@@ -1,0 +1,16 @@
+version: "{branch}-ci-{build}"
+clone_depth: 5
+
+install:
+  - mkdir deps
+  - mkdir deps\include
+  - mkdir deps\lib
+  - nuget install AllegroDeps -Version 1.5.0 -OutputDirectory deps -ExcludeVersion
+  - ps: move deps\AllegroDeps\build\native\include\* deps\include -force
+  - ps: move deps\AllegroDeps\build\native\v140\win32\deps\lib\* deps\lib -force
+
+build_script:
+  - mkdir build
+  - cd build
+  - cmake .. -G "Visual Studio 14 2015" -DWANT_ACODEC_DYNAMIC_LOAD=off -DFLAC_STATIC=on
+  - cmake --build . --config RelWithDebInfo

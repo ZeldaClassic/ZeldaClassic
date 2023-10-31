@@ -1,0 +1,204 @@
+# Joystick routines
+
+These functions are declared in the main Allegro header file:
+
+~~~~c
+ #include <allegro5/allegro.h>
+~~~~
+
+On Windows there are two joystick drivers, a DirectInput one and an Xinput 
+one. If support for XInput was compiled in, then it can be enabled by
+calling al_set_config_value(al_get_system_config(), "joystick", "driver", 
+"xinput") before calling al_install_joystick, or by setting the same
+option in the allegro5.cfg configuration file. The Xinput and DirectInput 
+drivers are mutually exclusive. The haptics subsystem will use the 
+same driver as the joystick system does.
+
+## API: ALLEGRO_JOYSTICK
+
+This is an abstract data type representing a physical joystick.
+
+See also: [al_get_joystick]
+
+## API: ALLEGRO_JOYSTICK_STATE
+
+This is a structure that is used to hold a "snapshot" of a
+joystick's axes and buttons at a particular instant.
+All fields public and read-only.
+
+~~~~c
+struct {
+   float axis[num_axes];             // -1.0 to 1.0
+} stick[num_sticks];
+int button[num_buttons];             // 0 to 32767
+~~~~
+
+See also: [al_get_joystick_state]
+
+## API: ALLEGRO_JOYFLAGS
+
+* ALLEGRO_JOYFLAG_DIGITAL  - the stick provides digital input
+* ALLEGRO_JOYFLAG_ANALOGUE - the stick provides analogue input
+
+(this enum is a holdover from the old API and may be removed)
+
+See also: [al_get_joystick_stick_flags]
+
+## API: al_install_joystick
+
+Install a joystick driver, returning true if successful.  If a
+joystick driver was already installed, returns true immediately.
+
+See also: [al_uninstall_joystick]
+
+## API: al_uninstall_joystick
+
+Uninstalls the active joystick driver.  All outstanding [ALLEGRO_JOYSTICK]
+structures are invalidated.  If no joystick driver
+was active, this function does nothing.
+
+This function is automatically called when Allegro is shut down.
+
+See also: [al_install_joystick]
+
+## API: al_is_joystick_installed
+
+Returns true if [al_install_joystick] was called successfully.
+
+## API: al_reconfigure_joysticks
+
+Allegro is able to cope with users connecting and disconnected joystick devices
+on-the-fly.  On existing platforms, the joystick event source will generate an
+event of type `ALLEGRO_EVENT_JOYSTICK_CONFIGURATION` when a device is plugged
+in or unplugged.  In response, you should call [al_reconfigure_joysticks].
+
+Afterwards, the number returned by [al_get_num_joysticks] may be different,
+and the handles returned by [al_get_joystick] may be different or be ordered
+differently.
+
+All [ALLEGRO_JOYSTICK] handles remain valid, but handles for disconnected
+devices become inactive: their states will no longer update, and
+[al_get_joystick] will not return the handle.  Handles for devices which remain
+connected will continue to represent the same devices.  Previously inactive
+handles may become active again, being reused to represent newly connected
+devices.
+
+Returns true if the joystick configuration changed, otherwise returns false.
+
+It is possible that on some systems, Allegro won't be able to generate
+`ALLEGRO_EVENT_JOYSTICK_CONFIGURATION` events.  If your game has an input
+configuration screen or similar, you may wish to call
+[al_reconfigure_joysticks] when entering that screen.
+
+See also: [al_get_joystick_event_source], [ALLEGRO_EVENT]
+
+## API: al_get_num_joysticks
+
+Return the number of joysticks currently on the system (or potentially on the
+system).  This number can change after [al_reconfigure_joysticks] is called, in
+order to support hotplugging.
+
+Returns 0 if there is no joystick driver installed.
+
+See also: [al_get_joystick], [al_get_joystick_active]
+
+## API: al_get_joystick
+
+Get a handle for a joystick on the system.  The number may be from 0 to
+[al_get_num_joysticks]-1.  If successful a pointer to a joystick object is
+returned, which represents a physical device.  Otherwise NULL is returned.
+
+The handle and the index are only incidentally linked.  After
+[al_reconfigure_joysticks] is called, [al_get_joystick] may return handles in a
+different order, and handles which represent disconnected devices will not be
+returned.
+
+See also: [al_get_num_joysticks], [al_reconfigure_joysticks],
+[al_get_joystick_active]
+
+## API: al_release_joystick
+
+This function currently does nothing.
+
+See also: [al_get_joystick]
+
+## API: al_get_joystick_active
+
+Return if the joystick handle is "active", i.e. in the current configuration,
+the handle represents some physical device plugged into the system.
+[al_get_joystick] returns active handles.  After reconfiguration, active
+handles may become inactive, and vice versa.
+
+See also: [al_reconfigure_joysticks]
+
+## API: al_get_joystick_name
+
+Return the name of the given joystick.
+
+See also: [al_get_joystick_stick_name], [al_get_joystick_axis_name],
+[al_get_joystick_button_name]
+
+## API: al_get_joystick_stick_name
+
+Return the name of the given "stick".  If the stick doesn't
+exist, NULL is returned.
+
+See also: [al_get_joystick_axis_name], [al_get_joystick_num_sticks]
+
+## API: al_get_joystick_axis_name
+
+Return the name of the given axis.  If the axis doesn't exist,
+NULL is returned.
+Indices begin from 0.
+
+See also: [al_get_joystick_stick_name], [al_get_joystick_num_axes]
+
+## API: al_get_joystick_button_name
+
+Return the name of the given button.  If the button doesn't exist,
+NULL is returned.
+Indices begin from 0.
+
+See also: [al_get_joystick_stick_name], [al_get_joystick_axis_name],
+[al_get_joystick_num_buttons]
+
+## API: al_get_joystick_stick_flags
+
+Return the flags of the given "stick".  If the stick doesn't
+exist, NULL is returned.
+Indices begin from 0.
+
+See also: [ALLEGRO_JOYFLAGS]
+
+## API: al_get_joystick_num_sticks
+
+Return the number of "sticks" on the given joystick.
+A stick has one or more axes.
+
+See also: [al_get_joystick_num_axes], [al_get_joystick_num_buttons]
+
+## API: al_get_joystick_num_axes
+
+Return the number of axes on the given "stick".  If the stick
+doesn't exist, 0 is returned.
+
+See also: [al_get_joystick_num_sticks]
+
+## API: al_get_joystick_num_buttons
+
+Return the number of buttons on the joystick.
+
+See also: [al_get_joystick_num_sticks]
+
+## API: al_get_joystick_state
+
+Get the current joystick state.
+
+See also: [ALLEGRO_JOYSTICK_STATE], [al_get_joystick_num_buttons],
+[al_get_joystick_num_axes]
+
+## API: al_get_joystick_event_source
+
+Returns the global joystick event source.  All
+[joystick events][ALLEGRO_EVENT_JOYSTICK_AXIS] are generated by
+this event source.

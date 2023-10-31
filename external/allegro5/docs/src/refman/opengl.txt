@@ -1,0 +1,204 @@
+# OpenGL integration
+
+These functions are declared in the following header file:
+
+~~~~c
+ #include <allegro5/allegro_opengl.h>
+~~~~
+
+## API: al_get_opengl_extension_list
+
+Returns the list of OpenGL extensions supported by Allegro, for
+the given display.
+
+Allegro will keep information about all extensions it knows about in a
+structure returned by `al_get_opengl_extension_list`.
+
+For example:
+
+~~~~c
+if (al_get_opengl_extension_list()->ALLEGRO_GL_ARB_multitexture) {
+   //use it
+}
+~~~~
+
+The extension will be set to true if available for the given display and
+false otherwise. This means to use the definitions and functions from an
+OpenGL extension, all you need to do is to check for it as above at
+run time, after acquiring the OpenGL display from Allegro.
+
+Under Windows, this will also work with WGL extensions, and under Unix
+with GLX extensions.
+
+In case you want to manually check for extensions and load function pointers
+yourself (say, in case the Allegro developers did not include it yet), you
+can use the [al_have_opengl_extension] and
+[al_get_opengl_proc_address] functions instead.
+
+> *Note:* the exact extensions exposed depend on how Allegro was compiled. It
+is recommended to use [al_have_opengl_extension] and
+[al_get_opengl_proc_address] for the most stable experience.
+
+## API: al_get_opengl_proc_address
+
+Helper to get the address of an OpenGL symbol
+
+Example:
+
+How to get the function _glMultiTexCoord3fARB_ that comes
+with ARB's Multitexture extension:
+
+~~~~c
+// define the type of the function
+ALLEGRO_DEFINE_PROC_TYPE(void, MULTI_TEX_FUNC,
+                         (GLenum, GLfloat, GLfloat, GLfloat));
+// declare the function pointer
+MULTI_TEX_FUNC glMultiTexCoord3fARB;
+// get the address of the function
+glMultiTexCoord3fARB = (MULTI_TEX_FUNC) al_get_opengl_proc_address(
+                                                        "glMultiTexCoord3fARB");
+~~~~
+
+If _glMultiTexCoord3fARB_ is not NULL then it can be used as if it has 
+been defined in the OpenGL core library.
+
+> *Note:* Under Windows, OpenGL functions may need a special calling
+convention, so it's best to always use the ALLEGRO_DEFINE_PROC_TYPE
+macro when declaring function pointer types for OpenGL functions.
+
+Parameters:
+
+name - The name of the symbol you want to link to.
+
+*Return value:*
+
+A pointer to the symbol if available or NULL otherwise.
+
+## API: al_get_opengl_texture
+
+Returns the OpenGL texture id internally used by the given bitmap if
+it uses one, else 0.
+
+Example:
+
+~~~~c
+bitmap = al_load_bitmap("my_texture.png");
+texture = al_get_opengl_texture(bitmap);
+if (texture != 0)
+    glBindTexture(GL_TEXTURE_2D, texture);
+~~~~
+
+## API: al_get_opengl_texture_size
+
+Retrieves the size of the texture used for the bitmap. This can be different
+from the bitmap size if OpenGL only supports power-of-two sizes or if it is
+a sub-bitmap.
+
+Returns true on success, false on failure.
+Zero width and height are returned if the bitmap is not an OpenGL bitmap.
+
+See also: [al_get_opengl_texture_position]
+
+## API: al_get_opengl_texture_position
+
+Returns the u/v coordinates for the top/left corner of the bitmap within the
+used texture, in pixels.
+
+See also: [al_get_opengl_texture_size]
+
+## API: al_get_opengl_program_object
+
+Returns the OpenGL program object associated with this shader, if the platform
+is `ALLEGRO_SHADER_GLSL`. Otherwise, returns 0.
+
+## API: al_get_opengl_fbo
+
+Returns the OpenGL FBO id internally used by the given bitmap if it uses one,
+otherwise returns zero.  No attempt will be made to create an FBO if the
+bitmap is not owned by the current display.
+
+The FBO returned by this function will only be freed when the bitmap is
+destroyed, or if you call [al_remove_opengl_fbo] on the bitmap.
+
+> *Note:* In Allegro 5.0.0 this function only returned an FBO which had
+previously been created by calling [al_set_target_bitmap].  It would not
+attempt to create an FBO itself.  This has since been changed.
+
+See also: [al_remove_opengl_fbo], [al_set_target_bitmap]
+
+## API: al_remove_opengl_fbo
+
+Explicitly free an OpenGL FBO created for a bitmap, if it has one.
+Usually you do not need to worry about freeing FBOs, unless you use
+[al_get_opengl_fbo].
+
+See also: [al_get_opengl_fbo], [al_set_target_bitmap]
+
+## API: al_have_opengl_extension
+
+This function is a helper to determine whether an OpenGL extension is
+available on the given display or not.
+
+Example:
+
+~~~~c
+bool packedpixels = al_have_opengl_extension("GL_EXT_packed_pixels");
+~~~~
+
+If _packedpixels_ is true then you can safely use the constants related
+to the packed pixels extension.
+
+Returns true if the extension is available; false otherwise.
+
+## API: al_get_opengl_version
+
+Returns the OpenGL or OpenGL ES version number of the client
+(the computer the program is running on), for the current display.
+"1.0" is returned as 0x01000000, "1.2.1" is returned as 0x01020100,
+and "1.2.2" as 0x01020200, etc.
+
+A valid OpenGL context must exist for this function to work, which
+means you may *not* call it before [al_create_display].
+
+See also: [al_get_opengl_variant]
+
+## API: al_get_opengl_variant
+
+Returns the variant or type of OpenGL used on the running platform. This
+function can be called before creating a display or setting properties for
+new displays. Possible values are:
+
+ALLEGRO_DESKTOP_OPENGL
+:   Regular OpenGL as seen on desktop/laptop computers.
+
+ALLEGRO_OPENGL_ES
+:   Trimmed down version of OpenGL used on many small consumer electronic
+    devices such as handheld (and sometimes full size) consoles.
+
+See also: [al_get_opengl_version]
+
+## API: al_set_current_opengl_context
+
+Make the OpenGL context associated with the given display current for the
+calling thread.  If there is a current target bitmap which belongs to a
+different OpenGL context, the target bitmap will be changed to NULL.
+
+Normally you do not need to use this function, as the context will be made
+current when you call [al_set_target_bitmap] or [al_set_target_backbuffer].
+You might need it if you created an OpenGL "forward compatible" context.
+Then [al_get_backbuffer] only returns NULL, so it would not work to pass that
+to [al_set_target_bitmap].
+
+## OpenGL configuration
+
+You can disable the detection of any OpenGL extension by Allegro with
+a section like this in allegro5.cfg:
+
+~~~~ini
+[opengl_disabled_extensions]
+GL_ARB_texture_non_power_of_two=0
+GL_EXT_framebuffer_object=0
+~~~~
+
+Any extension which appears in the section is treated as not available
+(it does not matter if you set it to 0 or any other value).

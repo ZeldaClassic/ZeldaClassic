@@ -1,0 +1,255 @@
+/* We use this style sheet for HTML documents generated with Pandoc. */
+
+body {
+    background-color: #fcfcfc;
+    padding-left: 0.1em;
+    color: #222;
+    font-family: sans-serif;
+}
+
+pre {
+    border: 1px solid #ddd;
+    background-color: #f3f3f8;
+    padding: 0.6em;
+    padding-left: 0.8em;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+blockquote {
+   border: 1px solid #ddd;
+   background-color: #fff8e0;
+   padding: 0.6em;
+   padding-left: 0.8em;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+blockquote p {
+   padding: 0;
+   margin: 0;
+}
+
+blockquote p em:first-child {
+   font-style: normal;
+   font-weight: bold;
+   color: #400000;
+}
+
+code {
+    font-family: monospace;
+}
+
+h1, h2, h3, h4, h5 {
+    color: #348;
+    margin-top: 2.5em;
+    border-top: 1px solid #eee;
+    padding-top: 0.8em;
+}
+
+h1 {
+    font-size: 130%;
+}
+
+h2 {
+    font-size: 110%;
+}
+
+h3 {
+    font-size: 95%;
+}
+
+h4 {
+    font-size: 90%;
+    font-style: italic;
+}
+
+h5 {
+    font-size: 90%;
+    font-style: italic;
+}
+
+h1.title {
+    font-size: 200%;
+    font-weight: bold;
+    margin-top: 0;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    text-align: left;
+    border: none;
+}
+
+a {
+    text-decoration: none;
+    color: #348;
+}
+
+dl dt {
+   font-weight: bold;
+}
+
+dt code {
+    font-weight: bold;
+}
+
+dd p {
+    margin-top: 0;
+}
+
+ul {
+    padding-left: 1.5em;
+}
+
+table {
+    background-color: #f8f8fa;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+table th {
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0.5em;
+}
+
+/* Side bar */
+div.sidebar {
+    background-color: #f0f0fa;
+    border: solid 1px #e0e0ea;
+    float: left;
+    width: 150px;
+    margin-right:           1em;
+    line-height:	    110%;
+    -moz-border-radius:	    5px;
+    -webkit-border-radius:  5px;
+}
+
+div.sidebar ul {
+    list-style-type:        none;
+    padding:                0;
+    margin-left:            0.5em;
+    font-size:              small;
+}
+
+div.sidebar ul a:hover {
+    background:             #fffff0;
+}
+
+div.searchbox {
+    margin-left:	    5px;
+    margin-right:	    5px;
+    margin-bottom:	    0.8em;
+    font-size:		    small;
+}
+
+/* font-size isn't inherited (at least not in Firefox and Chrome) */
+input#q {
+   font-size: small;
+   width: 85%;
+}
+
+/* Body of page */
+div.content {
+    margin-left: 165px;
+    max-width: 50em;
+    line-height: 135%;
+}
+
+div#TOC {
+    display:		    table;
+    border:		    1px solid #ddd;
+    background-color:	    #f3f3fa;
+    padding-right:	    1em;
+    -moz-border-radius:	    5px;
+    -webkit-border-radius:  5px;
+}
+
+div#TOC ul {
+    padding-left:	    1em;
+    list-style-type:	    none;
+}
+
+p.timestamp {
+    margin-top: 3em;
+    border-top: solid 1px #eee;
+    padding: 0.7em;
+    padding-left: 0.3em;
+    color: #999;
+    text-align: left;
+}
+
+/* Below is the autosuggest.css from autosuggest.js version 2.4. */
+
+.autosuggest-body
+{
+	position: absolute;
+	border: 1px solid black;
+	z-index: 100;
+    font-size: small;
+}
+
+.autosuggest-body iframe
+{
+	display: block;
+	position: absolute;
+	z-index: 999;
+	filter: alpha(opacity=0);
+}
+
+.autosuggest-body table
+{
+	width: 100%;
+	background-color: #f3f3fa;
+}
+
+.autosuggest-body tr
+{
+	cursor: hand;
+	cursor: pointer;
+
+	color: black;
+
+	text-align: left;
+}
+
+.autosuggest-body tr.up
+{
+	height: 10px;
+	background: #656291 url("arrow-up.gif") center center no-repeat;
+}
+
+.autosuggest-body tr.down
+{
+	height: 10px;
+	background: #656291 url("arrow-down.gif") center center no-repeat;
+}
+
+.autosuggest-body tr.up-disabled
+{
+	height: 10px;
+	background: #656291 url("arrow-up-d.gif") center center no-repeat;
+	cursor: default;
+}
+
+.autosuggest-body tr.down-disabled
+{
+	height: 10px;
+	background: #656291 url("arrow-down-d.gif") center center no-repeat;
+	cursor: default;
+}
+
+.autosuggest-body tr.selected
+{
+	background-color: #D6D7E7;
+	color: red;
+}
+
+.autosuggest-body td
+{
+	white-space: nowrap;
+}
+
+.autosuggest-body span.match
+{
+	font-weight: bold;
+}

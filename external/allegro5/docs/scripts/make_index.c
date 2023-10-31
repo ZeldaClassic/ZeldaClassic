@@ -1,0 +1,57 @@
+/*
+ * make_index HTML-REFS-FILE...
+ *
+ * Generate a file containing a list of links to all API entries.
+ * The links are sorted using strcmp.
+ */
+
+#include <string.h>
+#include <stdlib.h>
+#include "dawk.h"
+#include "aatree.h"
+
+static void print_link(const char *value)
+{
+   d_printf("* [%s]\n", value);
+
+   /* Work around Pandoc issue #182. */
+   d_printf("<!-- -->\n");
+}
+
+static void pre_order_traversal(Aatree *node, void (*doit)(const char *))
+{
+   if (node->left != &aa_nil) {
+      pre_order_traversal(node->left, doit);
+   }
+
+   doit(node->value);
+
+   if (node->right != &aa_nil) {
+      pre_order_traversal(node->right, doit);
+   }
+}
+
+int main(int argc, char *argv[])
+{
+   dstr line;
+   Aatree * root = &aa_nil;
+
+   d_init(argc, argv);
+
+   d_printf("# Index\n");
+
+   while ((d_getline(line))) {
+      if (d_match(line, "^\\[([^\\]]*)")) {
+         const char *ref = d_submatch(1);
+         root = aa_insert(root, ref, ref);
+      }
+   }
+
+   pre_order_traversal(root, print_link);
+
+   aa_destroy(root);
+
+   return 0;
+}
+
+/* vim: set sts=3 sw=3 et: */

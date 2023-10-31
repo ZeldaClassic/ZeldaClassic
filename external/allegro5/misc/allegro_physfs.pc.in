@@ -1,0 +1,15 @@
+prefix=@prefix@
+exec_prefix=${prefix}
+libdir=@libdir@
+includedir=@includedir@
+version=@ALLEGRO_VERSION@
+suffix=@lib_type@@lib_linkage@
+versuffix=@versuffix@
+
+Name: allegro_physfs
+Description: Allegro game programming library, PhysicsFS addon
+Version: ${version}
+Libs: -L${libdir} -lallegro_physfs${suffix}
+Libs.private: @link_with@
+Requires: allegro${suffix}-${versuffix} >= ${version}
+Cflags: -I${includedir}

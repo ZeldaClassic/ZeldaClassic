@@ -1,0 +1,684 @@
+# Native dialogs support
+
+These functions are declared in the following header file.
+Link with allegro_dialog.
+
+~~~~c
+ #include <allegro5/allegro_native_dialog.h>
+~~~~
+
+## API: ALLEGRO_FILECHOOSER
+
+Opaque handle to a native file dialog.
+
+## API: ALLEGRO_TEXTLOG
+
+Opaque handle to a text log window.
+
+## API: al_init_native_dialog_addon
+
+Initialise the native dialog addon.
+
+Returns true on success, false on error.
+
+Since: 5.0.9, 5.1.0
+
+> *Note:* Prior to Allegro 5.1.0 native dialog functions could be called
+without explicit initialisation, but that is now deprecated.
+Future functionality may require explicit initialisation.
+An exception is [al_show_native_message_box], which may be useful to show
+an error message if Allegro fails to initialise.
+
+See also: [al_shutdown_native_dialog_addon]
+
+## API: al_is_native_dialog_addon_initialized
+
+Returns true if the native dialog addon is initialized, otherwise returns false.
+
+Since: 5.2.6
+
+## API: al_shutdown_native_dialog_addon
+
+Shut down the native dialog addon.
+
+Since: 5.0.9, 5.1.5
+
+See also: [al_init_native_dialog_addon]
+
+## API: al_create_native_file_dialog
+
+Creates a new native file dialog.  You should only have one such dialog opened
+at a time.
+
+Parameters:
+
+- `initial_path`: The initial search path and filename. Can be NULL.
+  To start with a blank file name the string should end with a directory
+  separator (this should be the common case).
+
+- `title`: Title of the dialog.
+
+- `patterns`: A list of semi-colon separated patterns to match. This
+  should not contain any whitespace characters. If a pattern
+  contains the '/' character, then it is treated as a MIME type (e.g.
+  'image/png'). Not all platforms support file patterns. If the native dialog
+  does not provide support, this parameter is ignored.
+
+- `mode`: 0, or a combination of the following flags:
+
+ALLEGRO_FILECHOOSER_FILE_MUST_EXIST
+:   If supported by the native dialog, it will not allow entering new names,
+    but just allow existing files to be selected. Else it is ignored.
+
+ALLEGRO_FILECHOOSER_SAVE
+:   If the native dialog system has a different dialog for saving (for example
+    one which allows creating new directories), it is used. Else it is ignored.
+
+ALLEGRO_FILECHOOSER_FOLDER
+:   If there is support for a separate dialog to select a folder instead of a
+    file, it will be used.
+
+ALLEGRO_FILECHOOSER_PICTURES
+:   If a different dialog is available for selecting pictures, it is used. Else
+    it is ignored.
+
+ALLEGRO_FILECHOOSER_SHOW_HIDDEN
+:   If the platform supports it, also hidden files will be shown.
+
+ALLEGRO_FILECHOOSER_MULTIPLE
+:   If supported, allow selecting multiple files.
+
+Returns:
+
+A handle to the dialog which you can pass to
+[al_show_native_file_dialog] to display it, and from which you then can
+query the results  using [al_get_native_file_dialog_count] and
+[al_get_native_file_dialog_path]. When you are done, call
+[al_destroy_native_file_dialog] on it.
+
+If a dialog window could not be created then this function returns NULL.
+
+## API: al_show_native_file_dialog
+
+Show the dialog window.  The display may be NULL, otherwise the given display
+is treated as the parent if possible.
+
+This function blocks the calling thread until it returns,
+so you may want to spawn a thread with [al_create_thread] and
+call it from inside that thread.
+
+Returns true on success, false on failure.
+
+## API: al_get_native_file_dialog_count
+
+Returns the number of files selected, or 0 if the dialog was cancelled.
+
+## API: al_get_native_file_dialog_path
+
+Returns one of the selected paths with index `i`. The index should range
+from `0` to the return value of [al_get_native_file_dialog_count] `-1`.
+
+## API: al_destroy_native_file_dialog
+
+Frees up all resources used by the file dialog.
+
+## API: al_show_native_message_box
+
+Show a native GUI message box. This can be used for example to display an error
+message if creation of an initial display fails.  The display may be NULL,
+otherwise the given display is treated as the parent if possible.
+
+The message box will have a single "OK" button and use the style informative
+dialog boxes usually have on the native system. If the `buttons` parameter is
+not NULL, you can instead specify the button text in a string, with buttons
+separated by a vertical bar (|).
+
+> *Note:* `buttons` parameter is currently unimplemented on Windows.
+
+The flags available are:
+
+ALLEGRO_MESSAGEBOX_WARN
+:   The message is a warning.
+    This may cause a different icon (or other effects).
+
+ALLEGRO_MESSAGEBOX_ERROR
+:   The message is an error.
+
+ALLEGRO_MESSAGEBOX_QUESTION
+:   The message is a question.
+
+ALLEGRO_MESSAGEBOX_OK_CANCEL
+:   Display a cancel button alongside the "OK" button.
+    Ignored if `buttons` is not NULL.
+
+ALLEGRO_MESSAGEBOX_YES_NO
+:   Display Yes/No buttons instead of the "OK" button.
+    Ignored if `buttons` is not NULL.
+
+[al_show_native_message_box] may be called without Allegro being installed.
+This is useful to report an error during initialisation of Allegro itself.
+
+Returns:
+
+- 0 if the dialog window was closed without activating a button.
+- 1 if the OK or Yes button was pressed.
+- 2 if the Cancel or No button was pressed.
+
+If `buttons` is not NULL, the number of the pressed button is returned, starting
+with 1.
+
+All of the remaining parameters must not be NULL.
+
+If a message box could not be created then this returns 0, as if the window
+was dismissed without activating a button.
+
+Example:
+
+~~~~c
+int button = al_show_native_message_box(
+  display,
+  "Warning",
+  "Are you sure?",
+  "If you click yes then you are confirming that \"Yes\" "
+  "is your response to the query which you have "
+  "generated by the action you took to open this "
+  "message box.",
+  NULL,
+  ALLEGRO_MESSAGEBOX_YES_NO
+);
+~~~~
+
+## API: al_open_native_text_log
+
+Opens a window to which you can append log messages with
+[al_append_native_text_log]. This can be useful for debugging if you don't
+want to depend on a console being available.
+
+Use [al_close_native_text_log] to close the window again.
+
+The flags available are:
+
+ALLEGRO_TEXTLOG_NO_CLOSE
+:   Prevent the window from having a close button. Otherwise, if the close
+    button is pressed, an event is generated; see
+    [al_get_native_text_log_event_source].
+
+ALLEGRO_TEXTLOG_MONOSPACE
+:   Use a monospace font to display the text.
+
+Returns NULL if there was an error opening the window, or if text log windows
+are not implemented on the platform.
+
+See also: [al_append_native_text_log], [al_close_native_text_log]
+
+## API: al_close_native_text_log
+
+Closes a message log window opened with [al_open_native_text_log]
+earlier.
+
+Does nothing if passed NULL.
+
+See also: [al_open_native_text_log]
+
+## API: al_append_native_text_log
+
+Appends a line of text to the message log window and scrolls to the
+bottom (if the line would not be visible otherwise). This works like
+printf. A line is continued until you add a newline character.
+
+If the window is NULL then this function will fall back to calling
+printf. This makes it convenient to support logging to a window or
+a terminal.
+
+## API: al_get_native_text_log_event_source
+
+Get an event source for a text log window. The possible events are:
+
+ALLEGRO_EVENT_NATIVE_DIALOG_CLOSE
+:   The window was requested to be closed, either by pressing the close button
+    or pressing Escape on the keyboard.
+    The user.data1 field will hold a pointer to the [ALLEGRO_TEXTLOG]
+    which generated the event.
+    The user.data2 field will be 1 if the event was generated as a result of a
+    key press; otherwise it will be zero.
+
+## API: al_get_allegro_native_dialog_version
+
+Returns the (compiled) version of the addon, in the same format as
+[al_get_allegro_version].
+
+## Menus
+
+Menus are implemented on Windows, X and OS X.
+Menus on X are implemented with GTK, and have a special requirement: you must
+set the ALLEGRO_GTK_TOPLEVEL display flag prior to creating the display
+which will have menus attached.
+
+A menu can be attached to a single display window or popped up as a context
+menu. If you wish to use the same menu on multiple displays or use a sub-menu
+as a context menu, you must make a copy via [al_clone_menu] or
+[al_clone_menu_for_popup].
+
+Top level items in a non-popup menu must have at least one sub-item, or the
+behavior is undefined.
+
+Each menu item can be given an ID of any 16-bit integer greater than zero. When
+a user clicks on a menu item, an event will be generated only if it has an ID.
+This ID should be unique per menu; if you duplicate IDs, then there will be no
+way for you to determine exactly which item generated the event.
+
+There are many functions that take `pos` as a parameter used for locating a
+particular menu item. In those cases, it represents one of two things: an ID 
+or a zero-based index. Any value greater than zero will always be treated as an ID.
+Anything else (including zero) will be considered an index based on the absolute
+value. In other words, 0 is the first menu item, -1 is the second menu item, -2
+is the third menu item, and so on.
+
+The event type is `ALLEGRO_EVENT_MENU_CLICK`. It contains three fields:
+
+~~~~c
+event.user.data1 = id;
+event.user.data2 = (intptr_t) display;
+event.user.data3 = (intptr_t) menu;
+~~~~
+
+The `display` and `menu` may be NULL if it was not possible to tell exactly
+which item generated the event.
+
+A basic example:
+
+~~~~c
+ #define FILE_EXIT_ID 1
+
+ALLEGRO_MENU *menu = al_create_menu();
+ALLEGRO_MENU *file_menu = al_create_menu();
+al_append_menu_item(file_menu, "Exit", FILE_EXIT_ID, 0, NULL, NULL);
+al_append_menu_item(menu, "File", 0, 0, NULL, file_menu);
+al_set_display_menu(display, menu);
+
+al_register_event_source(queue, al_get_default_menu_event_source());
+al_wait_for_event(queue, &event);
+
+if (event.type == ALLEGRO_EVENT_MENU_CLICK) {
+   if (event.user.data1 == FILE_EXIT_ID) {
+      exit_program();
+   }
+}
+~~~~
+
+Because there is no "DISPLAY_DESTROYED" event, you must call
+al_set_display_menu(display, NULL) before destroying any display with a
+menu attached, to avoid leaking resources.
+
+### API: ALLEGRO_MENU
+
+An opaque data type that represents a menu that contains menu items.
+Each of the menu items may optionally include a sub-menu.
+
+### API: ALLEGRO_MENU_INFO
+
+A structure that defines how to create a complete menu system. For
+standard menu items, the following format is used:
+
+       { caption, id, flags, icon }
+
+For special items, these macros are helpful:
+
+~~~~c
+ALLEGRO_START_OF_MENU(caption, id)
+ALLEGRO_MENU_SEPARATOR
+ALLEGRO_END_OF_MENU
+~~~~
+
+A well-defined menu will begin with `ALLEGRO_START_OF_MENU`, contain
+one or more menu items, and end with `ALLEGRO_END_OF_MENU`. A menu
+may contain sub-menus. An example:
+
+~~~~c
+ALLEGRO_MENU_INFO menu_info[] = {
+   ALLEGRO_START_OF_MENU("&File", 1),
+      { "&Open", 2, 0, NULL },
+      ALLEGRO_START_OF_MENU("Open &Recent...", 3),
+         { "Recent 1", 4, 0, NULL },
+         { "Recent 2", 5, 0, NULL },
+         ALLEGRO_END_OF_MENU,
+      ALLEGRO_MENU_SEPARATOR,
+      { "E&xit", 6, 0, NULL },
+      ALLEGRO_END_OF_MENU,
+   ALLEGRO_START_OF_MENU("&Help", 7),
+      {"&About", 8, 0, NULL },
+      ALLEGRO_END_OF_MENU,
+   ALLEGRO_END_OF_MENU
+};
+
+ALLEGRO_MENU *menu = al_build_menu(menu_info);
+~~~~
+
+If you prefer, you can build the menu without the structure
+by using [al_create_menu] and [al_insert_menu_item].
+
+See also: [al_build_menu]
+
+### API: al_create_menu
+
+Creates a menu container that can hold menu items.
+
+Returns `NULL` on failure.
+
+Since: 5.1.0
+
+See also: [al_create_popup_menu], [al_build_menu]
+
+### API: al_create_popup_menu
+
+Creates a menu container for popup menus. Only the root (outermost)
+menu should be created with this function. Sub menus of popups should
+be created with [al_create_menu].
+
+Returns `NULL` on failure.
+
+Since: 5.1.0
+
+See also: [al_create_menu], [al_build_menu]
+
+### API: al_build_menu
+
+Builds a menu based on the specifications of a sequence of 
+`ALLEGRO_MENU_INFO` elements.
+
+Returns a pointer to the root `ALLEGRO_MENU`, or `NULL` on failure.
+To gain access to the other menus and items, you will need to
+search for them using [al_find_menu_item].
+
+Since: 5.1.0
+
+See also: [ALLEGRO_MENU_INFO], [al_create_menu], [al_create_popup_menu]
+
+### API: al_append_menu_item
+
+Appends a menu item to the end of the menu. See [al_insert_menu_item] 
+for more information.
+
+Since: 5.1.0
+
+See also: [al_insert_menu_item], [al_remove_menu_item]
+
+### API: al_insert_menu_item
+
+Inserts a menu item at the spot specified. See the introductory text for a
+detailed explanation of how the `pos` parameter is interpreted.
+
+The `parent` menu can be a popup menu or a regular menu. To underline
+one character in the `title`, prefix it with an ampersand. 
+
+The `flags` can be any combination of:
+
+ALLEGRO_MENU_ITEM_DISABLED
+:   The item is "grayed out" and cannot be selected.
+
+ALLEGRO_MENU_ITEM_CHECKBOX
+:   The item is a check box. This flag can only be set at the time the
+    menu is created. If a check box is clicked, it will automatically be
+    toggled.
+
+ALLEGRO_MENU_ITEM_CHECKED
+:   The item is checked. If set, ALLEGRO_MENU_ITEM_CHECKBOX will automatically
+    be set as well.
+    
+The `icon` is not yet supported.
+
+The `submenu` parameter indicates that this item contains a child menu.
+The child menu must have previously been created with `al_create_menu`,
+and not be associated with any other menu.
+
+Returns `true` on success.
+
+Since: 5.1.0
+
+See also: [al_append_menu_item], [al_remove_menu_item]
+
+### API: al_remove_menu_item
+
+Removes the specified item from the menu and destroys it. If the item
+contains a sub-menu, it too is destroyed. Any references to it are invalidated.
+If you want to preserve that sub-menu, you should first make a copy with [al_clone_menu].
+
+This is safe to call on a menu that is currently being displayed.
+
+Returns `true` if an item was removed.
+
+Since: 5.1.0
+
+See also: [al_append_menu_item], [al_insert_menu_item], [al_destroy_menu]
+
+### API: al_clone_menu
+
+Makes a copy of a menu so that it can be reused on another display. The
+menu being cloned can be anything: a regular menu, a popup menu, or a
+sub-menu.
+
+Returns the cloned menu.
+
+Since: 5.1.0
+
+See also: [al_clone_menu_for_popup]
+
+### API: al_clone_menu_for_popup
+
+Exactly like [al_clone_menu], except that the copy is for a popup menu.
+
+Since: 5.1.0
+
+See also: [al_clone_menu]
+
+### API: al_destroy_menu
+
+Destroys an entire menu, including its sub-menus. Any references to it or
+a sub-menu are no longer valid. It is safe to call this on a menu that is
+currently being displayed.
+
+Since: 5.1.0
+
+See also: [al_remove_menu_item]
+
+### API: al_get_menu_item_caption
+
+Returns the caption associated with the menu item. It is valid as long
+as the caption is not modified.
+
+Returns `NULL` if the item was not found.
+
+Since: 5.1.0
+
+See also: [al_set_menu_item_caption]
+
+### API: al_set_menu_item_caption
+
+Updates the menu item caption with the new `caption`. This will invalidate
+any previous calls to [al_get_menu_item_caption].
+
+Since: 5.1.0
+
+See also: [al_get_menu_item_caption]
+
+### API: al_get_menu_item_flags
+
+Returns the currently set flags. See [al_insert_menu_item] for a description
+of the available flags.
+
+Returns -1 if the item was not found.
+
+Since: 5.1.0
+
+See also: [al_set_menu_item_flags], [al_toggle_menu_item_flags]
+
+### API: al_set_menu_item_flags
+
+Updates the menu item's flags. See [al_insert_menu_item] for a description
+of the available flags. 
+
+Since: 5.1.0
+
+See also: [al_get_menu_item_flags], [al_toggle_menu_item_flags]
+
+### API: al_toggle_menu_item_flags
+
+Toggles the specified menu item's flags. See [al_insert_menu_item] for a
+description of the available flags. 
+
+Returns a bitfield of only the specified flags that are set after the toggle.
+A flag that was not toggled will not be returned, even if it is set.
+Returns -1 if the id is invalid.
+
+Since: 5.1.0
+
+> *[Unstable API]:* Redundant with `al_get/set_menu_item_flags`.
+
+See also: [al_get_menu_item_flags], [al_set_menu_item_flags]
+
+### API: al_get_menu_item_icon
+
+Returns the icon associated with the menu. It is safe to draw to the returned
+bitmap, but you must call [al_set_menu_item_icon] in order for the changes to
+be applied.
+
+Returns `NULL` if the item was not found or if it has no icon.
+
+Since: 5.1.0
+
+See also: [al_set_menu_item_icon]
+
+### API: al_set_menu_item_icon
+
+Sets the icon for the specified menu item. The menu assumes ownership of the
+`ALLEGRO_BITMAP` and may invalidate the pointer, so you must clone it if you
+wish to continue using it.
+
+If a video bitmap is passed, it will automatically be converted to a memory
+bitmap, so it is preferable to pass a memory bitmap.
+
+Since: 5.1.0
+
+See also: [al_get_menu_item_icon], [al_clone_bitmap]
+
+### API: al_find_menu
+
+Searches in the `haystack` menu for any submenu with the given `id`. (Note
+that this only represents a literal ID, and cannot be used as an index.)
+
+Returns the menu, if found. Otherwise returns `NULL`.
+
+Since: 5.1.0
+
+See also: [al_find_menu_item]
+ 
+### API: al_find_menu_item
+
+Searches in the `haystack` menu for an item with the given `id`. (Note that
+this only represents a literal ID, and cannot be used as an index.)
+
+If `menu` and `index` are not `NULL`, they will be set as the parent menu
+containing the item and the zero-based (positive) index of the item. (If the menu item
+was not found, then their values are undefined.)
+
+Returns true if the menu item was found.
+
+Since: 5.1.0
+
+See also: [al_find_menu]
+ 
+### API: al_get_default_menu_event_source
+
+Returns the default event source used for menu clicks. If a menu was not
+given its own event source via [al_enable_menu_event_source], then
+it will use this default source.
+
+Since: 5.1.0
+
+See also: [al_register_event_source], [al_enable_menu_event_source],
+[al_disable_menu_event_source]
+
+### API: al_enable_menu_event_source
+
+Enables a unique event source for this menu. It and all of its sub-menus
+will use this event source. (It is safe to call this multiple times on the
+same menu.)
+
+Returns the event source.
+
+Since: 5.1.0
+
+See also: [al_register_event_source], [al_get_default_menu_event_source],
+[al_disable_menu_event_source]
+
+### API: al_disable_menu_event_source
+
+Disables a unique event source for the menu, causing it to use the 
+default event source.
+
+Since: 5.1.0
+
+See also: [al_get_default_menu_event_source], [al_enable_menu_event_source]
+
+### API: al_get_display_menu
+
+Returns the menu associated with the `display`, or `NULL` if it does not have
+a menu.
+
+Since: 5.1.0
+
+See also: [al_set_display_menu]
+
+### API: al_set_display_menu
+
+Associates the `menu` with the `display` and shows it. If there was a previous
+menu associated with the display, it will be destroyed. If you don't want that
+to happen, you should first remove the menu with [al_remove_display_menu].
+
+If the menu is already attached to a display, it will not be attached to the
+new display. If `menu` is `NULL`, the current menu will still be destroyed.
+
+> *Note:* Attaching a menu may cause the window as available to your application
+to be resized! You should listen for a resize event, check how much space was
+lost, and resize the window accordingly if you want to maintain your window's
+prior size.
+
+Returns true if successful. 
+
+Since: 5.1.0
+
+See also: [al_create_menu], [al_remove_display_menu]
+
+### API: al_popup_menu
+
+Displays a context menu next to the mouse cursor. The menu must have been
+created with [al_create_popup_menu]. It generates events just like a regular
+display menu does. It is possible that the menu will be canceled without any
+selection being made.
+
+The `display` parameter indicates which window the menu is associated with 
+(when you process the menu click event), but does not actually affect where
+the menu is located on the screen.
+
+Returns `true` if the context menu was displayed.
+
+> *Note:* On Linux this function will fail if any of the mouse keys are held
+down. I.e. it will only reliably work if you handle it in
+`ALLEGRO_MOUSE_BUTTON_UP` events and even then only if that event corresponds
+to the final mouse button that was pressed.
+
+Since: 5.1.0
+
+See also: [al_create_popup_menu]
+
+### API: al_remove_display_menu
+
+Detaches the menu associated with the display and returns it. The menu
+can then be used on a different display.
+
+If you simply want to destroy the active menu, you can call
+[al_set_display_menu] with a `NULL` menu.
+
+Since: 5.1.0
+
+See also: [al_set_display_menu]

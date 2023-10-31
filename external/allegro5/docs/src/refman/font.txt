@@ -1,0 +1,808 @@
+# Font addons
+
+These functions are declared in the following header file.
+Link with allegro_font.
+
+~~~~c
+ #include <allegro5/allegro_font.h>
+~~~~
+
+## General font routines
+
+### API: ALLEGRO_FONT
+
+A handle identifying any kind of font. Usually you will create it with
+[al_load_font] which supports loading all kinds of TrueType fonts supported by
+the FreeType library. If you instead pass the filename of a bitmap file, it will
+be loaded with [al_load_bitmap] and a font in Allegro's bitmap font format will
+be created from it with [al_grab_font_from_bitmap].
+
+### API: ALLEGRO_GLYPH
+
+A structure containing the properties of a character in a font.
+
+~~~~c
+typedef struct ALLEGRO_GLYPH {
+   ALLEGRO_BITMAP *bitmap;   // the bitmap the character is on
+   int x;                    // the x position of the glyph on bitmap
+   int y;                    // the y position of the glyph on bitmap
+   int w;                    // the width of the glyph in pixels
+   int h;                    // the height of the glyph in pixels
+   int kerning;              // pixels of kerning (see below)
+   int offset_x;             // x offset to draw the glyph at
+   int offset_y;             // y offset to draw the glyph at
+   int advance;              // number of pixels to advance after this character
+} ALLEGRO_GLYPH;
+~~~~
+
+bitmap may be a sub-bitmap in the case of color fonts. Bitmap can also be NULL
+in which case nothing should be drawn (sometimes true for whitespace characters
+in TTF fonts).
+
+kerning should be added to the x position you draw to if you want your text
+kerned and depends on which codepoints [al_get_glyph] was called with.
+
+Glyphs are tightly packed onto the bitmap, so you need to add offset_x and
+offset_y to your draw position for the text to look right.
+
+advance is the number of pixels to add to your x position to advance to the
+next character in a string and includes kerning.
+
+Since: 5.2.1
+
+> *[Unstable API]:* This API is new and subject to refinement.
+
+See also: [al_get_glyph]
+
+### API: al_init_font_addon
+
+Initialise the font addon.
+
+Note that if you intend to load bitmap fonts, you will need to initialise
+allegro_image separately (unless you are using another library to load images).
+
+Similarly, if you wish to load truetype-fonts, do not forget to also call
+[al_init_ttf_addon].
+
+Returns true on success, false on failure.
+On the 5.0 branch, this function has no return value.  You may wish to avoid
+checking the return value if your code needs to be compatible with Allegro
+5.0.  Currently, the function will never return false.
+
+See also: [al_init_image_addon], [al_init_ttf_addon], [al_shutdown_font_addon]
+
+### API: al_is_font_addon_initialized
+
+Returns true if the font addon is initialized, otherwise returns false.
+
+Since: 5.2.6
+
+See also: [al_init_font_addon], [al_shutdown_font_addon]
+
+### API: al_shutdown_font_addon
+
+Shut down the font addon. This is done automatically at program exit,
+but can be called any time the user wishes as well.
+
+See also: [al_init_font_addon]
+
+### API: al_load_font
+
+Loads a font from disk. This will use [al_load_bitmap_font_flags] if you pass
+the name of a known bitmap format, or else [al_load_ttf_font].
+
+The flags parameter is passed through to either of those functions.
+Bitmap and TTF fonts are also affected by the current
+[bitmap flags][al_set_new_bitmap_flags] at the time the font is loaded.
+
+See also: [al_destroy_font], [al_init_font_addon], [al_register_font_loader],
+[al_load_bitmap_font_flags], [al_load_ttf_font]
+
+### API: al_destroy_font
+
+Frees the memory being used by a font structure.
+Does nothing if passed NULL.
+
+See also: [al_load_font]
+
+### API: al_register_font_loader
+
+Informs Allegro of a new font file type, telling it how to load files of
+this format.
+
+The `extension` should include the leading dot ('.') character.
+It will be matched case-insensitively.
+
+The `load_font` argument may be NULL to unregister an entry.
+
+Returns true on success, false on error.
+Returns false if unregistering an entry that doesn't exist.
+
+See also: [al_init_font_addon]
+
+### API: al_get_font_line_height
+
+Returns the usual height of a line of text in the specified font. For bitmap
+fonts this is simply the height of all glyph bitmaps. For truetype fonts it
+is whatever the font file specifies. In particular, some special glyphs may be
+higher than the height returned here.
+
+If the X is the position you specify to draw text, the meaning of
+ascent and descent and the line height is like in the figure below.
+
+    X------------------------
+        /\         |        |
+       /  \        |        |
+      /____\       ascent   |
+     /      \      |        |
+    /        \     |        height
+    ----------------        |
+                   |        |
+                   descent  |
+                   |        |
+    -------------------------
+
+See also: [al_get_text_width], [al_get_text_dimensions]
+
+### API: al_get_font_ascent
+
+Returns the ascent of the specified font.
+
+See also: [al_get_font_descent], [al_get_font_line_height]
+
+### API: al_get_font_descent
+
+Returns the descent of the specified font.
+
+See also: [al_get_font_ascent], [al_get_font_line_height]
+
+### API: al_get_text_width
+
+Calculates the length of a string in a particular font, in pixels.
+
+See also: [al_get_ustr_width], [al_get_font_line_height],
+[al_get_text_dimensions]
+
+### API: al_get_ustr_width
+
+Like [al_get_text_width] but expects an ALLEGRO_USTR.
+
+See also: [al_get_text_width], [al_get_ustr_dimensions]
+
+### API: al_draw_text
+
+Writes the NUL-terminated string `text` onto the target bitmap at position `x`,
+`y`, using the specified `font`.
+
+The `flags` parameter can be 0 or one of the following flags:
+
+- ALLEGRO_ALIGN_LEFT - Draw the text left-aligned (same as 0).
+- ALLEGRO_ALIGN_CENTRE - Draw the text centered around the given position.
+- ALLEGRO_ALIGN_RIGHT - Draw the text right-aligned to the given position.
+
+It can also be combined with this flag:
+
+- ALLEGRO_ALIGN_INTEGER - Always draw text aligned to an integer pixel
+  position.  This was formerly the default behaviour.  Since: 5.0.8, 5.1.4
+
+This function does not support newline characters (`\n`),
+but you can use [al_draw_multiline_text] for multi line text output.
+
+See also: [al_draw_ustr], [al_draw_textf], [al_draw_justified_text],
+[al_draw_multiline_text].
+
+### API: al_draw_ustr
+
+Like [al_draw_text], except the text is passed as an ALLEGRO_USTR instead of
+a NUL-terminated char array.
+
+See also: [al_draw_text], [al_draw_justified_ustr], [al_draw_multiline_ustr]
+
+### API: al_draw_justified_text
+
+Like [al_draw_text], but justifies the string to the region x1-x2.
+
+The `diff` parameter is the maximum amount of horizontal space to
+allow between words.  If justisfying the text would exceed `diff` pixels,
+or the string contains less than two words, then the string will be drawn
+left aligned.
+
+The `flags` parameter can be 0 or one of the following flags:
+
+- ALLEGRO_ALIGN_INTEGER - Draw text aligned to integer pixel positions.
+  Since: 5.0.8, 5.1.5
+
+See also: [al_draw_justified_textf], [al_draw_justified_ustr]
+
+### API: al_draw_justified_ustr
+
+Like [al_draw_justified_text], except the text is passed as an ALLEGRO_USTR
+instead of a NUL-terminated char array.
+
+See also: [al_draw_justified_text], [al_draw_justified_textf].
+
+### API: al_draw_textf
+
+Formatted text output, using a printf() style format string.
+All parameters have the same meaning as with [al_draw_text] otherwise.
+
+See also: [al_draw_text], [al_draw_ustr]
+
+### API: al_draw_justified_textf
+
+Formatted text output, using a printf() style format string.
+All parameters have the same meaning as with [al_draw_justified_text]
+otherwise.
+
+See also: [al_draw_justified_text], [al_draw_justified_ustr].
+
+### API: al_get_text_dimensions
+
+Sometimes, the [al_get_text_width] and [al_get_font_line_height]
+functions are not enough for exact text placement, so this function
+returns some additional information.
+
+Returned variables (all in pixels):
+
+- x, y - Offset to upper left corner of bounding box.
+- w, h - Dimensions of bounding box.
+
+Note that glyphs may go to the left and upwards of the X, in which
+case x and y will have negative values.
+
+See also: [al_get_text_width], [al_get_font_line_height],
+[al_get_ustr_dimensions]
+
+### API: al_get_ustr_dimensions
+
+Like [al_get_text_dimensions], except the text is passed as an ALLEGRO_USTR
+instead of a NUL-terminated char array.
+
+See also: [al_get_text_dimensions]
+
+### API: al_get_allegro_font_version
+
+Returns the (compiled) version of the addon, in the same format as
+[al_get_allegro_version].
+
+### API: al_get_font_ranges
+
+Gets information about all glyphs contained in a font, as a list of ranges.
+Ranges have the same format as with [al_grab_font_from_bitmap].
+
+`ranges_count` is the maximum number of ranges that will be returned.
+
+`ranges` should be an array with room for `ranges_count` * 2 elements. The
+even integers are the first unicode point in a range, the odd integers the
+last unicode point in a range.
+
+Returns the number of ranges contained in the font (even if it is bigger
+than `ranges_count`).
+
+Since: 5.1.4
+
+See also: [al_grab_font_from_bitmap]
+
+### API: al_set_fallback_font
+
+Sets a font which is used instead if a character is not present. Can be
+chained, but make sure there is no loop as that would crash the
+application! Pass NULL to remove a fallback font again.
+
+Since: 5.1.12
+
+See also: [al_get_fallback_font], [al_draw_glyph], [al_draw_text]
+
+### API: al_get_fallback_font
+
+Retrieves the fallback font for this font or NULL.
+
+Since: 5.1.12
+
+See also: [al_set_fallback_font]
+
+## Per glyph text handling
+
+For some applications Allegro's text drawing functions may not be sufficient.
+For example, you would like to give a different color to every letter in a word,
+or use different a font for a drop cap.
+
+That is why Allegro supports drawing and getting the dimensions of the 
+individual glyphs of a font. A glyph is a particular visual representation of 
+a letter, character or symbol in a specific font.
+
+And it's also possible to get the kerning to use between two glyphs. These per 
+glyph functions have less overhead than Allegro's per string text drawing and 
+dimensioning functions. So, with these functions you can write your own 
+efficient and precise custom text drawing functions.
+
+### API: al_draw_glyph
+
+Draws the glyph that corresponds with `codepoint` in the given `color`
+using the given `font`. If `font` does not have such a glyph, nothing
+will be drawn.
+
+To draw a string as left to right horizontal text you will need to use
+[al_get_glyph_advance] to determine the position of each glyph.
+For drawing strings in other directions, such as top to down, use
+[al_get_glyph_dimensions] to determine the size and position of each glyph.
+
+If you have to draw many glyphs at the same time, use [al_hold_bitmap_drawing]
+with true as the parameter, before drawing the glyphs, and then call
+[al_hold_bitmap_drawing] again with false as a parameter when done drawing the
+glyphs to further enhance performance.
+
+Since: 5.1.12
+
+See also: [al_get_glyph_width], [al_get_glyph_dimensions],
+[al_get_glyph_advance].
+
+### API: al_get_glyph_width
+
+This function returns the width in pixels of the glyph that corresponds with
+`codepoint` in the font `font`. Returns zero if the font does not have such
+a glyph.
+
+Since: 5.1.12
+
+See also: [al_draw_glyph], [al_get_glyph_dimensions], [al_get_glyph_advance].
+
+### API: al_get_glyph_dimensions
+
+Sometimes, the [al_get_glyph_width] or [al_get_glyph_advance] functions are
+not enough for exact glyph placement, so this function returns some additional
+information, particularly if you want to draw the font vertically.
+
+The function itself returns true if the character was present in `font`
+and false if the character was not present in `font`.
+
+Returned variables (all in pixel):
+
+- bbx, bby - Offset to upper left corner of bounding box.
+- bbw, bbh - Dimensions of bounding box.
+
+These values are the same as [al_get_text_dimensions] would return for 
+a string of a single character equal to the glyph passed to this function.
+Note that glyphs may go to the left and upwards of the X, in which
+case x and y will have negative values.
+
+If you want to draw a string verticallly, for Japanese or as a game effect, 
+then you should leave bby + bbh space between the glyphs in the y direction
+for a regular placement.
+
+If you want to draw a string horizontally in an extra compact way,  
+then you should leave bbx + bbw space between the glyphs in the x direction
+for a compact placement.
+
+In the figure below is an example of what bbx and bby may be like for a `2` 
+glyph, and a `g` glyph of the same font compared to the result of 
+al_get_glyph_width().
+    
+     
+       al_get_glyph_width()     al_get_glyph_width()
+              __|___                   __|__
+             /      \                 /     \  
+         bbx    bbw                 bbx   bbw    
+        <-->+<------>+           <-->+<----->+   X baseline
+        ^   |        |           ^   |       |   
+    bby |   |        |       bby |   |       |   
+        v   |        |           |   |       |   
+        +---+--------+           |   |       |
+        ^   | *****  |           |   |       |
+        |   |*    ** |           v   |       |
+    bbh |   |    **  |       bbh +---+-------+
+        |   |  **    |           ^   | ***** |
+        v   |********|           |   |*     *|
+        +---+--------+           |   | ***** |
+                                 |   |      *|
+                                 |   | *    *|
+                                 v   |  **** |
+                                 +---+-------+
+    
+    
+Since: 5.1.12
+
+See also: [al_draw_glyph], [al_get_glyph_width], [al_get_glyph_advance].
+
+### API: al_get_glyph_advance
+
+This function returns by how much the x position should be advanced
+for left to right text drawing when the glyph that corresponds to codepoint1
+has been drawn, and the glyph that corresponds to codepoint2 will be the next
+to be drawn. This takes into consideration the horizontal advance width of the
+glyph that corresponds with codepoint1 as well as the kerning between the
+glyphs of codepoint1 and codepoint2.
+
+Kerning is the process of adjusting the spacing between glyphs in a font,
+to obtain a more visually pleasing result. Kerning adjusts the space between
+two individual glyphs with an offset determined by the author of the font.
+
+If you pass ALLEGRO_NO_KERNING as codepoint1 then al_get_glyph_advance
+will return 0. this can be useful when drawing the first character of a string 
+in a loop.
+
+Pass ALLEGRO_NO_KERNING as codepoint2 to get the horizontal advance width
+of the glyph that corresponds to codepoint1 without taking any kerning into
+consideration. This can be used, for example, when drawing the last character 
+of a string in a loop.
+
+This function will return zero if the glyph of codepoint1 is not present
+in the `font`. If the glyph of codepoint2 is not present in the font, 
+the horizontal advance width of the glyph that corresponds to codepoint1 
+without taking any kerning into consideration is returned.
+
+When drawing a string one glyph at the time from the left to the right
+with kerning, the x position of the glyph should be incremented by the result
+of [al_get_glyph_advance] applied to the previous glyph drawn and
+the next glyph to draw.
+
+Note that the return value of this function is a recommended advance for
+optimal readability for left to right text determined by the author of the font. 
+However, if you like, you may want to draw the glyphs of the font narrower 
+or wider to each other than what [al_get_glyph_advance] returns for style 
+or effect.
+
+In the figure below is an example of what the result of al_get_glyph_advance
+may be like for two glypphs `A` and `l` of the same font that has kerning for 
+the "Al" pair, without and with the ALLEGRO_NO_KERNING flag.
+
+
+    al_get_glyph_advance(font, 'A', 'l')
+         ___|___                  
+        /       \  
+        -------------            
+            /\   -|  
+           /  \   |
+          /____\  |
+         /      \ |
+        /        \ \_             
+        -------------
+        
+        
+    al_get_glyph_advance(font, 'A', ALLEGRO_NO_KERNING)
+         ____|____
+        /         \  
+        ---------------
+            /\     -|  
+           /  \     |
+          /____\    |
+         /      \   |
+        /        \   \_             
+        ---------------
+
+
+Since: 5.1.12
+
+See also: [al_draw_glyph], [al_get_glyph_width], [al_get_glyph_dimensions].
+
+## Multiline text drawing
+
+### API: al_draw_multiline_text
+
+Like [al_draw_text], but this function supports drawing multiple lines of text.
+It will break `text` in lines based on its contents and the `max_width`
+parameter. The lines are then layed out vertically depending on the
+`line_height` parameter and drawn each as if [al_draw_text] was called
+on them.
+
+A newline `\n` in the `text` will cause a "hard" line break after its
+occurrence in the string. The text after a hard break is placed on a new line.
+Carriage return `\r` is not supported, will not cause a line break, and will
+likely be drawn as a square or a space depending on the font.
+
+The `max_width` parameter controls the maximum desired width of the lines.
+This function will try to introduce a "soft" line break after the longest
+possible series of words that will fit in `max_length` when drawn
+with the given `font`. A "soft" line break can occur either on a space or
+tab (`\t`) character.
+
+However, it is possible that `max_width` is too small, or the words in `text`
+are too long to fit `max_width` when drawn with `font`. In that case, the word
+that is too wide will simply be drawn completely on a line by itself. If you
+don't want the text that overflows `max_width` to be visible, then use
+[al_set_clipping_rectangle] to clip it off and hide it.
+
+The lines `text` was split into will each be drawn using the `font`, `x`, `color`
+and `flags` parameters, vertically starting at `y` and with a distance of
+`line_height` between them. If `line_height` is zero (`0`), the value returned by
+calling [al_get_font_line_height] on `font` will be used as a default instead.
+
+The `flags` ALLEGRO_ALIGN_LEFT, ALLEGRO_ALIGN_CENTRE, ALLEGRO_ALIGN_RIGHT
+and ALLEGRO_ALIGN_INTEGER will be honoured by this function.
+
+If you want to calculate the size of what this function will draw without actually
+drawing it, or if you need a complex and/or custom layout, you can use [al_do_multiline_text].
+
+Since: 5.1.9
+
+See also: [al_do_multiline_text], [al_draw_multiline_ustr],
+[al_draw_multiline_textf]
+
+### API: al_draw_multiline_ustr
+
+Like [al_draw_multiline_text], except the text is passed as an ALLEGRO_USTR
+instead of a NUL-terminated char array.
+
+Since: 5.1.9
+
+See also: [al_draw_multiline_text], [al_draw_multiline_textf],
+[al_do_multiline_text]
+
+### API: al_draw_multiline_textf
+
+Formatted text output, using a printf() style format string.
+All parameters have the same meaning as with [al_draw_multiline_text] otherwise.
+
+Since: 5.1.9
+
+See also: [al_draw_multiline_text], [al_draw_multiline_ustr],
+[al_do_multiline_text]
+
+### API: al_do_multiline_text
+
+This function processes the `text` and splits it into lines as
+[al_draw_multiline_text] would, and then calls the callback `cb` once
+for every line. This is useful for custom drawing of multiline text,
+or for calculating the size of multiline text ahead of time. See the
+documentation on [al_draw_multiline_text] for an explanation of the splitting
+algorithm.
+
+For every line that this function splits `text` into the callback `cb`
+will be called once with the following parameters:
+
+- `line_num` - the number of the line starting from zero and counting up
+- `line` - a pointer to the beginning character of the line (see below)
+- `size` - the size of the line (0 for empty lines)
+- `extra` - the same pointer that was passed to al_do_multiline_text
+
+Note that `line` is *not* guaranteed to be a NUL-terminated string, but will merely
+point to a character within `text` or to an empty string in case of an empty line.
+If you need a NUL-terminated string, you will have to copy `line` to a buffer
+and NUL-terminate it yourself. You will also have to make your own copy if you need
+the contents of `line` after `cb` has returned, as `line` is *not* guaranteed to be
+valid after that.
+
+If the callback `cb` returns false, al_do_multiline_text will stop immediately, otherwise
+it will continue on to the next line.
+
+Since: 5.1.9
+
+See also: [al_draw_multiline_text]
+
+### API: al_do_multiline_ustr
+
+Like [al_do_multiline_text], but using ALLEGRO_USTR instead of a
+NUL-terminated char array for text.
+
+Since: 5.1.9
+
+See also: [al_draw_multiline_ustr]
+
+## Bitmap fonts
+
+### API: al_grab_font_from_bitmap
+
+Creates a new font from an Allegro bitmap. You can delete the bitmap after the
+function returns as the font will contain a copy for itself.
+
+Parameters:
+
+- bmp: The bitmap with the glyphs drawn onto it
+- n: Number of unicode ranges in the bitmap.
+- ranges: 'n' pairs of first and last unicode point to map glyphs to for
+  each range.
+
+The bitmap format is as in the following example, which contains three glyphs
+for 1, 2 and 3.
+
+    .............
+    . 1 .222.333.
+    . 1 .  2.  3.
+    . 1 .222.333.
+    . 1 .2  .  3.
+    . 1 .222.333.
+    .............
+
+In the above illustration, the dot is for pixels having the background color. It
+is determined by the color of the top left pixel in the bitmap. There should be
+a border of at least 1 pixel with this color to the bitmap edge and between all
+glyphs.
+
+Each glyph is inside a rectangle of pixels not containing the background
+color. The height of all glyph rectangles should be the same, but the width
+can vary.
+
+The placement of the rectangles does not matter, except that glyphs are scanned
+from left to right and top to bottom to match them to the specified unicode
+codepoints.
+
+The glyphs will simply be drawn using [al_draw_bitmap], so usually you will want
+the rectangles filled with full transparency and the glyphs drawn in opaque
+white.
+
+Examples:
+
+~~~~c
+int ranges[] = {32, 126};
+al_grab_font_from_bitmap(bitmap, 1, ranges)
+
+int ranges[] = {
+    0x0020, 0x007F,  /* ASCII */
+    0x00A1, 0x00FF,  /* Latin 1 */
+    0x0100, 0x017F,  /* Extended-A */
+    0x20AC, 0x20AC}; /* Euro */
+al_grab_font_from_bitmap(bitmap, 4, ranges)
+~~~~
+
+The first example will grab glyphs for the 95 standard printable ASCII
+characters, beginning with the space character (32) and ending with the
+tilde character (126). The second example will map the first 96 glyphs
+found in the bitmap to ASCII range, the next 95 glyphs to Latin 1, the
+next 128 glyphs to Extended-A, and the last glyph to the Euro character.
+(This is just the characters found in the Allegro 4 font.)
+
+See also: [al_load_bitmap], [al_grab_font_from_bitmap]
+
+### API: al_load_bitmap_font
+
+Load a bitmap font from a file. This is done by first calling
+[al_load_bitmap_flags] and then [al_grab_font_from_bitmap].
+
+If you wanted to load an old A4 font, for example, it would be better to
+load the bitmap yourself in order to call [al_convert_mask_to_alpha] on it
+before passing it to [al_grab_font_from_bitmap].
+
+See also: [al_load_bitmap_font_flags], [al_load_font], [al_load_bitmap_flags]
+
+### API: al_load_bitmap_font_flags
+
+Like [al_load_bitmap_font] but additionally takes a flags parameter
+which is a bitfield containing a combination of the following:
+
+ALLEGRO_NO_PREMULTIPLIED_ALPHA
+:  The same meaning as for [al_load_bitmap_flags].
+
+See also: [al_load_bitmap_font], [al_load_bitmap_flags]
+
+### API: al_create_builtin_font
+
+Creates a monochrome bitmap font (8x8 pixels per character).
+
+This font is primarily intended to be used for displaying information in
+environments or during early runtime states where no external font data is
+available or loaded (e.g. for debugging).
+
+The builtin font contains the following unicode character ranges:
+
+    0x0020 to 0x007F (ASCII)
+    0x00A1 to 0x00FF (Latin 1)
+    0x0100 to 0x017F (Extended A)
+    0x20AC to 0x20AC (euro currency symbol)
+
+Returns NULL on an error.
+
+The font memory must be freed the same way as for any other font,
+using [al_destroy_font].
+
+Since: 5.0.8, 5.1.3
+
+See also: [al_load_bitmap_font], [al_destroy_font]
+
+## TTF fonts
+
+These functions are declared in the following header file.
+Link with allegro_ttf.
+
+~~~~c
+ #include <allegro5/allegro_ttf.h>
+~~~~
+
+### API: al_init_ttf_addon
+
+Call this after [al_init_font_addon] to make [al_load_font] recognize
+".ttf" and other formats supported by [al_load_ttf_font].
+
+Returns true on success, false on failure.
+
+### API: al_is_ttf_addon_initialized
+
+Returns true if the TTF addon is initialized, otherwise returns false.
+
+Since: 5.2.6
+
+See also: [al_init_ttf_addon], [al_shutdown_ttf_addon]
+
+### API: al_shutdown_ttf_addon
+
+Unloads the ttf addon again. You normally don't need to call this.
+
+### API: al_load_ttf_font
+
+Loads a TrueType font from a file using the FreeType library. Quoting
+from the FreeType FAQ this means support for many different font
+formats:
+
+*TrueType, OpenType, Type1, CID, CFF, Windows FON/FNT, X11 PCF, and
+others*
+
+The `size` parameter determines the size the font will be rendered at,
+specified in pixels. The standard font size is measured in *units per
+EM*, if you instead want to specify the size as the total height of
+glyphs in pixels, pass it as a negative value.
+
+> *Note:* If you want to display text at multiple sizes, load the font
+multiple times with different size parameters.
+
+The following flags are supported:
+
+* ALLEGRO_TTF_NO_KERNING - Do not use any kerning even if the font file
+  supports it.
+
+* ALLEGRO_TTF_MONOCHROME - Load as a monochrome font (which means no
+  anti-aliasing of the font is done).
+
+* ALLEGRO_TTF_NO_AUTOHINT - Disable the Auto Hinter which is enabled by default
+  in newer versions of FreeType. Since: 5.0.6, 5.1.2
+
+See also: [al_init_ttf_addon], [al_load_ttf_font_f]
+
+### API: al_load_ttf_font_f
+
+Like [al_load_ttf_font], but the font is read from the file handle. The filename
+is only used to find possible additional files next to a font file.
+
+> *Note:* The file handle is owned by the returned ALLEGRO_FONT object and must not
+be freed by the caller, as FreeType expects to be able to read from it at a
+later time.
+
+### API: al_load_ttf_font_stretch
+
+Like [al_load_ttf_font], except it takes separate width and height
+parameters instead of a single size parameter.
+
+If the height is a positive value, and the width zero or positive, then font
+will be stretched according to those parameters. The width must not be negative
+if the height is positive.
+
+As with [al_load_ttf_font], the height may be a negative value to specify
+the total height in pixels.  Then the width must also be a negative value, or
+zero.
+
+Returns `NULL` if the height is positive while width is negative, or if the
+height is negative while the width is positive.
+
+Since: 5.0.6, 5.1.0
+
+See also: [al_load_ttf_font], [al_load_ttf_font_stretch_f]
+
+### API: al_load_ttf_font_stretch_f
+
+Like [al_load_ttf_font_stretch], but the font is read from the file handle. The
+filename is only used to find possible additional files next to a font file.
+
+> *Note:* The file handle is owned by the returned ALLEGRO_FONT object and must not
+be freed by the caller, as FreeType expects to be able to read from it at a
+later time.
+
+Since: 5.0.6, 5.1.0
+
+See also: [al_load_ttf_font_stretch]
+
+### API: al_get_allegro_ttf_version
+
+Returns the (compiled) version of the addon, in the same format as
+[al_get_allegro_version].
+
+### API: al_get_glyph
+
+Gets all the information about a glyph, including the bitmap, needed to draw it
+yourself. prev_codepoint is the codepoint in the string before the one you want
+to draw and is used for kerning. codepoint is the character you want to get info
+about. You should clear the 'glyph' structure to 0 with memset before passing it
+to this function for future compatibility.
+
+Since: 5.2.1
+
+> *[Unstable API]:* This API is new and subject to refinement.
+
+See also: [ALLEGRO_GLYPH]

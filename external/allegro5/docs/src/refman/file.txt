@@ -1,0 +1,511 @@
+# File I/O
+
+These functions are declared in the main Allegro header file:
+
+~~~~c
+ #include <allegro5/allegro.h>
+~~~~
+
+## API: ALLEGRO_FILE
+
+An opaque object representing an open file.  This could be a
+real file on disk or a virtual file.
+
+## API: ALLEGRO_FILE_INTERFACE
+
+A structure containing function pointers to handle a type of "file",
+real or virtual.  See the full discussion in [al_set_new_file_interface].
+
+The fields are:
+
+~~~~c
+void*         (*fi_fopen)(const char *path, const char *mode);
+bool          (*fi_fclose)(ALLEGRO_FILE *f);
+size_t        (*fi_fread)(ALLEGRO_FILE *f, void *ptr, size_t size);
+size_t        (*fi_fwrite)(ALLEGRO_FILE *f, const void *ptr, size_t size);
+bool          (*fi_fflush)(ALLEGRO_FILE *f);
+int64_t       (*fi_ftell)(ALLEGRO_FILE *f);
+bool          (*fi_fseek)(ALLEGRO_FILE *f, int64_t offset, int whence);
+bool          (*fi_feof)(ALLEGRO_FILE *f);
+int           (*fi_ferror)(ALLEGRO_FILE *f);
+const char *  (*fi_ferrmsg)(ALLEGRO_FILE *f);
+void          (*fi_fclearerr)(ALLEGRO_FILE *f);
+int           (*fi_fungetc)(ALLEGRO_FILE *f, int c);
+off_t         (*fi_fsize)(ALLEGRO_FILE *f);
+~~~~
+
+The fi_open function must allocate memory for whatever userdata structure it needs.
+The pointer to that memory must be returned; it will then be associated with the
+file. The other functions can access that data by calling [al_get_file_userdata]
+on the file handle. If fi_open returns NULL then [al_fopen] will also return NULL. 
+
+The fi_fclose function must clean up and free the userdata, but Allegro will
+free the [ALLEGRO_FILE] handle.
+
+If fi_fungetc is NULL, then Allegro's default implementation of a 16 char long
+buffer will be used.
+
+## API: ALLEGRO_SEEK
+
+* ALLEGRO_SEEK_SET - seek relative to beginning of file
+* ALLEGRO_SEEK_CUR - seek relative to current file position
+* ALLEGRO_SEEK_END - seek relative to end of file
+
+See also: [al_fseek]
+
+## API: al_fopen
+
+Creates and opens a file (real or virtual) given the path and mode.
+The current file interface is used to open the file.
+
+Parameters:
+
+* path - path to the file to open
+* mode - access mode to open the file in ("r", "w", etc.)
+
+Depending on the stream type and the mode string, files may be opened in
+"text" mode.  The handling of newlines is particularly important.  For example,
+using the default stdio-based streams on DOS and Windows platforms, where the
+native end-of-line terminators are CR+LF sequences, a call to [al_fgetc] may
+return just one character ('\\n') where there were two bytes (CR+LF) in the
+file.  When writing out '\\n', two bytes would be written instead.
+(As an aside, '\\n' is not defined to be equal to LF either.)
+
+Newline translations can be useful for text files but is disastrous for binary
+files.  To avoid this behaviour you need to open file streams in binary mode
+by using a mode argument containing a "b", e.g. "rb", "wb".
+
+Returns a file handle on success, or NULL on error.
+
+See also: [al_set_new_file_interface], [al_fclose].
+
+## API: al_fopen_interface
+
+Opens a file using the specified interface, instead of the interface
+set with [al_set_new_file_interface].
+
+See also: [al_fopen]
+
+## API: al_fopen_slice
+
+Opens a slice (subset) of an already open random access file as if it were
+a stand alone file. While the slice is open, the parent file handle must
+not be used in any way.
+
+The slice is opened at the current location of the parent file, up through
+`initial_size` bytes. The `initial_size` may be any non-negative integer
+that will not exceed the bounds of the parent file.
+
+Seeking with `ALLEGRO_SEEK_SET` will be relative to this starting location.
+`ALLEGRO_SEEK_END` will be relative to the starting location plus the 
+size of the slice.
+
+The mode can be any combination of:
+
+* r: read access
+* w: write access
+* e: expandable
+* s: seek to the end of the slice upon [al_close] (this is the default behavior)
+* n: disable the seeking behavior of "s".
+
+For example, a mode of "rw" indicates the file can be read and written. 
+(Note that this is slightly different from the stdio modes.) Keep in mind
+that the parent file must support random access and be open in normal
+write mode (not append) for the slice to work in a well defined way.
+
+If the slice is marked as expandable, then reads and writes can happen
+after the initial end point, and the slice will grow accordingly. Otherwise,
+all activity is restricted to the initial size of the slice.
+
+A slice must be closed with [al_fclose]. The parent file will then be
+positioned immediately after the end of the slice. This behavior can be
+disabled by setting the "n" mode.
+
+Since: 5.0.6, 5.1.0
+
+See also: [al_fopen]
+
+## API: al_fclose
+
+Close the given file, writing any buffered output data (if any).
+
+Returns true on success, false on failure.
+errno is set to indicate the error.
+
+## API: al_fread
+
+Read 'size' bytes into the buffer pointed to by 'ptr', from the given file.
+
+Returns the number of bytes actually read.
+If an error occurs, or the end-of-file is reached, the return value is a
+short byte count (or zero).
+
+al_fread() does not distinguish between EOF and other errors.
+Use [al_feof] and [al_ferror] to determine which occurred.
+
+See also: [al_fgetc], [al_fread16be], [al_fread16le], [al_fread32be],
+[al_fread32le]
+
+## API: al_fwrite
+
+Write 'size' bytes from the buffer pointed to by 'ptr' into the given file.
+
+Returns the number of bytes actually written.
+If an error occurs, the return value is a short byte count (or zero).
+
+See also: [al_fputc], [al_fputs], [al_fwrite16be], [al_fwrite16le],
+[al_fwrite32be], [al_fwrite32le]
+
+## API: al_fflush
+
+Flush any pending writes to the given file.
+
+Returns true on success, false otherwise.
+errno is set to indicate the error.
+
+See also: [al_get_errno]
+
+## API: al_ftell
+
+Returns the current position in the given file, or -1 on error.
+errno is set to indicate the error.
+
+On some platforms this function may not support large files.
+
+See also: [al_fseek], [al_get_errno]
+
+## API: al_fseek
+
+Set the current position of the given file to a position relative
+to that specified by 'whence', plus 'offset' number of bytes.
+
+'whence' can be:
+
+* ALLEGRO_SEEK_SET - seek relative to beginning of file
+* ALLEGRO_SEEK_CUR - seek relative to current file position
+* ALLEGRO_SEEK_END - seek relative to end of file
+
+Returns true on success, false on failure.
+errno is set to indicate the error.
+
+After a successful seek, the end-of-file indicator is cleared
+and all pushback bytes are forgotten.
+
+On some platforms this function may not support large files.
+
+See also: [al_ftell], [al_get_errno]
+
+## API: al_feof
+
+Returns true if the end-of-file indicator has been set on the file,
+i.e. we have attempted to read *past* the end of the file.
+
+This does *not* return true if we simply are at the end of the file.
+The following code correctly reads two bytes, even when the file
+contains exactly two bytes:
+
+~~~~c
+int b1 = al_fgetc(f);
+int b2 = al_fgetc(f);
+if (al_feof(f)) {
+   /* At least one byte was unsuccessfully read. */
+   report_error();
+}
+~~~~
+
+See also: [al_ferror], [al_fclearerr]
+
+## API: al_ferror
+
+Returns non-zero if the error indicator is set on the given file,
+i.e. there was some sort of previous error.
+The error code may be system or file interface specific.
+
+See also: [al_feof], [al_fclearerr], [al_ferrmsg]
+
+## API: al_ferrmsg
+
+Return a message string with details about the last error that occurred on
+the given file handle.  The returned string is empty if there was no error,
+or if the file interface does not provide more information.
+
+See also: [al_fclearerr], [al_ferror]
+
+## API: al_fclearerr
+
+Clear the error indicator for the given file.
+
+The standard I/O backend also clears the end-of-file indicator, and other
+backends *should* try to do this.  However, they may not if it would require
+too much effort (e.g. PhysicsFS backend), so your code should not rely on it
+if you need your code to be portable to other backends.
+
+See also: [al_ferror], [al_feof]
+
+## API: al_fungetc
+
+Ungets a single byte from a file.
+Pushed-back bytes are not written to the file, only made available for
+subsequent reads, in reverse order.
+
+The number of pushbacks depends on the backend.  The standard I/O backend only
+guarantees a single pushback; this depends on the libc implementation.
+
+For backends that follow the standard behavior, the pushback buffer will
+be cleared after any seeking or writing; also calls to [al_fseek] and [al_ftell]
+are relative to the number of pushbacks. If a pushback causes the position to
+become negative, the behavior of [al_fseek] and [al_ftell] are undefined.
+
+See also: [al_fgetc], [al_get_errno]
+
+## API: al_fsize
+
+Return the size of the file, if it can be determined, or -1 otherwise.
+
+## API: al_fgetc
+
+Read and return next byte in the given file.
+Returns EOF on end of file or if an error occurred.
+
+See also: [al_fungetc]
+
+## API: al_fputc
+
+Write a single byte to the given file.
+The byte written is the value of c cast to an unsigned char.
+
+Parameters:
+
+* c - byte value to write
+* f - file to write to
+
+Returns the written byte (cast back to an int) on success,
+or EOF on error.
+
+## API: al_fprintf
+
+Writes to a file with stdio "printf"-like formatting.
+Returns the number of bytes written, or a negative number
+on error.
+
+See also: [al_vfprintf]
+
+## API: al_vfprintf
+
+Like al_fprintf but takes a va_list. Useful for creating your own
+variations of formatted printing.
+Returns the number of bytes written, or a negative number
+on error.
+
+See also: [al_fprintf]
+
+## API: al_fread16le
+
+Reads a 16-bit word in little-endian format (LSB first).
+
+On success, returns the 16-bit word.  On failure, returns EOF (-1).  Since -1
+is also a valid return value, use [al_feof] to check if the end of the file was
+reached prematurely, or [al_ferror] to check if an error occurred.
+
+See also: [al_fread16be]
+
+## API: al_fread16be
+
+Reads a 16-bit word in big-endian format (MSB first).
+
+On success, returns the 16-bit word.  On failure, returns EOF (-1).  Since -1
+is also a valid return value, use [al_feof] to check if the end of the file was
+reached prematurely, or [al_ferror] to check if an error occurred.
+
+See also: [al_fread16le]
+
+## API: al_fwrite16le
+
+Writes a 16-bit word in little-endian format (LSB first).
+
+Returns the number of bytes written: 2 on success, less than 2 on an error.
+
+See also: [al_fwrite16be]
+
+## API: al_fwrite16be
+
+Writes a 16-bit word in big-endian format (MSB first).
+
+Returns the number of bytes written: 2 on success, less than 2 on an error.
+
+See also: [al_fwrite16le]
+
+## API: al_fread32le
+
+Reads a 32-bit word in little-endian format (LSB first).
+
+On success, returns the 32-bit word.  On failure, returns EOF (-1).  Since -1
+is also a valid return value, use [al_feof] to check if the end of the file was
+reached prematurely, or [al_ferror] to check if an error occurred.
+
+See also: [al_fread32be]
+
+## API: al_fread32be
+
+Read a 32-bit word in big-endian format (MSB first).
+
+On success, returns the 32-bit word.  On failure, returns EOF (-1).  Since -1
+is also a valid return value, use [al_feof] to check if the end of the file was
+reached prematurely, or [al_ferror] to check if an error occurred.
+
+See also: [al_fread32le]
+
+## API: al_fwrite32le
+
+Writes a 32-bit word in little-endian format (LSB first).
+
+Returns the number of bytes written: 4 on success, less than 4 on an error.
+
+See also: [al_fwrite32be]
+
+## API: al_fwrite32be
+
+Writes a 32-bit word in big-endian format (MSB first).
+
+Returns the number of bytes written: 4 on success, less than 4 on an error.
+
+See also: [al_fwrite32le]
+
+## API: al_fgets
+
+Read a string of bytes terminated with a newline or end-of-file
+into the buffer given.  The line terminator(s), if any, are included in the
+returned string.  A maximum of max-1 bytes are read, with one byte being
+reserved for a NUL terminator.
+
+Parameters:
+
+* f - file to read from
+* buf - buffer to fill
+* max - maximum size of buffer
+
+Returns the pointer to buf on success.  Returns NULL if an error occurred or
+if the end of file was reached without reading any bytes.
+
+See [al_fopen] about translations of end-of-line characters.
+
+See also: [al_fget_ustr]
+
+## API: al_fget_ustr
+
+Read a string of bytes terminated with a newline or end-of-file.
+The line terminator(s), if any, are included in the returned string.
+
+On success returns a pointer to a new ALLEGRO_USTR structure.
+This must be freed eventually with [al_ustr_free].
+Returns NULL if an error occurred or if the end of file was reached without
+reading any bytes.
+
+See [al_fopen] about translations of end-of-line characters.
+
+See also: [al_fgetc], [al_fgets]
+
+## API: al_fputs
+
+Writes a string to file.  Apart from the return value,
+this is equivalent to:
+
+~~~~c
+al_fwrite(f, p, strlen(p));
+~~~~
+
+Parameters:
+
+* f - file handle to write to
+* p - string to write
+
+Returns a non-negative integer on success, EOF on error.
+
+Note: depending on the stream type and the mode passed to [al_fopen], newline
+characters in the string may or may not be automatically translated to
+native end-of-line sequences, e.g. CR/LF instead of LF.
+
+See also: [al_fwrite]
+
+## Standard I/O specific routines
+
+### API: al_fopen_fd
+
+Create an [ALLEGRO_FILE] object that operates on an open file descriptor using
+stdio routines.  See the documentation of fdopen() for a description of the
+'mode' argument.
+
+Returns an ALLEGRO_FILE object on success or NULL on an error.
+On an error, the Allegro errno will be set and the file descriptor will
+not be closed.
+
+The file descriptor will be closed by [al_fclose] so you should not
+call close() on it.
+
+See also: [al_fopen]
+
+### API: al_make_temp_file
+
+Make a temporary randomly named file given a filename 'template'.
+
+'template' is a string giving the format of the generated filename and
+should include one or more capital Xs.  The Xs are replaced with random
+alphanumeric characters, produced using a simple pseudo-random
+number generator only.  There should be no path separators.
+
+If 'ret_path' is not NULL, the address it points to will be set
+to point to a new path structure with the name of the temporary file.
+
+Returns the opened [ALLEGRO_FILE] on success, NULL on failure.
+
+## Alternative file streams
+
+By default, the Allegro file I/O routines use the C library I/O routines,
+hence work with files on the local filesystem, but can be overridden so that
+you can read and write to other streams.  For example, you can work with blocks
+of memory or sub-files inside .zip files.
+
+There are two ways to get an [ALLEGRO_FILE] that doesn't use stdio.
+An addon library may provide a function that returns a new ALLEGRO_FILE
+directly, after which, all al_f* calls on that object will use
+overridden functions for that type of stream.
+Alternatively, [al_set_new_file_interface] changes which function will handle
+the following [al_fopen] calls for the current thread.
+
+### API: al_set_new_file_interface
+
+Set the [ALLEGRO_FILE_INTERFACE] table for the calling thread.
+This will change the handler for later calls to [al_fopen].
+
+See also: [al_set_standard_file_interface], [al_store_state],
+[al_restore_state].
+
+### API: al_set_standard_file_interface
+
+Set the [ALLEGRO_FILE_INTERFACE] table to the default, for the calling thread.
+This will change the handler for later calls to [al_fopen].
+
+See also: [al_set_new_file_interface]
+
+### API: al_get_new_file_interface
+
+Return a pointer to the [ALLEGRO_FILE_INTERFACE] table in effect
+for the calling thread.
+
+See also: [al_store_state], [al_restore_state].
+
+### API: al_create_file_handle
+
+Creates an empty, opened file handle with some abstract user data.
+This allows custom interfaces to extend the [ALLEGRO_FILE] struct
+with their own data. You should close the handle with the standard
+[al_fclose] function when you are finished with it.
+
+See also: [al_fopen], [al_fclose], [al_set_new_file_interface]
+
+### API: al_get_file_userdata
+
+Returns a pointer to the custom userdata that is attached to the
+file handle. This is intended to be used by functions that extend
+[ALLEGRO_FILE_INTERFACE].
+

@@ -1,0 +1,80 @@
+# State
+
+These functions are declared in the main Allegro header file:
+
+     #include <allegro5/allegro.h>
+
+## API: ALLEGRO_STATE
+
+Opaque type which is passed to [al_store_state]/[al_restore_state].
+
+The various state kept internally by Allegro can be displayed like this:
+
+      global
+          active system driver
+              current config
+      per thread
+          new bitmap params
+          new display params
+          active file interface
+          errno
+          current blending mode
+          current display
+              deferred drawing
+          current target bitmap
+              current transformation
+              current projection transformation
+              current clipping rectangle
+              bitmap locking
+              current shader
+
+In general, the only real global state is the active system driver. All
+other global state is per-thread, so if your application has multiple
+separate threads they never will interfere with each other. (Except if
+there are objects accessed by multiple threads of course. Usually you
+want to minimize that though and for the remaining cases use
+synchronization primitives described in the threads section or events
+described in the events section to control inter-thread communication.)
+
+## API: ALLEGRO_STATE_FLAGS
+
+Flags which can be passed to [al_store_state]/[al_restore_state] as bit
+combinations. See [al_store_state] for the list of flags.
+
+## API: al_restore_state
+
+Restores part of the state of the current thread from the given
+[ALLEGRO_STATE] object.
+
+See also: [al_store_state], [ALLEGRO_STATE_FLAGS]
+
+## API: al_store_state
+
+Stores part of the state of the current thread in the given [ALLEGRO_STATE]
+object. The flags parameter can take any bit-combination of these flags:
+
+* ALLEGRO_STATE_NEW_DISPLAY_PARAMETERS - new_display_format,
+  new_display_refresh_rate, new_display_flags
+* ALLEGRO_STATE_NEW_BITMAP_PARAMETERS - new_bitmap_format, new_bitmap_flags
+* ALLEGRO_STATE_DISPLAY - current_display
+* ALLEGRO_STATE_TARGET_BITMAP - target_bitmap 
+* ALLEGRO_STATE_BLENDER - blender
+* ALLEGRO_STATE_TRANSFORM - current_transformation
+* ALLEGRO_STATE_PROJECTION_TRANSFORM - current_projection_transformation
+* ALLEGRO_STATE_NEW_FILE_INTERFACE - new_file_interface 
+* ALLEGRO_STATE_BITMAP - same as ALLEGRO_STATE_NEW_BITMAP_PARAMETERS and
+                         ALLEGRO_STATE_TARGET_BITMAP
+* ALLEGRO_STATE_ALL - all of the above 
+
+See also: [al_restore_state], [ALLEGRO_STATE]
+
+## API: al_get_errno
+
+Some Allegro functions will set an error number as well as returning an
+error code.  Call this function to retrieve the last error number set
+for the calling thread.
+
+## API: al_set_errno
+
+Set the error number for the calling thread.
+

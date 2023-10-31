@@ -1,0 +1,54 @@
+% Allegro 5 reference manual
+<!-- This file is only used for the HTML output. -->
+<!-- If you change this you should change inc.a as well. -->
+<!-- Don't use #-sectioning in this file. -->
+
+* [Getting started guide](getting_started.html)
+
+Core API
+===
+
+* [Configuration files](config.html)
+* [Displays](display.html)
+* [Events](events.html)
+* [File I/O](file.html)
+* [Filesystem](fshook.html)
+* [Fixed point math](fixed.html)
+* [Fullscreen modes](fullscreen_mode.html)
+* [Graphics routines](graphics.html)
+* [Haptic routines](haptic.html)
+* [Joystick routines](joystick.html)
+* [Keyboard routines](keyboard.html)
+* [Memory management](memory.html)
+* [Monitors](monitor.html)
+* [Mouse routines](mouse.html)
+* [Path structures](path.html)
+* [Shader](shader.html)
+* [State](state.html)
+* [System routines](system.html)
+* [Threads](threads.html)
+* [Time](time.html)
+* [Timer](timer.html)
+* [Touch input](touch.html)
+* [Transformations](transformations.html)
+* [UTF-8 string routines](utf8.html)
+* [Miscellaneous](misc.html)
+* [Platform-specific](platform.html)
+* [Direct3D integration](direct3d.html)
+* [OpenGL integration](opengl.html)
+
+Addons
+======
+
+* [Audio addon](audio.html)
+* [Audio codecs](acodec.html)
+* [Color addon](color.html)
+* [Font addons](font.html)
+* [Image I/O addon](image.html)
+* [Main addon](main.html)
+* [Memfile addon](memfile.html)
+* [Native dialogs addon](native_dialog.html)
+* [PhysicsFS addon](physfs.html)
+* [Primitives addon](primitives.html)
+* [Video streaming addon](video.html)
+

@@ -1,0 +1,228 @@
+# Video streaming addon
+
+These functions are declared in the following header file.
+Link with allegro_video.
+
+~~~~c
+ #include <allegro5/allegro_video.h>
+~~~~
+
+Currently we have an Ogg backend (Theora + Vorbis). See <http://xiph.org/> for
+installation instructions, licensing information and supported video formats.
+
+## API: ALLEGRO_VIDEO_EVENT_TYPE
+
+Events sent by [al_get_video_event_source].
+
+### ALLEGRO_EVENT_VIDEO_FRAME_SHOW
+
+This event is sent when it is time to show a new frame. Once you receive this
+event, you can draw the current frame (as returned by [al_get_video_frame]).
+[al_get_video_frame] will continue returning the same frame until the next
+ALLEGRO_EVENT_VIDEO_FRAME_SHOW is sent.
+
+user.data1 (ALLEGRO_VIDEO *)
+:   The video which generated the event.
+
+Since: 5.1.0
+
+### ALLEGRO_EVENT_VIDEO_FINISHED
+
+This event is sent when the video is finished. Depending on the backend, it may
+be possible to seek to an earlier part of the video and set the video to play
+to resume playback.
+
+user.data1 (ALLEGRO_VIDEO *)
+:   The video which generated the event.
+
+Since: 5.1.0
+
+## API: ALLEGRO_VIDEO_POSITION_TYPE
+
+Used with [al_get_video_position] to specify which position to retrieve. If
+these get out of sync, audio and video may be out of sync in the display of
+the video.
+
+* ALLEGRO_VIDEO_POSITION_ACTUAL -
+The amount of time the video has been playing. If the video has audio then
+this value can be ahead of ALLEGRO_VIDEO_POSITION_VIDEO_DECODE when video
+decoding lags.
+
+* ALLEGRO_VIDEO_POSITION_VIDEO_DECODE -
+The amount of video that has been decoded. This may lag behind the "actual"
+and audio positions if decoding is slower than realtime.
+
+* ALLEGRO_VIDEO_POSITION_AUDIO_DECODE -
+The amount of audio that has been decoded. This may be the same as
+ALLEGRO_VIDEO_POSITION_ACTUAL if audio decode is driving the position,
+which is common to keep audio and video in sync.
+
+Since: 5.1.11
+
+## API: al_init_video_addon
+
+Initializes the video addon.
+
+Since: 5.1.12
+
+## API: al_is_video_addon_initialized
+
+Returns true if the video addon is initialized, otherwise returns false.
+
+Since: 5.2.6
+
+## API: al_shutdown_video_addon
+
+Shut down the video addon. This is done automatically at program exit,
+but can be called any time the user wishes as well.
+
+Since: 5.1.12
+
+## API: al_get_allegro_video_version
+
+Returns the (compiled) version of the addon, in the same format as
+[al_get_allegro_version].
+
+Since: 5.1.12
+
+## API: al_open_video
+
+Reads a video file. This does not start streaming yet but reads the
+meta info so you can query e.g. the size or audio rate.
+
+Since: 5.1.0
+
+## API: al_identify_video
+
+This works exactly as [al_identify_video_f] but you specify the filename
+of the file for which to detect the type and not a file handle. The
+extension, if any, of the passed filename is not taken into account -
+only the file contents.
+
+Since: 5.2.8
+
+See also: [al_init_video_addon], [al_identify_video_f]
+
+## API: al_identify_video_f
+
+Tries to guess the video file type of the open ALLEGRO_FILE by
+reading the first few bytes. By default Allegro cannot recognize any
+file types, but calling [al_init_video_addon] will add detection of the
+types it can read.
+
+Returns a pointer to a static string with a file extension for the
+type, including the leading dot. For example ".ogv". Returns
+NULL if the video type cannot be determined.
+
+Since: 5.2.8
+
+See also: [al_init_video_addon], [al_identify_video]
+
+## API: al_close_video
+
+Closes the video and frees all allocated resources. The video pointer
+is invalid after the function returns.
+
+Since: 5.1.0
+
+## API: al_start_video
+
+Starts streaming the video from the beginning.
+
+Since: 5.1.0
+
+## API: al_start_video_with_voice
+
+Like [al_start_video] but audio is routed to the provided voice.
+
+Since: 5.1.0
+
+## API: al_get_video_event_source
+
+Get an event source for the video. The possible events are described
+under [ALLEGRO_VIDEO_EVENT_TYPE].
+
+Since: 5.1.0
+
+## API: al_set_video_playing
+
+Paused or resumes playback.
+
+Since: 5.1.12
+
+## API: al_is_video_playing
+
+Returns true if the video is currently playing.
+
+Since: 5.1.12
+
+## API: al_get_video_audio_rate
+
+Returns the audio rate of the video, in Hz.
+
+Since: 5.1.0
+
+## API: al_get_video_fps
+
+Returns the speed of the video in frames per second. Often this will
+not be an integer value.
+
+Since: 5.1.0
+
+## API: al_get_video_scaled_width
+
+Returns the width with which the video frame should be drawn. Videos often do
+not use square pixels, so this will may return a value larger than the width of
+the frame bitmap.
+
+Since: 5.1.12
+
+See also: [al_get_video_frame]
+
+## API: al_get_video_scaled_height
+
+Returns the height with which the video frame should be drawn. Videos often do
+not use square pixels, so this will may return a value larger than the height of
+the frame bitmap.
+
+See also: [al_get_video_frame]
+
+Since: 5.1.12
+
+## API: al_get_video_frame
+
+Returns the current video frame. The bitmap is owned by the video so
+do not attempt to free it. The bitmap will stay valid until the next
+call to al_get_video_frame.
+
+Videos often do not use square pixels so the recommended way to draw a video
+frame would be using code like this:
+
+~~~~c
+float scale = 1.0; /* Adjust this to fit your target bitmap dimensions. */
+ALLEGRO_BITMAP* frame = al_get_video_frame(video);
+float sw = al_get_bitmap_width(frame);
+float sh = al_get_bitmap_height(frame);
+float dw = scale * al_get_video_scaled_width(video);
+float dh = scale * al_get_video_scaled_height(video);
+al_draw_scaled_bitmap(frame, 0, 0, sw, sh, 0, 0, dw, dh, 0);
+~~~~
+
+Since: 5.1.0
+
+See also: [al_get_video_scaled_width], [al_get_video_scaled_height]
+
+## API: al_get_video_position
+
+Returns the current position of the video stream in seconds since the
+beginning. The parameter is one of the [ALLEGRO_VIDEO_POSITION_TYPE]
+constants.
+
+Since: 5.1.0
+
+## API: al_seek_video
+
+Seek to a different position in the video. Currently only seeking to the
+beginning of the video is supported.
+
+Since: 5.1.0

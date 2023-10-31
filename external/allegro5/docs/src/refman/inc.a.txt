@@ -1,0 +1,81 @@
+<div class="sidebar">
+
+<div>
+* [**Contents**](index.html)
+* [Configuration files](config.html)
+* [Display](display.html)
+* [Events](events.html)
+* [File I/O](file.html)
+* [Filesystem](fshook.html)
+* [Fixed point math](fixed.html)
+* [Fullscreen modes](fullscreen_mode.html)
+* [Graphics](graphics.html)
+* [Haptic](haptic.html)
+* [Joystick](joystick.html)
+* [Keyboard](keyboard.html)
+* [Memory](memory.html)
+* [Monitor](monitor.html)
+* [Mouse](mouse.html)
+* [Path](path.html)
+* [Shader](shader.html)
+* [State](state.html)
+* [System](system.html)
+* [Threads](threads.html)
+* [Time](time.html)
+* [Timer](timer.html)
+* [Touch input](touch.html)
+* [Transformations](transformations.html)
+* [UTF-8](utf8.html)
+* [Miscellaneous](misc.html)
+* [Platform-specific](platform.html)
+* [Direct3D](direct3d.html)
+* [OpenGL](opengl.html)
+
+<!-- The preceding blank line forces pandoc to terminate the list -->
+</div>
+
+<div>
+* [**Addons**](index.html#addons)
+* [Audio addon](audio.html)
+* [Audio codecs](acodec.html)
+* [Color addon](color.html)
+* [Font addons](font.html)
+* [Image I/O addon](image.html)
+* [Main addon](main.html)
+* [Memfile addon](memfile.html)
+* [Native dialogs addon](native_dialog.html)
+* [PhysicsFS addon](physfs.html)
+* [Primitives addon](primitives.html)
+* [Video streaming addon](video.html)
+
+<!-- The preceding blank line forces pandoc to terminate the list -->
+</div>
+
+<div>
+* [**Index**](index_all.html)
+
+<!-- The preceding blank line forces pandoc to terminate the list -->
+</div>
+
+<div class="searchbox">
+<script type="text/javascript">
+function on_search(index, control) {
+    // Note to self: the less-than sign must NOT converted to an entity!
+    // SCRIPT elements are special.  The HTML validator gives bad advice.
+    for (i = 0; i < search_index.length; i++) {
+        if (search_index[i] == control.keywords[index]) {
+            break;
+        }
+    }
+    location.href = search_urls[i];
+}
+</script>
+Search<br/>
+<input type="text" name="q" id="q" size="15" autocomplete="off" placeholder="Press ‘S’ to search" /><br/>
+<script type="text/javascript"> new autosuggest("q", search_index, null, on_search); </script>
+</div>
+
+</div>
+
+<div class="content">
+

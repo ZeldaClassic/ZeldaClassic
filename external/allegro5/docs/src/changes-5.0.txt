@@ -1,0 +1,4530 @@
+% Allegro changelog for 5.0.x series
+
+See `changes._tx` for changes in earlier versions of Allegro.  These lists
+serve as summaries; the full histories are in the git repository.
+
+
+Changes from 5.0.10 to 5.0.11 (January 2015)
+===========================================
+
+The main developers this time were: SiegeLord and Peter Wang.
+
+Core:
+
+  - Fix OSX backend on OSX 10.10 (lordnoriyuki).
+
+Audio addon:
+
+  - Fix/avoid all sound examples freezing on OSX with the aqueue driver (Elias Pschernig).
+
+  - Fix a deadlock in Pulseaudio driver.
+
+Other:
+
+  - Fix build warnings.
+
+  - Improve documentation (syntax highlighting).
+
+
+
+Changes from 5.0.9 to 5.0.10 (June 2013)
+========================================
+
+The main developers this time were: Trent Gamblin, Paul Suntsov, Peter Wang.
+
+Core:
+
+  - Register system interface even if no display driver available on Windows.
+
+Displays:
+
+  - Don't crash in al_create_display if there is no display driver.
+
+  - Don't crash at shutdown if there is no display driver (Windows).
+
+  - Don't fail init if both D3D, GL drivers unavailable (Windows).
+
+  - Run fullscreen toggle on main thread (OS X).
+
+  - Destroy the backbuffer bitmap when destroying the display (OS X).
+
+  - Switch to new NSTrackingArea API (OS X).
+
+  - Check availability of fullscreen button on window frame at run-time (OS X).
+
+Graphics:
+
+  - Add ALLEGRO_SRC_COLOR, ALLEGRO_DEST_COLOR, ALLEGRO_INVERSE_SRC_COLOR,
+    ALLEGRO_INVERSE_DEST_COLOR blending modes (initially by Jon Rafkind and
+    Elias Pschernig).
+
+  - Let al_destroy_bitmap implicitly untarget the bitmap on the calling
+    thread.
+
+  - Use memory bitmap drawing when either bitmap is locked (OpenGL).
+
+  - Add const qualifiers to glUniform*v() functions (Aaron Bolyard).
+
+Input:
+
+  - al_set_mouse_xy on Windows resulted in the mouse getting set to the wrong
+    position in windowed modes.
+
+  - Scale the user supplied mouse cursor if it's too big (Windows).
+
+  - Fix mouse warping on OS X.
+
+  - Fix mouse warping in Linux evdev mouse driver.
+
+Audio addon:
+
+  - pulseaudio: Use smaller buffer size by default, and make it configurable.
+
+  - pulseaudio: Clean up state transitions.
+
+  - Fix looping in Ogg Vorbis stream (Todd Cope).
+
+  - Enable the use of the unpatched DirectX SDK to build Allegro with MinGW.
+
+Color addon:
+
+  - Fix al_color_rgb_to_html blue component (Jeff Bernard).
+
+Font addons:
+
+  - Make al_init_ttf_addon return true for subsequent calls.
+
+Primitives addon:
+
+  - Disallow 3 component vectors for ALLEGRO_PRIM_TEX_COORD.
+
+  - Check that the vertex declaration is valid before creating it.
+
+  - Respect filter settings of textures in the D3D backend.
+
+Build system:
+
+  - Do not install most internal header files.
+
+  - Do not search for and link with unneeded X libraries.
+
+Examples:
+
+  - ex_audio_timer: New example.
+
+Other:
+
+  - Minor fixes.
+
+  - Various documentation updates.
+
+  - A lot of code refactoring.
+
+
+
+Changes from 5.0.8 to 5.0.9 (February 2013)
+===========================================
+
+The main developers this time were: Trent Gamblin, Elias Pschernig,
+Peter Wang.
+
+Core:
+
+-  Clean up logging subsystem at shutdown (muhkuh).
+
+-  Fix a problem with creating a display after Allegro is shut down
+   then re-initialised on X11.
+
+-  Fix use of clobbered return value from setlocale() on X11.
+
+-  Fix use of double math functions for float arguments (Nick Trout).
+
+Displays:
+
+-  Fix al_set/get_window position on Windows so getting/setting to the
+   same position continuosly doesn't move the window. (Michael Swiger)
+
+-  Add al_set_display_icons (plural). Implemented on X11 and Windows.
+
+-  Made al_get_display_mode return the closest thing to a pixel format
+   possible with the WGL driver (tobing).
+
+-  Move WGL context destruction out of the message pump thread and into
+   the user/main thread.
+
+-  Allow command-tab to work in fullscreen window mode on OS X.
+
+Graphics:
+
+-  Avoid null pointer dereference when setting a target bitmap after
+   its video_texture has already been released (D3D).
+
+-  Make d3d_lock_region fail immediately if _al_d3d_sync_bitmap
+   failed, likely because the device was lost.
+
+-  Set device_lost flag immediately when d3d_display_thread_proc
+   finds the device is lost.
+
+-  Sync bitmaps before resizing display to prevent changes being lost
+   after the resize (D3D).
+
+-  Revert a faulty FBO rebinding optimisation in al_set_target_bitmap.
+
+-  Fix OpenGL extensions being completely ignored on OS X.
+
+-  Support stencil buffer on iOS.
+
+Input:
+
+-  Partially fix mouse buttons "sticking" on Mac, e.g. holding the
+   mouse and toggling fullscreen window.
+
+Filesystem:
+
+-  Keep absolute path in ALLEGRO_FS_ENTRYs so that later changes to the
+   working directory do not affect the interpretation of the path.
+
+-  Set ALLEGRO_FILEMODE_HIDDEN properly on Unix.
+
+-  Make sure stat mode bits are cleared in default implementation of
+   al_update_fs_entry.
+
+-  Support Unicode paths on Windows.
+
+-  Change description of al_get_fs_entry_name about not returning absolute
+   path if created from relative path; no longer true for either the default
+   or Physfs implementations.
+
+Audio addons:
+
+-  Shut down threads properly when when destroying FLAC and modaudio streams.
+
+-  Fix PulseAudio driver trying to connect to a non-existent server forever.
+
+Image I/O addon:
+
+-  Fixed loading interlaced .png files with libpng.
+
+-  Use Allegro built-in loaders in preference to OS X loaders for BMP/TGA/PCX.
+   The OS X TGA loader doesn't support alpha and this is also more consistent.
+
+-  Restored ability of the native OSX image loader to load grayscale pictures.
+
+Native dialog addon:
+
+-  Add al_init_native_dialog_addon and al_shutdown_native_dialog_addon.
+
+Build system:
+
+-  Rename allegro\*-5.0.pc files to allegro\*-5.pc.  The old names are
+   deprecated but retained on the 5.0 branch for backwards compatibility.
+
+-  Only generate and install pkg-config files for libraries that we build.
+
+-  Install iPhone internals headers (Nick Trout).
+
+Examples:
+
+-  ex_icon2: New example.
+
+-  speed: Use builtin font.
+
+Other:
+
+-  Documentation updates.
+
+-  A lot of code refactoring.
+
+
+
+Changes from 5.0.7 to 5.0.8 (November 2012)
+===========================================
+
+The main developers this time were: Dennis Busch, Trent Gamblin,
+Elias Pschernig, Paul Suntsov, Peter Wang.
+
+Core:
+
+-  Added alternate spelling: ALLEGRO_ALIGN_CENTER.
+
+Displays:
+
+-  Rewrite D3D display format listing code, which was broken.  This should
+   re-enable multi-sampling and fix ex_depth_mask being slow with D3D.
+
+-  Fixed a case where changing fullscreen mode in D3D via al_resize_display
+   caused a crash and loss of loaded bitmaps information.
+
+-  Fixed a case where changing fullscreen mode in OpenGL (on Windows) via
+   al_resize_display cause nothing to be rendered after the mode change.
+
+-  Fix crashes when resizing a WGL fullscreen window.
+
+-  Fixed missing/incorrect resize events under Windows.
+
+-  Fix al_set_new_display_adapter on OS X.
+
+-  Fix use of invalidated pointers in D3D driver when the first format fails.
+
+-  Fix bug where setting the mouse cursor had no effect when
+   the mouse was captured (mouse button held down).
+
+-  Fix windows not having a minimise button when set to
+   windowed state from fullscreen window state.
+
+-  Respect ALLEGRO_FRAMELESS flag properly when toggling from
+   fullscreen window state to windowed state (Windows).
+
+-  Don't generate DISPLAY_LOST events when resizing a fullscreen display.
+
+-  Scale window icon to sizes returned by GetSystemMetrics (Windows).
+
+-  Fixed ALLEGRO_FULLSCREEN_WINDOW under OS X.
+
+-  Added al_osx_get_window function (Dennis Gooden).
+
+Graphics:
+
+-  al_draw_pixel was crashing when drawn on sub-bitmaps on OpenGL.
+
+-  Fix a potential crash when drawing the screen to a bitmap with D3D.
+
+-  Avoid null pointer dereference when setting a target bitmap after
+   its video_texture has already been released (D3D).
+
+-  Lock bitmap to prevent slowness when creating a cursor from a non-memory
+   bitmap on Windows.
+
+-  Conditionally lock bitmap when creating cursor on X11 (previously it did
+   so even if already locked).
+
+-  Don't use NSOpenGLPFAAccelerated unnecessarily (OS X).
+
+Input:
+
+-  Fix incorrect keyboard modifier flags after leaving and re-entering a window
+   (Windows).
+
+-  Fixed a bug with mouse enter/leave events for resized windows under OSX
+   (Dennis Gooden).
+
+-  Temporary fix for delay after mouse warp on OS X.
+
+File I/O:
+
+-  Fix al_fputc on big-endian.  Reported by Andreas Rönnquist and
+   Tobias Hansen.
+
+-  Make al_fputc return value like fputc when out of range.
+
+-  Fix al_read_directory crash on 64-bit Windows (simast).
+
+Image addon:
+
+-  Don't include native image loader source files in builds with the native
+   image loaders disabled (OSX, iOS).
+
+-  Added a missing autorelease-pool to the OSX bitmap saving function
+   (sleepywind).
+
+-  Fix OSX native image loader for loading not-premultiplied RGB data.
+   Previously the data was "de-multiplied", with possibly all information lost.
+
+-  Fix OSX native image loader for loading bitmaps without an alpha channel.
+   They appeared completely black previously.
+
+Font addons:
+
+-  Add builtin font creation function.
+
+-  Added ALLEGRO_ALIGN_INTEGER text drawing flag (Todd Cope).
+
+-  Made TTF addon include padding on the top and left edges of pages
+   (Todd Cope).
+
+Audio addon:
+
+-  Use programmatically generated interpolators.  They cover an additional
+   case which was missed and should be slightly more efficient.
+
+-  Support linear interpolation for 16-bit mixers.
+
+-  Add cubic interpolation for mixers (off by default).
+
+-  Fix potential deadlock in stop_voice for OpenAL.
+
+-  Fix potential deadlock in stop_voice for DirectSound.
+
+-  Improve buffer filling behaviour for DirectSound, reducing pops and
+   crackles significantly on slower machines.
+
+-  Increase default buffer size for DirectSound to 8192 samples.
+
+-  Fix setting the speed of an audio stream after it was attached to the mixer.
+
+Native dialogs addon:
+
+-  Do not unload of rich edit module when closing one text log window while
+   another exists.  Reported by URB753.
+
+-  Use default colours for Windows text log implementation, avoiding problems
+   when the previous custom colours failed, leading to black text on a
+   nearly black background.
+
+Build system:
+
+-  Install pkg-config files when cross-compiling on Unix.
+
+Examples:
+
+-  ex_synth: Add button to save waveform to a file.
+
+-  ex_multisample: Demonstrate using moving bitmaps.
+
+-  speed: Avoid poor performance due to needless redraws.
+
+-  Renamed a5teroids to Cosmic Protector
+
+Other:
+
+-  Many minor bug fixes.
+
+-  Various documentation updates.
+
+
+Changes from 5.0.6 to 5.0.7 (June 2012)
+=======================================
+
+The main developers this time were: Trent Gamblin, Elias Pschernig, Peter Wang.
+
+Core:
+
+-  Fix ALLEGRO_STATIC_ASSERT collisions from different files included in the
+   same translation unit.  Reported by tobing.
+
+-  Make al_ref_cstr, al_ref_ustr and al_ref_buffer return const ALLEGRO_USTR*
+   instead of just an ALLEGRO_USTR* (Paul Suntsov).
+
+-  Make al_ustr_empty_string const correct.
+
+-  Fix many memory leak/warnings on MacOS X (Pär Arvidsson).
+
+-  Fix typo preventing get_executable_name from using System V procfs
+   correctly.  Reported by Max Savenkov.
+
+Displays:
+
+-  Add ALLEGRO_FRAMELESS as a preferred synonym for the confusing
+   ALLEGRO_NOFRAME flag.
+
+-  Rename al_toggle_display_flag to al_set_display_flag, retaining
+   the older name for compatibility.
+
+-  Set WM_NAME for some window managers (X11).
+
+Graphics:
+
+-  Force al_create_bitmap to not create oversized bitmaps, to mitigate
+   integer overflow problems.
+
+-  Removed initial black frame on all Allegro programs.
+
+OpenGL:
+
+-  Texture should be 'complete' (min/mag and wrap set) before glTexImage2D.
+
+-  Fixed a bug in al_unlock_bitmap where the pixel alignment mistakenly was
+   used as row length.
+
+-  Fixed typo in names of some OpenGL extension functions.
+
+-  Display list of OpenGL extensions in allegro.log also for OpenGL 3.0.
+
+Direct3D:
+
+-  Fixed a bug in the D3D driver where separate alpha blending was being
+   tested for when it shouldn't have been (Max Savenkov).
+
+Input:
+
+-  Monitor /dev/input instead of /dev on Linux for hotplugging joysticks
+   (Jon Rafkind).
+
+-  Do not permanently change the locale for the X11 keyboard driver.
+   Set LC_CTYPE only, not LC_ALL.
+
+Audio addon:
+
+-  Fix desychronization due to inaccurate sample positions when resampling.
+   Thanks to _Bnu for discovering the issue and Paul Suntsov for devising the
+   correct solution.
+
+-  Fix linear interpolation across audio stream buffer fragments.
+
+-  Fix two minor memory leaks in the PulseAudio driver.
+
+Image I/O addon:
+
+-  Improve compatibility of BMP loader.  In particular, support bitmaps with
+   V2-V5 headers and certain alpha bit masks.
+
+-  Fix TGA loader using more memory than necessary.  Reported by Max Savenkov.
+
+Font addon:
+
+-  Use user set pixel format for fonts.
+
+Native dialogs addon:
+
+-  Clear mouse state after dialogs or else it gets messed up (OSX).
+
+-  Fix some warnings in gtk_dialog.c.
+
+-  Wrap use of NSAlert so it can be run on the main thread with return value.
+
+Examples:
+
+-  Add ex_resample_test.
+
+-  ex_audio_props: Add bidir button.
+
+-  ex_joystick_events: Support hotplugging and fix display of 3-axis sticks.
+
+-  Add test_driver --no-display flag. (Tobias Hansen)
+
+Other:
+
+-  Various documentation updates.
+
+-  Other minor bug fixes.
+
+-  Fix whatis entries of man pages. (Tobias Hansen)
+
+
+
+Changes from 5.0.5 to 5.0.6 (March 2012)
+========================================
+
+The main developers this time were: Trent Gamblin, Matthew Leverton,
+Elias Pschernig, Paul Suntsov, Peter Wang.
+
+Core:
+
+-  Added al_register_assert_handler.
+
+Graphics:
+
+-  Added al_draw_tinted_scaled_rotated_bitmap_region.
+
+-  Added al_reset_clipping_rectangle convenience function.
+
+-  Added al_get_parent_bitmap.
+
+-  Fixed a bug in the OpenGL driver when drawing the backbuffer outside the
+   clipping rectangle of the target bitmap.
+
+-  Make blitting from backbuffer work when using multisampling on Windows/D3D.
+
+Displays:
+
+-  Set ALLEGRO_MINIMIZED display flag on Windows (Zac Evans).
+
+-  Don't generate bogus resize events after restoring minimised window on
+   Windows.
+
+-  Fixed bug on Windows where two SWITCH_IN events were fired when window was
+   minimized/restored (Michael Swiger).
+
+-  Fixed inverted al_toggle_display_flag(ALLEGRO_NOFRAME) logic under Windows
+   as well as a bug where repeatedly setting the flag to on would make the
+   window grow bigger and bigger (Michael Swiger).
+
+-  Fixed inverted al_toggle_display_flag(ALLEGRO_NOFRAME) logic in X11.
+
+-  Prevent a deadlock during display creation on X.
+
+-  Fallback to the 'old' visual selection method on X instead of crashing
+   if the 'new' visual selection doesn't work.
+
+Input:
+
+-  Use the same logic in set_mouse_xy for FULLSCREEN_WINDOW as was used for
+   FULLSCREEN. (Max OS X)
+
+Filesystem:
+
+-  Added al_fopen_slice.
+
+-  Added al_set_exe_name which allows overriding Allegro's idea of the path
+   to the current executable.
+
+-  Make al_get_standard_path(ALLEGRO_TEMP_PATH) treat the value of TMPDIR
+   et al. as a directory name even without a trailing slash. (Unix)
+
+-  Make stdio al_fopen implementation set proper errno on failure.
+
+Audio addons:
+
+-  Add mixer gain property and functions.
+
+-  Improve code to check that DLL symbols are loaded in the acodec addon.
+   The old method was hacky and broke under -O2 using GCC 4.6.1.
+
+Image I/O addon:
+
+-  Improved accuracy of un-alpha-premultiplying in the native OSX bitmap
+   loader.
+
+Primitives addon:
+
+-  Added al_draw_filled_pieslice and al_draw_pieslice.
+
+-  Added al_draw_elliptical_arc.
+
+TTF addon:
+
+-  Added al_load_ttf_font_stretch functions (tobing).
+
+-  Added ALLEGRO_TTF_NO_AUTOHINT font loading flag to disable the Auto Hinter
+   which is enabled by default in newer version of FreeType (Michał Cichoń).
+
+-  Clear locked region so pixel borders aren't random garbage that can be seen
+   sometimes with linear filtering on.
+
+-  Unlock glyph cache page at end of text_length and get_text_dimensions
+   (jmasterx).
+
+Examples:
+
+-  Added new examples: ex_audio_chain, ex_display_events, ex_file_slice.
+
+-  ex_ogre3d: Make it work under Windows (AMCerasoli).
+
+-  a5teroids: Support gamepads that report small non-zero values for sticks
+   that are at rest.
+
+Other:
+
+-  Added index to HTML version of the reference manual (Jon Rafkind).
+
+-  Various documentation updates.
+
+-  Other minor bug fixes.
+
+
+
+Changes from 5.0.4 to 5.0.5 (November 2011)
+===========================================
+
+The main developers this time were: Elias Pschernig and Trent Gamblin.
+
+Graphics:
+
+-  Fixed several instances of windows being positioned wrong on Windows:
+   regular windows, WGL FULLSCREEN_WINDOW, and ALLEGRO_NOFRAME windows.
+
+-  Don't re-bind the FBO in al_set_target_bitmap if the new target
+   bitmap shares the parent bitmap with the new target bitmap (Paul Suntsov).
+
+-  Zero out fake refresh rate information from the nvidia proprietary driver
+   on X11 (Peter Wang).
+
+-  Implemented the ALLEGRO_FULLSCREEN_WINDOW flag for iOS.
+
+Input:
+
+-  Make al_set_mouse_xy work in fullscreen on Windows.
+
+-  Fixed a race condition in al_init_joystick.
+
+-  Fixed problem on OS X where having two identical gamepads attached would
+   cause joystick initialization to hang (Thanks to Todd Cope for pointing it
+   out.)
+
+-  Fixed iphone joystick events (it assumed a call to al_get_joystick but
+   that's not required when using events).
+
+TTF fonts:
+
+-  Save new bitmap flags and bitmap format at time of loading font and use them
+   when creating pages.
+
+Primitives addon:
+
+-  Very thin arcs/pieslices were not drawn due to an overzealous check
+   (Paul Suntsov).
+
+Native dialogs addon:
+
+-  Implemented al_show_native_message_box for iOS.
+
+Other:
+
+-  Use .../Library/Application Support for ALLEGRO_USER_SETTINGS_PATH and
+   ALLEGRO_USER_DATA_PATH on iOS.
+
+-  Listen for applicationDidBecomeActive and applicationWillResignActive
+   instead of applicationWillEnterForeground and applicationDidEnterBackground
+   on iOS. This makes all of the common situations where you want to pause your
+   game work, such as the lock button.
+
+-  Fix some memory leaks on iOS.
+
+Documentation:
+
+-  Various documentation updates.
+
+-  Generate multiple copies of a man page for all the API entries that it
+   documents.
+
+
+
+Changes from 5.0.3 to 5.0.4 (August 2011)
+=========================================
+
+The main developers this time were: Trent Gamblin, Matthew Leverton,
+Elias Pschernig, Jon Rafkind, Paul Suntsov, Peter Wang and torhu.
+
+Core:
+
+-  Restore searching of directories on PATH for DLLs to load on Windows.
+
+-  Fix crash on shutdown in headless Unix environment (no X11 display).
+
+-  Change all instances of al_malloc + memset(0) to al_calloc.
+
+Graphics:
+
+-  Save memory in OpenGL case by freeing bitmap memory after uploading a
+   texture.  Use a temporary buffer when converting lock buffer back to native
+   texture format.
+
+-  Don't release or refresh memory or sub-bitmaps when D3D device gets
+   lost/found.
+
+-  Do not set D3D sub bitmaps to modified when first creating them. This can
+   cause major slowdowns when creating a lot of sub-bitmaps and is likely
+   responsible for slow font performance/startup when using D3D.
+
+-  Fix incorrect number of display formats in D3D (tobing).
+
+-  Honor ALLEGRO_VSYNC in the WGL driver.
+
+-  Make titlebar icons the right size on Windows.
+
+-  Fix typo causing weird results of al_get_monitor_info on X.
+
+-  Don't setup FBO for a sub-bitmap whose parent is locked.
+
+-  Specialise ADD/ONE/INVERSE_ALPHA blend mode software scanline drawers.
+
+-  Toggle ALLEGRO_VIDEO_BITMAP flag off when creating a memory bitmap (both
+   bits were previously on).
+
+-  Add null bitmap assertion to al_clone_bitmap.
+
+Input:
+
+-  New system for mapping extended keys in Windows keyboard driver.
+   Mainly for getting the same keycode for numpad keys independently of the
+   state of Num Lock.
+
+-  More reliable updating of the toggle modifiers in Windows keyboard driver
+   (Num Lock, Caps Lock, and Scroll Lock).
+
+Timers:
+
+-  Fix race conditions when starting timers from different threads.
+
+Audio addons:
+
+-  Don't mix into a global temporary sample buffer, causing noise when two
+   separate mixers are trying to run in parallel.
+
+-  Make it possible to start/stop an audio stream which is attached to a voice.
+
+-  ALSA voices could not be resumed after being stopped, because the
+   update threads quit as soon as a voice is stopped.
+
+-  OpenAL backend did not handle the case where _al_voice_update returns less
+   than a full buffer.
+
+-  Attempt to load FLAC and Vorbis DLLs only once to avoid Windows popping up
+   too many error windows.
+
+Native dialogs addon:
+
+-  al_show_native_messagebox() on Windows: add UTF-8 support; show heading;
+   show information icon by default.
+
+TTF addon:
+
+-  Reduce memory usage.
+
+-  Don't make multiple passes over strings when computing text dimensions.
+
+Build system:
+
+-  Make sure static builds on Windows never use DLL_TLS (Zac Evans).
+
+-  Made compilation possible with different combinations of Xinerama,
+   XF86VidMode, or Randr being present.
+
+-  cmake: Use find_path HINTS instead of PATHS in our DirectX SDK scripts.
+
+-  cmake: Search for D3DX9 once instead of multiple times (John-Kim Murphy).
+
+-  cmake: Find FLAC/Ogg/Vorbis libraries under the names generated by the
+   official MSVC project files.
+
+-  Include zlib.h explicitly for libpng 1.5.
+
+Examples:
+
+-  Add multisampling to SPEED example.  Change examples to use ALLEGRO_SUGGEST
+   for multisampling.
+
+-  Include the font for speed.app under OSX within the bundle so it can be run
+   by double clicking.
+
+-  Use default blending/pre-multiplied alpha in ex_blend2.
+
+Other:
+
+-  Various documentation updates.
+
+-  Fix minor memory leaks.
+
+Bindings:
+
+-  Better way to make the Python wrapper work with both Python 2 and 3.
+
+-  Include Windows-specific functions in the Python wrapper.
+
+
+
+Changes from 5.0.2.1 to 5.0.3 (May 2011)
+========================================
+
+Input:
+
+-  Fixed keyboard repeat for extended keys on Windows.
+   Added ALLEGRO_KEY_MENU. (torhu)
+
+-  Make Delete key in Windows send KEY_CHAR event with unichar code 127
+   (Peter Wang).
+
+Filesystem:
+
+-  al_remove_filename returned false even if successful (reported by xpolife).
+
+Graphics:
+
+-  On OpenGL ES 1.1, glReadPixels can only read 4 byte pixels (Trent Gamblin).
+
+Font addon:
+
+-  Fix a small memory leak when unregistering a handler with
+   al_register_font_loader (Trent Gamblin).
+
+Primitives addon:
+
+-  Fix assertion failures when drawing al_draw_ellipse, al_draw_arc,
+   al_draw_rounded_rectangle, al_draw_filled_rounded_rectangle at very
+   small scales (reported by Carl Olsson).
+
+Native dialogs addon:
+
+-  gtk: Fix truncated string if the final button contained a non-ASCII
+   character (Peter Wang).
+
+Other:
+
+-  Minor build fixes and documentation updates.
+
+
+
+Changes from 5.0.2 to 5.0.2.1 (April 2011)
+==========================================
+
+-  Fix regression on Windows where the keyboard state was not updated
+   unless the keyboard event source is registered to an event queue.
+
+
+
+Changes from 5.0.1 to 5.0.2 (April 2011)
+========================================
+
+Input:
+
+-  Fix inverted mouse wheel on X11.
+
+-  Make unicode field in KEY_CHAR events zero for Fn, arrow keys, etc.
+   for OS X (jmasterx, Peter Hull).
+
+-  Support ALLEGRO_KEY_PAD_ENTER and detect left/right Alt and Ctrl
+   keys independently on Windows (torhu, Matthew Leverton).
+
+
+
+Changes from 5.0.0 to 5.0.1 (March 2011)
+========================================
+
+The main developers this time were: Trent Gamblin, Elias Pschernig, Peter Wang.
+Other contributions noted in-line.
+
+Graphics:
+
+-  Automatically destroy framebuffer objects (FBOs) created for non-memory
+   bitmaps after a while.  This solves the problem of running out of resources
+   if you set many different target bitmaps.
+
+-  Make al_get_opengl_fbo attempt to create an FBO if one doesn't exist.
+
+-  Avoid very small textures in Direct3D.
+
+-  Do not sync from memory when first creating/uploading a bitmap (D3D).
+
+-  Try to fix the problem of the taskbar appearing above fullscreen windows
+   on Windows.
+
+-  Center the window after toggling fullscreen on Windows.
+
+Input:
+
+-  Support 4-way mouse-wheel and up to 32 mouse buttons in X11.
+
+Audio addons:
+
+-  Avoid buffer overrun while reading from vorbis files.
+
+-  Added optional support for Tremor in place of libvorbis on any platform.
+
+-  Do not prefer DirectSound with OpenAL.  This can cause problems and also
+   will override user config.
+
+-  Play silence where needed in DirectSound driver.
+
+TTF addon:
+
+-  Do not hold bitmap drawing when changing target bitmap, which is invalid
+   and caused transformations to be misapplied.
+
+-  Remove FBO for a cache bitmap once we are no longer adding glyphs to it.
+
+Build system:
+
+-  Force "default" visibility of _al_mangled_main on OS X, otherwise the
+   dynamic linker cannot find the symbol if building with XCode4
+   (Owen Anderson and Peter Hull).
+
+-  Generated pkg-config files should take into account LIB_SUFFIX variable
+   (Cristian Morales Vega).
+
+-  Update allegro_font pkg-config file to not require allegro_primitives.
+
+Documentation:
+
+-  Various documentation updates.
+
+-  Add copy of DejaVu font licence.
+
+Bindings:
+
+-  Add allegro_main addon to the Python wrapper.  Make the wrapper work with
+   Python 3, which has a different string representation.  Add parameter type
+   checking for custom types.
+
+
+
+Changes from 5.0.0 RC5 to 5.0.0 (February 2011)
+===============================================
+
+Color addon:
+
+-  Use colour names from CSS.  This is the same as the previous list but
+   with all grey/gray alternatives.
+
+Documentation:
+
+-  Minor documentation updates.
+
+
+
+Changes from 5.0.0 RC4 to 5.0.0 RC5 (February 2011)
+===================================================
+
+The main developers this time were: Thomas Fjellstrom, Trent Gamblin,
+Peter Hull, Matthew Leverton and Peter Wang.  Other contributions noted
+in-line.
+
+System:
+
+-  Load allegro5.cfg from the directory containing the executable, not the
+   initial working directory.
+
+Graphics:
+
+-  Make al_get_monitor_info return success code.
+
+-  Replace al_set_new_display_adaptor(-1) with a named constant
+   ALLEGRO_DEFAULT_DISPLAY_ADAPTER.
+
+-  Fix numerous bugs in X mode setting and multi monitor related code, and
+   introduce new xrandr code.
+
+-  Generate ALLEGRO_EVENT_MOUSE_LEAVE_DISPLAY when mouse leaves OS X window
+   (Evert Glebbeek).
+
+-  Hide OS X window during exiting fullscreen window mode, to prevent the
+   hideous misaligned animation from showing.
+
+-  Fix erroneous assertions in OpenGL backend.
+
+-  Added a hack which makes OpenGL mode work under Wine for me
+   (Elias Pschernig).
+
+-  Add support for some al_get_display_options in D3D port.
+
+Keyboard:
+
+-  Don't send KEY_CHAR events for modifier and dead keys
+   (with contributions from torhu).
+
+-  Don't send KEY_DOWN events for non-physical key events.
+
+-  osx: Allow unicode entry (single keypresses only).
+
+-  x11: Set the keycode field in KEY_CHAR events to the code of the last key
+   pressed, as stated in the documentation, even if the char is due to a
+   compose sequence.
+
+-  x11: Get rid of historic behaviour where the unicode field is always zero
+   when Alt is held down.
+
+-  Rename ALLEGRO_KEY_EQUALS_PAD to ALLEGRO_KEY_PAD_EQUALS for consistency.
+
+Mouse:
+
+-  Add al_grab_mouse and al_ungrab_mouse.  Implemented on X11 and Windows.
+
+-  Allow the user configure a key binding to toggle mouse grabbing on a window.
+
+-  Support horizontal mouse wheel on Windows (jmasterx).
+
+-  Calculate Y position for al_set_mouse_xy correctly in OS X windowed mode
+   (X-G).
+
+-  Use more appropriate CURSOR_LINK cursor on OS X (X-G).
+
+-  Assign different button IDs for separate touches on iPhone (Michał Cichoń).
+
+-  iphone: Remove fake mouse move events as they're unncessary and can cause
+   problems with user input tracking.
+
+Filesystem:
+
+-  Clean up al_get_standard_path(): remove SYSTEM_DATA, SYSTEM_SETTINGS,
+   PROGRAM paths; add RESOURCES and USER_DOCUMENTS paths.
+   Use system API calls if possible.
+
+-  Implement ALLEGRO_USER_DATA_PATH under Linux. Honor XDG_DATA/CONFIG_HOME
+   environment variables.
+
+-  Fix al_make_directory on Windows due to problems with calls to stat() with
+   trailing slashes.
+
+Native dialogs addon:
+
+-  Use string arguments to al_create_native_file_dialog() and
+   al_get_native_file_dialog_path() instead of ALLEGRO_PATH.
+
+-  Enhance the Windows file selector (initial patch by Todd Cope):
+
+    - Use Windows' folder selector for ALLEGRO_FILECHOOSER_FOLDER.
+
+    - Implement patterns.
+
+    - Display the title of the dialog that the user specified.
+
+Primitives addon:
+
+-  Fix changing the D3D blender state without updating the cached state.
+
+TTF addon:
+
+-  Align glyphs in ttf font sheets so as to work around problems with forced
+   S3TC compression with some OpenGL drivers (Elias Pschernig).
+
+Examples:
+
+-  SPEED: add full screen flag, use standard paths for highscores and data.
+
+Build system:
+
+-  Check PulseAudio backend will compile before enabling support.
+
+-  Give a louder warning if FLAC/Vorbis/DUMB compile tests fail.
+
+Other:
+
+-  Many leaks fixed on OS X.
+
+-  Minor bug fixes and documentation updates.
+
+
+
+Changes from 5.0.0 RC3 to 5.0.0 RC4 (December 2010)
+===================================================
+
+The main developers this time were: Trent Gamblin, Matthew Leverton,
+Elias Pschernig, Peter Wang.
+
+Graphics:
+
+-  d3d: Don't generate intermediate resize events during modal resize loop.
+
+-  Optimize D3D9 driver by caching blender state and scissor rectangle so
+   redundant calls to D3D9 functions are avoided (Michał Cichoń).
+
+-  gl: Use glGenerateMipmapEXT to generate mipmaps when FBOs are used.
+
+-  x11: Don't restore display mode if another fullscreen display is active.
+
+Input:
+
+-  iphone: Reverse button/axis events that were swapped at some point.
+
+File I/O:
+
+-  Change the way user code implements new ALLEGRO_FILE structures.
+   This adds al_create_file_handle and al_get_file_userdata.
+
+-  Implement default ungetc behavior - used if the interface does not supply
+   its own.
+
+-  Add al_fopen_interface.
+
+Memfile addon:
+
+-  Implement ungetc.
+
+-  Add rw file modes.
+
+-  Rename header to allegro_memfile.h.
+
+-  Add documentation.
+
+Image I/O addon:
+
+-  Fix endian issues in TGA and Mac OS X image loaders.
+
+Other:
+
+-  Use _NSGetExecutablePath for al_get_standard_path(ALLEGRO_EXENAME_PATH) on
+   OS X (Jeff Connelly).
+
+-  Minor bug fixes and documentation updates.
+
+
+
+Changes from 5.0.0 RC2 to 5.0.0 RC3 (December 2010)
+===================================================
+
+The main developers this time were: Michał Cichoń, Trent Gamblin, Peter Wang.
+
+Graphics:
+
+-  Honour subbitmap clipping rectangle under OpenGL (Elias Pschernig).
+
+-  Fix an error in the Direct3D primitives blending.
+
+-  al_set_new_window_position() did not have an effect for resizable
+   windows on X11.
+
+-  Fix windows only showing up on first monitor on X11 (Thomas Fjellstrom).
+
+-  Implement al_get_monitor_info() for iDevices.
+
+Input:
+
+-  Separate character inputs from physical key down events.  This removes
+   unichar and modifiers fields from ALLEGRO_EVENT_KEY_DOWN, and replaces
+   ALLEGRO_EVENT_KEY_REPEAT by ALLEGRO_EVENT_KEY_CHAR.  We decided this design
+   flaw was better fixed now than later.
+
+-  Make Mac OS X keyboard driver properly distinguish key down and key repeat
+   events.
+
+TTF addon:
+
+-  Respect ALLEGRO_NO_PREMULTIPLIED_ALPHA flag when loading TTF fonts.
+
+Other:
+
+-  Fix returning a garbage pointer in maybe_load_library_at_cwd
+   (Vadik Mironov).
+
+-  Remove dependency on dxguid.
+
+-  Minor compilation fixes and documentation updates.
+
+
+
+Changes from 5.0.0 RC1 to 5.0.0 RC2 (December 2010)
+===================================================
+
+The developers this time were: Trent Gamblin, Elias Pschernig and Peter Wang.
+
+System:
+
+-  Add al_is_system_installed and hide al_get_system_driver.
+
+-  Prevent 'DLL hijacking' security issue on Windows.
+
+Graphics:
+
+-  Change to using premultiplied alpha by default.  The new bitmap flag
+   ALLEGRO_NO_PREMULTIPLIED_ALPHA was added.
+
+-  Change the value of ALLEGRO_VIDEO_BITMAP to non-zero.
+
+-  Change al_get_opengl_version to return a packed integer.
+
+-  Made al_get_opengl_version return an OpenGL ES version (if using OpenGL ES)
+   rather than an attempted estimate at a desktop GL version.
+
+-  Added function al_get_opengl_variant that returns either
+   ALLEGRO_DESKTOP_OPENGL or ALLEGRO_OPENGL_ES.
+
+-  Make al_have_opengl_extension return bool.
+
+-  Fix OpenGL graphics mode height value on Windows.
+
+-  Only try to create one Direct3D display at a time.
+
+-  Make screensaver activate on Windows Vista and above unless inhibited.
+
+-  Avoid potential divide-by-zeroes when computing the refresh rate in X11
+   video modes.
+
+Events:
+
+-  Delete an incorrect mutex destroy in al_unregister_event_source.
+
+Input:
+
+-  Revert the joystick driver used on OS X 10.4 to the pre-hotplugging version,
+   rather than one which contained an earlier attempt at implementing
+   hotplugging.  Select the 10.4 or greater joystick driver at runtime.
+
+iPhone:
+
+-  Added two iPhone-specific functions: al_iphone_override_screen_scale and
+   al_iphone_program_has_halted.
+
+Image I/O addon:
+
+-  Made the iPhone and OSX image loaders not try and correct colors to some
+   arbitrary color space, but instead use the values directly from the image.
+
+Native dialogs addon:
+
+-  Tolerate null display in al_show_native_file_dialog on Windows.
+
+-  Make GTK native dialog implementation only call GTK from a single thread.
+
+-  Define al_show_native_message_box to be usable without installing Allegro.
+
+Primitives addon:
+
+-  Make primitives addon compilable again without OpenGL.
+
+Examples:
+
+-  ex_ttf: Test the monochrome flag.
+
+-  Work around problems with MSVC and UTF-8 string literals.
+   ex_utf8 is now not built under MSVC.
+
+-  Don't use WIN32 executable type on examples that require the console
+   (David Capello).
+
+Other:
+
+-  Minor bug fixes and documentation updates.
+
+
+
+Changes from 4.9.22 to 5.0.0 RC1 (November 2010)
+================================================
+
+The developers this time were: Trent Gamblin, Evert Glebbeek, Elias Pschernig,
+Paul Suntsov, Peter Wang.
+
+Graphics:
+
+-  Make al_resize_display keep the original resolution (or change back) if it
+   can't set the users request, on Windows.
+
+-  Do not emit ALLEGRO_DISPLAY_RESIZE events from the Windows and X11 display
+   drivers when using al_resize_display.
+
+-  [X11] Make al_get_num_display_modes and al_get_display_mode work if the
+   adapter is set to default. Right now there was no way to query the modes of
+   the default monitor.
+
+-  [X11] Use _NET_WM_STATE_FULLSCREEN hint for "true" fullscreen displays.
+   Enable mouse grabbing in fullscreen modes.
+
+-  Added ALLEGRO_EVENT_DISPLAY_ORIENTATION and implement it on iOS.
+
+-  Dennis Busch fixed a problem with displays not showing up on the
+   primary display by default in some dual head setups, on Windows.
+
+-  Increase the precision of texture coordinate deltas in the software triangle
+   renderer, from floats to doubles.
+
+-  Remove al_get_frontbuffer(). It wasn't implemented anywhere.
+
+-  Implement min/mag filter and mipmap flags for Direct3D.
+
+Input:
+
+-  Report correct initial mouse position if a display is created with the mouse
+   pointer inside, or if the mouse routines are installed after a display is
+   created (X11, Windows).
+
+-  John Murphy fixed improperly mapped axes on the Windows joystick driver.
+
+Events:
+
+-  Do not register user event sources with the destructor system as it cannot
+   work reliably.  User event sources must be destroyed manually.
+
+Filesystem:
+
+-  Make al_get_fs_entry_name and al_get_current_directory return strings
+   instead of ALLEGRO_PATH.
+
+-  Make al_make_directory create parent directories as needed.
+
+-  Fix al_create_fs_entry to not trim the root path "/" down to the empty
+   string with the stdio backend.
+
+Path routines:
+
+-  Remove al_make_path_absolute and replace it by al_rebase_path.
+
+-  Remove undocumented behavior of setting a default organization name of
+   "allegro" for all apps.
+
+-  Correctly return standard paths as directories on OS X.
+
+Threads:
+
+-  Rename al_wait_cond_timed to al_wait_cond_until to match al_wait_cond_until.
+
+Config routines:
+
+-  Add a blank line between sections when writing out a config file.
+
+Other core:
+
+-  Move the Windows event loops back into the same thread as the D3D event
+   loop. It's a requirement of D3D, else you can get crashes as I was when
+   resetting the device (like tabbing away from a fullscreen app).
+
+-  Add some missing standard entries to the OS X menu bar (the "hide", "hide
+   others" and the window list, mainly).
+
+Audio addon:
+
+-  Automatically stop sample instances which point to a buffer of a sample
+   which is about to be destroyed with al_destroy_sample.
+
+-  alsa: Resume properly after suspending.
+
+Image I/O addon:
+
+-  Make GDI+ support compile cleanly with the headers that come with MinGW
+   package w32api-3.15.
+
+-  Speed up PNG and BMP saving, and NSImageFromAllegroBitmap loading.
+
+TTF addon:
+
+-  Add a flag for loading TTFs without anti-aliasing (ALLEGRO_TTF_MONOCHROME).
+
+Primitives addon:
+
+-  Fix several failed sub-bitmap related unit tests on Windows.
+
+-  Made thick outlined triangles look nicer when the triangles are very thin.
+
+-  Add a debug-only check for primitives addon initialization to aid in code
+   portability.
+
+Examples:
+
+-  Added example demonstrating the effect of premultiplied alpha.
+
+-  Make 'F' toggle fullscreen window in SPEED (in-game).
+
+-  Minor improvements to the a5teroids demo.
+
+Documentation:
+
+-  Many documentation updates.
+
+-  Add list of contributors and a readme for packagers.
+
+-  Make make_doc tool build cleanly on MSVC, and work around a problem with
+   recent version of Pandoc on Windows.
+
+-  Improve styling of PDF output.
+
+-  Add generated man pages to archives.
+
+Bindings:
+
+-  Implemented array types in the Python wrapper.
+
+
+
+Changes from 4.9.21 to 4.9.22 (September 2010)
+==============================================
+
+The developers this time included: Michał Cichoń, Trent Gamblin,
+Evert Glebbeek, Angelo Mottola, Elias Pschernig, Paul Suntsov and Peter Wang.
+
+System:
+
+-  Allow the X11 port to initialise without an X server connection.
+
+Graphics:
+
+-  Fix many bugs with bitmap locking.
+
+-  Fix many bugs to do with transformations, flipping and clipping.
+
+-  Fix many bugs to do with sub-bitmaps as source and destination.
+
+-  Renamed al\_draw\_[tinted\_]rotated_scaled_bitmap to
+   al\_draw\_[tinted\_]scaled_rotated_bitmap to match the parameter order.
+
+-  Reimplemented bitmap software rendering routines using newly optimised
+   software triangle renderer, formerly in the primitives addon.
+
+-  Add pixel_size field to ALLEGRO_LOCKED_REGION.
+
+-  Fix bugs to do with pixel alignment on OpenGL.
+
+-  Fix OpenGL pixel transfer of 15 bpp formats, where Allegro does not Allegro
+   does not care whether the unused bit is set or not, but when transferring to
+   OpenGL it will be interpreted as an alpha bit.
+
+-  Disabled support for drawing a bitmap into itself.
+
+-  Changed specification of al\_draw_*bitmap to not allow transformation and
+   ignore blending/tinting when the screen itself is being drawn (except when
+   drawn into a memory bitmap).
+
+-  Allow bitmap regions to be outside the bitmap area in drawing routines.
+
+-  Added al_add_new_bitmap_flag convenience function.
+
+-  Added three new bitmaps flags ALLEGRO_MAG_LINEAR, ALLEGRO_MIN_LINEAR,
+   ALLEGRO_MIPMAP.  Removed the config settings for linear/anisotropic min/mag
+   filtering.  DirectX side not yet updated.
+
+-  Register destructors for bitmaps, so they will be implicitly destroyed when
+   Allegro is shut down.  This was only true for some bitmaps previously.
+
+-  Don't allocate memory buffers for video bitmaps when using OpenGL.
+
+-  Make al_get_opengl_extension_list() return NULL if called on a non-GL display.
+
+-  Fix al_create_display for OpenGL forward compatible contexts.
+
+-  Add al_set_current_opengl_context as an explicit way to set the OpenGL
+   context.
+
+-  Rename al_is_opengl_extension_supported to al_have_opengl_extension.
+
+-  Produce more accurate/correct color when going from less to more bits per
+   component.
+
+-  Fix al_set_new_window_position() everywhere.
+
+-  Avoid potential deadlock if resizing window to the same size on X11.
+
+-  Fixed turning off vsync in X11.
+
+-  Added al_is_d3d_device_lost function.
+
+-  Dynamically load dinput and d3d DLLs on Windows.
+
+-  Replaced PeekMessage with GetMessage in window event loops for the D3D and
+   WGL drivers (David Capello).
+
+Input:
+
+-  Added hotplugging support for joysticks on Linux, Windows and OS X.
+
+-  Added al_reconfigure_joysticks function.
+
+-  Merged all joystick devices under a single joystick event source.
+
+-  Removed al_get_joystick_number.
+
+-  Add al_is_joystick_installed.
+
+-  The OS X joystick driver was rewritten; it requires OS X 10.5.
+   The older driver still exists for OS X 10.4 and earlier but is in a
+   semi-updated state with regards to hotplugging.
+
+-  Allow user to override joystick device paths in the config file (Linux).
+
+-  Fix iphone touch input and clipping for modes other than w=768,h=1024.
+
+-  Fixed missing mouse movement messages on IPhone on touch-up/down. Also
+   changed how mouse buttons are reported - always as button 1 now.
+
+Config:
+
+-  Give config iterators proper types instead of void *.
+
+-  Make al_get_system_config() always return non-NULL if a system driver is
+   installed.
+
+Events:
+
+-  Rename al_event_queue_is_empty to al_is_event_queue_empty
+   (with compatibility define).
+
+Timers:
+
+-  Add al_add_timer_count function.
+
+-  Rename al_timer_is_started to al_get_timer_started.
+
+-  Rename al_current_time to al_get_time (with compatibility define).
+
+File I/O:
+
+-  Add al_open_fs_entry to open a file handle from an FS_ENTRY.
+
+-  Add al_fclearerr.
+
+-  Set ALLEGRO_FILEMODE_HIDDEN flag on entries for file names beginning with
+   dot (OS X).
+
+-  Remove al_is_path_present, al_fs_entry_is_directory, al_fs_entry_is_file
+   (all trivial).
+
+Primitives addon:
+
+-  Optimised most of the software rendering routines by a lot.
+
+-  Triangle drawer was skipping pixels in very thin triangles.
+
+-  Handle lost d3d devices better.
+
+-  Fix some bugs found during testing.
+
+Image I/O addon:
+
+-  Fix native image loader on Mac OS X: images that were not 72 dpi would be
+   rescaled to a smaller size.
+
+-  Added native bitmap saving support for OSX.
+
+-  Fix jpeg saving when locked region has negative pitch.
+
+Native dialogs addon:
+
+-  Add Windows and OS X text log implementations.
+
+-  Add ALLEGRO_FILECHOOSER and ALLEGRO_TEXTLOG types instead of conflating
+   them into ALLEGRO_NATIVE_DIALOG.
+
+-  Fix race condition in al_open_native_text_log.
+
+-  Rename al_destroy_native_dialog to al_destroy_native_file_dialog.
+
+-  Rename al_get_native_dialog_event_source to
+   al_get_native_text_log_event_source.
+
+-  Speed up text log appending by making the reader/writers asynchronous.
+
+-  Register destructors for file chooser and text log dialogs.
+
+-  Fix file chooser on Windows returning multiple selections with slashes
+   appended to filenames.  If an initial path was specified then the dialog
+   wouldn't open at all; fixed.
+
+-  Let native dialog functions fail gracefully.
+
+Audio addons:
+
+-  Init destructors even if audio driver fails to install.
+
+-  Dynamically load dsound DLL on Windows.
+
+Font addons:
+
+-  Added al_shutdown_ttf_addon.
+
+-  Prevent SIGSEGV for double-closing a file in the TTF addon if it is not a
+   valid font file.
+
+-  Make al_grab_font_from_bitmap not cause a segmentation fault if the bitmap
+   is garbage.
+
+-  Some TTF fonts would not render right at small sizes; fixed.
+
+-  Make al_destroy_font ignore NULL.
+
+Tests:
+
+-  Added a test suite (finally).
+
+-  Add a shell script to produce test coverage results using lcov.
+
+Examples:
+
+-  Add ex_haiku, an example based on Mark Oates's Haiku game.
+   Mark generously agreed to let us include it as an Allegro example.
+
+-  Added a new example ex_joystick_hotplugging.
+
+-  Added a new example ex_filter.
+
+-  Make ex_fs_window work on MSVC.
+
+-  Allow a5teroids to run without audio, or if audio data doesn't load.
+
+Build system:
+
+-  Re-added CMake option that allows forced static linking of libFLAC.
+
+-  Replaced the old iphone xcode project with a cmake iphone toolchain.
+
+Documentation:
+
+-  Many updates to the reference manual.
+
+Bindings:
+
+-  Added a workaround to the Python wrapper for a Mingw bug.
+
+
+
+Changes from 4.9.20 to 4.9.21 (July 2010)
+=========================================
+
+The main developers this time were: Trent Gamblin, Matthew Leverton,
+Elias Pschernig, Paul Suntsov, Peter Wang.
+
+Graphics:
+
+-  Fixed the mis-termed "blend color". There is no more color state.
+
+    - al_set*_blender functions lose the color parameter.
+
+    - Added 5 new bitmap drawing functions al_draw_tinted*_bitmap with a color
+      parameter. The parameter is used just like the "blend color" before.
+
+    - All text drawing functions gain a color parameter and use it like they
+      used the "blend color" before.
+
+    - Primitive drawing functions previously sometimes (and sometimes not) used
+      the "blend color". Not any longer.
+
+-  Make the current blending mode thread-local state instead of per-display
+   state.
+
+-  Add explicit display arguments to functions which require a display,
+   but don't require the rendering context to be current.
+
+-  Make al_set_target_bitmap change the current display as necessary.
+   al_set_target_bitmap(NULL) releases the rendering context.
+
+-  Add al_set_target_backbuffer as a convenience.
+
+-  Remove al_set_current_display.
+
+-  Give each bitmap its own transformation, i.e. every bitmap has a
+   transformation, which is in effect when that bitmap is the target.
+
+-  Remove sub-bitmap clip-to-parent restriction on create. Add out-of-bounds
+   blitting support to memory bitmaps.
+
+-  Merge sub-bitmap and parent bitmap clipping; clip source bitmap to
+   (0,0)-(w,h); fix flipping to/from clipped bitmaps.
+
+-  Made mouse cursors independent of displays.  You may create cursors without
+   a display, and you may use a cursor with any display.
+
+-  Rename al_{set,get}_current_video_adapter to *new_display_adapter for
+   consistency.
+
+-  Move the new display video adapter and new window position to thread-local
+   state, like other new display parameters.  Make al_store_state also save
+   those parameters with ALLEGRO_STATE_NEW_DISPLAY_PARAMETERS.
+
+-  Rename al_transform_transform to al_compose_transform.  Switched the order
+   of parameters in al_compose_transform and al_copy_transform to match the
+   rest of the transform functions.
+
+-  Made memory bitmap manipulation without a display possible (again?).
+
+-  Fixed window resizing in D3D driver.  Simplify resize-postponing on Windows.
+
+-  Make al_create_display abort early when the new_display_adapter is
+   greater than the screen count (X11).
+
+-  Added ALLEGRO_MINIMIZED flag to the X11 port.
+
+-  Fixed OpenGL version string parsing (bug #3016654).
+
+Other core:
+
+-  Renamed al_install_timer to al_create_timer, and al_uninstall_timer to
+   al_destroy_timer.
+
+-  Rename al\_{get,set}\_{appname,orgname} to \*app_name and \*org_name.
+
+-  Fix assertion failure in al_create_mutex_recursive on Windows (spoofle).
+
+Primitives addon:
+
+-  Made the D3D driver of the primitives addon work with multiple displays.
+   Also made it handle the display being destroyed properly.
+
+-  Simplified shader recreating on thread destruction when using the primitives
+   addon with D3D.
+
+-  Avoid double free when shutting down the primitives addon multiple times.
+
+-  Older Intel cards don't implement DrawIndexedPrimitiveUP correctly.
+   Altered the D3D code to work around that.
+
+Audio addon:
+
+-  Allow setting the DirectSound buffer size via allegro5.cfg.
+
+Image addon:
+
+-  Make GDI+ image loader work with MinGW.
+
+Font addon:
+
+-  Nicolas Martyanoff added al_get_font_descent/ascent functions which query
+   per-font properties.  Previously it was necessary to call
+   al_get_text_dimensions (which now just reports the text dimensions as it
+   should).
+
+Native dialogs addon:
+
+-  Add text log window functions (GTK only for now).
+
+Documentation:
+
+-  Many updates to the reference manual.
+
+-  Improve styling and add Allegro version to HTML pages.
+
+-  Separated readme_a5.txt into multiple files, and hopefully improve them.
+
+Build system:
+
+-  Remove INSTALL_PREFIX.  Windows users can now use CMAKE_INSTALL_PREFIX to
+   set the install path.
+
+-  Allow the user to place dependencies in a subdirectory "deps", which will
+   be automatically searched.
+
+Examples:
+
+-  Use text log windows in many examples.
+
+-  Add ex_noframe: test bitmap manipulation without a display.
+
+Bindings:
+
+- Update Python bindings.
+
+
+
+Changes from 4.9.19 to 4.9.20 (May 2010)
+========================================
+
+The developers this time were: Thomas Fjellstrom, Evert Glebbeek,
+Matthew Leverton, Milan Mimica, Paul Suntsov, Trent Gamblin, Elias Pschernig,
+Peter Wang.  With significant contributions from Michał Cichoń.
+
+Core:
+
+-  Add al_malloc, al_free, et al.  These are now used consistently throughout
+   Allegro and its addons.
+
+-  Replace al_set_memory_management_functions by a simpler function,
+   al_set_memory_interface.
+
+-  Renamed some D3D/Windows specific functions to follow the al_{verb}_{stuff}
+   convention.
+
+Graphics:
+
+-  Move image I/O framework to core, i.e. al_load_bitmap, al_save_bitmap and
+   bitmap file type registration.  Image codecs remain in allegro_image.
+
+-  Added a simple display capabilities querying capability to
+   al_get_display_option: ALLEGRO_MAX_BITMAP_SIZE, ALLEGRO_SUPPORT_NPOT_BITMAP,
+   ALLEGRO_CAN_DRAW_INTO_BITMAP, ALLEGRO_SUPPORT_SEPARATE_ALPHA.
+   (OpenGL only for now)
+
+-  Fix in OpenGL 3.0 context creation.
+
+-  Make the extensions mechanism compatible with OpenGL version >= 3.
+   Declared symbols needed by OpenGL 3.2 and 3.3 and brought OpenGL extensions
+   up to date.
+
+-  Fix an assertion in _al_draw_bitmap_region_memory so it does not trigger
+   when source and destination are the same bitmap.
+
+-  Fix some locking issues by setting GL_PACK_ALIGNMENT and GL_UNPACK_ALIGNMENT
+   before reading/writing pixels.
+
+-  Partial implementation of ALLEGRO_FULLSCREEN_WINDOW on OS X (Snow Leopard,
+   probably Leopard).
+
+-  Started X11 fullscreen support (resolution switching).
+
+-  Fix handling of X11 size hints.
+
+-  Fixed a deadlock related to fullscreen windows under X11 caused by using a
+   nested lock for a condition variable.
+
+-  Use _NET_WM_ICON to set icon on X11 instead of XSetWMHints.
+
+-  Get the iPhone OpenGL version more properly.  Only use separate blending on
+   iPhone with OpenGL ES 2.0+.
+
+-  Release the splash view and windows on iPhone, which makes backgrounding
+   Allegro apps on OS 4.0 work.
+
+-  Updated iphone port for IPad (only tested in the simulator).
+
+Input:
+
+-  Disabled Raw Input code in Windows.  Mouse events now reflect system cursor
+   movements even in fullscreen mode.
+
+-  Prevent late WM_MOUSELEAVE notifications from overriding mouse state display
+   field (Windows).
+
+-  Update pollable mouse state with axes events as well as button events on
+   iPhone.
+
+Filesystem:
+
+-  Made the filesystem entry functions work under Windows even if the name
+   passed to al_create_fs_entry has a trailing slash or backslash.
+
+Config routines:
+
+-  Add al_{load,save}_config_file_f.
+
+-  Reorder al_save_config_file* arguments to match al_save_bitmap and
+   al_save_sample.
+
+-  Optimise config routines to work well for thousands of keys/sections.
+
+Image addon:
+
+-  Added a GDI+ implementation of the image codecs, which will be used in
+   favour of libjpeg/libpng if Allegro is compiled with MSVC.  Then
+   allegro_image will not require JPEG/PNG DLLs at runtime.
+
+-  Removed format specific image functions.
+
+-  Fixed bug in native png loader on iphone: was using the source color space
+   instead of the target color space which made it fail whenever they differed
+   (alpha-less paletted pictures).
+
+-  Add an autorelease pool around iphone native image loading to stop memory
+   leaks.
+
+Font addons:
+
+-  Sever the tie between allegro_font and allegro_image.
+   The user needs to initialise the image addon separately now.
+
+-  Rename al_load_ttf_font_entry to al_load_ttf_font_f.
+
+-  Fixed problem with glyph precision after applying transformations in the ttf
+   addon.
+
+Primitives addon:
+
+-  Added al_init_primitives addon function.  This is now required.
+
+-  Removed ALLEGRO_PRIM_COLOR; ALLEGRO_COLOR can now be used where it was
+   required.
+
+-  v textures coordinates were off for OpenGL non-power-of-two textures.
+
+-  Free the vertex cache in al_destroy_display on X11.
+
+-  Added the dummy vertex shader support to D3D driver of the primitives addon.
+   Without this, custom vertices either resulted in warnings or outright
+   crashes on some systems.
+
+-  Bring D3D driver up to speed a little bit: transformations now work properly
+   with sub-bitmap targets; the half-pixel offset now properly interacts with
+   transformations; al_set_target_bitmap does not clear the transformation; the
+   proper transformation is set at display creation.
+
+-  Cull the primitives that are completely outside the clipping region.
+
+-  Scale the numbers of vertices for the curvy primitives with the scale of the
+   current transformation.
+
+Audio addon:
+
+-  Remove driver parameter from al_install_audio.
+
+-  Rename al_get_depth_size to al_get_audio_depth_size.
+
+-  Rename al_get_audio_stream_buffer to al_get_audio_stream_fragment.
+
+-  Many improvements to AQueue driver.
+
+Audio codecs:
+
+-  Add MOD/S3M/XM/IT file support, using the DUMB library.
+
+-  Revert to a monolithic allegro_acodec addon, i.e. remove separate
+   allegro_flac, allegro_vorbis addons.  WAV file support is in allegro_acodec.
+
+-  Implement DLL loading for FLAC/Vorbis/DUMB on Windows.  allegro_acodec will
+   load the DLL at runtime to enable support for that format.  If your program
+   does not require said format, you don't need to distribute the DLL.
+
+-  Remove format-specific loader/saver audio codec functions.
+
+-  Make acodec loaders have consistent file closing behaviour.
+
+-  Optimised wave file loading.
+
+Examples:
+
+-  Make SPEED port run acceptably on graphics drivers without FBOs.
+
+Documentation:
+
+-  Added documentation for the public Direct3D specific functions.
+
+-  Documented ALLEGRO_OPENGL_3_0 and ALLEGRO_OPENGL_FORWARD_COMPATIBLE.
+
+Other:
+
+-  Many bug and documentation fixes.
+
+
+
+Changes from 4.9.18 to 4.9.19 (April 2010)
+==========================================
+
+The main developers this time were: Milan Mimica, Trent Gamblin, Paul Suntsov,
+Peter Wang.  Other contributions from: Evert Glebbeek and Shawn Hargreaves.
+
+Graphics:
+
+-  Implemented support for transformations for memory bitmaps.
+
+-  Transformations now work properly when the target bitmap is a sub-bitmap in
+   OpenGL (still broken in D3D). Also fixed OpenGL bitmap drawing in the same
+   scenario (it used to always revert to software drawing).
+
+-  Use the memory drawers when the source bitmap is the backbuffer with the
+   rotated/scaled bitmaps.
+
+-  Make al_put_pixel clip even if the bitmap is locked, which was the reason
+   why software primitives were not clipping.
+
+-  Added al_put_blended_pixel, the blended version of al_put_pixel.
+
+-  Sub bitmaps of sub bitmaps must be clipped to the first parent.
+
+-  Don't clear the transformation when setting the target bitmap in OpenGL.
+
+-  Implemented ALLEGRO_NOFRAME and ALLEGRO_FULLSCREEN_WINDOW in WGL.
+
+-  Set the ALLEGRO_DISPLAY->refresh_rate variable for fullscreen modes under D3D.
+
+-  Make d3d_clear return immediately if the display is in a lost state.
+
+-  Rewrote the function that reads the OpenGL version so it works for
+   previously unrecognised versions, and future versions.
+
+-  Check for framebuffer extension on iPhone properly.
+
+-  Fixed locking bugs on iPhone. allegro_ttf works now.
+
+Input:
+
+-  Removed al_set_mouse_range.
+
+-  Don't call al_get_mouse_state if the mouse driver isn't installed (Windows).
+
+-  Send events even when the mouse cursor leaves the window, while any buttons
+   are held down (Windows and Mac OS X; X11 already did this).
+
+-  Allow mouse presses and accelerometer data simultaneously. (iPhone)
+
+File I/O:
+
+-  Optimise al_fread{16,32}* by using only one call to al_fread each.
+
+-  Optimise al_fgetc() for stdio backend.
+
+Path:
+
+-  Fix an infinite loop in _find_executable_file when searching for the
+   executable on the PATH (Alan Coopersmith).
+
+Primitives addon:
+
+-  Made the software driver for the primitives addon check for blending
+   properly. Also, fixed two line shaders.
+
+-  Made the D3D driver thread-safe. The whole addon should be thread-safe now.
+
+-  The addon now officially supports 3D vertices, even though the software
+   component can't draw them yet.
+
+-  Changed the way the primitives addon handles the OpenGL state (fixes a few
+   bugs and makes life easier for raw-OpenGL people)
+
+Image addon:
+
+-  Optimised BMP, PCX, TGA loaders.
+
+-  Fix loading 16-bit BMP files.
+
+-  Fix loading grayscale TGA images.
+
+-  Nial Giacomelli fixed a bug where images could be corrupt using the native
+   Apple image loader (iPhone).
+
+Audio addon:
+
+-  Add al_is_audio_installed.
+
+-  Fix al_attach_sample_instance_to_mixer for int16 mixers.
+
+-  Implement attaching an INT16 mixer to another INT16 mixer.
+
+-  Handle conversion when an INT16 mixer is attached to a UINT16 voice.
+
+Build system:
+
+-  Add an option to disable Apple native image loader (iPhone and OS X).
+
+-  Add ttf addon target to iPhone xcode project.
+
+Examples:
+
+-  Special contribution from Shawn "the Progenitor" Hargreaves.
+
+
+
+Changes from 4.9.17 to 4.9.18 (March 2010)
+==========================================
+
+The main developers this time were: Trent Gamblin, Elias Pschernig, Evert
+Glebbeek, Peter Wang.  Other contributions from: Milan Mimica, Paul Suntsov,
+Peter Hull.
+
+Graphics:
+
+-  Fixed broken drawing into memory bitmaps as access to the global
+   transformation required an active display. Now both transformation and
+   current blending mode are stored in the display but provisions are made for
+   them to also work if the current thread has no display.
+
+-  Fixed a bunch of clipping problems with OpenGL, especially with sub-bitmaps.
+
+-  Fix bug in OpenGL FBO setup when the target bitmap is the sub-bitmap of a
+   bitmap with an FBO.
+
+-  Fixed crash in al_get_num_display_modes under OSX 10.5.
+
+-  Fixed some problems in _al_convert_to_display_bitmap that caused problems in
+   WGL FS display resize.
+
+-  Fixed al_set_current_display(NULL) on WGL.
+
+-  Added subtractive blending.  al_set_blender() takes another parameter.
+
+-  Added ALLEGRO_FULLSCREEN_WINDOW display flag (X11 and D3D for now).
+
+-  Allow changing ALLEGRO_FULLSCREEN_WINDOW with al_toggle_display_flag.
+
+-  Figured out how to switch display modes using Carbon on OS X 10.6.
+
+-  Stop the OpenGL driver on iPhone from changing the currently bound FBO
+   behind our back when locking a bitmap.
+
+-  Prevent screen flicker at app startup by simulating the splash screen
+   (iPhone).
+
+Input:
+
+-  Added "pressure" field to the mouse event struct and mouse state, which can
+   be used with pressure sensitive pointing devices, i.e. tablets/stylus
+   (currently OS X only).
+
+-  Report scroll ball "w" position in mouse event struct, on OS X.
+
+-  Removed OS X 10.1 specific code from mouse driver. We don't support OS X
+   10.1 any more.
+
+-  Fix building of Linux joystick driver on some systems.
+
+Threads:
+
+-  Fix a problem when al_join_thread() is called immediately after
+   al_start_thread().  The thread could be joined before the user's thread
+   function starts at all.
+
+-  Fix a possible deadlock with al_join_thread() on Windows (thanks to Michał
+   Cichoń for the report).
+
+-  Fix some error messages running threading examples on OS X.
+
+Other core:
+
+-  Added version check to al_install_system.
+
+-  Rename al_free_path to al_destroy_path for consistency.
+
+-  Make it possible to have an empty organization name with al_set_org_name().
+
+-  Changed implementation of AL_ASSERT to use POSIX-standard assert instead.
+
+-  Removed al_register_assert_handler.
+
+-  Fix timer macros which did not parenthesize their arguments.
+
+-  Make stricmp, strlwr, strupr macros conditionally defined.
+
+Audio addon:
+
+-  Rename al_attach_sample_to_mixer to al_attach_sample_instance_to_mixer.
+
+-  Fix a premature free() when detaching samples and other audio objects.
+
+-  Fix mixers attaching to mixers.
+
+-  Pass correct number of samples to mixer postprocess callback.
+
+-  AudioQueue code was not compiled even though version requirements may have
+   been met (OS X).
+
+Primitives addon:
+
+-  Make high-level primitives functions thread safe. (note: the DirectX driver
+   is not yet thread safe)
+
+-  Fix a bug causing crashes on Windows 7 when using the primitives addon and
+   Direct3D (Invalid vertex declarations were being used).
+
+-  Fixed another issue with primitives drawing to memory bitmaps.
+
+-  Hopefully fix the bitmap clipping bugs, and make the D3D and OGL/Software
+   outputs to be near-identical again.
+
+Image addon:
+
+-  Added a "native loader" for MacOS X that uses the NSImage bitmap loading
+   functions. In addition to .png and .jpg, this allows us to read a whole zoo
+   of image formats (listed in allegro.log).
+
+-  Add native support for tif, jpg, gif, png, BMPf, ico, cur, xbm formats to
+   under IPhone.
+
+-  Fixed an over-zealous ASSERT() that disallowed passing NULL to
+   al_register_bitmap_loader() despite this being an allowed value.
+
+-  Avoid using a field which is deprecated in libpng 1.4.
+
+Color addon:
+
+-  Make al_color_name_to_rgb return a bool.
+
+Native dialogs addon:
+
+-  Fixed some erratic behaviour and crashes on OS X.
+
+Build system:
+
+-  Set VERSION and SOVERSION properties on targets to give Unix shared
+   libraries proper sonames.
+   e.g. liballegro[_addon].so.4.9, liballegro[_addon].4.9.dylib
+
+-  Static libraries are now named without version number suffixes
+   to minimise the differences with the shared libraries, which no longer
+   have the versions in their base names.
+   e.g. liballegro[_addon]-static.a, allegro[_addon]-static.lib
+
+-  Windows import libraries are also named without version suffixes, e.g.
+   liballegro[_addon].a, allegro[_addon].lib
+
+-  DLLs are named with a short version suffix, not the full version.
+   e.g. allegro-4.9.dll instead of allegro-4.9.18.dll
+
+-  Add support for Mac OS X frameworks (untested), which are enabled with
+   WANT_FRAMEWORKS and WANT_EMBED.  There is one framework per addon.
+
+-  Search for static OGG/Vorbis libraries built with MSVC named
+   libogg_static.lib, etc.
+
+-  Updated iPhone XCode project.
+
+Examples:
+
+-  ex_mixer_pp: New example to test mixer postprocessing callbacks.
+
+-  ex_threads: Make it more visually interesting and test out per-display
+   transformations.
+
+-  ex_ogre3d: New example demonstrating use of Ogre graphics rendering
+   alongside Allegro (currently GLX only).  Commented out in the build system
+   for now.
+
+-  ex_fs_window: New example to test ALLEGRO_FULLSCREEN_WINDOW flag and
+   al_toggle_display_flag.
+
+-  ex_blend2: Updated to test subtractive blending, including scaled/rotated
+   blits and the primitives addon.
+
+-  ex_mouse_events: Show "w" field.
+
+-  ex_prim: Added possibility to click the mouse to advance screens (for iPhone).
+
+-  ex_vsync: Display config parameters and warning.
+
+-  ex_gldepth: Make the textures appear again though we're not sure why they
+   disappeared.
+
+Documentation:
+
+-  Many documentation updates.
+
+-  Add which header file and which library to link with for each page of the
+   reference manual.
+
+-  Minor improvements to HTML styling and man page output.
+
+
+
+Changes from 4.9.16 to 4.9.17 (February 2010)
+=============================================
+
+The main developers this time were: Trent Gamblin, Elias Pschernig, Evert
+Glebbeek, Paul Suntsov, Peter Wang.
+
+Core:
+
+-   Removed END_OF_MAIN() everywhere.
+
+    For MSVC, we pass a linker option through a #pragma.
+
+    On Mac OS X, we rename main() and call it from a real main() function in
+    the allegro-main addon.  The prototype for main() for C++ applications
+    should be "int main(int, char **)", or the code will not compile on OS X.
+    For C, either of the normal ANSI forms is fine.
+
+    \#define ALLEGRO_NO_MAGIC_MAIN disables the \#pragma or name mangling, so
+    you can write a WinMain() or use al_run_main() yourself.
+
+Graphics:
+
+-  Fixed a bug in the OpenGL driver where al_draw_bitmap() wouldn't handle
+   blitting from the back buffer.
+
+-  Changing the blending color now works with deferred drawing (Todd Cope).
+
+-  Avoid some problems with window resizing in Windows/D3D.
+
+-  Added al_get_d3d_texture_position.
+
+-  Fixed bug under X11 where al_create_display() would always use the display
+   options from the first al_create_display() call.
+
+-  Properly implemented osx_get_opengl_pixelformat_attributes().
+
+-  Fixed automatic detection of colour depth on OS X.
+
+-  Fixed al_get_num_display_modes() on Mac OS X 10.6.
+
+-  Removed al_get_num_display_formats, al_get_display_format_option,
+   al_set_new_display_format functions as they can't be implemented on
+   OSX/iPhone/GPX ports (and were awkward to use).
+
+-  Replaced al_toggle_window_frame function with a new function
+   al_toggle_display_flags.
+
+-  al_load_bitmap() and al_convert_mask_to_alpha() no longer reset the current
+   transformation.
+
+-  Add a minimize button to all non-resizable windows on Windows.
+
+-  The wgl display switch-in/out vtable entries were swapped (Milan Mimica).
+
+Input:
+
+-  Some keycodes were out of order in src/win/wkeyboard.c
+
+-  Fixed mouse range after resizing window on Windows.
+
+-  Fixed (or worked around) a joystick axis detection problem on Mac OS X.
+
+-  Change timer counts from 'long' to 'int64_t'.
+
+File I/O:
+
+-  Remove `ret_success' arguments from al_fread32be/le.
+
+allegro-main addon:
+
+-  Added an "allegro-main" addon to hold the main() function that is required
+   on Mac OS X.  This way the user can opt out of it.
+
+Primitives addon:
+
+-  Added support for sub-bitmap textures in OpenGL driver.
+
+-  Added support for sub-bitmap textures in D3D driver.
+   Made D3D sub-bitmaps work better with user D3D code.
+
+Audio addons:
+
+-  Changed the _stream suffix to _f in the audio loading functions.
+
+-  Added the stream versions of loading functions for wav, ogg and flac.
+
+-  Rename audio I/O functions to al_load_{format}, al_save_{format},
+   al_load_{format}_f and al_save_{format}_f.
+
+-  Added al_load_sample_f, al_save_sample_f, al_load_audio_stream_f and the
+   related functions.
+
+-  Fixed a bug where al_save_sample was improperly handling the extension.
+
+-  al_drain_audio_stream would hang on an audio stream in the 'playing' state
+   (the default) which wasn't attached to anything.
+
+-  Fixed a potential deadlock on destroying audio streams by shutting down the
+   audio driver.
+
+-  Comment out PA_SINK_SUSPENDED check, which breaks the PulseAudio driver, at
+   least on Ubuntu 9.10.
+
+-  Replace unnecessary uses of `long' in audio interfaces.
+
+Image addons:
+
+-  Fixed return values of al_save_bmp_f and al_save_pcx_f being ignored.
+
+-  Changed the _stream suffix to _f in the image loading functions.
+
+TTF addon:
+
+-  Drawing TTF fonts no longer resets the current transformation.
+
+Build system:
+
+-  Add the CMake option FLAC_STATIC, required when using MSVC with a static
+   FLAC library.
+
+-  Link with zlib if linking with PhysicsFS is not enough.
+
+-  Updated iPhone project files.
+
+Documentation:
+
+-  Many documentation updates.
+
+Examples:
+
+-  ex_display_options: Added mouse support, query current display settings,
+   display error if a mode can't be set.
+
+Bindings:
+
+-  Made the Python wrapper work under OSX.
+
+-  Added a CMake option to build the Python wrapper.
+
+-  Added al_run_main() mainly to support the Python wrapper on OSX.
+
+
+
+Changes from 4.9.15.1 to 4.9.16 (November 2009)
+===============================================
+
+The main developers this time were: Trent Gamblin and Paul Suntsov.
+
+Graphics:
+
+-  Fixed clipping of the right/bottom edges for the software primitives.
+
+-  Enable sub-pixel accuracy for rotated blitting in software.
+
+-  Made the D3D output look closer to the OGL/Software output.
+
+-  OpenGL driver now respects the 'linear' texture filtering configuration
+   option.  Anisotropic is interpreted as linear at this time.
+
+-  Added deferred bitmap drawing (al_hold_bitmap_drawing).
+
+-  Made the font addons use deferred bitmap drawing instead of the primitives
+   addon, removing the link between the two addons.
+
+-  Changed al_transform_vertex to al_transform_coordinates to make the
+   function more versatile.
+
+-  Transfered transformations from the primitives addon into the core.
+   Added documentation for that, as well as a new example, ex_transform.
+   Transformations work for hardware accelerated bitmap drawing (including
+   fonts) but the software component is not implemented as of yet.
+   Also fixed some bugs inside the code of the transformations.
+
+-  Increase performance of screen->bitmap blitting in the D3D driver.
+
+-  Fixed a strange bug with textured primitives (u/v repeat flags were being
+   ignored on occasion).
+
+-  Added ALLEGRO_VIDEO_BITMAP for consistency.
+
+Input:
+
+-  Work around a memory leak in iPhone OS that occurs when the accelerometer
+   is on during touch input.
+
+Other core:
+
+-  Don't #define true/false/bool macros in C++.
+
+Audio addon:
+
+-  Some minor cleanups to the Audio Queue driver.
+
+
+
+Changes from 4.9.15 to 4.9.15.1 (October 2009)
+==============================================
+
+-  Fixed a problem building on MinGW (dodgy dinput.h).
+
+
+
+Changes from 4.9.14 to 4.9.15 (October 2009)
+============================================
+
+The main developers this time were: Trent Gamblin, Elias Pschernig, Matthew
+Leverton, Paul Suntsov, Peter Wang.
+
+Core:
+
+-  Set the initial title of new windows to the app name.
+
+-  Add al_set/get_event_source_data.
+
+-  Make locking work on bitmaps that didn't have an FBO prior to the call on
+   iPhone.
+
+-  Make al_get_opengl_fbo work on iPhone.
+
+-  Made iPhone port properly choose a visual (so depth buffer creation works).
+
+Font addon:
+
+-  Improved drawing speed for longish strings.  The font addon now depends on
+   the primitives addon.
+
+Primitives addon:
+
+-  Made the ribbon drawer handle the case of extremely sharp corners more
+   gracefully.
+
+-  Make al_draw_pixel use blend color in the D3D driver.
+
+-  Added POINT_LIST to the primitive types.
+
+-  Various fixes for the D3D driver: fixed line loop drawing; made the indexed
+   primitives a little faster; added workabouts for people with old/Intel
+   graphics cards.
+
+-  Fall back to software if given a memory bitmap as a texture.
+
+-  Removed OpenGL state saving code, it was causing massive slowdown when
+   drawing.  Also removed glFlush for the same reason.
+
+Audio addon:
+
+-  Added PulseAudio driver.
+
+-  Support AudioQueue driver on Mac OS X.
+
+-  Add al_uninstall_audio exit function.
+
+-  Added ALLEGRO_EVENT_AUDIO_STREAM_FINISHED event to signify when non-looping
+   streams made with al_load_audio_stream reach the end of the file.
+
+-  Fixed a deadlock when destroying voices.
+
+-  Handle underruns in the r/w ALSA updater.
+
+-  Minor change to the ALSA driver to improve compatibility with PulseAudio.
+
+Documentation:
+
+-  Replaced awk/sh documentation scripts with C programs.
+
+
+
+Changes from 4.9.13 to 4.9.14 (September 2009)
+==============================================
+
+The main developers this time were: Trent Gamblin, Elias Pschernig, Paul
+Suntsov, Peter Wang.  Other contributions from: Evert Glebbeek, Matthew
+Leverton.
+
+Ports:
+
+-  Elias Pschernig and Trent Gamblin started a iPhone port.
+
+Graphics:
+
+-  Added al_get_opengl_texture_size and al_get_opengl_texture_position
+   functions.
+
+-  Try to take into account GL_PACK_ALIGNMENT, GL_UNPACK_ALIGNMENT when
+   locking OpenGL bitmaps.
+
+-  Fixed all (hopefully) conversion mistakes in the color conversion macros.
+
+-  Sped up memory blitting, which was using conversion even with identical
+   formats (in some cases).
+
+-  Make al_set_current_display(NULL); unset the current display.
+
+-  Added ALLEGRO_LOCK_READWRITE flag for al_lock_bitmap (in place of 0).
+
+-  Fixed window titles which contain non-ASCII characters in X11.
+
+-  Added OES_framebuffer_object extension.
+
+Input:
+
+-  Added a lot more system mouse cursors.
+
+-  Renamed al_get_cursor_position to al_get_mouse_cursor_position.
+
+-  Prevent Windows from intercepting ALT for system menus.
+
+Filesystem:
+
+-  Make the path returned by al_get_entry_name() owned by the filesystem entry
+   so the user doesn't need to free it manually.
+
+-  Renamed the filesystem entry functions, mainly to include "fs_entry" in
+   their names instead of just "entry".
+
+-  Reordered and renamed ALLEGRO_FS_INTERFACE members.
+
+-  Make al_read_directory() not return . and .. directory entries.
+
+-  Renamed al_create_path_for_dir to al_create_path_for_directory.
+
+-  Added al_set_standard_file_interface, al_set_standard_fs_interface.
+
+Events:
+
+-  Exported ALLEGRO_EVENT_TYPE_IS_USER.
+
+Threads:
+
+-  Added a new function al_run_detached_thread.
+
+Other core:
+
+-  Put prefixes on register_assert_handler, register_trace_handler.
+
+-  Added functions to return the compiled Allegro version and addon versions.
+
+-  Added al_ prefix to fixed point routines and document them.
+
+-  Added al_get_system_config().
+
+-  Renamed al_system_driver() to al_get_system_driver().
+
+-  Added 64-bit intptr_t detection for Windows.
+
+-  Added work-around to make OS X port compile in 64 bit mode.
+
+Addons:
+
+-  Renamed addons from a5\_\* to allegro_*.
+
+Image addon:
+
+-  Renamed the IIO addon to "allegro_image".
+
+-  Renamed \*\_entry functions that take ALLEGRO_FILE * arguments to *_stream.
+
+-  Fixed off-by-one error in greyscale JPEG loader.
+
+Audio addons:
+
+-  Renamed the kcm_audio addon to "allegro_audio".
+
+-  Renamed ALLEGRO_STREAM and stream functions to ALLEGRO\_AUDIO\_STREAM
+   and al\_\*audio_stream\*.
+
+-  Renamed al_stream_from_file to al_load_audio_stream
+
+-  Added int16 mixing and configurable frequency and depth for default
+   mixer/voice (see configuration file).
+
+-  Fixed FLAC decoding and added FLAC streaming support.
+
+-  Changed the function signature of al_get_stream_fragment() to be more
+   straightforward.
+
+-  Fixed bug in kcm audio that caused data to be deleted that was still used.
+
+-  Made ALSA audio driver work when the driver does not support mmap (commonly
+   because the ALSA really is PulseAudio).
+
+-  Removed al_is_channel_conf function.
+
+Font addons:
+
+-  Optimized font loading by converting the mask color on a memory copy instead
+   of have to lock a texture.
+
+-  Made the ttf addon read from file streams.
+
+Primitives addon:
+
+-  Fixed the direction of the last segment in software line loop, and fixed
+   the offsets in the line drawer.
+
+-  Fixed the thick ribbon code in the primitives addon, was broken for
+   straight segments.
+
+-  Various fixes/hacks for the D3D driver of the primitives addon: hack to
+   make the indexed primitives work and a fix for the textured primitives.
+
+-  Various enhancements to the transformations API: const correctness,
+   transformation inverses and getting the current transformation.
+
+-  Added support for custom vertex formats.
+
+-  Flipped the v axis of texture coordinates for primitives. Now (u=0, v=0)
+   correspond to (x=0, y=0) on the texture bitmap.
+
+-  Added a way to use texture coordinates measured in pixels. Changed
+   ALLEGRO_VERTEX to use them by default.
+
+PhysicsFS:
+
+-  PhysFS readdir didn't prepend the parent directory name to the returned
+   entry's path.
+
+-  Set execute bit on PhysFS directory entries.
+
+Examples:
+
+-  Made examples report errors using the native dialogs addon if
+   WANT_POPUP_EXAMPLES is enabled in CMake (default).
+
+-  Added new example ex_draw_bitmap, which simply measures FPS when drawing a
+   bunch of bitmaps (similar to exaccel in A4).
+
+Documentation:
+
+-  Many documentation updates and clarifications.
+
+-  Fixed up Info and PDF documentation.
+
+Bindings:
+
+-  Added a script to generate a 1:1 Python wrapper (see `python` directory).
+
+
+
+Changes from 4.9.12 to 4.9.13 (August 2009)
+===========================================
+
+The main developers this time were: Trent Gamblin, Elias Pschernig, Paul
+Suntsov, Peter Wang.  Other contributions from: Todd Cope, Evert Glebbeek,
+Michael Harrington, Matthew Leverton.
+
+Ports:
+
+-  Trent Gamblin started a port to the GP2X Wiz handheld console.
+
+Graphics:
+
+-  Some OpenGL bitmap routines were not checking whether the target bitmap was
+   locked.
+
+-  Scaled bitmap drawer was not setting the blend mode.
+
+-  Fixed a bug where al_map_rgb followed by al_unmap_rgb would return
+   different values.
+
+-  Fixed problems with sub-sub-bitmaps.
+
+-  Fixed window placement on OS X, which did not properly translate the
+   coordinates specified by the user with al_set_new_window_position().
+
+-  Made is_wgl_extension_supported() fail gracefuly.
+
+-  Added ALLEGRO_ALPHA_TEST bitmap flag.
+
+-  Minor optimizations in some memory blitting routines.
+
+Input:
+
+-  Replaced (ALLEGRO_EVENT_SOURCE *) casting with type-safe functions, namely
+   al_get_keyboard_event_source, al_get_mouse_event_source,
+   al_get_joystick_event_source, al_get_display_event_source,
+   al_get_timer_event_source, etc.
+
+-  Made it so that users can derive their own structures from
+   ALLEGRO_EVENT_SOURCE.  al_create_user_event_source() is replaced by
+   al_init_user_event_source().
+
+-  Fixed a problem on Windows where the joystick never regains focus when
+   tabbing away from a window.
+
+-  Fixed a problem with missing key repeat with broken X.Org drivers.
+
+-  Implemented ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY,
+   ALLEGRO_EVENT_MOUSE_LEAVE_DISPLAY for X11.
+
+Image I/O addon:
+
+-  Changed return type of al_save_bitmap() to bool.
+
+-  Separated al_add_image_handler into al_register_bitmap_loader,
+   al_register_bitmap_saver, etc.
+
+-  Made JPEG and PNG loaders handle al_create_bitmap() failing.
+
+-  Speed up JPEG loading and saving.
+
+-  Fixed a reinitialisation issue in iio.
+
+Audio addons:
+
+-  Moved basic sample loading/saving routines to kcm_audio from acodec
+   and added file type registration functions.
+
+-  Moved WAV support into kcm_audio.
+
+-  Made WAV loader not choke on extra chunks in the wave.
+
+-  Separated acodec into a5_flac, a5_vorbis addons.  You need to initialise
+   them explicitly.  Removed sndfile support.
+
+-  Renamed al\_\*\_oggvorbis to al\_\*\_ogg\_vorbis.
+
+-  Changed argument order in al_save_sample and al_stream_from_file.
+
+-  Reordered parameters in al\_attach\_* functions to follow the word order.
+
+-  Renamed a few streaming functions to refer to fragments/buffers
+   as fragments consistently.
+
+-  Added missing getters for ALLEGRO_SAMPLE fields.
+
+-  Fixed mutex locking problems with kcm_audio objects.
+
+-  Avoid underfilling a stream when it is fed with a short looping stream.
+
+Other addons:
+
+-  Added glyph advance caching for the TTF addon.
+
+-  Renamed al_register_font_extension to al_register_font_loader.
+   Match the file name extension case insensitively.
+
+Documentation:
+
+-  Lots of documentation updates.
+
+-  Added a short "Getting started guide" to the reference manual.
+
+Examples:
+
+-  Added another example for kcm_audio streaming: ex_synth.
+
+Build system:
+
+-  Fix pkg-config .pc files generated for static linking.
+
+-  DLL symbols are now exported by name, not ordinals.
+
+
+
+Changes from 4.9.11 to 4.9.12 (July 2009)
+=========================================
+
+-  Fixed bugs in Windows keyboard driver (Todd Cope).
+
+-  Fixed problems with ALLEGRO_MOUSE_STATE buttons on Windows (Milan Mimica).
+
+-  Fixed problems with PhysicsFS addon DLL on MSVC (Peter Wang).
+
+-  Set the D3D texture address mode to CLAMP (Todd Cope).
+
+-  Fixed hang if Allegro was initialized more than once on Windows
+   (Michael Harrington).
+
+-  Added a CMake option to force the use of DllMain style TLS on Windows,
+   for use with C# bindings (Michael Harrington).
+
+-  Fixed a bug where drawing circles with a small radius would crash
+   (Elias Pschernig).
+
+-  Fixed several memory leaks throughout the libraries (Trent Gamblin).
+
+-  Fixed some compilation warnings on Mac OS X (Evert Glebbeek).
+
+-  Small documentation updates.
+
+
+
+Changes from 4.9.10.1 to 4.9.11 (June 2009)
+===========================================
+
+The main developers this time were: Trent Gamblin, Milan Mimica, Elias
+Pschernig, Paul Suntsov, Peter Wang.  Other contributions from: Christopher
+Bludau, David Capello, Todd Cope, Evert Glebbeek, Peter Hull.
+
+Graphics:
+
+-  Changed rotation direction in memory blitting routines to match D3D/OpenGL
+   routines.
+
+-  Made al_set_target_bitmap not create an FBO if the bitmap is locked.
+
+-  Added explicit FBO handling functions al_get_opengl_fbo and
+   al_remove_opengl_fbo in case we weren't quite clever enough above and the
+   user has to intervene manually.
+
+-  Added OpenGL 3.1 support and a bunch of new OpenGL extensions.
+
+-  Fixed al_inhibit_screensaver on Windows
+
+-  Fixed selection of X pixel formats with WGL if a new bitmap has alpha.
+
+-  Made X11 icon work regardless of the backbuffer format.
+
+Input:
+
+-  Ditched DirectInput keyboard driver and replaced it with WinAPI.
+   Fixes several issues the old driver had.
+
+-  Rewrote Windows mouse driver to use WinAPI instad of DirectInput.
+
+-  Added al_get_joystick_number.
+
+Filesystem:
+
+-  Merged ALLEGRO_FS_HOOK_ENTRY_INTERFACE into ALLEGRO_FS_INTERFACE
+   and made ALLEGRO_FS_INTERFACE public.
+
+-  Added al_set_fs_interface and al_get_fs_interface.
+
+-  Made al_opendir take an ALLEGRO_FS_ENTRY.
+
+-  Removed functions which are obsolete or probably have no use.
+
+-  Made al_get_standard_path(ALLEGRO_PROGRAM_PATH) return a path
+   with an empty filename.
+
+Path routines:
+
+-  Renamed functions to follow conventions.
+
+File I/O:
+
+-  Fix al_fgets() returning wrong pointer value on success.
+
+Primitives addon:
+
+-  Added support for textured primitives in software.
+
+-  Introduced ALLEGRO_PRIM_COLOR, removed ALLEGRO_VBUFFER.
+
+-  Exposed the software line and triangle drawers to the user.
+
+-  Added rounded rectangles.
+
+-  Fix an extraneous pixel bug in the triangle drawer.
+
+Audio addon:
+
+-  Change from using generic get/set audio property functions to specific
+   getter/setter functions.
+
+-  Change return types on many functions to return true on success instead
+   of zero.  (Watch out when porting your code, the C compiler won't help.)
+
+Native dialogs:
+
+-  Added a Windows implementation.
+
+-  Added a title to al_show_native_message_box().
+
+Other addons:
+
+-  Implemented the filesystem interface for PhysicsFS and demonstrate its use
+   in ex_physfs.
+
+-  Fixed al_color_html_to_rgb.
+
+Examples:
+
+-  Added an OpenGL pixel shader example.
+
+Build system:
+
+-  Output separate pkg-config .pc files for static linking.
+
+
+
+Changes from 4.9.10 to 4.9.10.1 (May 2009)
+==========================================
+
+-  Fixed uses of snprintf on MSVC.
+
+-  Disabled ex_curl on Windows as it requires Winsock.
+
+
+
+Changes from 4.9.9.1 to 4.9.10 (May 2009)
+=========================================
+
+The main developers this time were: Trent Gamblin, Evert Glebbeek, Milan
+Mimica, Elias Pschernig, Peter Wang.  Other contributions from: Peter Hull,
+Paul Suntsov.
+
+Graphics:
+
+-  Renamed al_clear() to al_clear_to_color().
+
+-  Renamed al_opengl_version() to al_get_opengl_version().
+
+-  Changed the direction of rotation for al_draw_rotated* from
+   counter-clockwise to clockwise.
+
+-  Added new pixel format ALLEGRO_PIXEL_FORMAT_ABGR_8888_LE which guanrantees
+   component ordering.
+
+-  Added ALLEGRO_NO_PRESERVE_TEXTURE flag.
+
+-  Fixed horizontal flipping in plain software blitting routines.
+
+-  Fixed some blending bugs in the OpenGL driver.
+
+-  Made OpenGL driver fall back to software rendering if separate alpha
+   blending is requested but not supported.
+
+-  Added a config option which allows pretending a lower OpenGL version.
+
+-  Implemented al_get_num_display_formats(), al_get_display_format_option()
+   and al_set_new_display_format() for WGL.
+
+-  Fixed bug in al_get_display_format_option() with the GLX driver.
+
+-  Fixed a bug in the D3D driver that made display creation crash if the first
+   scored mode failed.
+
+-  Made the OpenGL driver prefer the backbuffer format for new bitmaps.
+
+-  Defer FBO creation to when first setting a bitmap as target bitmap.
+
+Input:
+
+-  Renamed some joystick functions.
+
+-  Account for caps lock state in OS X keyboard driver.
+
+-  Made UTF-8 input work on X11.
+
+File I/O:
+
+-  Separated part of fshook API into a distinct file I/O API (actually
+   generic streams).
+
+-  Make the file I/O API match stdio more closely and account for corner
+   cases.  (incomplete)
+
+-  Made it possible to set a stream vtable on a per-thread basis, which
+   affects al_fopen() for that thread.
+
+-  Added al_fget_ustr() to read a line conveniently.
+
+-  Change al_fputs() not to do its own CR insertion.
+
+-  Add al_fopen_fd() to create an ALLEGRO_FILE from an existing file
+   descriptor.
+
+Filesystem:
+
+-  Changed al_getcwd, al_get_entry_name to return ALLEGRO_PATHs.
+
+-  Renamed al_get_path to al_get_standard_path, and to return an ALLEGRO_PATH.
+
+-  Changed al_readdir to return an ALLEGRO_FS_ENTRY.
+
+-  Added al_path_create_dir.
+
+-  Removed some filesystem querying functions which take string paths
+   (ALLEGRO_FS_ENTRY versions will do).
+
+Config routines:
+
+-  Added functions to traverse configurations structures.
+
+-  Change al_save_config_file() return type to bool.
+
+-  Removed an arbitrary limit on the length of config values.
+
+-  Renamed configuration files to allegro5.cfg and allegro5rc.
+
+String routines:
+
+-  Allegro 4-era string routines removed.
+
+-  Added al_ustr_to_buffer().
+
+Other core:
+
+-  Renamed al_thread_should_stop to al_get_thread_should_stop.
+
+-  Added a new internal logging mechanism with configurable debug "channels",
+   verbosity levels and output formatting.
+
+-  Cleaned up ASSERT namespace pollution.
+
+Font addons:
+
+-  Renamed font and TTF addon functions to conform to conventions.
+
+-  Added al_init_ttf_addon.
+
+-  Implemented slightly nicer text drawing API:
+
+   - functions are called "draw_text" instead of "textout"
+   - centre/right alignment handled by a flag instead of functions
+   - functions accepting ALLEGRO_USTR arguments provided
+   - substring support is removed so 'count' arguments not needed in usual
+     case, however ALLEGRO_USTR functions provide similar thing.
+
+-  Removed al_font_is_compatible_font.
+
+-  Sped up al_grab_font_from_bitmap() by five times.
+
+-  ttf: Fixed a possible bug with kerning of unicode code points > 127.
+
+Image I/O addon:
+
+-  Renamed everything in the IIO addon.
+
+-  Exposed al_load_bmp/al_save_bmp etc.
+
+Audio addon:
+
+-  Renamed al_mixer_set_postprocess_callback.
+
+-  Added two config options to OSS driver.
+
+-  Made ALSA read config settings from [alsa] section.
+
+Native dialogs:
+
+-  Added al_show_native_message_box() which works like allegro_message() in A4.
+   Implemented for GTK and OS X.
+
+PhysicsFS addon:
+
+-  Added PhysicsFS addon.
+
+Primitives addon:
+
+-  Removed global state flags.
+
+-  Removed normals from ALLEGRO_VERTEX.
+
+-  Removed read/write flags from vertex buffers.
+
+Examples:
+
+-  Added an example that tests al_get_display_format_option().
+
+-  Added an example which shows playing a sample directly to a voice.
+
+-  Added an example for PhysicsFS addon.
+
+-  Added a (silly) example that loads an image off the network using libcurl.
+
+-  Added ex_dir which demonstrates the use of al_readdir and
+   al_get_entry_name.
+
+Other:
+
+-  Many bug and documentation fixes.
+
+
+
+Changes from 4.9.9 to 4.9.9.1 (March 2009)
+==========================================
+
+-  Made it compile and work with MSVC and MinGW 3.4.5.
+
+-  Enabled SSE instruction set in MSVC.
+
+-  Fixed X11 XIM keyboard input (partially?).
+
+-  Fall back on the reference (software) rasterizer in D3D.
+
+
+
+Changes from 4.9.8 to 4.9.9 (March 2009)
+========================================
+
+The main developers this time were: Trent Gamblin, Evert Glebbeek, Milan
+Mimica, Elias Pschernig, Paul Suntsov, Peter Wang.  Other contributions
+from: Todd Cope, Angelo Mottola, Trezker.
+
+Graphics:
+
+-  Added display options API and scoring, based on AllegroGL, for finer
+   control over display creation.
+
+-  Added API to query possible display formats (implemented on X, Mac OS X).
+
+-  Changed the bitmap locking mechanism.  The caller can choose a pixel
+   format.
+
+-  Added support for multisampling.
+
+-  Simplified the semantics of al_update_display_region().
+
+-  Optimised software blitting routines.
+
+-  Optimised al_map_rgb/al_map_rgba.
+
+-  Replaced al_draw_rectangle() and al_draw_line() from core library with
+   al_draw_rectangle_ex() and al_draw_line_ex() from the primitives addon.
+
+-  Implemented al_wait_for_vsync() everywhere except WGL.
+
+-  Fixed problems with sub-bitmaps with the OpenGL driver.
+
+-  Fixed bugs in software scaled/rotated blit routines.
+
+-  Added a new pixel format ALLEGRO_PIXEL_FORMAT_ABGR_F32.
+   Removed ALLEGRO_PIXEL_FORMAT_ANY_15_WITH_ALPHA,
+   ALLEGRO_PIXEL_FORMAT_ANY_24_WITH_ALPHA.
+
+-  Added support for creating OpenGL 3.0 contexts (untested; only WGL/GLX for
+   now).  Relevant display flags are ALLEGRO_OPENGL_3_0 and
+   ALLEGRO_OPENGL_FORWARD_COMPATIBLE.
+
+-  Allow disabling any OpenGL extensions from allegro.cfg to
+   test alternative rendering paths.
+
+-  Fixed problem with windows only activating on title bar clicks (Windows).
+
+-  Fixed a minimize/restore bug in D3D (with the help of Christopher Bludau).
+
+Input:
+
+-  Implemented al_set_mouse_xy under X11.
+
+-  Added ALLEGRO_EVENT_MOUSE_WARPED event for al_set_mouse_xy().
+
+Path routines:
+
+-  Made al_path_get_drive/filename return the empty string instead of NULL
+   if the drive or filename is missing.
+
+-  Changed al_path_set_extension/al_path_get_extension to include the leading
+   dot.
+
+-  Made al_path_get_extension(), al_path_get_basename(), al_path_to_string()
+   return pointers to internal strings.
+
+Unicode:
+
+-  Changed type of ALLEGRO_USTR; now you should use pointers to ALLEGRO_USTRs.
+
+-  Added UTF-16 conversion routines.
+
+Other core:
+
+-  Added ALLEGRO_GET_EVENT_TYPE for constructing integers for event type IDs.
+
+-  Renamed configuration function names to conform to conventions.
+
+-  Removed public MIN/MAX/ABS/MID/SGN/CLAMP/TRUE/FALSE macros.
+
+-  Replaced AL_PI by ALLEGRO_PI and documented it as part of public API.
+
+Audio addons:
+
+-  Added stream seeking and stream start/end loop points.
+
+-  Add panning support for kcm_audio (stereo only).
+
+Font addons:
+
+-  Made al_font_grab_font_from_bitmap() accept code point ranges.
+
+-  Made font routines use new UTF-8 routines; lifted some arbitrary limits.
+
+-  Fixed artefacts in bitmap font and TTF rendering.
+
+Image I/O addon:
+
+-  Made the capability to load/save images from/to ALLEGRO_FS_ENTRYs public.
+
+-  Added missing locking to .png save function.
+
+Other addons:
+
+-  Added native_dialog addon, with file selector dialogs.
+
+-  Fixed many bugs in the primitives addon.
+
+-  Made hsv/hsl color functions accept angles outside the 0..360° range.
+
+-  Fixed a bug in al_color_name_to_rgb.
+
+Examples:
+
+-  New programs: ex_audio_props, ex_blend_bench, ex_blend_test, ex_blit,
+   ex_clip, ex_draw, ex_font_justify, ex_gl_depth, ex_logo, ex_multisample,
+   ex_native_filechooser, ex_path_test, ex_rotate, ex_stream_seek, ex_vsync,
+   ex_warp_mouse.
+   (ex_draw demonstrated known bugs currently.)
+
+-  Updated programs: ex_joystick_events, ex_monitorinfo ex_pixelformat,
+   ex_scale, ex_subbitmap.
+
+Build system:
+
+-  Added pkg-config support.  .pc files are generated and installed on Unix.
+
+-  Allowed gcc to generate SSE instructions on x86 by default.  For Pentium 2
+   (or lower) compatibility you must uncheck a CMake option before building
+   Allegro.
+
+Other:
+
+-  Many other bug fixes.
+
+
+
+Changes from 4.9.7.1 to 4.9.8 (February 2009)
+=============================================
+
+The main developers this time were: Thomas Fjellstrom, Trent Gamblin,
+Evert Glebbeek, Matthew Leverton, Milan Mimica, Elias Pschernig, Paul Suntsov,
+Peter Wang.
+
+General:
+
+-  Lots of bug fixes.
+
+File system hooks:
+
+-  Rationalised file system hook functions.  Failure reasons can be retrieved
+   with al_get_errno().
+
+-  Enable large file support on 32-bit systems.
+
+-  Converted the library and addons to use file system hook functions.
+
+Path functions:
+
+-  Added al_path_clone(), al_path_make_canonical(), al_path_make_absolute(),
+   al_path_set\_extension(), al\_{get,set}\_org_name, al\_{get,set}_app_name}
+   functions.
+
+-  Made al_path_get_extension() not include the leading "." of the extension,
+
+-  Add AL_EXENAME_PATH, AL_USER_SETTINGS_PATH, AL_SYSTEM_SETTINGS_PATH enums
+   for al_get_path().
+
+String routines:
+
+-  Added a new, dynamically allocating UTF-8 string API.  This uses bstrlib
+   internally, which is distributed under a BSD licence.  Allegro 5 will
+   expect all strings to be either ASCII compatible, or in UTF-8 encoding.
+
+-  Removed many old Unicode string functions. (Eventually they will all be
+   removed.)
+
+Config routines:
+
+-  Clarified behaviour of al_config_add_comment, al_config_set_value with
+   regards to whitespace and leading comment marks.
+
+Graphics:
+
+-  Bug fixes on Windows and Mac OS X for resizing, switching away, setting full
+   screens, multi-monitor, etc.
+
+-  Added an al_get_opengl_texture() convenience function.
+
+-  Added separate alpha blending.
+
+-  Added ALLEGRO_PIXEL_FORMAT_ANY.
+
+-  Honour al_set_new_window_position() in X11 port.
+
+-  Made the X11 port fail to set a full screen mode if the requested resolution
+   cannot be set rather than falling back to a windowed mode.
+
+Input:
+
+-  Added a field to the mouse state struct to indicate the display the mouse is
+   currently on.
+
+-  Made DirectX enumerate all joysticks/gamepads properly by using a device
+   type new to DirectInput 8.
+
+-  Fixed a bug in wmouse.c where y was not changed in al_set_mouse_xy.
+
+-  Support ALLEGRO_EVENT_MOUSE_ENTER/LEAVE_DISPLAY events in Windows.
+
+Addons:
+
+-  Added a primitives addon.
+
+-  Revamp interface for kcm_audio addon to make simple cases easier.
+
+-  Added native .wav support and save sample routines to acodec addon.
+
+-  Added a colors addon.
+
+-  Added memory file addon and example.
+
+TTF addon:
+
+-  Added al_ttf_get_text_dimensions() function.
+
+-  Allow specifying the font size more precisely by passing a negative font
+   size.
+
+-  Guess the filenames of kerning info for Type1 fonts.
+
+Documentation:
+
+-  Added a new documentation system using Pandoc.  Now we can generate HTML,
+   man, Info and PDF formats.
+
+-  Added and fixed lots of documentation.
+
+Examples:
+
+-  Added ex_prim, ex_mouse_focus examples.
+
+-  Made ex_blend2 more comprehensive.
+
+-  Updated ex_get_path example.
+
+-  Made ex_ttf accept the TTF file name on the command line.
+
+Build system:
+
+-  Use official CMAKE_BUILD_TYPE method of selecting which build configuration.
+   This should work better for non-make builds, however, it's no longer
+   possible to build multiple configurations with a single configuration step
+   as we could previously.
+
+Removals:
+
+-  Remove outdated A4 tools.
+
+-  Remove icodec addon.
+
+-  SCons build was unmaintained and not working.
+
+
+
+Changes from 4.9.7 to 4.9.7.1 (December 2008)
+=============================================
+
+-  Scan aintern_dtor.h for export symbols, needed for MSVC.
+
+
+
+Changes from 4.9.6 to 4.9.7 (December 2008)
+===========================================
+
+The main developers this time were: Trent Gamblin, Evert Glebbeek, Peter Hull,
+Milan Mimica, Peter Wang.
+
+Graphics:
+
+-  Fixed a bug where the "display" field of a bitmap was not correctly reset
+   when it was transfered to another display on OS X.
+
+-  Made al_create_display() respect al_set_new_window_position() on OS X.
+
+-  Fixed the bug that caused input focus to be lost in OS X when a
+   window was resized.
+
+-  Made resizable Allegro windows respond properly to the green "+" button at
+   the top of the screen on OS X.
+
+-  Properly implemented fullscreen resize in WGL.
+
+-  Made the memory blenders work the same as the hardware ones.
+
+-  Made al_get_pixel()/al_draw_pixel() handle sub bitmaps in case the bitmap
+   was locked.
+
+-  In the OpenGL driver, if the bitmap is locked by the user, use memory
+   drawing on the locked region.
+
+-  Added implementations of al_inhibit_screensaver() for the X and Mac OS X
+   ports.
+
+-  Added multi-monitor support to Mac OS X port (untested!).
+
+-  Other fixes.
+
+Input:
+
+-  Made al_get_keyboard_state() return structures with the `display' field
+   correctly set.
+
+-  Made keyboard event member 'unichar' uppercase when Shift/CapsLock is on,
+   in Windows.
+
+-  Made mouse cursor show/hide work with Mac OS X full screen.
+
+Config routines:
+
+-  Preserve comment and empty lines in config files when writing.
+
+Addons:
+
+-  Add a simple interface layer for kcm_audio.
+
+-  Made kcm_audio objects automatically be destroyed when it is shut down.
+
+-  Renamed functions in kcm_audio to conform better with the rest of the
+   library.
+
+-  Made the TTF addon aggregate glyph cache bitmaps into larger bitmaps for
+   faster glyph rendering (less source bitmap switching).
+
+Examples:
+
+-  Add an example to test the ALLEGRO_KEYBOARD_STATE `display' field.
+
+-  Add an example for testing config routines.
+
+-  Add an example for checking software blending routines against hardware
+   blending.
+
+-  Add an example for the simple interface for kcm_audio.
+
+
+
+Changes from 4.9.5 to 4.9.6 (November 2008)
+===========================================
+
+The core developers this time were: Thomas Fjellstrom, Trent Gamblin, Evert
+Glebbeek, Peter Hull, Milan Mimica, Jon Rafkind, Peter Wang.
+
+Allegro 4.9.6 and onwards are licensed under the zlib licence (see
+LICENSE.txt).  This is a simple permissive free software licence, close in
+spirit to the 'giftware' licence, but is clearer and more well-known.
+
+General:
+
+-  Added filesystem hook (fshook) and path API functions.
+
+-  Many minor bug fixes.
+
+Graphics:
+
+-  Added allegro5/a5_opengl.h, which has to be included by programs
+   to use OpenGL specifics.  ALLEGRO_EXCLUDE_GLX and ALLEGRO_EXCLUDE_WGL can
+   be #defined to exclude GLX and WGL OpenGL extensions respectively.
+
+-  Added allegro/a5_direct3d.h, which has to be included by programs
+   to use D3D specifics.
+
+-  Fixed some drawing from and onto sub-bitmaps.
+
+-  Fixed blending with the wrong color in case of sub-bitmaps.
+
+-  Fixed a bug in the D3D driver where the transformation matrix was not
+   reset after drawing a bitmap.
+
+-  Added draw pixel to OpenGL driver.
+
+-  Added more OpenGL extensions.
+
+-  Added function to inhibit screen saver (currently Windows only).
+
+Config routines:
+
+-  Added al_config_create().
+
+-  Deleted al_config_set_global().  Made empty section name equivalent to
+   the global section.
+
+-  Read system wide and home directory config files on Unix
+   (Ryan Patterson).
+
+Events:
+
+-  Added support for injecting user-defined events into event queues.
+
+Audio addon:
+
+-  Made the ALSA driver read the device name from the config file (Ryan
+   Patterson).
+
+Examples:
+
+-  Added ex_subbitmap example.
+
+-  Added ex_disable_screensaver example.
+
+Build system:
+
+-  Rationalised library names and made CMake and SCons build systems
+   agree on the names.
+
+
+
+Changes from 4.9.4 to 4.9.5 (October 2008)
+==========================================
+
+The core developers this time were: Trent Gamblin, Evert Glebbeek, Peter Hull,
+Milan Mimica, Elias Pschernig, Jon Rafkind, Peter Wang.
+
+Graphics:
+
+-  Added fullscreen support on Mac OS X.
+
+-  Added support for resizable windows on Mac OS X.
+
+-  Made frameless windows respond to events on Mac OS X.
+
+-  Fixed a problem with D3D blending.
+
+-  Made D3D driver work on systems without hardware vertex processing.
+
+-  Made WGL driver fail more gracefully.
+
+-  Implemented sprite flipping for OpenGL drivers (Steven Wallace).
+
+-  Added al_is_sub_bitmap() function.
+
+Input:
+
+-  Fixed input with multiple windows on Windows.
+
+-  Fixed keyboard autorepeat events in X11.
+
+-  Added al_is_keyboard_installed().
+
+-  Fixed key shifts on Windows (ported from 4.2).
+
+-  Fixed mouse button reporting on Mac OS X.
+
+-  Implemented system mouse cursors on MacOS X.
+
+-  Fixed mouse cursors with alpha channels on X11.
+
+-  Some work on Mac OS X joystick support (incomplete).
+
+Events:
+
+-  Simplified internals of events system further.  At the same time,
+   this change happens to also allow event queues to grow unboundedly.
+   (You should still avoid letting them get too big, of course.)
+
+Audio addons:
+
+-  Made ALLEGRO_STREAM objects emit events for empty fragments that need
+   to be refilled.
+
+-  Added a possiblity to drain a stream created by al_stream_from_file().
+
+-  Added a function to rewind a stream.
+
+-  Added gain support to ALLEGRO_STREAM and ALLEGRO_SAMPLE objects.
+
+-  Made it possible to attach a sample to a mixer that isn't already attached
+   to something.
+
+-  Fixed Ogg Vorbis loader on big-endian systems.
+
+-  Made the OpenAL driver the least preferred driver, as it doesn't play
+   stereo samples properly.
+
+Image addons:
+
+-  Added JPEG support to iio addon, using libjpeg.
+
+-  Fixed TGA loader on big-endian systems.
+
+-  Fixed image loading in icodec addon.
+
+Font addon:
+
+-  Fixed count-restricted text output functions calculations on non-ASCII
+   strings.
+
+-  Made al_textout* functions always a 'count' parameter.
+
+-  Renamed al_font_text_length* to al_font_text_width*.
+
+-  Harmonised the order of al_font_textout* and al_font_textprintf* arguments.
+
+Examples:
+
+-  Added ex_bitmap_flip example (Steven Wallace).
+
+-  Added ex_mixer_chain example.
+
+-  Split ex_events into smaller examples.
+
+-  Made the demo use ALLEGRO_STREAM to play music.
+
+-  Build an app bundle from the demo, on Mac OS X.
+
+Build system:
+
+-  Improved detection of external dependencies in CMake build.
+
+-  Guess compiler locations for MinGW and MSVC (CMake).
+
+-  Many improvements to scons build, including install support.
+
+General:
+
+-  Many other bug fixes.
+
+
+
+Changes from 4.9.3 to 4.9.4 (September 2008)
+============================================
+
+The core developers this time were: Trent Gamblin, Peter Hull, Milan Mimica,
+Elias Pschernig and Peter Wang.  Ryan Dickie and Jon Rafkind also contributed.
+
+General:
+
+-  Many bug fixes all around.
+
+-  Added a public threads API.
+
+-  Added a basic configuration API.
+
+-  Added al_store_state/al_restore_state functions.
+
+-  Added al_get_errno/al_set_errno (not used much yet).
+
+-  Renamed some functions/structures to be more consistent.
+
+-  Code formatting improvements.
+
+-  Added more debugging messages.
+
+-  Removed a lot of A4 code that is no longer used.
+
+Graphics:
+
+-  Added support for some new OpenGL extensions.
+
+-  Multihead support on Windows (preliminary support on OSX and Linux).
+
+-  Many enhancements to all drivers.
+
+-  Merged common parts of WGL and D3D drivers.
+
+-  Borderless windows, setting window positions and titles.
+
+-  Fullscreen support on OSX and Linux.
+
+-  Do not clear bitmaps when they are created.
+
+-  Improved compile times and DLL sizes by simplifying "memblit" functions.
+
+-  Added EXPOSE, SWITCH_IN and SWITCH_OUT display events.
+
+Build system:
+
+-  Many bug fixes and enhancements to SCons and CMake build systems.
+
+-  Support for Turbo C++ 2006.
+
+-  Support for cross-compiling on Linux to MinGW (CMake).
+
+Events:
+
+-  Filled in a display field for all relevant events.
+
+-  Added al_wait_for_event_until.
+
+Addons:
+
+-  Added an ImageMagick addon
+
+-  Added iio (Image IO) addon
+
+      -  Supports BMP, PCX, TGA.
+
+      -  Supports PNG support with libpng.
+
+-  Added new audio addon, kcm_audio.  (The 'audio' addon was taken in a new
+   direction between the 4.9.3 and 4.9.4 releases, but we decided against
+   that, so actually it's actually a continuation of the old audio addon.)
+
+      -  Added audio streaming functionality.
+
+      -  Added OSS, ALSA, DirectSound drivers.
+
+      -  A lot of reorganisation, internally and externally.
+
+-  Added TTF font addon, using FreeType.
+
+-  Made all addons use "al_" prefix.
+
+Examples:
+
+-  Lots of new examples.
+
+-  Wait for keypress in some examples instead of arbitrary delay.
+
+-  Clean up files when done in some examples.
+
+
+
+Changes from 4.9.2 to 4.9.3 (April 2008)
+========================================
+
+Graphics:
+
+-  Milan Mimica did lots of work on the OpenGL drivers, such as adding an
+   OpenGL driver for Windows and making the OpenGL code shared between
+   platforms.
+
+-  Peter Hull added an OpenGL graphics driver for Mac OS X.
+
+-  Milan Mimica made the OpenGL driver share contexts between displays.
+
+-  Peter Wang and Milan Mimica made the OpenGL driver work with cards that
+   don't support non-power-of-two (NPOT) textures.
+
+-  Trent Gamblin added support for NPOT textures in the Direct3D driver.
+
+-  Trent Gamblin fixed blending in memory drawing functions. 
+
+-  Trent Gamblin added al_draw_pixel() which obeys blending.
+
+-  Trent Gamblin made al_clear() not affected by blending in D3D.
+
+-  Milan Mimica added the following functions to the public API:
+   al_opengl_version(), al_is_opengl_extension_supported(),
+   al_get_opengl_proc_address(), al_get_opengl_extension_list().
+
+-  Milan Mimica added sub-bitmaps support for memory bitmaps and in the
+   OpenGL display driver.
+
+-  Milan Mimica made displays keep a list of bitmaps. When destroying a
+   display its bitmaps will be managed properly, e.g. converted to memory
+   bitmaps if necessary. All display bitmaps will be automatically destroyed
+   on exit.
+
+-  Peter Wang made X window resizing work without GLX 1.3.
+
+-  Trent Gamblin fixed a bug in the Direct3D driver when windows were
+   minimized (thanks to David McCallum).
+
+-  Trent Gamblin fixed the coordinates of Direct3D primitives to match OpenGL
+   style.
+
+-  Peter Hull fixed some logic in bitmap drawing and al_load_bitmap().
+
+Fonts:
+
+-  Milan Mimica made font drawing faster, by making glyphs sub-bitmaps of a
+   larger glyph sheet.
+
+-  Milan Mimica and Peter Wang made font loading faster.
+
+-  Trent Gamblin added versions of text output functions which take as an
+   explicit argument the length of the strings.
+
+Audio:
+
+-  A new audio API implementation, originally by Chris Robinson, was added
+   (currently as an addon only).  It has received additional work in the past
+   from Milan Mimica and recently much work from Ryan Dickie.
+
+-  Ryan Dickie also added an acodec addon, which has loaders for FLAC, Wave
+   and Ogg Vorbis files, using other libraries.
+
+Timers:
+
+-  Ryan Dickie changed the type of timestamps throughout the API from int
+   expressed in milliseconds to double expressed in seconds and improved
+   timer resolution on Windows.
+
+-  Ryan Dickie added an 'error' field to the timer event, and added error
+   and overhead statistics to exnew_timer.
+
+-  Trent Gamblin made the Windows timer use QueryPerformanceCounter.
+
+-  Peter Wang split al_wait_for_event() into two functions, a version that
+   takes a timeout and a version that doesn't.
+
+-  Trent Gamblin merged the Windows and Unix timer source files.
+
+Input:
+
+-  Peter Wang renamed some joystick and timer functions to adhere to the
+   `al_<verb>_<noun>` convention.
+
+-  Peter Wang made al_num_joysticks() more lenient if there is no joystick
+   driver installed.
+
+Other:
+
+-  David Capello added support for various different BMPs.
+
+-  Elias Pschernig fixed compilation of the X port in case the XVidMode
+   extension is unavailable (thanks to Thomas Fjellstrom).
+
+-  Elias Pschernig added a exnew_timer example.
+
+-  Trent Gamblin added exnew_multiwin and exnew_drawpixels.
+
+-  Peter Wang added exnew_timedwait and exnew_scale.
+
+-  Jon Rafkind and Elias Pschernig updated the SCons build.
+
+-  Jon Rafkind added a `_s` suffix to static libraries in the SCons build.
+
+-  Elias Pschernig did some work on cross-compilation with SCons and MinGW.
+
+-  Milan Mimica made the CMake build work with MSVC project solutions
+   and made the library build with MSVC 8.
+
+-  Jacod Dawid added a nicer spaceship graphic for a5teroids demo.
+
+-  Many more bug fixes and documentation updates.
+
+
+
+Changes from 4.9.1 to 4.9.2 (November 2007)
+===========================================
+
+*This list is still to be summarised.*
+
+-  Trent Gamblin made the mouse cursor always hide when the user
+   calls al_hide_mouse_cursor in fullscreen (D3D).
+
+-  Trent Gamblin fixed some signedness warnings and implemented
+   show/hide_mouse in the display vtable for D3D.
+
+-  Elias Pschernig made show/hide cursor use the display driver instead of
+   the 4.2 gfx_driver.
+
+-  Elias Pschernig fixed missing keyboard events in exnew_mouse_events
+   example.
+
+-  Elias Pschernig wired the X11 mouse driver to the XGLX system driver.
+
+-  Jon Rafkind made various fixes to get the OSX build to compile
+
+-  Trent Gamblin added exnew_mouse_events.
+
+-  Trent Gamblin added exnew_mouse.
+
+-  Jon Rafkind made the scons build get the library name dynamically.
+
+-  Jon Rafkind made the scons build link Allegro using -l instead of
+   using the full path.
+
+-  Trent Gamblin added a note about MINGDIR in readme_a5.txt.
+
+-  Trent Gamblin removed -lalleg_unsharable from allegro-config.in,
+   since assembly is not used anymore.
+
+-  Jon Rafkind fixed up allegro-config.
+
+-  Trent Gamblin added some documentation on ALLEGRO_MSESTATE.
+
+-  Trent Gamblin listed the examples in readme_a5.txt.
+
+-  Trent Gamblin improved some inline documentation.
+
+-  Jon Rafkind removed /lib from install path in unix.scons.
+
+-  Jon Rafkind added the new demo to the scons build and allowed
+   addons to be built statically or shared.
+
+-  Trent Gamblin made the glx line drawing function use blending.
+
+-  Trent Gamblin added cmake instructions to readme_a5.txt.
+
+-  Elias Pschernig added readme_a5.txt.
+
+-  Trent Gamblin fixed warnings in the demo.
+
+-  Trent Gamblin fixed a crash-on-exit bug in tls.c.
+
+-  Trent Gamblin replaced the old demo with a temporary one.
+
+-  Peter Wang fixed gcc string warnings.
+
+-  Peter Wang added some assertions to display_new.c.
+
+-  Peter Wang merged changes from the 4.2 branch.
+
+-  Elias Pschernig removed an unnecessary import from the
+   naturaldocs upload script.
+
+-  Elias Pschernig added a script to automatically upload the
+   naturaldocs generated documentation to the website.
+
+-  Peter Wang fixed missed renamings from AL_ to ALLEGRO_ in the
+   Linux and X code.
+
+-  Elias Pschernig merged 4.9-newgfx back to 4.9.
+
+-  Peter Wang fixed a "ALLEGRO__JOYSTICK" typo.
+
+-  Trent Gamblin renamed AL_ to ALLEGRO_ in input, events, and timer
+   code.
+
+-  Elias Pschernig implemented outline flag and blending for
+   draw_rectangle in the GLX driver.
+
+-  Elias Pschernig added another mysha.pcx for the font example.
+
+-  Elias Pschernig re-added GLX checked to scons build which went
+   missing in the merge.
+
+-  Elias Pschernig added icon.xpm which went missing in the merge.
+
+-  Peter Wang replaced _al_draw_bitmap_region_memory_fast with
+   _al_draw_bitmap_region_memory.
+
+-  Trent Gamblin made memblit.c compile a little faster in debug
+   mode.
+
+-  Peter Wang mergedd changes in r7948:10859 on 4.9 branch to
+   4.9-newgfx  branch.
+
+-  Peter Wang enabled WANT_D3D by default. Only set ALLEGRO_D3D
+   on Windows.
+
+-  Trent Gamblin made al_acknowledge_resize take the display as a
+   parameter.
+
+-  Trent Gamblin fixed some warnings and made the MinGW build compilable
+   statically with gcc 4.2.1.
+
+-  Peter Wang fixed a bug in ALLEGRO_CONVERT_BGR_565_TO_ARGB_4444.
+
+-  Peter Wang renamed al_memory_management_functions() to
+   al_set_memory_management_functions() and added some extra
+   documenation for it.
+
+-  Peter Wang removed NaturalDocs markup for Allegro 4.x display
+   functions.
+
+-  Peter Wang made OpenGL libraries link if building with X11 support.
+
+-  Peter Wang fixed a signedness warning.
+
+-  Peter Wang made al_destroy_bitmap return immediately when passed a
+   null pointer instead of segfaulting.
+
+-  Elias Pschernig made some cosmetic improvements to the code.
+
+-  Elias Pschernig removed a bad optimization.
+
+-  Elias Pschernig removed > GLX 1.1 specific code.
+
+-  Trent Gamblin fixed several of the floating point unmapping functions
+   that were doing integer division.
+
+-  Elias Pschernig implemented blending in the GLX driver.
+
+-  Elias Pschernig fixed GLX rotation to use radians and allow negative
+   angles.
+
+-  Elias Pschernig implemented rotated blitting in the GLX driver.
+
+-  Jon Rafkind made scons install addons/font.
+
+-  Jon Rafkind added a scons file for addons.
+
+-  Jon Rafkind used target_scanner to find makedoc instead of using
+   Depends.
+
+-  Jon Rafkind forced makedoc to be a dependancy of the docs.
+
+-  Trent Gamblin made 60hz the default refresh rate of the D3D driver.
+
+-  Trent Gamblin changed al_create_mouse_cursor to accept
+   ALLEGRO_BITMAP structures.
+
+-  Trent Gamblin renamed __al_unmap_rgba to al_unmap_rgba_ex in the
+   glx driver.
+
+-  Trent Gamblin made al_(map|unmap)_rgb(a)_*_ex public.
+
+-  Trent Gamblin made D3D windows show the resize cursor when resizing
+   windows.
+
+-  Jon Rafkind added allegro includes for asmdef.
+
+-  Jon Rafkind erased older build demo target.
+
+-  Jon Rafkind added the demo to the scons build.
+
+-  Jon Rafkind made it so assembly files can be built statically.
+
+-  Jon Rafkind made scons always build asmdef.
+
+-  Trent Gamblin made al_acknowledge_resize and al_resize_display
+   adjust clipping in the D3D driver. Mad eal_set_current_display
+
+-  Trent Gamblin used higher compatibility flags to Direct3DCreate9,
+   made D3D driver die more gracefully on unsupported configurations,
+   removed flags from draw_line, and did more error checking.
+
+-  Trent Gamblin turned al_init macros into an inline function.
+
+-  Trent Gamblin commented out a TRACE line that was causing the entire
+   log to be overwritten.
+
+-  Peter Wang fixed an incorrect call to _al_vector_find_and_delete.
+
+-  Peter Wang made various formatting fixes.
+
+-  Peter Wang converted CR/LF line endings to LF.
+
+-  Trent Gamblin added NaturalDocs for the graphics api.
+
+-  Trent Gamblin fixed an instance where a variable could have been
+   used uninitialized.
+
+-  Trent Gamblin fixed texture coordinates in the D3D driver.
+
+-  Trent Gamblin fixed formatting and an improper assertion.
+
+-  Trent Gamblin removed a redundant call to al_set_target_bitmap.
+
+-  Trent Gamblin fixed a bug in the DX joystick code that caused it to
+   assert when it shouldn't.
+
+-  Trent Gamblin made al_create_display call al_flip_display
+   so the window is cleared.
+
+-  Trent Gamblin made the D3D driver work where render-to-texture
+   is not supported.
+
+-  Trent Gamblin removed masking support completely.
+
+-  Elias Pschernig got the font example working with the GLX driver.
+
+-  Elias Pschernig renamed the font addon in the scons build.
+
+-  Jon Rafkind made scons build modules in a separate directory.
+
+-  Jon Rafkind bumped the version to match cmake.
+
+-  Jon Rafkind fixed esd to be like the other unix modules.
+
+-  Trent Gamblin changed color map and unmap functions to use the target
+   bitmap.
+
+-  Trent Gamblin added the font example to the cmake build process.
+
+-  Elias Pschernig added the font example to the scons build process.
+
+-  Elias Pschernig removed special handling of "src" dir, and made various
+   cosmetic changes.
+
+-  Trent Gamblin made cmake install to MINGDIR.
+
+-  Trent Gamblin added a better font and example for the bitmap
+   font addon.
+
+-  Trent Gamblin removed unix header from install on other platforms.
+
+-  Trent Gamblin added a bitmap font addon.
+
+-  Trent Gamblin fixed a locking bug in the D3D driver.
+
+-  Elias Pschernig removed masking from the GLX driver.
+
+-  Trent Gamblin implemented blending for memory bitmaps
+   (very slow unless the blend mode is ALLEGRO_ONE,ALLEGRO_ZERO with a
+   pure white blend color).
+
+-  Trent Gamblin implemented blending for the D3D driver.
+
+-  Trent Gamblin added
+   ALLEGRO_PIXEL_FORMAT_ANY_(15|16|24|32)_(WITH_ALPHA|NO_ALPHA)
+   formats, used ALLEGRO_PIXEL_FORMAT_ANY_32_NO_ALPHA in locking
+   examples, and ixed some formatting.
+
+-  Trent Gamblin added al_clone_bitmap which makes an exact copy of the
+   color-data of a bitmap.
+
+-  Trent Gamblin added a ALLEGRO_KEEP_BITMAP_FORMAT flag that forces
+   Allegro to use the same format as the disk file when loading bitmaps.
+
+-  Elias Pschernig implemented video bitmap masking for the GLX driver (by
+   converting to alpha textures and drawing with alpha blending).
+
+-  Elias Pschernig fixed clipping in the GLX driver.
+
+-  Trent Gamblin removed ALLEGRO_MASK_SOURCE flag in favor of
+   ALLEGRO_USE_MASKING. Mask color is now a bitmap property. Removed
+   ALLEGRO_NO_ALPHA flag and changed the meaning of
+   ALLEGRO_USE_ALPHA to mean do alpha blending or not. Added
+   al_set/get_bitmap_mask_color and removed al_set/get_mask_color.
+   New masking example added (exnew_masking).
+
+-  Trent Gamblin added proper clipping to al_put_pixel.
+
+-  Trent Gamblin renamed graphics stuff from AL_ to ALLEGRO_ and removed
+   patterned drawing.
+
+-  Elias Pschernig implemented clipping for the X11 GLX driver (only for
+   screen so far).
+
+-  Trent Gamblin removed unused set_bitmap_clip entry from the bitmap vtable.
+
+-  Trent Gamblin made clipping always enabled and made the clipping functions
+   operate on the current target bitamp.
+
+-  Trent Gamblin removed src/compat/coblit.c.
+
+-  Trent Gamblin renamed scroll_display to scroll_screen in display.c
+
+-  Trent Gamblin Removed commented code from src/display.c. Removed
+   include/allegro/display.h and src/compat/cogfx.c
+
+-  Elias Pschernig renamed XDUMMY driver to XGLX.
+
+-  Elias Pschernig made some cosmetic changes.
+
+-  Elias Pschernig made exblend work over the compatibility screen.
+
+-  Elias Pschernig implemented upload_compat_screen method in the GLX
+   driver.
+
+-  Elias Pschernig optimized al_lock_bitmap/al_unlock_bitmap slightly.
+
+-  Elias Pschernig added a flags parameter to the drawing primitives methods.
+
+-  Trent Gamblin added flags to primitives in display vtable and renamed
+   draw_filled_rectangle vtable entry to draw_rectangle.
+
+-  Elias Pschernig implemented AL_SINGLEBUFFER flag and fixed  bug with
+   AL_FULLSCREEN in the GLX driver.
+
+-  Trent Gamblin added a mode parameter to al_set_drawing_pattern.
+
+-  Trent Gamblin added AL_OUTLINED flag that is the default for primitives.
+
+-  Trent Gamblin added al_set_drawing_pattern and al_get_drawing_pattern,
+   added a flags parameters to all the primitive drawing functions that
+   can be: AL_FILLED, AL_PATTERNED, and added hline and vline functions
+   for memory bitmaps.
+
+-  Trent Gamblin ifdefed d3d stuff in win/wnewsys.c.
+
+-  Trent Gamblin removed d3dx9 library from CMakeLists.txt.
+
+-  Trent Gamblin ifdefed Direct3D stuff in display.c.
+
+-  Jon Rafkind made scons read win32 files from cmake file list.
+
+-  Trent Gamblin added al_wait_for_vsync and made it work with the D3D driver.
+
+-  Elias Pschernig implemented immediate-resize for al_resize_display, and
+   implemented fullscreen resizing.
+
+-  Trent Gamblin added al_enable_bitmap_clip and al_is_bitmap_clip_enabled,
+   added al_create_sub_bitmap, and made it work with D3D and memory
+   bitmaps.
+
+-  Elias Pschernig improved fullscreen handling.
+
+-  Elias Pschernig added shutdown_system vtable entry to the system driver,
+   and automatically call it on program exit. This allows unsetting
+   fullscreen modes in the X11 driver.
+
+-  Trent Gamblin added al_set_bitmap_clip and al_get_bitmap_clip, and made
+   them work with D3D and memory bitmaps.
+
+-  Elias Pschernig added XF86Vidmode fullscreen modes.
+
+-  Elias Pschernig added xdummy files to cmake files list.
+
+-  Elias Pschernig made al_resize_display work on non-resizable windows.
+
+-  Elias Pschernig fixed opengl setup being issued in wrong thread.
+
+-  Elias Pschernig moved src/misc/colconv.c from windows sources to general
+   sources.
+
+-  Elias Pschernig uncommented accidentally commented out line.
+
+-  Elias Pschernig made scons read the list of source files from
+   cmake/FileList.cmake, so there's only one place to add new files.
+
+-  Trent Gamblin made _al_get_pixel_value faster.
+
+-  Trent Gamblin made al_unmap_rgba_i use a table instead of relying on
+   al_unmap_rgba_f.
+
+-  Peter Wang changed #includes to use file names from the root of the include
+   hierarchy, i.e. #include "allegro/internal/foo.h" instead of #include
+   "internal/foo.h" and likewise for allegro/platform/foo.h.
+
+-  Peter Wang removed some stray CR characters.
+
+-  Trent Gamblin added al_get_bitmap_width, al_get_bitmap_height,
+   al_get_bitmap_format, and al_get_bitmap_flags.
+
+-  Trent Gamblin made al_draw_rotated_(scaled_)bitmap only lock the region of
+   the destination is needs to for memory bitmaps.
+
+-  Trent Gamblin made al_draw_scaled_bitmap use the AL_FLIP_* flags.
+
+-  Trent Gamblin added an example of resizing a fullscreen display.
+
+-  Elias Pschernig updated xdummy driver and implemented al_resize_display
+   for it.
+
+-  Elias Pschernig added another testcase.
+
+-  Trent Gamblin added al_get_display_width and al_get_display_height, made
+   al_get_display_* work on the current display, and renamed
+   al_notify_resize to al_acknowledge_resize.
+
+-  Trent Gamblin uncommented everything in cogfx.c (removing the display
+   parameter).
+
+-  Trent Gamblin made exnew_lockscreen use pitch.
+
+-  Trent Gamblin fixed scaled conversion macros (4444, 555, 565), added
+   XRGB_8888 pixel format, made windowed mode default, moved
+   get_num_display_modes and get_display_mode into the system
+   vtable.
+
+-  Trent Gamblin made exnew_lockbitmap use pitch.
+
+-  Trent Gamblin fixed D3D unlocking bug, and used desktop format in windowed
+   mode if not specified.
+
+-  Elias Pschernig fixed a bug where events reported the wrong source display
+   under X11.
+
+-  Elias Pschernig added three simple test cases.
+
+-  Elias Pschernig fixed al_lock_bitmap and al_unlock_bitmap implementation
+   in the xdummy driver (for now it works in a slow way).
+
+-  Trent Gamblin made al_notify_resize return success/failure and added
+   al_resize_display to resize the display from code.
+
+-  Elias Pschernig started implementing lock_region and unlock_region for the
+   xdummy driver.
+
+-  Elias Pschernig split xdraw.c out of xdisplay.c, 
+   used _AL_THREAD instead of pthreads in the xdummy driver,
+   added a lock to the xdummy driver, in order to implement
+   al_destroy_display, used the correct format.
+
+-  Elias Pschernig fixed a comment typo.
+
+-  Elias Pschernig fixed a typo in AL_CONVERT_PALETTE_8_TO_ABGR_8888.
+
+-  Trent Gamblin improved D3D line drawing, added al_get_num_display_modes and
+   al_get_display_mode, and cleaned up & organized some code.
+
+-  Trent Gamblin removed _al_win_delete_from_vector.
+
+-  Trent Gamblin added draw_memory_bitmap_region vtable hook to AL_DISPLAY.
+
+-  Elias Pschernig implemented enough of the xdummy driver to run exnewap
+   (doesn't display correctly yet though).
+
+-  Elias Pschernig updated scons build files.
+
+-  Elias Pschernig Removed windows specific includes from exnewapi.c.
+
+-  Elias Pschernig added missing al_convert_mask_to_alpha prototype.
+
+-  Peter Wang fixed src/tls.c to compile under Linux (not tested).
+
+-  Trent Gamblin put TLS support back in for MSVC and UNIX.
+
+-  Trent Gamblin cleaned up some code, added headers to new source files, 
+   grouped thread  local variables into one structure (UNIX support is
+   broken for now), and made mask color thread local.
+
+-  Trent Gamblin added clear, filled rectangle, and line for memory bitmaps.
+
+-  Trent Gamblin made it so the system driver is no longer hard coded,
+   added switch_out method to display vtable, made the D3D window and system
+   driver code generic.
+
+-  Trent Gamblin merged 4.9-elias and 4.9-trentg into 4.9-newgfx.
+
+-  Elias Pschernig adjusted prototype of _al_init to implementation.
+
+-  Elias Pschernig fixed a bogus cast.
+
+-  Elias Pschernig fixed typo in al_get_new_diplay_format for non-mingw.
+
+-  Trent Gamblin made display and bitmap parameters local to the calling
+   thread.
+
+-  Trent Gamblin added al_draw_rotated_bitmap and
+   al_draw_rotated_scaled_bitmap for memory bitmaps using Allegro's
+   software rotation code as a base.
+
+-  Trent Gamblin ported a stretch blit fix from 4.2, made al_init
+   call allegro_init, made al_draw_bitmap(_region) much faster on
+   memory bitmaps, and added al_draw_scaled_bitmap for memory bitmaps.
+
+-  Trent Gamblin renamed AL_LOCKED_RECTANGLE to AL_LOCKED_REGION, and 
+   started on memory bitmaps (al_draw_bitmap and al_draw_bitmap region work).
+
+-  Trent Gamblin made seperate functions for getting/setting display/bitmap
+   parameters, made backbuffer-as-source bitmap work in D3D, and changed
+   parameter ordering of some functions.
+
+-  Trent Gamblin added al_is_compatible_bitmap removed dependancy on
+   Allegro's 3D math functions from the D3D driver.
+
+-  Trent Gamblin added al_convert_mask_to_alpha, made put/get_pixel
+   faster if the bitmap is locked ahead of time, and brought back
+   AL_MASK_SOURCE.
+
+-  Trent Gamblin committed various bugfixes, implemented the RGB
+   mapping/unmapping functions from Bob's API.
+
+-  Trent Gamblin removed the D3DX library dependancy.
+
+-  Trent Gamblin committed various bugfixes and got all of the examples
+   working with the D3D driver.
+
+-  Trent Gamblin fixed some of the compatibility conversions.
+
+-  Trent Gamblin changed the examples back to autodetecting the graphics
+   driver.
+
+-  Trent Gamblin made fullscreen mode work with the D3D driver, and
+   non-resizable windows.
+
+-  Trent Gamblin finished bitmap conversion functions, improved locking,
+   implemented get/put pixel, and made some speed improvements.
+
+-  Trent Gamblin added a bitmap conversion function.
+
+-  Trent Gamblin got the demo game running in D3D.
+
+-  Trent Gamblin removed an unnecessary bitmap copy.
+
+-  Trent Gamblin added a skeleton D3D driver.
+
+-  Peter Wang fixed the generation of allegro-config under Mac OS.
+
+-  Michael Jensen fixed a mistake in the documenation for
+   is_compatible_font.
+
+-  Peter Wang fixed wrong variable in example code for load_font();
+
+-  Trent Gamblin fixed some problems with the cmake build on Windows.
+
+-  Peter Wang removed the second parameter in a call to
+   _al_event_source_needs_to_generate_event() which was missed
+   earlier.
+
+-  Peter Wang exposed some internal documentation on destructors,
+   events and event sources to NaturalDocs.
+
+-  Peter Wang changed al_wait_for_event() so that a timeout value of "0"
+   means to not wait at all. To wait an indefinite amount of time the
+   caller should pass the AL_WAIT_FOREVER constant.
+
+-  Peter Wang removed the declarations of al_event_source_set_mask
+   and al_event_source_mask which were missed in the previous change.
+
+-  Peter Wang removed event masking abilities, that is, for
+   the user to prevent an event source from generating particular
+   event types. This was implemented using bitfields which limited the
+   number of event types to 32. Although the limit could be raised
+   event masking was probably not very useful anyway. In all, the
+   functions removed are: al_event_source_mask, al_event_source_set_mask,
+   al_wait_for_specific_event. The al_wait_for_specific_event() API also
+   required event types to be bitfields.
+
+-  Peter Wang fixed some spelling mistakes in the examples.
+
+-  Peter Wang bumped the version to 4.9.2.
+
+-  Peter Wang moved allegro/branches/4.3 to allegro/branches/4.9.
+
+-  Ryan Patterson clarified the documentation of stop_sample().
+
+-  Peter Wang and Trent Gamblin fixed some issues with the CMake build.
+   The allegro-config script was not generated properly and
+   liballeg_unsharable wasn't being installed.
+
+-  Matthew Leverton changed an instance of long long to LONG_LONG
+   and an LL suffix into a (LONG_LONG) cast, both for MSVC 6.
+
+-  Matthew Leverton submitted a fix for MSVC 6 regarding MSVC's
+   lack of a \_\_FUNCTION\_\_ macro.
+
+-  orz, Matthew Leverton, and Peter Wang made the ALLEGRO_USE_C=1
+   option to work under MinGW and MSVC.
+
+-  Anthony Cassidy fixed a typo.
+
+-  Peter Wang removed the 'msvc' target from the fix.sh help message as it
+   should not be used by users any more. Added a comment that it is used by
+   zipup.sh.
+
+-  Anthony 'Timorg' Cassidy made d_menu_proc fill up its assigned
+   area with the gui_bg_color.
+
+
+
+Changes from 4.9.0 to 4.9.1 (March 2007)
+========================================
+
+*Note that 4.9.1 was called 4.3.1 when it was originally released.*
+
+-  Added a new mouse and cursor API. The new functions are:
+
+      al_install_mouse, al_uninstall_mouse, al_get_mouse,
+      al_get_mouse_num_buttons, al_get_mouse_num_axes, al_set_mouse_xy,
+      al_set_mouse_z, al_set_mouse_w, al_set_mouse_axis, al_set_mouse_range,
+      al_get_mouse_state, al_mouse_button_down, al_mouse_state_axis
+
+      al_create_mouse_cursor, al_destroy_mouse_cursor, al_set_mouse_cursor,
+      al_set_system_mouse_cursor, al_show_mouse_cursor, al_hide_mouse_cursor
+
+-  Added documentation for some parts of the 4.9 API using the NaturalDocs
+   generation system. The documentation is nowhere near as good as a proper
+   manual, but it's still better than nothing.
+
+-  Added a commented example demonstating the new API (exnew_events.c).
+
+-  Added CMake and SCons build systems. These are mainly for use by Allegro
+   developers at present.
+
+-  Various bug fixes and minor changes.
+
+
+
+Changes from 4.2 series to 4.9.0 (July 2006)
+============================================
+
+*Note that 4.9.0 was called 4.3.0 when it was originally released.*
+
+Basically we're just wrapping up what we have in version control up to
+now.  See the commit logs if you want details.
+
+This release introduces a few new subsystems.  We have an event system, a
+new keyboard API, a new joystick API, a new timer API, and the start of a
+new graphics API.  All of these are subject to change, as is usual for
+a WIP.
+
+We are maintaining a certain level of source compatibility with the 4.2
+API.  If it's easy to maintain compatibility then we do it, otherwise
+compatibility is dropped.  Obscure features are more likely to be dropped.
+
+This release has had minimal testing on Linux/x86, Windows/x86 (MinGW) and
+Windows/x86 (MSVC).  It seems to work on some Linux/x86-64 machines also.
+Other ports are broken or untested.
+
+The new functions are as follows (in no particular order).  No real
+documentation exists at the moment but interesting header files
+are: altime.h, display.h, draw.h, events.h, joystick.h, keyboard.h,
+timer.h.
+
+-  al_current_time al_rest
+
+-  al_create_video_bitmap al_create_system_bitmap al_scroll_display
+   al_request_scroll al_poll_scroll al_show_video_bitmap
+   al_request_video_bitmap al_enable_triple_buffer al_create_display
+   al_set_update_method al_destroy_display al_flip_display al_get_buffer
+   al_get_update_method al_enable_vsync al_disable_vsync al_toggle_vsync
+   al_vsync_is_enabled al_blit al_blit_region al_blit_scaled
+
+-  al_event_source_set_mask al_event_source_mask
+
+-  al_create_event_queue al_destroy_event_queue al_register_event_source
+   al_unregister_event_source al_event_queue_is_empty al_get_next_event
+   al_peek_next_event al_drop_next_event al_flush_event_queue
+   al_wait_for_event al_wait_for_specific_event
+
+-  al_install_joystick al_uninstall_joystick al_num_joysticks
+   al_get_joystick al_release_joystick al_joystick_name
+   al_joystick_num_sticks al_joystick_stick_flags al_joystick_stick_name
+   al_joystick_num_axes al_joystick_axis_name al_joystick_button_name
+   al_get_joystick_state
+
+-  al_install_keyboard al_uninstall_keyboard al_get_keyboard
+   al_set_keyboard_leds al_keycode_to_name al_get_keyboard_state al_key_down
+
+-  al_install_timer al_uninstall_timer al_start_timer al_stop_timer
+   al_timer_is_started al_timer_get_speed al_timer_set_speed
+   al_timer_get_count al_timer_set_count
+
+
+
+<!-- vi: set sts=3 sw=3 et: -->

@@ -1,0 +1,196 @@
+# Getting started guide
+
+## Introduction
+
+Welcome to Allegro 5!
+
+This short guide should point you at the parts of the API that you'll
+want to know about first.  It's not a tutorial, as there isn't much
+discussion, only links into the manual.  The rest you'll have to discover for
+yourself.  Read the examples, and ask questions at [Allegro.cc].
+
+There is an unofficial tutorial at [the wiki]. Be aware that, being on
+the wiki, it may be a little out of date, but the changes should be
+minor. Hopefully more will sprout when things stabilise, as they did for
+earlier versions of Allegro.
+
+## Structure of the library and its addons
+
+Allegro 5.0 is divided into a core library and multiple addons.  The addons
+are bundled together and built at the same time as the core, but they are
+distinct and kept in separate libraries.  The core doesn't depend on anything
+in the addons, but addons may depend on the core and other addons and
+additional third party libraries.
+
+Here are the addons and their dependencies:
+
+    allegro_main -> allegro
+
+    allegro_image -> allegro
+    allegro_primitives -> allegro
+    allegro_color -> allegro
+
+    allegro_font -> allegro
+    allegro_ttf -> allegro_font -> allegro
+
+    allegro_audio -> allegro
+    allegro_acodec -> allegro_audio -> allegro
+    allegro_video -> allegro_audio -> allegro
+
+    allegro_memfile -> allegro
+    allegro_physfs -> allegro
+
+    allegro_native_dialog -> allegro
+
+The header file for the core library is `allegro5/allegro.h`.  The header
+files for the addons are named `allegro5/allegro_image.h`, `allegro5/allegro_font.h`,
+etc. The allegro_main addon does not have a header file.
+
+## The main function
+
+For the purposes of cross-platform compatibility Allegro puts some requirements
+on your main function. First, you must include the core header
+(`allegro5/allegro.h`) in the same file as your main function. Second, if your
+main function is inside a C++ file, then it must have this signature:
+`int main(int argc, char **argv)`. Third, if you're using C/C++ then you need
+to link with the allegro_main addon when building your program.
+
+## Initialisation
+
+Before using Allegro you must call [al_init].  Some addons have their own
+initialisation, e.g. [al_init_image_addon], [al_init_font_addon],
+[al_init_ttf_addon].
+
+To receive input, you need to initialise some subsystems like
+[al_install_keyboard], [al_install_mouse], [al_install_joystick].
+
+## Opening a window
+
+[al_create_display] will open a window and return an [ALLEGRO_DISPLAY].
+
+To clear the display, call [al_clear_to_color].  Use [al_map_rgba] or
+[al_map_rgba_f] to obtain an [ALLEGRO_COLOR] parameter.
+
+Drawing operations are performed on a backbuffer.  To make the operations
+visible, call [al_flip_display].
+
+## Display an image
+
+To load an image from disk, you need to have initialised the image I/O
+addon with [al_init_image_addon].  Then use [al_load_bitmap], which returns an
+[ALLEGRO_BITMAP].
+
+Use [al_draw_bitmap], [al_draw_scaled_bitmap] or
+[al_draw_scaled_rotated_bitmap] to draw the image to the backbuffer.
+Remember to call [al_flip_display].
+
+## Changing the drawing target
+
+Notice that [al_clear_to_color] and [al_draw_bitmap] didn't take destination
+parameters: the destination is implicit.  Allegro remembers the current
+"target bitmap" for the current thread.  To change the target bitmap, call
+[al_set_target_bitmap].
+
+The backbuffer of the display is also a bitmap.  You can get it with
+[al_get_backbuffer] and then restore it as the target bitmap.
+
+Other bitmaps can be created with [al_create_bitmap], with options which can
+be adjusted with [al_set_new_bitmap_flags] and [al_set_new_bitmap_format].
+
+## Event queues and input
+
+Input comes from multiple sources: keyboard, mouse, joystick, timers, etc.
+Event queues aggregate events from all these sources, then you can query
+the queue for events.
+
+Create an event queue with [al_create_event_queue], then tell input sources
+to place new events into that queue using [al_register_event_source].  The
+usual input event sources can be retrieved with [al_get_keyboard_event_source],
+[al_get_mouse_event_source] and [al_get_joystick_event_source].
+
+Events can be retrieved with [al_wait_for_event] or [al_get_next_event].
+Check the event type and other fields of [ALLEGRO_EVENT] to react to the
+input.
+
+Displays are also event sources, which emit events when they are resized.
+You'll need to set the ALLEGRO_RESIZABLE flag with [al_set_new_display_flags]
+before creating the display, then register the display with an event queue.
+When you get a resize event, call [al_acknowledge_resize].
+
+Timers are event sources which "tick" periodically, causing an event to be
+inserted into the queues that the timer is registered with.  Create some with
+[al_create_timer].
+
+[al_get_time] and [al_rest] are more direct ways to deal with time.
+
+## Displaying some text
+
+To display some text, initialise the image and font addons with
+[al_init_image_addon] and [al_init_font_addon], then load a bitmap font with
+[al_load_font].  Use [al_draw_text] or [al_draw_textf].
+
+For TrueType fonts, you'll need to initialise the TTF font addon with
+[al_init_ttf_addon] and load a TTF font with [al_load_ttf_font].
+
+## Drawing primitives
+
+The primitives addon provides some handy routines to draw lines
+([al_draw_line]), rectangles ([al_draw_rectangle]), circles
+([al_draw_circle]), etc.
+
+## Blending
+
+To draw translucent or tinted images or primitives, change the blender state
+with [al_set_blender].
+
+As with [al_set_target_bitmap], this changes Allegro's internal state (for
+the current thread).  Often you'll want to save some part of the state and
+restore it later.  The functions [al_store_state] and [al_restore_state]
+provide a convenient way to do that.
+
+## Sound
+
+Use [al_install_audio] to initialize sound. To load any sample formats, you
+will need to initialise the acodec addon with [al_init_acodec_addon].
+
+After that, you can simply use [al_reserve_samples] and pass the number of
+sound effects typically playing at the same time. Then load your sound effects
+with [al_load_sample] and play them with [al_play_sample]. To stream large
+pieces of music from disk, you can use [al_load_audio_stream] so the whole piece
+will not have to be pre-loaded into memory.
+
+If the above sounds too simple and you can't help but think about clipping and
+latency issues, don't worry. Allegro gives you full control over how much or
+little you want its sound system to do. The [al_reserve_samples] function
+mentioned above only sets up a default mixer and a number of sample instances
+but you don't need to use it.
+
+Instead, to get a "direct connection" to the sound system you would use an
+[ALLEGRO_VOICE] (but depending on the platform only one such voice is guaranteed
+to be available and it might require a specific format of audio data). Therefore
+all sound can be first routed through an [ALLEGRO_MIXER] which is connected to
+such a voice (or another mixer) and will mix together all sample data fed to it.
+
+You can then directly stream real-time sample data to a mixer or a voice using
+an [ALLEGRO_AUDIO_STREAM] or play complete sounds using an [ALLEGRO_SAMPLE_INSTANCE].
+The latter simply points to an [ALLEGRO_SAMPLE] and will stream it for you.
+
+## Unstable API
+
+Some of Allegro's API is marked as unstable, which means that in future versions
+of Allegro it may change or even be removed entirely! If you want to experiment
+with the unstable API, define `ALLEGRO_UNSTABLE` macro before including Allegro's
+headers.
+
+Note that when you define that macro, the version check performed by
+[al_install_system] and [al_init] becomes more scrict. See documentation of
+those functions for details.
+
+## Not the end
+
+There's a heap of stuff we haven't even mentioned yet.
+
+Enjoy!
+
+[Allegro.cc]: http://www.allegro.cc/forums/
+[the wiki]: http://wiki.allegro.cc/

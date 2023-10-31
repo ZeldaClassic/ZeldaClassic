@@ -1,0 +1,232 @@
+# Configuration files
+
+These functions are declared in the main Allegro header file:
+
+~~~~c
+ #include <allegro5/allegro.h>
+~~~~
+
+Allegro supports reading and writing of configuration files with a
+simple, INI file-like format. 
+
+A configuration file consists of key-value pairs separated by newlines. 
+Keys are separated from values by an equals sign (`=`). All whitespace 
+before the key, after the value and immediately adjacent to the equals 
+sign is ignored. Keys and values may have whitespace characters within 
+them. Keys do not need to be unique, but all but the last one are ignored.
+
+The hash (`#`) character is used a comment when it is the first 
+non-whitespace character on the line. All characters following that
+character are ignored to the end of the line. The hash character anywhere
+else on the line has no special significance.
+
+Key-value pairs can be optionally grouped into sections, which are
+declared by surrounding a section name with square brackets (`[` and `]`) on
+a single line. Whitespace before the opening bracket is ignored. All
+characters after the trailing bracket are also ignored.
+
+All key-value pairs that follow a section declaration belong to the last
+declared section. Key-value pairs that don't follow any section 
+declarations belong to the global section. Sections do not nest.
+
+Here is an example configuration file:
+
+~~~ini
+## Monster description
+monster name = Allegro Developer
+
+[weapon 0]
+damage = 443
+
+[weapon 1]
+damage = 503
+~~~~
+
+It can then be accessed like this (make sure to check for errors in
+an actual program):
+
+~~~~c
+ALLEGRO_CONFIG* cfg = al_load_config_file("test.cfg");
+printf("%s\n", al_get_config_value(cfg, "", "monster name")); /* Prints: Allegro Developer */
+printf("%s\n", al_get_config_value(cfg, "weapon 0", "damage")); /* Prints: 443 */
+printf("%s\n", al_get_config_value(cfg, "weapon 1", "damage")); /* Prints: 503 */
+al_destroy_config(cfg);
+~~~~
+
+## API: ALLEGRO_CONFIG
+
+An abstract configuration structure.
+
+## API: ALLEGRO_CONFIG_SECTION
+
+An opaque structure used for iterating across sections in a configuration
+structure.
+
+See also: [al_get_first_config_section], [al_get_next_config_section]
+
+## API: ALLEGRO_CONFIG_ENTRY
+
+An opaque structure used for iterating across entries in a configuration
+section.
+
+See also: [al_get_first_config_entry], [al_get_next_config_entry]
+
+## API: al_create_config
+
+Create an empty configuration structure.
+
+See also: [al_load_config_file], [al_destroy_config]
+
+## API: al_destroy_config
+
+Free the resources used by a configuration structure.
+Does nothing if passed NULL.
+
+See also: [al_create_config], [al_load_config_file]
+
+## API: al_load_config_file
+
+Read a configuration file from disk.
+Returns NULL on error.  The configuration structure should be destroyed
+with [al_destroy_config].
+
+See also: [al_load_config_file_f], [al_save_config_file]
+
+## API: al_load_config_file_f
+
+Read a configuration file from an already open file.
+
+Returns NULL on error.  The configuration structure should be destroyed
+with [al_destroy_config].  The file remains open afterwards.
+
+See also: [al_load_config_file]
+
+## API: al_save_config_file
+
+Write out a configuration file to disk.
+Returns true on success, false on error.
+
+See also: [al_save_config_file_f], [al_load_config_file]
+
+## API: al_save_config_file_f
+
+Write out a configuration file to an already open file.
+
+Returns true on success, false on error.
+The file remains open afterwards.
+
+See also: [al_save_config_file]
+
+## API: al_add_config_section
+
+Add a section to a configuration structure with the given name.
+If the section already exists then nothing happens.
+
+## API: al_remove_config_section
+
+Remove a section of a configuration.
+
+Returns true if the section was removed, or false if the section did not
+exist.
+
+Since: 5.1.5
+
+## API: al_add_config_comment
+
+Add a comment in a section of a configuration.  If the section doesn't yet
+exist, it will be created.
+The section can be NULL or "" for the global section.
+
+The comment may or may not begin with a hash character.
+Any newlines in the comment string will be replaced by space characters.
+
+See also: [al_add_config_section]
+
+## API: al_get_config_value
+
+Gets a pointer to an internal character buffer that will only remain valid
+as long as the ALLEGRO_CONFIG structure is not destroyed. Copy the value
+if you need a copy.
+The section can be NULL or "" for the global section.
+Returns NULL if the section or key do not exist.
+
+See also: [al_set_config_value]
+
+## API: al_set_config_value
+
+Set a value in a section of a configuration.  If the section doesn't yet
+exist, it will be created.  If a value already existed for the given key,
+it will be overwritten.
+The section can be NULL or "" for the global section.
+
+For consistency with the on-disk format of config files, any leading and
+trailing whitespace will be stripped from the value.  If you have significant
+whitespace you wish to preserve, you should add your own quote characters
+and remove them when reading the values back in.
+
+See also: [al_get_config_value]
+
+## API: al_remove_config_key
+
+Remove a key and its associated value in a section of a configuration.
+
+Returns true if the entry was removed, or false if the entry did not exist.
+
+Since: 5.1.5
+
+## API: al_get_first_config_section
+
+Returns the name of the first section in the given config file. Usually
+this will return an empty string for the global section, even it contains no
+values. The `iterator` parameter will receive an opaque iterator which is used
+by [al_get_next_config_section] to iterate over the remaining sections.
+
+The returned string and the iterator are only valid as long as no
+change is made to the passed ALLEGRO_CONFIG.
+
+See also: [al_get_next_config_section]
+
+## API: al_get_next_config_section
+
+Returns the name of the next section in the given config file or NULL if
+there are no more sections. The `iterator` must have been obtained with 
+[al_get_first_config_section] first.
+
+See also: [al_get_first_config_section]
+
+## API: al_get_first_config_entry
+
+Returns the name of the first key in the given section in the given
+config or NULL if the section is empty. The `iterator` works like the one for
+[al_get_first_config_section].
+
+The returned string and the iterator are only valid as long as no
+change is made to the passed [ALLEGRO_CONFIG].
+
+See also: [al_get_next_config_entry]
+
+## API: al_get_next_config_entry
+
+Returns the next key for the iterator obtained by
+[al_get_first_config_entry]. The `iterator` works like the one for
+[al_get_next_config_section].
+
+## API: al_merge_config
+
+Merge two configuration structures, and return the result as a new
+configuration.  Values in configuration 'cfg2' override those in 'cfg1'.
+Neither of the input configuration structures are
+modified.
+Comments from 'cfg2' are not retained.
+
+See also: [al_merge_config_into]
+
+## API: al_merge_config_into
+
+Merge one configuration structure into another.
+Values in configuration 'add' override those in 'master'.
+'master' is modified.
+Comments from 'add' are not retained.
+
+See also: [al_merge_config]
+

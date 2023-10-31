@@ -1,0 +1,548 @@
+# Color addon
+
+These functions are declared in the following header file.
+Link with allegro_color.
+
+~~~~c
+ #include <allegro5/allegro_color.h>
+~~~~
+
+When converting between certain color spaces, RGB colors are implicitly
+assumed to mean sRGB.
+
+sRGB is a standard which maps RGB colors to absolute colors. sRGB is
+very close to RGB values on a monitor which has a gamma value of 2.2.
+For example when the red component of a color is 0.5, the monitor will
+use a brightness of pow(0.5, 2.2) or about 22% - and not 50%. The reason
+is that human eyes can distinguish better between dark colors than
+between bright colors, and so if a pixel of the monitor is lit up to
+22% of its maximum power it already will appear at half brightness to a
+human eye.
+
+sRGB improves upon simple gamma correction by taking differences
+between the three color channels into account as well. In general, most
+monitors nowadays try to be close to the sRGB specification. And so if
+in an Allegro game you display something with color
+
+al_map_rgb_f(0.5, 0.5, 0,5)
+
+then it will appear at about half brightness (even though the actual
+brightness output of the monitor will be less than half).
+
+
+## API: al_color_cmyk
+
+Return an [ALLEGRO_COLOR] structure from CMYK values (cyan, magenta, yellow,
+black).
+
+See also: [al_color_cmyk_to_rgb], [al_color_rgb_to_cmyk]
+
+
+## API: al_color_cmyk_to_rgb
+
+Convert CMYK values to RGB values.
+
+See also: [al_color_cmyk], [al_color_rgb_to_cmyk]
+
+
+## API: al_color_hsl
+
+Return an [ALLEGRO_COLOR] structure from HSL (hue, saturation, lightness)
+values.
+
+Parameters:
+
+* hue - Color hue angle in the range 0..360
+* saturation - Color saturation in the range 0..1
+* lightness - Color lightness in the range 0..1
+
+See also: [al_color_hsl_to_rgb], [al_color_hsv]
+
+
+## API: al_color_hsl_to_rgb
+
+Convert values in HSL color model to RGB color model.
+
+Parameters:
+
+* hue - Color hue angle in the range 0..360
+* saturation - Color saturation in the range 0..1
+* lightness - Color lightness in the range 0..1
+* red, green, blue - returned RGB values in the range 0..1
+
+See also: [al_color_rgb_to_hsl], [al_color_hsl], [al_color_hsv_to_rgb]
+
+
+## API: al_color_hsv
+
+Return an [ALLEGRO_COLOR] structure from HSV (hue, saturation, value)
+values.
+
+Parameters:
+
+* hue - Color hue angle in the range 0..360
+* saturation - Color saturation in the range 0..1
+* value - Color value in the range 0..1
+
+See also: [al_color_hsv_to_rgb], [al_color_hsl]
+
+
+## API: al_color_hsv_to_rgb
+
+Convert values in HSV color model to RGB color model.
+
+Parameters:
+
+* hue - Color hue angle in the range 0..360
+* saturation - Color saturation in the range 0..1
+* value - Color value in the range 0..1
+* red, green, blue - returned RGB values in the range 0..1
+
+See also: [al_color_rgb_to_hsv], [al_color_hsv], [al_color_hsl_to_rgb]
+
+
+## API: al_color_html
+
+Interprets an HTML-style hex number (e.g. #00faff) as a color.
+The accepted format is the same as [al_color_html_to_rgb].
+
+Returns the interpreted color, or `al_map_rgba(0, 0, 0, 0)` if the string
+could not be parsed.
+
+> *Note*: the behaviour on invalid strings is different from Allegro 5.0.x.
+
+See also: [al_color_html_to_rgb], [al_color_rgb_to_html]
+
+
+## API: al_color_html_to_rgb
+
+Interprets an HTML-style hex number (e.g. #00faff) as a color.
+The only accepted formats are "#RRGGBB" and "RRGGBB" where R, G, B are
+hexadecimal digits [0-9A-Fa-f].
+
+Returns true on success, false on failure.
+On failure all components are set to zero.
+
+> *Note*: the behaviour on invalid strings is different from Allegro 5.0.x.
+
+See also: [al_color_html], [al_color_rgb_to_html]
+
+
+## API: al_color_rgb_to_html
+
+Create an HTML-style string representation of an [ALLEGRO_COLOR],
+e.g. #00faff.
+
+Parameters:
+
+* red, green, blue - The color components in the range 0..1.
+* string - A pointer to a buffer of at least 8 bytes, into which the result
+  will be written (including the NUL terminator).
+
+Example:
+
+~~~~c
+char html[8];
+al_color_rgb_to_html(1, 0, 0, html);
+~~~~
+
+Now html will contain "#ff0000".
+
+See also: [al_color_html], [al_color_html_to_rgb]
+
+
+## API: al_color_name
+
+Return an [ALLEGRO_COLOR] with the given name.  If the color is not found then
+black is returned.
+
+See [al_color_name_to_rgb] for the list of names.
+
+
+## API: al_color_name_to_rgb
+
+Parameters:
+
+* name - The (lowercase) name of the color.
+* r, g, b - If one of the recognized color names below is passed,
+  the corresponding RGB values in the range 0..1 are written.
+
+The 148 recognized names are:
+
+> aliceblue, antiquewhite, aqua, aquamarine, azure, beige, bisque,
+black, blanchedalmond, blue, blueviolet, brown, burlywood, cadetblue,
+chartreuse, chocolate, coral, cornflowerblue, cornsilk, crimson,
+cyan, darkblue, darkcyan, darkgoldenrod, darkgray, darkgreen,
+darkkhaki, darkmagenta, darkolivegreen, darkorange, darkorchid,
+darkred, darksalmon, darkseagreen, darkslateblue, darkslategray,
+darkturquoise, darkviolet, deeppink, deepskyblue, dimgray,
+dodgerblue, firebrick, floralwhite, forestgreen, fuchsia, gainsboro,
+ghostwhite, goldenrod, gold, gray, green, greenyellow, honeydew,
+hotpink, indianred, indigo, ivory, khaki, lavenderblush, lavender,
+lawngreen, lemonchiffon, lightblue, lightcoral, lightcyan,
+lightgoldenrodyellow, lightgreen, lightgrey, lightpink,
+lightsalmon, lightseagreen, lightskyblue, lightslategray,
+lightsteelblue, lightyellow, lime, limegreen, linen, magenta, maroon,
+mediumaquamarine, mediumblue, mediumorchid, mediumpurple,
+mediumseagreen, mediumslateblue, mediumspringgreen, mediumturquoise,
+mediumvioletred, midnightblue, mintcream, mistyrose, moccasin, 
+avajowhite, navy, oldlace, olive, olivedrab, orange, orangered,
+orchid, palegoldenrod, palegreen, paleturquoise, palevioletred,
+papayawhip, peachpuff, peru, pink, plum, powderblue, purple,
+rebeccapurple, red, rosybrown, royalblue, saddlebrown, salmon,
+sandybrown, seagreen, seashell, sienna, silver, skyblue, slateblue,
+slategray, snow, springgreen, steelblue, tan, teal, thistle, tomato,
+turquoise, violet, wheat, white, whitesmoke, yellow, yellowgreen
+
+They are taken from CSS: <https://www.w3.org/TR/css-color-4/>
+
+Note that these 9 colors have two names and so there are only 139
+distinct colors: aqua = cyan, darkgray = darkgrey, darkslategray =
+darkslategrey, dimgray = dimgrey, fuchsia = purple, gray = grey,
+lightgray = lightgrey, lightslategray = lightslategrey, slategray =
+slategrey
+
+Returns:
+true if a name from the list above was passed, else false.
+
+See also: [al_color_name]
+
+
+## API: al_color_rgb_to_cmyk
+
+Each RGB color can be represented in CMYK with a K component of 0
+with the following formula:
+
+    C = 1 - R
+    M = 1 - G
+    Y = 1 - B
+    K = 0
+
+This function will instead find the representation with the maximal
+value for K and minimal color components.
+
+See also: [al_color_cmyk], [al_color_cmyk_to_rgb]
+
+
+## API: al_color_rgb_to_hsl
+
+Given an RGB triplet with components in the range 0..1, return
+the hue in degrees from 0..360 and saturation and lightness in the
+range 0..1.
+
+See also: [al_color_hsl_to_rgb], [al_color_hsl]
+
+
+## API: al_color_rgb_to_hsv
+
+Given an RGB triplet with components in the range 0..1, return
+the hue in degrees from 0..360 and saturation and value in the
+range 0..1.
+
+See also: [al_color_hsv_to_rgb], [al_color_hsv]
+
+
+## API: al_color_rgb_to_name
+
+Given an RGB triplet with components in the range 0..1, find a color
+name describing it approximately.
+
+See also: [al_color_name_to_rgb], [al_color_name]
+
+
+## API: al_color_rgb_to_xyz
+
+Convert RGB values to XYZ color space.
+
+Since: 5.2.3
+
+See also: [al_color_xyz], [al_color_xyz_to_rgb]
+
+
+## API: al_color_xyz
+
+Return an [ALLEGRO_COLOR] structure from XYZ values. The CIE 1931 XYZ
+color space consists of three components in the range 0..1. The Y
+component corresponds to luminance and the X and Z components define
+the color.
+
+RGB components are always assumed to be in sRGB space.
+
+> *Note:*
+>
+> The XYZ color space can represent more colors than are
+> visible in sRGB and therefore conversion may result in RGB values
+> outside of the 0..1 range. You can check for that case with
+> [al_is_color_valid].
+
+Since: 5.2.3
+
+See also: [al_color_xyz_to_rgb], [al_color_rgb_to_xyz]
+
+
+## API: al_color_xyz_to_rgb
+
+Convert XYZ color values to RGB color space.
+
+Since: 5.2.3
+
+See also: [al_color_xyz], [al_color_rgb_to_xyz]
+
+
+## API: al_color_rgb_to_xyy
+
+Convert RGB values to xyY color space.
+
+Since: 5.2.3
+
+See also: [al_color_xyy], [al_color_xyy_to_rgb]
+
+
+## API: al_color_xyy
+
+Return an [ALLEGRO_COLOR] structure from xyY values. The Y component
+in the xyY color space is the same as the Y in XYZ.
+
+However the x and y values are computed from XYZ like this:
+
+~~~~c
+x = X / (X + Y + Z)
+y = Y / (X + Y + Z)
+~~~~
+
+Since: 5.2.3
+
+See also: [al_color_xyy_to_rgb], [al_color_rgb_to_xyy]
+
+
+## API: al_color_xyy_to_rgb
+
+Convert xyY color values to RGB color space.
+
+Since: 5.2.3
+
+See also: [al_color_xyy], [al_color_rgb_to_xyy]
+
+
+## API: al_color_rgb_to_lab
+
+Convert RGB values to L\*a\*b\* color space.
+
+Since: 5.2.3
+
+See also: [al_color_lab], [al_color_lab_to_rgb]
+
+
+## API: al_color_lab
+
+Return an [ALLEGRO_COLOR] structure from CIE L\*a\*b\* values. The L\*
+component corresponds to luminance from 0..1. The a\* and b\* components
+are in the range -1..+1.
+
+> *Note:*
+>
+> The L\*a\*b\* color space can represent more colors than are
+> visible in sRGB and therefore conversion may result in RGB values
+> outside of the 0..1 range. You can check for that case with
+> [al_is_color_valid].
+
+> *Note:*
+>
+> In some literature the range of L* is 0 to 100 and a* and b* are from
+> -100 to +100. In that case divide all components by 100 before passing
+> them to this function.
+
+Since: 5.2.3
+
+See also: [al_color_lab_to_rgb], [al_color_rgb_to_lab]
+
+
+## API: al_color_lab_to_rgb
+
+Convert CIE L\*a\*b\* color values to RGB color space.
+
+Since: 5.2.3
+
+See also: [al_color_lab], [al_color_rgb_to_lab]
+
+
+## API: al_color_rgb_to_lch
+
+Convert RGB values to CIE LCH color space. 
+
+Since: 5.2.3
+
+See also: [al_color_lch], [al_color_lch_to_rgb]
+
+
+## API: al_color_lch
+
+Return an [ALLEGRO_COLOR] structure from CIE LCH values. LCH colors are
+very similar to HSL, with the same meaning of L and H and C
+corresponding to S. However LCH is more visually uniform. Furthermore,
+this function expects the angle for H in radians and not in degree.
+
+The CIE LCH color space is a cylindrical representation of the L\*a\*b\*
+color space. The L component is the same and C and H are computed like
+this:
+
+~~~~c
+C = sqrt(a * a + b * b)
+H = atan2(b, a)
+~~~~
+
+Since: 5.2.3
+
+See also: [al_color_lch_to_rgb], [al_color_rgb_to_lch]
+
+
+## API: al_color_lch_to_rgb
+
+Convert CIE LCH color values to RGB color space.
+
+Since: 5.2.3
+
+See also: [al_color_lch], [al_color_rgb_to_lch]
+
+
+## API: al_color_distance_ciede2000
+
+This function computes the CIEDE2000 color difference between two
+RGB colors. This is a visually uniform color difference, unlike for
+example the RGB distance.
+
+When using the RGB distance (Euklidean distance between two RGB
+triplets) there can be color pairs with the same distance, where the
+colors of one pair appear to be almost the same color, while the colors
+of the other pair look quite different. This is improved by using the
+L\*a\*b\* color space which was designed with perceptual uniformity in
+mind. However it still is not completely uniform. The CIEDE2000
+formula contains some additional transformations to fix that.
+
+The returned color distance is roughly in the range 0 (identical
+color) to 1 (completely different color) - but values greater than one
+are possible.
+
+> Note: This function uses [al_color_lab] internally which
+> defines the L component to be in the range 0..1 (and not 0..100 as is
+> sometimes seen).
+
+Since: 5.2.3
+
+## API: al_color_rgb_to_yuv
+
+Convert RGB values to YUV color space.
+
+See also: [al_color_yuv], [al_color_yuv_to_rgb]
+
+
+## API: al_color_yuv
+
+Return an [ALLEGRO_COLOR] structure from YUV values.
+
+See also: [al_color_yuv_to_rgb], [al_color_rgb_to_yuv]
+
+
+## API: al_color_yuv_to_rgb
+
+Convert YUV color values to RGB color space.
+
+See also: [al_color_yuv], [al_color_rgb_to_yuv]
+
+
+## API: al_get_allegro_color_version
+
+Returns the (compiled) version of the addon, in the same format as
+[al_get_allegro_version].
+
+
+## API: al_is_color_valid
+
+Checks if all components of the color are between 0 and 1. Some of the
+color conversions in this addon support color spaces with more colors
+than can be represented in sRGB and when converted to RGB will result
+in invalid color components outside the 0..1 range.
+
+Since: 5.2.3
+
+## API: al_color_rgb_to_oklab
+
+Convert RGB values to the Oklab color space.
+
+Since: 5.2.8
+
+See also: [al_color_oklab], [al_color_oklab_to_rgb]
+
+
+## API: al_color_oklab
+
+Return an [ALLEGRO_COLOR] structure from Oklab values. The L component
+corresponds to luminance from 0..1. The a and b components
+are in the range -1..+1.
+
+> *Note:*
+>
+> The Oklab color space can represent more colors than are
+> visible in sRGB and therefore conversion may result in RGB values
+> outside of the 0..1 range. You can check for that case with
+> [al_is_color_valid].
+
+Since: 5.2.8
+
+See also: [al_color_oklab_to_rgb], [al_color_rgb_to_oklab]
+
+
+## API: al_color_oklab_to_rgb
+
+Convert Oklab color values to RGB.
+
+Since: 5.2.8
+
+See also: [al_color_oklab], [al_color_rgb_to_oklab]
+
+
+## API: al_color_rgb_to_linear
+
+Convert gamma corrected sRGB values (i.e. normal RGB) to linear sRGB space.
+
+Since: 5.2.8
+
+See also: [al_color_linear], [al_color_linear_to_rgb]
+
+
+## API: al_color_linear
+
+Return an [ALLEGRO_COLOR] structure from linear sRGB values. Allegro
+RGB values are assumed to be sRGB. The sRGB standard is in wide use by
+various display devices. It accounts for a standard gamma correction
+applied to RGB colors before they get displayed.
+
+Gamma correction means if for example we have a medium gray color
+specified with al_map_rgb_f(0.5,0.5,0.5) then we do not want the monitor
+to set the pixel to exactly half the physical maximum intensity, but
+instead to an intensity that appears to be half as bright as the maximum
+to the person looking at it. In this case that would be closer to 21% of
+maximum intensity rather than to 50% intensity.
+
+For some applications it may be useful to specify a color in linear sRGB
+components, in which case you can use this function. For example:
+
+~~~~c
+ALLEGRO_COLOR gray = al_color_linear(0.216, 0.216, 0.216);
+char html[8];
+al_color_rgb_to_html(gray.r, gray.g, gray.b, html); // "#808080"
+~~~~
+
+Since: 5.2.8
+
+See also: [al_color_linear_to_rgb], [al_color_rgb_to_linear]
+
+
+## API: al_color_linear_to_rgb
+
+Convert linear sRGB color values to gamma corrected (i.e. normal) RGB
+values.
+
+Since: 5.2.8
+
+See also: [al_color_linera], [al_color_rgb_to_linear]
