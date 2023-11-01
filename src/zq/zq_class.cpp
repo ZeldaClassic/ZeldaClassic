@@ -65,7 +65,7 @@ using std::pair;
 #define COLOR_LADDER vc(6)
 //#define COLOR_EFFECT vc(10)
 
-//const char zqsheader[30]="ZQuest Classic String Table\n\x01";
+//const char zqsheader[30]="ZC Quest Editor String Table\n\x01";
 extern char msgbuf[MSG_NEW_SIZE*8];
 
 extern string zScript;
@@ -6396,7 +6396,7 @@ int32_t init_quest()
     load_quest(qstdat_string);
     loading_file_new = false;
 	
-	sprintf(buf,"ZC Editor - Untitled Quest");
+	sprintf(buf,"ZC Quest Creator - Untitled Quest");
     set_window_title(buf);
     zinit.last_map = 0;
     zinit.last_screen = 0;
@@ -6756,7 +6756,7 @@ int32_t load_quest(const char *filename, bool show_progress)
 			
 			if (show_progress)
 			{
-				sprintf(buf,"ZC Editor - [%s]", get_filename(filename));
+				sprintf(buf,"ZC Quest Creator - [%s]", get_filename(filename));
 				set_window_title(buf);
 			}
 		}
@@ -6810,7 +6810,7 @@ int32_t load_tileset(const char *filename, dword tsetflags)
 				bmap=NULL;
 			}
 			
-			set_window_title("ZC Editor - Untitled Quest");
+			set_window_title("ZC Quest Creator - Untitled Quest");
 			first_save = saved = false;
 			memset(filepath,0,255);
 			memset(temppath,0,255);
@@ -7078,7 +7078,7 @@ int32_t writeheader(PACKFILE *f, zquestheader *Header)
             new_return(36);
         }
 		
-		if(!pfwrite("ZQuest Classic",1024,f))
+		if(!pfwrite("ZC Quest Creator",1024,f))
         {
             new_return(37);
         }

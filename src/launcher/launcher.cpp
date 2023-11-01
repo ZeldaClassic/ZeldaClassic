@@ -239,7 +239,7 @@ int32_t main(int32_t argc, char* argv[])
 	
 	get_root_path(rootpath, 4096);
 	
-	set_window_title("ZQuest Launcher");
+	set_window_title("ZC Launcher");
 	set_close_button_callback((void (*)()) hit_close_button);
 	//
 	Z_message("Launcher opened successfully.\n");

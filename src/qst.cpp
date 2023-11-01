@@ -2027,10 +2027,10 @@ void print_quest_metadata(zquestheader const& tempheader, char const* path, byte
 	if ( tempheader.new_version_id_main > 0 )
 	{
 		if(tempheader.new_version_id_fourth > 0)
-			zprint2("Last saved in ZQuest Version %d.%d.%d.%d ",
+			zprint2("Last saved in Version %d.%d.%d.%d ",
 				tempheader.new_version_id_main,tempheader.new_version_id_second,
 				tempheader.new_version_id_third,tempheader.new_version_id_fourth);
-		else zprint2("Last saved in ZQuest Version: %d.%d.%d ",
+		else zprint2("Last saved in Version: %d.%d.%d ",
 				tempheader.new_version_id_main,tempheader.new_version_id_second,
 				tempheader.new_version_id_third);
 	}
@@ -2099,6 +2099,7 @@ void print_quest_metadata(zquestheader const& tempheader, char const* path, byte
 				if ( tempheader.build ) zprint2("Beta/Build %d\n", tempheader.build); 
 				break;
 			}
+			zprint2("Last saved in obselete version, cannot be inported %d\n", tempheader.build); break;
 			/* These versions cannot be handled here; they will be incorrect at this time. -Z
 			case 0x193:
 			{
@@ -2708,7 +2709,7 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 			memset(tempheader.new_version_compilername, 0, 256);
 			memset(tempheader.new_version_compilerversion, 0, 256);
 			memset(tempheader.product_name, 0, 1024);
-			strcpy(tempheader.product_name, "ZQuest Creator Suite");
+			strcpy(tempheader.product_name, "ZC Quest Creator Suite");
 			
 			tempheader.compilerid = 0;
 			tempheader.compilerversionnumber_first = 0;
@@ -2881,7 +2882,7 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		{
 			enter_sys_pal();
 			AlertDialog("Quest saved in newer version",
-				"This quest was last saved in a newer version of ZQuest."
+				"This quest was last saved in a newer version."
 				" Attempting to load this quest may not work correctly; to"
 				" avoid issues, try loading this quest in at least '" + std::string(tempheader.getVerStr()) + "'"
 				"\n\nWould you like to continue loading anyway? (Not recommended)",

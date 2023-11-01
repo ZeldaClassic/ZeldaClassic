@@ -46,48 +46,45 @@ namespace
 	const EndingTextLine credits[]=
 	{
 		{ " STAFF ",                104, 240, white },
-		{ "EXECUTIVE",              40,  272, blue  },
-		{ "PRODUCER... H.YAMAUCHI", 40,  280, blue  },
-		{ "PRODUCER.... S.MIYAHON", 40,  320, green },
-		{ "DIRECTOR.... S.MIYAHON", 40,  360, red   },
-		{ "        ...... TEN TEN", 40,  384, red   },
-		{ "DESIGNER...... TEN TEN", 40,  424, blue  },
-		{ "PROGRAMMER.. T.NAKAZOO", 40,  464, green },
-		{ "          ..... YACHAN", 40,  488, green },
-		{ "          ... MARUMARU", 40,  512, green },
-		{ "SOUND",                  40,  552, red   },
-		{ "COMPOSER...... KONCHAN", 40,  560, red   }
 	};
 	
-	const int32_t numQuest1EndLines = 4;
+	const int32_t numQuest1EndLines = 6;
 	const EndingTextLine quest1End[]=
 	{
-		{ "ANOTHER QUEST WILL START", 32, 656, white },
-		{ "FROM HERE.",               88, 672, white },
-		{ "PRESS THE START BUTTON.",  40, 696, white },
-		{ "\2731986 NINTENDO",        72, 760, white }
+			{ "Congratulations!", 64, 768, white },
+			/* name - deaths */
+			/* time */
+			{ "You finished a",   72, 816, white },
+			{ "custom quest.",    76, 832, white },
+			{ "ZC Quest Creator and Player",    76, 880, white },
+			{ "\2741999-2023",    88, 896, white },
+			{ "Armageddon Games", 64, 912, blue }
 	};
 	
-	const int32_t numQuest2EndLines = 4;
+	const int32_t numQuest2EndLines = 6;
 	const EndingTextLine quest2End[]=
 	{
-		{ "YOU ARE GREAT.",      72, 768, white },
-		/* name - deaths */
-		{ "YOU HAVE AN AMAZING", 48, 816, white },
-		{ "WISDOM AND POWER.",   64, 832, white },
-		{ "\2731986 NINTENDO",   72, 912, blue  }
+			{ "Congratulations!", 64, 768, white },
+			/* name - deaths */
+			/* time */
+			{ "You finished a",   72, 816, white },
+			{ "custom quest.",    76, 832, white },
+			{ "ZC Quest Creator and Player",    76, 880, white },
+			{ "\2741999-2023",    88, 896, white },
+			{ "Armageddon Games", 64, 912, blue }
 	};
 	
 	const int32_t numQuest34EndLines = 6;
 	const EndingTextLine quest34End[]=
 	{
-		{ "YOU ARE GREAT.",            72,  768, white },
-		/* name - deaths */
-		{ "YOU HAVE AN AMAZING",       48,  816, white },
-		{ "WISDOM AND POWER.",         64,  832, white },
-		{ "END OF",                    104, 880, white },
-		{ "\"THE LEGEND OF ZELDA 1\"", 32,  896, white },
-		{ "\2731986 NINTENDO",         72,  912, blue  }
+			{ "Congratulations!", 64, 768, white },
+			/* name - deaths */
+			/* time */
+			{ "You finished a",   72, 816, white },
+			{ "custom quest.",    76, 832, white },
+			{ "ZC Quest Creator and Player",    76, 880, white },
+			{ "\2741999-2023",    88, 896, white },
+			{ "Armageddon Games", 64, 912, blue }
 	};
 	
 	const int32_t numCustomQuestEndLines = 6;
@@ -98,8 +95,8 @@ namespace
 		/* time */
 		{ "You finished a",   72, 816, white },
 		{ "custom quest.",    76, 832, white },
-		{ "ZELDA CLASSIC",    76, 880, white },
-		{ "\2741999-2019",    88, 896, white },
+		{ "ZC Quest Creator and Player",    76, 880, white },
+		{ "\2741999-2023",    88, 896, white },
 		{ "Armageddon Games", 64, 912, blue }
 	};
 }
@@ -172,7 +169,7 @@ void ending()
 	  *************************
 	  * WIN THE GAME SEQUENCE *
 	  *************************
-	  0    HERO at ZELDA's side
+	  0    HERO at Princess' side
 	  288  begin WIPE (8px per side per step, each 5 frames)
 	  363  WIPE complete, DOT out, A/B items out
 	  QMisc.colors.hero_dot = 255;
@@ -180,23 +177,23 @@ void ending()
 	  365  first MESSAGE character in
 	  371  next character in
 	  407  last character in
-	  668  HERO out, ZELDA out
-	  669  HERO in (TRIFORCE overhead), ZELDA in (TRIFORCE overhead)
+	  668  HERO out, Princess' out
+	  669  HERO in (TRIFORCE overhead), Princess in (TRIFORCE overhead)
 	  733  BLUE flash bg
 	  734  RED
 	  735  GREEN
 	  736  BLACK
 	  ...
-	  860  BLACK, HERO out, ZELDA out
-	  861  HERO in, ZELDA in
+	  860  BLACK, HERO out, Princess out
+	  861  HERO in, Princess in
 	  927  first MSG character in
 	  935  next character in
 	  1335 last character in
-	  1461 HERO out, ZELDA out
+	  1461 HERO out, Princess out
 	  1493 begin SCROLL
 	  */
 	
-	//get rid off all sprites but Hero and Zelda
+	//get rid off all sprites but Hero and Princess
 	items.clear();
 	Ewpns.clear();
 	Lwpns.clear();

@@ -231,7 +231,7 @@ char datapwd[8]   = "longtan";
 #ifndef __EMSCRIPTEN__
     if (!zscript_coloured_console.valid() && !is_headless())
     {
-        al_show_native_message_box(all_get_display(), "ZQuest Classic: I AM ERROR", "", buf, NULL, ALLEGRO_MESSAGEBOX_ERROR);
+        al_show_native_message_box(all_get_display(), "Warning: I AM ERROR", "", buf, NULL, ALLEGRO_MESSAGEBOX_ERROR);
     }
 #endif
     zscript_coloured_console.cprintf((CConsoleLoggerEx::COLOR_RED | CConsoleLoggerEx::COLOR_INTENSITY | 
@@ -1701,7 +1701,7 @@ void textprintf_shadowed_right_x_ex(BITMAP *bmp, const FONT *f, int32_t x, int32
     textout_shadowed_x_ex(bmp, f, buf, x-text_length(f, buf), y, color, shadow, bg);
 }
 
-// A lot of crashes in ZQuest can be traced to rect(). Hopefully, this will help.
+// A lot of crashes in ZC Quest Creator can be traced to rect(). Hopefully, this will help.
 void safe_rect(BITMAP *bmp, int x1, int y1, int x2, int y2, int color)
 {
 	rect(bmp, vbound(x1, 0, bmp->w-1), vbound(y1, 0, bmp->h-1), vbound(x2, 0, bmp->w-1), vbound(y2, 0, bmp->h-1), color);

@@ -133,7 +133,7 @@ int32_t Win32Data::zqSetCustomCallbackProc(HWND hWnd)
 
 LRESULT CALLBACK Win32Data::zqWindowsProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    assert(win32data.isValid && "ZQuest-Windows Fatal Error: Set \"zq_win_proc_fix = 0\" in config file.");
+    assert(win32data.isValid && "ZC Quest Creator-Windows Fatal Error: Set \"zq_win_proc_fix = 0\" in config file.");
     
     static bool initPriority = false;
     

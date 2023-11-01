@@ -1,4 +1,4 @@
-/* ZQuest Classic Music Library         */
+/* ZC Music Library         */
 /* ------------------------------------*/
 /* Wrapper for transparently extending */
 /* supported music file formats.       */

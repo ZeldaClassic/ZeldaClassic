@@ -48,7 +48,6 @@ void setZScriptVersion(int32_t) { } //bleh...
 #include <al5_img.h>
 #include <loadpng.h>
 #include <fmt/format.h>
-
 #include "dialog/cheat_codes.h"
 #include "dialog/set_password.h"
 #include "dialog/foodlg.h"
@@ -28264,7 +28263,7 @@ int32_t main(int32_t argc,char **argv)
 	
 	if (zc_get_config("zquest","always_betawarn",0) || strcmp(curcontrol, oldcontrol))
 	{
-		InfoDialog("Alpha Warning", "WARNING:\nThis is an ALPHA version of ZQuest."
+		InfoDialog("Alpha Warning", "WARNING:\nThis is an ALPHA version of ZC Quest Creator."
 			" There may be major bugs, which could cause quests"
 			"\nto crash or become corrupted. Keep backups of your quest file!!"
 			"\nAdditionally, new features may change over time.").show();

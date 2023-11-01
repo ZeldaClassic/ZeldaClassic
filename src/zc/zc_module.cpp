@@ -91,7 +91,7 @@ bool ZModule::init(bool d) //bool default
 	//We load the current module name from zc.cfg or zquest.cfg!
 	//Otherwise, we don't know what file to access to load the module vars! 
 	strcpy(moduledata.module_name,zc_get_config("ZCMODULE","current_module","modules/classic.zmod"));
-	al_trace("The Current ZQuest Player Module is: %s\n",moduledata.module_name); 
+	al_trace("The Current ZC Player Module is: %s\n",moduledata.module_name); 
 	if(!fileexists((char*)moduledata.module_name))
 	{
 		Z_error("ZC Player I/O Error: No module definitions found. Please check your settings in %s.cfg.\n", "zc");

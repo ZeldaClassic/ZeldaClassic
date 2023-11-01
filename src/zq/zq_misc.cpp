@@ -1024,11 +1024,11 @@ int32_t onAbout()
 #endif
         sprintf(buf2,"Tag: %s", getReleaseTag());
         sprintf(buf3,"This qst file: %04X",header.internal&0xFFFF);
-        InfoDialog("About ZQuest", { buf1, buf2, buf3 }).show();
+        InfoDialog("About ZC Quest Creator", { buf1, buf2, buf3 }).show();
     }
     else
     {
-        AboutDialog("About ZQuest", generate_zq_about()).show();
+        AboutDialog("About ZC Quest Creator", generate_zq_about()).show();
     }
 
     return D_O_K;

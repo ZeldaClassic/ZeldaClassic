@@ -197,7 +197,7 @@ static bool linked = true;
 std::unique_ptr<ZScript::ScriptsData> compile(std::string script_path)
 {
 	if(linked)
-		zconsole_info("Compiling the ZQuest buffer...");
+		zconsole_info("Compiling the ZC Quest Creator buffer...");
 	else zconsole_info("Compiling '%s'", script_path.c_str());
 
 	// copy to tmp file
