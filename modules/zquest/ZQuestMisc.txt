@@ -1,0 +1,36 @@
+## Source list for ZQuest Misc module
+set(ZQUEST_MISC_SOURCES
+
+################################
+# Add or remove files here
+################################
+src/items.cpp
+src/zq/questReport.cpp
+src/zq/ffasm.cpp
+src/zq/zquest.cpp
+src/zq/package.cpp
+src/zq/render.cpp
+src/tab_ctl.cpp
+src/tiles.cpp
+src/zq/ffasmexport.cpp
+src/drawing.cpp
+src/zq/colorname.cpp
+src/zq/zq_hotkey.cpp
+src/zq/autocombo/autopattern_base.cpp
+src/zq/autocombo/pattern_basic.cpp
+src/zq/autocombo/pattern_fence.cpp
+src/zq/autocombo/pattern_flatmtn.cpp
+src/zq/autocombo/pattern_cakemtn.cpp
+src/zq/autocombo/pattern_relational.cpp
+src/zq/autocombo/pattern_dungeoncarve.cpp
+src/zq/autocombo/pattern_dormtn.cpp
+src/zq/autocombo/pattern_tiling.cpp
+src/zq/autocombo/pattern_replace.cpp
+src/zq/render_hotkeys.cpp
+src/zq/render_minimap.cpp
+src/zq/render_tooltip.cpp
+
+
+## End of ZQuest Misc module
+)
+

@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "mocha tests/web.test.js"
+  },
+  "dependencies": {
+    "browser-fs-access": "^0.35.0",
+    "idb-keyval": "^6.2.1",
+    "workbox-cli": "^7.0.0"
+  },
+  "devDependencies": {
+    "expect": "^29.4.3",
+    "mocha": "^10.2.0",
+    "puppeteer": "^21.1.1",
+    "statikk": "^2.2.0"
+  }
+}

@@ -1,0 +1,34 @@
+[Theme]
+color_1 = D0E0FC
+color_2 = 689094
+color_3 = 4C7480
+color_4 = 38546C
+color_5 = 283C54
+color_6 = 1C2038
+color_7 = 100420
+color_8 = 787878
+ztheme_ver = 1
+
+jcbox = 5
+jclight = 3
+jcmedlt = 4
+jcmeddark = 6
+jcdark = 7
+jcboxfg = 1
+jctitlel = 2
+jctitler = 6
+jctitlefg = 1
+jctextbg = 6
+jctextfg = 2
+jcselbg = 2
+jcselfg = 6
+
+jccursormisc = 7
+jccursoroutline = 6
+jccursorlight = 2
+jccursordark = 1
+
+jc_alt_textfg = 6
+jc_alt_textbg = 8
+jc_disabled_fg = 6
+jc_disabled_bg = 5
