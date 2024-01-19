@@ -940,7 +940,7 @@ int32_t checksave()
         sprintf(buf,"Save changes to %s?",name);
 	
 	int ret = 0;
-	AlertFuncDialog("ZQuest",
+	AlertFuncDialog("ZC Editor",
 		buf,
 		"",
 		3, 0, //3 buttons, where buttons[0] is focused
@@ -982,7 +982,7 @@ int32_t onExit()
 	
 	int ret = D_O_K;
 	
-	AlertFuncDialog("ZQuest",
+	AlertFuncDialog("ZC Editor",
 		exittxt,
 		"",
 		2, 0, //2 buttons, where buttons[0] is focused
@@ -1007,28 +1007,28 @@ int32_t onAbout()
 		char buf3[80]={0};
 #if V_ZC_ALPHA
         {
-            sprintf(buf1,"ZQuest %s Alpha - DEBUG",ZQ_EDITOR_V);
+            sprintf(buf1,"ZC Editor %s Alpha - DEBUG",ZQ_EDITOR_V);
         }
 #elif V_ZC_BETA
         {
-            sprintf(buf1,"ZQuest %s Beta - DEBUG",ZQ_EDITOR_V);
+            sprintf(buf1,"ZC Edito %s Beta - DEBUG",ZQ_EDITOR_V);
         }
 #elif V_ZC_GAMMA
         {
-            sprintf(buf1,"ZQuest %s Gamma - DEBUG",ZQ_EDITOR_V);
+            sprintf(buf1,"ZC Editor %s Gamma - DEBUG",ZQ_EDITOR_V);
         }
 #else
         {
-            sprintf(buf1,"ZQuest %s - DEBUG",ZQ_EDITOR_V);
+            sprintf(buf1,"ZC Edito %s - DEBUG",ZQ_EDITOR_V);
         }
 #endif
         sprintf(buf2,"Tag: %s", getReleaseTag());
         sprintf(buf3,"This qst file: %04X",header.internal&0xFFFF);
-        InfoDialog("About ZQuest", { buf1, buf2, buf3 }).show();
+        InfoDialog("About ZC Editer", { buf1, buf2, buf3 }).show();
     }
     else
     {
-        AboutDialog("About ZQuest", generate_zq_about()).show();
+        AboutDialog("About ZC  Editer", generate_zq_about()).show();
     }
 
     return D_O_K;

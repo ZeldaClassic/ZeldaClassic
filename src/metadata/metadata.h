@@ -42,11 +42,11 @@
 #endif
 
 #define COMPANY_NAME "Armageddon Games"
-#define ZQ_EDITOR_NAME "ZQuest Classic Editor"
+#define ZQ_EDITOR_NAME "ZC Editor"
 #define ZQ_EDITOR_V "2.55"
 #define ZQ_EDITOR_COPYRIGHT "Copyright (C) 2021"
 
-#define ZC_PLAYER_NAME "ZQuest Classic Player"
+#define ZC_PLAYER_NAME "ZC Player"
 #define ZC_PLAYER_V "2.55"
 #define ZC_PLAYER_COPYRIGHT "Copyright (C) 2021"
 //}

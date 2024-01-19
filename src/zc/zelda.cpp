@@ -4733,9 +4733,8 @@ int main(int argc, char **argv)
 		//  if(useCD)
 		//    cd_exit();
 		quit_game();
-		Z_message("ZQuest Classic web site: https://zquestclassic.com.com\n");
-		Z_message("ZQuest Classic old wiki: https://web.archive.org/web/20210910193102/https://zeldaclassic.com/wiki\n");
-		Z_message("ZQuest Classic new wiki: https://github.com/ZQuestClassic/ZQuestClassic/wiki\n");
+		Z_message("ZC web site: https://zeldaclassic.com.com\n");
+		Z_message("Zelda Classic old wiki: https://web.archive.org/web/20210910193102/https://zeldaclassic.com/wiki\n");
 		
 		skipcont = 0;
 		if(forceExit) //fix for the allegro at_exit() hang.
@@ -4793,7 +4792,7 @@ int main(int argc, char **argv)
 	
 	if(!game_vid_mode(tempmode, wait_ms_on_set_graphics))
 	{
-		al_trace("Fatal Error: could not create a window for ZQuest Classic.\n");
+		al_trace("Fatal Error: could not create a window for ZC.\n");
 		Z_error_fatal(allegro_error);
 	}
 	else
@@ -4801,7 +4800,7 @@ int main(int argc, char **argv)
 		Z_message("set gfx mode succsessful at -%d %dbpp %d x %d \n", tempmode, get_color_depth(), resx, resy);
 	}
 
-	const char* window_title = "ZQuest Classic";
+	const char* window_title = "ZC";
 	int window_title_arg = used_switch(argc, argv, "-window-title");
 	if (window_title_arg > 0)
 		window_title = argv[window_title_arg + 1];
@@ -5469,9 +5468,8 @@ reload_for_replay_file:
 	//  if(useCD)
 	//    cd_exit();
 	quit_game();
-	Z_message("ZQuest Classic web site: https://zquestclassic.com\n");
-	Z_message("ZQuest Classic old wiki: https://web.archive.org/web/20210910193102/https://zeldaclassic.com/wiki\n");
-	Z_message("ZQuest Classic new wiki: https://github.com/ZQuestClassic/ZQuestClassic/wiki\n");
+	Z_message("ZC web site: https://zeldaclassic.com\n");
+	Z_message("Zelda Classic old wiki: https://web.archive.org/web/20210910193102/https://zeldaclassic.com/wiki\n");
 	
 	skipcont = 0;
 	

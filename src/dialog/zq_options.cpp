@@ -909,7 +909,7 @@ std::shared_ptr<GUI::Widget> OptionsDialog::view()
 	);
 	
 	std::shared_ptr<GUI::Window> window = Window(
-		title = "ZQuest Options",
+		title = "ZC Editor Options",
 		onClose = message::CANCEL,
 		Column(
 			TabPanel(ptr = &tabpos1,

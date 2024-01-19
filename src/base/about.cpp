@@ -86,6 +86,6 @@ char const* getRepo()
 #ifdef REPO
 	return REPO;
 #else
-	return "ZQuestClassic/ZQuestClassic";
+	return "ZC/ZC";
 #endif
 }

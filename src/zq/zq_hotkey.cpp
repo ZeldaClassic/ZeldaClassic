@@ -747,7 +747,7 @@ char const* get_hotkey_helptext(uint hkey)
 		case ZQKEY_PASTE_ENEMIES:
 			return "Paste the Enemies from the copied screen";
 		case ZQKEY_EXIT:
-			return "Exit ZQuest";
+			return "Exit ZC Edior";
 		case ZQKEY_PASTE_FFCS:
 			return "Paste FFCs from the copied screen";
 		case ZQKEY_GAME_ICONS:
@@ -905,7 +905,7 @@ char const* get_hotkey_helptext(uint hkey)
 		case ZQKEY_COMPILE_SMART:
 			return "Compile the ZScript buffer and smartly auto-assign slots";
 		case ZQKEY_DEBUG_CONSOLE:
-			return "Toggle the ZQuest Debug Console";
+			return "Toggle the ZC Debug Console";
 		case ZQKEY_SHOW_HOTKEYS:
 			return "Show Hotkeys";
 		case ZQKEY_BIND_HOTKEYS:

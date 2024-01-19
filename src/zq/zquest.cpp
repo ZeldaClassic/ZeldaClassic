@@ -499,7 +499,7 @@ void clearConsole()
 	zscript_coloured_console.cls(CConsoleLoggerEx::COLOR_BACKGROUND_BLACK);
 	zscript_coloured_console.gotoxy(0,0);
 	zscript_coloured_console.cprintf( CConsoleLoggerEx::COLOR_BLUE | CConsoleLoggerEx::COLOR_INTENSITY |
-		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"ZQuest Classic Logging Console\n");
+		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"ZC Logging Console\n");
 }
 
 void initConsole()
@@ -507,7 +507,7 @@ void initConsole()
 	if(console_is_open) return;
 	console_is_open = 1;
 	set_console_state();
-	zscript_coloured_console.Create("ZQuest Classic Logging Console", 600, 200);
+	zscript_coloured_console.Create("ZC Logging Console", 600, 200);
 	clearConsole();
 }
 
@@ -28338,7 +28338,7 @@ void check_autosave()
             
             if((header.zelda_version != ZELDA_VERSION || header.build != VERSION_BUILD) && first_save)
             {
-                jwin_alert("Auto Save","This quest was saved in an older version of ZQuest.","If you wish to use the autosave feature, you must manually","save the files in this version first.","OK",NULL,13,27,get_zc_font(font_lfont));
+                jwin_alert("Auto Save","This quest was saved in an older version of ZC.","If you wish to use the autosave feature, you must manually","save the files in this version first.","OK",NULL,13,27,get_zc_font(font_lfont));
                 time(&auto_save_time_start);
                 comeback();
                 return;
@@ -29000,11 +29000,11 @@ void FFScript::ZScriptConsole(bool open)
 	#ifdef _WIN32
 	if ( console_is_open )
 	{
-		zscript_coloured_console.Create("ZQuest Classic Logging Console", 600, 200);
+		zscript_coloured_console.Create("ZC Logging Console", 600, 200);
 		zscript_coloured_console.cls(CConsoleLoggerEx::COLOR_BACKGROUND_BLACK);
 		zscript_coloured_console.gotoxy(0,0);
 		zscript_coloured_console.cprintf( CConsoleLoggerEx::COLOR_BLUE | CConsoleLoggerEx::COLOR_INTENSITY |
-		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"ZQuest Classic Logging Console\n");
+		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"ZC Logging Console\n");
 	}
 	else
 	{

@@ -202,7 +202,7 @@ int32_t main(int32_t argc, char* argv[])
 		QUIT_LAUNCHER();
 	}
 
-	set_window_title("ZQuest Classic Launcher");
+	set_window_title("ZC Launcher");
 	al_init_image_addon();
 	al_init_font_addon();
 	al_init_primitives_addon();

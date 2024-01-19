@@ -382,7 +382,7 @@ int32_t onSave()
     
     if(disable_saving)
     {
-        jwin_alert("ZQuest","Saving is","disabled in this version.",NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+        jwin_alert("ZC Editor","Saving is","disabled in this version.",NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
         return D_O_K;
     }
     
@@ -390,7 +390,7 @@ int32_t onSave()
         return onSaveAs();
     else if(OverwriteProtection)
     {
-        jwin_alert("ZQuest","Overwriting quests is disabled.","Change this in the options dialog.",NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+        jwin_alert("ZC Editor","Overwriting quests is disabled.","Change this in the options dialog.",NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
         return D_O_K;
     }
     
@@ -398,7 +398,7 @@ int32_t onSave()
 	{
 		if(!do_compile_and_slots(1,false))
 		{
-			InfoDialog("ZQuest","Failed compile on save! Saving quest anyway...").show();
+			InfoDialog("ZC Editor","Failed compile on save! Saving quest anyway...").show();
 		}
 	}
 	
@@ -413,7 +413,7 @@ int32_t onSave()
     if(!ret)
     {
         sprintf(buf,"Saved %s",name);
-        jwin_alert("ZQuest",buf,NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+        jwin_alert("ZC Editor",buf,NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
         saved=true;
         first_save=true;
         header.dirty_password=false;
@@ -441,7 +441,7 @@ int32_t onSaveAs()
 
 	if(disable_saving)
 	{
-		jwin_alert("ZQuest","Saving is","disabled in this version.",NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+		jwin_alert("ZC Editor","Saving is","disabled in this version.",NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
 		return D_O_K;
 	}
 #ifdef __EMSCRIPTEN__
@@ -456,7 +456,7 @@ int32_t onSaveAs()
 	{
 		if(OverwriteProtection)
 		{
-			jwin_alert("ZQuest","Overwriting quests is disabled.","Change this in the options dialog.",NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+			jwin_alert("ZC Editor","Overwriting quests is disabled.","Change this in the options dialog.",NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
 			return D_O_K;
 		}
 		
@@ -470,7 +470,7 @@ int32_t onSaveAs()
 	{
 		if(!do_compile_and_slots(1,false))
 		{
-			InfoDialog("ZQuest","Failed compile on save! Saving quest anyway...").show();
+			InfoDialog("ZC Editor","Failed compile on save! Saving quest anyway...").show();
 		}
 	}
 	
@@ -488,7 +488,7 @@ int32_t onSaveAs()
 		sprintf(buf,"ZC Editor - [%s]", get_filename(filepath));
 		set_window_title(buf);
 		sprintf(buf,"Saved %s",name);
-		jwin_alert("ZQuest",buf,NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+		jwin_alert("ZC Editor",buf,NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
 		saved=true;
 		first_save=true;
 		header.dirty_password=false;
@@ -760,7 +760,7 @@ int32_t onExport_Map()
     
     if(!ret)
     {
-        sprintf(buf,"ZQuest");
+        sprintf(buf,"ZC");
         sprintf(buf2,"Saved %s",name);
     }
     else
@@ -1000,12 +1000,12 @@ int32_t onExport_DMaps_old()
     
     if(save_dmaps(temppath))
     {
-        sprintf(buf,"ZQuest");
+        sprintf(buf,"ZC Editor");
         sprintf(buf2,"Saved %s",name);
     }
     else
     {
-        sprintf(buf,"Error");
+        sprintf(buf,"ZC Editor");
         sprintf(buf2,"Error saving %s",name);
     }
     
@@ -1041,7 +1041,7 @@ int32_t onExport_Pals()
     
     if(save_pals(temppath))
     {
-        sprintf(buf,"ZQuest");
+        sprintf(buf,"ZC Editor");
         sprintf(buf2,"Saved %s",name);
     }
     else
@@ -1082,12 +1082,12 @@ int32_t onExport_Msgs()
     
     if(save_msgstrs(temppath))
     {
-        sprintf(buf,"ZQuest");
+        sprintf(buf,"ZC Editor");
         sprintf(buf2,"Saved %s",name);
     }
     else
     {
-        sprintf(buf,"Error");
+        sprintf(buf,"ZC Editor");
         sprintf(buf2,"Error saving %s",name);
     }
     
@@ -1106,7 +1106,7 @@ int32_t onExport_MsgsText()
     
     if(save_msgstrs_text(temppath))
     {
-        sprintf(buf,"ZQuest");
+        sprintf(buf,"ZC Editor");
         sprintf(buf2,"Saved %s",name);
     }
     else
@@ -1195,7 +1195,7 @@ int32_t onExport_Combos_old()
     
     if(save_combos(temppath))
     {
-        sprintf(buf,"ZQuest");
+        sprintf(buf,"ZC");
         sprintf(buf2,"Saved %s",name);
     }
     else
@@ -1307,7 +1307,7 @@ int32_t onExport_Guys()
     
     if(save_guys(temppath))
     {
-        sprintf(buf,"ZQuest");
+        sprintf(buf,"ZC Editor");
         sprintf(buf2,"Saved %s",name);
     }
     else
@@ -1353,7 +1353,7 @@ int32_t onExport_ComboAlias()
     
     if(save_combo_alias(temppath))
     {
-        sprintf(buf,"ZQuest");
+        sprintf(buf,"ZCEditor");
         sprintf(buf2,"Saved %s",name);
     }
     else
@@ -1396,7 +1396,7 @@ int32_t onExport_ZGP()
     
     if(save_zgp(temppath))
     {
-        sprintf(buf,"ZQuest");
+        sprintf(buf,"ZC Editor");
         sprintf(buf2,"Saved %s",name);
     }
     else

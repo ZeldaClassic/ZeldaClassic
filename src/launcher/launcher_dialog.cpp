@@ -547,8 +547,8 @@ std::shared_ptr<GUI::Widget> LauncherDialog::view()
 						CONFIG_DROPDOWN_I("Name Entry Mode:", App::zelda,"zeldadx","name_entry_mode",0,nameEntryList,"The entry method of save file names."),
 						CONFIG_TEXTFIELD_I("Window Width:",App::zelda,"zeldadx","window_width", -1, -1, 3000, "The width of the ZC window, for windowed mode. If -1 the largest possible window will be made without distorting the pixel content."),
 						CONFIG_TEXTFIELD_I("Window Height:",App::zelda,"zeldadx","window_height", -1, -1, 2250, "The height of the ZC window, for windowed mode. If -1 the largest possible window will be made without distorting the pixel content."),
-						CONFIG_TEXTFIELD_I("Saved Window X:",App::zelda,"zeldadx","window_x", 0, 0, rightmost, "The top-left corner of the ZQuest Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
-						CONFIG_TEXTFIELD_I("Saved Window Y:",App::zelda,"zeldadx","window_y", 0, 0, bottommost, "The top-left corner of the ZQuest Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
+						CONFIG_TEXTFIELD_I("Saved Window X:",App::zelda,"zeldadx","window_x", 0, 0, rightmost, "The top-left corner of the ZC Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
+						CONFIG_TEXTFIELD_I("Saved Window Y:",App::zelda,"zeldadx","window_y", 0, 0, bottommost, "The top-left corner of the ZC Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
 						GFXCARD_DROPDOWN("Graphics Driver:", App::zelda, "graphics", "driver", 0, gfxDriverList),
 						CONFIG_DROPDOWN_I("(EXPERIMENTAL) JIT threads:",App::zelda,"ZSCRIPT","jit_threads",-2,jitThreadsList,"Use background threads to speed up JIT compilation"),
 						//
@@ -836,7 +836,7 @@ bool LauncherDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 			break;
 		case message::SUPPORT:
 		{
-			std::string url = "https://zquestclassic.com/support-zc";
+			std::string url = "https://zc.com/support-zc";
 #ifdef _WIN32
 			std::string cmd = "start " + url;
 			system(cmd.c_str());
@@ -871,7 +871,7 @@ bool LauncherDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 		break;
 		case message::ZU_RELEASE_NOTES:
 		{
-			std::string url = fmt::format("https://zquestclassic.com/releases/{}/", getReleaseTag());
+			std::string url = fmt::format("https://zeldaclassic.com/releases/{}/", getReleaseTag());
 #ifdef _WIN32
 			std::string cmd = "start " + url;
 			system(cmd.c_str());
@@ -884,7 +884,7 @@ bool LauncherDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 		break;
 		case message::ZU_RELEASE_NOTES_NEXT:
 		{
-			std::string url = fmt::format("https://zquestclassic.com/releases/{}/", next_version);
+			std::string url = fmt::format("https://zeldaclassic.com/releases/{}/", next_version);
 #ifdef _WIN32
 			std::string cmd = "start " + url;
 			system(cmd.c_str());
