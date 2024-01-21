@@ -1,10 +1,12 @@
-# ZeldaClassic
-Zelda Classic is a 2D game engine and editor for creating adventure games.
+# Zelda Classic
+Zelda Classic is a game and editing tool that lets you create custom Legend of Zelda quests.
 
-Website: [zeldaclassic.com](https://zeldaclassic.com)
-[Download Archive](https://www.zeldaclassic.com/download-archive/)
+Homepage:
+[zeldaclassic.com](https://zeldaclassic.com)
 
+The homepage contains information about the latest release, links to the latest binaries, and a repository of custom quests for you to enjoy. 
 
+This repository contains the Zelda Classic source code, for use by the Zelda Classic developers and advanced users wanting to port ZC to new platforms. You do not need to download or compile the source if you want to play Zelda Classic or make quests on Windows, OS X, or (Debian) Linux.
 
 ## License
 
@@ -17,3 +19,5 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
+
+
