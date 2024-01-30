@@ -1207,11 +1207,6 @@ int32_t onExport_Package()
 	if (package_name.empty())
 		package_name = "Quest";
 
-    if (strlen(filepath) == 0) {
-	InfoDialog("Can't export untitled quest", "Please save the quest before exporting").show();
-	return D_O_K;
-    }
-
     package_create(filepath, package_name);
     std::string line1 = fmt::format("Package saved to packages/{}", package_name);
     std::string line2 = "To learn about packaging, read docs/packaging_quests.md";
