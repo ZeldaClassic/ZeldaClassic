@@ -48,7 +48,7 @@ namespace
 	{
 		{ "CREDITS", 64, 768, red			},
 		{ "ZC Development Members Past and Present",   72, 816, white },
-		{ "Phantom Mance",    76, 832, white },
+		{ "The orginal Developer Phantom Menace",    76, 832, white },
 	};
 	
 	const int32_t numQuest1EndLines = 4;
