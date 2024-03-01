@@ -86,7 +86,7 @@ static int32_t used_switch(int32_t argc,char *argv[],const char *s)
 	if (headless)
 		printf("[fatal] %s\n", msg.c_str());
 	else
-		al_show_native_message_box(all_get_display(), "ZC: I AM ERROR", "", msg.c_str(), NULL, ALLEGRO_MESSAGEBOX_ERROR);
+		al_show_native_message_box(all_get_display(), "ZQuest Classic: I AM ERROR", "", msg.c_str(), NULL, ALLEGRO_MESSAGEBOX_ERROR);
 
 	out << "[fatal] " << msg.c_str() << '\n';
 	out.close();
@@ -98,7 +98,7 @@ static int32_t used_switch(int32_t argc,char *argv[],const char *s)
 	if (headless)
 		printf("[done] %s\n", msg.c_str());
 	else
-		al_show_native_message_box(all_get_display(), "ZC Updater", "", msg.c_str(), NULL, ALLEGRO_MESSAGEBOX_OK_CANCEL);
+		al_show_native_message_box(all_get_display(), "ZQuest Classic Updater", "", msg.c_str(), NULL, ALLEGRO_MESSAGEBOX_OK_CANCEL);
 
 	out << "[done] " << msg.c_str() << '\n';
 	out.close();
@@ -114,7 +114,7 @@ static bool prompt(std::string msg)
 		return true;
 	}
 
-	int ret = al_show_native_message_box(all_get_display(), "ZC Updater", "", msg.c_str(), NULL, ALLEGRO_MESSAGEBOX_YES_NO);
+	int ret = al_show_native_message_box(all_get_display(), "ZQuest Classic Updater", "", msg.c_str(), NULL, ALLEGRO_MESSAGEBOX_YES_NO);
 	return ret != 2;
 }
 
@@ -174,7 +174,7 @@ static std::tuple<std::string, std::string> get_next_release()
 	std::string asset_url = next_release_map["asset_url"];
 	return {new_version, asset_url};
 #else
-	std::string json_url = fmt::format("https://zeldaclassic.com/releases/{}.json", channel);
+	std::string json_url = fmt::format("https://zquestclassic.com/releases/{}.json", channel);
 
 	struct MemoryStruct chunk;
 	chunk.memory = (char*)malloc(1);

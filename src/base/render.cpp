@@ -276,6 +276,7 @@ void zc_set_palette_range(PALETTE pal, int start, int end, bool)
 void render_a4_a5(BITMAP* src,int sx,int sy,int dx,int dy,int w,int h,int maskind,uint32_t* backpal)
 {
 	if(!backpal) backpal = zc_backend_palette;
+	set_bitmap_create_flags(true);
 	ALLEGRO_BITMAP* buf = al_create_bitmap(w,h);
 	ALLEGRO_LOCKED_REGION * lr;
 	uint8_t * line_8;
@@ -327,7 +328,7 @@ void render_text(ALLEGRO_BITMAP* bitmap, ALLEGRO_FONT* font, std::string text, i
 	{
 		if (text_bitmap)
 			al_destroy_bitmap(text_bitmap);
-		al_set_new_bitmap_flags(ALLEGRO_NO_PRESERVE_TEXTURE);
+		set_bitmap_create_flags(true);
 		text_bitmap = al_create_bitmap(resx, h);
 	}
 
@@ -585,6 +586,7 @@ namespace MouseSprite
 			};
 			ALLEGRO_COLOR white = al_map_rgb(255,255,255);
 			ALLEGRO_COLOR black = al_map_rgb(0,0,0);
+			set_bitmap_create_flags(true);
 			ALLEGRO_BITMAP* bmp = al_create_bitmap(16,16);
 			auto* lock = al_lock_bitmap(bmp, ALLEGRO_PIXEL_FORMAT_ANY, ALLEGRO_LOCK_WRITEONLY);
 			for(int y = 0; y < 16; ++y)
@@ -682,6 +684,19 @@ void get_zqdialog_xy(int& x, int& y)
 	else x = y = 0;
 }
 
+static vector<std::function<void()>> on_close_procs;
+void on_zqdialog_close(std::function<void()>&& proc)
+{
+	on_close_procs.emplace_back(std::move(proc));
+}
+void on_zqdialog_close()
+{
+	vector<std::function<void()>> procs;
+	procs.swap(on_close_procs);
+	for(auto& proc : procs)
+		proc();
+}
+
 static RenderTreeItem* get_active_dialog(bool forTint = false)
 {
 	auto& children = rti_dialogs.get_children();
@@ -737,6 +752,7 @@ void popup_zqdialog_start(int x, int y, int w, int h, int transp)
 }
 void popup_zqdialog_end()
 {
+	bool closed = false;
 	if (active_dlg_rti)
 	{
 		RenderTreeItem* to_del = active_dlg_rti;
@@ -751,11 +767,14 @@ void popup_zqdialog_end()
 		{
 			screen = zqdialog_bg_bmp;
 			zqdialog_bg_bmp = nullptr;
+			closed = true;
 		}
 		delete to_del;
 	}
 	position_mouse_z(0);
 	clear_tooltip();
+	if(closed)
+		on_zqdialog_close();
 }
 
 static std::vector<ALLEGRO_STATE> old_a5_states;
@@ -785,6 +804,7 @@ void popup_zqdialog_start_a5()
 
 void popup_zqdialog_end_a5()
 {
+	bool closed = false;
 	if (active_dlg_rti && old_a5_states.size())
 	{
 		RenderTreeItem* to_del = active_dlg_rti;
@@ -793,6 +813,7 @@ void popup_zqdialog_end_a5()
 		if (!active_dlg_rti)
 		{
 			zqdialog_bg_bmp = nullptr;
+			closed = true;
 		}
 		ALLEGRO_STATE& oldstate = old_a5_states.back();
 		al_restore_state(&oldstate);
@@ -802,6 +823,8 @@ void popup_zqdialog_end_a5()
 	}
 	position_mouse_z(0);
 	clear_tooltip();
+	if(closed)
+		on_zqdialog_close();
 }
 
 RenderTreeItem* add_dlg_layer(int x, int y, int w, int h)
@@ -858,6 +881,7 @@ void reload_dialog_tint()
 	if (!rti_tint.bitmap)
 	{
 		rti_tint.set_size(screen->w, screen->h);
+		set_bitmap_create_flags(true);
 		rti_tint.bitmap = create_a5_bitmap(screen->w, screen->h);
 		ALLEGRO_STATE oldstate;
 		al_store_state(&oldstate, ALLEGRO_STATE_TARGET_BITMAP);

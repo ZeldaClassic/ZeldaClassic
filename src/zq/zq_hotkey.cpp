@@ -1,6 +1,7 @@
 #include "base/zdefs.h"
 #include "base/hotkey.h"
 #include "zq/render_hotkeys.h"
+#include "zq/zq_files.h"
 #include "zq/zquest.h"
 #include "zq/zq_misc.h"
 #include "zq/zq_hotkey.h"
@@ -747,7 +748,7 @@ char const* get_hotkey_helptext(uint hkey)
 		case ZQKEY_PASTE_ENEMIES:
 			return "Paste the Enemies from the copied screen";
 		case ZQKEY_EXIT:
-			return "Exit ZC Edior";
+			return "Exit ZQuest";
 		case ZQKEY_PASTE_FFCS:
 			return "Paste FFCs from the copied screen";
 		case ZQKEY_GAME_ICONS:
@@ -905,7 +906,7 @@ char const* get_hotkey_helptext(uint hkey)
 		case ZQKEY_COMPILE_SMART:
 			return "Compile the ZScript buffer and smartly auto-assign slots";
 		case ZQKEY_DEBUG_CONSOLE:
-			return "Toggle the ZC Debug Console";
+			return "Toggle the ZQuest Debug Console";
 		case ZQKEY_SHOW_HOTKEYS:
 			return "Show Hotkeys";
 		case ZQKEY_BIND_HOTKEYS:
@@ -1453,10 +1454,10 @@ int run_hotkey(uint hkey)
 			onExport_Pals();
 			break;
 		case ZQKEY_IMPORT_STRINGS:
-			onImport_Msgs();
+			onImport_StringsTSV();
 			break;
 		case ZQKEY_EXPORT_STRINGS:
-			onExport_Msgs();
+			onExport_StringsTSV();
 			break;
 		case ZQKEY_IMPORT_TILES:
 			onImport_Tiles();

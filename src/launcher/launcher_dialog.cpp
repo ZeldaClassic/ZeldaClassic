@@ -520,6 +520,7 @@ std::shared_ptr<GUI::Widget> LauncherDialog::view()
 						CONFIG_CHECKBOX("Disable Resizing",App::zelda,"gui","disable_window_resizing",0),
 						CONFIG_CHECKBOX("Cap FPS",App::zelda,"zeldadx","throttlefps",1),
 						CONFIG_CHECKBOX("Show FPS",App::zelda,"zeldadx","showfps",0),
+						CONFIG_CHECKBOX("Show Game Time",App::zelda,"zeldadx","showtime",0),
 						CONFIG_CHECKBOX("Cont. Heart Beep",App::zelda,"zeldadx","heart_beep",0),
 						CONFIG_CHECKBOX("Disable Sound",App::zelda,"zeldadx","nosound",0),
 						CONFIG_CHECKBOX_I("Replay New Saves",App::zelda,"zeldadx","replay_new_saves",0,"Starting a new game will prompt recording to a .zplay file"),
@@ -533,7 +534,7 @@ std::shared_ptr<GUI::Widget> LauncherDialog::view()
 						CONFIG_CHECKBOX_I("Autosave Window Size Changes",App::zelda,"zeldadx","save_drag_resize",0,"Makes any changes to the window size by dragging get saved for whenever you open the program next."),
 						CONFIG_CHECKBOX_I("Lock Aspect Ratio On Resize",App::zelda,"zeldadx","drag_aspect",1,"Makes any changes to the window size by dragging get snapped to ZC's default (4:3) aspect ratio."),
 						CONFIG_CHECKBOX_I("Save Window Position",App::zelda,"zeldadx","save_window_position",0,"Remembers the last position of the ZC Window."),
-						CONFIG_CHECKBOX_I("Force Integer Values for Scale",App::zelda,"zeldadx","scaling_force_integer",0,"Locks the screen to only scale by an integer value. Results in perfect pixel art scaling, at the expense of not using the entire availabe window space."),
+						CONFIG_CHECKBOX_I("Force Integer Values for Scale",App::zelda,"zeldadx","scaling_force_integer",1,"Locks the screen to only scale by an integer value. Results in perfect pixel art scaling, at the expense of not using the entire availabe window space."),
 						CONFIG_CHECKBOX_I("Linear Scaling",App::zelda,"zeldadx","scaling_mode",0,"Use linear scaling when upscaling the window. If off, the default is nearest-neighbor scaling. If on, things will look a little blurry at most resolutions"),
 						CONFIG_CHECKBOX_I("Monochrome Debuggers",App::zelda,"CONSOLE","monochrome_debuggers",0,"Use non-colored debugger text."),
 						CONFIG_CHECKBOX_I("(EXPERIMENTAL) JIT script compilation",App::zelda,"ZSCRIPT","jit",0,"Compile scripts to machine code. Depending on the script, can be up to 10x faster. 64-bit only"),
@@ -547,8 +548,8 @@ std::shared_ptr<GUI::Widget> LauncherDialog::view()
 						CONFIG_DROPDOWN_I("Name Entry Mode:", App::zelda,"zeldadx","name_entry_mode",0,nameEntryList,"The entry method of save file names."),
 						CONFIG_TEXTFIELD_I("Window Width:",App::zelda,"zeldadx","window_width", -1, -1, 3000, "The width of the ZC window, for windowed mode. If -1 the largest possible window will be made without distorting the pixel content."),
 						CONFIG_TEXTFIELD_I("Window Height:",App::zelda,"zeldadx","window_height", -1, -1, 2250, "The height of the ZC window, for windowed mode. If -1 the largest possible window will be made without distorting the pixel content."),
-						CONFIG_TEXTFIELD_I("Saved Window X:",App::zelda,"zeldadx","window_x", 0, 0, rightmost, "The top-left corner of the ZC Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
-						CONFIG_TEXTFIELD_I("Saved Window Y:",App::zelda,"zeldadx","window_y", 0, 0, bottommost, "The top-left corner of the ZC Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
+						CONFIG_TEXTFIELD_I("Saved Window X:",App::zelda,"zeldadx","window_x", 0, 0, rightmost, "The top-left corner of the ZQuest Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
+						CONFIG_TEXTFIELD_I("Saved Window Y:",App::zelda,"zeldadx","window_y", 0, 0, bottommost, "The top-left corner of the ZQuest Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
 						GFXCARD_DROPDOWN("Graphics Driver:", App::zelda, "graphics", "driver", 0, gfxDriverList),
 						CONFIG_DROPDOWN_I("(EXPERIMENTAL) JIT threads:",App::zelda,"ZSCRIPT","jit_threads",-2,jitThreadsList,"Use background threads to speed up JIT compilation"),
 						//
@@ -610,7 +611,6 @@ std::shared_ptr<GUI::Widget> LauncherDialog::view()
 						CONFIG_CHECKBOX_I("Save Window Position",App::zquest,"zquest","save_window_position",0,"Remembers the last position of the ZQuest Window."),
 						CONFIG_CHECKBOX_I("Force Integer Values for Scale",App::zquest,"zquest","scaling_force_integer",0,"Locks the screen to only scale by an integer value. Results in perfect pixel art scaling, at the expense of not using the entire availabe window space."),
 						CONFIG_CHECKBOX_I("Linear Scaling",App::zquest,"zquest","scaling_mode",0,"Use linear scaling when upscaling the window. If off, the default is nearest-neighbor scaling. If on, things will look a little blurry at most resolutions"),
-						CONFIG_CHECKBOX_I("Record During Test Feature",App::zquest,"zquest","test_mode_record",0,"Save a recording to replays/test_XXXXXXXX.zplay when using the GUI test feature."),
 						CONFIG_CHECKBOX_I("Custom Fonts",App::zquest,"ZQ_GUI","custom_fonts",1,"Use custom fonts from the 'customfonts' folder for UI elements.")
 					),
 					Rows<3>(fitParent = true,
@@ -836,7 +836,7 @@ bool LauncherDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 			break;
 		case message::SUPPORT:
 		{
-			std::string url = "https://zc.com/support-zc";
+			std::string url = "https://zeldaclassic.com";
 #ifdef _WIN32
 			std::string cmd = "start " + url;
 			system(cmd.c_str());

@@ -752,7 +752,7 @@ enum
 struct user_genscript
 {
 	//Saved vars
-	bool doscript;
+	byte _doscript;
 	bounded_map<dword,int32_t> data;
 	word exitState;
 	word reloadState;
@@ -760,42 +760,14 @@ struct user_genscript
 	bounded_vec<byte,int32_t> initd;
 	
 	//Temp Vars
-	bool initialized;
 	bool wait_atleast;
 	bool waitevent;
 	scr_timing waituntil;
 	int32_t indx;
-	refInfo ri;
-	int32_t stack[MAX_SCRIPT_REGISTERS];
 	
-	user_genscript(){clear();}
-	void clear()
-	{
-		doscript = false;
-		initialized = false;
-		wait_atleast = true;
-		waituntil = SCR_TIMING_START_FRAME;
-		waitevent = false;
-		exitState = 0;
-		reloadState = 0;
-		eventstate = 0;
-		indx = -1;
-		ri.Clear();
-		memset(stack, 0, sizeof(stack));
-		initd.clear();
-		data.clear();
-	}
-	void launch()
-	{
-		quit();
-		doscript = true;
-		initialized = false;
-		wait_atleast = true;
-		waituntil = SCR_TIMING_START_FRAME;
-		waitevent = false;
-		ri.Clear();
-		memset(stack, 0, sizeof(stack));
-	}
+	user_genscript(){indx = -1; clear();}
+	void clear();
+	void launch();
 	void quit();
 	size_t dataSize() const
 	{
@@ -807,12 +779,14 @@ struct user_genscript
 	}
 	void timeExit(byte exState)
 	{
-		if(!doscript) return;
+		if(!doscript()) return;
 		if(exitState & (1<<exState))
 			quit();
 		else if(reloadState & (1<<exState))
 			launch();
 	}
+	byte& doscript();
+	byte const& doscript() const;
 };
 extern user_genscript user_scripts[NUMSCRIPTSGENERIC];
 extern int32_t genscript_timing;
@@ -3116,8 +3090,8 @@ enum ASM_DEFINE
 	SPRINTFVARG,
 	TRACELR,
 	WAITFRAMESR,
-	RESRVD_OP_Z3_01,
-	RESRVD_OP_Z3_02,
+	REGION_SCREEN_FOR_COMBO_POS,
+	REGION_TRIGGER_SECRETS,
 	RESRVD_OP_Z3_03,
 	RESRVD_OP_Z3_04,
 	RESRVD_OP_Z3_05,
@@ -4791,15 +4765,15 @@ enum ASM_DEFINE
 #define RESRVD_VAR_Z3_05        0x14D6
 #define RESRVD_VAR_Z3_06        0x14D7
 #define RESRVD_VAR_Z3_07        0x14D8
-#define RESRVD_VAR_Z3_08        0x14D9
-#define RESRVD_VAR_Z3_09        0x14DA
-#define RESRVD_VAR_Z3_10        0x14DB
-#define RESRVD_VAR_Z3_11        0x14DC
+#define REGION_WIDTH            0x14D9
+#define REGION_HEIGHT           0x14DA
+#define REGION_SCREEN_WIDTH     0x14DB
+#define REGION_SCREEN_HEIGHT    0x14DC
 #define RESRVD_VAR_Z3_12        0x14DD
-#define RESRVD_VAR_Z3_13        0x14DE
-#define RESRVD_VAR_Z3_14        0x14DF
-#define RESRVD_VAR_Z3_15        0x14E0
-#define RESRVD_VAR_Z3_16        0x14E1
+#define REGION_UNUSED           0x14DE
+#define REGION_NUM_COMBOS       0x14DF
+#define REGION_ID               0x14E0
+#define REGION_ORIGIN_SCREEN    0x14E1
 #define LWPNLIFTLEVEL      0x14E2
 #define LWPNLIFTTIME      0x14E3
 #define LWPNLIFTHEIGHT      0x14E4

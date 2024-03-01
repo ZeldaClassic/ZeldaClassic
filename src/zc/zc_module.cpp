@@ -91,7 +91,7 @@ bool ZModule::init(bool d) //bool default
 	//We load the current module name from zc.cfg or zquest.cfg!
 	//Otherwise, we don't know what file to access to load the module vars! 
 	strcpy(moduledata.module_name,zc_get_config("ZCMODULE","current_module","modules/classic.zmod"));
-	al_trace("The Current ZC Player Module is: %s\n",moduledata.module_name); 
+	al_trace("The Current ZQuest Player Module is: %s\n",moduledata.module_name); 
 	if(!fileexists((char*)moduledata.module_name))
 	{
 		Z_error("ZC Player I/O Error: No module definitions found. Please check your settings in %s.cfg.\n", "zc");
@@ -321,7 +321,7 @@ bool ZModule::init(bool d) //bool default
 		};
 		for ( int32_t q = 0; q < wRefFire2+1; q++ )
 		{
-			if(lweapon_cats[q][0] == '-')
+			if(lweapon_cats[q][0] != '-')
 				strcpy(moduledata.player_weapon_names[q],zc_get_config_basic("LWEAPONS",lweapon_cats[q],lweapon_default_names[q]));
 			//al_trace("LWeapon ID %d is: %s\n", q, moduledata.player_weapon_names[q]);
 			//al_trace("LWEAPONS %d is: %s\n", q, moduledata.player_weapon_names[q]);

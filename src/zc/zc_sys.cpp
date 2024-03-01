@@ -389,13 +389,10 @@ void load_game_configs()
 	
 	epilepsyFlashReduction = zc_get_config(cfg_sect,"epilepsy_flash_reduction",0);
 	
-	digi_volume = zc_get_config(sfx_sect,"digi",248);
 	midi_volume = zc_get_config(sfx_sect,"midi",255);
-	sfx_volume = zc_get_config(sfx_sect,"sfx",248);
-	emusic_volume = zc_get_config(sfx_sect,"emusic",248);
+	sfx_volume = zc_get_config(sfx_sect,"sfx",255);
+	emusic_volume = zc_get_config(sfx_sect,"emusic",255);
 	pan_style = zc_get_config(sfx_sect,"pan",1);
-	// 1 <= zcmusic_bufsz <= 128
-	zcmusic_bufsz = vbound(zc_get_config(sfx_sect,"zcmusic_bufsz",64),1,128);
 	volkeys = zc_get_config(sfx_sect,"volkeys",0)!=0;
 	zc_vsync = zc_get_config(cfg_sect,"vsync",0);
 	Throttlefps = zc_get_config(cfg_sect,"throttlefps",1)!=0;
@@ -408,6 +405,7 @@ void load_game_configs()
 	if (em_is_mobile()) NameEntryMode = 2;
 #endif
 	ShowFPS = zc_get_config(cfg_sect,"showfps",0)!=0;
+	ShowGameTime = zc_get_config(cfg_sect,"showtime",0);
 	NESquit = zc_get_config(cfg_sect,"fastquit",0)!=0;
 	ClickToFreeze = zc_get_config(cfg_sect,"clicktofreeze",1)!=0;
 	abc_patternmatch = zc_get_config(cfg_sect, "lister_pattern_matching", 1);
@@ -3982,12 +3980,12 @@ int32_t onNonGUISnapshot()
 	}
 	while(num<99999 && exists(buf));
 
-	if (tmpscr->flags3&fNOSUBSCR && !(key[KEY_ALT]))
+	if ((tmpscr->flags3&fNOSUBSCR && !(tmpscr->flags3&fNOSUBSCROFFSET)) && !(key[KEY_ALT]))
 	{
 		BITMAP *b = create_bitmap_ex(8,256,168);
 		clear_to_color(b,0);
 		blit(framebuf,b,0,passive_subscreen_height/2,0,0,256,168);
-		alleg4_save_bitmap(b, SnapshotScale, buf);
+		alleg4_save_bitmap(b, SnapshotScale, buf, realpal ? temppal : RAMpal);
 		destroy_bitmap(b);
 	}
 	else
@@ -4466,15 +4464,6 @@ void syskeys()
 	
 	if(!get_debug() || !SystemKeys || replay_is_replaying())
 		goto bottom;
-		
-	if(zc_readkey(KEY_D))
-	{
-		details = !details;
-		rectfill(screen,0,0,319,7,BLACK);
-		rectfill(screen,0,8,31,239,BLACK);
-		rectfill(screen,288,8,319,239,BLACK);
-		rectfill(screen,32,232,287,239,BLACK);
-	}
 	
 	if(zc_readkey(KEY_P))   Paused=!Paused;
 	
@@ -5187,38 +5176,6 @@ int32_t OnnClearQuestDir()
 	else return D_O_K;
 }
 
-
-int32_t onConsoleZASM()
-{
-	if ( !zasm_debugger )
-	{
-		AlertDialog("WARNING: ZASM Debugger",
-			"Enabling this will open the ZASM Debugger Console" 
-			"\nThis will likely grind ZC to a halt with lag."
-			"\nTo make any use of this, it is suggested that you read"
-			"\nthe documentation for 'void Breakpoint(char[] string);'"
-			" in 'ZScript_Additions.txt'"
-			"\nThis is not recommended for normal users,"
-			" and is only intended for ZC developers,"
-			"\nor quest developers coding directly in ZASM"
-			"\nAre you sure that you wish to open the ZASM Debugger?",
-			[&](bool ret,bool)
-			{
-				if(ret)
-				{
-					FFCore.ZASMPrint(true);
-				}
-			}).show();
-		return D_O_K;
-	}
-	else
-	{
-		FFCore.ZASMPrint(false);
-		return D_O_K;
-	}
-}
-
-
 int32_t onConsoleZScript()
 {
 	if ( !zscript_debugger )
@@ -5303,6 +5260,13 @@ int32_t onShowFPS()
 {
 	ShowFPS = !ShowFPS;
 	zc_set_config(cfg_sect,"showfps",(int32_t)ShowFPS);
+	return D_O_K;
+}
+
+int32_t onShowTime()
+{
+	ShowGameTime = !ShowGameTime;
+	zc_set_config(cfg_sect,"showtime",ShowGameTime);
 	return D_O_K;
 }
 
@@ -5480,7 +5444,6 @@ extern const char *key_str[];
 std::string get_keystr(int key);
 
 const char *pan_str[4] = { "MONO", " 1/2", " 3/4", "FULL" };
-//extern int32_t zcmusic_bufsz;
 
 static char str_a[80],str_b[80],str_s[80],str_m[80],str_l[80],str_r[80],str_p[80],str_ex1[80],str_ex2[80],str_ex3[80],str_ex4[80],
 	str_leftmod1[80],str_leftmod2[80],str_rightmod1[80],str_rightmod2[80], str_left[80], str_right[80], str_up[80], str_down[80],
@@ -5551,9 +5514,7 @@ int32_t d_stringloader(int32_t msg,DIALOG *d,int32_t c)
 				
 			case 2:
 				sprintf(str_a,"   %3d",midi_volume);
-				sprintf(str_b,"   %3d",digi_volume);
 				sprintf(str_l,"   %3d",emusic_volume);
-				sprintf(str_m,"   %3dKB",zcmusic_bufsz);
 				sprintf(str_r,"   %3d",sfx_volume);
 				strcpy(str_s,pan_str[pan_style]);
 				sprintf(str_leftmod1,"%3d\n%s",cheat_modifier_keys[0],key_str[cheat_modifier_keys[0]]);
@@ -5598,14 +5559,6 @@ int32_t set_pan(void *dp3, int32_t d2)
 	pan_style = vbound(d2,0,3);
 	// text_mode(vc(11));
 	textout_right_ex(screen,get_zc_font(font_lfont_l), pan_str[pan_style],((int32_t*)dp3)[1],((int32_t*)dp3)[2],jwin_pal[jcBOXFG],jwin_pal[jcBOX]);
-	return D_O_K;
-}
-
-int32_t set_buf(void *dp3, int32_t d2)
-{
-	// text_mode(vc(11));
-	zcmusic_bufsz = d2 + 1;
-	textprintf_right_ex(screen,get_zc_font(font_lfont_l), ((int32_t*)dp3)[1],((int32_t*)dp3)[2],jwin_pal[jcBOXFG],jwin_pal[jcBOX],"%3dKB",zcmusic_bufsz);
 	return D_O_K;
 }
 
@@ -5888,16 +5841,8 @@ static DIALOG keyboard_control_dlg[] =
 	{ NULL,				 0,	0,	0,	0,   0,	   0,	   0,	   0,		  0,			 0,	   NULL,						   NULL,  NULL }
 };
 
-/*
-int32_t midi_dp[3] = {0,147,104};
-int32_t digi_dp[3] = {1,147,120};
-int32_t pan_dp[3]  = {0,147,136};
-int32_t buf_dp[3]  = {0,147,152};
-*/
 int32_t midi_dp[3] = {0,0,0};
-int32_t digi_dp[3] = {1,0,0};
 int32_t emus_dp[3] = {2,0,0};
-int32_t buf_dp[3]  = {0,0,0};
 int32_t sfx_dp[3]  = {3,0,0};
 int32_t pan_dp[3]  = {0,0,0};
 
@@ -5911,33 +5856,32 @@ static DIALOG sound_dlg[] =
 	{ d_timer_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
 	{ jwin_frame_proc,	   10,	 28,	300,	112,	0,		 0,				   0,	0,			FR_ETCHED,	 0,  NULL,						   NULL,			   NULL	 },
 	{ jwin_rtext_proc,	  190,	 40,	 40,	  8,	vc(7),	 vc(11),			  0,	0,			0,			 0, (void *) str_a,				 NULL,			   NULL	 },
-	{ jwin_rtext_proc,	  190,	 56,	 40,	  8,	vc(7),	 vc(11),			  0,	0,			0,			 0, (void *) str_b,				 NULL,			   NULL	 },
-	{ jwin_rtext_proc,	  190,	 72,	 40,	  8,	vc(7),	 vc(11),			  0,	0,			0,			 0, (void *) str_l,				 NULL,			   NULL	 },
-	{ jwin_rtext_proc,	  190,	 88,	 40,	  8,	vc(7),	 vc(11),			  0,	0,			0,			 0, (void *) str_m,				 NULL,			   NULL	 },
+	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
+	{ jwin_rtext_proc,	  190,	 56,	 40,	  8,	vc(7),	 vc(11),			  0,	0,			0,			 0, (void *) str_l,				 NULL,			   NULL	 },
+	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
 	// 10
-	{ jwin_rtext_proc,	  190,	104,	 40,	  8,	vc(7),	 vc(11),			  0,	0,			0,			 0, (void *) str_r,				 NULL,			   NULL	 },
-	{ jwin_rtext_proc,	  190,	120,	 40,	  8,	vc(7),	 vc(11),			  0,	0,			0,			 0, (void *) str_s,				 NULL,			   NULL	 },
+	{ jwin_rtext_proc,	  190,	 72,	 40,	  8,	vc(7),	 vc(11),			  0,	0,			0,			 0, (void *) str_r,				 NULL,			   NULL	 },
+	{ jwin_rtext_proc,	  190,	 88,	 40,	  8,	vc(7),	 vc(11),			  0,	0,			0,			 0, (void *) str_s,				 NULL,			   NULL	 },
 	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
 	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
 	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
 	{ jwin_slider_proc,	 196,	 40,	 96,	  8,	vc(0),	 jwin_pal[jcBOX],	 0,	0,		   32,			 0,  NULL, (void *) set_vol,   midi_dp  },
-	{ jwin_slider_proc,	 196,	 56,	 96,	  8,	vc(0),	 jwin_pal[jcBOX],	 0,	0,		   32,			 0,  NULL, (void *) set_vol,   digi_dp  },
-	{ jwin_slider_proc,	 196,	 72,	 96,	  8,	vc(0),	 jwin_pal[jcBOX],	 0,	0,		   32,			 0,  NULL, (void *) set_vol,   emus_dp  },
-	{ jwin_slider_proc,	 196,	 88,	 96,	  8,	vc(0),	 jwin_pal[jcBOX],	 0,	0,		  127,			 0,  NULL, (void *) set_buf,   buf_dp   },
-	{ jwin_slider_proc,	 196,	104,	 96,	  8,	vc(0),	 jwin_pal[jcBOX],	 0,	0,		   32,			 0,  NULL, (void *) set_vol,   sfx_dp   },
+	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
+	{ jwin_slider_proc,	 196,	 56,	 96,	  8,	vc(0),	 jwin_pal[jcBOX],	 0,	0,		   32,			 0,  NULL, (void *) set_vol,   emus_dp  },
+	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
+	{ jwin_slider_proc,	 196,	 72,	 96,	  8,	vc(0),	 jwin_pal[jcBOX],	 0,	0,		   32,			 0,  NULL, (void *) set_vol,   sfx_dp   },
 	//20
-	{ jwin_slider_proc,	 196,	120,	 96,	  8,	vc(0),	 jwin_pal[jcBOX],	 0,	0,			3,			 0,  NULL, (void *) set_pan,   pan_dp   },
+	{ jwin_slider_proc,	 196,	88,	 96,	  8,	vc(0),	 jwin_pal[jcBOX],	 0,	0,			3,			 0,  NULL, (void *) set_pan,   pan_dp   },
 	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
 	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
 	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
-	{ jwin_text_proc,		17,	 40,	 48,	  8,	vc(0),	 vc(11),			  0,	0,			0,			 0, (void *) "Master MIDI Volume",  NULL,			   NULL	 },
-	{ jwin_text_proc,		17,	 56,	 48,	  8,	vc(0),	 vc(11),			  0,	0,			0,			 0, (void *) "Master Digi Volume",  NULL,			   NULL	 },
-	{ jwin_text_proc,		17,	 72,	 48,	  8,	vc(0),	 vc(11),			  0,	0,			0,			 0, (void *) "Enhanced Music Volume",	 NULL,			   NULL	 },
-	{ jwin_text_proc,		17,	 88,	 48,	  8,	vc(0),	 vc(11),			  0,	0,			0,			 0, (void *) "Enhanced Music Buffer",	 NULL,			   NULL	 },
-	{ jwin_text_proc,		17,	104,	 48,	  8,	vc(0),	 vc(11),			  0,	0,			0,			 0, (void *) "SFX Volume",		  NULL,			   NULL	 },
-	{ jwin_text_proc,		17,	120,	 48,	  8,	vc(0),	 vc(11),			  0,	0,			0,			 0, (void *) "SFX Pan",			 NULL,			   NULL	 },
+	{ jwin_text_proc,		17,	 40,	 48,	  8,	vc(0),	 vc(11),			  0,	0,			0,			 0, (void *) "MIDI Volume",  NULL,			   NULL	 },
+	{ jwin_text_proc,		17,	 56,	 48,	  8,	vc(0),	 vc(11),			  0,	0,			0,			 0, (void *) "Music Volume (Enhanced Music)",	 NULL,			   NULL	 },
+	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
+	{ jwin_text_proc,		17,	 72,	 48,	  8,	vc(0),	 vc(11),			  0,	0,			0,			 0, (void *) "SFX Volume",		  NULL,			   NULL	 },
+	{ jwin_text_proc,		17,	 88,	 48,	  8,	vc(0),	 vc(11),			  0,	0,			0,			 0, (void *) "SFX Pan",			 NULL,			   NULL	 },
+	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
 	//30
-	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
 	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
 	{ d_dummy_proc,		   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
 	{ NULL,				   0,	  0,	  0,	  0,	0,		 0,				   0,	0,			0,			 0,  NULL,						   NULL,			   NULL	 },
@@ -6211,7 +6155,7 @@ static NewMenu replay_menu
 static DIALOG credits_dlg[] =
 {
 	/* (dialog proc)	   (x)   (y)   (w)   (h)   (fg)	 (bg)	 (key)	(flags)	(d1)	  (d2)	 (dp)	 (dp2) (dp3) */
-	{ jwin_win_proc,	   40,   38,   241,  173,  vc(14),  vc(1),   0,	   D_EXIT,	0,		0, (void *) "ZC Credits", NULL,  NULL },
+	{ jwin_win_proc,	   40,   38,   241,  173,  vc(14),  vc(1),   0,	   D_EXIT,	0,		0, (void *) "ZQuest Classic Credits", NULL,  NULL },
 	{ jwin_frame_proc,	 47,   65,   227,  115,  vc(15),  vc(1),   0,	   0,		 FR_DEEP,  0,	   NULL, NULL,  NULL },
 	{ d_bitmap_proc,	   49,   67,   222,  110,  vc(15),  vc(1),   0,	   0,		 0,		0,	   NULL, NULL,  NULL },
 	{ jwin_button_proc,	140,  184,  41,   21,   vc(14),  vc(1),   0,	   D_EXIT,	0,		0, (void *) "OK", NULL,  NULL },
@@ -6534,15 +6478,13 @@ int32_t onAbout()
 {
 	char buf1[80]={0};
 	std::ostringstream oss;
-	sprintf(buf1,"%s, Version: %s", ZC_PLAYER_NAME,ZC_PLAYER_V);
+	sprintf(buf1,"%s", ZC_PLAYER_NAME);
 	oss << buf1 << '\n';
-	sprintf(buf1, "%s", ALPHA_VER_STR);
+	sprintf(buf1, "%s", getReleaseTag());
 	oss << buf1 << '\n';
 	sprintf(buf1,"Build Date: %s %s, %d at @ %s %s", dayextension(BUILDTM_DAY).c_str(), (char*)months[BUILDTM_MONTH], BUILDTM_YEAR, __TIME__, __TIMEZONE__);
 	oss << buf1 << '\n';
 	sprintf(buf1, "Built By: %s", DEV_SIGNOFF);
-	oss << buf1 << '\n';
-	sprintf(buf1, "Tag: %s", getReleaseTag());
 	oss << buf1 << '\n';
 	
 	InfoDialog("About ZC", oss.str()).show();
@@ -6903,9 +6845,7 @@ int32_t onSound()
 	}
 
 	int32_t m = midi_volume;
-	int32_t d = digi_volume;
 	int32_t e = emusic_volume;
-	int32_t b = zcmusic_bufsz;
 	int32_t s = sfx_volume;
 	int32_t p = pan_style;
 	pan_style = vbound(pan_style,0,3);
@@ -6916,20 +6856,14 @@ int32_t onSound()
 		
 	midi_dp[1] = sound_dlg[6].x;
 	midi_dp[2] = sound_dlg[6].y;
-	digi_dp[1] = sound_dlg[7].x;
-	digi_dp[2] = sound_dlg[7].y;
 	emus_dp[1] = sound_dlg[8].x;
 	emus_dp[2] = sound_dlg[8].y;
-	buf_dp[1]  = sound_dlg[9].x;
-	buf_dp[2]  = sound_dlg[9].y;
 	sfx_dp[1]  = sound_dlg[10].x;
 	sfx_dp[2]  = sound_dlg[10].y;
 	pan_dp[1]  = sound_dlg[11].x;
 	pan_dp[2]  = sound_dlg[11].y;
 	sound_dlg[15].d2 = (midi_volume==255) ? 32 : midi_volume>>3;
-	sound_dlg[16].d2 = (digi_volume==255) ? 32 : digi_volume>>3;
 	sound_dlg[17].d2 = (emusic_volume==255) ? 32 : emusic_volume>>3;
-	sound_dlg[18].d2 = zcmusic_bufsz;
 	sound_dlg[19].d2 = (sfx_volume==255) ? 32 : sfx_volume>>3;
 	sound_dlg[20].d2 = pan_style;
 	
@@ -6946,23 +6880,18 @@ int32_t onSound()
 			temp_volume = (sfx_volume * FFCore.usr_sfx_volume) / 10000 / 100;
 		for(int32_t i=0; i<WAV_COUNT; ++i)
 		{
-			//allegro assertion fails when passing in -1 as voice -DD
-			if(sfx_voice[i] > 0)
+			if(sfx_voice[i] >= 0)
 				voice_set_volume(sfx_voice[i], temp_volume);
 		}
-		zc_set_config(sfx_sect,"digi",digi_volume);
 		zc_set_config(sfx_sect,"midi",midi_volume);
 		zc_set_config(sfx_sect,"sfx",sfx_volume);
 		zc_set_config(sfx_sect,"emusic",emusic_volume);
 		zc_set_config(sfx_sect,"pan",pan_style);
-		zc_set_config(sfx_sect,"zcmusic_bufsz",zcmusic_bufsz);
 	}
 	else
 	{
 		midi_volume   = m;
-		digi_volume   = d;
 		emusic_volume = e;
-		zcmusic_bufsz = b;
 		sfx_volume	= s;
 		pan_style	 = p;
 	}
@@ -6972,7 +6901,7 @@ int32_t onSound()
 
 int32_t queding(char const* s1, char const* s2, char const* s3)
 {
-	return jwin_alert("ZC",s1,s2,s3,"&Yes","&No",'y','n',get_zc_font(font_lfont));
+	return jwin_alert("ZQuest Classic",s1,s2,s3,"&Yes","&No",'y','n',get_zc_font(font_lfont));
 }
 
 int32_t onQuit()
@@ -7062,7 +6991,7 @@ int32_t onReset()
 
 int32_t onExit()
 {
-	if(queding(" Quit ZC? ",NULL,NULL)==1)
+	if(queding(" Quit ZQuest Classic? ",NULL,NULL)==1)
 	{
 		Quit=qEXIT;
 		return D_CLOSE;
@@ -7435,6 +7364,7 @@ enum
 	MENUID_SETTINGS_CONTROLS,
 	MENUID_SETTINGS_CAPFPS,
 	MENUID_SETTINGS_SHOWFPS,
+	MENUID_SETTINGS_SHOWTIME,
 	MENUID_SETTINGS_CLICK_FREEZE,
 	MENUID_SETTINGS_TRANSLAYERS,
 	MENUID_SETTINGS_NESQUIT,
@@ -7452,6 +7382,7 @@ static NewMenu settings_menu
 	{},
 	{ "&Cap FPS","F1", onThrottleFPS, MENUID_SETTINGS_CAPFPS },
 	{ "Show &FPS","F2", onShowFPS, MENUID_SETTINGS_SHOWFPS },
+	{ "Show &Time", onShowTime, MENUID_SETTINGS_SHOWTIME },
 	{ "Click to Freeze", onClickToFreeze, MENUID_SETTINGS_CLICK_FREEZE },
 	{ "Cont. &Heart Beep", onHeartBeep, MENUID_SETTINGS_HEARTBEEP },
 	{ "Show Trans. &Layers", onTransLayers, MENUID_SETTINGS_TRANSLAYERS },
@@ -7476,7 +7407,7 @@ static NewMenu misc_menu
 {
 	{ "&About...", onAbout },
 	// TODO: re-enable, but: 1) do not use a bitmap thing that is hard to update 2) update names and 3) don't use the Z-word.
-	{ "&Credits...", onCredits, nullopt, true },
+	// { "&Credits...", onCredits },
 	{ "&Fullscreen", onFullscreenMenu, MENUID_MISC_FULLSCREEN },
 	{ "&Video Mode...", onVidMode, MENUID_MISC_VIDMODE },
 	{},
@@ -7487,7 +7418,6 @@ static NewMenu misc_menu
 	{ "Take &Snapshot F12", onSnapshot },
 	{ "Sc&reen Saver...", onScreenSaver },
 	{ "Save ZC Configuration", OnSaveZCConfig },
-	{ "Show ZASM Debugger", onConsoleZASM, MENUID_MISC_ZASM_DEBUGGER },
 	{ "Show ZScript Debugger", onConsoleZScript, MENUID_MISC_ZSCRIPT_DEBUGGER },
 	{ "Clear Console on Qst Load", onClrConsoleOnLoad, MENUID_MISC_CLEAR_CONSOLE_ON_LOAD },
 	{ "Clear Directory Cache", OnnClearQuestDir },
@@ -7699,15 +7629,23 @@ int32_t onExtLetterGridEntry()
 static BITMAP* oldscreen;
 int32_t onFullscreenMenu()
 {
-	// super hacks
-	screen = oldscreen;
-	if (onFullscreen() == D_REDRAW)
-	{
-		oldscreen = screen;
-	}
-	screen = menu_bmp;
+	PALETTE oldpal;
+	get_palette(oldpal);
+
+	fullscreen = !fullscreen;
+	all_toggle_fullscreen(fullscreen);
+	zc_set_config("zeldadx","fullscreen",fullscreen);
+
+	zc_set_palette(oldpal);
+	gui_mouse_focus=0;
+	extern int32_t switch_type;
+	switch_type = pause_in_background ? SWITCH_PAUSE : SWITCH_BACKGROUND;
+	set_display_switch_mode(fullscreen?SWITCH_BACKAMNESIA:switch_type);
+	set_display_switch_callback(SWITCH_OUT, switch_out_callback);
+	set_display_switch_callback(SWITCH_IN, switch_in_callback);
 	misc_menu.select_uid(MENUID_MISC_FULLSCREEN, isFullScreen());
 	misc_menu.select_uid(MENUID_MISC_VIDMODE, isFullScreen());
+
 	return D_O_K;
 }
 
@@ -7874,15 +7812,15 @@ void System()
 	//  font=tfont;
 	
 	misc_menu.select_uid(MENUID_MISC_FULLSCREEN, isFullScreen());
-	misc_menu.select_uid(MENUID_MISC_VIDMODE, isFullScreen());
+	misc_menu.disable_uid(MENUID_MISC_VIDMODE, isFullScreen());
 	
 	#if DEVLEVEL > 1
 	dev_menu.disable_uid(MENUID_DEV_SETCHEAT, !Playing);
 	#endif
 	game_menu.disable_uid(MENUID_GAME_LOADQUEST, getsaveslot() < 0);
 	game_menu.disable_uid(MENUID_GAME_ENDGAME, !Playing);
-	misc_menu.select_uid(MENUID_MISC_QUEST_INFO, !Playing);
-	misc_menu.select_uid(MENUID_MISC_QUEST_DIR, Playing);
+	misc_menu.disable_uid(MENUID_MISC_QUEST_INFO, !Playing);
+	misc_menu.disable_uid(MENUID_MISC_QUEST_DIR, Playing);
 	clear_keybuf();
 
 	clear_bitmap(menu_bmp);
@@ -7912,6 +7850,7 @@ void System()
 			settings_menu.disable_uid(MENUID_SETTINGS_CONTROLS, replay_is_replaying());
 			settings_menu.select_uid(MENUID_SETTINGS_CAPFPS, Throttlefps);
 			settings_menu.select_uid(MENUID_SETTINGS_SHOWFPS, ShowFPS);
+			settings_menu.select_uid(MENUID_SETTINGS_SHOWTIME, ShowGameTime);
 			settings_menu.select_uid(MENUID_SETTINGS_CLICK_FREEZE, ClickToFreeze);
 			settings_menu.select_uid(MENUID_SETTINGS_TRANSLAYERS, TransLayers);
 			settings_menu.select_uid(MENUID_SETTINGS_NESQUIT, NESquit);
@@ -8115,19 +8054,6 @@ void fix_dialogs()
 	jwin_center_dialog(scrsaver_dlg);
 	jwin_center_dialog(sound_dlg);
 	jwin_center_dialog(triforce_dlg);
-	
-	// digi_dp[1] += scrx;
-	// digi_dp[2] += scry;
-	// midi_dp[1] += scrx;
-	// midi_dp[2] += scry;
-	// pan_dp[1]  += scrx;
-	// pan_dp[2]  += scry;
-	// emus_dp[1]  += scrx;
-	// emus_dp[2]  += scry;
-	// buf_dp[1]  += scrx;
-	// buf_dp[2]  += scry;
-	// sfx_dp[1]  += scrx;
-	// sfx_dp[2]  += scry;
 }
 
 /*****************************/
@@ -8432,6 +8358,31 @@ void sfx_cleanup()
 		}
 }
 
+SAMPLE* sfx_get_sample(int32_t index)
+{
+	// check index
+	if (index<=0 || index>=WAV_COUNT)
+		return nullptr;
+		
+	if (sfxdat)
+	{
+		if (index<Z35)
+		{
+			return (SAMPLE*)sfxdata[index].dat;
+		}
+		else
+		{
+			return (SAMPLE*)sfxdata[Z35].dat;
+		}
+	}
+	else
+	{
+		return &customsfxdata[index];
+	}
+
+	return nullptr;
+}
+
 // allocates a voice for the sample "wav_index" (index into zelda.dat)
 // if a voice is already allocated (and/or playing), then it just returns true
 // Returns true:  voice is allocated
@@ -8441,31 +8392,16 @@ bool sfx_init(int32_t index)
 	// check index
 	if(index<=0 || index>=WAV_COUNT)
 		return false;
-		
-	if(sfx_voice[index]==-1)
+
+	if (sfx_voice[index] == -1)
 	{
-		if(sfxdat)
-		{
-			if(index<Z35)
-			{
-				sfx_voice[index]=allocate_voice((SAMPLE*)sfxdata[index].dat);
-			}
-			else
-			{
-				sfx_voice[index]=allocate_voice((SAMPLE*)sfxdata[Z35].dat);
-			}
-		}
-		else
-		{
-			sfx_voice[index]=allocate_voice(&customsfxdata[index]);
-		}
-		
-		int32_t temp_volume = sfx_volume;
-		if (GameLoaded && !get_qr(qr_OLD_SCRIPT_VOLUME))
-			temp_volume = (sfx_volume * FFCore.usr_sfx_volume) / 10000 / 100;
-		voice_set_volume(sfx_voice[index], temp_volume);
+		SAMPLE* sample = sfx_get_sample(index);
+		if (!sample)
+			return false;
+
+		sfx_voice[index] = allocate_voice(sample);
 	}
-	
+
 	return sfx_voice[index] != -1;
 }
 
@@ -8564,6 +8500,7 @@ void cont_sfx(int32_t index)
 	{
 		voice_set_position(sfx_voice[index],0);
 		voice_set_playmode(sfx_voice[index],PLAYMODE_LOOP);
+		voice_set_volume(sfx_voice[index], sfx_volume);
 		voice_start(sfx_voice[index]);
 	}
 	else

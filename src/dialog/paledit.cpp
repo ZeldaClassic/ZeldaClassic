@@ -250,8 +250,6 @@ std::shared_ptr<GUI::Widget> PalEditDialog::view()
 						{
 							memcpy(*gUndoPal, pal, sizeof(RGB)*16*cset_count);
 						}
-						cls();
-						pendDraw();
 						loadPal();
 					}
 				),
@@ -265,8 +263,6 @@ std::shared_ptr<GUI::Widget> PalEditDialog::view()
 						{
 							memcpy(*gUndoPal, pal, sizeof(RGB)*16*cset_count);
 						}
-						cls();
-						pendDraw();
 						loadPal();
 					}
 				),
@@ -278,8 +274,6 @@ std::shared_ptr<GUI::Widget> PalEditDialog::view()
 						{
 							calc_dark(offset);
 							memcpy(*gUndoPal, pal, sizeof(RGB)*16*cset_count);
-							cls();
-							pendDraw();
 							loadPal();
 						}
 						else
@@ -297,10 +291,10 @@ std::shared_ptr<GUI::Widget> PalEditDialog::view()
 						int32_t val = tabpan->getCurrentIndex()?13:0;
 						val += frames[tabpan->getCurrentIndex()]->getSelection();
 						load_cset(RAMpal,9,offset + val);
-						InfoDialog("CSet 9 Preview","The selected cset has been temporarily copied to the ZC Editor's CSet 9."
+						InfoDialog("CSet 9 Preview","The selected cset has been temporarily copied to ZQuest's CSet 9."
 							" \nThis feature is useful if you want to preview or edit how a tile would look in the selected CSet."
 							" \nThis effect is temporary and will be reverted when you load a different palette,"
-							" such as by changing screens in ZC Editor to a screen with a different palette.").show();
+							" such as by changing screens in ZQuest to a screen with a different palette.").show();
 						set_pal();
 						DidCS9 = true;
 					},

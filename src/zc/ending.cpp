@@ -43,45 +43,52 @@ namespace
 		int32_t color;
 	};
 	
-	const int32_t numCreditsLines = 3;
+	const int32_t numCreditsLines = 12;
 	const EndingTextLine credits[]=
 	{
-		{ "CREDITS", 64, 768, red			},
-		{ "ZC Development Members Past and Present",   72, 816, white },
-		{ "Phantom Mance",    76, 832, white },
+		{ " STAFF ",                104, 240, white },
+		{ "EXECUTIVE",              40,  272, blue  },
+		{ "PRODUCER... H.YAMAUCHI", 40,  280, blue  },
+		{ "PRODUCER.... S.MIYAHON", 40,  320, green },
+		{ "DIRECTOR.... S.MIYAHON", 40,  360, red   },
+		{ "        ...... TEN TEN", 40,  384, red   },
+		{ "DESIGNER...... TEN TEN", 40,  424, blue  },
+		{ "PROGRAMMER.. T.NAKAZOO", 40,  464, green },
+		{ "          ..... YACHAN", 40,  488, green },
+		{ "          ... MARUMARU", 40,  512, green },
+		{ "SOUND",                  40,  552, red   },
+		{ "COMPOSER...... KONCHAN", 40,  560, red   }
 	};
 	
 	const int32_t numQuest1EndLines = 4;
 	const EndingTextLine quest1End[]=
 	{
-		{ "Congratulations!", 64, 768, white },
-		/* name - deaths */
-		/* time */
-		{ "You finished a",   72, 816, white },
-		{ "custom quest.",    76, 832, white },
-		{ "ZC",   76, 880, white }
+		{ "ANOTHER QUEST WILL START", 32, 656, white },
+		{ "FROM HERE.",               88, 672, white },
+		{ "PRESS THE START BUTTON.",  40, 696, white },
+		{ "\2731986 NINTENDO",        72, 760, white }
 	};
 	
 	const int32_t numQuest2EndLines = 4;
 	const EndingTextLine quest2End[]=
 	{
-		{ "Congratulations!", 64, 768, white },
+		{ "YOU ARE GREAT.",      72, 768, white },
 		/* name - deaths */
-		/* time */
-		{ "You finished a",   72, 816, white },
-		{ "custom quest.",    76, 832, white },
-		{ "ZC",   76, 880, white }
+		{ "YOU HAVE AN AMAZING", 48, 816, white },
+		{ "WISDOM AND POWER.",   64, 832, white },
+		{ "\2731986 NINTENDO",   72, 912, blue  }
 	};
 	
-	const int32_t numQuest34EndLines = 4;
+	const int32_t numQuest34EndLines = 6;
 	const EndingTextLine quest34End[]=
 	{
-		{ "Congratulations!", 64, 768, white },
+		{ "YOU ARE GREAT.",            72,  768, white },
 		/* name - deaths */
-		/* time */
-		{ "You finished a",   72, 816, white },
-		{ "custom quest.",    76, 832, white },
-		{ "ZC",   76, 880, white }
+		{ "YOU HAVE AN AMAZING",       48,  816, white },
+		{ "WISDOM AND POWER.",         64,  832, white },
+		{ "END OF",                    104, 880, white },
+		{ "\"THE LEGEND OF ZELDA 1\"", 32,  896, white },
+		{ "\2731986 NINTENDO",         72,  912, blue  }
 	};
 	
 	const int32_t numCustomQuestEndLines = 4;
@@ -92,7 +99,7 @@ namespace
 		/* time */
 		{ "You finished a",   72, 816, white },
 		{ "custom quest.",    76, 832, white },
-		{ "ZC",   76, 880, white }
+		{ "ZQUEST CLASSIC",   76, 880, white }
 	};
 }
 

@@ -2,6 +2,7 @@
 #define _SPRITE_H_
 
 #include "base/zc_alleg.h"
+#include "base/headers.h"
 #include "base/zdefs.h"
 #include <set>
 #include <map>
@@ -24,12 +25,6 @@ extern byte newconveyorclk;
 
 extern byte sprite_flicker_color;
 extern byte sprite_flicker_transp_passes;
-
-struct scriptmem
-{
-    int32_t stack[MAX_SCRIPT_REGISTERS];
-    refInfo scriptData;
-};
 
 /**********************************/
 /******* Sprite Base Class ********/
@@ -89,11 +84,7 @@ public:
     int32_t miscellaneous[32];
     byte scriptcoldet;
     int32_t wpnsprite; //wpnsprite is new for 2.6 -Z
-	scriptmem* scrmem;
-    byte initialised;
     dword scriptflag;
-    word doscript;
-    byte waitdraw;
     word script;
     word weaponscript;
     int32_t initD[8];
@@ -174,12 +165,14 @@ public:
 	bool getCanFlicker();
 	void setCanFlicker(bool v);
 	
-	void alloc_scriptmem();
-	
 	virtual int32_t run_script(int32_t mode);
 	
 	virtual ALLEGRO_COLOR hitboxColor(byte opacity = 255) const;
 	virtual void draw_hitbox();
+	
+	//Script helper funcs
+	virtual optional<ScriptType> get_scrtype() const {return nullopt;}
+	
 };
 
 enum //run_script modes
@@ -201,6 +194,7 @@ class sprite_list
     sprite *sprites[SLMAX];
     int32_t count;
 	int32_t active_iterator;
+    bool delete_active_iterator;
 	int32_t max_sprites;
     map<int32_t, int32_t> containedUIDs;
     // Cache requests from scripts
@@ -224,7 +218,7 @@ public:
     int32_t getMisc(int32_t j);
 	int32_t getMax() {return max_sprites;}
 	void setMax(int32_t max) {max_sprites = (max < SLMAX ? max : SLMAX);}
-    bool del(int32_t j, bool force = false);
+    bool del(int32_t j, bool force = false, bool may_defer = true);
     void draw(BITMAP* dest,bool lowfirst);
     void drawshadow(BITMAP* dest,bool translucent, bool lowfirst);
     void draw2(BITMAP* dest,bool lowfirst);
@@ -329,8 +323,8 @@ public:
 };
 
 bool insideRotRect(double x, double y, int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, int32_t x4, int32_t y4);
-bool lineLineColl(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, int32_t x4, int32_t y4);
-bool lineBoxCollision(int32_t linex1, int32_t liney1, int32_t linex2, int32_t liney2, int32_t boxx, int32_t boxy, int32_t boxwidth, int32_t boxheight);
+bool lineLineColl(zfix x1, zfix y1, zfix x2, zfix y2, zfix x3, zfix y3, zfix x4, zfix y4);
+bool lineBoxCollision(zfix linex1, zfix liney1, zfix linex2, zfix liney2, zfix boxx, zfix boxy, zfix boxwidth, zfix boxheight);
 double comparePointLine(double x, double y, double x1, double x2, double y1, double y2);
 
 #include "items.h"

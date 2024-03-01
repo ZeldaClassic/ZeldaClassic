@@ -12,7 +12,7 @@
 #include "base/misctypes.h"
 #include "drawing.h"
 
-#ifndef IS_EDITOR
+#ifdef IS_PLAYER
 #include "zc/hero.h"
 #include "zc/decorations.h"
 #include "items.h"
@@ -52,16 +52,6 @@ fixed rad_to_fixed(T d)
 /******* Sprite Base Class ********/
 /**********************************/
 
-void sprite::alloc_scriptmem()
-{
-	if(!scrmem)
-	{
-		scrmem = new scriptmem();
-		memset(scrmem->stack, 0xFFFF, MAX_SCRIPT_REGISTERS);
-		scrmem->scriptData.Clear();
-	}
-}
-
 sprite::sprite(): solid_object()
 {
     uid = getNextUID();
@@ -79,7 +69,6 @@ sprite::sprite(): solid_object()
     drawstyle=0;
     extend=0;
     wpnsprite = 0; //wpnsprite is new for 2.6 -Z
-    scrmem = NULL;
     
     /*ewpnclass=0;
     lwpnclass=0;
@@ -119,12 +108,9 @@ sprite::sprite(): solid_object()
     //sp=0;
     //itemclass=0;
     //ffcref=0;
-    doscript=1;
-    waitdraw = 0;
     for(int32_t i=0; i<32; i++) miscellaneous[i] = 0;
     
     scriptcoldet = 1;
-    initialised = 0;
     
     //itemref = 0;
     //guyref = 0;
@@ -175,70 +161,33 @@ sprite::sprite(): solid_object()
 
 sprite::sprite(sprite const & other):
 	solid_object(other),
-    z(other.z),
-    fall(other.fall),
-    fakez(other.fakez),
-    tile(other.tile),
-    shadowtile(other.shadowtile),
-    cs(other.cs),
-    flip(other.flip),
-    c_clk(other.c_clk),
-    clk(other.clk),
-    misc(other.misc),
-    xofs(other.xofs),
-    yofs(other.yofs),
-    zofs(other.zofs),
-    hzsz(other.hzsz),
-    txsz(other.txsz),
-    tysz(other.tysz),
-    id(other.id),
-    slopeid(other.slopeid),
-    onplatid(other.onplatid),
-    angular(other.angular),
-    canfreeze(other.canfreeze),
-    angle(other.angle),
-    lasthit(other.lasthit),
-    lasthitclk(other.lasthitclk),
-    drawstyle(other.drawstyle),
-    extend(other.extend),
-    wpnsprite(other.wpnsprite),
-scriptflag(other.scriptflag),
-doscript(other.doscript),
-waitdraw(other.waitdraw),
-script(other.script),
-weaponscript(other.weaponscript),
-scripttile(other.scripttile),
-scriptflip(other.scriptflip),
-do_animation(other.do_animation),
-rotation(other.rotation),
-scale(other.scale),
-moveflags(other.moveflags),
-drawflags(other.drawflags),
-knockbackflags(other.knockbackflags),
-screenedge(other.screenedge),
-scriptshadowtile(other.scriptshadowtile),
-knockbackSpeed(other.knockbackSpeed),
-script_knockback_clk(other.script_knockback_clk),
-script_knockback_speed(other.script_knockback_speed),
-pit_pulldir(other.pit_pulldir),
-pit_pullclk(other.pit_pullclk),
-fallclk(other.fallclk),
-fallCombo(other.fallCombo),
-old_cset(other.old_cset),
-drownclk(other.drownclk),
-drownCombo(other.drownCombo),
-can_flicker(other.can_flicker),
-spr_shadow(other.spr_shadow),
-spr_death(other.spr_death),
-spr_spawn(other.spr_spawn),
-spr_death_anim_clk(other.spr_death_anim_clk),
-spr_spawn_anim_clk(other.spr_spawn_anim_clk),
-spr_death_anim_frm(other.spr_death_anim_frm),
-spr_spawn_anim_frm(other.spr_spawn_anim_frm),
-glowRad(other.glowRad),
-glowShape(other.glowShape),
-ignore_delete(other.ignore_delete)
-
+    z(other.z), fall(other.fall), fakez(other.fakez), tile(other.tile),
+    shadowtile(other.shadowtile), cs(other.cs), flip(other.flip),
+    c_clk(other.c_clk), clk(other.clk), misc(other.misc), xofs(other.xofs),
+    yofs(other.yofs), zofs(other.zofs), hzsz(other.hzsz), txsz(other.txsz),
+    tysz(other.tysz), id(other.id), slopeid(other.slopeid),
+    onplatid(other.onplatid), angular(other.angular), canfreeze(other.canfreeze),
+    angle(other.angle), lasthit(other.lasthit), lasthitclk(other.lasthitclk),
+    drawstyle(other.drawstyle), extend(other.extend), wpnsprite(other.wpnsprite),
+	scriptflag(other.scriptflag), script(other.script), weaponscript(other.weaponscript),
+	scripttile(other.scripttile), scriptflip(other.scriptflip),
+	do_animation(other.do_animation), rotation(other.rotation),
+	scale(other.scale), moveflags(other.moveflags), drawflags(other.drawflags),
+	knockbackflags(other.knockbackflags), screenedge(other.screenedge),
+	scriptshadowtile(other.scriptshadowtile), knockbackSpeed(other.knockbackSpeed),
+	script_knockback_clk(other.script_knockback_clk),
+	script_knockback_speed(other.script_knockback_speed),
+	pit_pulldir(other.pit_pulldir), pit_pullclk(other.pit_pullclk),
+	fallclk(other.fallclk), fallCombo(other.fallCombo),
+	old_cset(other.old_cset), drownclk(other.drownclk),
+	drownCombo(other.drownCombo), can_flicker(other.can_flicker),
+	spr_shadow(other.spr_shadow), spr_death(other.spr_death),
+	spr_spawn(other.spr_spawn), spr_death_anim_clk(other.spr_death_anim_clk),
+	spr_spawn_anim_clk(other.spr_spawn_anim_clk),
+	spr_death_anim_frm(other.spr_death_anim_frm),
+	spr_spawn_anim_frm(other.spr_spawn_anim_frm),
+	glowRad(other.glowRad), glowShape(other.glowShape),
+	ignore_delete(other.ignore_delete)
 {
     uid = getNextUID();
 	isspawning = other.isspawning;
@@ -262,10 +211,8 @@ ignore_delete(other.ignore_delete)
     for(int32_t i=0; i<32; i++) miscellaneous[i] = other.miscellaneous[i];
     
     scriptcoldet = other.scriptcoldet;
-    initialised = other.initialised;
     
     
-    scrmem = NULL;
 	for (int32_t i=0; i<8; ++i)
 	{
 		initD[i]=other.initD[i];
@@ -305,13 +252,10 @@ sprite::sprite(zfix X,zfix Y,int32_t T,int32_t CS,int32_t F,int32_t Clk,int32_t 
     //pc=0;
     //sp=0;
     //ffcref=0;
-    doscript=1;
-    waitdraw = 0;
     //itemclass=0;
     for(int32_t i=0; i<32; i++) miscellaneous[i] = 0;
     
     scriptcoldet = 1;
-    initialised = 0;
     //ewpnclass=0;
     //lwpnclass=0;
     //guyclass=0;
@@ -360,7 +304,6 @@ sprite::sprite(zfix X,zfix Y,int32_t T,int32_t CS,int32_t F,int32_t Clk,int32_t 
         initA[q] = 0;
         weap_inita[q] = 0;
     }
-    scrmem = NULL;
 	glowRad = 0;
 	glowShape = 0;
 	switch_hooked = false;
@@ -379,11 +322,12 @@ sprite::sprite(zfix X,zfix Y,int32_t T,int32_t CS,int32_t F,int32_t Clk,int32_t 
 
 sprite::~sprite()
 {
-	if(scrmem)
+	#ifdef IS_PLAYER
+	if(auto scrty = get_scrtype())
 	{
-		delete scrmem;
-		scrmem = NULL;
+		FFCore.clear_script_engine_data(*scrty, getUID());
 	}
+	#endif
 }
 
 static int32_t nextid = 0;
@@ -1115,7 +1059,7 @@ void sprite::draw(BITMAP* dest)
 		return;
 	}
 	zfix tyoffs = yofs;
-#ifndef IS_EDITOR
+#ifdef IS_PLAYER
 	if(switch_hooked)
 	{
 		switch(Hero.switchhookstyle)
@@ -1609,7 +1553,7 @@ void sprite::draw(BITMAP* dest)
 void sprite::draw_hitbox()
 {
 	if(hide_hitbox) return;
-#ifndef IS_EDITOR
+#ifdef IS_PLAYER
 	start_info_bmp();
 	al_draw_rectangle(x+hxofs,y+playing_field_offset+hyofs-(z+zofs)-fakez,x+hxofs+hit_width,(y+playing_field_offset+hyofs+hit_height-(z+zofs)-fakez),hitboxColor(info_opacity),1);
 	end_info_bmp();
@@ -2213,6 +2157,7 @@ gotit:
     }
     
     --count;
+    if(j<=active_iterator) --active_iterator;
     //checkConsistency();
     return true;
 }
@@ -2257,12 +2202,24 @@ int32_t sprite_list::getMisc(int32_t j)
     return sprites[j]->misc;
 }
 
-bool sprite_list::del(int32_t j, bool force)
+bool sprite_list::del(int32_t j, bool force, bool may_defer)
 {
 	if(j<0||j>=count)
 		return false;
 	
 	if(!force && sprites[j]->ignore_delete) return false;
+
+	// If this sprite is currently running its `animate` function, just mark it for deletion
+	// to avoid crashing. This allows the sprite to finish its logic even after being told to
+	// go away.
+	if(may_defer && active_iterator == j)
+	{
+		delete_active_iterator = true;
+		// Remove from list so fewer things interact with it.
+		// TODO: better to remove by index.
+		remove(sprites[j]);
+		return false;
+	}
 	
 	map<int32_t, int32_t>::iterator it = containedUIDs.find(sprites[j]->getUID());
 	
@@ -2367,16 +2324,25 @@ void sprite_list::animate()
 		{
 			setCurObject(sprites[active_iterator]);
 			auto tmp_iter = active_iterator;
-			if(sprites[active_iterator]->animate(active_iterator))
+			sprite* cur_sprite = sprites[active_iterator];
+			if (cur_sprite->animate(active_iterator) || delete_active_iterator)
 			{
-#ifndef IS_EDITOR
-				if (replay_is_active() && dynamic_cast<enemy*>(sprites[active_iterator]) != nullptr)
+#ifdef IS_PLAYER
+				if (replay_is_active() && dynamic_cast<enemy*>(cur_sprite) != nullptr)
 				{
-					enemy* as_enemy = dynamic_cast<enemy*>(sprites[active_iterator]);
+					enemy* as_enemy = dynamic_cast<enemy*>(cur_sprite);
 					replay_step_comment(fmt::format("enemy died {}", guy_string[as_enemy->id&0xFFF]));
 				}
 #endif
-				del(active_iterator);
+				if (delete_active_iterator)
+				{
+					delete cur_sprite;
+					delete_active_iterator = false;
+				}
+				else
+				{
+					del(active_iterator, false, false);
+				}
 			}
 			else if(tmp_iter == active_iterator)
 			{
@@ -2402,9 +2368,15 @@ void sprite_list::run_script(int32_t mode)
 	
 	while(active_iterator<count)
 	{
-		if(!(freeze_guys && sprites[active_iterator]->canfreeze))
+		sprite* cur_sprite = sprites[active_iterator];
+		if(!(freeze_guys && cur_sprite->canfreeze))
 		{
-			sprites[active_iterator]->run_script(mode);
+			cur_sprite->run_script(mode);
+			if (delete_active_iterator)
+			{
+				delete cur_sprite;
+				delete_active_iterator = false;
+			}
 		}
 		
 		++active_iterator;
@@ -2877,7 +2849,7 @@ breakable::breakable(zfix X, zfix Y, zfix Z, newcombo const& cmb, int32_t cset, 
 
 bool breakable::animate(int32_t)
 {
-#ifndef IS_EDITOR
+#ifdef IS_PLAYER
 	if(++aclk >= aspd)
 	{
 		aclk = 0;
@@ -2943,7 +2915,7 @@ bool insideRotRect(double x, double y, int32_t x1, int32_t y1, int32_t x2, int32
 	return true;
 }
 
-bool lineLineColl(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, int32_t x4, int32_t y4)
+bool lineLineColl(zfix x1, zfix y1, zfix x2, zfix y2, zfix x3, zfix y3, zfix x4, zfix y4)
 {
 	 float denominator = ((x2 - x1) * (y4 - y3)) - ((y2 - y1) * (x4 - x3));
 	float numerator1 = ((y1 - y3) * (x4 - x3)) - ((x1 - x3) * (y4 - y3));
@@ -2966,17 +2938,27 @@ bool lineLineColl(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, in
 }
 
 //Line box collision is just 4 lineline collisions
-bool lineBoxCollision(int32_t linex1, int32_t liney1, int32_t linex2, int32_t liney2, int32_t boxx, int32_t boxy, int32_t boxwidth, int32_t boxheight)
+bool lineBoxCollision(zfix linex1, zfix liney1, zfix linex2, zfix liney2, zfix boxx, zfix boxy, zfix boxwidth, zfix boxheight)
 {
-	if (lineLineColl(linex1, liney1, linex2, liney2, boxx, boxy, boxx+boxwidth-1, boxy)) return true;
-	if (lineLineColl(linex1, liney1, linex2, liney2, boxx, boxy, boxx, boxy+boxheight-1)) return true;
-	if (lineLineColl(linex1, liney1, linex2, liney2, boxx+boxwidth-1, boxy, boxx+boxwidth-1, boxy+boxheight-1)) return true;
-	if (lineLineColl(linex1, liney1, linex2, liney2, boxx, boxy+boxheight-1, boxx+boxwidth-1, boxy+boxheight-1)) return true;
+	if (lineLineColl(linex1, liney1, linex2, liney2, boxx, boxy, boxx+boxwidth-0.0001_zf, boxy)) return true;
+	if (lineLineColl(linex1, liney1, linex2, liney2, boxx, boxy, boxx, boxy+boxheight-0.0001_zf)) return true;
+	if (lineLineColl(linex1, liney1, linex2, liney2, boxx+boxwidth-0.0001_zf, boxy, boxx+boxwidth-0.0001_zf, boxy+boxheight-0.0001_zf)) return true;
+	if (lineLineColl(linex1, liney1, linex2, liney2, boxx, boxy+boxheight-0.0001_zf, boxx+boxwidth-0.0001_zf, boxy+boxheight-0.0001_zf)) return true;
 	return false;
 }
 
 double comparePointLine(double x, double y, double x1, double y1, double x2, double y2)
 {
+	if (x1 == x2)
+	{
+		if (y1 < y2) return x1 - x;
+		else return x - x1;
+	}
+	if (y1 == y2)
+	{
+		if (x1 < x2) return y - y1;
+		else return y1 - y;
+	}
     double slope = (y2-y1)/(x2-x1);
     double b = y1 - (slope*x1);
     double ly = slope*x + b;

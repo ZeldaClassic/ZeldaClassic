@@ -35,18 +35,24 @@ namespace fs = std::filesystem;
 
 extern FFScript FFCore;
 
-static const char *OLD_SAVE_HEADER = "ZQuest Classic Save File";
-static const char *SAVE_HEADER = "Zelda Classic Save File";
+static const char *SAVE_HEADER = "ZQuest Classic Save File";
+static const char *OLD_SAVE_HEADER = "Zelda Classic Save File";
 static int currgame = -1;
 static std::vector<save_t> saves;
 static bool save_current_replay_games;
 
-save_t::~save_t()
+void save_t::unload()
 {
 	if (this->game)
 		delete this->game;
 	else
 		delete this->header;
+	this->game = nullptr;
+	this->header = nullptr;
+}
+save_t::~save_t()
+{
+	unload();
 }
 
 static fs::path get_legacy_save_file_path()
@@ -526,21 +532,6 @@ static int32_t read_saves(ReadMode read_mode, PACKFILE* f, std::vector<save_t>& 
 
 		if (!p_getwstr(&game.header.qstpath, f))
 			return 38;
-
-		if (standalone_mode)
-		{
-			auto normalized_qstpath = (fs::current_path() / fs::path(qstdir) / fs::path(game.header.qstpath)).lexically_normal();
-			if (standalone_quest != normalized_qstpath)
-			{
-				enter_sys_pal();
-				jwin_alert("Invalid save file",
-						"This save file is for",
-						"a different quest.",
-						"",
-						"OK",NULL,'o',0,get_zc_font(font_lfont));
-				exit(0);
-			}
-		}
 
 		// Convert path separators so save files work across platforms (hopefully)
 		regulate_path(game.header.qstpath);
@@ -2021,6 +2012,18 @@ void saves_unselect()
 		save.game = nullptr;
 	}
 	currgame = -1;
+}
+
+void saves_unload(int32_t index)
+{
+	if (index == -1)
+		return;
+
+	auto& save = saves[index];
+	save.unload();
+
+	if (currgame == index)
+		currgame = -1;
 }
 
 int32_t saves_count()

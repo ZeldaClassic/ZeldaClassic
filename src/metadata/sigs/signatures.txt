@@ -1,1 +1,1 @@
-Sign you developer name and complier version and time zones to these files 
+Copy compilersig.h.sig and devsig.h.sig into this path.

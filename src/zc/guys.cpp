@@ -432,7 +432,6 @@ enemy::enemy(zfix X,zfix Y,int32_t Id,int32_t Clk) : sprite()
 	for ( int32_t q = 0; q < 32; q++ ) new_weapon[q] = d->new_weapon[q];
 	
 	script = (d->script >= 0) ? d->script : 0; //Dont assign invalid data. 
-	waitdraw = 0;
 	weaponscript = (d->weaponscript >= 0) ? d->weaponscript : 0; //Dont assign invalid data. 
 	
 	for ( int32_t q = 0; q < 8; q++ ) 
@@ -1278,7 +1277,7 @@ bool enemy::animate(int32_t index)
 						y += fall_amnt;
 					if(fall_amnt < 0)
 					{
-						if(!movexy(0,fall_amnt,spw_none))
+						if(!movexy(0,fall_amnt,spw_none,false,!get_qr(qr_BROKEN_SIDEVIEW_SPRITE_JUMP)))
 							hit = true;
 					}
 					if(hit)
@@ -1621,6 +1620,8 @@ bool enemy::isOnSideviewPlatform()
 {
 	int32_t usewid = (SIZEflags&guyflagOVERRIDE_HIT_WIDTH) ? hit_width : 16;
 	int32_t usehei = (SIZEflags&guyflagOVERRIDE_HIT_HEIGHT) ? hit_height : 16;
+	if(!get_qr(qr_BROKEN_SIDEVIEW_SPRITE_JUMP)&&fall<0)
+		return false;
 	if(y + usehei >= 176 && currscr>=0x70 && !(tmpscr->flags2&wfDOWN)) return true; //Bottom of the map
 	if(check_slope(x, y+1, usewid, usehei)) return true;
 	for(int32_t nx = x + 4; nx <= x + usewid - 4; nx+=16)
@@ -4025,10 +4026,6 @@ bool enemy::dont_draw()
 	if(flags&lens_only && !lensclk)
 		return true;
 		
-	if(lensclk && (itemsbuf[Hero.getLastLensID()].flags & ITEM_FLAG6) && !(itemsbuf[Hero.getLastLensID()].flags & ITEM_FLAG7) &&
-	!((flags&lens_only) && (get_qr(qr_LENSSEESENEMIES) || (itemsbuf[Hero.getLastLensID()].flags & ITEM_FLAG5))))
-		return true;
-		
 	return false;
 }
 
@@ -4043,8 +4040,6 @@ void enemy::draw(BITMAP *dest)
 	if(fading==fade_invisible || (((flags2&guy_blinking)||(fading==fade_flicker)) && (clk&1))) 
 		return;
 	if(flags&guy_invisible)
-		return;
-	if(lensclk && (itemsbuf[Hero.getLastLensID()].flags & ITEM_FLAG6) && !(itemsbuf[Hero.getLastLensID()].flags & ITEM_FLAG7) && !(flags&lens_only))
 		return;
 	
 	//We did the normal don't_draw stuff here so we can make exceptions; specifically the lens check (which should make enemies
@@ -4082,14 +4077,6 @@ void enemy::draw(BITMAP *dest)
 	//Lens check
 	if (lensclk)
 	{
-		if((itemsbuf[Hero.getLastLensID()].flags & ITEM_FLAG6) && !(flags&lens_only))
-		{
-			if (canSee == DRAW_NORMAL) 
-			{
-				if (itemsbuf[Hero.getLastLensID()].flags & ITEM_FLAG7) canSee = DRAW_CLOAKED;
-				else canSee = DRAW_INVIS; //Should never happen cause dont_draw should catch this, but just in case.
-			}
-		}
 		if(flags&lens_only)
 		{
 			if (canSee == DRAW_INVIS) canSee = DRAW_NORMAL;
@@ -7787,19 +7774,23 @@ int32_t wpnsfx(int32_t wpn)
 int32_t enemy::run_script(int32_t mode)
 {
 	if(switch_hooked && !get_qr(qr_SWITCHOBJ_RUN_SCRIPT)) return RUNSCRIPT_OK;
-	if (script <= 0 || !doscript || FFCore.getQuestHeaderInfo(vZelda) < 0x255 || FFCore.system_suspend[susptNPCSCRIPTS])
+	if (script <= 0 || FFCore.getQuestHeaderInfo(vZelda) < 0x255 || FFCore.system_suspend[susptNPCSCRIPTS])
+		return RUNSCRIPT_OK;
+	auto scrty = *get_scrtype();
+	auto uid = getUID();
+	if(!FFCore.doscript(scrty,uid))
 		return RUNSCRIPT_OK;
 	int32_t ret = RUNSCRIPT_OK;
-	alloc_scriptmem();
+	bool& waitdraw = FFCore.waitdraw(scrty, uid);
 	switch(mode)
 	{
 		case MODE_NORMAL:
-			return ZScriptVersion::RunScript(ScriptType::NPC, script, getUID());
+			return ZScriptVersion::RunScript(ScriptType::NPC, script, uid);
 		case MODE_WAITDRAW:
 			if(waitdraw)
 			{
-				ret = ZScriptVersion::RunScript(ScriptType::NPC, script, getUID());
-				waitdraw = 0;
+				ret = ZScriptVersion::RunScript(ScriptType::NPC, script, uid);
+				waitdraw = false;
 			}
 			break;
 	}
@@ -20162,7 +20153,6 @@ void loadenemies()
 void moneysign()
 {
 	additem(48,108,iRupy,ipDUMMY);
-	//  textout(scrollbuf,get_zc_font(font_zfont),"X",64,112,CSET(0)+1);
 	set_clip_state(pricesdisplaybuf, 0);
 	textout_ex(pricesdisplaybuf,get_zc_font(font_zfont),"X",64,112,CSET(0)+1,-1);
 }
@@ -20170,9 +20160,6 @@ void moneysign()
 void putprices(bool sign)
 {
 	if(fadeclk > 0) return;
-	// refresh what's under the prices
-	// for(int32_t i=5; i<12; i++)
-	//   putcombo(scrollbuf,i<<4,112,tmpscr->data[112+i],tmpscr->cpage);
 	
 	rectfill(pricesdisplaybuf, 72, 112, pricesdisplaybuf->w-1, pricesdisplaybuf->h-1, 0);
 	int32_t step=32;
@@ -22130,7 +22117,7 @@ const char *old_guy_string[OLDMAXGUYS] =
 	// 165
 	"Tektite (L3) ", "Spinning Tile (Combo)", "Spinning Tile (Enemy Sprite)", "Lynel (L3) ", "Peahat (L2) ",
 	// 170
-	"Pols Voice (Magic) ", "Pols Voice (Whistle) ", "Darknut (Mirror) ", "Ghini (L2, Fire) ", "Ghini (L2, Magic) ",
+	"Pols Voice (Magic)", "Pols Voice (Whistle)", "Darknut (Mirror) ", "Ghini (L2, Fire) ", "Ghini (L2, Magic) ",
 	// 175
 	"Grappler Bug (HP) ", "Grappler Bug (MP) "
 };

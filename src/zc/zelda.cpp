@@ -348,6 +348,7 @@ bool show_layer_0=true, show_layer_1=true, show_layer_2=true, show_layer_3=true,
 bool Throttlefps = true, MenuOpen = false, ClickToFreeze=false, Paused=false, Saving=false,
 	Advance=false, ShowFPS = true, Showpal=false, disableClickToFreeze=false, SaveDragResize=false,
 	DragAspect=false, SaveWinPos=false, scaleForceInteger=false, stretchGame=false;
+int ShowGameTime=0;
 int32_t Maxfps = 0;
 double aspect_ratio = 0.75;
 int window_min_width = 320, window_min_height = 240;
@@ -355,7 +356,7 @@ bool Playing, FrameSkip=false, TransLayers = true,clearConsoleOnLoad = true,clea
 bool GameLoaded = false;
 bool __debug=false,debug_enabled = false;
 bool refreshpal,blockpath = false,loaded_guys= false,freeze_guys= false,
-     loaded_enemies= false,drawguys= false,details=false,watch= false;
+     loaded_enemies= false,drawguys= false,watch= false;
 bool darkroom=false,naturaldark=false,BSZ= false;                         //,NEWSUBSCR;
 
 bool down_control_states[controls::btnLast] = {false};
@@ -1602,13 +1603,29 @@ void init_dmap()
 }
 
 // Sets globals to their default values.
-void init_game_vars()
+void init_game_vars(bool is_cont_game = false)
 {
+	new_subscreen_active = new_subscreen_passive = new_subscreen_overlay = nullptr;
+
+	// There are many replay tests that were made when these globals were not being reset
+	// on continue. Let's not break them.
+	if (is_cont_game && !(replay_version_check(32) || replay_get_meta_str("qst") == "grassland_attack.qst"))
+		return;
+
+	// Don't reset cheats on continue.
+	if (!is_cont_game)
+	{
+		cheat=0;
+		show_layer_0=show_layer_1=show_layer_2=show_layer_3=show_layer_4=show_layer_5=show_layer_6=true;
+		show_layer_over=show_layer_push=show_sprites=show_ffcs=true;
+		cheat_superman=cheats_execute_light=cheats_execute_goto=show_walkflags=show_effectflags=show_ff_scripts=show_hitboxes=false;
+	}
+
 	// Various things use the frame counter to do random stuff (ex: runDrunkRNG).
 	// We only bother setting it to 0 here so that recordings will play back the
 	// same way, even if manually started in the ZC UI.
-    frame = 0;
-	new_subscreen_active = nullptr;
+	frame = 0;
+
 	new_sub_indexes[sstACTIVE] = -1;
 	loadside = 0;
 	view_map_show_mode = 3;
@@ -1633,11 +1650,7 @@ void init_game_vars()
 	add_nl2bsparkle=false;
 	gofast=false;
 	wavy=quakeclk=0;
-	show_layer_0=show_layer_1=show_layer_2=show_layer_3=show_layer_4=show_layer_5=show_layer_6=true;
-	show_layer_over=show_layer_push=show_sprites=show_ffcs=true;
-	cheat_superman=cheats_execute_light=cheats_execute_goto=show_walkflags=show_effectflags=show_ff_scripts=show_hitboxes=false;
 	if (zscriptDrawingRenderTarget) zscriptDrawingRenderTarget->SetCurrentRenderTarget(-1);
-	new_subscreen_active = new_subscreen_passive = new_subscreen_overlay = nullptr;
 	new_sub_indexes[sstACTIVE] = new_sub_indexes[sstPASSIVE] = new_sub_indexes[sstOVERLAY] = -1;
 	script_hero_sprite = 0; 
 	script_hero_flip = -1; 
@@ -2224,6 +2237,7 @@ int32_t init_game()
 
 int32_t cont_game()
 {
+	init_game_vars(true);
 	replay_step_comment("cont_game");
 	GameLoaded = true;
 	timeExitAllGenscript(GENSCR_ST_CONTINUE);
@@ -3214,10 +3228,10 @@ void game_loop()
 		#endif
 		if ( !FFCore.system_suspend[susptCONTROLSTATE] ) load_control_state();
 		FFCore.runGenericPassiveEngine(SCR_TIMING_POST_POLL_INPUT);
-		
+
+		update_slopes();
 		if(!freezeff)
 		{
-			//if ( !FFCore.system_suspend[susptUPDATEFFC] ) 
 			update_freeform_combos();
 		}
 		
@@ -3994,70 +4008,6 @@ int32_t isFullScreen()
     return !is_windowed_mode();
 }
 
-bool setGraphicsMode(bool windowed)
-{
-	int32_t type=windowed ? GFX_AUTODETECT_WINDOWED : GFX_AUTODETECT_FULLSCREEN;
-	int w = resx, h = resy;
-	if (type == GFX_AUTODETECT_WINDOWED)
-	{
-		w = window_width;
-		h = window_height;
-	}
-	bool result = set_gfx_mode(type, w, h, 0, 0)==0;
-	return result;
-}
-
-int32_t onFullscreen()
-{
-    if(jwin_alert3(
-			(is_windowed_mode()) ? "Fullscreen Warning" : "Change to Windowed Mode", 
-			(is_windowed_mode()) ? "Some video chipsets/drivers do not support 8-bit native fullscreen" : "Proceeding will drop from Fullscreen to Windowed Mode", 
-			(is_windowed_mode()) ? "We strongly advise saving your game before shifting from windowed to fullscreen!": "Do you wish to shift from Fullscreen to Windowed mode?",
-			(is_windowed_mode()) ? "Do you wish to continue to fullscreen mode?" : NULL,
-		 "&Yes", 
-		"&No", 
-		NULL, 
-		'y', 
-		'n', 
-		0, 
-		get_zc_font(font_lfont)) == 1)	
-    {
-	    PALETTE oldpal;
-	    get_palette(oldpal);
-	    
-	    bool windowed=is_windowed_mode()!=0;
-	    
-	    bool success=setGraphicsMode(!windowed);
-	    if(success)
-		{
-			fullscreen=!fullscreen;
-			zc_set_config("zeldadx","fullscreen",fullscreen);
-	    }
-		else
-	    {
-		// Try to restore the previous mode, then...
-		success=setGraphicsMode(windowed);
-		if(!success)
-		{
-			Z_error_fatal("Failed to set video mode. allegro_error: %s\n", allegro_error);
-		}
-	    }
-	    
-	    //Everything set?
-	    Z_message("gfx mode set at -%d %dbpp %d x %d \n", is_windowed_mode(), get_color_depth(), resx, resy);
-	    
-	    zc_set_palette(oldpal);
-	    gui_mouse_focus=0;
-	    switch_type = pause_in_background ? SWITCH_PAUSE : SWITCH_BACKGROUND;
-	    set_display_switch_mode(fullscreen?SWITCH_BACKAMNESIA:switch_type);
-		set_display_switch_callback(SWITCH_OUT, switch_out_callback);
-		set_display_switch_callback(SWITCH_IN, switch_in_callback);
-
-	    return D_REDRAW;
-    }
-    else return D_O_K;
-}
-
 static bool current_session_is_replay = false;
 static void load_replay_file(ReplayMode mode, std::string replay_file, int frame)
 {
@@ -4091,6 +4041,10 @@ static void load_replay_file(ReplayMode mode, std::string replay_file, int frame
 
 	if (strlen(zc_get_config("zeldadx", "replay_snapshot", "")) > 0)
 		replay_add_snapshot_frame(zc_get_config("zeldadx", "replay_snapshot", ""));
+
+	// Older quests don't have a misc section, and QMisc isn't set by default except via loading the default quest.
+	// So do that here, since not all code paths to this will have done it already.
+	init_NES_mode();
 }
 
 static bool load_replay_file_deffered_called = false;
@@ -4274,7 +4228,12 @@ int main(int argc, char **argv)
 	int only_arg = used_switch(argc, argv, "-only");
 	if (only_arg)
 	{
-		only_qstpath = (fs::current_path() / argv[only_arg+1]).string();
+		fs::path only_path = (fs::current_path() / argv[only_arg+1]);
+		only_qstpath = only_path.string();
+		if (only_path.extension() != ".qst")
+			Z_error_fatal("-only value must be a qst file, but got: %s\n", only_qstpath.c_str());
+		if (!fs::exists(only_path))
+			Z_error_fatal("Could not find file: %s\n", only_qstpath.c_str());
 	}
 
 	common_main_setup(App::zelda, argc, argv);
@@ -4346,10 +4305,10 @@ int main(int argc, char **argv)
 	memset(zc_aboutstr,0,80);
 
 	sprintf(zc_builddate,"Build Date: %s %s, %d at @ %s %s", dayextension(BUILDTM_DAY).c_str(), (char*)months[BUILDTM_MONTH], BUILDTM_YEAR, __TIME__, __TIMEZONE__);
-	sprintf(zc_aboutstr,"%s, Version %s", ZC_PLAYER_NAME, ZC_PLAYER_V);
+	sprintf(zc_aboutstr,"%s, Version %s", ZC_PLAYER_NAME, getReleaseTag());
 	
 
-	Z_title("ZC Launched: %s, v.%s %s",ZC_PLAYER_NAME, ZC_PLAYER_V, ALPHA_VER_STR);
+	Z_title("ZC Launched: %s, v.%s",ZC_PLAYER_NAME, getReleaseTag());
 	
 	if(!get_qst_buffers())
 	{
@@ -4357,6 +4316,12 @@ int main(int argc, char **argv)
 	}
 
 	three_finger_flag=false;
+
+	// TODO: digi_volume has been removed as a user controllable setting. It is a global volume control for
+	// a4 music streams, but we use emusic_volume for all enhanced music, so it was a weird double volume control.
+	// Should remove all usages of digi_volume (maybe replacing with emusic_volume where appropriate). For now,
+	// just set to 255.
+	digi_volume = 255;
 	
 	load_game_configs();
 
@@ -4555,6 +4520,7 @@ int main(int argc, char **argv)
 	
 	if(used_switch(argc,argv,"-v1")) Throttlefps=true;
 	if(used_switch(argc,argv,"-show-fps")) ShowFPS=true;
+	if(used_switch(argc,argv,"-show-time")) ShowGameTime=true;
 	
 	debug_enabled = used_switch(argc,argv,"-d") && !strcmp(zc_get_config("zeldadx","debug",""),zeldapwd);
 	set_debug(debug_enabled);
@@ -4733,8 +4699,9 @@ int main(int argc, char **argv)
 		//  if(useCD)
 		//    cd_exit();
 		quit_game();
-		Z_message("ZC web site: https://zeldaclassic.com.com\n");
-		Z_message("Zelda Classic old wiki: https://web.archive.org/web/20210910193102/https://zeldaclassic.com/wiki\n");
+		Z_message("ZQuest Classic web site: https://zquestclassic.com.com\n");
+		Z_message("ZQuest Classic old wiki: https://web.archive.org/web/20210910193102/https://zeldaclassic.com/wiki\n");
+		Z_message("ZQuest Classic new wiki: https://github.com/ZQuestClassic/ZQuestClassic/wiki\n");
 		
 		skipcont = 0;
 		if(forceExit) //fix for the allegro at_exit() hang.
@@ -4782,17 +4749,16 @@ int main(int argc, char **argv)
 	auto [w, h] = zc_get_default_display_size(zq_screen_w, zq_screen_h, resx, resy);
 	resx = w;
 	resy = h;
-
 	// TODO: consolidate "resx" and "resy" variables with window_width,height.
-	// window_width = resx;
-	// window_height = resy;
+	window_width = resx;
+	window_height = resy;
 	
 	if(zc_get_config("gui","disable_window_resizing",0))
 		all_set_resize_flag(false);
 	
 	if(!game_vid_mode(tempmode, wait_ms_on_set_graphics))
 	{
-		al_trace("Fatal Error: could not create a window for ZC.\n");
+		al_trace("Fatal Error: could not create a window for ZQuest Classic.\n");
 		Z_error_fatal(allegro_error);
 	}
 	else
@@ -4800,7 +4766,7 @@ int main(int argc, char **argv)
 		Z_message("set gfx mode succsessful at -%d %dbpp %d x %d \n", tempmode, get_color_depth(), resx, resy);
 	}
 
-	const char* window_title = "ZC";
+	const char* window_title = "ZQuest Classic";
 	int window_title_arg = used_switch(argc, argv, "-window-title");
 	if (window_title_arg > 0)
 		window_title = argv[window_title_arg + 1];
@@ -5204,8 +5170,10 @@ reload_for_replay_file:
 		{
 			int32_t q = Quit;
 			Quit = 0;
-			if(q==qCONT)
+			if (q == qCONT)
+			{
 				cont_game();
+			}
 			else if(init_game())
 			{
 				//Failed initializing? Keep trying.
@@ -5426,6 +5394,7 @@ reload_for_replay_file:
 			// Replay is over, so jump up to load the real saves.
 			Quit = 0;
 			use_testingst_start = false;
+			saves_unselect();
 			goto reload_for_replay_file;
 		}
 	}
@@ -5468,8 +5437,9 @@ reload_for_replay_file:
 	//  if(useCD)
 	//    cd_exit();
 	quit_game();
-	Z_message("ZC web site: https://zeldaclassic.com\n");
-	Z_message("Zelda Classic old wiki: https://web.archive.org/web/20210910193102/https://zeldaclassic.com/wiki\n");
+	Z_message("ZQuest Classic web site: https://zquestclassic.com\n");
+	Z_message("ZQuest Classic old wiki: https://web.archive.org/web/20210910193102/https://zeldaclassic.com/wiki\n");
+	Z_message("ZQuest Classic new wiki: https://github.com/ZQuestClassic/ZQuestClassic/wiki\n");
 	
 	skipcont = 0;
 	

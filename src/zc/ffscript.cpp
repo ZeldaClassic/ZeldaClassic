@@ -597,28 +597,29 @@ int32_t sz_int_arr(const int32_t ptr);
 //We gain some speed by not passing as arguments
 int32_t sarg1 = 0;
 int32_t sarg2 = 0;
-std::vector<int32_t> *sargvec;
-std::string *sargstr;
+vector<int32_t> *sargvec;
+string *sargstr;
 refInfo *ri = NULL;
 script_data *curscript = NULL;
 int32_t(*stack)[MAX_SCRIPT_REGISTERS] = NULL;
-std::vector<int32_t> zs_vargs;
+vector<int32_t> zs_vargs;
 ScriptType curScriptType;
 word curScriptNum;
 int32_t curScriptIndex;
 bool script_funcrun = false;
-std::string* destructstr = nullptr;
+string* destructstr = nullptr;
+size_t gen_frozen_index = 0;
 
-static std::vector<ScriptType> curScriptType_cache;
-static std::vector<int32_t> curScriptNum_cache;
-static std::vector<int32_t> curScriptIndex_cache;
-static std::vector<int32_t> sarg1cache;
-static std::vector<int32_t> sarg2cache;
-static std::vector<std::vector<int32_t>*> sargvec_cache;
-static std::vector<std::string*> sargstr_cache;
-static std::vector<refInfo*> ricache;
-static std::vector<script_data*> sdcache;
-static std::vector<int32_t(*)[MAX_SCRIPT_REGISTERS]> stackcache;
+static vector<ScriptType> curScriptType_cache;
+static vector<int32_t> curScriptNum_cache;
+static vector<int32_t> curScriptIndex_cache;
+static vector<int32_t> sarg1cache;
+static vector<int32_t> sarg2cache;
+static vector<vector<int32_t>*> sargvec_cache;
+static vector<string*> sargstr_cache;
+static vector<refInfo*> ricache;
+static vector<script_data*> sdcache;
+static vector<int32_t(*)[MAX_SCRIPT_REGISTERS]> stackcache;
 void push_ri()
 {
 	sarg1cache.push_back(sarg1);
@@ -646,1189 +647,11 @@ void pop_ri()
 	stack = stackcache.back(); stackcache.pop_back();
 }
 
-static int32_t numInstructions = 0; // Used to detect hangs
-static bool scriptCanSave = true;
+//START HELPER FUNCTIONS
+///-------------------------------------//
+//           Helper Functions           //
+///-------------------------------------//
 
-std::vector<refInfo*> genericActiveData;
-std::vector<int32_t(*)[MAX_SCRIPT_REGISTERS]> generic_active_stack;
-bool gen_active_doscript = false, gen_active_initialized = false;
-
-struct ScriptEngineData {
-	refInfo ref;
-	int32_t stack[MAX_SCRIPT_REGISTERS];
-	// This is used as a boolean for all but ScriptType::Item.
-	byte doscript = true;
-	bool waitdraw;
-	bool initialized;
-
-	void reset()
-	{
-		// No need to zero the stack.
-		ref = refInfo();
-		doscript = true;
-		waitdraw = false;
-		initialized = false;
-	}
-};
-
-// (type, index) => ScriptEngineData
-static std::map<std::pair<ScriptType, word>, ScriptEngineData> scriptEngineDatas;
-
-static ScriptEngineData& get_script_engine_data(ScriptType type, int index)
-{
-	if (type == ScriptType::DMap || type == ScriptType::OnMap || type == ScriptType::ScriptedPassiveSubscreen || type == ScriptType::ScriptedActiveSubscreen)
-	{
-		// `index` is used for dmapref, not for different script engine data.
-		index = 0;
-	}
-	if (type == ScriptType::EngineSubscreen)
-	{
-		// `index` is used for subdataref, not for different script engine data.
-		index = 0;
-	}
-
-	return scriptEngineDatas[{type, index}];
-}
-
-static ScriptEngineData& get_script_engine_data(ScriptType type)
-{
-	return scriptEngineDatas[{type, 0}];
-}
-
-void FFScript::clear_script_engine_data()
-{
-	scriptEngineDatas.clear();
-}
-
-void FFScript::reset_script_engine_data(ScriptType type, int index)
-{
-	get_script_engine_data(type, index).reset();
-}
-
-void FFScript::clear_script_engine_data(ScriptType type, int index)
-{
-	if (type == ScriptType::DMap || type == ScriptType::OnMap || type == ScriptType::ScriptedPassiveSubscreen || type == ScriptType::ScriptedActiveSubscreen)
-	{
-		// `index` is used for dmapref, not for different script engine data.
-		index = 0;
-	}
-	if (type == ScriptType::EngineSubscreen)
-	{
-		// `index` is used for subdataref, not for different script engine data.
-		index = 0;
-	}
-
-	auto it = scriptEngineDatas.find({type, index});
-	if (it != scriptEngineDatas.end())
-	{
-		scriptEngineDatas.erase(it);
-	}
-}
-
-void FFScript::clear_script_engine_data_of_type(ScriptType type)
-{
-	std::erase_if(scriptEngineDatas, [&](auto& kv) { return kv.first.first == type; });
-}
-
-refInfo& FFScript::ref(ScriptType type, int index)
-{
-	return get_script_engine_data(type, index).ref;
-}
-
-byte& FFScript::doscript(ScriptType type, int index)
-{
-	return get_script_engine_data(type, index).doscript;
-}
-
-bool& FFScript::waitdraw(ScriptType type, int index)
-{
-	return get_script_engine_data(type, index).waitdraw;
-}
-
-// Returns true if registers had to be initialized.
-static bool set_current_script_engine_data(ScriptType type, int script, int index)
-{
-	bool got_initialized = false;
-
-	auto& data = get_script_engine_data(type, index);
-	ri = &data.ref;
-	stack = &data.stack;
-
-	switch (type)
-	{
-		case ScriptType::FFC:
-		{
-			curscript = ffscripts[script];
-
-			if (!data.initialized)
-			{
-				got_initialized = true;
-				memcpy(ri->d, tmpscr->ffcs[index].initd, 8 * sizeof(int32_t));
-				memcpy(ri->a, tmpscr->ffcs[index].inita, 2 * sizeof(int32_t));
-				data.initialized = true;
-			}
-
-			ri->ffcref = index;
-		}
-		break;
-
-		// case ScriptType::NPC:
-		// {
-		// 	int32_t npc_index = GuyH::getNPCIndex(i);
-		// 	enemy *w = (enemy*)guys.spr(npc_index);
-		// 	ri = &(w->scrmem->scriptData);
-		// 	curscript = guyscripts[w->script];
-		// 	stack = &(w->scrmem->stack);
-		// 	ri->guyref = i;
-			
-		// 	if (!w->initialised)
-		// 	{
-		// 		got_initialized = true;
-		// 		for ( int32_t q = 0; q < 8; q++ ) 
-		// 		{
-		// 			ri->d[q] = w->initD[q];
-		// 		}
-		// 		w->initialised = 1;
-		// 	}
-		// }
-		// break;
-		
-		// case ScriptType::Lwpn:
-		// {
-		// 	int32_t lwpn_index = LwpnH::getLWeaponIndex(i);
-		// 	weapon *w = (weapon*)Lwpns.spr(lwpn_index);
-		// 	ri = &(w->scrmem->scriptData);
-		// 	curscript = lwpnscripts[w->weaponscript];
-		// 	stack = &(w->scrmem->stack);
-		// 	ri->lwpn = i;
-			
-		// 	if (!w->initialised)
-		// 	{
-		// 		got_initialized = true;
-		// 		for ( int32_t q = 0; q < 8; q++ ) 
-		// 		{
-		// 			ri->d[q] = w->weap_initd[q]; //w->initiald[q];
-		// 		}
-		// 		w->initialised = 1;
-		// 	}
-		// }
-		// break;
-		
-		// case ScriptType::Ewpn:
-		// {
-		// 	int32_t ewpn_index = EwpnH::getEWeaponIndex(i);
-		// 	weapon *w = (weapon*)Ewpns.spr(ewpn_index);
-		// 	ri = &(w->scrmem->scriptData);
-		// 	curscript = ewpnscripts[w->weaponscript];
-		// 	stack = &(w->scrmem->stack);
-		// 	ri->ewpn = i;
-			
-		// 	if (!w->initialised)
-		// 	{
-		// 		got_initialized = true;
-		// 		for ( int32_t q = 0; q < 8; q++ ) 
-		// 		{
-		// 			ri->d[q] = w->weap_initd[q];
-		// 		}
-		// 		w->initialised = 1;
-		// 	}
-		// }
-		// break;
-		
-		// case ScriptType::ItemSprite:
-		// {
-		// 	int32_t the_index = ItemH::getItemIndex(i);
-		// 	item *w = (item*)items.spr(the_index);
-		// 	ri = &(w->scrmem->scriptData);
-		// 	curscript = itemspritescripts[w->script];
-		// 	stack = &(w->scrmem->stack);
-		// 	ri->itemref = i;
-			
-		// 	if (!w->initialised)
-		// 	{
-		// 		got_initialized = true;
-		// 		for ( int32_t q = 0; q < 8; q++ ) 
-		// 		{
-		// 			ri->d[q] = w->initD[q];
-		// 		}
-		// 		w->initialised = 1;
-		// 	}
-		// }
-		// break;
-		
-		case ScriptType::Item:
-		{
-			int32_t i = index;
-			int32_t new_i = 0;
-			bool collect = ( ( i < 1 ) || (i == COLLECT_SCRIPT_ITEM_ZERO) );
-			new_i = ( collect ) ? (( i != COLLECT_SCRIPT_ITEM_ZERO ) ? (i * -1) : 0) : i;
-
-			curscript = itemscripts[script];
-			
-			if (!data.initialized)
-			{
-				got_initialized = true;
-				memcpy(ri->d, ( collect ) ? itemsbuf[new_i].initiald : itemsbuf[i].initiald, 8 * sizeof(int32_t));
-				memcpy(ri->a, ( collect ) ? itemsbuf[new_i].initiala : itemsbuf[i].initiala, 2 * sizeof(int32_t));
-				data.initialized = true;
-			}			
-			ri->idata = ( collect ) ? new_i : i; //'this' pointer
-		}
-		break;
-		
-		case ScriptType::Global:
-		{
-			curscript = globalscripts[script];
-		}
-		break;
-		
-		// case ScriptType::Generic:
-		// {
-		// 	user_genscript& scr = user_scripts[script];
-		// 	stack = &scr.stack;
-		// 	ri = &scr.ri;
-		// 	ri->genericdataref = script;
-		// 	curscript = genericscripts[script];
-		// 	scr.waitevent = false;
-		// 	if(!scr.initialized)
-		// 	{
-		// 		got_initialized = true;
-		// 		scr.initialized = true;
-		// 		memcpy(ri->d, scr.initd, 8 * sizeof(int32_t));
-		// 	}
-		// }
-		// break;
-		
-		// case ScriptType::GenericFrozen:
-		// {
-		// 	ri = genericActiveData.back();
-		// 	ri->genericdataref = script;
-		// 	curscript = genericscripts[script];
-		// 	stack = generic_active_stack.back();
-		// 	if(!gen_active_initialized)
-		// 	{
-		// 		got_initialized = true;
-		// 		gen_active_initialized = true;
-		// 		memcpy(ri->d, user_scripts[script].initd, 8 * sizeof(int32_t));
-		// 	}
-		// }
-		// break;
-		
-		case ScriptType::Player:
-		{
-			curscript = playerscripts[script];
-		}
-		break;
-		
-		case ScriptType::DMap:
-		{
-			curscript = dmapscripts[script];
-			ri->dmapsref = index;
-			//how do we clear initialised on dmap change?
-			if ( !data.initialized )
-			{
-				got_initialized = true;
-				for ( int32_t q = 0; q < 8; q++ ) 
-				{
-					ri->d[q] = DMaps[ri->dmapsref].initD[q];// * 10000;
-				}
-				data.initialized = true;
-			}
-		}
-		break;
-		
-		case ScriptType::OnMap:
-		{
-			curscript = dmapscripts[script];
-			ri->dmapsref = index;
-			if (!data.initialized)
-			{
-				got_initialized = true;
-				for ( int32_t q = 0; q < 8; q++ ) 
-				{
-					ri->d[q] = DMaps[ri->dmapsref].onmap_initD[q];
-				}
-				data.initialized = true;
-			}
-		}
-		break;
-		
-		case ScriptType::ScriptedActiveSubscreen:
-		{
-			curscript = dmapscripts[script];
-			ri->dmapsref = index;
-			if (!data.initialized)
-			{
-				got_initialized = true;
-				for ( int32_t q = 0; q < 8; q++ ) 
-				{
-					ri->d[q] = DMaps[ri->dmapsref].sub_initD[q];
-				}
-				data.initialized = true;
-			}
-		}
-		break;
-		
-		case ScriptType::ScriptedPassiveSubscreen:
-		{
-			curscript = dmapscripts[script];
-			ri->dmapsref = index;
-			if (!data.initialized)
-			{
-				got_initialized = true;
-				for ( int32_t q = 0; q < 8; q++ ) 
-				{
-					ri->d[q] = DMaps[ri->dmapsref].sub_initD[q];
-				}
-				data.initialized = true;
-			}
-		}
-		break;
-		case ScriptType::EngineSubscreen:
-		{
-			curscript = subscreenscripts[script];
-			ri->subdataref = get_subref(-1, sstACTIVE);
-			auto [ptr,_ty] = load_subdata(ri->subdataref);
-			
-			if (ptr && !data.initialized)
-			{
-				got_initialized = true;
-				for ( int32_t q = 0; q < 8; q++ ) 
-				{
-					ri->d[q] = ptr->initd[q];
-				}
-				data.initialized = true;
-			}
-		}
-		break;
-		
-		case ScriptType::Screen:
-		{
-			curscript = screenscripts[script];
-
-			if (!data.initialized)
-			{
-				got_initialized = true;
-				for ( int32_t q = 0; q < 8; q++ ) 
-				{
-					ri->d[q] = tmpscr->screeninitd[q];// * 10000;
-				}
-				data.initialized = true;
-			}
-		}
-		break;
-		
-		case ScriptType::Combo:
-		{
-			curscript = comboscripts[script];
-
-			int32_t pos = combopos_ref_to_pos(index);
-			int32_t lyr = combopos_ref_to_layer(index);
-			int32_t id = FFCore.tempScreens[lyr]->data[pos];
-			if (!data.initialized)
-			{
-				got_initialized = true;
-				memset(ri->d, 0, 8 * sizeof(int32_t));
-				for ( int32_t q = 0; q < 8; q++ )
-					ri->d[q] = combobuf[id].initd[q];
-				data.initialized = true;
-			}
-
-			ri->combosref = id; //'this' pointer
-			ri->comboposref = index; //used for X(), Y(), Layer(), and so forth.
-			break;
-		}
-	}
-
-	return got_initialized;
-}
-
-//Sprite script data
-refInfo npcScriptData[256];
-refInfo lweaponScriptData[256]; //should this be lweapon and eweapon, separate stacks?
-refInfo eweaponScriptData[256]; //should this be lweapon and eweapon, separate stacks?
-refInfo itemactiveScriptData[256];
-
-int32_t ffmisc[MAXFFCS][16];
-
-user_genscript user_scripts[NUMSCRIPTSGENERIC];
-int32_t genscript_timing = SCR_TIMING_START_FRAME;
-static word max_valid_genscript;
-static dword max_valid_object;
-
-void user_genscript::quit()
-{
-	doscript = false;
-	if(indx > -1)
-	{
-		FFCore.deallocateAllScriptOwned(ScriptType::Generic, indx);
-	}
-}
-
-void countGenScripts()
-{
-	max_valid_genscript = 0;
-	for(auto q = 1; q < NUMSCRIPTSGENERIC; ++q)
-	{
-		if(genericscripts[q] && genericscripts[q]->valid())
-			max_valid_genscript = q;
-	}
-}
-void countObjects()
-{
-	max_valid_object = 0;
-	for(auto q = 0; q < MAX_USER_OBJECTS; ++q)
-	{
-		if(script_objects[q].reserved)
-			max_valid_object = q+1;
-	}
-}
-void timeExitAllGenscript(byte exState)
-{
-	for(user_genscript& g : user_scripts)
-		g.timeExit(exState);
-}
-void throwGenScriptEvent(int32_t event)
-{
-	for(auto q = 1; q <= max_valid_genscript; ++q)
-	{
-		user_genscript& scr = user_scripts[q];
-		if(!scr.doscript) continue;
-		if(!genericscripts[q]->valid()) continue;
-		if(!scr.waitevent) continue;
-		if(scr.eventstate & (1<<event))
-		{
-			scr.ri.d[rEXP1] = event*10000;
-			scr.waitevent = false;
-			
-			//Run the script!
-			ZScriptVersion::RunScript(ScriptType::Generic, q, q);
-		}
-	}
-}
-
-void load_genscript(const gamedata& gd)
-{
-	for(size_t q = 0; q < NUMSCRIPTSGENERIC; ++q)
-	{
-		user_genscript& gen = user_scripts[q];
-		gen.clear();
-		gen.indx = q;
-		gen.doscript = gd.gen_doscript.get(q);
-		gen.exitState = gd.gen_exitState[q];
-		gen.reloadState = gd.gen_reloadState[q];
-		gen.eventstate = gd.gen_eventstate[q];
-		gen.initd = gd.gen_initd[q];
-		gen.data = gd.gen_data[q];
-	}
-}
-void load_genscript(const zinitdata& zd)
-{
-	for(size_t q = 0; q < NUMSCRIPTSGENERIC; ++q)
-	{
-		user_genscript& gen = user_scripts[q];
-		gen.clear();
-		gen.indx = q;
-		gen.doscript = zd.gen_doscript.get(q);
-		gen.exitState = zd.gen_exitState[q];
-		gen.reloadState = zd.gen_reloadState[q];
-		gen.eventstate = zd.gen_eventstate[q];
-		gen.initd = zd.gen_initd[q];
-		gen.data = zd.gen_data[q];
-	}
-}
-
-void save_genscript(gamedata& gd)
-{
-	for(size_t q = 0; q < NUMSCRIPTSGENERIC; ++q)
-	{
-		user_genscript const& gen = user_scripts[q];
-		gd.gen_doscript.set(q, gen.doscript);
-		gd.gen_exitState[q] = gen.exitState;
-		gd.gen_reloadState[q] = gen.reloadState;
-		gd.gen_eventstate[q] = gen.eventstate;
-		gd.gen_initd[q] = gen.initd;
-		gd.gen_data[q] = gen.data;
-	}
-}
-
-void FFScript::runGenericPassiveEngine(int32_t scrtm)
-{
-	if(!max_valid_genscript) return; //No generic scripts in the quest!
-	//zprint2("Processing timing %d\n", scrtm);
-	bool init = (scrtm == SCR_TIMING_INIT);
-	if(!init)
-	{
-		if(genscript_timing != scrtm)
-		{
-			//zprint2("Generic script timing jump: expected '%d', found '%d'\n", genscript_timing, scrtm);
-			while(genscript_timing != scrtm)
-				runGenericPassiveEngine(genscript_timing);
-		}
-	}
-	for(auto q = 1; q <= max_valid_genscript; ++q)
-	{
-		user_genscript& scr = user_scripts[q];
-		if(!scr.doscript) continue;
-		if(!genericscripts[q]->valid()) continue;
-		if(scr.waitevent) continue;
-		if(!init && (scr.waituntil > scrtm || (!scr.wait_atleast && scr.waituntil != scrtm)))
-			continue;
-		
-		//Run the script!
-		ZScriptVersion::RunScript(ScriptType::Generic, q, q);
-	}
-	if(init || genscript_timing >= SCR_TIMING_END_FRAME)
-		genscript_timing = SCR_TIMING_START_FRAME;
-	else ++genscript_timing;
-}
-
-void FFScript::initZScriptDMapScripts()
-{
-	scriptEngineDatas[{ScriptType::DMap, 0}] = ScriptEngineData();
-	scriptEngineDatas[{ScriptType::ScriptedPassiveSubscreen, 0}] = ScriptEngineData();
-}
-
-void FFScript::initZScriptSubscreenScript()
-{
-	scriptEngineDatas[{ScriptType::EngineSubscreen, 0}] = ScriptEngineData();
-}
-void FFScript::initZScriptScriptedActiveSubscreen()
-{
-	scriptEngineDatas[{ScriptType::ScriptedActiveSubscreen, 0}] = ScriptEngineData();
-}
-
-void FFScript::initZScriptOnMapScript()
-{
-	scriptEngineDatas[{ScriptType::OnMap, 0}] = ScriptEngineData();
-}
-
-void FFScript::initZScriptHeroScripts()
-{
-	scriptEngineDatas[{ScriptType::Player, 0}] = ScriptEngineData();
-}
-
-void FFScript::initZScriptItemScripts()
-{
-	for ( int32_t q = 0; q < 256; q++ )
-	{
-		auto& data = get_script_engine_data(ScriptType::Item, q);
-		data.reset();
-		data.doscript = (itemsbuf[q].flags&ITEM_PASSIVESCRIPT) && game->item[q];
-	}
-
-	for ( int32_t q = -256; q < 0; q++ )
-	{
-		auto& data = get_script_engine_data(ScriptType::Item, q);
-		data.reset();
-		data.doscript = 0;
-	}
-}
-
-static int get_mouse_state(int index)
-{
-	int value = 0;
-	if (replay_is_replaying())
-	{
-		value = replay_get_mouse(index);
-	}
-	else if (index == 0)
-	{
-		value = script_mouse_x;
-	}
-	else if (index == 1)
-	{
-		value = script_mouse_y;
-	}
-	else if (index == 2)
-	{
-		value = script_mouse_z;
-	}
-	else if (index == 3)
-	{
-		value = script_mouse_b;
-	}
-
-	if (replay_is_recording())
-	{
-		replay_set_mouse(index, value);
-	}
-
-	return value;
-}
-
-///----------------------------------------------//
-//           New Mapscreen Flags Tools           //
-///----------------------------------------------//
-
-/*
-void FFScript::set_mapscreenflag_state(mapscr *m, int32_t flagid, bool state)
-{
-	switch(flagid)
-	{
-		// Room Types
-		case MSF_INTERIOR: 
-			if ( state )
-				m->flags6 |= 1;
-			else m->flags6 &= ~1;
-			break;
-		case MSF_DUNGEON: 
-			if ( state )
-				m->flags6 |= 2;
-			else m->flags6 &= ~2;
-			break;
-		case MSF_SIDEVIEW: 
-			if ( state )
-				m->flags7 |= 8;
-			else m->flags7 &= ~8;
-			break;
-		
-		// View
-		case MSF_INVISHERO: 
-			if ( state )
-				m->flags3 |= 8;
-			else m->flags3 &= ~8;
-			break;
-		case MSF_NOHEROMARKER: 
-			if ( state )
-				m->flags7 |= 16;
-			else m->flags7 &= ~16;
-			break;
-			
-		case MSF_NOSUBSCREEN: 
-			if ( state )
-				m->flags3 |= 16;
-			else m->flags3 &= ~16;
-			break;
-		case MSF_NOOFFSET: 
-			if ( state )
-				m->flags3 |= 64;
-			else m->flags3 &= ~64;
-			break;
-		
-		case MSF_LAYER2BG: 
-			if ( state )
-				m->flags7 |= 2;
-			else m->flags7 &= ~2;
-			break;
-		case MSF_LAYER3BG: 
-			if ( state )
-				m->flags7 |= 1;
-			else m->flags7 &= ~1;
-			break;
-		case MSF_DARKROOM: 
-			if ( state )
-				m->flags |= 4;
-			else m->flags &= ~4;
-			break;
-	
-		// Secrets
-		case MSF_BLOCKSHUT: 
-			if ( state )
-				m->flags |= 1;
-			else m->flags &= ~1;
-			break;
-		case MSF_TEMPSECRETS:
-			if ( state )
-				m->flags5 |= 16;
-			else m->flags5 &= ~16;
-			break;
-			
-		case MSF_TRIGPERM: 
-			if ( state )
-				m->flags6 |= 4;
-			else m->flags6 &= ~4;
-			break;
-		case MSF_ALLTRIGFLAGS: 
-			if ( state )
-				m->flags6 |= 32;
-			else m->flags6 &= ~32;
-			break;
-		// Warp
-		case MSF_AUTODIRECT: 
-			if ( state )
-				m->flags5 |= 4;
-			else m->flags5 &= ~4;
-			break;
-		case MSF_SENDSIRECT: 
-			if ( state )
-				m->flags5 |= 8;
-			else m->flags5 &= ~8;
-			break;
-		case MSF_MAZEPATHS: 
-			if ( state )
-				m->flags |= 64;
-			else m->flags &= ~64;
-			break;
-			
-		case MSF_MAZEOVERRIDE: 
-			if ( state )
-				m->flags8 |= 64;
-			else m->flags8 &= ~64;
-			break;
-		case MSF_SPRITECARRY: 
-			if ( state )
-				m->flags3 |= 32;
-			else m->flags3 &= ~32;
-			break;
-
-		case MSF_DIRECTTIMEDWARPS:
-			if ( state )
-				m->flags4 |= 4;
-			else m->flags4 &= ~4;
-			break;
-			
-		case MSF_SECRETSISABLETIMEWRP:
-			if ( state )
-				m->flags4 |= 8;
-			else m->flags4 &= ~8;
-			break;
-		case MSF_RANDOMTIMEDWARP:
-			if ( state )
-				m->flags5 |= 1;
-			else m->flags5 &= ~1;
-			break;
-		
-		// Item			
-		case MSF_HOLDUP:
-			if ( state )
-				m->flags3 |= 1;
-			else m->flags3 &= ~1;
-			break;
-			
-		case MSF_FALLS:
-			if ( state )
-				m->flags7 |= 4;
-			else m->flags7 &= ~4;
-			break;
-			
-			
-		// Combo
-		case MSF_MIDAIR: 
-		{ //FIX ME!
-			//! What the ever love of fuck mate?!
-			// byte *f2 = &(m->flags2);
-			// f2 >>=4;
-			// int32_t f = 0;
-			// f<<=1;
-			// f |= state ? 1:0;
-			// m->flags2 &= 0x0F;
-			// m->flags2 |= f<<4;
-			//if ( state )
-			//	(m->flags2>>4) |= 2;
-			//else (m->flags2>>4) &= ~2;
-			break;
-		}
-		case MSF_CYCLEINIT: 
-			if ( state )
-				m->flags3 |= 2;
-			else m->flags3 &= ~2;
-			break;
-		case MSF_IGNOREBOOTS: 
-			if ( state )
-				m->flags5 |= 2;
-			else m->flags5 &= ~2;
-			break;
-		case MSF_TOGGLERINGS: 
-			if ( state )
-				m->flags6 |= 64;
-			else m->flags6 &= ~64;
-			break;
-		// Save
-		case MSF_SAVECONTHERE: 
-			if ( state )
-				m->flags4 |= 64;
-			else m->flags4 &= ~64;
-			break;
-		case MSF_SAVEONENTRY:
-			if ( state )
-				m->flags4 |= 128;
-			else m->flags4 &= ~128;
-			break;			
-			
-		case MSF_CONTHERE: 
-			if ( state )
-				m->flags6 |= 8;
-			else m->flags6 &= ~8;
-			break;
-			
-		case MSF_NOCONTINUEWARP:  
-			if ( state )
-				m->flags6 |= 16;
-			else m->flags6 &= ~16;
-			break;
-	
-		// FFC
-		case MSF_WRAPFFC: 
-			if ( state )
-				m->flags6 |= 128;
-			else m->flags6 &= ~128;
-			break;
-			
-		case MSF_NOCARRYOVERFFC: 
-			if ( state )
-				m->flags5 |= 128;
-			else m->flags5 &= ~128;
-			break;
-	
-		// Whistle
-		case MSF_STAIRS: 
-			if ( state )
-				m->flags |= 16;
-			else m->flags &= ~16;
-			break;
-		case MSF_PALCHANGE: 
-			if ( state )
-				m->flags7 |= 64;
-			else m->flags7 &= ~64;
-			break;
-		case MSF_DRYLAKE:  
-			if ( state )
-				m->flags7 |= 128;
-			else m->flags7 &= ~128;
-			break;
-			
-		// Enemies
-		case MSF_TRAPS_IGNORE_SOLID:
-		{
-			//! What the ever love of fuck mate?!
-			int32_t f = 0;
-			f<<=2;
-			f |= state ? 1:0;
-			m->flags2 &= 0x0F;
-			m->flags2 |= f<<4;
-			break;
-		
-			//! May be wrong : Might be 4>>4 : ~4>>4;?
-			//if ( state )
-			//	m->(flags2>>4) |= 4; 
-			//else (flags2>>4) &= ~4;
-			//break;
-		}
-		case MSF_ENEMEIS_SECRET:
-		{
-			//! What the ever love of fuck mate?!
-			int32_t f = 0;
-			f<<=3;
-			f |= state ? 1:0;
-			m->flags2 &= 0x0F;
-			m->flags2 |= f<<4;
-			break;
-		
-			//! May be wrong : Might be 8>>4 : ~8>>4;?
-			//if ( state )
-			//	m->(flags2>>4) |= 8;
-			//else (flags2>>4) &= ~8;
-			//break;
-		}
-		case MSF_INVISIBLEENEMIES:
-			if ( state )
-				m->flags3 |= 4;
-			else m->flags3 &= ~4;
-		case MSF_EMELIESALWAYSRETURN:
-			if ( state )
-				m->flags3 |= 128;
-			else m->flags3 &= ~128;
-			break;
-		case MSF_ENEMIES_ITEM:
-			if ( state )
-				m->flags |= 2;
-			else m->flags &= ~2;
-			break;
-		
-		case MSF_ENEMIES_SECRET_PERM:
-			if ( state )
-				m->flags4 |= 16;
-			else m->flags4 &= ~16;
-			break;
-			
-		case MSF_SPAWN_ZORA:
-			if ( state )
-				m->enemyflags |= 1;
-			else m->enemyflags &= ~1;
-			break;
-		case MSF_SPAWN_CORNERTRAP:
-			if ( state )
-				m->enemyflags |= 2;
-			else m->enemyflags &= ~2;
-			break;
-		case MSF_SPAWN_MIDDLETRAP:
-			if ( state )
-				m->enemyflags |= 4;
-			else m->enemyflags &= ~4;
-			break;			
-		case MSF_SPAWN_ROCK:
-			if ( state )
-				m->enemyflags |= 8;
-			else m->enemyflags &= ~8;
-			break;
-		case MSF_SPAWN_SHOOTER:
-			if ( state )
-				m->enemyflags |= 16;
-			else m->enemyflags &= ~16;
-			break;
-			
-		case MSF_RINGLEADER:
-			if ( state )
-				m->enemyflags |= 32;
-			else m->enemyflags &= ~32;
-			break;
-		case MSF_ENEMYHASITEM:
-		if ( state )
-				m->enemyflags |= 64;
-			else m->enemyflags &= ~64;
-			break;
-		case MSF_ENEMYISBOSS:
-			if ( state )
-				m->enemyflags |= 128;
-			else m->enemyflags &= ~128;
-			break;
-
-		// Misc
-		case MSF_ALLOW_LADDER: 
-			if ( state )
-				m->flags |= 32;
-			else m->flags &= ~32;
-			break;
-		case MSF_NO_DIVING: 
-			if ( state )
-				m->flags5 |= 64;
-			else m->flags5 &= ~64;
-			break;
-			
-		case MSF_LENSEFFECT:
-			if ( state )
-				m->flags8 |= 32;
-			else m->flags8 &= ~32;
-			break;
-		
-		case MSF_SFXONENTRY:
-			if ( state )
-				m->flags |= 128;
-			else m->flags &= ~128;
-			break;
-		
-			
-		// Custom / Script
-		case MSF_SCRIPT1:
-			if ( state )
-				m->flags8 |= 1;
-			else m->flags8 &= ~1;
-			break;
-		case MSF_SCRIPT2: 
-			if ( state )
-				m->flags8 |= 2;
-			else m->flags8 &= ~2;
-			break;
-		case MSF_SCRIPT3: 
-			if ( state )
-				m->flags8 |= 4;
-			else m->flags8 &= ~4;
-			break;
-		case MSF_SCRIPT4:
-			if ( state )
-				m->flags8 |= 8;
-			else m->flags8 &= ~8;
-			break;
-		case MSF_SCRIPT5:
-			if ( state )
-				m->flags8 |= 16;
-			else m->flags8 &= ~16;
-			break;
-			
-		//This is a dummy proc, but may have been used at one point in older versions. 
-		case MSF_DUMMY_8:
-			if ( state )
-				m->flags |= 8;
-			else m->flags &= ~8;
-			break;
-		
-		default: Z_scripterrlog("Illegal flag value (%d) passed to SetMapscreenFlag", flagid);
-	}
-}
-				
-int32_t FFScript::get_mapscreenflag_state(mapscr *m, int32_t flagid)
-{
-	switch(flagid)
-	{
-		// Room Types
-		case MSF_INTERIOR: 
-			return (m->flags6&1) ? 1 : 0;
-		case MSF_DUNGEON: 
-			return (m->flags6&2) ? 1 : 0;
-		case MSF_SIDEVIEW: 
-			return (m->flags7&8) ? 1 : 0;
-		
-		// View
-		case MSF_INVISHERO: 
-			return (m->flags3&8) ? 1 : 0;
-		case MSF_NOHEROMARKER: 
-			return (m->flags7&16) ? 1 : 0;
-			
-		case MSF_NOSUBSCREEN: 
-			return (m->flags3&16) ? 1 : 0;
-		case MSF_NOOFFSET: 
-			return (m->flags3&64) ? 1 : 0;
-		
-		case MSF_LAYER2BG: 
-			return (m->flags7&2) ? 1 : 0;
-		case MSF_LAYER3BG: 
-			return (m->flags7&1) ? 1 : 0;
-		case MSF_DARKROOM: 
-			return (m->flags&4) ? 1 : 0;
-	
-		// Secrets
-		case MSF_BLOCKSHUT: 
-			return (m->flags&1) ? 1 : 0;
-		case MSF_TEMPSECRETS:
-			return (m->flags5&16) ? 1 : 0;
-		case MSF_TRIGPERM: 
-			return (m->flags6&4) ? 1 : 0;
-		case MSF_ALLTRIGFLAGS: 
-			return (m->flags6&32) ? 1 : 0;
-		
-		// Warp
-		case MSF_AUTODIRECT: 
-			return (m->flags5&4) ? 1 : 0;
-		case MSF_SENDSIRECT: 
-			return (m->flags5&8) ? 1 : 0;
-		case MSF_MAZEPATHS: 
-			return (m->flags&64) ? 1 : 0;
-			
-		case MSF_MAZEOVERRIDE: 
-			return (m->flags8&64) ? 1 : 0;
-		case MSF_SPRITECARRY: 
-			return (m->flags3&32) ? 1 : 0;
-		case MSF_DIRECTTIMEDWARPS:
-			return (m->flags4&4) ? 1 : 0;
-		case MSF_SECRETSISABLETIMEWRP:
-			return (m->flags4&8) ? 1 : 0;
-		
-		case MSF_RANDOMTIMEDWARP:
-			return (m->flags5&1) ? 1 : 0;
-			
-		// Item
-		case MSF_HOLDUP: 
-			return (m->flags3&1) ? 1 : 0;
-		case MSF_FALLS: 
-			return (m->flags7&4) ? 1 : 0;
-		
-		// Combo
-		case MSF_MIDAIR: 
-			return ((m->flags2>>4)&2) ? 1 : 0;
-		case MSF_CYCLEINIT: 
-			return (m->flags3&2) ? 1 : 0;
-		case MSF_IGNOREBOOTS: 
-			return (m->flags5&2) ? 1 : 0;
-		case MSF_TOGGLERINGS: 
-			return (m->flags6&64) ? 1 : 0;
-		// Save
-		case MSF_SAVECONTHERE: 
-			return (m->flags4&64) ? 1 : 0;
-		case MSF_SAVEONENTRY:
-			return (m->flags4&128) ? 1 : 0;		
-			
-		case MSF_CONTHERE: 
-			return (m->flags6&8) ? 1 : 0;
-			
-		case MSF_NOCONTINUEWARP:  
-			return (m->flags6&16) ? 1 : 0;
-	
-		// FFC
-		case MSF_WRAPFFC: 
-			return (m->flags6&128) ? 1 : 0;
-			
-		case MSF_NOCARRYOVERFFC: 
-			return (m->flags5&128) ? 1 : 0;
-	
-		// Whistle
-		case MSF_STAIRS: 
-			return (m->flags&16) ? 1 : 0;
-		case MSF_PALCHANGE: 
-			return (m->flags7&64) ? 1 : 0;
-		case MSF_DRYLAKE:  
-			return (m->flags7&128) ? 1 : 0;
-		
-		// Enemies
-		case MSF_TRAPS_IGNORE_SOLID:
-			//! May be wrong : Might be 4>>4 : ~4>>4;?
-			return ((m->flags2>>4)&4) ? 1 : 0;
-		
-		case MSF_ENEMEIS_SECRET:
-			//! May be wrong : Might be 8>>4 : ~8>>4;?
-			return ((m->flags2>>4)&8) ? 1 : 0;
-		
-		case MSF_ENEMIES_SECRET_PERM:
-			return (m->flags4&16) ? 1 : 0;
-		
-		case MSF_SPAWN_ZORA:
-			return (m->enemyflags&1) ? 1 : 0;
-			
-		case MSF_SPAWN_CORNERTRAP:
-			return (m->enemyflags&2) ? 1 : 0;
-		
-		case MSF_SPAWN_MIDDLETRAP:
-			return (m->enemyflags&3) ? 1 : 0;
-		
-		case MSF_SPAWN_ROCK:
-			return (m->enemyflags&4) ? 1 : 0;
-		
-		case MSF_SPAWN_SHOOTER:
-			return (m->enemyflags&16) ? 1 : 0;
-		
-		case MSF_RINGLEADER:
-			return (m->enemyflags&32) ? 1 : 0;
-		
-		case MSF_ENEMYHASITEM:
-			return (m->enemyflags&64) ? 1 : 0;
-		case MSF_ENEMYISBOSS:
-			return (m->enemyflags&128) ? 1 : 0;
-		
-		case MSF_INVISIBLEENEMIES:
-			return (m->flags3&4) ? 1 : 0;
-		case MSF_EMELIESALWAYSRETURN:
-			return (m->flags3&128) ? 1 : 0;
-			
-		case MSF_ENEMIES_ITEM:
-			return (m->flags&2) ? 1 : 0;
-		
-		// Misc
-		case MSF_ALLOW_LADDER: 
-			return (m->flags&32) ? 1 : 0;
-		case MSF_NO_DIVING: 
-			return (m->flags5&64) ? 1 : 0;
-		
-		case MSF_LENSEFFECT:
-			return (m->flags8&32) ? 1 : 0;
-		
-		case MSF_SFXONENTRY:
-			return (m->flags&128) ? 1 : 0;
-		
-		//Custom / Script 
-		case MSF_SCRIPT1: 
-			return (m->flags8&1) ? 1 : 0;
-		case MSF_SCRIPT2: 
-			return (m->flags8&2) ? 1 : 0;
-		case MSF_SCRIPT3:
-			return (m->flags8&4) ? 1 : 0;
-		case MSF_SCRIPT4:
-			return (m->flags8&8) ? 1 : 0;
-		case MSF_SCRIPT5:
-			return (m->flags8&16) ? 1 : 0;
-		
-		//This is a dummy proc, but may have been used at one point in older versions. 
-		case MSF_DUMMY_8:
-			return (m->flags&8) ? 1 : 0;
-				
-		
-		default: 
-		{
-			Z_scripterrlog("Illegal flag value (%d) passed to GetMapscreenFlag", flagid);
-			return -1;
-		}
-	}
-}
-*/
 //ScriptHelper
 class SH
 {
@@ -1888,13 +711,6 @@ public:
 ///----------------------------//
 //           Misc.             //
 ///----------------------------//
-
-//Miscellaneous Helper
-class MiscH : public SH
-{
-public:
-
-};
 
 byte flagpos;
 int32_t flagval;
@@ -2700,6 +1516,621 @@ void clearScriptHelperData()
 	ItemH::clearTemp();
 	LwpnH::clearTemp();
 	EwpnH::clearTemp();
+}
+////END HELPER FUNCTIONS
+
+static int32_t numInstructions = 0; // Used to detect hangs
+static bool scriptCanSave = true;
+
+struct ScriptEngineData {
+	refInfo ref;
+	int32_t stack[MAX_SCRIPT_REGISTERS];
+	// This is used as a boolean for all but ScriptType::Item.
+	byte doscript = true;
+	bool waitdraw;
+	bool initialized;
+
+	void reset()
+	{
+		// No need to zero the stack.
+		ref = refInfo();
+		doscript = true;
+		waitdraw = false;
+		initialized = false;
+	}
+};
+
+// (type, index) => ScriptEngineData
+static std::map<std::pair<ScriptType, word>, ScriptEngineData> scriptEngineDatas;
+
+static ScriptEngineData& get_script_engine_data(ScriptType type, int index)
+{
+	if (type == ScriptType::DMap || type == ScriptType::OnMap || type == ScriptType::ScriptedPassiveSubscreen || type == ScriptType::ScriptedActiveSubscreen)
+	{
+		// `index` is used for dmapref, not for different script engine data.
+		index = 0;
+	}
+	if (type == ScriptType::EngineSubscreen)
+	{
+		// `index` is used for subdataref, not for different script engine data.
+		index = 0;
+	}
+	
+	return scriptEngineDatas[{type, index}];
+}
+
+static ScriptEngineData& get_script_engine_data(ScriptType type)
+{
+	return get_script_engine_data(type, 0);
+}
+
+void FFScript::clear_script_engine_data()
+{
+	scriptEngineDatas.clear();
+}
+
+void FFScript::reset_script_engine_data(ScriptType type, int index)
+{
+	get_script_engine_data(type, index).reset();
+}
+
+void FFScript::clear_script_engine_data(ScriptType type, int index)
+{
+	if (type == ScriptType::DMap || type == ScriptType::OnMap || type == ScriptType::ScriptedPassiveSubscreen || type == ScriptType::ScriptedActiveSubscreen)
+	{
+		// `index` is used for dmapref, not for different script engine data.
+		index = 0;
+	}
+	if (type == ScriptType::EngineSubscreen)
+	{
+		// `index` is used for subdataref, not for different script engine data.
+		index = 0;
+	}
+
+	auto it = scriptEngineDatas.find({type, index});
+	if (it != scriptEngineDatas.end())
+	{
+		scriptEngineDatas.erase(it);
+	}
+}
+
+void FFScript::clear_script_engine_data_of_type(ScriptType type)
+{
+	std::erase_if(scriptEngineDatas, [&](auto& kv) { return kv.first.first == type; });
+}
+
+refInfo& FFScript::ref(ScriptType type, int index)
+{
+	return get_script_engine_data(type, index).ref;
+}
+
+byte& FFScript::doscript(ScriptType type, int index)
+{
+	if (type == ScriptType::Generic && unsigned(index) < NUMSCRIPTSGENERIC)
+		return user_scripts[index].doscript();
+	return get_script_engine_data(type, index).doscript;
+}
+
+bool& FFScript::waitdraw(ScriptType type, int index)
+{
+	return get_script_engine_data(type, index).waitdraw;
+}
+
+// Returns true if registers had to be initialized.
+static bool set_current_script_engine_data(ScriptType type, int script, int index)
+{
+	bool got_initialized = false;
+
+	auto& data = get_script_engine_data(type, index);
+	ri = &data.ref;
+	stack = &data.stack;
+	
+	switch (type)
+	{
+		case ScriptType::FFC:
+		{
+			curscript = ffscripts[script];
+
+			if (!data.initialized)
+			{
+				got_initialized = true;
+				memcpy(ri->d, tmpscr->ffcs[index].initd, 8 * sizeof(int32_t));
+				memcpy(ri->a, tmpscr->ffcs[index].inita, 2 * sizeof(int32_t));
+				data.initialized = true;
+			}
+
+			ri->ffcref = index;
+		}
+		break;
+		
+		case ScriptType::NPC:
+		{
+			auto indx = GuyH::getNPCIndex(index);
+			enemy *spr = (enemy*)guys.spr(indx);
+			curscript = guyscripts[script];
+			
+			if (!data.initialized)
+			{
+				got_initialized = true;
+				memcpy(ri->d, spr->initD, 8 * sizeof(int32_t));
+				data.initialized = 1;
+			}
+			
+			ri->guyref = index;
+		}
+		break;
+		
+		case ScriptType::Lwpn:
+		{
+			auto indx = LwpnH::getLWeaponIndex(index);
+			weapon *spr = (weapon*)Lwpns.spr(indx);
+			curscript = lwpnscripts[script];
+			
+			if (!data.initialized)
+			{
+				got_initialized = true;
+				memcpy(ri->d, spr->weap_initd, 8 * sizeof(int32_t));
+				data.initialized = 1;
+			}
+			
+			ri->lwpn = index;
+		}
+		break;
+		
+		case ScriptType::Ewpn:
+		{
+			auto indx = EwpnH::getEWeaponIndex(index);
+			weapon *spr = (weapon*)Ewpns.spr(indx);
+			curscript = ewpnscripts[script];
+			
+			if (!data.initialized)
+			{
+				got_initialized = true;
+				memcpy(ri->d, spr->weap_initd, 8 * sizeof(int32_t));
+				data.initialized = 1;
+			}
+			
+			ri->ewpn = index;
+		}
+		break;
+		
+		case ScriptType::ItemSprite:
+		{
+			auto indx = ItemH::getItemIndex(index);
+			item *spr = (item*)items.spr(indx);
+			curscript = itemspritescripts[script];
+			
+			if (!data.initialized)
+			{
+				got_initialized = true;
+				memcpy(ri->d, spr->initD, 8 * sizeof(int32_t));
+				data.initialized = 1;
+			}
+			
+			ri->itemref = index;
+		}
+		break;
+		
+		case ScriptType::Item:
+		{
+			int32_t i = index;
+			int32_t new_i = 0;
+			bool collect = ( ( i < 1 ) || (i == COLLECT_SCRIPT_ITEM_ZERO) );
+			new_i = ( collect ) ? (( i != COLLECT_SCRIPT_ITEM_ZERO ) ? (i * -1) : 0) : i;
+
+			curscript = itemscripts[script];
+			
+			if (!data.initialized)
+			{
+				got_initialized = true;
+				memcpy(ri->d, ( collect ) ? itemsbuf[new_i].initiald : itemsbuf[i].initiald, 8 * sizeof(int32_t));
+				memcpy(ri->a, ( collect ) ? itemsbuf[new_i].initiala : itemsbuf[i].initiala, 2 * sizeof(int32_t));
+				data.initialized = true;
+			}			
+			ri->idata = ( collect ) ? new_i : i; //'this' pointer
+		}
+		break;
+		
+		case ScriptType::Global:
+		{
+			curscript = globalscripts[script];
+		}
+		break;
+		
+		case ScriptType::Generic:
+		{
+			user_genscript& scr = user_scripts[script];
+			curscript = genericscripts[script];
+			scr.waitevent = false;
+			if(!data.initialized)
+			{
+				got_initialized = true;
+				scr.initd.copy_to(ri->d, 8);
+				data.initialized = true;
+			}
+			ri->genericdataref = script;
+		}
+		break;
+		
+		case ScriptType::GenericFrozen:
+		{
+			user_genscript& scr = user_scripts[script];
+			curscript = genericscripts[script];
+			if(!data.initialized)
+			{
+				got_initialized = true;
+				scr.initd.copy_to(ri->d, 8);
+				data.initialized = true;
+			}
+			ri->genericdataref = script;
+		}
+		break;
+		
+		case ScriptType::Player:
+		{
+			curscript = playerscripts[script];
+		}
+		break;
+		
+		case ScriptType::DMap:
+		{
+			curscript = dmapscripts[script];
+			ri->dmapsref = index;
+			//how do we clear initialised on dmap change?
+			if ( !data.initialized )
+			{
+				got_initialized = true;
+				for ( int32_t q = 0; q < 8; q++ ) 
+				{
+					ri->d[q] = DMaps[ri->dmapsref].initD[q];// * 10000;
+				}
+				data.initialized = true;
+			}
+		}
+		break;
+		
+		case ScriptType::OnMap:
+		{
+			curscript = dmapscripts[script];
+			ri->dmapsref = index;
+			if (!data.initialized)
+			{
+				got_initialized = true;
+				for ( int32_t q = 0; q < 8; q++ ) 
+				{
+					ri->d[q] = DMaps[ri->dmapsref].onmap_initD[q];
+				}
+				data.initialized = true;
+			}
+		}
+		break;
+		
+		case ScriptType::ScriptedActiveSubscreen:
+		{
+			curscript = dmapscripts[script];
+			ri->dmapsref = index;
+			if (!data.initialized)
+			{
+				got_initialized = true;
+				for ( int32_t q = 0; q < 8; q++ ) 
+				{
+					ri->d[q] = DMaps[ri->dmapsref].sub_initD[q];
+				}
+				data.initialized = true;
+			}
+		}
+		break;
+		
+		case ScriptType::ScriptedPassiveSubscreen:
+		{
+			curscript = dmapscripts[script];
+			ri->dmapsref = index;
+			if (!data.initialized)
+			{
+				got_initialized = true;
+				for ( int32_t q = 0; q < 8; q++ ) 
+				{
+					ri->d[q] = DMaps[ri->dmapsref].sub_initD[q];
+				}
+				data.initialized = true;
+			}
+		}
+		break;
+		case ScriptType::EngineSubscreen:
+		{
+			curscript = subscreenscripts[script];
+			ri->subdataref = get_subref(-1, sstACTIVE);
+			auto [ptr,_ty] = load_subdata(ri->subdataref);
+			
+			if (ptr && !data.initialized)
+			{
+				got_initialized = true;
+				for ( int32_t q = 0; q < 8; q++ ) 
+				{
+					ri->d[q] = ptr->initd[q];
+				}
+				data.initialized = true;
+			}
+		}
+		break;
+		
+		case ScriptType::Screen:
+		{
+			curscript = screenscripts[script];
+
+			if (!data.initialized)
+			{
+				got_initialized = true;
+				for ( int32_t q = 0; q < 8; q++ ) 
+				{
+					ri->d[q] = tmpscr->screeninitd[q];// * 10000;
+				}
+				data.initialized = true;
+			}
+		}
+		break;
+		
+		case ScriptType::Combo:
+		{
+			curscript = comboscripts[script];
+
+			int32_t pos = combopos_ref_to_pos(index);
+			int32_t lyr = combopos_ref_to_layer(index);
+			int32_t id = FFCore.tempScreens[lyr]->data[pos];
+			if (!data.initialized)
+			{
+				got_initialized = true;
+				memset(ri->d, 0, 8 * sizeof(int32_t));
+				for ( int32_t q = 0; q < 8; q++ )
+					ri->d[q] = combobuf[id].initd[q];
+				data.initialized = true;
+			}
+
+			ri->combosref = id; //'this' pointer
+			ri->comboposref = index; //used for X(), Y(), Layer(), and so forth.
+			break;
+		}
+	}
+
+	return got_initialized;
+}
+
+int32_t ffmisc[MAXFFCS][16];
+
+user_genscript user_scripts[NUMSCRIPTSGENERIC];
+int32_t genscript_timing = SCR_TIMING_START_FRAME;
+static word max_valid_genscript;
+static dword max_valid_object;
+
+void user_genscript::clear()
+{
+	wait_atleast = true;
+	waituntil = SCR_TIMING_START_FRAME;
+	waitevent = false;
+	exitState = 0;
+	reloadState = 0;
+	eventstate = 0;
+	initd.clear();
+	data.clear();
+	quit();
+}
+void user_genscript::launch()
+{
+	quit();
+	doscript() = true;
+	wait_atleast = true;
+	waituntil = SCR_TIMING_START_FRAME;
+	waitevent = false;
+}
+void user_genscript::quit()
+{
+	if(indx > -1)
+	{
+		FFCore.clear_script_engine_data(ScriptType::Generic, indx);
+		FFCore.deallocateAllScriptOwned(ScriptType::Generic, indx);
+	}
+	_doscript = false;
+}
+byte& user_genscript::doscript()
+{
+	return _doscript;
+}
+byte const& user_genscript::doscript() const
+{
+	return _doscript;
+}
+
+void countGenScripts()
+{
+	max_valid_genscript = 0;
+	for(auto q = 1; q < NUMSCRIPTSGENERIC; ++q)
+	{
+		if(genericscripts[q] && genericscripts[q]->valid())
+			max_valid_genscript = q;
+	}
+}
+void countObjects()
+{
+	max_valid_object = 0;
+	for(auto q = 0; q < MAX_USER_OBJECTS; ++q)
+	{
+		if(script_objects[q].reserved)
+			max_valid_object = q+1;
+	}
+}
+void timeExitAllGenscript(byte exState)
+{
+	for(user_genscript& g : user_scripts)
+		g.timeExit(exState);
+}
+void throwGenScriptEvent(int32_t event)
+{
+	for(auto q = 1; q <= max_valid_genscript; ++q)
+	{
+		user_genscript& scr = user_scripts[q];
+		if(!scr.doscript()) continue;
+		if(!genericscripts[q]->valid()) continue;
+		if(!scr.waitevent) continue;
+		if(scr.eventstate & (1<<event))
+		{
+			auto& data = get_script_engine_data(ScriptType::Generic, q);
+			data.ref.d[rEXP1] = event*10000;
+			scr.waitevent = false;
+			
+			//Run the script!
+			ZScriptVersion::RunScript(ScriptType::Generic, q, q);
+		}
+	}
+}
+
+void load_genscript(const gamedata& gd)
+{
+	for(size_t q = 0; q < NUMSCRIPTSGENERIC; ++q)
+	{
+		user_genscript& gen = user_scripts[q];
+		gen.clear();
+		gen.indx = q;
+		gen.doscript() = gd.gen_doscript.get(q);
+		gen.exitState = gd.gen_exitState[q];
+		gen.reloadState = gd.gen_reloadState[q];
+		gen.eventstate = gd.gen_eventstate[q];
+		gen.initd = gd.gen_initd[q];
+		gen.data = gd.gen_data[q];
+	}
+}
+void load_genscript(const zinitdata& zd)
+{
+	for(size_t q = 0; q < NUMSCRIPTSGENERIC; ++q)
+	{
+		user_genscript& gen = user_scripts[q];
+		gen.clear();
+		gen.indx = q;
+		gen.doscript() = zd.gen_doscript.get(q);
+		gen.exitState = zd.gen_exitState[q];
+		gen.reloadState = zd.gen_reloadState[q];
+		gen.eventstate = zd.gen_eventstate[q];
+		gen.initd = zd.gen_initd[q];
+		gen.data = zd.gen_data[q];
+	}
+}
+
+void save_genscript(gamedata& gd)
+{
+	for(size_t q = 0; q < NUMSCRIPTSGENERIC; ++q)
+	{
+		user_genscript const& gen = user_scripts[q];
+		gd.gen_doscript.set(q, gen.doscript());
+		gd.gen_exitState[q] = gen.exitState;
+		gd.gen_reloadState[q] = gen.reloadState;
+		gd.gen_eventstate[q] = gen.eventstate;
+		gd.gen_initd[q] = gen.initd;
+		gd.gen_data[q] = gen.data;
+	}
+}
+
+void FFScript::runGenericPassiveEngine(int32_t scrtm)
+{
+	if(!max_valid_genscript) return; //No generic scripts in the quest!
+	//zprint2("Processing timing %d\n", scrtm);
+	bool init = (scrtm == SCR_TIMING_INIT);
+	if(!init)
+	{
+		if(genscript_timing != scrtm)
+		{
+			//zprint2("Generic script timing jump: expected '%d', found '%d'\n", genscript_timing, scrtm);
+			while(genscript_timing != scrtm)
+				runGenericPassiveEngine(genscript_timing);
+		}
+	}
+	for(auto q = 1; q <= max_valid_genscript; ++q)
+	{
+		user_genscript& scr = user_scripts[q];
+		if(!scr.doscript()) continue;
+		if(!genericscripts[q]->valid()) continue;
+		if(scr.waitevent) continue;
+		if(!init && (scr.waituntil > scrtm || (!scr.wait_atleast && scr.waituntil != scrtm)))
+			continue;
+		
+		//Run the script!
+		ZScriptVersion::RunScript(ScriptType::Generic, q, q);
+	}
+	if(init || genscript_timing >= SCR_TIMING_END_FRAME)
+		genscript_timing = SCR_TIMING_START_FRAME;
+	else ++genscript_timing;
+}
+
+void FFScript::initZScriptDMapScripts()
+{
+	scriptEngineDatas[{ScriptType::DMap, 0}] = ScriptEngineData();
+	scriptEngineDatas[{ScriptType::ScriptedPassiveSubscreen, 0}] = ScriptEngineData();
+}
+
+void FFScript::initZScriptSubscreenScript()
+{
+	scriptEngineDatas[{ScriptType::EngineSubscreen, 0}] = ScriptEngineData();
+}
+void FFScript::initZScriptScriptedActiveSubscreen()
+{
+	scriptEngineDatas[{ScriptType::ScriptedActiveSubscreen, 0}] = ScriptEngineData();
+}
+
+void FFScript::initZScriptOnMapScript()
+{
+	scriptEngineDatas[{ScriptType::OnMap, 0}] = ScriptEngineData();
+}
+
+void FFScript::initZScriptHeroScripts()
+{
+	scriptEngineDatas[{ScriptType::Player, 0}] = ScriptEngineData();
+}
+
+void FFScript::initZScriptItemScripts()
+{
+	for ( int32_t q = 0; q < 256; q++ )
+	{
+		auto& data = get_script_engine_data(ScriptType::Item, q);
+		data.reset();
+		data.doscript = (itemsbuf[q].flags&ITEM_PASSIVESCRIPT) && game->item[q];
+	}
+
+	for ( int32_t q = -256; q < 0; q++ )
+	{
+		auto& data = get_script_engine_data(ScriptType::Item, q);
+		data.reset();
+		data.doscript = 0;
+	}
+}
+
+static int get_mouse_state(int index)
+{
+	int value = 0;
+	if (replay_is_replaying())
+	{
+		value = replay_get_mouse(index);
+	}
+	else if (index == 0)
+	{
+		value = script_mouse_x;
+	}
+	else if (index == 1)
+	{
+		value = script_mouse_y;
+	}
+	else if (index == 2)
+	{
+		value = script_mouse_z;
+	}
+	else if (index == 3)
+	{
+		value = script_mouse_b;
+	}
+
+	if (replay_is_recording())
+	{
+		replay_set_mouse(index, value);
+	}
+
+	return value;
 }
 
 ///---------------------------------------------//
@@ -4835,15 +4266,54 @@ int32_t get_register(const int32_t arg)
 			break;
 		
 		case ITEMX:
+		{
 			if(0!=(s=checkItem(ri->itemref)))
 			{
+				zfix x;
+				bool is_fairy = itemsbuf[s->id].family==itype_fairy && itemsbuf[s->id].misc3;
+				if (is_fairy)
+				{
+					enemy* fairy = (enemy*) guys.getByUID(((item*)(s))->fairyUID);
+					x = fairy ? fairy->x : s->x;
+				}
+				else
+				{
+					x = s->x;
+				}
+
 				if ( get_qr(qr_SPRITEXY_IS_FLOAT) )
 				{
-					ret=(((item*)(s))->x).getZLong();    
+					ret=x.getZLong();
 				}
-				else ret=((int32_t)((item*)(s))->x)*10000;
+				else ret = (int32_t)x * 10000;
 			}
-			break;
+		}
+		break;
+
+		case ITEMY:
+		{
+			if(0!=(s=checkItem(ri->itemref)))
+			{
+				zfix y;
+				bool is_fairy = itemsbuf[s->id].family==itype_fairy && itemsbuf[s->id].misc3;
+				if (is_fairy)
+				{
+					enemy* fairy = (enemy*) guys.getByUID(((item*)(s))->fairyUID);
+					y = fairy ? fairy->y : s->y;
+				}
+				else
+				{
+					y = s->y;
+				}
+
+				if ( get_qr(qr_SPRITEXY_IS_FLOAT) )
+				{
+					ret=y.getZLong();
+				}
+				else ret = (int32_t)y * 10000;
+			}
+		}
+		break;
 		
 		case ITEMSPRITESCRIPT:
 			if(0!=(s=checkItem(ri->itemref)))
@@ -4887,18 +4357,7 @@ int32_t get_register(const int32_t arg)
 				ret=((int32_t)((item*)(s))->script_UID); //Literal, not *10000
 			}
 			break;
-			
-		case ITEMY:
-			if(0!=(s=checkItem(ri->itemref)))
-			{
-				if ( get_qr(qr_SPRITEXY_IS_FLOAT) )
-				{
-					ret=(((item*)(s))->y).getZLong();    
-				}
-				else 
-					ret=((int32_t)((item*)(s))->y)*10000;
-			}
-			break;
+		
 			
 		case ITEMZ:
 			if(0!=(s=checkItem(ri->itemref)))
@@ -8462,7 +7921,7 @@ int32_t get_register(const int32_t arg)
 			if ( indx < 0 || indx > 31 )
 			{
 				ret = -10000;
-				Z_scripterrlog("Invalud index used to access Game->Misc: %d\n", indx);
+				Z_scripterrlog("Invalid index used to access Game->Misc: %d\n", indx);
 			}
 			else
 			{
@@ -8482,14 +7941,23 @@ int32_t get_register(const int32_t arg)
 			int32_t inx = (ri->d[rINDEX])/10000;
 			if ( (unsigned) inx > (susptLAST-1) )
 			{
-				Z_scripterrlog("Invalid array index [%d] passed to Gme->Suspend[]\n");
+				Z_scripterrlog("Invalid array index [%d] passed to Game->Suspend[]\n");
 			}
 			ret = (( FFCore.system_suspend[inx] ) ? 10000 : 0);
 			break;
 		}
 		case GAMELITEMSD:
-			ret=game->lvlitems[(ri->d[rINDEX])/10000]*10000;
+		{
+			size_t index = ri->d[rINDEX] / 10000;
+			if (index >= game->lvlitems.size())
+			{
+				ret = 0;
+				Z_scripterrlog("Invalid array index [%d] passed to Game->LItems[]\n", index);
+				break;
+			}
+			ret=game->lvlitems[index]*10000;
 			break;
+		}
 		case GAMELSWITCH:
 		{
 			int32_t ind = (ri->d[rINDEX])/10000;
@@ -9161,6 +8629,51 @@ int32_t get_register(const int32_t arg)
 				ret = -10000;
 			else
 				ret = ((combobuf[tmpscr->data[pos]].walk & 0xF0)>>4) * 10000;
+		}
+		break;
+
+		///----------------------------------------------------------------------------------------------------//
+		//Region
+
+		case REGION_WIDTH:
+		{
+			ret = 256 * 10000;
+		}
+		break;
+
+		case REGION_HEIGHT:
+		{
+			ret = 176 * 10000;
+		}
+		break;
+
+		case REGION_SCREEN_WIDTH:
+		{
+			ret = 1 * 10000;
+		}
+		break;
+
+		case REGION_SCREEN_HEIGHT:
+		{
+			ret = 1 * 10000;
+		}
+		break;
+
+		case REGION_NUM_COMBOS:
+		{
+			ret = 176 * 10000;
+		}
+		break;
+
+		case REGION_ID:
+		{
+			ret = 0 * 10000;
+		}
+		break;
+
+		case REGION_ORIGIN_SCREEN:
+		{
+			ret = currscr * 10000;
 		}
 		break;
 		
@@ -13729,7 +13242,7 @@ int32_t get_register(const int32_t arg)
 			ret = 0;
 			if(user_genscript* scr = checkGenericScr(ri->genericdataref, "Running"))
 			{
-				ret = scr->doscript ? 10000L : 0L;
+				ret = scr->doscript() ? 10000L : 0L;
 			}
 			break;
 		}
@@ -17650,13 +17163,31 @@ void set_register(int32_t arg, int32_t value)
 		case ITEMX:
 			if(0!=(s=checkItem(ri->itemref)))
 			{
-				(s->x)=get_qr(qr_SPRITEXY_IS_FLOAT) ? zslongToFix(value) : zfix(value/10000);
+				s->x = get_qr(qr_SPRITEXY_IS_FLOAT) ? zslongToFix(value) : zfix(value/10000);
 				
 				// Move the Fairy enemy as well.
-				if(itemsbuf[((item*)(s))->id].family==itype_fairy && itemsbuf[((item*)(s))->id].misc3)
-					movefairynew2(((item*)(s))->x,((item*)(s))->y,*((item*)(s)));
+				if(itemsbuf[s->id].family==itype_fairy && itemsbuf[s->id].misc3)
+				{
+					enemy* fairy = (enemy*) guys.getByUID(((item*)(s))->fairyUID);
+					if (fairy)
+						fairy->x = s->x;
+				}
 			}
-			
+			break;
+
+		case ITEMY:
+			if(0!=(s=checkItem(ri->itemref)))
+			{
+				s->y = get_qr(qr_SPRITEXY_IS_FLOAT) ? zslongToFix(value) : zfix(value/10000);
+				
+				// Move the Fairy enemy as well.
+				if(itemsbuf[s->id].family==itype_fairy && itemsbuf[s->id].misc3)
+				{
+					enemy* fairy = (enemy*) guys.getByUID(((item*)(s))->fairyUID);
+					if (fairy)
+						fairy->y = s->y;
+				}
+			}
 			break;
 		
 		case ITEMSPRITESCRIPT:
@@ -17677,18 +17208,6 @@ void set_register(int32_t arg, int32_t value)
 			if(0!=(s=checkItem(ri->itemref)))
 			{
 				(s->scale)=(zfix)(value/100.0);
-			}
-			
-			break;
-			
-		case ITEMY:
-			if(0!=(s=checkItem(ri->itemref)))
-			{
-				(s->y)=get_qr(qr_SPRITEXY_IS_FLOAT) ? zslongToFix(value) : zfix(value/10000);
-				
-				// Move the Fairy enemy as well.
-				if(itemsbuf[((item*)(s))->id].family==itype_fairy && itemsbuf[((item*)(s))->id].misc3)
-					movefairynew2(((item*)(s))->x,((item*)(s))->y,*((item*)(s)));
 			}
 			
 			break;
@@ -21401,15 +20920,20 @@ void set_register(int32_t arg, int32_t value)
 			int32_t inx = (ri->d[rINDEX])/10000;
 			if ( (unsigned) inx > (susptLAST-1) )
 			{
-				Z_scripterrlog("Invalid array index [%d] passed to Gme->Suspend[]\n");
+				Z_scripterrlog("Invalid array index [%d] passed to Game->Suspend[]\n");
+				break;
 			}
 			FFCore.system_suspend[inx]= ( (value) ? 1 : 0 );
 			break;
 		}
 			
 		case GAMELITEMSD:
-			game->lvlitems[(ri->d[rINDEX])/10000]=value/10000;
+		{
+			int32_t ind = (ri->d[rINDEX])/10000;
+			if(unsigned(ind) < MAXLEVELS)
+				game->lvlitems[ind]=value/10000;
 			break;
+		}
 		case GAMELSWITCH:
 		{
 			int32_t ind = (ri->d[rINDEX])/10000;
@@ -28958,6 +28482,36 @@ int32_t sz_int_arr(const int32_t ptr)
 ///----------------------------------------------------------------------------------------------------//
 
 
+void stack_push(int32_t val)
+{
+	--ri->sp;
+	ri->sp &= MASK_SP;
+	SH::write_stack(ri->sp, val);
+}
+void stack_push(int32_t val, size_t count)
+{
+	for(int q = 0; q < count; ++q)
+	{
+		--ri->sp;
+		ri->sp &= MASK_SP;
+		SH::write_stack(ri->sp, val);
+	}
+}
+
+int32_t stack_pop()
+{
+	const int32_t val = SH::read_stack(ri->sp);
+	++ri->sp;
+	ri->sp &= MASK_SP;
+	return val;
+}
+int32_t stack_pop(size_t count)
+{
+	ri->sp += count;
+	ri->sp &= MASK_SP;
+	return SH::read_stack((ri->sp-1) & MASK_SP);
+}
+
 ///----------------------------------------------------------------------------------------------------//
 //Internal (to ZScript)
 
@@ -29032,9 +28586,7 @@ void do_set(const bool v, ScriptType whichType, const int32_t whichUID)
 void do_push(const bool v)
 {
 	const int32_t value = SH::get_arg(sarg1, v);
-	--ri->sp;
-	ri->sp &= MASK_SP;
-	SH::write_stack(ri->sp, value);
+	stack_push(value);
 }
 void do_push_varg(const bool v)
 {
@@ -29044,10 +28596,7 @@ void do_push_varg(const bool v)
 
 void do_pop()
 {
-	const int32_t value = SH::read_stack(ri->sp);
-	++ri->sp;
-	ri->sp &= MASK_SP;
-	set_register(sarg1, value);
+	set_register(sarg1, stack_pop());
 }
 
 void do_peek()
@@ -29063,12 +28612,7 @@ void do_peekat(const bool v)
 
 void do_pops() // Pop past a bunch of stuff at once. Useful for clearing the stack.
 {
-	int32_t num = sarg2;
-	ri->sp += num;
-	ri->sp &= MASK_SP;
-	word read = (ri->sp-1) & MASK_SP;
-	int32_t value = SH::read_stack(read);
-	set_register(sarg1, value);
+	set_register(sarg1, stack_pop(sarg2));
 }
 
 void do_loadi()
@@ -30220,6 +29764,20 @@ void do_triggersecrets()
 
 
 
+void do_getscreenforcombopos(const bool v)
+{
+	int rpos = (SH::get_arg(sarg1, v) / 10000);
+	
+	if (BC::checkBoundsPos(rpos, 0, 175, "Region->GetScreenForComoboPos") != SH::_NoError)
+	{
+		set_register(sarg1, -10000);
+		return;
+	}
+
+	set_register(sarg1, currscr * 10000);
+}
+
+
 
 void do_getscreenflags()
 {
@@ -31231,30 +30789,36 @@ void FFScript::do_loadgenericdata(const bool v)
 void FFScript::do_create_paldata()
 {
 	ri->paldataref = get_free_paldata();
-	user_paldata* pd = &script_paldatas[ri->paldataref-1];
-	for (int32_t q = 0; q < PALDATA_BITSTREAM_SIZE; ++q)
-		pd->colors_used[q] = 0;
+	if (ri->paldataref > 0)
+	{
+		user_paldata* pd = &script_paldatas[ri->paldataref - 1];
+		for (int32_t q = 0; q < PALDATA_BITSTREAM_SIZE; ++q)
+			pd->colors_used[q] = 0;
+	}
 	ri->d[rEXP1] = ri->paldataref;
 }
 
 void FFScript::do_create_paldata_clr()
 {
 	ri->paldataref = get_free_paldata();
-	user_paldata* pd = &script_paldatas[ri->paldataref - 1];
-	int32_t clri = get_register(sarg1);
-	
-	RGB c = _RGB((clri >> 16) & 0xFF, (clri >> 8) & 0xFF, clri & 0xFF);
-
-	if (c.r < 0 || c.g < 0 || c.b < 0)
+	if (ri->paldataref > 0)
 	{
-		Z_scripterrlog("Invalid rgb (%d) passed to Graphics->CreatePalData().\n", clri);
-	}
-	c.r = vbound(c.r, 0, 63);
-	c.g = vbound(c.g, 0, 63);
-	c.b = vbound(c.b, 0, 63);
+		user_paldata* pd = &script_paldatas[ri->paldataref - 1];
+		int32_t clri = get_register(sarg1);
 
-	for(int32_t q = 0; q < 240; ++q)
-		pd->set_color(q, c);
+		RGB c = _RGB((clri >> 16) & 0xFF, (clri >> 8) & 0xFF, clri & 0xFF);
+
+		if (c.r < 0 || c.g < 0 || c.b < 0)
+		{
+			Z_scripterrlog("Invalid rgb (%d) passed to Graphics->CreatePalData().\n", clri);
+		}
+		c.r = vbound(c.r, 0, 63);
+		c.g = vbound(c.g, 0, 63);
+		c.b = vbound(c.b, 0, 63);
+
+		for (int32_t q = 0; q < 240; ++q)
+			pd->set_color(q, c);
+	}
 	ri->d[rEXP1] = ri->paldataref;
 }
 
@@ -32091,6 +31655,7 @@ void FFScript::do_paldata_copy()
 
 void FFScript::do_paldata_copycset()
 {
+	ri->paldataref = SH::read_stack(ri->sp + 3);
 	if (user_paldata* pd = checkPalData(ri->paldataref, "paldata->CopyCSet()"))
 	{
 		int32_t ref_dest = SH::read_stack(ri->sp + 2);
@@ -35051,8 +34616,8 @@ void FFScript::do_get_music_length()
 
 void FFScript::do_set_music_loop()
 {
-	double start = (get_register(sarg1) / 10000);
-	double end = (get_register(sarg2) / 10000);
+	double start = (get_register(sarg1) / 10000.0);
+	double end = (get_register(sarg2) / 10000.0);
 
 	set_zcmusicloop(start, end);
 }
@@ -35711,6 +35276,41 @@ portal* loadportal(savedportal& p);
 //                                       Run the script                                                //
 ///----------------------------------------------------------------------------------------------------//
 
+void goto_err(char const* opname)
+{
+	auto i = curScriptIndex;
+	const char* type_str = ScriptTypeToString(curScriptType);
+	switch(curScriptType)
+	{
+		case ScriptType::FFC:
+			Z_scripterrlog("%s Script %s attempted to %s an invalid jump to (%d).\n", type_str, ffcmap[i].scriptname.c_str(), opname, sarg1); break;
+		case ScriptType::NPC:
+			Z_scripterrlog("%s Script %s attempted to %s an invalid jump to (%d).\n", type_str, npcmap[i].scriptname.c_str(), opname, sarg1); break;
+		case ScriptType::Lwpn:
+			Z_scripterrlog("%s Script %s attempted to %s an invalid jump to (%d).\n", type_str, lwpnmap[i].scriptname.c_str(), opname, sarg1); break;
+		case ScriptType::Ewpn:
+			Z_scripterrlog("%s Script %s attempted to %s an invalid jump to (%d).\n", type_str, ewpnmap[i].scriptname.c_str(), opname, sarg1); break;
+		case ScriptType::ItemSprite:
+			Z_scripterrlog("%s Script %s attempted to %s an invalid jump to (%d).\n", type_str, itemspritemap[i].scriptname.c_str(), opname, sarg1); break;
+		case ScriptType::Item:
+			Z_scripterrlog("%s Script %s attempted to %s an invalid jump to (%d).\n", type_str, itemmap[i].scriptname.c_str(), opname, sarg1); break;
+		case ScriptType::Global:
+			Z_scripterrlog("%s Script %s attempted to %s an invalid jump to (%d).\n", type_str, globalmap[i].scriptname.c_str(), opname, sarg1); break;
+		case ScriptType::Player:
+			Z_scripterrlog("%s Script %s attempted to %s an invalid jump to (%d).\n", type_str, playermap[i].scriptname.c_str(), opname, sarg1); break;
+		case ScriptType::Screen:
+			Z_scripterrlog("%s Script %s attempted to %s an invalid jump to (%d).\n", type_str, screenmap[i].scriptname.c_str(), opname, sarg1); break;
+		case ScriptType::OnMap:
+		case ScriptType::DMap:
+		case ScriptType::ScriptedActiveSubscreen:
+		case ScriptType::ScriptedPassiveSubscreen:
+			Z_scripterrlog("%s Script %s attempted to %s an invalid jump to (%d).\n", type_str, dmapmap[i].scriptname.c_str(), opname, sarg1); break;
+		case ScriptType::Combo:
+			Z_scripterrlog("%s Script %s attempted to %s an invalid jump to (%d).\n", type_str, comboscriptmap[i].scriptname.c_str(), opname, sarg1); break;
+		
+		default: break;
+	}
+}
 
 int32_t run_script(ScriptType type, const word script, const int32_t i)
 {
@@ -35745,127 +35345,14 @@ int32_t run_script(ScriptType type, const word script, const int32_t i)
 		case ScriptType::Screen:
 		case ScriptType::Combo:
 		case ScriptType::Item:
-		{
-			// TODO: finish refactoring the other script types.
-			got_initialized = set_current_script_engine_data(type, script, i);
-		}
-		break;
-
 		case ScriptType::NPC:
-		{
-			int32_t npc_index = GuyH::getNPCIndex(i);
-			enemy *w = (enemy*)guys.spr(npc_index);
-			ri = &(w->scrmem->scriptData);
-			curscript = guyscripts[w->script];
-			stack = &(w->scrmem->stack);
-			ri->guyref = i;
-			
-			if (!w->initialised)
-			{
-				got_initialized = true;
-				for ( int32_t q = 0; q < 8; q++ ) 
-				{
-					ri->d[q] = w->initD[q];
-				}
-				w->initialised = 1;
-			}
-		}
-		break;
-		
 		case ScriptType::Lwpn:
-		{
-			int32_t lwpn_index = LwpnH::getLWeaponIndex(i);
-			weapon *w = (weapon*)Lwpns.spr(lwpn_index);
-			ri = &(w->scrmem->scriptData);
-			curscript = lwpnscripts[w->weaponscript];
-			stack = &(w->scrmem->stack);
-			ri->lwpn = i;
-			
-			if (!w->initialised)
-			{
-				got_initialized = true;
-				for ( int32_t q = 0; q < 8; q++ ) 
-				{
-					ri->d[q] = w->weap_initd[q]; //w->initiald[q];
-				}
-				w->initialised = 1;
-			}
-		}
-		break;
-		
 		case ScriptType::Ewpn:
-		{
-			int32_t ewpn_index = EwpnH::getEWeaponIndex(i);
-			weapon *w = (weapon*)Ewpns.spr(ewpn_index);
-			ri = &(w->scrmem->scriptData);
-			curscript = ewpnscripts[w->weaponscript];
-			stack = &(w->scrmem->stack);
-			ri->ewpn = i;
-			
-			if (!w->initialised)
-			{
-				got_initialized = true;
-				for ( int32_t q = 0; q < 8; q++ ) 
-				{
-					ri->d[q] = w->weap_initd[q];
-				}
-				w->initialised = 1;
-			}
-		}
-		break;
-		
 		case ScriptType::ItemSprite:
-		{
-			int32_t the_index = ItemH::getItemIndex(i);
-			item *w = (item*)items.spr(the_index);
-			ri = &(w->scrmem->scriptData);
-			curscript = itemspritescripts[w->script];
-			stack = &(w->scrmem->stack);
-			ri->itemref = i;
-			
-			if (!w->initialised)
-			{
-				got_initialized = true;
-				for ( int32_t q = 0; q < 8; q++ ) 
-				{
-					ri->d[q] = w->initD[q];
-				}
-				w->initialised = 1;
-			}
-		}
-		break;
-		
 		case ScriptType::Generic:
-		{
-			user_genscript& scr = user_scripts[script];
-			stack = &scr.stack;
-			ri = &scr.ri;
-			ri->genericdataref = script;
-			curscript = genericscripts[script];
-			scr.waitevent = false;
-			if(!scr.initialized)
-			{
-				got_initialized = true;
-				scr.initialized = true;
-				for (int q = 0; q < 8; ++q)
-					ri->d[q] = scr.initd[q];
-			}
-		}
-		break;
-		
 		case ScriptType::GenericFrozen:
 		{
-			ri = genericActiveData.back();
-			ri->genericdataref = script;
-			curscript = genericscripts[script];
-			stack = generic_active_stack.back();
-			if(!gen_active_initialized)
-			{
-				got_initialized = true;
-				gen_active_initialized = true;
-				for (int q = 0; q < 8; ++q)
-					ri->d[q] = user_scripts[script].initd[q];
-			}
+			got_initialized = set_current_script_engine_data(type, script, i);
 		}
 		break;
 
@@ -36270,84 +35757,24 @@ j_command:
 				break;
 			case GOTO:
 			{
-				uint8_t invalid = 0;
 				if(sarg1 < 0 )
 				{
-					const char* type_str = ScriptTypeToString(type);
-					switch(type)
-					{
-						case ScriptType::FFC:
-							Z_scripterrlog("%s Script %s attempted to GOTO an invalid jump to (%d).\n", type_str, ffcmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::NPC:
-							Z_scripterrlog("%s Script %s attempted to GOTO an invalid jump to (%d).\n", type_str, npcmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::Lwpn:
-							Z_scripterrlog("%s Script %s attempted to GOTO an invalid jump to (%d).\n", type_str, lwpnmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::Ewpn:
-							Z_scripterrlog("%s Script %s attempted to GOTO an invalid jump to (%d).\n", type_str, ewpnmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::ItemSprite:
-							Z_scripterrlog("%s Script %s attempted to GOTO an invalid jump to (%d).\n", type_str, itemspritemap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::Item:
-							Z_scripterrlog("%s Script %s attempted to GOTO an invalid jump to (%d).\n", type_str, itemmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::Global:
-							Z_scripterrlog("%s Script %s attempted to GOTO an invalid jump to (%d).\n", type_str, globalmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::Player:
-							Z_scripterrlog("%s Script %s attempted to GOTO an invalid jump to (%d).\n", type_str, playermap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::Screen:
-							Z_scripterrlog("%s Script %s attempted to GOTO an invalid jump to (%d).\n", type_str, screenmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::OnMap:
-						case ScriptType::DMap:
-						case ScriptType::ScriptedActiveSubscreen:
-						case ScriptType::ScriptedPassiveSubscreen:
-							Z_scripterrlog("%s Script %s attempted to GOTO an invalid jump to (%d).\n", type_str, dmapmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::Combo: Z_scripterrlog("%s Script %s attempted to GOTO an invalid jump to (%d).\n", type_str, comboscriptmap[i].scriptname.c_str(), sarg1); break;
-						
-						default: break;						
-					}
-					invalid = 1; scommand = 0xFFFF;
+					goto_err("GOTO");
+					scommand = 0xFFFF;
+					break;
 				}
-				if ( invalid ) break;
 				ri->pc = sarg1;
 				increment = false;
 				break;
 			}
 			case GOTOR:
 			{
-				uint8_t invalid = 0;
 				if(sarg1 < 0 )
 				{
-					const char* type_str = ScriptTypeToString(type);
-					switch(type)
-					{
-						case ScriptType::FFC:
-							Z_scripterrlog("%s Script %s attempted to GOTOR an invalid jump to (%d).\n", type_str, ffcmap[i].scriptname.c_str() ,sarg1); break;
-						case ScriptType::NPC:
-							Z_scripterrlog("%s Script %s attempted to GOTOR an invalid jump to (%d).\n", type_str, npcmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::Lwpn:
-							Z_scripterrlog("%s Script %s attempted to GOTOR an invalid jump to (%d).\n", type_str, lwpnmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::Ewpn:
-							Z_scripterrlog("%s Script %s attempted to GOTOR an invalid jump to (%d).\n", type_str, ewpnmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::ItemSprite:
-							Z_scripterrlog("%s Script %s attempted to GOTOR an invalid jump to (%d).\n", type_str, itemspritemap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::Item:
-							Z_scripterrlog("%s Script %s attempted to GOTOR an invalid jump to (%d).\n", type_str, itemmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::Global:
-							Z_scripterrlog("%s Script %s attempted to GOTOR an invalid jump to (%d).\n", type_str, globalmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::Player:
-							Z_scripterrlog("%s Script %s attempted to GOTOR an invalid jump to (%d).\n", type_str, playermap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::Screen:
-							Z_scripterrlog("%s Script %s attempted to GOTOR an invalid jump to (%d).\n", type_str, screenmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::OnMap:
-						case ScriptType::DMap:
-						case ScriptType::ScriptedActiveSubscreen:
-						case ScriptType::ScriptedPassiveSubscreen:
-							Z_scripterrlog("%s Script %s attempted to GOTOR an invalid jump to (%d).\n", type_str, dmapmap[i].scriptname.c_str(), sarg1); break;
-						case ScriptType::Combo: Z_scripterrlog("%s Script %s attempted to GOTOR an invalid jump to (%d).\n", type_str, comboscriptmap[i].scriptname.c_str(), sarg1); break;
-						
-						default: break;						
-					}
-					invalid = 1; scommand = 0xFFFF;
+					goto_err("GOTOR");
+					scommand = 0xFFFF;
+					break;
 				}
-				if ( invalid ) break;
 				ri->pc = (get_register(sarg1) / 10000) - 1;
 				increment = false;
 			}
@@ -36356,181 +35783,57 @@ j_command:
 			case GOTOTRUE:
 				if(ri->scriptflag & TRUEFLAG)
 				{
-					uint8_t invalid = 0;
 					if(sarg1 < 0 )
 					{
-						const char* type_str = ScriptTypeToString(type);
-						switch(type)
-						{
-							case ScriptType::FFC:
-								Z_scripterrlog("%s Script %s attempted to GOTOTRUE an invalid jump to (%d).\n", type_str, ffcmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::NPC:
-								Z_scripterrlog("%s Script %s attempted to GOTOTRUE an invalid jump to (%d).\n", type_str, npcmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Lwpn:
-								Z_scripterrlog("%s Script %s attempted to GOTOTRUE an invalid jump to (%d).\n", type_str, lwpnmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Ewpn:
-								Z_scripterrlog("%s Script %s attempted to GOTOTRUE an invalid jump to (%d).\n", type_str, ewpnmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::ItemSprite:
-								Z_scripterrlog("%s Script %s attempted to GOTOTRUE an invalid jump to (%d).\n", type_str, itemspritemap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Item:
-								Z_scripterrlog("%s Script %s attempted to GOTOTRUE an invalid jump to (%d).\n", type_str, itemmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Global:
-								Z_scripterrlog("%s Script %s attempted to GOTOTRUE an invalid jump to (%d).\n", type_str, globalmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Player:
-								Z_scripterrlog("%s Script %s attempted to GOTOTRUE an invalid jump to (%d).\n", type_str, playermap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Screen:
-								Z_scripterrlog("%s Script %s attempted to GOTOTRUE an invalid jump to (%d).\n", type_str, screenmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::OnMap:
-							case ScriptType::DMap:
-							case ScriptType::ScriptedActiveSubscreen:
-							case ScriptType::ScriptedPassiveSubscreen:
-								Z_scripterrlog("%s Script %s attempted to GOTOTRUE an invalid jump to (%d).\n", type_str, dmapmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Combo: Z_scripterrlog("%s Script %s attempted to GOTOTRUE an invalid jump to (%d).\n", type_str, comboscriptmap[i].scriptname.c_str(), sarg1); break;
-							
-							default: break;						
-						}
-						invalid = 1; scommand = 0xFFFF;
+						goto_err("GOTOTRUE");
+						scommand = 0xFFFF;
+						break;
 					}
-					if ( invalid ) break;
 					ri->pc = sarg1;
 					increment = false;
 				}
-				
 				break;
 				
 			case GOTOFALSE:
 				if(!(ri->scriptflag & TRUEFLAG))
 				{
-					uint8_t invalid = 0;
 					if(sarg1 < 0 )
 					{
-						const char* type_str = ScriptTypeToString(type);
-						switch(type)
-						{
-							case ScriptType::FFC:
-								Z_scripterrlog("%s Script %s attempted to GOTOFALSE an invalid jump to (%d).\n", type_str, ffcmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::NPC:
-								Z_scripterrlog("%s Script %s attempted to GOTOFALSE an invalid jump to (%d).\n", type_str, npcmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Lwpn:
-								Z_scripterrlog("%s Script %s attempted to GOTOFALSE an invalid jump to (%d).\n", type_str, lwpnmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Ewpn:
-								Z_scripterrlog("%s Script %s attempted to GOTOFALSE an invalid jump to (%d).\n", type_str, ewpnmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::ItemSprite:
-								Z_scripterrlog("%s Script %s attempted to GOTOFALSE an invalid jump to (%d).\n", type_str, itemspritemap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Item:
-								Z_scripterrlog("%s Script %s attempted to GOTOFALSE an invalid jump to (%d).\n", type_str, itemmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Global:
-								Z_scripterrlog("%s Script %s attempted to GOTOFALSE an invalid jump to (%d).\n", type_str, globalmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Player:
-								Z_scripterrlog("%s Script %s attempted to GOTOFALSE an invalid jump to (%d).\n", type_str, playermap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Screen:
-								Z_scripterrlog("%s Script %s attempted to GOTOFALSE an invalid jump to (%d).\n", type_str, screenmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::OnMap:
-							case ScriptType::DMap:
-							case ScriptType::ScriptedActiveSubscreen:
-							case ScriptType::ScriptedPassiveSubscreen:
-								Z_scripterrlog("%s Script %s attempted to GOTOFALSE an invalid jump to (%d).\n", type_str, dmapmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Combo: Z_scripterrlog("%s Script %s attempted to GOTOFALSE an invalid jump to (%d).\n", type_str, comboscriptmap[i].scriptname.c_str(), sarg1); break;
-							
-							default: break;						
-						}
-						invalid = 1; scommand = 0xFFFF;
+						goto_err("GOTOFALSE");
+						scommand = 0xFFFF;
+						break;
 					}
-					if ( invalid ) break;
 					ri->pc = sarg1;
 					increment = false;
 				}
-				
 				break;
 				
 			case GOTOMORE:
 				if(ri->scriptflag & MOREFLAG)
 				{
-					uint8_t invalid = 0;
 					if(sarg1 < 0 )
 					{
-						const char* type_str = ScriptTypeToString(type);
-						switch(type)
-						{
-							case ScriptType::FFC:
-								Z_scripterrlog("%s Script %s attempted to GOTOMORE an invalid jump to (%d).\n", type_str, ffcmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::NPC:
-								Z_scripterrlog("%s Script %s attempted to GOTOMORE an invalid jump to (%d).\n", type_str, npcmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Lwpn:
-								Z_scripterrlog("%s Script %s attempted to GOTOMORE an invalid jump to (%d).\n", type_str, lwpnmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Ewpn:
-								Z_scripterrlog("%s Script %s attempted to GOTOMORE an invalid jump to (%d).\n", type_str, ewpnmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::ItemSprite:
-								Z_scripterrlog("%s Script %s attempted to GOTOMORE an invalid jump to (%d).\n", type_str, itemspritemap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Item:
-								Z_scripterrlog("%s Script %s attempted to GOTOMORE an invalid jump to (%d).\n", type_str, itemmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Global:
-								Z_scripterrlog("%s Script %s attempted to GOTOMORE an invalid jump to (%d).\n", type_str, globalmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Player:
-								Z_scripterrlog("%s Script %s attempted to GOTOMORE an invalid jump to (%d).\n", type_str, playermap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Screen:
-								Z_scripterrlog("%s Script %s attempted to GOTOMORE an invalid jump to (%d).\n", type_str, screenmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::OnMap:
-							case ScriptType::DMap:
-							case ScriptType::ScriptedActiveSubscreen:
-							case ScriptType::ScriptedPassiveSubscreen:
-								Z_scripterrlog("%s Script %s attempted to GOTOMORE an invalid jump to (%d).\n", type_str, dmapmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Combo: Z_scripterrlog("%s Script %s attempted to GOTOMORE an invalid jump to (%d).\n", type_str, comboscriptmap[i].scriptname.c_str(), sarg1); break;
-							
-							default: break;						
-						}
-						invalid = 1; scommand = 0xFFFF;
+						goto_err("GOTOMORE");
+						scommand = 0xFFFF;
+						break;
 					}
-					if ( invalid ) break;
 					ri->pc = sarg1;
 					increment = false;
 				}
-				
 				break;
 				
 			case GOTOLESS:
 				if(!(ri->scriptflag & MOREFLAG) || (!get_qr(qr_GOTOLESSNOTEQUAL) && (ri->scriptflag & TRUEFLAG)))
 				{
-					uint8_t invalid = 0;
 					if(sarg1 < 0 )
 					{
-						const char* type_str = ScriptTypeToString(type);
-						switch(type)
-						{
-							case ScriptType::FFC:
-								Z_scripterrlog("%s Script %s attempted to GOTOLESS an invalid jump to (%d).\n", type_str, ffcmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::NPC:
-								Z_scripterrlog("%s Script %s attempted to GOTOLESS an invalid jump to (%d).\n", type_str, npcmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Lwpn:
-								Z_scripterrlog("%s Script %s attempted to GOTOLESS an invalid jump to (%d).\n", type_str, lwpnmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Ewpn:
-								Z_scripterrlog("%s Script %s attempted to GOTOLESS an invalid jump to (%d).\n", type_str, ewpnmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::ItemSprite:
-								Z_scripterrlog("%s Script %s attempted to GOTOLESS an invalid jump to (%d).\n", type_str, itemspritemap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Item:
-								Z_scripterrlog("%s Script %s attempted to GOTOLESS an invalid jump to (%d).\n", type_str, itemmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Global:
-								Z_scripterrlog("%s Script %s attempted to GOTOLESS an invalid jump to (%d).\n", type_str, globalmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Player:
-								Z_scripterrlog("%s Script %s attempted to GOTOLESS an invalid jump to (%d).\n", type_str, playermap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Screen:
-								Z_scripterrlog("%s Script %s attempted to GOTOLESS an invalid jump to (%d).\n", type_str, screenmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::OnMap:
-							case ScriptType::DMap:
-							case ScriptType::ScriptedActiveSubscreen:
-							case ScriptType::ScriptedPassiveSubscreen:
-								Z_scripterrlog("%s Script %s attempted to GOTOLESS an invalid jump to (%d).\n", type_str, dmapmap[i].scriptname.c_str(), sarg1); break;
-							case ScriptType::Combo: Z_scripterrlog("%s Script %s attempted to GOTOLESS an invalid jump to (%d).\n", type_str, comboscriptmap[i].scriptname.c_str(), sarg1); break;
-							
-							default: break;						
-						}
-						invalid = 1; scommand = 0xFFFF;
+						goto_err("GOTOLESS");
+						scommand = 0xFFFF;
+						break;
 					}
-					if ( invalid ) break;
 					ri->pc = sarg1;
 					increment = false;
 				}
-				
 				break;
 				
 			case LOOP:
@@ -40269,6 +39572,23 @@ j_command:
 				set_register(sarg1, r ? 10000L : 0L);
 				break;
 			}
+
+			case REGION_SCREEN_FOR_COMBO_POS:
+				do_getscreenforcombopos(false);
+				break;
+
+			case REGION_TRIGGER_SECRETS:
+			{
+				int screen_index = get_register(sarg1) / 10000;
+				if (screen_index != currscr)
+				{
+					Z_scripterrlog("Screen->TriggerSecrets must be given a screen in the current region. got: %d\n", screen_index);
+					break;
+				}
+
+				do_triggersecrets();
+				break;
+			}
 			
 			///----------------------------------------------------------------------------------------------------//
 			
@@ -40592,7 +39912,11 @@ j_command:
 			case ScriptType::ScriptedPassiveSubscreen:
 			case ScriptType::ScriptedActiveSubscreen:
 			case ScriptType::Screen:
-			case ScriptType::Combo: 
+			case ScriptType::Combo:
+			case ScriptType::NPC:
+			case ScriptType::Lwpn:
+			case ScriptType::Ewpn:
+			case ScriptType::ItemSprite:
 				FFCore.waitdraw(type, i) = true;
 				break;
 			
@@ -40604,31 +39928,7 @@ j_command:
 				}
 				break;
 			}
-			
-			case ScriptType::NPC:
-			{
-				//enemy *wp = (enemy*)guys.spr(i);
-				//wp->waitdraw = 1;
-				guys.spr(GuyH::getNPCIndex(i))->waitdraw = 1;
-				break;
-			}
-			case ScriptType::Lwpn:
-			{
-				Lwpns.spr(LwpnH::getLWeaponIndex(i))->waitdraw = 1;
-				break;
-			}
-			
-			case ScriptType::Ewpn:
-			{
-				Ewpns.spr(EwpnH::getEWeaponIndex(i))->waitdraw = 1;
-				break;
-			}
-			case ScriptType::ItemSprite:
-			{
-				items.spr(ItemH::getItemIndex(i))->waitdraw = 1;
-				break;
-			}
-			
+						
 			case ScriptType::FFC:
 			{
 				if ( !(get_qr(qr_NOFFCWAITDRAW)) )
@@ -40681,13 +39981,53 @@ j_command:
 				data.doscript = false;
 			}
 			break;
+			case ScriptType::NPC:
+			{
+				auto& data = get_script_engine_data(type, i);
+				data.doscript = false;
+				data.initialized = false;
+				int index = GuyH::getNPCIndex(i);
+				if (index != -1)
+					guys.spr(index)->weaponscript = 0;
+			}
+			break;
+			case ScriptType::Lwpn:
+			{
+				auto& data = get_script_engine_data(type, i);
+				data.doscript = false;
+				data.initialized = false;
+				int index = LwpnH::getLWeaponIndex(i);
+				if (index != -1)
+					Lwpns.spr(index)->weaponscript = 0;
+			}
+			break;
+			case ScriptType::Ewpn:
+			{
+				auto& data = get_script_engine_data(type, i);
+				data.doscript = false;
+				data.initialized = false;
+				int index = ItemH::getItemIndex(i);
+				if (index != -1)
+					Ewpns.spr(index)->weaponscript = 0;
+			}
+			break;
+			case ScriptType::ItemSprite:
+			{
+				auto& data = get_script_engine_data(type, i);
+				data.doscript = false;
+				data.initialized = false;
+				int index = ItemH::getItemIndex(i);
+				if (index != -1)
+					items.spr(index)->script = 0;
+			}
+			break;
 			
 			case ScriptType::Generic:
 				user_scripts[script].quit();
 				break;
 			
 			case ScriptType::GenericFrozen:
-				gen_active_doscript = 0;
+				FFCore.doscript(ScriptType::GenericFrozen, gen_frozen_index-1) = false;
 				break;
 
 			case ScriptType::Item:
@@ -40707,35 +40047,6 @@ j_command:
 					data.ref.Clear();
 				}
 				data.initialized = false;
-				break;
-			}
-			case ScriptType::NPC:
-			{
-				guys.spr(GuyH::getNPCIndex(i))->doscript = 0;
-				guys.spr(GuyH::getNPCIndex(i))->weaponscript = 0;
-				guys.spr(GuyH::getNPCIndex(i))->initialised = 0;
-				break;
-			}
-			case ScriptType::Lwpn:
-			{
-				Lwpns.spr(LwpnH::getLWeaponIndex(i))->doscript = 0;
-				Lwpns.spr(LwpnH::getLWeaponIndex(i))->weaponscript = 0;
-				Lwpns.spr(LwpnH::getLWeaponIndex(i))->initialised = 0;
-				break;
-			}
-			case ScriptType::Ewpn:
-			{
-			
-				Ewpns.spr(EwpnH::getEWeaponIndex(i))->doscript = 0;
-				Ewpns.spr(EwpnH::getEWeaponIndex(i))->weaponscript = 0;
-				Ewpns.spr(EwpnH::getEWeaponIndex(i))->initialised = 0;
-				break;
-			}
-			case ScriptType::ItemSprite:
-			{
-				items.spr(ItemH::getItemIndex(i))->doscript = 0;
-				items.spr(ItemH::getItemIndex(i))->script = 0;
-				items.spr(ItemH::getItemIndex(i))->initialised = 0;
 				break;
 			}
 		}
@@ -41585,7 +40896,7 @@ void FFScript::do_isvalidbitmap()
 	int32_t UID = get_register(sarg1);
 	//zprint("isValidBitmap() bitmap pointer value is %d\n", UID);
 	if ( UID <= 0 ) set_register(sarg1, 0); 
-	else if ( scb.script_created_bitmaps[UID-10].u_bmp ) 
+	else if ( UID-10>=0 && UID-10 < 256 && scb.script_created_bitmaps[UID-10].u_bmp )
 		set_register(sarg1, 10000);
 	else set_register(sarg1, 0);
 }
@@ -41596,7 +40907,7 @@ void FFScript::do_isallocatedbitmap()
 	if ( UID <= 0 ) set_register(sarg1, 0); 
 	else
 	{
-		set_register(sarg1, (scb.script_created_bitmaps[UID-10].reserved()) ? 10000L : 0L);
+		set_register(sarg1, (UID-10>=0 && UID-10 < 256 && scb.script_created_bitmaps[UID-10].reserved()) ? 10000L : 0L);
 		/*
 		UID-=10;
 		if ( UID <= highest_valid_user_bitmap() || UID < firstUserGeneratedBitmap)
@@ -43534,7 +42845,6 @@ void FFScript::runOnLaunchEngine()
 }
 bool FFScript::runGenericFrozenEngine(const word script, const int32_t *init_data)
 {
-	static int32_t local_i = 0;
 	if(script < 1 || script >= NUMSCRIPTSGENERIC) return false;
 	if(init_data)
 	{
@@ -43546,16 +42856,8 @@ bool FFScript::runGenericFrozenEngine(const word script, const int32_t *init_dat
 	if(!genericscripts[script]->valid()) return false; //No script to run
 	//Store script refinfo
 	push_ri();
-	refInfo local_ri;
-	int32_t local_stack[MAX_SCRIPT_REGISTERS];
-	local_ri.Clear();
-	memset(local_stack, 0, sizeof(local_stack));
-	genericActiveData.push_back(&local_ri);
-	generic_active_stack.push_back(&local_stack);
-	bool tmp_init = gen_active_initialized;
-	bool tmp_doscript = gen_active_doscript;
-	gen_active_doscript = true;
-	gen_active_initialized = false;
+	int local_i = int(gen_frozen_index++);
+	reset_script_engine_data(ScriptType::GenericFrozen, local_i);
 	//run script
 	uint32_t fl = GameFlags & GAMEFLAG_SCRIPTMENU_ACTIVE;
 	BITMAP* tmpbuf = script_menu_buf;
@@ -43566,9 +42868,8 @@ bool FFScript::runGenericFrozenEngine(const word script, const int32_t *init_dat
 	clear_bitmap(script_menu_buf);
 	blit(framebuf, script_menu_buf, 0, 0, 0, 0, 256, 224);
 	GameFlags |= GAMEFLAG_SCRIPTMENU_ACTIVE;
-	++local_i;
 	//auto tmpDrawCommands = script_drawing_commands.pop_commands();
-	while(gen_active_doscript && !Quit)
+	while(doscript(ScriptType::GenericFrozen, local_i) && !Quit)
 	{
 		script_drawing_commands.Clear();
 		load_control_state();
@@ -43582,9 +42883,6 @@ bool FFScript::runGenericFrozenEngine(const word script, const int32_t *init_dat
 	}
 	script_drawing_commands.Clear();
 	//script_drawing_commands.push_commands(tmpDrawCommands);
-	--local_i;
-	gen_active_doscript = tmp_doscript;
-	gen_active_initialized = tmp_init;
 	//clear
 	GameFlags &= ~GAMEFLAG_SCRIPTMENU_ACTIVE;
 	if(fl)
@@ -43593,8 +42891,8 @@ bool FFScript::runGenericFrozenEngine(const word script, const int32_t *init_dat
 		destroy_bitmap(script_menu_buf);
 		script_menu_buf = tmpbuf;
 	}
-	genericActiveData.pop_back();
-	generic_active_stack.pop_back();
+	clear_script_engine_data(ScriptType::GenericFrozen, local_i);
+	--gen_frozen_index;
 	//Restore script refinfo
 	pop_ri();
 	return true;
@@ -48109,20 +47407,16 @@ script_variable ZASMVars[]=
 	{ "CLASS_THISKEY2", CLASS_THISKEY2, 0, 0 },
 	{ "RESRVD_VAR_Z3_01", RESRVD_VAR_Z3_01, 0, 0 },
 	{ "RESRVD_VAR_Z3_02", RESRVD_VAR_Z3_02, 0, 0 },
-	{ "RESRVD_VAR_Z3_03", RESRVD_VAR_Z3_03, 0, 0 },
-	{ "RESRVD_VAR_Z3_04", RESRVD_VAR_Z3_04, 0, 0 },
-	{ "RESRVD_VAR_Z3_05", RESRVD_VAR_Z3_05, 0, 0 },
-	{ "RESRVD_VAR_Z3_06", RESRVD_VAR_Z3_06, 0, 0 },
+	{ "REGION_WIDTH", REGION_WIDTH, 0, 0},
+	{ "REGION_HEIGHT", REGION_HEIGHT, 0, 0},
+	{ "REGION_SCREEN_WIDTH", REGION_SCREEN_WIDTH, 0, 0},
+	{ "REGION_SCREEN_HEIGHT", REGION_SCREEN_HEIGHT, 0, 0},
 	{ "RESRVD_VAR_Z3_07", RESRVD_VAR_Z3_07, 0, 0 },
-	{ "RESRVD_VAR_Z3_08", RESRVD_VAR_Z3_08, 0, 0 },
-	{ "RESRVD_VAR_Z3_09", RESRVD_VAR_Z3_09, 0, 0 },
-	{ "RESRVD_VAR_Z3_10", RESRVD_VAR_Z3_10, 0, 0 },
-	{ "RESRVD_VAR_Z3_11", RESRVD_VAR_Z3_11, 0, 0 },
+	{ "REGION_UNUSED", REGION_UNUSED, 0, 0},
+	{ "REGION_NUM_COMBOS", REGION_NUM_COMBOS, 0, 0},
+	{ "REGION_ID", REGION_ID, 0, 0},
+	{ "REGION_ORIGIN_SCREEN", REGION_ORIGIN_SCREEN, 0, 0},
 	{ "RESRVD_VAR_Z3_12", RESRVD_VAR_Z3_12, 0, 0 },
-	{ "RESRVD_VAR_Z3_13", RESRVD_VAR_Z3_13, 0, 0 },
-	{ "RESRVD_VAR_Z3_14", RESRVD_VAR_Z3_14, 0, 0 },
-	{ "RESRVD_VAR_Z3_15", RESRVD_VAR_Z3_15, 0, 0 },
-	{ "RESRVD_VAR_Z3_16", RESRVD_VAR_Z3_16, 0, 0 },
 	{ "LWPNLIFTLEVEL", LWPNLIFTLEVEL, 0, 0},
 	{ "LWPNLIFTTIME", LWPNLIFTTIME, 0, 0},
 	{ "LWPNLIFTHEIGHT", LWPNLIFTHEIGHT, 0, 0},
@@ -48349,11 +47643,11 @@ void FFScript::ZScriptConsole(int32_t attributes,const char *format, Params&&...
 {
 	//if ( open )
 	{
-		zscript_coloured_console.Create("ZCLogging Console", 600, 200, NULL, NULL);
+		zscript_coloured_console.Create("ZQuest Classic Logging Console", 600, 200, NULL, NULL);
 		zscript_coloured_console.cls(CConsoleLoggerEx::COLOR_BACKGROUND_BLACK);
 		zscript_coloured_console.gotoxy(0,0);
 		zscript_coloured_console.cprintf( CConsoleLoggerEx::COLOR_BLUE | CConsoleLoggerEx::COLOR_INTENSITY |
-		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"ZC Logging Console\n");
+		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"ZQuest Classic Logging Console\n");
 	
 		zscript_coloured_console.cprintf( attributes, format, std::forward<Params>(params)...);
 	}

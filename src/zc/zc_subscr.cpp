@@ -73,11 +73,9 @@ void dosubscr()
 	
 	set_clip_rect(scrollbuf, 0, 0, scrollbuf->w, scrollbuf->h);
 	set_clip_rect(framebuf, 0, 0, framebuf->w, framebuf->h);
-	
-	//make a copy of the blank playing field on the right side of scrollbuf
-	blit(scrollbuf,scrollbuf,0,playing_field_offset,256,0,256,176);
-	//make a copy of the complete playing field on the bottom of scrollbuf
-	blit(framebuf,scrollbuf,0,playing_field_offset,0,176,256,176);
+
+	// Copy the complete frame.
+	blit(framebuf,scrollbuf,0,playing_field_offset,0,0,256,176);
 	
 	bool use_a = get_qr(qr_SELECTAWPN), use_x = get_qr(qr_SET_XBUTTON_ITEMS),
 		 use_y = get_qr(qr_SET_YBUTTON_ITEMS);
@@ -123,16 +121,16 @@ void dosubscr()
 		}
 		//fill in the screen with black to prevent the hall of mirrors effect
 		rectfill(framebuf, 0, 0, 255, 223, 0);
-		
+
+		// With COOLSCROLL on, the subscreen crawls down over the playing field.
+		// Otherwise the playing field scrolls down past the bottom of the screen.
 		if(COOLSCROLL)
 		{
-			//copy the playing field back onto the screen
-			blit(scrollbuf,framebuf,0,176,0,passive_subscreen_height,256,176);
+			blit(scrollbuf,framebuf,0,0,0,passive_subscreen_height,256,176);
 		}
 		else
 		{
-			//scroll the playing field (copy the copy we made)
-			blit(scrollbuf,framebuf,256,0,0,y+168+passive_subscreen_height,256,-y);
+			blit(scrollbuf,framebuf,0,0,0,y+168+passive_subscreen_height,256,-y);
 		}
 		
 		draw_subscrs(framebuf,0,y,showtime,sspSCROLLING);
@@ -150,7 +148,16 @@ void dosubscr()
 	// Consume whatever input was registered during opening animation.
 	if (replay_version_check(18))
 		load_control_state();
-	
+
+	bool legacy_btn_press_peek = false;
+	if (replay_is_active())
+	{
+		std::string qst = replay_get_meta_str("qst");
+		legacy_btn_press_peek |= qst == "demosp253.qst";
+		legacy_btn_press_peek |= qst == "first_quest_layered.qst";
+		legacy_btn_press_peek |= qst == "hell_awaits.qst";
+	}
+
 	do
 	{
 		if (replay_version_check(0, 11))
@@ -164,7 +171,7 @@ void dosubscr()
 		bool can_btn = !subscr_pg_animating;
 		if(can_btn)
 		{
-			byte btn_press = getIntBtnInput(0xFF, true, false, false, false, true);
+			byte btn_press = getIntBtnInput(0xFF, true, false, false, false, legacy_btn_press_peek);
 			int32_t pos = pg.cursor_pos;
 			
 			if(rUp())         pg.move_cursor(SEL_UP);
@@ -433,7 +440,7 @@ void dosubscr()
 		rectfill(framebuf, 0, 0, 255, 223, 0);
 		
 		if(compat && COOLSCROLL) //copy the playing field back onto the screen
-			blit(scrollbuf,framebuf,0,176,0,passive_subscreen_height,256,176);
+			blit(scrollbuf,framebuf,0,0,0,passive_subscreen_height,256,176);
 		//else nothing to do; the playing field has scrolled off the screen
 		
 		//draw the passive and active subscreen
@@ -481,13 +488,11 @@ void dosubscr()
 		
 		if(COOLSCROLL)
 		{
-			//copy the playing field back onto the screen
-			blit(scrollbuf,framebuf,0,176,0,passive_subscreen_height,256,176);
+			blit(scrollbuf,framebuf,0,0,0,passive_subscreen_height,256,176);
 		}
 		else
 		{
-			//scroll the playing field (copy the copy we made)
-			blit(scrollbuf,framebuf,256,0,0,y+168+passive_subscreen_height,256,-y);
+			blit(scrollbuf,framebuf,0,0,0,y+168+passive_subscreen_height,256,-y);
 		}
 		
 		draw_subscrs(framebuf,0,y,showtime,sspSCROLLING);

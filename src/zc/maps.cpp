@@ -1001,9 +1001,8 @@ void update_combo_cycling()
         if(combobuf[x].animflags & AF_FRESH) continue;
         
         //time to restart
-        if((combobuf[x].aclk>=combobuf[x].speed) &&
-                (combobuf[x].tile-combobuf[x].frames>=combobuf[x].o_tile-1) &&
-                (combobuf[x].nextcombo!=0))
+		
+        if ((combobuf[x].aclk>=combobuf[x].speed) && combobuf[x].nextcombo!=0 && combocheck(combobuf[x]))
         {
             newdata[i]=combobuf[x].nextcombo;
 			if(!(combobuf[x].animflags & AF_CYCLENOCSET))
@@ -1024,9 +1023,7 @@ void update_combo_cycling()
         if(!(combobuf[x].animflags & AF_FRESH)) continue;
         
         //time to restart
-        if((combobuf[x].aclk>=combobuf[x].speed) &&
-                (combobuf[x].tile-combobuf[x].frames>=combobuf[x].o_tile-1) &&
-                (combobuf[x].nextcombo!=0))
+        if ((combobuf[x].aclk>=combobuf[x].speed) && combobuf[x].nextcombo!=0 && combocheck(combobuf[x]))
         {
             newdata[i]=combobuf[x].nextcombo;
             if(!(combobuf[x].animflags & AF_CYCLENOCSET))
@@ -1064,9 +1061,7 @@ void update_combo_cycling()
 		bool fresh = cmb.animflags & AF_FRESH;
         
         //time to restart
-        if((cmb.aclk>=cmb.speed) &&
-                (cmb.tile-cmb.frames>=cmb.o_tile-1) &&
-                (cmb.nextcombo!=0))
+        if ((cmb.aclk>=cmb.speed) && cmb.nextcombo!=0 && combocheck(cmb))
         {
             zc_ffc_set(ffc, cmb.nextcombo);
             if(!(cmb.animflags & AF_CYCLENOCSET))
@@ -1091,9 +1086,7 @@ void update_combo_cycling()
                 if(combobuf[x].animflags & AF_FRESH) continue;
                 
                 //time to restart
-                if((combobuf[x].aclk>=combobuf[x].speed) &&
-                        (combobuf[x].tile-combobuf[x].frames>=combobuf[x].o_tile-1) &&
-                        (combobuf[x].nextcombo!=0))
+                if ((combobuf[x].aclk>=combobuf[x].speed) && combobuf[x].nextcombo!=0 && combocheck(combobuf[x]))
                 {
                     newdata[i]=combobuf[x].nextcombo;
                     if(!(combobuf[x].animflags & AF_CYCLENOCSET))
@@ -1114,9 +1107,7 @@ void update_combo_cycling()
                 if(!(combobuf[x].animflags & AF_FRESH)) continue;
                 
                 //time to restart
-                if((combobuf[x].aclk>=combobuf[x].speed) &&
-                        (combobuf[x].tile-combobuf[x].frames>=combobuf[x].o_tile-1) &&
-                        (combobuf[x].nextcombo!=0))
+                if ((combobuf[x].aclk>=combobuf[x].speed) && combobuf[x].nextcombo!=0 && combocheck(combobuf[x]))
                 {
                     newdata2[i]=combobuf[x].nextcombo;
 					if(!(combobuf[x].animflags & AF_CYCLENOCSET))
@@ -2659,11 +2650,6 @@ void hidden_entrance2(mapscr *s, mapscr *t, bool high16only,int32_t single) //Pe
 				}
 			}
 		}
-		
-		/*
-		  if(putit && refresh)
-		  putcombo(scrollbuf,(i&15)<<4,i&0xF0,s->data[i],s->cset[i]);
-		  */
 	}
 	
 	for(word i=0; i<c; i++) // FFCs
@@ -2926,6 +2912,15 @@ bool triggerfire(int x, int y, bool setflag, bool any, bool strong, bool magic, 
 		}
 	}
 	return ret;
+}
+
+void update_slopes()
+{
+	for (auto& p : slopes)
+	{
+		slope_object& s = p.second;
+		s.updateslope(); //sets old x/y poses
+	}
 }
 
 void update_freeform_combos()
@@ -3987,19 +3982,16 @@ void draw_msgstr(byte layer)
 	if(!(msg_bg_display_buf->clip))
 	{
 		blit_msgstr_bg(framebuf,0,0,0,playing_field_offset,256,168);
-		blit_msgstr_bg(scrollbuf,0,0,0,playing_field_offset,256,168);
 	}
 	
 	if(!(msg_portrait_display_buf->clip))
 	{
 		blit_msgstr_prt(framebuf,0,0,0,playing_field_offset,256,168);
-		blit_msgstr_prt(scrollbuf,0,0,0,playing_field_offset,256,168);
 	}
 	
 	if(!(msg_txt_display_buf->clip))
 	{
 		blit_msgstr_fg(framebuf,0,0,0,playing_field_offset,256,168);
-		blit_msgstr_fg(scrollbuf,0,0,0,playing_field_offset,256,168);
 	}
 }
 
@@ -4017,17 +4009,17 @@ void draw_screen(mapscr* this_screen, bool showhero, bool runGeneric)
 	//The Plan:
 	//1. Draw some background layers
 	//2. Blit scrollbuf onto framebuf
-	//3. Draw some sprites onto framebuf
+	//3. Draw some sprites
 	//4. -----
-	//5. Draw some layers onto framebuf and scrollbuf
+	//5. Draw some layers
 	//6. -----
-	//6b. Draw the subscreen onto frame_buf, without clipping
-	//7. Draw some flying sprites onto framebuf
+	//6b. Draw the subscreen, without clipping
+	//7. Draw some flying sprites
 	//8. -----
-	//9. Draw some layers onto frame_buf and scrollbuf
+	//9. Draw some layers
 	//10. ----
-	//11. Draw some text on framebuf and scrollbuf
-	//12. Draw the subscreen onto framebuf, without clipping
+	//11. Draw some text
+	//12. Draw the subscreen, without clipping
 	clear_bitmap(framebuf);
 	clear_clip_rect(framebuf);
 	
@@ -4366,32 +4358,27 @@ void draw_screen(mapscr* this_screen, bool showhero, bool runGeneric)
 		do_primitives(framebuf, SPLAYER_NPC_ABOVEPLAYER_DRAW, this_screen, 0, playing_field_offset);
 	}
 	
-	//5. Draw some layers onto framebuf and scrollbuf
+	//5. Draw some layers onto framebuf
 	set_clip_rect(framebuf,draw_screen_clip_rect_x1,draw_screen_clip_rect_y1,draw_screen_clip_rect_x2,draw_screen_clip_rect_y2);
 	
 	if(!XOR(this_screen->flags7&fLAYER3BG, DMaps[currdmap].flags&dmfLAYER3BG))
 	{
 		do_layer(framebuf, 0, 3, this_screen, 0, 0, 2, false, true);
-		do_layer(scrollbuf, 0, 3, this_screen, 0, 0, 2);
 		
 		particles.draw(framebuf, true, 2);
 		draw_msgstr(3);
 	}
 	
 	do_layer(framebuf, 0, 4, this_screen, 0, 0, 2, false, true);
-	do_layer(scrollbuf, 0, 4, this_screen, 0, 0, 2);
 	
 	particles.draw(framebuf, true, 3);
 	draw_msgstr(4);
 	
 	do_layer(framebuf, -1, 0, this_screen, 0, 0, 2);
-	do_layer(scrollbuf, -1, 0, this_screen, 0, 0, 2);
 	if(get_qr(qr_OVERHEAD_COMBOS_L1_L2))
 	{
 		do_layer(framebuf, -1, 1, this_screen, 0, 0, 2);
-		do_layer(scrollbuf, -1, 1, this_screen, 0, 0, 2);
 		do_layer(framebuf, -1, 2, this_screen, 0, 0, 2);
-		do_layer(scrollbuf, -1, 2, this_screen, 0, 0, 2);
 	}
 	do_primitives(framebuf, SPLAYER_OVERHEAD_CMB, this_screen, 0, playing_field_offset);
 	
@@ -4455,7 +4442,7 @@ void draw_screen(mapscr* this_screen, bool showhero, bool runGeneric)
 			items.spr(i)->draw(framebuf);
 	do_primitives(framebuf, SPLAYER_FAIRYITEM_DRAW, this_screen, 0, playing_field_offset);
 	
-	//9. Draw some layers onto framebuf and scrollbuf
+	//9. Draw some layers onto framebuf
 
 	set_clip_rect(framebuf,draw_screen_clip_rect_x1,draw_screen_clip_rect_y1,draw_screen_clip_rect_x2,draw_screen_clip_rect_y2);
 	
@@ -4470,17 +4457,14 @@ void draw_screen(mapscr* this_screen, bool showhero, bool runGeneric)
 	}
 	
 	do_layer(framebuf, 0, 5, this_screen, 0, 0, 2, false, true);
-	do_layer(scrollbuf, 0, 5, this_screen, 0, 0, 2);
 	
 	particles.draw(framebuf, true, 4);
 	draw_msgstr(5);
 	
 	do_layer(framebuf, -4, 0, this_screen, 0, 0, 2); // overhead freeform combos!
-	do_layer(scrollbuf, -4, 0, this_screen, 0, 0, 2);
 	do_primitives(framebuf, SPLAYER_OVERHEAD_FFC, this_screen, 0, playing_field_offset);
 	
 	do_layer(framebuf, 0, 6, this_screen, 0, 0, 2, false, true);
-	do_layer(scrollbuf, 0, 6, this_screen, 0, 0, 2);
 	
 	particles.draw(framebuf, true, 5);
 		
@@ -4518,7 +4502,6 @@ void draw_screen(mapscr* this_screen, bool showhero, bool runGeneric)
 	//12. Draw some text on framebuf
 	
 	set_clip_rect(framebuf,0,0,256,224);
-	set_clip_rect(scrollbuf,0,0,256,224);
 	
 	draw_msgstr(6);
 	
@@ -5472,8 +5455,8 @@ void loadscr2(int32_t tmp,int32_t scr,int32_t)
 	{
 		if(game->maps[(currmap*MAPSCRSNORMAL)+scr]&mSECRET)			   // if special stuff done before
 		{
-			hiddenstair(tmp,false);
-			hidden_entrance(tmp,false,false,-3);
+			hiddenstair2(tmpscr+tmp,false);
+			hidden_entrance2(tmpscr+tmp,tmpscr2,false,-3);
 		}
 		if(game->maps[(currmap*MAPSCRSNORMAL)+scr]&mLIGHTBEAM) // if special stuff done before
 		{

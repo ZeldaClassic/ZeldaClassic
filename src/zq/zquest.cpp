@@ -499,7 +499,7 @@ void clearConsole()
 	zscript_coloured_console.cls(CConsoleLoggerEx::COLOR_BACKGROUND_BLACK);
 	zscript_coloured_console.gotoxy(0,0);
 	zscript_coloured_console.cprintf( CConsoleLoggerEx::COLOR_BLUE | CConsoleLoggerEx::COLOR_INTENSITY |
-		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"ZC Logging Console\n");
+		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"ZQuest Classic Logging Console\n");
 }
 
 void initConsole()
@@ -507,7 +507,7 @@ void initConsole()
 	if(console_is_open) return;
 	console_is_open = 1;
 	set_console_state();
-	zscript_coloured_console.Create("ZC Logging Console", 600, 200);
+	zscript_coloured_console.Create("ZQuest Classic Logging Console", 600, 200);
 	clearConsole();
 }
 
@@ -802,7 +802,8 @@ static NewMenu import_menu
 	{ "&Enemies", onImport_Guys },
 	{ "&Map", onImport_Map },
 	{ "&DMaps", onImport_DMaps },
-	{ "&String Table", onImport_Msgs },
+	{ "&Strings (.tsv)", onImport_StringsTSV },
+	{ "String Table (deprecated)", onImport_Msgs },
 	{},
 	{ "&Graphics", &import_graphics },
 	{},
@@ -847,8 +848,8 @@ static NewMenu export_menu
 	{ "&Map", onExport_Map },
 	{ "&DMaps", onExport_DMaps },
 	{},
-	{ "&String Table", onExport_Msgs },
-	{ "Text &Dump", onExport_MsgsText },
+	{ "&Strings (.tsv)", onExport_StringsTSV },
+	{ "String Table (deprecated)", onExport_Msgs },
 	{},
 	{ "&Graphics", &export_graphics },
 	{},
@@ -1365,7 +1366,7 @@ static NewMenu fixtools_menu
 
 static NewMenu tool_menu
 {
-	{ "Combo &Flags", onFlags },
+	{ "Combo &Flags", onFlags, nullopt, MFL_EXIT_PRE_PROC },
 	{ "Fix &Tools ", &fixtools_menu },
 	{ "&NES Dungeon Template", onTemplate },
 	{ "&Apply Template to All", onReTemplate },
@@ -1573,41 +1574,21 @@ int32_t onResetTransparency()
 
 int32_t onFullScreen()
 {
-	if(jwin_alert3(
-			(is_windowed_mode()) ? "Fullscreen Warning" : "Change to Windowed Mode", 
-			(is_windowed_mode()) ? "Some video chipsets/drivers do not support 8-bit native fullscreen" : "Proceeding will drop from Fullscreen to Windowed Mode", 
-			(is_windowed_mode()) ? "We strongly advise saving your quest before shifting from windowed to fullscreen!": "Do you wish to shift from Fullscreen to Windowed mode?",
-			(is_windowed_mode()) ? "Do you wish to continue to fullscreen mode?" : NULL,
-		 "&Yes", 
-		"&No", 
-		NULL, 
-		'y', 
-		'n', 
-		0, 
-		get_zc_font(font_lfont)) == 1)	
-	{
-		get_palette(RAMpal);
-		bool windowed=is_windowed_mode()!=0;
-		
-		int32_t ret=set_gfx_mode(windowed?GFX_AUTODETECT_FULLSCREEN:GFX_AUTODETECT_WINDOWED,zq_screen_w,zq_screen_h,0,0);
-		if(ret!=0)
-		{
-			Z_error_fatal("Failed to set video mode: %d. allegro_error: %s\n", ret, allegro_error);
-		}
-		
-		gui_mouse_focus=0;
-		gui_bg_color=jwin_pal[jcBOX];
-		gui_fg_color=jwin_pal[jcBOXFG];
-		MouseSprite::set(ZQM_NORMAL);
-		zc_set_palette(RAMpal);
-		position_mouse(zq_screen_w/2,zq_screen_h/2);
-		set_display_switch_mode(SWITCH_BACKGROUND);
-		set_display_switch_callback(SWITCH_OUT, switch_out);
-		set_display_switch_callback(SWITCH_IN, switch_in);
-		zc_set_config("zquest","fullscreen", is_windowed_mode() ? 0 : 1);
-		return D_REDRAW;
-	}
-	else return D_O_K;
+	get_palette(RAMpal);
+	bool windowed=is_windowed_mode()!=0;
+	all_toggle_fullscreen(windowed);
+
+	gui_mouse_focus=0;
+	gui_bg_color=jwin_pal[jcBOX];
+	gui_fg_color=jwin_pal[jcBOXFG];
+	MouseSprite::set(ZQM_NORMAL);
+	zc_set_palette(RAMpal);
+	position_mouse(zq_screen_w/2,zq_screen_h/2);
+	set_display_switch_mode(SWITCH_BACKGROUND);
+	set_display_switch_callback(SWITCH_OUT, switch_out);
+	set_display_switch_callback(SWITCH_IN, switch_in);
+	zc_set_config("zquest","fullscreen", is_windowed_mode() ? 0 : 1);
+	return D_REDRAW;
 }
 
 int32_t onEnter()
@@ -3735,23 +3716,27 @@ int32_t onGotoPage()
 {
 	if (draw_mode==dm_alias)
 	{
-		if(optional<int> v = call_get_num("Scroll to Alias Page", 0, MAXCOMBOALIASES/96, 0))
-			combo_alistpos[current_comboalist] = *v*96;
+		static const int PER_PAGE = 260;
+		if(optional<int> v = call_get_num("Scroll to Alias Page", 0, MAXCOMBOALIASES/PER_PAGE-1, 0))
+			combo_alistpos[current_comboalist] = *v*PER_PAGE;
 	}
 	else if (draw_mode==dm_cpool)
 	{
-		if(optional<int> v = call_get_num("Scroll to Combo Pool Page", 0, MAXCOMBOPOOLS/96, 0))
-			combo_pool_listpos[current_cpoollist] = *v*96;
+		static const int PER_PAGE = 260;
+		if(optional<int> v = call_get_num("Scroll to Combo Pool Page", 0, MAXCOMBOPOOLS/PER_PAGE-1, 0))
+			combo_pool_listpos[current_cpoollist] = *v*PER_PAGE;
 	}
 	else if (draw_mode == dm_auto)
 	{
-		if(optional<int> v = call_get_num("Scroll to Auto Combo Page", 0, MAXAUTOCOMBOS/96, 0))
-			combo_auto_listpos[current_cautolist] = *v*96;
+		static const int PER_PAGE = 260;
+		if(optional<int> v = call_get_num("Scroll to Auto Combo Page", 0, MAXAUTOCOMBOS/PER_PAGE-1, 0))
+			combo_auto_listpos[current_cautolist] = *v*PER_PAGE;
 	}
 	else
 	{
-		if(optional<int> v = call_get_num("Scroll to Combo Page", 0, COMBO_PAGES-1, 0))
-			First[current_combolist] = *v << 8;
+		static const int PER_PAGE = 256;
+		if(optional<int> v = call_get_num("Scroll to Combo Page", 0, MAXCOMBOS/PER_PAGE-1, 0))
+			First[current_combolist] = *v*PER_PAGE;
 	}
     
     return D_O_K;
@@ -4522,7 +4507,7 @@ int load_the_pic_new(BITMAP **dst, PALETTE dstpal)
     return 0;
 }
 
-int32_t mapMaker(BITMAP * _map, PALETTE _mappal)
+int32_t saveMapAsImage(ALLEGRO_BITMAP* bitmap)
 {
     char buf[200];
     int32_t num=0;
@@ -4534,7 +4519,8 @@ int32_t mapMaker(BITMAP * _map, PALETTE _mappal)
     }
     while(num<99999 && exists(buf));
     
-    save_bitmap(buf,_map,_mappal);
+	if (!al_save_bitmap(buf, bitmap))
+		InfoDialog("Error", "Failed to save map image").show();
     
     return D_O_K;
 }
@@ -4543,6 +4529,43 @@ int32_t onViewPic()
 {
     return launchPicViewer(&pic,picpal,&picx,&picy,&picscale,false);
 }
+
+
+class MapViewRTI : public RenderTreeItem
+{
+public:
+	MapViewRTI(): RenderTreeItem("map_view")
+	{
+	}
+
+	int bw, bh, sw, sh, flags;
+
+private:
+	void render(bool bitmap_resized)
+	{
+		BITMAP* bmap4_single = create_bitmap_ex(8,256,176);
+		set_bitmap_create_flags(true);
+		ALLEGRO_BITMAP* bmap5_single = al_create_bitmap(256,176);
+		int curscr = Map.getCurrScr();
+		for(int32_t y=0; y<8; y++)
+		{
+			for(int32_t x=0; x<16; x++)
+			{
+				clear_bitmap(bmap4_single);
+				Map.setCurrScr(y*16+x);
+				Map.draw(bmap4_single, 0, 0, flags, -1, y*16+x, -1);
+				stretch_blit(bmap4_single, bmap4_single, 0, 0, 0, 0, 256, 176, 256, 176);
+				all_render_a5_bitmap(bmap4_single, bmap5_single);
+				al_draw_scaled_bitmap(bmap5_single, 0, 0, 256, 176, sw * x, sh * y, sw, sh, 0);
+			}
+		}
+
+		Map.setCurrScr(curscr);
+		destroy_bitmap(bmap4_single);
+		al_destroy_bitmap(bmap5_single);
+	}
+};
+static MapViewRTI rti_map_view;
 
 int32_t launchPicViewer(BITMAP **pictoview, PALETTE pal, int32_t *px2, int32_t *py2, double *scale2, bool isviewingmap, bool skipmenu)
 {
@@ -4557,6 +4580,7 @@ int32_t launchPicViewer(BITMAP **pictoview, PALETTE pal, int32_t *px2, int32_t *
 	{
 		zc_set_palette(RAMpal);
 		popup_zqdialog_end();
+		close_the_map();
 		return D_O_K;
 	}
 	
@@ -4571,33 +4595,66 @@ int32_t launchPicViewer(BITMAP **pictoview, PALETTE pal, int32_t *px2, int32_t *
 	{
 		jwin_alert("Error","Error creating temp bitmap",NULL,NULL,"OK",NULL,13,27,get_zc_font(font_lfont));
 		popup_zqdialog_end();
+		close_the_map();
 		return D_O_K;
 	}
+
+	static LegacyBitmapRTI viewer_overlay_rti("viewer_overlay");
+	viewer_overlay_rti.set_size(buf->w, buf->h);
+	viewer_overlay_rti.a4_bitmap = buf;
+	viewer_overlay_rti.transparency_index = 15;
+	get_root_rti()->add_child(&viewer_overlay_rti);
 	
-	//  go();
-	//    //  clear_bitmap(screen);
 	zc_set_palette(pal);
 
 	if(isviewingmap)
 	{
-		size_t sw = (*pictoview)->w / 16;
-		size_t sh = (*pictoview)->h / 8;
-		int32_t scr = Map.getCurrScr();
+		int sw = rti_map_view.width / 16;
+		int sh = rti_map_view.height / 8;
+		int scr = Map.getCurrScr();
 		if (scr >= 0x00 && scr <= 0x7F)
 		{
-			*px2 = (*pictoview)->w - ((scr % 16) * sw + (sw / 2)) * 2;
-			*py2 = (*pictoview)->h - ((scr / 16) * sh + (sh / 2)) * 2;
+			int dw = al_get_display_width(all_get_display()) / get_root_rti()->get_transform().xscale;
+			int dh = al_get_display_height(all_get_display()) / get_root_rti()->get_transform().yscale;
+			mapx = (-(scr % 16) * sw - sw/2 + dw/2);
+			mapy = (-(scr / 16) * sh - sh/2 + dh/2);
 		}
+	}
+
+	int w, h;
+	if (isviewingmap)
+	{
+		w = rti_map_view.width;
+		h = rti_map_view.height;
+	}
+	else
+	{
+		w = (*pictoview)->w;
+		h = (*pictoview)->h;
 	}
 
 	do
 	{
+		if (isviewingmap)
+		{
+			float scale = *scale2;
+			int dw = al_get_display_width(all_get_display()) / get_root_rti()->get_transform().xscale;
+			int dh = al_get_display_height(all_get_display()) / get_root_rti()->get_transform().yscale;
+			mapx = std::max(mapx, (int)(-w*scale + dw));
+			mapy = std::max(mapy, (int)(-h*scale + dh));
+			mapx = std::min(mapx, 0);
+			mapy = std::min(mapy, 0);
+			rti_map_view.set_transform({mapx, mapy, scale, scale});
+		}
+
 		if(redraw)
 		{
-			clear_to_color(buf,pblack);
-			stretch_blit(*pictoview, buf, 0, 0, (*pictoview)->w, (*pictoview)->h,
-				int32_t(zq_screen_w + (*px2 - (*pictoview)->w) * *scale2) / 2, int32_t(zq_screen_h + (*py2 - (*pictoview)->h) * *scale2) / 2,
-				int32_t((*pictoview)->w * *scale2), int32_t((*pictoview)->h * *scale2));
+			clear_to_color(buf,15);
+
+			if (!isviewingmap)
+				stretch_blit(*pictoview, buf, 0, 0, w, h,
+					int32_t(zq_screen_w + (*px2 - w) * *scale2) / 2, int32_t(zq_screen_h + (*py2 - h) * *scale2) / 2,
+					int32_t(w * *scale2), int32_t(h * *scale2));
 						 
 			if(vp_showpal)
 				for(int32_t i=0; i<256; i++)
@@ -4605,11 +4662,11 @@ int32_t launchPicViewer(BITMAP **pictoview, PALETTE pal, int32_t *px2, int32_t *
 					
 			if(vp_showsize)
 			{
-				//        text_mode(pblack);
-				textprintf_ex(buf,font,0,zq_screen_h-8,pwhite,pblack,"%dx%d %.2f%%",(*pictoview)->w,(*pictoview)->h,*scale2*100.0);
+				textprintf_ex(buf,font,0,zq_screen_h-8,pwhite,pblack,"%dx%d %.2f%%",w,h,*scale2*100.0);
 			}
 			
-			blit(buf,screen,0,0,0,0,zq_screen_w,zq_screen_h);
+			if (!isviewingmap)
+				blit(buf,screen,0,0,0,0,zq_screen_w,zq_screen_h);
 			redraw=false;
 		}
 		
@@ -4691,8 +4748,8 @@ int32_t launchPicViewer(BITMAP **pictoview, PALETTE pal, int32_t *px2, int32_t *
 				break;
 				
 			case KEY_Z:
-				*px2=(*pictoview)->w-zq_screen_w;
-				*py2=(*pictoview)->h-zq_screen_h;
+				*px2=w-zq_screen_w;
+				*py2=h-zq_screen_h;
 				vp_center=false;
 				redraw=true;
 				break;
@@ -4745,6 +4802,8 @@ int32_t launchPicViewer(BITMAP **pictoview, PALETTE pal, int32_t *px2, int32_t *
 				break;
 				
 			case KEY_SPACE:
+				close_the_map();
+				// TODO: why is `load_the_map` rendering a black dialog?
 				if(isviewingmap ? load_the_map(skipmenu) : load_the_pic(pictoview,pal)==2)
 				{
 					done=true;
@@ -4771,6 +4830,8 @@ int32_t launchPicViewer(BITMAP **pictoview, PALETTE pal, int32_t *px2, int32_t *
 	
 	popup_zqdialog_end();
 	position_mouse_z(0);
+	viewer_overlay_rti.remove();
+	close_the_map();
 	return D_O_K;
 }
 
@@ -4793,7 +4854,7 @@ static DIALOG loadmap_dlg[] =
     // 11
     {  jwin_button_proc,      42,    110,     61,     21,    vc(14),     vc(1),     13,    D_EXIT,     0,    0, (void *) "OK",                       NULL,   NULL  },
     {  jwin_button_proc,     122,    110,     61,     21,    vc(14),     vc(1),     27,    D_EXIT,     0,    0, (void *) "Cancel",                   NULL,   NULL  },
-    {  jwin_check_proc,       16,    88,     97,      9,    vc(14),     vc(1),      0,    0,          1,    0, (void *) "Save to File (Mapmaker)",  NULL,   NULL  },
+    {  jwin_check_proc,       16,    88,     97,      9,    vc(14),     vc(1),      0,    0,          1,    0, (void *) "Save to Image",  NULL,   NULL  },
 	// 14
 	{  jwin_radio_proc,       16,    66,     97,      9,    vc(14),     vc(1),       0,    0,          0,    0, (void*)"2x  - 8192x2816",		   NULL,   NULL  },
 	{  jwin_radio_proc,       16,    76,     97,      9,    vc(14),     vc(1),       0,    0,          0,    0, (void*)"4x  - 16384x5632",		   NULL,   NULL  },
@@ -4846,11 +4907,6 @@ int32_t load_the_map(bool skipmenu)
 
 		if(loadmap_dlg[15].flags&D_SELECTED) res=4;
     }
-
-    if(bmap)
-    {
-        destroy_bitmap(bmap);
-    }
     
     int32_t bw = (256*16)>>res;
 	int32_t bh = (176*8)>>res;
@@ -4863,33 +4919,33 @@ int32_t load_the_map(bool skipmenu)
 		sw = 256<<(res-2);
 		sh = 176<<(res-2);
 	}
-    bmap = create_bitmap_ex(8,bw,bh);
-    
-    if(!bmap)
-    {
-        jwin_alert("Error","Error creating bitmap.",NULL,NULL,"OK",NULL,13,27,get_zc_font(font_lfont));
-        return 2;
-    }
-    
-    for(int32_t y=0; y<8; y++)
-    {
-        for(int32_t x=0; x<16; x++)
-        {
-            Map.draw(screen2, 0, 0, flags, -1, y*16+x, -1);
-            stretch_blit(screen2, bmap, 0, 0, 256, 176, x*sw, y*sh, sw,sh);
-        }
-    }
-    
-    memcpy(mappal,RAMpal,sizeof(RAMpal));
+
+	rti_map_view.flags = flags;
+	rti_map_view.bw = bw;
+	rti_map_view.bh = bh;
+	rti_map_view.sw = sw;
+	rti_map_view.sh = sh;
+	rti_map_view.set_size(bw, bh);
+	rti_map_view.dirty = true;
+	get_root_rti()->add_child(&rti_map_view);
+	render_zq();
+
     vp_showpal = false;
     get_bw(picpal,pblack,pwhite);
     mapx = mapy = 0;
     mapscale = 1;
     imagepath[0] = 0;
-    
-    if(loadmap_dlg[13].flags & D_SELECTED) mapMaker(bmap, mappal);
-    
+
+    if(loadmap_dlg[13].flags & D_SELECTED) saveMapAsImage(rti_map_view.bitmap);
+
+	memcpy(mappal,RAMpal,sizeof(RAMpal));
+
     return 0;
+}
+
+void close_the_map()
+{
+	rti_map_view.remove();
 }
 
 int32_t onViewMap()
@@ -5914,6 +5970,9 @@ void draw_screenunit(int32_t unit, int32_t flags)
 				
 				for(int32_t j=0; j<num_combo_cols; ++j)
 				{
+					auto per_page = (comboaliaslist[j].w * comboaliaslist[j].h);
+					if(combo_alistpos[j] + per_page >= MAXCOMBOALIASES)
+						combo_alistpos[j] = MAXCOMBOALIASES-per_page;
 					auto& col = comboaliaslist[j];
 					for(int32_t i=0; i<(comboaliaslist[j].w*comboaliaslist[j].h); i++)
 					{
@@ -5982,8 +6041,11 @@ void draw_screenunit(int32_t unit, int32_t flags)
 					jwin_draw_frame(menu1,pos.x-2,pos.y-2,(pos.w*comboaliaslist[c].xscale)+4,(pos.h*comboaliaslist[c].yscale)+4,FR_DEEP);
 				}
 				
-				for(int32_t j=0; j<num_combo_cols; ++j) //the actual panes
+				for (int32_t j = 0; j < num_combo_cols; ++j) //the actual panes
 				{
+					auto per_page = (comboaliaslist[j].w * comboaliaslist[j].h);
+					if(combo_pool_listpos[j] + per_page >= MAXCOMBOPOOLS)
+						combo_pool_listpos[j] = MAXCOMBOPOOLS-per_page;
 					for(int32_t i=0; i<(comboaliaslist[j].w*comboaliaslist[j].h); i++)
 					{
 						int32_t cid=-1; int8_t cs=CSet;
@@ -6094,6 +6156,9 @@ void draw_screenunit(int32_t unit, int32_t flags)
 
 				for (int32_t j = 0; j < num_combo_cols; ++j) //the actual panes
 				{
+					auto per_page = (comboaliaslist[j].w * comboaliaslist[j].h);
+					if(combo_auto_listpos[j] + per_page >= MAXAUTOCOMBOS)
+						combo_auto_listpos[j] = MAXAUTOCOMBOS-per_page;
 					for (int32_t i = 0; i < (comboaliaslist[j].w * comboaliaslist[j].h); i++)
 					{
 						int32_t cid = -1; int8_t cs = CSet;
@@ -6160,6 +6225,9 @@ void draw_screenunit(int32_t unit, int32_t flags)
 				
 				for(int32_t j=0; j<num_combo_cols; ++j)
 				{
+					auto per_page = (combolist[j].w * combolist[j].h);
+					if(First[j] + per_page >= MAXCOMBOS)
+						First[j] = MAXCOMBOS-per_page;
 					for(int32_t i=0; i<(combolist[j].w*combolist[j].h); i++)
 					{
 						put_combo(menu1,(i%combolist[j].w)*combolist[j].xscale+combolist[j].x,
@@ -9774,7 +9842,7 @@ void popup_cpane_rc(int x, int y)
 					{ "Combo Locations", onComboLocationReport },
 					{},
 					{ "Scroll to Page...", onGotoPage },
-					{ "Linked Scrolling", toggle_linked_scrolling, nullopt, false, LinkedScroll!=0 },
+					{ "Linked Scrolling", toggle_linked_scrolling, nullopt, LinkedScroll ? MFL_SEL : 0 },
 				});
 			break;
 		case dm_alias:
@@ -9785,7 +9853,7 @@ void popup_cpane_rc(int x, int y)
 					{ fmt::format("Open {} Page", type), on_cpane_page },
 					{},
 					{ "Scroll to Page...", onGotoPage },
-					{ "Linked Scrolling", toggle_linked_scrolling, nullopt, false, LinkedScroll!=0 },
+					{ "Linked Scrolling", toggle_linked_scrolling, nullopt, LinkedScroll ? MFL_SEL : 0 },
 				});
 			break;
 	}
@@ -15848,7 +15916,8 @@ void edit_tune(int32_t i)
         editmidi_dlg[23].dp = len_str;
         editmidi_dlg[25].dp = timestr(Midi_Info.len_sec);
         editmidi_dlg[26].flags = (flags&tfDISABLESAVE)?D_SELECTED:0;
-        
+
+        popup_zqdialog_start();
         DIALOG_PLAYER *p = init_dialog(editmidi_dlg,-1);
         
         while(update_dialog(p))
@@ -15857,8 +15926,9 @@ void edit_tune(int32_t i)
             //      text_mode(vc(1));
             textprintf_ex(screen,get_zc_font(font_lfont_l),editmidi_dlg[0].x+int32_t(193*1.5),editmidi_dlg[0].y+int32_t(58*1.5),jwin_pal[jcBOXFG],jwin_pal[jcBOX],"%-5ld",midi_pos);
         }
-        
+
         ret = shutdown_dialog(p);
+        popup_zqdialog_end();
         
         loop = editmidi_dlg[8].flags?1:0;
         volume = vbound(atoi(volume_str),0,255); // Allegro can't play louder than 255.
@@ -26017,7 +26087,8 @@ int32_t main(int32_t argc,char **argv)
 
 		const char* input_filename = argv[package_arg + 1];
 		const char* package_name = argv[package_arg + 2];
-		package_create(input_filename, package_name);
+		if (auto error = package_create(input_filename, package_name))
+			Z_error_fatal("%s\n", error->c_str());
 		exit(0);
 	}
 
@@ -26036,7 +26107,7 @@ int32_t main(int32_t argc,char **argv)
 		do_copy_qst_command(input_filename, output_filename);
 	}
 
-	Z_title("%s, v.%s %s",ZQ_EDITOR_NAME, ZQ_EDITOR_V, ALPHA_VER_STR);
+	Z_title("%s, v.%s",ZQ_EDITOR_NAME, getReleaseTag());
 	
 	// Before anything else, let's register our custom trace handler:
 	register_trace_handler(zc_trace_handler);
@@ -26385,8 +26456,6 @@ int32_t main(int32_t argc,char **argv)
 		Z_error_fatal("couldn't allocate timer");
 	}
 	
-	// 1 <= zcmusic_bufsz <= 128
-	zcmusic_bufsz = vbound(zc_get_config("zquest","zqmusic_bufsz",64),1,128);
 	byte layermask = zc_get_config("zquest","layer_mask",0x7F);
 	int32_t usefullscreen = zc_get_config("zquest","fullscreen",0);
 	tempmode = (usefullscreen == 0 ? GFX_AUTODETECT_WINDOWED : GFX_AUTODETECT_FULLSCREEN);
@@ -26585,6 +26654,37 @@ int32_t main(int32_t argc,char **argv)
 		if (!success)
 		{
 			printf("Failed to save quest\n");
+			exit(1);
+		}
+
+		exit(0);
+	}
+
+	int export_strings_arg = used_switch(argc, argv, "-export-strings");
+	if (export_strings_arg > 0)
+	{
+		if (export_strings_arg + 3 > argc)
+		{
+			printf("%d\n", argc);
+			printf("expected -export-strings input.qst output.tsv\n");
+			exit(1);
+		}
+
+		is_zq_replay_test = true;
+		set_headless_mode();
+
+		int load_ret = load_quest(argv[export_strings_arg + 1], false);
+		bool success = load_ret == qe_OK;
+		if (!success)
+		{
+			printf("Failed to load quest: %d\n", load_ret);
+			exit(1);
+		}
+
+		success = save_strings_tsv(argv[export_strings_arg + 2]);
+		if (!success)
+		{
+			printf("Failed to export strings\n");
 			exit(1);
 		}
 
@@ -27939,7 +28039,6 @@ void center_zquest_dialogs()
     jwin_center_dialog(showpal_dlg);
     jwin_center_dialog(strlist_dlg);
     jwin_center_dialog(template_dlg);
-    center_zq_tiles_dialog();
     jwin_center_dialog(tp_dlg);
     jwin_center_dialog(under_dlg);
     jwin_center_dialog(tilewarp_dlg);
@@ -28321,6 +28420,9 @@ int32_t d_timer_proc(int32_t msg, DIALOG *d, int32_t c)
 
 void check_autosave()
 {
+    if (!first_save)
+        return;
+
     if(AutoSaveInterval>0)
     {
         time(&auto_save_time_current);
@@ -28329,16 +28431,13 @@ void check_autosave()
         if(auto_save_time_diff>AutoSaveInterval*60)
         {
             MouseSprite::set(ZQM_NORMAL);
-            if(first_save)
-                replace_extension(last_timed_save, filepath, "qt0", 2047);
-            else
-                strcpy(last_timed_save, "untitled.qt0");
+			replace_extension(last_timed_save, filepath, "qt0", 2047);
 			set_last_timed_save(last_timed_save);
             go();
             
-            if((header.zelda_version != ZELDA_VERSION || header.build != VERSION_BUILD) && first_save)
+            if((header.zelda_version != ZELDA_VERSION || header.build != VERSION_BUILD))
             {
-                jwin_alert("Auto Save","This quest was saved in an older version of ZC.","If you wish to use the autosave feature, you must manually","save the files in this version first.","OK",NULL,13,27,get_zc_font(font_lfont));
+                jwin_alert("Auto Save","This quest was saved in an older version of ZQuest.","If you wish to use the autosave feature, you must manually","save the files in this version first.","OK",NULL,13,27,get_zc_font(font_lfont));
                 time(&auto_save_time_start);
                 comeback();
                 return;
@@ -29000,11 +29099,11 @@ void FFScript::ZScriptConsole(bool open)
 	#ifdef _WIN32
 	if ( console_is_open )
 	{
-		zscript_coloured_console.Create("ZC Logging Console", 600, 200);
+		zscript_coloured_console.Create("ZQuest Classic Logging Console", 600, 200);
 		zscript_coloured_console.cls(CConsoleLoggerEx::COLOR_BACKGROUND_BLACK);
 		zscript_coloured_console.gotoxy(0,0);
 		zscript_coloured_console.cprintf( CConsoleLoggerEx::COLOR_BLUE | CConsoleLoggerEx::COLOR_INTENSITY |
-		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"ZC Logging Console\n");
+		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"ZQuest Classic Logging Console\n");
 	}
 	else
 	{

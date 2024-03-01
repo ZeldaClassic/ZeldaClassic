@@ -119,77 +119,56 @@ float intscale(float scale)
 }
 static void configure_render_tree()
 {
-	static const double game_aspect = 240.0/256.0;
 	int resx = al_get_display_width(all_get_display());
 	int resy = al_get_display_height(all_get_display());
 	
-	if(stretchGame)
+	int w = rti_game.width;
+	int h = rti_game.height;
+	float xscale = (float)resx/w;
+	float yscale = (float)resy/(h+12);
+	bool keep_aspect_ratio = !stretchGame;
+	if (keep_aspect_ratio)
+		xscale = yscale = std::min(xscale, yscale);
+	if (scaleForceInteger)
 	{
-		int w = rti_game.width;
-		int h = rti_game.height;
-		float xscale = (float)resx/w;
-		float yscale = (float)resy/h;
-		if (scaleForceInteger)
-		{
-			xscale = intscale(xscale);
-			yscale = intscale(yscale);
-		}
-
-		rti_game.set_transform({
-			.x = (int)(resx - w*xscale) / 2,
-			.y = (int)(resy - h*yscale) / 2,
-			.xscale = xscale,
-			.yscale = yscale,
-		});
-		rti_game.visible = true;
-
-		rti_infolayer.set_transform({
-			.x = (int)(resx - w*xscale) / 2,
-			.y = (int)(resy - h*yscale) / 2,
-			.xscale = xscale,
-			.yscale = yscale,
-		});
-		rti_infolayer.visible = true;
+		xscale = intscale(xscale);
+		yscale = intscale(yscale);
 	}
-	else
-	{
-		int w = rti_game.width;
-		int h = rti_game.height;
-		float txscale = (float)resx/w;
-		float tyscale = (float)resy/(h+12);
-		float yscale = intscale(tyscale), xscale = intscale(yscale/game_aspect);
-		if(xscale*w > resx && yscale > 1)
-		{
-			--yscale;
-			xscale = intscale(yscale/game_aspect);
-		}
 
-		rti_game.set_transform({
-			.x = (int)(resx - w*xscale) / 2,
-			.y = (int)(resy - h*yscale) / 2,
-			.xscale = xscale,
-			.yscale = yscale,
-		});
-		rti_game.visible = true;
+	rti_game.set_transform({
+		.x = (int)(resx - w*xscale) / 2,
+		.y = (int)(resy - h*yscale) / 2,
+		.xscale = xscale,
+		.yscale = yscale,
+	});
+	rti_game.visible = true;
 
-		rti_infolayer.set_transform({
-			.x = (int)(resx - w*xscale) / 2,
-			.y = (int)(resy - h*yscale) / 2,
-			.xscale = xscale,
-			.yscale = yscale,
-		});
-		rti_infolayer.visible = true;
-	}
+	rti_infolayer.set_transform({
+		.x = (int)(resx - w*xscale) / 2,
+		.y = (int)(resy - h*yscale) / 2,
+		.xscale = xscale,
+		.yscale = yscale,
+	});
+	rti_infolayer.visible = true;
 	
 	rti_dialogs.visible = rti_dialogs.has_children();
 	rti_gui.visible = (dialog_count >= 1 && !active_dialog) || dialog_count >= 2 || screen == gui_bmp;
-	
-	if (rti_dialogs.visible || rti_gui.visible)
+
+	float gui_xscale, gui_yscale;
 	{
 		int w = rti_gui.width;
 		int h = rti_gui.height;
 		float xscale = (float)resx/w;
 		float yscale = (float)resy/h;
+		gui_xscale = gui_yscale = std::min(xscale, yscale);
+	}
+	
+	if (rti_dialogs.visible || rti_gui.visible)
+	{
+		int w = rti_gui.width;
+		int h = rti_gui.height;
+		float xscale = gui_xscale;
+		float yscale = gui_yscale;
 		rti_gui.set_transform({
 			.x = (int)(resx - w*xscale) / 2,
 			.y = (int)(resy - h*yscale) / 2,
@@ -198,8 +177,8 @@ static void configure_render_tree()
 		});
 		
 		rti_dialogs.set_transform({
-			.x = (int)(resx - w*xscale) / 2,
-			.y = (int)(resy - h*yscale) / 2,
+			.x = 0,
+			.y = 0,
 			.xscale = xscale,
 			.yscale = yscale,
 		});
@@ -210,8 +189,16 @@ static void configure_render_tree()
 	for(auto it = dlgs.rbegin(); it != dlgs.rend(); ++it)
 	{
 		auto rti = *it;
-		if(rti->type == RTI_TY_DIALOG_A4 || rti->type == RTI_TY_DIALOG_A5)
+		if (rti->type == RTI_TY_DIALOG_A4 || rti->type == RTI_TY_DIALOG_A5)
+		{
+			int dialogs_w = rti_gui.width;
+			int dialogs_h = rti_gui.height;
+			auto t = rti->get_transform();
+			t.x = resx / gui_xscale / 2 - dialogs_w / 2;
+			t.y = resy / gui_yscale / 2 - dialogs_h / 2;
+			rti->set_transform(t);
 			has_zqdialog = true;
+		}
 		else if(rti->type == RTI_TY_POPUP_MENU)
 			rti->visible = !has_zqdialog;
 	}
@@ -221,10 +208,8 @@ static void configure_render_tree()
 	{
 		int w = rti_menu.width;
 		int h = rti_menu.height;
-		float xscale = (float)resx/w;
-		float yscale = (float)resy/h;
-		xscale = intscale(xscale);
-		yscale = intscale(yscale);
+		float xscale = gui_xscale;
+		float yscale = gui_yscale;
 		rti_menu.set_transform({
 			.x = 0,
 			.y = 0,
@@ -310,6 +295,13 @@ void render_zc()
 	std::vector<std::string> lines_left;
 	std::vector<std::string> lines_right;
 
+	if (ShowGameTime && game && Playing)
+	{
+		if (MenuOpen || Paused)
+			lines_left.push_back(fmt::format("{} ({})", time_str_long(game->get_time()), game->get_time()));
+		else
+			lines_left.push_back(fmt::format("{}", ShowGameTime == 2 ? time_str_long(game->get_time()) : time_str_med(game->get_time())));
+	}
 	// TODO calculate fps without using a timer thread.
 	if (ShowFPS)
 		lines_left.push_back(fmt::format("FPS: {}", (int)lastfps));
@@ -321,13 +313,6 @@ void render_zc()
 		lines_right.push_back("PAUSED");
 	if (Saving && use_save_indicator)
 		lines_right.push_back("SAVING ...");
-	if (details && game)
-	{
-		lines_right.push_back(fmt::format("dlvl:{:2} dngn:{}", dlevel, isdungeon()));
-		lines_right.push_back(time_str_long(game->get_time()));
-		for (int i = 0; i < guys.Count(); i++)
-			lines_right.push_back(fmt::format("{}", (int)((enemy*)guys.spr(i))->id));
-	}
 	if (show_ff_scripts)
 	{
 		for (int i = 0; i < tmpscr->numFFC(); i++)
