@@ -1573,9 +1573,19 @@ static int load_from_save_file_expect_one(ReadMode read_mode, fs::path path, sav
 	return 0;
 }
 
+bool saves_is_valid_slot(int index)
+{
+	return index >= 0 && index < saves.size();
+}
+
 static int get_save(save_t*& out_save, int index, bool full_data)
 {
-	assert(index >= 0 && index < saves.size());
+	if (!saves_is_valid_slot(index))
+	{
+		assert(false);
+		return -1;
+	}
+
 	auto& save = saves[index];
 
 	if (full_data)
@@ -1923,6 +1933,7 @@ static int32_t do_save_games()
 		auto dir = get_save_folder_path() / "current_replay";
 		fs::create_directories(dir);
 		saves[currgame].path = create_new_file_path(dir, "zc", ".sav", true);
+		saves[currgame].write_to_disk = true;
 		int ret = write_save(&saves[currgame]);
 		if (ret)
 			return ret;
