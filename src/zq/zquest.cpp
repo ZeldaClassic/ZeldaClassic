@@ -18466,7 +18466,7 @@ int32_t select_enemy(const char *prompt,int32_t enemy,bool hide,bool is_editor,i
         elist_dlg[2].flags&=~(D_USER<<1);
         elist_dlg[3].dp = (void *)"OK";
         elist_dlg[4].dp = (void *)"Cancel";
-        elist_dlg[3].x = 240;
+        elist_dlg[3].x = 250;
         elist_dlg[4].x = 350;
         elist_dlg[5].flags &= ~D_HIDDEN;
     }
