@@ -282,7 +282,7 @@ int32_t gethexnumber(const char *prompt,int32_t initialval);
 
 void update_combo_cycling();
 
-enum {dm_normal, dm_relational, dm_dungeon, dm_alias, dm_cpool, dm_auto, dm_max, dm_menumax = 4};
+enum {DM_NORMAL, DM_RELATIONAL, DM_DUNGEON, DM_ALIAS, DM_CPOOL, DM_AUTO, DM_MAX, DM_MENUMAX = 4};
 
 bool confirmBox(const char *m1, const char *m2 = NULL, const char *m3 = NULL);
 int32_t onSelectSFX();

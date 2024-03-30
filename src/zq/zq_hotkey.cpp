@@ -1233,13 +1233,13 @@ bool selected_hotkey(uint hkey)
 		case ZQKEY_VIEW_L3_BG:
 			return ViewLayer3BG;
 		case ZQKEY_DRAWMODE_AUTO:
-			return draw_mode == dm_auto;
+			return draw_mode == DM_AUTO;
 		case ZQKEY_DRAWMODE_POOL:
-			return draw_mode==dm_cpool;
+			return draw_mode==DM_CPOOL;
 		case ZQKEY_DRAWMODE_ALIAS:
-			return draw_mode==dm_alias;
+			return draw_mode==DM_ALIAS;
 		case ZQKEY_DRAWMODE_NORMAL:
-			return draw_mode==dm_normal;
+			return draw_mode==DM_NORMAL;
 		case ZQKEY_DARK_PREVIEW:
 			return (get_qr(qr_NEW_DARKROOM) && (Flags&cNEWDARK));
 	}
