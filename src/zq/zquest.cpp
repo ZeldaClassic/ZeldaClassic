@@ -17820,27 +17820,20 @@ void EditItemDropSet(int32_t index)
 
 int32_t count_item_drop_sets()
 {
-    int32_t count=0;
-    bool found=false;
-    
-    for(count=255; (count>0); --count)
-    {
-        for(int32_t i=0; (i<11); ++i)
-        {
-            if(item_drop_sets[count].chance[i]!=0)
-            {
-                found=true;
-                break;
-            }
-        }
-        
-        if(found)
-        {
-            break;
-        }
-    }
-    
-    return count+1;
+	int32_t count;
+
+	for (count = 255; (count > 0); --count)
+	{
+		for (int32_t i = 0; (i < 11); ++i) // 5 chances on both pages + Nothing Chance == 11
+		{
+			if (item_drop_sets[count].chance[i] != 0)
+			{
+				return count + 1;
+			}
+		}
+	}
+
+	return count + 1;
 }
 
 int32_t onItemDropSets()
