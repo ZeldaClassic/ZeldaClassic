@@ -850,7 +850,7 @@ static DIALOG doorcomboset_dlg[] =
     { jwin_ctext_proc,      112,  64+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Locked", NULL, NULL },
     { jwin_ctext_proc,      160,  64+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Shuttered", NULL, NULL },
     { jwin_ctext_proc,      208,  64+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Boss", NULL, NULL },
-    { jwin_ctext_proc,      256,  64+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Bomb", NULL, NULL },
+    { jwin_ctext_proc,      256,  64+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Bombed", NULL, NULL },
     
     { jwin_ctext_proc,      64,   136+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Open", NULL, NULL },
     { jwin_ctext_proc,      112,  136+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Unlocked", NULL, NULL },
@@ -942,7 +942,7 @@ static DIALOG doorcomboset_dlg[] =
     { jwin_ctext_proc,      112,  64+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Locked", NULL, NULL },
     { jwin_ctext_proc,      160,  64+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Shuttered", NULL, NULL },
     { jwin_ctext_proc,      208,  64+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Boss", NULL, NULL },
-    { jwin_ctext_proc,      256,  64+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Bomb", NULL, NULL },
+    { jwin_ctext_proc,      256,  64+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Bombed", NULL, NULL },
     
     { jwin_ctext_proc,      64,   136+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Open", NULL, NULL },
     { jwin_ctext_proc,      112,  136+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Unlocked", NULL, NULL },
