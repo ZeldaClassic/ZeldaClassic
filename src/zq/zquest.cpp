@@ -9068,7 +9068,7 @@ static NewMenu brush_menu
 };
 int toggle_autobrush()
 {
-	AutoBrush = AutoBrush ? 0 : 1;
+	AutoBrush = !AutoBrush;
 	BrushWidth = BrushHeight = 1;
 	brush_menu.select_uid(MENUID_BRUSH_AUTOBRUSH, AutoBrush);
 	brush_menu.disable_uid(MENUID_BRUSH_WIDTH, AutoBrush);
@@ -9078,14 +9078,14 @@ int toggle_autobrush()
 }
 int toggle_combobrush()
 {
-	ComboBrush = ComboBrush ? 0 : 1;
+	ComboBrush = !ComboBrush;
 	brush_menu.select_uid(MENUID_BRUSH_COMBOBRUSH, ComboBrush);
 	zc_set_config("zquest","combo_brush",ComboBrush);
 	return D_O_K;
 }
 int toggle_floatbrush()
 {
-	FloatBrush = FloatBrush ? 0 : 1;
+	FloatBrush = !FloatBrush;
 	brush_menu.select_uid(MENUID_BRUSH_FLOATBRUSH, FloatBrush);
 	zc_set_config("zquest","float_brush",FloatBrush);
 	return D_O_K;
