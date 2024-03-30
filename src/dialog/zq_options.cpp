@@ -840,7 +840,7 @@ std::shared_ptr<GUI::Widget> OptionsDialog::view()
 					ROW_CHECK(OPT_RULESET, "Show Ruleset Dialog on New Quest"),
 					ROW_CHECK(OPT_PATTERNSEARCH, "Listers Use Pattern-Matching Search"),
 					ROW_CHECK(OPT_CUSTOMFONT, "Custom Fonts"),
-					ROW_CHECK(OPT_TOOLTIPS, "Enable Tooltips"),
+					ROW_CHECK_I(OPT_TOOLTIPS, "Enable Tooltips", "Tooltips will appear after hovering over a control for the duration configured in Etc->Options->Settings->Tooltip Timer"),
 					ROW_CHECK(OPT_TOOLTIP_HIGHLIGHT, "Tooltips Highlight Target"),
 					ROW_CHECK(OPT_NEXTPREVIEW, "No Next-Screen Preview"),
 					ROW_CHECK(OPT_INITSCR_WARN, "Warn on ~Init Script Update"),
