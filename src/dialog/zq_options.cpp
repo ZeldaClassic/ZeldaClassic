@@ -831,7 +831,7 @@ std::shared_ptr<GUI::Widget> OptionsDialog::view()
 				Rows<3>(vAlign = 0.0,
 					ROW_CHECK(OPT_SAVEPATHS, "Save Paths"),
 					ROW_CHECK(OPT_PALCYCLE, "Palette Cycle"),
-					ROW_CHECK(OPT_FPS, "Show FPS"),
+					ROW_CHECK_I(OPT_FPS, "Show FPS", "Display frames per second in the upper-left corner of the canvas"),
 					ROW_CHECK(OPT_RELOAD_QUEST, "Reload Last Quest"),
 					ROW_CHECK(OPT_ANIM_COMBOS, "Animate Combos"),
 					ROW_CHECK(OPT_OW_PROT, "Overwrite Protection"),
