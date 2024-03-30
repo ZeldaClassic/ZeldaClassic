@@ -834,7 +834,7 @@ std::shared_ptr<GUI::Widget> OptionsDialog::view()
 					ROW_CHECK_I(OPT_FPS, "Show FPS", "Display frames per second in the upper-left corner of the canvas"),
 					ROW_CHECK_I(OPT_RELOAD_QUEST, "Reload Last Quest", "When the ZC editor starts up it will automatically load the quest that was being edited last time you ran it.  Otherwise, creates a new quest instead."),
 					ROW_CHECK_I(OPT_ANIM_COMBOS, "Animate Combos", "Affects the canvas and combo lists.  When off, you must go to the Combo Editor to preview a combo animation"),
-					ROW_CHECK(OPT_OW_PROT, "Overwrite Protection"),
+					ROW_CHECK_I(OPT_OW_PROT, "Overwrite Protection", "ZC Editor will refuse to overwrite existing quest files"),
 					ROW_CHECK(OPT_TILE_PROT, "Tile Protection"),
 					//ROW_CHECK(OPT_STATIC_INVAL, "Use Static for Invalid Data"),
 					ROW_CHECK(OPT_RULESET, "Show Ruleset Dialog on New Quest"),
