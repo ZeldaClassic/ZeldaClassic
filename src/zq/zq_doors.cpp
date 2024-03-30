@@ -43,7 +43,7 @@ const char *doorslist(int32_t index, int32_t *list_size)
     return NULL;
 }
 
-static const char *sidestr[4] = {"Top","Bottom","Left","Right"};
+static const char *sidestr[4] = {"North","South","West","East"};
 
 int32_t door_to_index(int32_t door)
 {
