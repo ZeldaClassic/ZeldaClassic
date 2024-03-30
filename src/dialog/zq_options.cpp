@@ -851,7 +851,7 @@ std::shared_ptr<GUI::Widget> OptionsDialog::view()
 					ROW_CHECK(OPT_SKIP_LAYER_WARNING, "Skip Wrong Layer Flag Warning"),
 					ROW_CHECK(OPT_NUMERICAL_FLAG_LIST, "Sort Flag List by Flag Number"),
 					ROW_CHECK(OPT_SAVEDRAGRESIZE, "Autosave Window Size Changes"),
-					ROW_CHECK(OPT_DRAGASPECT, "Lock Aspect Ratio"),
+					ROW_CHECK_I(OPT_DRAGASPECT, "Lock Aspect Ratio", "Auto-correct the aspect ratio upon releasing the mouse after resizing the window"),
 					ROW_CHECK(OPT_SAVEWINPOS, "Autosave Window Position"),
 					ROW_CHECK(OPT_MOUSESCROLL, "Mouse Scroll"),
 					ROW_CHECK_I(OPT_COMB_BRUSH, "Combo Brush", "Show the combo you would place if you clicked"),
