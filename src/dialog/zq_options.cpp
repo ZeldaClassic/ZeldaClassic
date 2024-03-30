@@ -838,7 +838,7 @@ std::shared_ptr<GUI::Widget> OptionsDialog::view()
 					ROW_CHECK(OPT_TILE_PROT, "Tile Protection"),
 					//ROW_CHECK(OPT_STATIC_INVAL, "Use Static for Invalid Data"),
 					ROW_CHECK_I(OPT_RULESET, "Show Ruleset Dialog on New Quest", "After selecting File->New a 'Pick Ruleset' window will appear allowing you to choose between modern, SNES, and NES style rules."),
-					ROW_CHECK(OPT_PATTERNSEARCH, "Listers Use Pattern-Matching Search"),
+					ROW_CHECK_I(OPT_PATTERNSEARCH, "Listers Use Pattern-Matching Search", "For example, Quest->Items will allow you to type the whole item name to search for it.  When disabled, you can only cycle through items which share the same the first letter"),
 					ROW_CHECK(OPT_CUSTOMFONT, "Custom Fonts"),
 					ROW_CHECK_I(OPT_TOOLTIPS, "Enable Tooltips", "Tooltips will appear after hovering over a control for the duration configured in Etc->Options->Settings->Tooltip Timer"),
 					ROW_CHECK_I(OPT_TOOLTIP_HIGHLIGHT, "Tooltips Highlight Target", "A purple square will appear outlining the tool the tip is describing"),
