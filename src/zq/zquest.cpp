@@ -9704,7 +9704,7 @@ void edit_twarp(int warpindex)
 
 int toggle_linked_scrolling()
 {
-	LinkedScroll = LinkedScroll ? 0 : 1;
+	LinkedScroll = !LinkedScroll;
 	zc_set_config("zquest","linked_comboscroll",LinkedScroll);
 	return D_O_K;
 }
