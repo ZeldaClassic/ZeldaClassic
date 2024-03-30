@@ -9845,7 +9845,7 @@ void popup_cpane_rc(int x, int y)
 					{ "Combo Locations", onComboLocationReport },
 					{},
 					{ "Scroll to Page...", onGotoPage },
-					{ "Linked Scrolling", toggle_linked_scrolling, nullopt, LinkedScroll ? MFL_SEL : 0 },
+					{ "Scroll Together", toggle_linked_scrolling, nullopt, LinkedScroll ? MFL_SEL : 0 },
 				});
 			break;
 		case dm_alias:
@@ -9856,7 +9856,7 @@ void popup_cpane_rc(int x, int y)
 					{ fmt::format("Open {} Page", type), on_cpane_page },
 					{},
 					{ "Scroll to Page...", onGotoPage },
-					{ "Linked Scrolling", toggle_linked_scrolling, nullopt, LinkedScroll ? MFL_SEL : 0 },
+					{ "Scroll Together", toggle_linked_scrolling, nullopt, LinkedScroll ? MFL_SEL : 0 },
 				});
 			break;
 	}
