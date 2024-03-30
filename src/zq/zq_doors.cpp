@@ -817,11 +817,11 @@ static int32_t door_right_list[] =
 static TABPANEL door_tabs[] =
 {
     // (text)
-    { (char *)"Top",     D_SELECTED,  door_top_list,    0, NULL },
-    { (char *)"Bottom",  0,           door_bottom_list, 0, NULL },
-    { (char *)"Left",    0,           door_left_list,   0, NULL },
-    { (char *)"Right",   0,           door_right_list,  0, NULL },
-    { NULL,              0,           NULL,             0, NULL }
+    { (char *)"North",  D_SELECTED,  door_top_list,    0, NULL },
+    { (char *)"South",  0,           door_bottom_list, 0, NULL },
+    { (char *)"West",   0,           door_left_list,   0, NULL },
+    { (char *)"East",   0,           door_right_list,  0, NULL },
+    { NULL,             0,           NULL,             0, NULL }
 };
 
 int32_t dcs_auto_button_proc(int32_t msg, DIALOG *d, int32_t c);
