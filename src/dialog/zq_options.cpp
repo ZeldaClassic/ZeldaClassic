@@ -837,7 +837,7 @@ std::shared_ptr<GUI::Widget> OptionsDialog::view()
 					ROW_CHECK_I(OPT_OW_PROT, "Overwrite Protection", "ZC Editor will refuse to overwrite existing quest files"),
 					ROW_CHECK(OPT_TILE_PROT, "Tile Protection"),
 					//ROW_CHECK(OPT_STATIC_INVAL, "Use Static for Invalid Data"),
-					ROW_CHECK(OPT_RULESET, "Show Ruleset Dialog on New Quest"),
+					ROW_CHECK_I(OPT_RULESET, "Show Ruleset Dialog on New Quest", "After selecting File->New a 'Pick Ruleset' window will appear allowing you to choose between modern, SNES, and NES style rules."),
 					ROW_CHECK(OPT_PATTERNSEARCH, "Listers Use Pattern-Matching Search"),
 					ROW_CHECK(OPT_CUSTOMFONT, "Custom Fonts"),
 					ROW_CHECK_I(OPT_TOOLTIPS, "Enable Tooltips", "Tooltips will appear after hovering over a control for the duration configured in Etc->Options->Settings->Tooltip Timer"),
