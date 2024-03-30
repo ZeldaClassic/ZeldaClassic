@@ -5759,36 +5759,39 @@ void draw_screenunit(int32_t unit, int32_t flags)
 				int32_t tempbw=BrushWidth;
 				int32_t tempbh=BrushHeight;
 				
-				if(draw_mode==dm_alias)
-				{
-					BrushWidth = combo_aliases[combo_apos].width+1;
-					BrushHeight = combo_aliases[combo_apos].height+1;
-				}
-				else if(draw_mode == dm_cpool)
-				{
-					BrushWidth = BrushHeight = 1;
-					combo_pool const& pool = combo_pools[combo_pool_pos];
-					if(pool.valid())
+				switch (draw_mode) {
+					case dm_alias:
+						BrushWidth = combo_aliases[combo_apos].width + 1;
+						BrushHeight = combo_aliases[combo_apos].height + 1;
+						break;
+					case dm_cpool:
 					{
-						int32_t cid = Combo;
-						int8_t cset = CSet;
-						pool.get_w_wrap(cid,cset,cpoolbrush_index/16); //divide to reduce speed
-						put_combo(brushbmp,0,0,cid,cset,Flags&(cFLAGS|cWALK),0);
+						BrushWidth = BrushHeight = 1;
+						combo_pool const& pool = combo_pools[combo_pool_pos];
+						if (pool.valid())
+						{
+							int32_t cid = Combo;
+							int8_t cset = CSet;
+							pool.get_w_wrap(cid, cset, cpoolbrush_index / 16); //divide to reduce speed
+							put_combo(brushbmp, 0, 0, cid, cset, Flags & (cFLAGS | cWALK), 0);
+						}
+						else clear_bitmap(brushbmp);
+						break;
 					}
-					else clear_bitmap(brushbmp);
-				}
-				else if (draw_mode == dm_auto)
-				{
-					BrushWidth = BrushHeight = 1;
-					/*combo_auto const& pool = combo_autos[combo_auto_pos];
-					if (pool.valid())
+					case dm_auto:
 					{
-						int32_t cid = Combo;
-						int8_t cset = CSet;
-						pool.get_w_wrap(cid, cset, cpoolbrush_index / 16); //divide to reduce speed
-						put_combo(brushbmp, 0, 0, cid, cset, Flags & (cFLAGS | cWALK), 0);
+						BrushWidth = BrushHeight = 1;
+						/*combo_auto const& pool = combo_autos[combo_auto_pos];
+						if (pool.valid())
+						{
+							int32_t cid = Combo;
+							int8_t cset = CSet;
+							pool.get_w_wrap(cid, cset, cpoolbrush_index / 16); //divide to reduce speed
+							put_combo(brushbmp, 0, 0, cid, cset, Flags & (cFLAGS | cWALK), 0);
+						}
+						else clear_bitmap(brushbmp);*/
+						break;
 					}
-					else clear_bitmap(brushbmp);*/
 				}
 
 				if((FloatBrush)&&(draw_mode!=dm_alias))
