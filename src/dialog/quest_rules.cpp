@@ -259,7 +259,7 @@ static GUI::ListData comboRulesList
 		" the sword items you wish to have reflecting Sword Beams for in"
 		" the item editor."},
 	{ "Magic Mirrors Reflect Scripted Whirlwinds", qr_WHIRLWINDMIRROR, 
-		"Let's script-created Wind Weapons reflect off Mirrors. Note"
+		"Lets script-created Wind Weapons reflect off Mirrors. Note"
 		" that this does not affect whistle-created whirlwinds; to"
 		" have those reflect, check the 'Whirlwinds Reflect off"
 		" Prism/Mirror Combos' Item Flag on the whistle item in the"
