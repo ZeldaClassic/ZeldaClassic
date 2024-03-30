@@ -115,7 +115,6 @@ char qstdat_string[2048] = { 0 };
 
 static zinfo* load_tmp_zi = NULL;
 
-int32_t memDBGwatch[8]= {0,0,0,0,0,0,0,0}; //So I can monitor memory crap
 const byte clavio[9]={97,109,111,110,103,117,115,0};
 
 //enum { qe_OK, qe_notfound, qe_invalid, qe_version, qe_obsolete,
