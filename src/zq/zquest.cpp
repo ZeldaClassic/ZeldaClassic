@@ -1380,13 +1380,13 @@ static NewMenu tool_menu
 
 int32_t onLayer3BG()
 {
-	ViewLayer3BG = ViewLayer3BG ? 0 : 1;
+	ViewLayer3BG = !ViewLayer3BG;
 	zc_set_config("zquest","layer3_bg",ViewLayer3BG);
 	return D_O_K;
 }
 int32_t onLayer2BG()
 {
-	ViewLayer2BG = ViewLayer2BG ? 0 : 1;
+	ViewLayer2BG = !ViewLayer2BG;
 	zc_set_config("zquest","layer2_bg",ViewLayer2BG);
 	return D_O_K;
 }
