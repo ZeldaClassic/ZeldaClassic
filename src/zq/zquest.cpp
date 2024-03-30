@@ -1514,7 +1514,7 @@ static NewMenu etc_menu
 {
 	{ "Help", &zq_help_menu },
 	{ "&About", onAbout },
-	{ "&Video Mode", onZQVidMode, MENUID_ETC_VIDMODE },
+	{ "&Video Resolution", onZQVidMode, MENUID_ETC_VIDMODE },
 	{ "&Options...", onOptions },
 	{ "&Hotkeys...", do_zq_hotkey_dialog },
 	{ "&List Hotkeys...", do_zq_list_hotkeys_dialog },

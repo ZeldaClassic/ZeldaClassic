@@ -229,7 +229,7 @@ char const* get_hotkey_name(uint hkey)
 		case ZQKEY_MCGUFFIN_PIECES: return "McGuffin Pieces";
 		case ZQKEY_UNDERCOMBO: return "Under Combo";
 		case ZQKEY_PASTE_UNDERCOMBO: return "Paste Undercombo";
-		case ZQKEY_VIDEO_MODE: return "Video Mode";
+		case ZQKEY_VIDEO_MODE: return "Video Resolution";
 		case ZQKEY_VIEW_PALETTE: return "View Palette";
 		case ZQKEY_VIEW_PIC: return "View Pic";
 		case ZQKEY_PASTE_WARP_RET: return "Paste Warp Return";

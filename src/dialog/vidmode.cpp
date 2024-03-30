@@ -24,7 +24,7 @@ std::shared_ptr<GUI::Widget> VidModeDialog::view()
 	sprintf(resbuf, "Res: %dx%d", resx, resy);
 	std::shared_ptr<GUI::Grid> resbtn_grid;
 	std::shared_ptr<GUI::Window> window = Window(
-		title = "Video Mode",
+		title = "Video Resolution",
 		onClose = message::CANCEL,
 		Column(
 			hPadding = 0_px, 

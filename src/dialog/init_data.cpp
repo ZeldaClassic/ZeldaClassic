@@ -467,7 +467,7 @@ std::shared_ptr<GUI::Widget> InitDataDialog::view()
 				padding = 3_px,
 				TabRef(name = "Equipment", ilist_panel),
 				TabRef(name = "Counters", counter_panel),
-				TabRef(name = "LItems", Column(
+				TabRef(name = "LItems", Column( // Level Items
 					Label(text = "Select from 512 rows of Map, Compass, Bosskey, Triforce, Small keys"),
 					Row(
 						BTN_100(000),
