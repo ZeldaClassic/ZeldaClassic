@@ -845,7 +845,7 @@ std::shared_ptr<GUI::Widget> OptionsDialog::view()
 					ROW_CHECK(OPT_NEXTPREVIEW, "No Next-Screen Preview"),
 					ROW_CHECK(OPT_INITSCR_WARN, "Warn on ~Init Script Update"),
 					ROW_CHECK(OPT_DISABLE_LPAL_SHORTCUT, "Disable Level Palette Shortcuts"),
-					ROW_CHECK(OPT_DISABLE_COMPILE_CONSOLE, "Internal Compile Window")
+					ROW_CHECK_I(OPT_DISABLE_COMPILE_CONSOLE, "Internal Compile Window", "When disabled, the 'Compile Progress' window is skipped.") 
 				),
 				Rows<3>(vAlign = 0.0,
 					ROW_CHECK(OPT_SKIP_LAYER_WARNING, "Skip Wrong Layer Flag Warning"),
