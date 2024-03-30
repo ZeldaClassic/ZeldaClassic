@@ -468,6 +468,7 @@ std::shared_ptr<GUI::Widget> InitDataDialog::view()
 				TabRef(name = "Equipment", ilist_panel),
 				TabRef(name = "Counters", counter_panel),
 				TabRef(name = "LItems", Column(
+					Label(text = "Select from 512 rows of Map, Compass, Bosskey, Triforce, Small keys"),
 					Row(
 						BTN_100(000),
 						BTN_100(100),
@@ -495,7 +496,7 @@ std::shared_ptr<GUI::Widget> InitDataDialog::view()
 							Label(text = "C", textAlign = 0, width = 14_px+12_px),
 							Label(text = "B", textAlign = 0, width = 14_px+12_px),
 							Label(text = "T", textAlign = 0, width = 14_px+12_px),
-							Label(text = "Key", textAlign = 1, width = 2.5_em)
+							Label(text = "Keys", textAlign = 1, width = 2.5_em)
 						),
 						LEVEL_FIELD(0),
 						LEVEL_FIELD(1),
@@ -508,7 +509,7 @@ std::shared_ptr<GUI::Widget> InitDataDialog::view()
 							Label(text = "C", textAlign = 0, width = 14_px+12_px),
 							Label(text = "B", textAlign = 0, width = 14_px+12_px),
 							Label(text = "T", textAlign = 0, width = 14_px+12_px),
-							Label(text = "Key", textAlign = 1, width = 2.5_em)
+							Label(text = "Keys", textAlign = 1, width = 2.5_em)
 						),
 						LEVEL_FIELD(5),
 						LEVEL_FIELD(6),
