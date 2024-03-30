@@ -19145,7 +19145,7 @@ static DIALOG newcomboa_dlg[] =
     { jwin_text_proc,     24,   52,   80,   8,       0,       0,      0,       0,          0,             0, (void *) "Alias Height", NULL, NULL },
     { jwin_text_proc,     24,   70,   100,   8,       0,       0,      0,       0,          0,             0, (void *) "Layers to Draw On:", NULL, NULL },
     { jwin_edit_proc,      104,   30,   28-6,   16,    vc(12),  vc(1),  0,       0,          2,             0,       NULL, NULL, NULL },
-    { jwin_edit_proc,      122,   48,   28-6,   16,    vc(12),  vc(1),  0,       0,          2,             0,       NULL, NULL, NULL },
+    { jwin_edit_proc,      104,   48,   28-6,   16,    vc(12),  vc(1),  0,       0,          2,             0,       NULL, NULL, NULL },
     { jwin_check_proc,     24,   86,   24,   9,    vc(12),  vc(1),  0,       0,          1,             0, (void *) "1", NULL, NULL },
     { jwin_check_proc,     50,   86,   24,   9,    vc(12),  vc(1),  0,       0,          1,             0, (void *) "2", NULL, NULL },
     { jwin_check_proc,     76,   86,   24,   9,    vc(12),  vc(1),  0,       0,          1,             0, (void *) "3", NULL, NULL },
