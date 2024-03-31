@@ -122,8 +122,7 @@ void copy_properties(int indx)
 	if(unsigned(indx) < pg.size())
 	{
 		SubscrWidget* widg = pg[indx];
-		if(subscr_copied_widget)
-			delete subscr_copied_widget;
+		delete subscr_copied_widget;
 		if(widg)
 		{
 			subscr_copied_widget = widg->clone();
