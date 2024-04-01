@@ -1827,16 +1827,11 @@ struct ffscript
 	}
 	~ffscript()
 	{
-		if(vecptr)
-		{
-			delete vecptr;
-			vecptr = nullptr;
-		}
-		if(strptr)
-		{
-			delete strptr;
-			strptr = nullptr;
-		}
+		delete vecptr;
+		vecptr = nullptr;
+
+		delete strptr;
+		strptr = nullptr;
 	}
 	void give(ffscript& other)
 	{
@@ -1854,16 +1849,12 @@ struct ffscript
 		command = 0xFFFF;
 		arg1 = 0;
 		arg2 = 0;
-		if(vecptr)
-		{
-			delete vecptr;
-			vecptr = nullptr;
-		}
-		if(strptr)
-		{
-			delete strptr;
-			strptr = nullptr;
-		}
+
+		delete vecptr;
+		vecptr = nullptr;
+
+		delete strptr;
+		strptr = nullptr;
 	}
 	void copy(ffscript& other)
 	{
