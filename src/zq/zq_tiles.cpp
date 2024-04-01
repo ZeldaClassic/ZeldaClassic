@@ -696,7 +696,7 @@ void draw_selection_outline(BITMAP *dest, int32_t x, int32_t y, int32_t scale2)
 
 bool is_selecting()
 {
-	return (selecting_x1>-1&&selecting_x2>-1&&selecting_y1>-1&&selecting_y2>-1);
+	return selecting_x1>-1&&selecting_x2>-1&&selecting_y1>-1&&selecting_y2>-1;
 }
 
 void draw_selecting_outline(BITMAP *dest, int32_t x, int32_t y, int32_t scale2)
@@ -800,7 +800,7 @@ bool is_in_selection(int32_t x, int32_t y)
 	x %= 16; y %= 16;
 	if(x < 0) x = (16 - abs(x));
 	if(y < 0) y = (16 - abs(y));
-	return (!has_selection()||(selection_grid[x+1][y+1]!=0));
+	return !has_selection()||(selection_grid[x+1][y+1]!=0);
 }
 
 void zoomtile16(BITMAP *dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip,int32_t m)
@@ -10056,11 +10056,8 @@ bool overlay_tile_united_mass(int32_t &tile,int32_t &tile2,int32_t &copy,int32_t
 	delete[] move_combo_list;
 	delete[] move_items_list;
 	delete[] move_weapons_list;
-	
-	if(done)
-		return false;
-		
-	return true;
+
+	return !done;
 }
 //
 bool do_movetile_united(tile_move_data const& tmd)
