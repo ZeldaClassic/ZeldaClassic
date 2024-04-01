@@ -18422,7 +18422,7 @@ int32_t enelist_proc(int32_t msg,DIALOG *d,int32_t c,bool use_abc_list)
     return ret;
 }
 
-int32_t select_enemy(const char *prompt,int32_t enemy,bool hide,bool is_editor,int32_t &exit_status)
+int32_t select_enemy(const char *prompt,int32_t enemy,bool hide,bool via_menu,int32_t &exit_status)
 {
     //if(bie_cnt==-1)
     {
@@ -18446,7 +18446,7 @@ int32_t select_enemy(const char *prompt,int32_t enemy,bool hide,bool is_editor,i
     
     large_dialog(elist_dlg);
     
-    if(is_editor)
+    if(via_menu)
     {
         elist_dlg[2].dp3 = (void *)&elist_rclick_func;
         elist_dlg[2].flags|=(D_USER<<1);
