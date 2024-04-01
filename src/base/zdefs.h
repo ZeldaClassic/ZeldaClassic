@@ -1926,8 +1926,7 @@ struct script_data
 	{
 		if (newSize < 1)
 			newSize = 1;
-		if(zasm)
-			delete[] zasm;
+		delete[] zasm;
 		zasm = new ffscript[newSize];
 		zasm[0].clear();
 		meta.zero();
@@ -1967,8 +1966,7 @@ struct script_data
 	
 	void set(script_data const& other)
 	{
-		if(zasm)
-			delete[] zasm;
+		delete[] zasm;
 		if(other.size)
 		{
 			zasm = new ffscript[other.size];
