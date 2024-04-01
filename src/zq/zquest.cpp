@@ -19064,10 +19064,8 @@ int32_t d_comboat_proc(int32_t msg,DIALOG *d,int32_t)
     {
     case MSG_CLICK:
     {
-        int32_t c2;
-        int32_t cs;
-        c2=temp_aliases[comboa_cnt].combo;
-        cs=temp_aliases[comboa_cnt].cset;
+        int32_t c2 = temp_aliases[comboa_cnt].combo;
+        int32_t cs = temp_aliases[comboa_cnt].cset;
         
         if(gui_mouse_b()&2)  //right mouse button
         {
