@@ -1999,15 +1999,13 @@ struct script_data
 	
 	~script_data()
 	{
-		if(zasm)
-			delete[] zasm;
+		delete[] zasm;
 	}
 	
 	void transfer(script_data& other)
 	{
 		other.meta = meta;
-		if(other.zasm)
-			delete[] other.zasm;
+		delete[] other.zasm;
 		other.zasm = zasm;
 		other.size = size;
 		zasm = NULL;

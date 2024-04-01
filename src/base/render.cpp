@@ -204,8 +204,7 @@ RenderTreeItem::~RenderTreeItem()
 	}
 	if(owned_tint)
 	{
-		if(tint)
-			delete tint;
+		delete tint;
 	}
 	for(RenderTreeItem* child : children)
 	{

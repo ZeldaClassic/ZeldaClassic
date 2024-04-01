@@ -1323,11 +1323,11 @@ void free_grabtilebuf()
 
 void del_qst_buffers()
 {
-    if(MsgStrings) delete[] MsgStrings;
+    delete[] MsgStrings;
     
     if(DoorComboSets) free(DoorComboSets);
     
-	if (DMaps) delete[] DMaps;
+	delete[] DMaps;
     
 	combobuf.clear();
     
@@ -12147,23 +12147,19 @@ int32_t readffscript(PACKFILE *f, zquestheader *Header)
 				}
 			}
 			
-			if(globalscripts[GLOBAL_SCRIPT_ONLAUNCH] != NULL)
-				delete globalscripts[GLOBAL_SCRIPT_ONLAUNCH];
+			delete globalscripts[GLOBAL_SCRIPT_ONLAUNCH];
 				
 			globalscripts[GLOBAL_SCRIPT_ONLAUNCH] = new script_data(ScriptType::Global, GLOBAL_SCRIPT_ONLAUNCH);
 			
-			if(globalscripts[GLOBAL_SCRIPT_ONCONTGAME] != NULL)
-				delete globalscripts[GLOBAL_SCRIPT_ONCONTGAME];
+			delete globalscripts[GLOBAL_SCRIPT_ONCONTGAME];
 				
 			globalscripts[GLOBAL_SCRIPT_ONCONTGAME] = new script_data(ScriptType::Global, GLOBAL_SCRIPT_ONCONTGAME);
 			
-			if(globalscripts[GLOBAL_SCRIPT_F6] != NULL)
-				delete globalscripts[GLOBAL_SCRIPT_F6];
+			delete globalscripts[GLOBAL_SCRIPT_F6];
 				
 			globalscripts[GLOBAL_SCRIPT_F6] = new script_data(ScriptType::Global, GLOBAL_SCRIPT_F6);
 			
-			if(globalscripts[GLOBAL_SCRIPT_ONSAVE] != NULL)
-				delete globalscripts[GLOBAL_SCRIPT_ONSAVE];
+			delete globalscripts[GLOBAL_SCRIPT_ONSAVE];
 				
 			globalscripts[GLOBAL_SCRIPT_ONSAVE] = new script_data(ScriptType::Global, GLOBAL_SCRIPT_ONSAVE);
 		}
@@ -12179,28 +12175,23 @@ int32_t readffscript(PACKFILE *f, zquestheader *Header)
 				}
 			}
 			
-			if(globalscripts[GLOBAL_SCRIPT_ONSAVELOAD] != NULL)
-				delete globalscripts[GLOBAL_SCRIPT_ONSAVELOAD];
+			delete globalscripts[GLOBAL_SCRIPT_ONSAVELOAD];
 				
 			globalscripts[GLOBAL_SCRIPT_ONSAVELOAD] = new script_data(ScriptType::Global, GLOBAL_SCRIPT_ONSAVELOAD);
 			
-			if(globalscripts[GLOBAL_SCRIPT_ONLAUNCH] != NULL)
-				delete globalscripts[GLOBAL_SCRIPT_ONLAUNCH];
+			delete globalscripts[GLOBAL_SCRIPT_ONLAUNCH];
 				
 			globalscripts[GLOBAL_SCRIPT_ONLAUNCH] = new script_data(ScriptType::Global, GLOBAL_SCRIPT_ONLAUNCH);
 			
-			if(globalscripts[GLOBAL_SCRIPT_ONCONTGAME] != NULL)
-				delete globalscripts[GLOBAL_SCRIPT_ONCONTGAME];
+			delete globalscripts[GLOBAL_SCRIPT_ONCONTGAME];
 				
 			globalscripts[GLOBAL_SCRIPT_ONCONTGAME] = new script_data(ScriptType::Global, GLOBAL_SCRIPT_ONCONTGAME);
 			
-			if(globalscripts[GLOBAL_SCRIPT_F6] != NULL)
-				delete globalscripts[GLOBAL_SCRIPT_F6];
+			delete globalscripts[GLOBAL_SCRIPT_F6];
 				
 			globalscripts[GLOBAL_SCRIPT_F6] = new script_data(ScriptType::Global, GLOBAL_SCRIPT_F6);
 			
-			if(globalscripts[GLOBAL_SCRIPT_ONSAVE] != NULL)
-				delete globalscripts[GLOBAL_SCRIPT_ONSAVE];
+			delete globalscripts[GLOBAL_SCRIPT_ONSAVE];
 				
 			globalscripts[GLOBAL_SCRIPT_ONSAVE] = new script_data(ScriptType::Global, GLOBAL_SCRIPT_ONSAVE);
 		}
@@ -12228,13 +12219,11 @@ int32_t readffscript(PACKFILE *f, zquestheader *Header)
 					return qe_invalid;
 				}
 			}
-			if(playerscripts[3] != NULL)
-				delete playerscripts[3];
+			delete playerscripts[3];
 					
 			playerscripts[3] = new script_data(ScriptType::Player, 3);
 			
-			if(playerscripts[4] != NULL)
-				delete playerscripts[4];
+			delete playerscripts[4];
 					
 			playerscripts[4] = new script_data(ScriptType::Player, 4);
 		}

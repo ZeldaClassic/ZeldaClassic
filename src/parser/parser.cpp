@@ -439,7 +439,7 @@ int32_t main(int32_t argc, char **argv)
 		fclose(outfile);
 	}
 	
-	if(cph) delete cph;
+	delete cph;
 	return res;
 }
 END_OF_MAIN()

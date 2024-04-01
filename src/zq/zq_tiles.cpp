@@ -522,11 +522,10 @@ static bool nogocombos = false;
 void go_tiles()
 {
 	if(nogotiles) return;
-	if(last_tile_move)
-	{
-		delete last_tile_move;
-		last_tile_move = NULL;
-	}
+
+	delete last_tile_move;
+	last_tile_move = NULL;
+
 	for(int32_t i=0; i<NEWMAXTILES; ++i)
 	{
 		newundotilebuf[i].format=newtilebuf[i].format;
@@ -617,11 +616,9 @@ void comeback_tiles()
 void go_combos()
 {
 	if(nogocombos) return;
-	if(last_combo_move)
-	{
-		delete last_combo_move;
-		last_combo_move = NULL;
-	}
+
+	delete last_combo_move;
+	last_combo_move = NULL;
 
 	undocombobuf = combobuf;
 }
@@ -11677,8 +11674,7 @@ bool copy_tiles_united(int32_t &tile,int32_t &tile2,int32_t &copy,int32_t &copyc
 	bool ret = do_movetile_united(tmd);
 	if(ret)
 	{
-		if(last_tile_move)
-			delete last_tile_move;
+		delete last_tile_move;
 		last_tile_move = new tile_move_data(tmd);
 	}
 	return ret;
@@ -14287,8 +14283,7 @@ void move_combos(int32_t &tile,int32_t &tile2,int32_t &copy,int32_t &copycnt)
 	cmd.copycnt = copycnt;
 	
 	do_movecombo(cmd);
-	if(last_combo_move)
-		delete last_combo_move;
+	delete last_combo_move;
 	last_combo_move = new combo_move_data(cmd);
 	copy=-1;
 	tile2=tile;

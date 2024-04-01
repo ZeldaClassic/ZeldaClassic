@@ -5554,62 +5554,62 @@ void quit_game()
 	
 	for(int32_t i=0; i<NUMSCRIPTFFC; i++)
 	{
-		if(ffscripts[i]!=NULL) delete ffscripts[i];
+		delete ffscripts[i];
 		ffscripts[i] = NULL;
 	}
 	for(int32_t i=0; i<NUMSCRIPTITEM; i++)
 	{
-		if(itemscripts[i]!=NULL) delete itemscripts[i];
+		delete itemscripts[i];
 		itemscripts[i] = NULL;
 	}
 	for(int32_t i=0; i<NUMSCRIPTGUYS; i++)
 	{
-		if(guyscripts[i]!=NULL) delete guyscripts[i];
+		delete guyscripts[i];
 		guyscripts[i] = NULL;
 	}
 	for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
 	{
-		if(ewpnscripts[i]!=NULL) delete ewpnscripts[i];
+		delete ewpnscripts[i];
 		ewpnscripts[i] = NULL;
 	}
 	for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
 	{
-		if(lwpnscripts[i]!=NULL) delete lwpnscripts[i];
+		delete lwpnscripts[i];
 		lwpnscripts[i] = NULL;
 	}
 	for(int32_t i=0; i<NUMSCRIPTSCREEN; i++)
 	{
-		if(screenscripts[i]!=NULL) delete screenscripts[i];
+		delete screenscripts[i];
 		screenscripts[i] = NULL;
 	}
 	for(int32_t i=0; i<NUMSCRIPTGLOBAL; i++)
 	{
-		if(globalscripts[i]!=NULL) delete globalscripts[i];
+		delete globalscripts[i];
 		globalscripts[i] = NULL;
 	}
 	for(int32_t i=0; i<NUMSCRIPTPLAYER; i++)
 	{
-		if(playerscripts[i]!=NULL) delete playerscripts[i];
+		delete playerscripts[i];
 		playerscripts[i] = NULL;
 	}
 	for(int32_t i=0; i<NUMSCRIPTSDMAP; i++)
 	{
-		if(dmapscripts[i]!=NULL) delete dmapscripts[i];
+		delete dmapscripts[i];
 		dmapscripts[i] = NULL;
 	}
 	for(int32_t i=0; i<NUMSCRIPTSITEMSPRITE; i++)
 	{
-		if(itemspritescripts[i]!=NULL) delete itemspritescripts[i];
+		delete itemspritescripts[i];
 		itemspritescripts[i] = NULL;
 	}
 	for(int32_t i=0; i<NUMSCRIPTSCOMBODATA; i++)
 	{
-		if(comboscripts[i]!=NULL) delete comboscripts[i];
+		delete comboscripts[i];
 		comboscripts[i] = NULL;
 	}
 	for(int32_t i=0; i<NUMSCRIPTSSUBSCREEN; i++)
 	{
-		if(subscreenscripts[i]!=NULL) delete subscreenscripts[i];
+		delete subscreenscripts[i];
 		subscreenscripts[i] = NULL;
 	}
 	
