@@ -9997,9 +9997,9 @@ const char *ctype_name[cMAX]=
 int32_t init_combo_classes()
 {
 	zinfo* zi = (load_tmp_zi ? load_tmp_zi : &ZI);
-    for(int32_t i=0; i<cMAX; i++)
-    {
-        combo_class_buf[i] = default_combo_classes[i];
+	for(int32_t i=0; i<cMAX; i++)
+	{
+		combo_class_buf[i] = default_combo_classes[i];
 		if ( char const* nm = zi->getComboTypeName(i) )
 		{
 			size_t len = strlen(nm);
@@ -10008,7 +10008,7 @@ int32_t init_combo_classes()
 				combo_class_buf[i].name[q] = (q<len ? nm[q] : 0);
 			}
 		}
-    }
+	}
     
     return 0;
 }
@@ -22307,12 +22307,9 @@ invalid:
     
     pack_fclose(f);
     
-    if(!oldquest)
+    if(!oldquest && exists(tmpfilename))
     {
-        if(exists(tmpfilename))
-        {
-            delete_file(tmpfilename);
-        }
+	delete_file(tmpfilename);
     }
     
     return qe_invalid;
