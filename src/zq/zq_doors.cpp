@@ -191,7 +191,7 @@ int32_t onDoors()
 				//cleanup the command to be minimal-needed for the effect
 				Map.RevokeListCommand();
 				Map.StartListCommand();
-                Map.DoSetDCSCommand(dcs);
+				Map.DoSetDCSCommand(dcs);
 				for(int32_t i=0; i<4; i++)
 					Map.DoPutDoorCommand(i,doors[i],dcs!=old_dcs);
 				Map.FinishListCommand();
@@ -210,7 +210,7 @@ int32_t onDoors()
 					// Clear any changes already made
 					Map.RevokeListCommand();
 					Map.StartListCommand();
-                    Map.DoSetDCSCommand(dcs); //..except the dcs
+					Map.DoSetDCSCommand(dcs); //..except the dcs
 					for(int32_t i=0; i<4; i++)
 					{
 						Map.DoPutDoorCommand(i,dNONE);
@@ -1495,7 +1495,6 @@ void editdoorcomboset(int32_t index)
     edit_dcs(index);
     setup_combo_animations();
     setup_combo_animations2();
-    return;
 }
 
 const char *doorcombosetlist(int32_t index, int32_t *list_size)
