@@ -13266,11 +13266,8 @@ int32_t readsfx(PACKFILE *f, zquestheader *Header)
 		}
 		else continue;
 		
-		if(customsfxdata[i].data!=NULL)
-		{
-			// delete [] customsfxdata[i].data;
-			free(customsfxdata[i].data);
-		}
+		// delete [] customsfxdata[i].data;
+		free(customsfxdata[i].data);
 		
 		// customsfxdata[i].data = new byte[(temp_sample.bits==8?1:2)*temp_sample.len];
 		int32_t len2 = (temp_sample.bits==8?1:2)*(temp_sample.stereo==0?1:2)*temp_sample.len;
