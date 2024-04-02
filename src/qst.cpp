@@ -22354,9 +22354,8 @@ int32_t loadquest(const char *filename, zquestheader *Header, miscQdata *Misc,
 		if(ret)
 		{
 			box_out("-- Error loading quest file! --");
-			box_end(true);
 		}
-		else box_end(false);
+		box_end(ret);
 	}
 
 	load_tmp_zi = NULL;
