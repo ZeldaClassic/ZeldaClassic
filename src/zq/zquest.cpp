@@ -7343,33 +7343,33 @@ void select_comboa(int32_t clist)
 
 void select_combop(int32_t clist)
 {
-    current_cpoollist=clist;
-    int32_t tempcb=ComboBrush;
-    ComboBrush=0;
+	current_cpoollist=clist;
+	int32_t tempcb=ComboBrush;
+	ComboBrush=0;
     
 	auto& curlist = comboaliaslist[current_cpoollist];
-    while(gui_mouse_b())
-    {
-        int32_t x=gui_mouse_x();
-        
-        if(x<curlist.x) x=curlist.x;
-        
-        if(x>curlist.x+(curlist.w*curlist.xscale)-1)
-			x=curlist.x+(curlist.w*curlist.xscale)-1;
-        
-        int32_t y=gui_mouse_y();
-        
-        if(y<curlist.y) y=curlist.y;
-        
-        if(y>curlist.y+(curlist.h*curlist.yscale)-1)
-			y=curlist.y+(curlist.h*curlist.yscale)-1;
-        
-        combo_pool_pos=(((y-curlist.y)/curlist.yscale)*curlist.w)+((x-curlist.x)/curlist.xscale)+combo_pool_listpos[current_cpoollist];
-        custom_vsync();
-        refresh(rALL);
-    }
+	while(gui_mouse_b())
+	{
+		int32_t x=gui_mouse_x();
+		
+		if(x<curlist.x) x=curlist.x;
+		
+		if(x>curlist.x+(curlist.w*curlist.xscale)-1)
+				x=curlist.x+(curlist.w*curlist.xscale)-1;
+		
+		int32_t y=gui_mouse_y();
+		
+		if(y<curlist.y) y=curlist.y;
+		
+		if(y>curlist.y+(curlist.h*curlist.yscale)-1)
+				y=curlist.y+(curlist.h*curlist.yscale)-1;
+		
+		combo_pool_pos=(((y-curlist.y)/curlist.yscale)*curlist.w)+((x-curlist.x)/curlist.xscale)+combo_pool_listpos[current_cpoollist];
+		custom_vsync();
+		refresh(rALL);
+	}
     
-    ComboBrush=tempcb;
+	ComboBrush=tempcb;
 }
 
 void select_autocombo(int32_t clist)
