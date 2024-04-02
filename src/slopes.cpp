@@ -525,7 +525,3 @@ void slope_push_int(slope_info const& s, solid_object* obj, zfix& dx, zfix& dy, 
 	dx += (rx - orx);
 	dy += (ry - ory);
 }
-
-
-
-
