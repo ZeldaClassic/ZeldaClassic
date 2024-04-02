@@ -1167,13 +1167,13 @@ bool reset_guys()
 bool reset_wpns(bool validate, zquestheader *Header)
 {
 	bool ret = true;
-    if (get_app_id() == App::zquest)
-        ret = init_section(Header, ID_WEAPONS, NULL, NULL, validate);
+	if (get_app_id() == App::zquest)
+		ret = init_section(Header, ID_WEAPONS, NULL, NULL, validate);
     
-    for(int32_t i=0; i<MAXWPNS; i++)
-        reset_weaponname(i);
+	for(int32_t i=0; i<MAXWPNS; i++)
+		reset_weaponname(i);
         
-    return ret;
+	return ret;
 }
 
 bool reset_mapstyles(bool validate, miscQdata *Misc)
@@ -1319,33 +1319,31 @@ void free_grabtilebuf()
 
 void del_qst_buffers()
 {
-    delete[] MsgStrings;
+	delete[] MsgStrings;
     
-    if(DoorComboSets) free(DoorComboSets);
+	free(DoorComboSets);
     
 	delete[] DMaps;
     
 	combobuf.clear();
     
-    if(colordata) free(colordata);
+	free(colordata);
 	
-    free_newtilebuf();
-    free_grabtilebuf();
+	free_newtilebuf();
+	free_grabtilebuf();
     
-    if(trashbuf) free(trashbuf);
+	free(trashbuf);
     
-    // See get_qst_buffers
-    if(itemsbuf)
-    {
-        itemsbuf--;
-        free(itemsbuf);
-    }
+	// See get_qst_buffers
+	if(itemsbuf)
+	{
+		itemsbuf--;
+		free(itemsbuf);
+	}
     
-    if(wpnsbuf) free(wpnsbuf);
-    
-    if(guysbuf) free(guysbuf);
-    
-    if(combo_class_buf) free(combo_class_buf);
+	free(wpnsbuf); 
+	free(guysbuf); 
+	free(combo_class_buf);
 }
 
 bool init_palnames()
