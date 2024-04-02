@@ -40,12 +40,12 @@ byte sprite_flicker_transp_passes = 0;
 template<class T> inline
 fixed deg_to_fixed(T d)
 {
-    return ftofix(degtoFix(d));
+	return ftofix(degtoFix(d));
 }
 template<class T> inline
 fixed rad_to_fixed(T d)
 {
-    return ftofix(radtoFix(d));
+	return ftofix(radtoFix(d));
 }
 
 /**********************************/
@@ -54,35 +54,35 @@ fixed rad_to_fixed(T d)
 
 sprite::sprite(): solid_object()
 {
-    uid = getNextUID();
+	uid = getNextUID();
 	isspawning = false;
-    x=y=z=tile=shadowtile=cs=flip=c_clk=clk=xofs=yofs=shadowxofs=shadowyofs=zofs=fall=fakefall=fakez=0;
-    slopeid = 0;
-    onplatid = 0;
-    txsz=1;
-    tysz=1;
-    id=-1;
-    hzsz=1;
-    yofs=(get_qr(qr_OLD_DRAWOFFSET)?playing_field_offset:original_playing_field_offset);
-    dir=down;
-    angular=canfreeze=false;
-    drawstyle=0;
-    extend=0;
-    wpnsprite = 0; //wpnsprite is new for 2.6 -Z
+	x=y=z=tile=shadowtile=cs=flip=c_clk=clk=xofs=yofs=shadowxofs=shadowyofs=zofs=fall=fakefall=fakez=0;
+	slopeid = 0;
+	onplatid = 0;
+	txsz=1;
+	tysz=1;
+	id=-1;
+	hzsz=1;
+	yofs=(get_qr(qr_OLD_DRAWOFFSET)?playing_field_offset:original_playing_field_offset);
+	dir=down;
+	angular=canfreeze=false;
+	drawstyle=0;
+	extend=0;
+	wpnsprite = 0; //wpnsprite is new for 2.6 -Z
     
-    /*ewpnclass=0;
-    lwpnclass=0;
-    guyclass=0;*/ //Not implemented
-    //ewpnref=0;
-    //lwpnref=0;
-    //guyref=0;
-    //itemref=0;
-    lasthitclk=0;
-    lasthit=0;
-    angle=0;
-    misc=0;
+	/*ewpnclass=0;
+	lwpnclass=0;
+	guyclass=0;*/ //Not implemented
+	//ewpnref=0;
+	//lwpnref=0;
+	//guyref=0;
+	//itemref=0;
+	lasthitclk=0;
+	lasthit=0;
+	angle=0;
+	misc=0;
 	flickercolor = -1;
-    pit_pulldir = -1;
+	pit_pulldir = -1;
 	pit_pullclk = 0;
 	fallclk = 0;
 	fallCombo = 0;
@@ -90,60 +90,60 @@ sprite::sprite(): solid_object()
 	drownclk = 0;
 	drownCombo = 0;
 	
-    for(int32_t i=0; i<10; i++)
-    {
-        dummy_int[i]=0;
-        dummy_fix[i]=0;
-        dummy_float[i]=0;
-        dummy_bool[i]=false;
-    }
+	for(int32_t i=0; i<10; i++)
+	{
+		dummy_int[i]=0;
+		dummy_fix[i]=0;
+		dummy_float[i]=0;
+		dummy_bool[i]=false;
+	}
     
-    //for(int32_t i=0;i<8;i++)
-    //{
-    //  if(i<2) a[i]=0;
-    //  d[i]=0;
-    //}
-    scriptflag=0;
-    //pc=0;
-    //sp=0;
-    //itemclass=0;
-    //ffcref=0;
-    for(int32_t i=0; i<32; i++) miscellaneous[i] = 0;
+	//for(int32_t i=0;i<8;i++)
+	//{
+	//  if(i<2) a[i]=0;
+	//  d[i]=0;
+	//}
+	scriptflag=0;
+	//pc=0;
+	//sp=0;
+	//itemclass=0;
+	//ffcref=0;
+	for(int32_t i=0; i<32; i++) miscellaneous[i] = 0;
     
-    scriptcoldet = 1;
+	scriptcoldet = 1;
     
-    //itemref = 0;
-    //guyref = 0;
-    //lwpnref = 0;
-    //ewpnref = 0;
-    //guyclass = 0; //Not implemented
-    //lwpnclass = 0;
-    //ewpnclass = 0;
-    script = 0;
-    weaponscript = 0;
-    scripttile = -1;
-    scriptflip = -1;
-    do_animation = 1;
-    rotation = 0;
-    scale = 0;
-    moveflags = 0;
-    drawflags = 0;
+	//itemref = 0;
+	//guyref = 0;
+	//lwpnref = 0;
+	//ewpnref = 0;
+	//guyclass = 0; //Not implemented
+	//lwpnclass = 0;
+	//ewpnclass = 0;
+	script = 0;
+	weaponscript = 0;
+	scripttile = -1;
+	scriptflip = -1;
+	do_animation = 1;
+	rotation = 0;
+	scale = 0;
+	moveflags = 0;
+	drawflags = 0;
 	knockbackflags = 0;
 	knockbackSpeed = 4; //default speed
 	script_knockback_clk = 0;
 	script_knockback_speed = 0;
 	screenedge = 0;
 	scriptshadowtile = -1;
-    for ( int32_t q = 0; q < 8; q++ )
-    {
-	    initD[q] = 0;
-	    weap_initd[q] = 0;
-    }
-    for ( int32_t q = 0; q < 2; q++ )
-    {
-	    initA[q] = 0;
-	    weap_inita[q] = 0;
-    }
+	for ( int32_t q = 0; q < 8; q++ )
+	{
+		initD[q] = 0;
+		weap_initd[q] = 0;
+	}
+	for ( int32_t q = 0; q < 2; q++ )
+	{
+		initA[q] = 0;
+		weap_inita[q] = 0;
+	}
 	glowRad = 0;
 	glowShape = 0;
 	switch_hooked = false;
@@ -189,28 +189,28 @@ sprite::sprite(sprite const & other):
 	glowRad(other.glowRad), glowShape(other.glowShape),
 	ignore_delete(other.ignore_delete)
 {
-    uid = getNextUID();
+	uid = getNextUID();
 	isspawning = other.isspawning;
     
-    for(int32_t i=0; i<10; ++i)
-    {
-        dummy_int[i]=other.dummy_int[i];
-        dummy_fix[i]=other.dummy_fix[i];
-        dummy_float[i]=other.dummy_float[i];
-        dummy_bool[i]=other.dummy_bool[i];
-    }
+	for(int32_t i=0; i<10; ++i)
+	{
+		dummy_int[i]=other.dummy_int[i];
+		dummy_fix[i]=other.dummy_fix[i];
+		dummy_float[i]=other.dummy_float[i];
+		dummy_bool[i]=other.dummy_bool[i];
+	}
     
-    //for (int32_t i=0; i<8; ++i)
-    //{
-    //  d[i]=other.d[i];
-    //}
-    //for (int32_t i=0; i<2; ++i)
-    //{
-    //  a[i]=other.a[i];
-    //}
-    for(int32_t i=0; i<32; i++) miscellaneous[i] = other.miscellaneous[i];
-    
-    scriptcoldet = other.scriptcoldet;
+	//for (int32_t i=0; i<8; ++i)
+	//{
+	//  d[i]=other.d[i];
+	//}
+	//for (int32_t i=0; i<2; ++i)
+	//{
+	//  a[i]=other.a[i];
+	//}
+	for(int32_t i=0; i<32; i++) miscellaneous[i] = other.miscellaneous[i];
+
+	scriptcoldet = other.scriptcoldet;
     
     
 	for (int32_t i=0; i<8; ++i)
@@ -230,80 +230,80 @@ sprite::sprite(zfix X,zfix Y,int32_t T,int32_t CS,int32_t F,int32_t Clk,int32_t 
 {
 	x = X;
 	y = Y;
-    uid = getNextUID();
-    isspawning = false;
-    slopeid = 0;
-    onplatid = 0;
-    hit_width=hit_height=16;
-    hxofs=hyofs=xofs=0;
-    txsz=1;
-    tysz=1;
-    id=-1;
-    dir=down;
-    angular=canfreeze=false;
-    extend=0;
-    
-    //for(int32_t i=0;i<8;i++)
-    //{
-    //  if(i<2) a[i]=0;
-    //  d[i]=0;
-    //}
-    scriptflag=0;
-    //pc=0;
-    //sp=0;
-    //ffcref=0;
-    //itemclass=0;
-    for(int32_t i=0; i<32; i++) miscellaneous[i] = 0;
-    
-    scriptcoldet = 1;
-    //ewpnclass=0;
-    //lwpnclass=0;
-    //guyclass=0;
-    //ewpnref=0;
-    //lwpnref=0;
-    //guyref=0;
-    //itemref=0;
-    script = 0;
-    weaponscript = 0;
-    scripttile = -1;
-    scriptflip = -1;
-    rotation = 0;
-    moveflags = 0;
+	uid = getNextUID();
+	isspawning = false;
+	slopeid = 0;
+	onplatid = 0;
+	hit_width=hit_height=16;
+	hxofs=hyofs=xofs=0;
+	txsz=1;
+	tysz=1;
+	id=-1;
+	dir=down;
+	angular=canfreeze=false;
+	extend=0;
+
+	//for(int32_t i=0;i<8;i++)
+	//{
+	//  if(i<2) a[i]=0;
+	//  d[i]=0;
+	//}
+	scriptflag=0;
+	//pc=0;
+	//sp=0;
+	//ffcref=0;
+	//itemclass=0;
+	for(int32_t i=0; i<32; i++) miscellaneous[i] = 0;
+
+	scriptcoldet = 1;
+	//ewpnclass=0;
+	//lwpnclass=0;
+	//guyclass=0;
+	//ewpnref=0;
+	//lwpnref=0;
+	//guyref=0;
+	//itemref=0;
+	script = 0;
+	weaponscript = 0;
+	scripttile = -1;
+	scriptflip = -1;
+	rotation = 0;
+	moveflags = 0;
 	knockbackflags = 0;
 	knockbackSpeed = 4; //default speed
 	script_knockback_clk = 0;
 	script_knockback_speed = 0;
-    scale = 0;
-    do_animation = 1;
-    drawstyle=0;
-    lasthitclk=0;
-    lasthit=0;
-    angle=0;
-    hzsz=1;
-    misc=0;
+	scale = 0;
+	do_animation = 1;
+	drawstyle=0;
+	lasthitclk=0;
+	lasthit=0;
+	angle=0;
+	hzsz=1;
+	misc=0;
 	flickercolor = -1;
-    c_clk=0;
-    shadowtile=0;
-    screenedge = 0;
-    scriptshadowtile = -1;
-    pit_pulldir = -1;
-    pit_pullclk = 0;
-    fallclk = 0;
-    fallCombo = 0;
-    old_cset = 0;
-    drownclk = 0;
-    drownCombo = 0;
-    drawflags = 0;
-    for ( int32_t q = 0; q < 8; q++ ) 
-    {
-        initD[q] = 0;
-        weap_initd[q] = 0;
-    }
-    for ( int32_t q = 0; q < 2; q++ ) 
-    {
-        initA[q] = 0;
-        weap_inita[q] = 0;
-    }
+	c_clk=0;
+	shadowtile=0;
+	screenedge = 0;
+	scriptshadowtile = -1;
+	pit_pulldir = -1;
+	pit_pullclk = 0;
+	fallclk = 0;
+	fallCombo = 0;
+	old_cset = 0;
+	drownclk = 0;
+	drownCombo = 0;
+	drawflags = 0;
+	for ( int32_t q = 0; q < 8; q++ ) 
+	{
+		initD[q] = 0;
+		weap_initd[q] = 0;
+	}
+	for ( int32_t q = 0; q < 2; q++ ) 
+	{
+		initA[q] = 0;
+		weap_inita[q] = 0;
+	}
 	glowRad = 0;
 	glowShape = 0;
 	switch_hooked = false;
@@ -351,8 +351,8 @@ void sprite::drawcloaked2(BITMAP *)                     // top layer for special
 
 bool sprite::animate(int32_t)
 {
-    ++c_clk;
-    return false;
+	++c_clk;
+	return false;
 }
 void sprite::post_animate()
 {
@@ -376,17 +376,17 @@ int32_t sprite::real_x(zfix fx)
 
 int32_t sprite::real_y(zfix fy)
 {
-    return fy.getInt();
+	return fy.getInt();
 }
 
 int32_t sprite::real_z(zfix fz)
 {
-    return fz.getInt();
+	return fz.getInt();
 }
 
 int32_t sprite::fake_z(zfix fz)
 {
-    return fz.getInt();
+	return fz.getInt();
 }
 
 int32_t sprite::get_pit() //Returns combo ID of pit that sprite WOULD fall into; no side-effects
