@@ -5962,7 +5962,6 @@ int32_t readonenpc(PACKFILE *f, int32_t index)
 
 int32_t writeonenpc(PACKFILE *f, int32_t i)
 {
-	
 	dword section_version=V_GUYS;
 	dword section_cversion=CV_GUYS;
 	int32_t zversion = ZELDA_VERSION;
@@ -5995,383 +5994,383 @@ int32_t writeonenpc(PACKFILE *f, int32_t i)
 		
 	   if(!p_iputl(guysbuf[i].flags,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].flags2,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].tile,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_putc(guysbuf[i].width,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_putc(guysbuf[i].height,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].s_tile,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_putc(guysbuf[i].s_width,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_putc(guysbuf[i].s_height,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].e_tile,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_putc(guysbuf[i].e_width,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_putc(guysbuf[i].e_height,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].hp,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].family,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].cset,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].anim,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].e_anim,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].frate,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].e_frate,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].dp,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].wdp,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].weapon,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].rate,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].hrate,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].step,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].homing,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].grumble,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].item_set,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].misc1,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].misc2,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].misc3,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].misc4,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].misc5,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].misc6,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].misc7,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].misc8,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].misc9,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].misc10,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].bgsfx,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].bosspal,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputw(guysbuf[i].extend,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		for(int32_t j=0; j < edefLAST; j++)
 		{
-		if(!p_putc(guysbuf[i].defense[j],f))
-		{
-		   return 0;
-		}
+			if(!p_putc(guysbuf[i].defense[j],f))
+			{
+				return 0;
+			}
 		}
 		
 		if(!p_putc(guysbuf[i].hitsfx,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_putc(guysbuf[i].deadsfx,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].misc11,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		if(!p_iputl(guysbuf[i].misc12,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		//2.55 starts here
 		for(int32_t j=edefLAST; j < edefLAST255; j++)
 		{
-		if(!p_putc(guysbuf[i].defense[j],f))
-		{
-			return 0;
-		}
+			if(!p_putc(guysbuf[i].defense[j],f))
+			{
+				return 0;
+			}
 		}
 		
 		//tilewidth, tileheight, hitwidth, hitheight, hitzheight, hitxofs, hityofs, hitzofs
 		if(!p_iputl(guysbuf[i].txsz,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].tysz,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].hxsz,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].hysz,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].hzsz,f))
 		{
-		return 0;
+			return 0;
 		}
 		// These are not fixed types, but ints, so they are safe to use here. 
 		if(!p_iputl(guysbuf[i].hxofs,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].hyofs,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].xofs,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].yofs,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].zofs,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].wpnsprite,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].SIZEflags,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].frozentile,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].frozencset,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].frozenclock,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		for ( int32_t q = 0; q < 10; q++ ) 
 		{
-		if(!p_iputw(guysbuf[i].frozenmisc[q],f))
-		{
-			return 0;
-		}
+			if(!p_iputw(guysbuf[i].frozenmisc[q],f))
+			{
+				return 0;
+			}
 		}
 		if(!p_iputw(guysbuf[i].firesfx,f))
 		{
-		return 0;
+			return 0;
 		}
 		//misc 16->31
 		if(!p_iputl(guysbuf[i].misc16,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc17,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc18,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc19,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc20,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc21,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc22,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc23,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc24,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc25,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc26,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc27,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc28,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc29,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc30,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc31,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc32,f))
 		{
-		return 0;
+			return 0;
 		}
 		for ( int32_t q = 0; q < 32; q++ )
 		{
@@ -6384,43 +6383,43 @@ int32_t writeonenpc(PACKFILE *f, int32_t i)
 		{
 			if(!p_iputl(guysbuf[i].new_weapon[q],f))
 			{
-			return 0;
+				return 0;
 			}
 		}
 		if(!p_iputw(guysbuf[i].script,f))
 		{
-		return 0;
+			return 0;
 		}
 		for ( int32_t q = 0; q < 8; q++ )
 		{
-		if(!p_iputl(guysbuf[i].initD[q],f))
-		{
-			return 0;
-		}
+			if(!p_iputl(guysbuf[i].initD[q],f))
+			{
+				return 0;
+			}
 		}
 		for ( int32_t q = 0; q < 2; q++ )
 		{
-		if(!p_iputl(guysbuf[i].initA[q],f))
-		{
-			return 0;
-		}
+			if(!p_iputl(guysbuf[i].initA[q],f))
+			{
+				return 0;
+			}
 		}
 		if(!p_iputl(guysbuf[i].editorflags,f))
 		{
-		return 0;
+			return 0;
 		}
 		//somehow forgot these in the older builds -Z
 		if(!p_iputl(guysbuf[i].misc13,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc14,f))
 		{
-		return 0;
+			return 0;
 		}
 		if(!p_iputl(guysbuf[i].misc15,f))
 		{
-		return 0;
+			return 0;
 		}
 		
 		//Enemy Editor InitD[] labels
@@ -6443,15 +6442,15 @@ int32_t writeonenpc(PACKFILE *f, int32_t i)
 		}
 		if(!p_iputw(guysbuf[i].weaponscript,f))
 		{
-		return 0;
+			return 0;
 		}
 		//eweapon initD
 		for ( int32_t q = 0; q < 8; q++ )
 		{
-		if(!p_iputl(guysbuf[i].weap_initiald[q],f))
-		{
-			return 0;
-		}
+			if(!p_iputl(guysbuf[i].weap_initiald[q],f))
+			{
+				return 0;
+			}
 		}
 	return 1;
 }
