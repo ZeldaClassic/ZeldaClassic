@@ -1309,7 +1309,7 @@ void free_grabtilebuf()
         if(grabtilebuf)
         {
             for(int32_t i=0; i<NEWMAXTILES; i++)
-                if(grabtilebuf[i].data) free(grabtilebuf[i].data);
+                free(grabtilebuf[i].data);
                 
             free(grabtilebuf);
 	    grabtilebuf = 0;
@@ -18866,11 +18866,8 @@ int32_t readtiles(PACKFILE *f, tiledata *buf, zquestheader *Header, word version
 
 			buf[start_tile+i].format=format;
 			
-			if(buf[start_tile+i].data)
-			{
-				free(buf[start_tile+i].data);
-				buf[start_tile+i].data=NULL;
-			}
+			free(buf[start_tile+i].data);
+			buf[start_tile+i].data=NULL;
 
 			buf[start_tile+i].data=(byte *)malloc(tilesize(buf[start_tile+i].format));
 
