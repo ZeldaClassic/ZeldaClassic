@@ -3472,7 +3472,7 @@ int32_t onComboColDown()
 
 void scrollup(int j)
 {
-    switch(draw_mode)
+	switch(draw_mode)
 	{
 		case DM_ALIAS:
 		{
@@ -3645,7 +3645,7 @@ void scrolldown(int j)
 
 int32_t onPgUp()
 {
-    switch(draw_mode)
+	switch(draw_mode)
 	{
 		case DM_ALIAS:
 			scrollup(current_comboalist);
@@ -3660,12 +3660,12 @@ int32_t onPgUp()
 			scrollup(current_combolist);
 			break;
 	}
-    return D_O_K;
+	return D_O_K;
 }
 
 int32_t onPgDn()
 {
-    switch(draw_mode)
+	switch(draw_mode)
 	{
 		case DM_ALIAS:
 			scrolldown(current_comboalist);
@@ -3680,7 +3680,7 @@ int32_t onPgDn()
 			scrolldown(current_combolist);
 			break;
 	}
-    return D_O_K;
+	return D_O_K;
 }
 
 int32_t onIncreaseCSet()
@@ -3694,7 +3694,7 @@ int32_t onIncreaseCSet()
 	{
 		alias_cset_mod=wrap(alias_cset_mod+1,0,13);
 	}
-    return D_O_K;
+	return D_O_K;
 }
 
 int32_t onDecreaseCSet()
@@ -3708,7 +3708,7 @@ int32_t onDecreaseCSet()
 	{
 		alias_cset_mod=wrap(alias_cset_mod-1,0,13);
 	}
-    return D_O_K;
+	return D_O_K;
 }
 
 int32_t onGotoPage()
@@ -3738,7 +3738,7 @@ int32_t onGotoPage()
 			First[current_combolist] = *v*PER_PAGE;
 	}
     
-    return D_O_K;
+	return D_O_K;
 }
 
 bool getname(const char *prompt,const char *ext,EXT_LIST *list,const char *def,bool usefilename)
@@ -4029,24 +4029,24 @@ int32_t playTune(int32_t pos)
 
 int32_t stopMusic()
 {
-    zc_stop_midi();
+	zc_stop_midi();
     
-    if(zcmusic != NULL)
-    {
-        zcmusic_stop(zcmusic);
-        zcmusic_unload_file(zcmusic);
-        zcmusic = NULL;
+	if(zcmusic != NULL)
+	{
+		zcmusic_stop(zcmusic);
+		zcmusic_unload_file(zcmusic);
+		zcmusic = NULL;
 		zcmixer->newtrack = NULL;
-    }
+	}
     
 	media_menu.select_uid(MENUID_MEDIA_TUNES, false);
 	media_menu.select_uid(MENUID_MEDIA_PLAYMUSIC, false);
 	disable_hotkey(ZQKEY_AMBIENT_MUSIC, false);
 	disable_hotkey(ZQKEY_PLAY_MUSIC, false);
 	
-    media_menu.disable_uid(MENUID_MEDIA_CHANGETRACK, true);
+	media_menu.disable_uid(MENUID_MEDIA_CHANGETRACK, true);
 	disable_hotkey(ZQKEY_CHANGE_TRACK, true);
-    return D_O_K;
+	return D_O_K;
 }
 
 static int32_t gamemisc1_list[] =
@@ -4079,7 +4079,7 @@ static int32_t gamemisc2_list[] =
 
 static int32_t gamemisc3_list[] =
 {
-    21,22,23,24,
+	21,22,23,24,
 	25,26,27,28,
 	
 	53,54,55,56,
@@ -4862,18 +4862,18 @@ static DIALOG loadmap_dlg[] =
 
 int32_t load_the_map(bool skipmenu)
 {
-    static int32_t res = 0;
-    static int32_t flags = cDEBUG;
+	static int32_t res = 0;
+	static int32_t flags = cDEBUG;
     
-    loadmap_dlg[0].dp2    = get_zc_font(font_lfont);
-    loadmap_dlg[3].flags  = (res==2) ? D_SELECTED : 0;
-    loadmap_dlg[4].flags  = (res==1) ? D_SELECTED : 0;
-    loadmap_dlg[5].flags  = (res==0) ? D_SELECTED : 0;
-    loadmap_dlg[7].flags  = (flags&cWALK)   ? D_SELECTED : 0;
-    loadmap_dlg[8].flags  = (flags&cFLAGS)  ? D_SELECTED : 0;
-    loadmap_dlg[9].flags  = (flags&cNODARK) ? 0 : D_SELECTED;
-    loadmap_dlg[10].flags = (flags&cNOITEM) ? 0 : D_SELECTED;
-    loadmap_dlg[13].flags = 0;
+	loadmap_dlg[0].dp2    = get_zc_font(font_lfont);
+	loadmap_dlg[3].flags  = (res==2) ? D_SELECTED : 0;
+	loadmap_dlg[4].flags  = (res==1) ? D_SELECTED : 0;
+	loadmap_dlg[5].flags  = (res==0) ? D_SELECTED : 0;
+	loadmap_dlg[7].flags  = (flags&cWALK)   ? D_SELECTED : 0;
+	loadmap_dlg[8].flags  = (flags&cFLAGS)  ? D_SELECTED : 0;
+	loadmap_dlg[9].flags  = (flags&cNODARK) ? 0 : D_SELECTED;
+	loadmap_dlg[10].flags = (flags&cNOITEM) ? 0 : D_SELECTED;
+	loadmap_dlg[13].flags = 0;
 	loadmap_dlg[14].flags = (res==3) ? D_SELECTED : 0;
 	loadmap_dlg[15].flags = (res==4) ? D_SELECTED : 0;
     
@@ -4905,9 +4905,9 @@ int32_t load_the_map(bool skipmenu)
 		if(loadmap_dlg[14].flags&D_SELECTED) res=3;
 
 		if(loadmap_dlg[15].flags&D_SELECTED) res=4;
-    }
+	}
     
-    int32_t bw = (256*16)>>res;
+	int32_t bw = (256*16)>>res;
 	int32_t bh = (176*8)>>res;
 	int32_t sw = 256>>res;
 	int32_t sh = 176>>res;
@@ -4929,17 +4929,17 @@ int32_t load_the_map(bool skipmenu)
 	get_root_rti()->add_child(&rti_map_view);
 	render_zq();
 
-    vp_showpal = false;
-    get_bw(picpal,pblack,pwhite);
-    mapx = mapy = 0;
-    mapscale = 1;
-    imagepath[0] = 0;
+	vp_showpal = false;
+	get_bw(picpal,pblack,pwhite);
+	mapx = mapy = 0;
+	mapscale = 1;
+	imagepath[0] = 0;
 
-    if(loadmap_dlg[13].flags & D_SELECTED) saveMapAsImage(rti_map_view.bitmap);
+	if(loadmap_dlg[13].flags & D_SELECTED) saveMapAsImage(rti_map_view.bitmap);
 
 	memcpy(mappal,RAMpal,sizeof(RAMpal));
 
-    return 0;
+	return 0;
 }
 
 void close_the_map()
@@ -4978,9 +4978,9 @@ char _ticksstr[32]="99.99 seconds";
 char *ticksstr(int32_t tics)
 {
     int32_t mins=tics/(60*60);
-    tics=tics-(mins*60*60);
+    tics -= mins*60*60;
     int32_t secs=tics/60;
-    tics=tics-(secs*60);
+    tics -= secs*60;
     tics=tics*100/60;
     
     if(mins>0)
