@@ -1013,7 +1013,7 @@ void EditDMapDialog::refreshScripts()
 	int32_t ty_ac_initds[8];
 	int32_t ty_ss_initds[8];
 	int32_t ty_map_initds[8];
-	for (auto q = 0; q < 8; ++q)
+	for (int q = 0; q < 8; ++q)
 	{
 		ac_initds[q] = "InitD[" + std::to_string(q) + "]";
 		h_ac_initds[q].clear();
@@ -1031,7 +1031,7 @@ void EditDMapDialog::refreshScripts()
 	if (local_dmap.script)
 	{
 		zasm_meta const& meta = dmapscripts[local_dmap.script]->meta;
-		for (auto q = 0; q < 8; ++q)
+		for (int q = 0; q < 8; ++q)
 		{
 			if (meta.initd[q].size())
 				ac_initds[q] = meta.initd[q];
@@ -1043,14 +1043,14 @@ void EditDMapDialog::refreshScripts()
 	}
 	else
 	{
-		for (auto q = 0; q < 8; ++q)
+		for (int q = 0; q < 8; ++q)
 			ty_ac_initds[q] = nswapDEC;
 	}
 	if (local_dmap.active_sub_script && (iscd & DSCRDATA_ACTIVE))
 	{
 		did_dmap_scr = true;
 		zasm_meta const& meta = dmapscripts[local_dmap.active_sub_script]->meta;
-		for (auto q = 0; q < 8; ++q)
+		for (int q = 0; q < 8; ++q)
 		{
 			if (meta.initd[q].size())
 				ss_initds[q] = meta.initd[q];
@@ -1064,7 +1064,7 @@ void EditDMapDialog::refreshScripts()
 	{
 		did_dmap_scr = true;
 		zasm_meta const& meta = dmapscripts[local_dmap.passive_sub_script]->meta;
-		for (auto q = 0; q < 8; ++q)
+		for (int q = 0; q < 8; ++q)
 		{
 			if (meta.initd[q].size())
 				ss_initds[q] = meta.initd[q];
@@ -1076,13 +1076,13 @@ void EditDMapDialog::refreshScripts()
 	}
 	if (!did_dmap_scr)
 	{
-		for (auto q = 0; q < 8; ++q)
+		for (int q = 0; q < 8; ++q)
 			ty_ss_initds[q] = nswapDEC;
 	}
 	if (local_dmap.onmap_script)
 	{
 		zasm_meta const& meta = dmapscripts[local_dmap.onmap_script]->meta;
-		for (auto q = 0; q < 8; ++q)
+		for (int q = 0; q < 8; ++q)
 		{
 			if (meta.initd[q].size())
 				map_initds[q] = meta.initd[q];
@@ -1094,10 +1094,10 @@ void EditDMapDialog::refreshScripts()
 	}
 	else
 	{
-		for (auto q = 0; q < 8; ++q)
+		for (int q = 0; q < 8; ++q)
 			ty_map_initds[q] = nswapDEC;
 	}
-	for (auto q = 0; q < 8; ++q)
+	for (int q = 0; q < 8; ++q)
 	{
 		if (ty_ac_initds[q] > -1)
 			tf_ac_initds[q]->setSwapType(ty_ac_initds[q]);
