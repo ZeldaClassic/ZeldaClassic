@@ -119,43 +119,45 @@ int32_t get_conveyor(int32_t x, int32_t y)
 
 void sprite::check_conveyor()
 {
-    int32_t deltax=0;
-    int32_t deltay=0;
-    int32_t cmbid = get_conveyor(x+8,y+8);
+	int32_t deltax=0;
+	int32_t deltay=0;
+	int32_t cmbid = get_conveyor(x+8,y+8);
 	if(cmbid < 0) return;
 	newcombo const* cmb = &combobuf[cmbid];
 	bool custom_spd = (cmb->usrflags&cflag2);
-    if(((z==0&&fakez==0) || (tmpscr->flags2&fAIRCOMBOS)))
-    {
-        int32_t ctype=(combobuf[cmbid].type);
-        deltax=combo_class_buf[ctype].conveyor_x_speed;
-        deltay=combo_class_buf[ctype].conveyor_y_speed;
+	if((z==0&&fakez==0) || (tmpscr->flags2&fAIRCOMBOS))
+	{
+		int32_t ctype=(combobuf[cmbid].type);
+		deltax=combo_class_buf[ctype].conveyor_x_speed;
+		deltay=combo_class_buf[ctype].conveyor_y_speed;
+
 		if (is_conveyor(ctype) && custom_spd)
 		{
 			deltax = zslongToFix(cmb->attributes[0]);
 			deltay = zslongToFix(cmb->attributes[1]);
 		}
-        if(deltax!=0||deltay!=0)
-        {
-            if(deltay<0&&!_walkflag(x,y+8-2,2))
-            {
-                y=y-abs(deltay);
-            }
-            else if(deltay>0&&!_walkflag(x,y+15+2,2))
-            {
-                y=y+abs(deltay);
-            }
-            
-            if(deltax<0&&!_walkflag(x-2,y+8,1))
-            {
-                x=x-abs(deltax);
-            }
-            else if(deltax>0&&!_walkflag(x+15+2,y+8,1))
-            {
-                x=x+abs(deltax);
-            }
-        }
-    }
+
+		if(deltax!=0||deltay!=0)
+		{
+			if(deltay<0&&!_walkflag(x,y+8-2,2))
+			{
+				y=y-abs(deltay);
+			}
+			else if(deltay>0&&!_walkflag(x,y+15+2,2))
+			{
+				y=y+abs(deltay);
+			}
+
+			if(deltax<0&&!_walkflag(x-2,y+8,1))
+			{
+				x=x-abs(deltax);
+			}
+			else if(deltax>0&&!_walkflag(x+15+2,y+8,1))
+			{
+				x=x+abs(deltax);
+			}
+		}
+	}
 }
 
 void movingblock::clear()
@@ -192,11 +194,11 @@ void movingblock::push(zfix bx,zfix by,int32_t d2,int32_t f)
 {
 	new_block = false;
 	step = 0.5;
-    trigger=false;
-    x=bx;
-    y=by;
-    dir=d2;
-    switch(dir)
+	trigger=false;
+	x=bx;
+	y=by;
+	dir=d2;
+	switch(dir)
 	{
 		case up:
 			endx = x;
@@ -218,22 +220,22 @@ void movingblock::push(zfix bx,zfix by,int32_t d2,int32_t f)
 			endx = x;
 			endy = y;
 	}
-    oldflag=f;
+	oldflag=f;
 	size_t combopos = size_t((int32_t(y)&0xF0)+(int32_t(x)>>4));
 	mapscr *m = FFCore.tempScreens[blockLayer];
-    word *di = &(m->data[combopos]);
-    byte *ci = &(m->cset[combopos]);
-    bcombo =  m->data[combopos];
-    oldcset = m->cset[combopos];
-    cs     = (isdungeon() && !get_qr(qr_PUSHBLOCKCSETFIX)) ? 9 : oldcset;
-    tile = combobuf[bcombo].tile;
-    flip = combobuf[bcombo].flip;
-    //   cs = ((*di)&0x700)>>8;
-    *di = m->undercombo;
-    *ci = m->undercset;
+	word *di = &(m->data[combopos]);
+	byte *ci = &(m->cset[combopos]);
+	bcombo =  m->data[combopos];
+	oldcset = m->cset[combopos];
+	cs     = (isdungeon() && !get_qr(qr_PUSHBLOCKCSETFIX)) ? 9 : oldcset;
+	tile = combobuf[bcombo].tile;
+	flip = combobuf[bcombo].flip;
+	//   cs = ((*di)&0x700)>>8;
+	*di = m->undercombo;
+	*ci = m->undercset;
 	FFCore.clear_combo_script(blockLayer, combopos);
-    putcombo(scrollbuf,x,y,*di,*ci);
-    clk=32;
+	putcombo(scrollbuf,x,y,*di,*ci);
+	clk=32;
 	if(!get_qr(qr_MOVINGBLOCK_FAKE_SOLID))
 		setSolid(true);
 	solid_update(false);
@@ -242,11 +244,11 @@ void movingblock::push_new(zfix bx,zfix by,int d2,int f,zfix spd)
 {
 	new_block = true;
 	step = spd;
-    trigger=false;
-    x=bx;
-    y=by;
+	trigger=false;
+	x=bx;
+	y=by;
 	dir=d2;
-    switch(dir)
+	switch(dir)
 	{
 		case up:
 			endx = x;
@@ -268,22 +270,22 @@ void movingblock::push_new(zfix bx,zfix by,int d2,int f,zfix spd)
 			endx = x;
 			endy = y;
 	}
-    oldflag=f;
+	oldflag=f;
 	size_t combopos = size_t((int32_t(y)&0xF0)+(int32_t(x)>>4));
 	mapscr *m = FFCore.tempScreens[blockLayer];
-    word *di = &(m->data[combopos]);
-    byte *ci = &(m->cset[combopos]);
-    bcombo =  m->data[combopos];
-    oldcset = m->cset[combopos];
-    cs     = (isdungeon() && !get_qr(qr_PUSHBLOCKCSETFIX)) ? 9 : oldcset;
-    tile = combobuf[bcombo].tile;
-    flip = combobuf[bcombo].flip;
-    //   cs = ((*di)&0x700)>>8;
-    *di = m->undercombo;
-    *ci = m->undercset;
+	word *di = &(m->data[combopos]);
+	byte *ci = &(m->cset[combopos]);
+	bcombo =  m->data[combopos];
+	oldcset = m->cset[combopos];
+	cs     = (isdungeon() && !get_qr(qr_PUSHBLOCKCSETFIX)) ? 9 : oldcset;
+	tile = combobuf[bcombo].tile;
+	flip = combobuf[bcombo].flip;
+	//   cs = ((*di)&0x700)>>8;
+	*di = m->undercombo;
+	*ci = m->undercset;
 	FFCore.clear_combo_script(blockLayer, combopos);
-    putcombo(scrollbuf,x,y,*di,*ci);
-    clk=32;
+	putcombo(scrollbuf,x,y,*di,*ci);
+	clk=32;
 	if(!get_qr(qr_MOVINGBLOCK_FAKE_SOLID))
 		setSolid(true);
 	solid_update(false);
@@ -319,8 +321,8 @@ bool movingblock::check_trig() const
 		return true;
 	else if(!get_qr(qr_BLOCKHOLE_SAME_ONLY))
 	{
-		auto maxLayer = get_qr(qr_PUSHBLOCK_LAYER_1_2) ? 2 : 0;
-		for(auto lyr = 0; lyr <= maxLayer; ++lyr)
+		int maxLayer = get_qr(qr_PUSHBLOCK_LAYER_1_2) ? 2 : 0;
+		for(int lyr = 0; lyr <= maxLayer; ++lyr)
 		{
 			if(lyr==blockLayer) continue;
 			if(FFCore.tempScreens[lyr]->sflag[combopos] == mfBLOCKTRIGGER
