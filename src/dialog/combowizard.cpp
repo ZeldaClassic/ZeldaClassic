@@ -2966,13 +2966,13 @@ std::shared_ptr<GUI::Widget> ComboWizardDialog::view()
 			byte& opensfx = local_ref.attribytes[3];
 			int16_t& contains_item = local_ref.attrishorts[2];
 			
-			auto radmode0 = 0;
+			int radmode0 = 0;
 			if(local_ref.usrflags&cflag16)
 				radmode0 = 1;
 			
-			auto radmode1 = 0;
+			int radmode1 = 0;
 			auto spitem_def = contains_item;
-			auto normitem_def = 0;
+			int normitem_def = 0;
 			if(unsigned(contains_item) < 256)
 			{
 				radmode1 = 1;
@@ -2980,10 +2980,10 @@ std::shared_ptr<GUI::Widget> ComboWizardDialog::view()
 				normitem_def = contains_item;
 			}
 			
-			auto radmode2 = 0;
+			int radmode2 = 0;
 			if(local_ref.usrflags & cflag4)
 				radmode2 = 1;
-			auto radmode3 = 0;
+			int radmode3 = 0;
 			if(local_ref.usrflags & cflag8)
 				radmode3 = 1;
 			else if(local_ref.usrflags & cflag6)
@@ -3424,14 +3424,14 @@ std::shared_ptr<GUI::Widget> ComboWizardDialog::view()
 			byte& openbtn = local_ref.attribytes[2];
 			byte& opensfx = local_ref.attribytes[3];
 			
-			auto radmode0 = 0;
+			int radmode0 = 0;
 			if(local_ref.usrflags&cflag16)
 				radmode0 = 1;
 			
-			auto radmode2 = 0;
+			int radmode2 = 0;
 			if(local_ref.usrflags & cflag4)
 				radmode2 = 1;
-			auto radmode3 = 0;
+			int radmode3 = 0;
 			if(local_ref.usrflags & cflag8)
 				radmode3 = 1;
 			else if(local_ref.usrflags & cflag6)

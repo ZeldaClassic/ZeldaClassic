@@ -728,7 +728,7 @@ void ComboEditorDialog::refreshScript()
 {
 	loadComboType();
 	int32_t sw_initd[8];
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		l_initd[q] = "InitD["+to_string(q)+"]:";
 		h_initd[q].clear();
@@ -737,7 +737,7 @@ void ComboEditorDialog::refreshScript()
 	if(local_comboref.script)
 	{
 		zasm_meta const& meta = comboscripts[local_comboref.script]->meta;
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 		{
 			if(unsigned(meta.initd_type[q]) < nswapMAX)
 				sw_initd[q] = meta.initd_type[q];
@@ -749,10 +749,10 @@ void ComboEditorDialog::refreshScript()
 	}
 	else
 	{
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 			sw_initd[q] = nswapDEC;
 	}
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		ib_initds[q]->setDisabled(h_initd[q].empty());
 		l_initds[q]->setText(l_initd[q]);

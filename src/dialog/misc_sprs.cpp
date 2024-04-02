@@ -19,7 +19,7 @@ static const GUI::ListData miscSprsList
 MiscSprsDialog::MiscSprsDialog(byte* vals, size_t vals_per_tab, std::function<void(int32_t*)> setVals):
 	sprs_list(GUI::ZCListData::miscsprites()), setVals(setVals), vals_per_tab(vals_per_tab)
 {
-	for(auto q = 0; q < sprMAX; ++q)
+	for(int q = 0; q < sprMAX; ++q)
 	{
 		local_sprs[q] = vals[q];
 	}
