@@ -834,11 +834,8 @@ int32_t onImport_Tilepack_To()
 
 int32_t onExport_DMaps()
 {
-
-    
-    savesomedmaps("Read DMaps",0);
-    
-    return D_O_K;
+	savesomedmaps("Read DMaps",0);
+	return D_O_K;
 }
 
 
@@ -898,10 +895,10 @@ int32_t onImport_DMaps()
 	}
 	pack_fclose(f);
    
-    saved=false;
+	saved=false;
 
     
-    return D_O_K;
+	return D_O_K;
 }
 
 int32_t onImport_Tilepack()
@@ -933,20 +930,18 @@ int32_t onExport_Combopack()
 {
 	savesomecombos("Save Combo Package", 0);
 	return D_O_K;
-	
 }
 
 int32_t onImport_Combopack_To()
 {
 	writesomecombos_to("Load Combo Package to:", 0);
 	return D_O_K;
-	
 }
 
 int32_t onImport_Combopack()
 {
-		loadcombopack("Load Combo Package to:", 0);
-		return D_O_K;
+	loadcombopack("Load Combo Package to:", 0);
+	return D_O_K;
 }
 
 

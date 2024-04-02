@@ -951,29 +951,25 @@ ALSTREAMFILE *load_alstream_file(const char *filename)
 
 error:
 
-    if(p)
-        free(p);
+    free(p);
         
     return NULL;
 }
 
 void unload_alstream_file(ALSTREAMFILE *als)
 {
-    if(als != NULL)
-    {
-        if(als->s != NULL)
-        {
+	if(als != NULL)
+	{
+		if(als->s != NULL)
+		{
 			al_set_audio_stream_playing(als->s, false);
 			al_destroy_audio_stream(als->s);
 			als->s = NULL;
-        }
-        
-        if(als->fname != NULL)
-        {
-            free(als->fname);
-        }
+		}
+		
+		free(als->fname);
 		free(als);
-    }
+	}
 }
 
 int32_t stream_getpos(ALSTREAMFILE* als)
