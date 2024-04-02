@@ -1650,21 +1650,21 @@ int32_t onToggleShowFFCs()
 
 int32_t onToggleShowSquares()
 {
-    ShowSquares=!ShowSquares;
-    zc_set_config("zquest","showsquares",ShowSquares);
-    return D_O_K;
+	ShowSquares = !ShowSquares;
+	zc_set_config("zquest","showsquares",ShowSquares);
+	return D_O_K;
 }
 
 int32_t onToggleShowInfo()
 {
-    ShowInfo=!ShowInfo;
+	ShowInfo = !ShowInfo;
 	zc_set_config("zquest","showinfo",ShowInfo);
-    return D_O_K;
+	return D_O_K;
 }
 
 int32_t onToggleHighlightLayer()
 {
-	ActiveLayerHighlight = ActiveLayerHighlight ? 0 : 1;
+	ActiveLayerHighlight = !ActiveLayerHighlight;
 	zc_set_config("zquest","hl_active_lyr",ActiveLayerHighlight);
 	return D_O_K;
 }
@@ -1940,7 +1940,6 @@ static DIALOG read_tiles_dlg[] =
 
 void writesometiles_to(const char *prompt,int32_t initialval)
 {
-	
 	char firsttile[8];;
 	int32_t first_tile_id = 0; int32_t the_tile_count = 1;
 	sprintf(firsttile,"%d",0);
