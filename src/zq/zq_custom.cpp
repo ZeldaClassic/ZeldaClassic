@@ -5003,14 +5003,7 @@ void edit_enemydata(int32_t index)
 	
 	sprintf(bsp,"%d",guysbuf[index].bosspal);
 	
-	if(guysbuf[index].cset == 14)
-	{
-		enedata_dlg[143].flags = D_SELECTED;
-	}
-	else
-	{
-		enedata_dlg[143].flags = 0;
-	}
+	enedata_dlg[143].flags = guysbuf[index].cset == 14 ? D_SELECTED : 0;
 	
 	enedata_dlg[53].dp = bsp;
 	
