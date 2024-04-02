@@ -154,16 +154,24 @@ struct itemdata
 //  byte exp[10];                                             // not used
     int32_t initiald[INITIAL_D];
     byte initiala[INITIAL_A];
-    byte wpn;
-    byte wpn2;
-    byte wpn3;
-    byte wpn4;
-    byte wpn5;
-    byte wpn6;
-    byte wpn7;
-    byte wpn8;
-    byte wpn9;
-    byte wpn10;
+
+    union {
+	    struct
+	    {
+		    byte wpn;
+		    byte wpn2;
+		    byte wpn3;
+		    byte wpn4;
+		    byte wpn5;
+		    byte wpn6;
+		    byte wpn7;
+		    byte wpn8;
+		    byte wpn9;
+		    byte wpn10;
+	    };
+	    byte wpn_arr[10];
+    };
+
     byte pickup_hearts;
     int32_t misc1;
     int32_t misc2;
