@@ -7017,7 +7017,7 @@ int32_t onHeartBeep()
 
 int32_t onSaveIndicator()
 {
-	use_save_indicator = use_save_indicator ? 0 : 1;
+	use_save_indicator = !use_save_indicator;
 	zc_set_config(cfg_sect,"save_indicator",use_save_indicator);
 	return D_O_K;
 }
@@ -7037,7 +7037,7 @@ int32_t onEpilepsy()
 		0, 
 		get_zc_font(font_lfont)) == 1)
 	{
-		epilepsyFlashReduction = epilepsyFlashReduction ? 0 : 1;
+		epilepsyFlashReduction = !epilepsyFlashReduction;
 		zc_set_config("zeldadx","checked_epilepsy",1);
 		zc_set_config(cfg_sect,"epilepsy_flash_reduction",epilepsyFlashReduction);
 	}
@@ -7595,7 +7595,7 @@ int32_t onPauseInBackground()
 		0, 
 		get_zc_font(font_lfont)) == 1)
 	{
-		pause_in_background = pause_in_background ? 0 : 1;
+		pause_in_background = !pause_in_background;
 		zc_set_config("zeldadx","pause_in_background", pause_in_background);
 		int switch_type = pause_in_background ? SWITCH_PAUSE : SWITCH_BACKGROUND;
 		set_display_switch_mode(fullscreen?SWITCH_BACKAMNESIA:switch_type);

@@ -26201,7 +26201,7 @@ int32_t main(int32_t argc,char **argv)
 		}
 		if (success)
 			printf("all tests passed\n");
-		exit(success ? 0 : 1);
+		exit(!success);
 	}
 
 	int unencrypt_qst_arg = used_switch(argc, argv, "-unencrypt-qst");

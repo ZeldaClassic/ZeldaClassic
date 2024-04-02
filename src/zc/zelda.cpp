@@ -4251,7 +4251,7 @@ int main(int argc, char **argv)
 		}
 		if (success)
 			printf("all tests passed\n");
-		exit(success ? 0 : 1);
+		exit(!success);
 	}
 
 	// Helps to test crash reporting.

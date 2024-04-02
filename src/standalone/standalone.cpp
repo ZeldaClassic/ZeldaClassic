@@ -5,28 +5,28 @@
 
 int APIENTRY WinMain(HINSTANCE, HINSTANCE, PSTR, int)
 {
-    STARTUPINFOA si;
-    PROCESS_INFORMATION pi;
-    ZeroMemory(&si, sizeof(si));
-    si.cb = sizeof(si);
-    ZeroMemory(&pi, sizeof(pi));
+	STARTUPINFOA si;
+	PROCESS_INFORMATION pi;
+	ZeroMemory(&si, sizeof(si));
+	si.cb = sizeof(si);
+	ZeroMemory(&pi, sizeof(pi));
 
 	TCHAR cmdArgs[] = "zplayer.exe -package";
 
-    bool success = CreateProcessA(
-        "data/zplayer.exe",
-        cmdArgs,
-        NULL,
-        NULL,
-        FALSE,
-        NULL,
-        NULL,
-        "data",
-        &si,
-        &pi
-    );
+	bool success = CreateProcessA(
+		"data/zplayer.exe",
+		cmdArgs,
+		NULL,
+		NULL,
+		FALSE,
+		NULL,
+		NULL,
+		"data",
+		&si,
+		&pi
+	);
 	CloseHandle(pi.hProcess);
 	CloseHandle(pi.hThread);
 
-	return success ? 0 : 1;
+	return !success;
 }

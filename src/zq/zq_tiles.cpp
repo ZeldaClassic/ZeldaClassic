@@ -17714,7 +17714,7 @@ int32_t combo_screen(int32_t pg, int32_t tl)
 				font = tfont;
 				
 				//do_scheckbox(screen2,320,440+panel_yofs,16,jwin_pal[jcTEXTBG],jwin_pal[jcTEXTFG],combopage_animate,screen_xofs,screen_yofs);
-				combopage_animate = combopage_animate ? 0 : 1;
+				combopage_animate = !combopage_animate;
 				zc_set_config("ZQ_GUI","combopage_animate",combopage_animate);
 				redraw = true;
 				
