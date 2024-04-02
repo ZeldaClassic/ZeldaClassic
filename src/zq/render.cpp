@@ -96,15 +96,11 @@ static void configure_render_tree()
 	rti_dialogs.visible = rti_dialogs.has_children();
 
 	// Freeze dialogs that won't be changing.
-	if (screen_never_freeze)
-		rti_screen.freeze = false;
-	else
-		rti_screen.freeze = rti_dialogs.has_children();
-	int i = 0;
-	while (i < rti_dialogs.get_children().size())
+	rti_screen.freeze = screen_never_freeze ? false : rti_dialogs.has_children();
+
+	for (int i = 0; i < rti_dialogs.get_children().size(); i++)
 	{
 		rti_dialogs.get_children()[i]->freeze = i != rti_dialogs.get_children().size() - 1;
-		i++;
 	}
 
 	reload_dialog_tint();
