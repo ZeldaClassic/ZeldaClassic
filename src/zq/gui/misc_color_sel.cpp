@@ -55,7 +55,7 @@ static const ListData miscColList
 MiscColorSel::MiscColorSel(): onUpdate(NULL), c1(0), c2(0)
 {
 	setFitParent(true);
-	for(auto q = 0; q <= 11; ++q)
+	for(int q = 0; q <= 11; ++q)
 	{
 		c2s[q] = 0;
 	}
