@@ -112,7 +112,6 @@ int32_t select_dropitem(int32_t item_set)
     
     for(int32_t k=10; k>=0; --k)
     {
-    
         int32_t current_chance=item_drop_sets[item_set].chance[k];
         int32_t current_item=(k==0 ? -1 : item_drop_sets[item_set].item[k-1]);
         
@@ -159,17 +158,17 @@ int32_t select_dropitem(int32_t item_set, int32_t x, int32_t y)
 {
 	int32_t drop_item = select_dropitem(item_set);
 	
-    if(drop_item>=0 && itemsbuf[drop_item].family==itype_fairy && !get_qr(qr_OLD_FAIRY_LIMIT))
-    {
-        for(int32_t j=0; j<items.Count(); ++j)
-        {
-            if((itemsbuf[items.spr(j)->id].family==itype_fairy)&&((abs(items.spr(j)->x-x)<32)||(abs(items.spr(j)->y-y)<32)))
-            {
-                drop_item=-1;
-                break;
-            }
-        }
-    }
+	if(drop_item>=0 && itemsbuf[drop_item].family==itype_fairy && !get_qr(qr_OLD_FAIRY_LIMIT))
+	{
+		for(int32_t j=0; j<items.Count(); ++j)
+		{
+			if((itemsbuf[items.spr(j)->id].family==itype_fairy)&&((abs(items.spr(j)->x-x)<32)||(abs(items.spr(j)->y-y)<32)))
+			{
+				drop_item=-1;
+				break;
+			}
+		}
+	}
 	
 	return drop_item;
 }
@@ -196,7 +195,7 @@ int32_t item::run_script(int32_t mode)
 			}
 			break;
 	}
-    return ret;
+	return ret;
 }
 
 
