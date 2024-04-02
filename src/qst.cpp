@@ -1103,12 +1103,8 @@ bool init_section(zquestheader *Header, int32_t section_id, miscQdata *Misc, zct
     }
     
     //setPackfilePassword(NULL);
-    if(!ret)
-    {
-        return true;
-    }
-    
-    return false;
+
+    return !ret;
 }
 
 bool init_tiles(bool validate, zquestheader *Header)
