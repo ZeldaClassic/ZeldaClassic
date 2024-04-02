@@ -338,7 +338,6 @@ int32_t get_version_and_build(PACKFILE *f, word *version, word *build)
 
 bool find_section(PACKFILE *f, int32_t section_id_requested)
 {
-
     if(!f)
     {
         return false;
@@ -482,7 +481,6 @@ bool find_section(PACKFILE *f, int32_t section_id_requested)
 
 bool valid_zqt(PACKFILE *f)
 {
-
     //word tiles_used;
     //word combos_used;
     //open the file
@@ -850,46 +848,46 @@ PACKFILE *open_quest_file(int32_t *open_error, const char *filename, bool show_p
 
 PACKFILE *open_quest_template(zquestheader *Header, char *deletefilename, bool validate)
 {
-    char *filename;
-    PACKFILE *f=NULL;
-    int32_t open_error=0;
+	char *filename;
+	PACKFILE *f=NULL;
+	int32_t open_error=0;
  
 	strcpy(qstdat_string, "modules/classic/default.qst");
-    if(Header->templatepath[0]==0)
-    {
-        filename=(char *)malloc(2048);
-        strcpy(filename, qstdat_string);
-    }
-    else
-    {
-        // TODO: should be safe to remove this, no one seems to use custom quest templates.
-        filename=Header->templatepath;
-    }
+	if(Header->templatepath[0]==0)
+	{
+		filename=(char *)malloc(2048);
+		strcpy(filename, qstdat_string);
+	}
+	else
+	{
+		// TODO: should be safe to remove this, no one seems to use custom quest templates.
+		filename=Header->templatepath;
+	}
     
-    f=open_quest_file(&open_error, filename, false);
+	f=open_quest_file(&open_error, filename, false);
     
-    if(Header->templatepath[0]==0)
-    {
-        free(filename);
-    }
+	if(Header->templatepath[0]==0)
+	{
+		free(filename);
+	}
     
-    if(!f)
-    {
-        return NULL;
-    }
+	if(!f)
+	{
+		return NULL;
+	}
     
-    if(validate)
-    {
-        if(!valid_zqt(f))
-        {
-            jwin_alert("Error","Invalid Quest Template",NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
-            pack_fclose(f);
+	if(validate)
+	{
+		if(!valid_zqt(f))
+		{
+			jwin_alert("Error","Invalid Quest Template",NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+			pack_fclose(f);
 			clear_quest_tmpfile();
-            return NULL;
-        }
-    }
+			return NULL;
+		}
+	}
     
-    return f;
+	return f;
 }
 
 bool init_section(zquestheader *Header, int32_t section_id, miscQdata *Misc, zctune *tunes, bool validate)
