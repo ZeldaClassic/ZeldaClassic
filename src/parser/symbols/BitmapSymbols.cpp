@@ -83,7 +83,7 @@ static AccessorTable BitmapTable[] =
 
 BitmapSymbols::BitmapSymbols()
 {
-    table = BitmapTable;
+	table = BitmapTable;
 	refVar = REFBITMAP;
 }
 
