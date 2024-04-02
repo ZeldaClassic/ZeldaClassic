@@ -527,7 +527,7 @@ int32_t readoneitem(PACKFILE *f, int32_t index)
 	{
 		if(!p_igetl(&tempitem.initiald[j],f))
 		{
-		return 0;
+			return 0;
 		}
 	}
 	
@@ -952,7 +952,7 @@ int32_t writeoneitem(PACKFILE *f, int32_t i)
 				new_return(5);
 			}
 		
-		if(!p_iputl(itemsbuf[i].tile,f))
+			if(!p_iputl(itemsbuf[i].tile,f))
 			{
 				new_return(6);
 			}
@@ -4521,15 +4521,15 @@ void setEnemyLabels(int32_t family)
 		
 		enedata_dlg[192].flags &= ~D_DISABLED;
 		enedata_dlg[203].d1 &= ~D_DISABLED;
-		 enedata_dlg[204].d1 &= ~D_DISABLED;
-		 enedata_dlg[205].d1 &= ~D_DISABLED;
-		 enedata_dlg[206].d1 &= ~D_DISABLED;
-		 enedata_dlg[207].d1 &= ~D_DISABLED;
-		 enedata_dlg[208].d1 &= ~D_DISABLED;
-		 enedata_dlg[209].d1 &= ~D_DISABLED;
-		 enedata_dlg[210].d1 &= ~D_DISABLED;
-		 enedata_dlg[211].d1 &= ~D_DISABLED;
-		 enedata_dlg[212].d1 &= ~D_DISABLED;
+		enedata_dlg[204].d1 &= ~D_DISABLED;
+		enedata_dlg[205].d1 &= ~D_DISABLED;
+		enedata_dlg[206].d1 &= ~D_DISABLED;
+		enedata_dlg[207].d1 &= ~D_DISABLED;
+		enedata_dlg[208].d1 &= ~D_DISABLED;
+		enedata_dlg[209].d1 &= ~D_DISABLED;
+		enedata_dlg[210].d1 &= ~D_DISABLED;
+		enedata_dlg[211].d1 &= ~D_DISABLED;
+		enedata_dlg[212].d1 &= ~D_DISABLED;
 	}
 	
 	if(!(family==eeWALK || family==eeFIRE || family==eeOTHER))
