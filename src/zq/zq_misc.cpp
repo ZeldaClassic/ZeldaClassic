@@ -200,7 +200,7 @@ void load_arrows()
     {
         arrow_bmp[i] = create_bitmap_ex(8,16,16);
 		BITMAP* tmpbmp = create_bitmap_ex(8,16,16);
-        blit((BITMAP*)zcdata[BMP_ARROWS].dat,tmpbmp,i*17+1,1,0,0,16,16);
+		blit((BITMAP*)zcdata[BMP_ARROWS].dat,tmpbmp,i*17+1,1,0,0,16,16);
 		for(int32_t x = 0; x < 16; ++x)
 		{
 			for(int32_t y = 0; y < 16; ++y)
