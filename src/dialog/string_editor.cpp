@@ -37,7 +37,7 @@ GUI::ListData createShadowTypesListData()
 {
 	std::vector<std::string> strings;
 
-	for(auto q = 0; q < sstsMAX; ++q)
+	for(int q = 0; q < sstsMAX; ++q)
 	{
 		strings.push_back(shadowstyle_str[q]);
 	}

@@ -2386,13 +2386,8 @@ void sprite_list::run_script(int32_t mode)
 
 void sprite_list::check_conveyor()
 {
-    int32_t i=0;
-    
-    while(i<count)
-    {
+    for (int32_t i=0; i<count; ++i)
         sprites[i]->check_conveyor();
-        ++i;
-    }
 }
 
 int32_t sprite_list::Count()
