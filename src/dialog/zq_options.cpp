@@ -25,35 +25,35 @@ extern bool NoHighlightLayer0;
 
 void OptionsDialog::loadOptions()
 {
-	opts[OPT_MOUSESCROLL] = MouseScroll ? 1 : 0;
-	opts[OPT_SAVEPATHS] = SavePaths ? 1 : 0;
-	opts[OPT_PALCYCLE] = CycleOn ? 1 : 0;
-	opts[OPT_FPS] = ShowFPS ? 1 : 0;
-	opts[OPT_SAVEDRAGRESIZE] = SaveDragResize ? 1 : 0;
-	opts[OPT_SAVEWINPOS] = SaveWinPos ? 1 : 0;
-	opts[OPT_DRAGASPECT] = DragAspect ? 1 : 0;
-	opts[OPT_COMB_BRUSH] = ComboBrush ? 1 : 0;
-	opts[OPT_FLOAT_BRUSH] = FloatBrush ? 1 : 0;
-	opts[OPT_RELOAD_QUEST] = OpenLastQuest ? 1 : 0;
-	opts[OPT_MISALIGNS] = ShowMisalignments ? 1 : 0;
-	opts[OPT_ANIM_COMBOS] = AnimationOn ? 1 : 0;
-	opts[OPT_OW_PROT] = OverwriteProtection ? 1 : 0;
-	opts[OPT_TILE_PROT] = TileProtection ? 1 : 0;
-	opts[OPT_RULESET] = RulesetDialog ? 1 : 0;
-	opts[OPT_TOOLTIPS] = EnableTooltips ? 1 : 0;
-	opts[OPT_TOOLTIP_HIGHLIGHT] = TooltipsHighlight ? 1 : 0;
+	opts[OPT_MOUSESCROLL] = !!MouseScroll; // Iversion brackets (!!) evaluate anything nonzero to 1
+	opts[OPT_SAVEPATHS] = !!SavePaths;
+	opts[OPT_PALCYCLE] = !!CycleOn;
+	opts[OPT_FPS] = !!ShowFPS;
+	opts[OPT_SAVEDRAGRESIZE] = !!SaveDragResize;
+	opts[OPT_SAVEWINPOS] = !!SaveWinPos;
+	opts[OPT_DRAGASPECT] = !!DragAspect;
+	opts[OPT_COMB_BRUSH] = !!ComboBrush;
+	opts[OPT_FLOAT_BRUSH] = !!FloatBrush;
+	opts[OPT_RELOAD_QUEST] = !!OpenLastQuest;
+	opts[OPT_MISALIGNS] = !!ShowMisalignments;
+	opts[OPT_ANIM_COMBOS] = !!AnimationOn;
+	opts[OPT_OW_PROT] = !!OverwriteProtection;
+	opts[OPT_TILE_PROT] = !!TileProtection;
+	opts[OPT_RULESET] = !!RulesetDialog;
+	opts[OPT_TOOLTIPS] = !!EnableTooltips;
+	opts[OPT_TOOLTIP_HIGHLIGHT] = !!TooltipsHighlight;
 	opts[OPT_TOOLTIP_TIMER] = tooltip_maxtimer;
 	opts[OPT_MAPCURSOR] = MMapCursorStyle;
 	opts[OPT_LYR_DITH_BG] = LayerDitherBG;
 	opts[OPT_LYR_DITH_SZ] = LayerDitherSz;
 	opts[OPT_INVALID_BG] = InvalidBG;
-	opts[OPT_PATTERNSEARCH] = abc_patternmatch ? 1 : 0;
-	opts[OPT_NEXTPREVIEW] = NoScreenPreview ? 1 : 0;
-	opts[OPT_INITSCR_WARN] = WarnOnInitChanged ? 1 : 0;
+	opts[OPT_PATTERNSEARCH] = !!abc_patternmatch;
+	opts[OPT_NEXTPREVIEW] = !!NoScreenPreview;
+	opts[OPT_INITSCR_WARN] = !!WarnOnInitChanged;
 	opts[OPT_ABRETENTION] = AutoBackupRetention;
 	opts[OPT_ASINTERVAL] = AutoSaveInterval;
 	opts[OPT_ASRETENTION] = AutoSaveRetention;
-	opts[OPT_UNCOMP_AUTOSAVE] = UncompressedAutoSaves ? 1 : 0;
+	opts[OPT_UNCOMP_AUTOSAVE] = !!UncompressedAutoSaves;
 	opts[OPT_GRIDCOL] = GridColor;
 	opts[OPT_CMB_CURS_COL] = CmbCursorCol;
 	opts[OPT_TPG_CURS_COL] = TilePgCursorCol;
@@ -77,10 +77,10 @@ void OptionsDialog::loadOptions()
 	opts[OPT_CUSTOMFONT] = zc_get_config("ZQ_GUI","custom_fonts",1);
 	opts[OPT_BOTTOM8] = pixeldb;
 	opts[OPT_INFO_BG] = infobg;
-	opts[OPT_HIDEMOUSE] = allowHideMouse?1:0;
+	opts[OPT_HIDEMOUSE] = !!allowHideMouse;
 	opts[OPT_COMPILEONSAVE] = zc_get_config("zquest","quick_compile_on_save",0)?1:0;
-	opts[OPT_SHOW_FAV_COMBO_MODES] = ShowFavoriteComboModes?1:0;
-	opts[OPT_NO_HIGHLIGHT_LAYER0] = NoHighlightLayer0?1:0;
+	opts[OPT_SHOW_FAV_COMBO_MODES] = !!ShowFavoriteComboModes;
+	opts[OPT_NO_HIGHLIGHT_LAYER0] = !!NoHighlightLayer0;
 	
 	for(int q = 0; q < CFONT_MAX; ++q)
 	{
