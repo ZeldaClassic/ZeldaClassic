@@ -4,7 +4,6 @@
 extern zcmodule moduledata;
 
 /*
-
 	combo_class_buf[combo_type].variable
 
 	combo types left to do:
@@ -39,7 +38,6 @@ extern zcmodule moduledata;
 	cEYEBALL_A, cEYEBALL_B, cBLOCKARROW1, cBLOCKARROW2, cBLOCKARROW3, cBLOCKBRANG1,
 	cBLOCKBRANG2, cBLOCKBRANG3, cBLOCKSBEAM, cMAGICSPONGE, cBLOCKFIREBALL,
 	cBLOCKALL,
-
 */
 
 //modules need to set the names here
