@@ -82,22 +82,22 @@ static AccessorTable DMapDataTable[] =
 	{ "getFlags",                   0,         ZTID_FLOAT,   DMAPDATAFLAGS,             0,  { ZTID_DMAPDATA },{} },
 	{ "setFlags",                   0,          ZTID_VOID,   DMAPDATAFLAGS,             0,  { ZTID_DMAPDATA, ZTID_FLOAT },{} },
 	
-	{ "getMusicLoopStart",               0,         ZTID_FLOAT,   DMAPDATALOOPSTART,         0,  { ZTID_DMAPDATA },{} },
-	{ "setMusicLoopStart",               0,          ZTID_VOID,   DMAPDATALOOPSTART,         0,  { ZTID_DMAPDATA, ZTID_FLOAT },{} },
+	{ "getMusicLoopStart",          0,         ZTID_FLOAT,   DMAPDATALOOPSTART,         0,  { ZTID_DMAPDATA },{} },
+	{ "setMusicLoopStart",          0,          ZTID_VOID,   DMAPDATALOOPSTART,         0,  { ZTID_DMAPDATA, ZTID_FLOAT },{} },
 
-	{ "getMusicLoopEnd",                 0,         ZTID_FLOAT,   DMAPDATALOOPEND,         0,  { ZTID_DMAPDATA },{} },
-	{ "setMusicLoopEnd",                 0,          ZTID_VOID,   DMAPDATALOOPEND,         0,  { ZTID_DMAPDATA, ZTID_FLOAT },{} },
+	{ "getMusicLoopEnd",            0,         ZTID_FLOAT,   DMAPDATALOOPEND,           0,  { ZTID_DMAPDATA },{} },
+	{ "setMusicLoopEnd",            0,          ZTID_VOID,   DMAPDATALOOPEND,           0,  { ZTID_DMAPDATA, ZTID_FLOAT },{} },
 
-	{ "getMusicCrossfadeIn",                 0,         ZTID_FLOAT,   DMAPDATAXFADEIN,         0,  { ZTID_DMAPDATA },{} },
-	{ "setMusicCrossfadeIn",                 0,          ZTID_VOID,   DMAPDATAXFADEIN,         0,  { ZTID_DMAPDATA, ZTID_FLOAT },{} },
+	{ "getMusicCrossfadeIn",        0,         ZTID_FLOAT,   DMAPDATAXFADEIN,           0,  { ZTID_DMAPDATA },{} },
+	{ "setMusicCrossfadeIn",        0,          ZTID_VOID,   DMAPDATAXFADEIN,           0,  { ZTID_DMAPDATA, ZTID_FLOAT },{} },
 
-	{ "getMusicCrossfadeOut",                 0,         ZTID_FLOAT,   DMAPDATAXFADEOUT,         0,  { ZTID_DMAPDATA },{} },
-	{ "setMusicCrossfadeOut",                 0,          ZTID_VOID,   DMAPDATAXFADEOUT,         0,  { ZTID_DMAPDATA, ZTID_FLOAT },{} },
+	{ "getMusicCrossfadeOut",       0,         ZTID_FLOAT,   DMAPDATAXFADEOUT,          0,  { ZTID_DMAPDATA },{} },
+	{ "setMusicCrossfadeOut",       0,          ZTID_VOID,   DMAPDATAXFADEOUT,          0,  { ZTID_DMAPDATA, ZTID_FLOAT },{} },
 
-	{ "getIntroStringID",             0,          ZTID_FLOAT,   DMAPDATAINTROSTRINGID,          0,  { ZTID_DMAPDATA },{} },
-	{ "setIntroStringID",             0,          ZTID_VOID,   DMAPDATAINTROSTRINGID,          0,  { ZTID_DMAPDATA, ZTID_FLOAT },{} },
+	{ "getIntroStringID",           0,          ZTID_FLOAT,  DMAPDATAINTROSTRINGID,     0,  { ZTID_DMAPDATA },{} },
+	{ "setIntroStringID",           0,           ZTID_VOID,  DMAPDATAINTROSTRINGID,     0,  { ZTID_DMAPDATA, ZTID_FLOAT },{} },
 
-	{ "",                           0,          ZTID_VOID,   -1,                        0,  {},{} }
+	{ "",                           0,           ZTID_VOID,  -1,                        0,  {},{} }
 };
 
 DMapDataSymbols::DMapDataSymbols()
