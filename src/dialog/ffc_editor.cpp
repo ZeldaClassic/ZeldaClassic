@@ -69,9 +69,9 @@ void ffdata::load(mapscr const* scr, int32_t ind)
 	fwid = scr->ffEffectWidth(ind)-1;
 	fhei = scr->ffEffectHeight(ind)-1;
 	script = scr->ffcs[ind].script;
-	for(auto q = 0; q < 2; ++q)
+	for(int q = 0; q < 2; ++q)
 		inita[q] = scr->ffcs[ind].inita[q];
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 		initd[q] = scr->ffcs[ind].initd[q];
 }
 void ffdata::save(mapscr* scr, int32_t ind)
@@ -219,7 +219,7 @@ std::shared_ptr<GUI::Widget> FFCDialog::FFC_INITD(int index)
 void FFCDialog::refreshScript()
 {
 	std::string label[8], help[8];
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		label[q] = "InitD["+std::to_string(q)+"]";
 	}
@@ -234,7 +234,7 @@ void FFCDialog::refreshScript()
 				help[q] = meta.initd_help[q];
 		}
 		
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 		{
 			if(unsigned(meta.initd_type[q]) < nswapMAX)
 				tf_initd[q]->setSwapType(meta.initd_type[q]);
@@ -242,12 +242,12 @@ void FFCDialog::refreshScript()
 	}
 	else
 	{
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 		{
 			tf_initd[q]->setSwapType(nswapDEC);
 		}
 	}
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		l_initds[q]->setText(label[q]);
 		h_initd[q] = help[q];
