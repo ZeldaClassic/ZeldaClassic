@@ -899,10 +899,10 @@ void refresh_recent_menu()
 		do_RecentQuest_7, do_RecentQuest_8, do_RecentQuest_9
 	};
 	static MenuItem nilitem("---",nullptr,nullopt,true);
-	for(auto q = 0; q < 10; ++q)
+	for(int q = 0; q < 10; ++q)
 	{
 		MenuItem& mit = *recent_menu.at(q);
-        bool valid = rec_menu_fullpaths[q][0] != '-';
+		bool valid = rec_menu_fullpaths[q][0] != '-';
 		if(valid)
 			mit = MenuItem(rec_menu_strs[q],procs[q]);
 		else mit = nilitem;
@@ -914,7 +914,7 @@ void load_recent_quests()
 	char configname[64] = "rec_qst_";
 	char* ptr = &configname[strlen(configname)];
 	char buf[512] = {0};
-	for(auto q = 0; q < 10; ++q)
+	for(int q = 0; q < 10; ++q)
 	{
 		sprintf(ptr, "%d", q); //increment the configname value
 		char const* qst_str = zc_get_config("recent",configname,nullptr);
@@ -943,7 +943,7 @@ void write_recent_quests()
 {
 	char configname[64] = "rec_qst_";
 	char* ptr = &configname[strlen(configname)];
-	for(auto q = 0; q < 10; ++q)
+	for(int q = 0; q < 10; ++q)
 	{
 		sprintf(ptr, "%d", q); //increment the configname value
 		zc_set_config("recent",configname,(rec_menu_fullpaths[q][0]!='-') ? rec_menu_fullpaths[q] : nullptr);
@@ -953,7 +953,7 @@ void write_recent_quests()
 void update_recent_quest(char const* path)
 {
 	int32_t ind = -1;
-	for(auto q = 0; q < 10; ++q)
+	for(int q = 0; q < 10; ++q)
 	{
 		if(!strcmp(path, rec_menu_fullpaths[q]))
 		{
@@ -963,7 +963,7 @@ void update_recent_quest(char const* path)
 	}
 	if(ind > -1)
 	{
-		for(auto q = ind; q > 0; --q)
+		for(int q = ind; q > 0; --q)
 		{
 			strcpy(rec_menu_fullpaths[q], rec_menu_fullpaths[q-1]);
 			strcpy(rec_menu_strs[q], rec_menu_strs[q-1]);
@@ -972,7 +972,7 @@ void update_recent_quest(char const* path)
 	else
 	{
 		int32_t free_ind = 9; //if none found, override the last index
-		for(auto q = 0; q < 9; ++q)
+		for(int q = 0; q < 9; ++q)
 		{
 			if(rec_menu_fullpaths[q][0] == '-')
 			{
@@ -981,7 +981,7 @@ void update_recent_quest(char const* path)
 			}
 		}
 		
-		for(auto q = free_ind; q > 0; --q)
+		for(int q = free_ind; q > 0; --q)
 		{
 			strcpy(rec_menu_fullpaths[q], rec_menu_fullpaths[q-1]);
 			strcpy(rec_menu_strs[q], rec_menu_strs[q-1]);
@@ -1337,7 +1337,7 @@ int32_t onStrFix()
 			{
 				if(ret)
 				{
-					for(auto q = 0; q < msg_count; ++q)
+					for(int q = 0; q < msg_count; ++q)
 					{
 						MsgStrings[q].w += 16;
 						MsgStrings[q].h += 16;
@@ -2903,7 +2903,7 @@ void call_options_dlg();
 int32_t onOptions()
 {
 	call_options_dlg();
-    return D_O_K;
+	return D_O_K;
 }
 
 const char *dm_names[DM_MAX]=
@@ -3174,16 +3174,16 @@ int32_t onPasteEnemies()
 
 int32_t onDelete()
 {
-    restore_mouse();
+	restore_mouse();
     
 	if(!(Map.CurrScr()->valid&mVALID) || jwin_alert("Confirm Delete","Delete this screen?", NULL, NULL, "Yes", "Cancel", 'y', 27,get_zc_font(font_lfont)) == 1)
 	{
 		Map.DoClearScreenCommand();
 	}
     
-    reset_relational_tile_grid();
-    saved=false;
-    return D_O_K;
+	reset_relational_tile_grid();
+	saved=false;
+	return D_O_K;
 }
 
 int32_t onDeleteMap()
@@ -21245,7 +21245,7 @@ int32_t jwin_zmeta_proc(int32_t msg, DIALOG *d, int32_t )
 				sprintf(buf, "Script Type: %s", get_script_name(meta.script_type).c_str());
 				t_w = txtout(target, buf, d->x, d->y + ((++ind)*(text_height(font) + 3)), disabled);
 				d->w = zc_max(d->w, t_w);
-				for(auto q = 0; q < 4; ++q)
+				for(int q = 0; q < 4; ++q)
 				{
 					if(!meta.attributes[q].size())
 						continue;
@@ -21254,7 +21254,7 @@ int32_t jwin_zmeta_proc(int32_t msg, DIALOG *d, int32_t )
 					t_w = txtout(target, buf, d->x, d->y + ((++ind)*(text_height(font) + 3)), disabled);
 					d->w = zc_max(d->w, t_w);
 				}
-				for(auto q = 0; q < 8; ++q)
+				for(int q = 0; q < 8; ++q)
 				{
 					if(!meta.attribytes[q].size())
 						continue;
@@ -21263,7 +21263,7 @@ int32_t jwin_zmeta_proc(int32_t msg, DIALOG *d, int32_t )
 					t_w = txtout(target, buf, d->x, d->y + ((++ind)*(text_height(font) + 3)), disabled);
 					d->w = zc_max(d->w, t_w);
 				}
-				for(auto q = 0; q < 8; ++q)
+				for(int q = 0; q < 8; ++q)
 				{
 					if(!meta.attrishorts[q].size())
 						continue;
@@ -28594,7 +28594,7 @@ void debug_pos(size_and_pos const& pos, int color)
 	if(pos.xscale > 1 || pos.yscale > 1)
 	{
 		auto maxind = pos.w*pos.h;
-		for(auto q = 0; q < maxind; ++q)
+		for(int q = 0; q < maxind; ++q)
 		{
 			auto& sub = pos.subsquare(q);
 			if(sub.x < 0) break;
@@ -29280,7 +29280,7 @@ extern "C" void open_test_mode()
 {
 	int dmap = -1;
 	int32_t pal = Map.getcolor();
-	for(auto q = 0; q < MAXDMAPS; ++q)
+	for(int q = 0; q < MAXDMAPS; ++q)
 	{
 		if(DMaps[q].map == Map.getCurrMap())
 		{
