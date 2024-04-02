@@ -14,10 +14,11 @@ byte hero_defence[wMax];
 int32_t hammeroffsets[4];
 
 int32_t old_floatspr, old_slashspr, herospr;
+
 int32_t walkspr[4][3];                                   //dir,                           tile/flip/extend
 int32_t stabspr[4][3];                                   //dir,                           tile/flip/extend
 int32_t slashspr[4][3];                                  //dir,                           tile/flip/extend
-int32_t revslashspr[4][3];                                  //dir,                           tile/flip/extend
+int32_t revslashspr[4][3];                               //dir,                           tile/flip/extend
 int32_t floatspr[4][3];                                  //dir,                           tile/flip/extend
 int32_t swimspr[4][3];                                   //dir,                           tile/flip/extend
 int32_t divespr[4][3];                                   //dir,                           tile/flip/extend
@@ -40,14 +41,14 @@ int32_t liftingwalkspr[4][3];                            //dir,                 
 int32_t stunnedspr[4][3];                                //dir,                           tile/flip/extend
 int32_t stunned_waterspr[4][3];                          //dir,                           tile/flip/extend
 int32_t drowningspr[4][3];                               //dir,                           tile/flip/extend
-int32_t sidedrowningspr[4][3];                               //dir,                           tile/flip/extend
+int32_t sidedrowningspr[4][3];                           //dir,                           tile/flip/extend
 int32_t drowning_lavaspr[4][3];                          //dir,                           tile/flip/extend
 int32_t sideswimspr[4][3];                               //dir,                           tile/flip/extend
-int32_t sideswimslashspr[4][3];                               //dir,                           tile/flip/extend
-int32_t sideswimstabspr[4][3];                               //dir,                           tile/flip/extend
-int32_t sideswimpoundspr[4][3];                               //dir,                           tile/flip/extend
-int32_t sideswimchargespr[4][3];                               //dir,                           tile/flip/extend
-int32_t sideswimholdspr[3][3];                               //dir,                           tile/flip/extend
+int32_t sideswimslashspr[4][3];                          //dir,                           tile/flip/extend
+int32_t sideswimstabspr[4][3];                           //dir,                           tile/flip/extend
+int32_t sideswimpoundspr[4][3];                          //dir,                           tile/flip/extend
+int32_t sideswimchargespr[4][3];                         //dir,                           tile/flip/extend
+int32_t sideswimholdspr[3][3];                           //dir,                           tile/flip/extend
 int32_t fallingspr[4][3];                                //dir,                           tile/flip/extend
 int32_t shockedspr[4][3];                                //dir,                           tile/flip/extend
 int32_t shocked_waterspr[4][3];                          //dir,                           tile/flip/extend
@@ -918,12 +919,10 @@ void setupherotiles(int32_t style)
 
 void setupherodefenses()
 {
-    //For now this just zeroes out Hero's defenses by default, set these to appropriate defaults if necessary if defense implementation is extended. -Jman
-    for (int32_t i = 0; i < wMax; i++)
-    {
-        hero_defence[i] = 0;
-    }
-    
+	//For now this just zeroes out Hero's defenses by default, set these to appropriate defaults if necessary if defense implementation is extended. -Jman
+	for (int32_t i = 0; i < wMax; i++)
+		hero_defence[i] = 0;
+	}
 }
 
 void setupherooffsets()
