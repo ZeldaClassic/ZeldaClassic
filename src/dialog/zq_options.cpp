@@ -101,7 +101,7 @@ void OptionsDialog::loadOptions()
 
 void OptionsDialog::saveOptions()
 {
-	for(auto ind = 0; ind < OPT_MAX; ++ind)
+	for(int ind = 0; ind < OPT_MAX; ++ind)
 	{
 		if(opt_changed[ind])
 			saveOption(ind);
