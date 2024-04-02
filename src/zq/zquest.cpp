@@ -19533,11 +19533,8 @@ int32_t d_orgcomboa_proc(int32_t msg, DIALOG *d, int32_t c)
                 d->flags &= ~D_SELECTED;
                 object_message(d, MSG_DRAW, 0);
             }
-        }
         
-        /* should we close the dialog? */
-        if(down)
-        {
+	    /* should we close the dialog? */
             onOrgComboAliases();
             return D_REDRAW;
         }
