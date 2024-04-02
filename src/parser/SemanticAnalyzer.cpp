@@ -323,7 +323,7 @@ void SemanticAnalyzer::caseStmtFor(ASTStmtFor& host, void*)
 	scope = host.getScope();
 	RecursiveVisitor::caseStmtFor(host);
 	scope = scope->getParent();
-    if (breakRecursion(host)) return;
+	if (breakRecursion(host)) return;
 
 	checkCast(*host.test->getReadType(scope, this), DataType::UNTYPED, &host);
 }
@@ -337,12 +337,12 @@ void SemanticAnalyzer::caseStmtForEach(ASTStmtForEach& host, void* param)
 	scope = host.getScope();
 	
 	visit(host.arrExpr.get(), param);
-    if (breakRecursion(host)) {scope = scope->getParent(); return;}
+	if (breakRecursion(host)) {scope = scope->getParent(); return;}
 	
 	//Get the type of the array expr
 	DataType const& arrtype = *host.arrExpr->getReadType(scope, this);
 	checkCast(arrtype, DataType::UNTYPED, &host);
-    if (breakRecursion(host)) {scope = scope->getParent(); return;}
+	if (breakRecursion(host)) {scope = scope->getParent(); return;}
 	//Get the base type of this type
 	DataType const& ty = getNaiveType(arrtype, scope);
 	
@@ -364,17 +364,17 @@ void SemanticAnalyzer::caseStmtForEach(ASTStmtForEach& host, void* param)
 	host.decl = decl;
 	
 	visit(host.indxdecl.get(), param);
-    if (breakRecursion(host)) {scope = scope->getParent(); return;}
+	if (breakRecursion(host)) {scope = scope->getParent(); return;}
 	visit(host.arrdecl.get(), param);
-    if (breakRecursion(host)) {scope = scope->getParent(); return;}
+	if (breakRecursion(host)) {scope = scope->getParent(); return;}
 	visit(host.decl.get(), param);
-    if (breakRecursion(host)) {scope = scope->getParent(); return;}
+	if (breakRecursion(host)) {scope = scope->getParent(); return;}
 	
 	visit(host.body.get(), param);
-    if (breakRecursion(host)) {scope = scope->getParent(); return;}
+	if (breakRecursion(host)) {scope = scope->getParent(); return;}
 	
 	scope = scope->getParent();
-    if (breakRecursion(host)) return;
+	if (breakRecursion(host)) return;
 	
 	if(host.hasElse())
 		visit(host.elseBlock.get(), param);
@@ -396,8 +396,8 @@ void SemanticAnalyzer::caseStmtReturn(ASTStmtReturn& host, void*)
 
 void SemanticAnalyzer::caseStmtReturnVal(ASTStmtReturnVal& host, void*)
 {
-    RecursiveVisitor::caseStmtReturnVal(host);
-    if (breakRecursion(host)) return;
+	RecursiveVisitor::caseStmtReturnVal(host);
+	if (breakRecursion(host)) return;
 	
 	if(host.value->isTempVal())
 	{
@@ -410,8 +410,8 @@ void SemanticAnalyzer::caseStmtReturnVal(ASTStmtReturnVal& host, void*)
 
 void SemanticAnalyzer::caseStmtBreak(ASTStmtBreak& host, void*)
 {
-    RecursiveVisitor::caseStmtBreak(host);
-    if (breakRecursion(host)) return;
+	RecursiveVisitor::caseStmtBreak(host);
+	if (breakRecursion(host)) return;
 
 	if(host.count.get())
 	{
@@ -430,8 +430,8 @@ void SemanticAnalyzer::caseStmtBreak(ASTStmtBreak& host, void*)
 
 void SemanticAnalyzer::caseStmtContinue(ASTStmtContinue &host, void *)
 {
-    RecursiveVisitor::caseStmtContinue(host);
-    if (breakRecursion(host)) return;
+	RecursiveVisitor::caseStmtContinue(host);
+	if (breakRecursion(host)) return;
 
 	if(host.count.get())
 	{
@@ -455,7 +455,7 @@ void SemanticAnalyzer::caseDataTypeDef(ASTDataTypeDef& host, void*)
 	if(host.registered()) return; //Skip if already handled
 	// Resolve the base type under current scope.
 	DataType const& type = host.type->resolve(*scope, this);
-    if (breakRecursion(*host.type.get())) return;
+	if (breakRecursion(*host.type.get())) return;
 	if (!type.isResolved())
 	{
 		handleError(CompileError::UnresolvedType(&host, type.getName()));
@@ -1137,7 +1137,7 @@ extern bool delay_asserts;
 void SemanticAnalyzer::caseAssert(ASTAssert& host, void* param)
 {
 	visit(host.expr.get(), param);
-    if (breakRecursion(host)) return;
+	if (breakRecursion(host)) return;
 	int32_t val = *(host.expr->getCompileTimeValue(this, scope));
 	if(val == 0)
 	{
@@ -1185,7 +1185,7 @@ void SemanticAnalyzer::caseExprAssign(ASTExprAssign& host, void*)
 	visit(host.right.get(), paramRead);
 	if (breakRecursion(host)) return;	
 
-    DataType const* rtype = host.right->getReadType(scope, this);
+	DataType const* rtype = host.right->getReadType(scope, this);
 	if (!rtype)
 	{
 		handleError(
@@ -1246,7 +1246,7 @@ void SemanticAnalyzer::caseExprArrow(ASTExprArrow& host, void* param)
 {
     // Recurse on left.
 	visit(host.left.get());
-    if (breakRecursion(host)) return;
+	if (breakRecursion(host)) return;
 
 	// Grab the left side's class.
 	DataType const& base_ltype = *host.left->getReadType(scope, this);
@@ -1269,10 +1269,10 @@ void SemanticAnalyzer::caseExprArrow(ASTExprArrow& host, void* param)
 	}
     DataTypeClass const* leftType =
 		dynamic_cast<DataTypeClass const*>(&getNaiveType(base_ltype, scope));
-    if (!leftType)
+	if (!leftType)
 	{
 		handleError(CompileError::ArrowNotPointer(&host));
-        return;
+		return;
 	}
 	host.leftClass = program.getTypeStore().getClass(leftType->getClassId());
 	// zconsole_db("Arrow for type '%s->'", leftType->getName());
@@ -1359,12 +1359,12 @@ void SemanticAnalyzer::caseExprArrow(ASTExprArrow& host, void* param)
 	if (host.index)
 	{
 		visit(host.index.get());
-        if (breakRecursion(host)) return;
+		if (breakRecursion(host)) return;
 
-        checkCast(*host.index->getReadType(scope, this), DataType::FLOAT,
+		checkCast(*host.index->getReadType(scope, this), DataType::FLOAT,
                   host.index.get());
-        if (breakRecursion(host)) return;
-    }
+		if (breakRecursion(host)) return;
+	}
 }
 
 void SemanticAnalyzer::caseExprIndex(ASTExprIndex& host, void* param)
@@ -2015,11 +2015,11 @@ void SemanticAnalyzer::analyzeUnaryExpr(
 void SemanticAnalyzer::analyzeIncrement(ASTUnaryExpr& host)
 {
 	visit(host.operand.get(), paramReadWrite);
-    if (breakRecursion(host)) return;
+	if (breakRecursion(host)) return;
 
 	ASTExpr& operand = *host.operand;
-    checkCast(*operand.getReadType(scope, this), DataType::FLOAT, &host);
-    if (breakRecursion(host)) return;
+	checkCast(*operand.getReadType(scope, this), DataType::FLOAT, &host);
+	if (breakRecursion(host)) return;
 }
 
 void SemanticAnalyzer::analyzeBinaryExpr(
@@ -2036,4 +2036,3 @@ void SemanticAnalyzer::analyzeBinaryExpr(
 	checkCast(*host.right->getReadType(scope, this), rightType, &host);
 	if (breakRecursion(host)) return;
 }
-
