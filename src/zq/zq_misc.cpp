@@ -1148,15 +1148,14 @@ int32_t onShowDarkness()
 			readkey();
 
 			load_cset(RAMpal,5,5);
-			loadlvlpal(Color);
 		}
 		else
 		{
 			loadfadepal(Color*pdLEVEL+poFADE3);
 			update_hw_screen(true);
 			readkey();
-			loadlvlpal(Color);
 		}
+		loadlvlpal(Color);
 	}
 
 	return D_O_K;
