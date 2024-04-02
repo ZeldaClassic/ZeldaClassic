@@ -468,4 +468,3 @@ bool FFCDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 	}
 	return false;
 }
-
