@@ -63,21 +63,21 @@ static DIALOG edit_cset_dlg[] =
 	{ d_dummy_proc,         160, 140,    61,   21,    vc(14),   vc(1),      0,      0,          0,             0, (void *) "Jump", NULL, (void*) onJumpHSL },
 	{ jwin_hsl_proc,        72,   28,   174,   88,    vc(14),   vc(1),      0,      0,          0,             0, NULL, NULL, NULL },
 	{ jwin_cset_proc,       96,  170,   128,   24,    vc(14),   vc(1),      0,      0,          0,             0, NULL, NULL, NULL },
-    // 10
+	// 10
 	{ jwin_edit_proc,       24,  120,   24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          3,             0,       NULL, NULL, NULL },
-    { jwin_edit_proc,       24,  140,   24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          3,             0,       NULL, NULL, NULL },
-    { jwin_edit_proc,       24,  160,   24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          3,             0,       NULL, NULL, NULL },
+	{ jwin_edit_proc,       24,  140,   24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          3,             0,       NULL, NULL, NULL },
+	{ jwin_edit_proc,       24,  160,   24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          3,             0,       NULL, NULL, NULL },
 	{ jwin_func_button_proc,16,  180,   40,   21,    vc(14),   vc(1),      0,      0,          0,             0, (void *) "Insert", NULL, (void*) onInsertColor_Text },
 	{ jwin_func_button_proc,16,  205,   40,   21,    vc(14),   vc(1),      0,      0,          0,             0, (void *) "Jump", NULL, (void*) onJumpText },
 	// 15
 	{ jwin_func_button_proc,130, 140,    61,   21,    vc(14),   vc(1),      0,      0,          0,             0, (void *) "&Insert", NULL, (void*) onInsertColor },
-    { jwin_text_proc,        16,  124,   8,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "R", NULL, NULL },
-    { jwin_text_proc,        16,  144,   8,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "G", NULL, NULL },
-    { jwin_text_proc,        16,  164,   8,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "B", NULL, NULL },
-    { jwin_check_proc,      230,   30,   8,   9,    vc(0),              vc(11),           0,       0,          0,             0, (void *) "View 8b values", NULL, NULL },
+	{ jwin_text_proc,        16,  124,   8,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "R", NULL, NULL },
+	{ jwin_text_proc,        16,  144,   8,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "G", NULL, NULL },
+	{ jwin_text_proc,        16,  164,   8,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "B", NULL, NULL },
+	{ jwin_check_proc,      230,   30,   8,   9,    vc(0),              vc(11),           0,       0,          0,             0, (void *) "View 8b values", NULL, NULL },
 	// 20
-    { jwin_text_proc,       16,   54,   8,     8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "0x", NULL, NULL },
-    { jwin_edit_proc,       24,   50,   48,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          6,             0,       NULL, NULL, NULL },
+	{ jwin_text_proc,       16,   54,   8,     8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "0x", NULL, NULL },
+	{ jwin_edit_proc,       24,   50,   48,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          6,             0,       NULL, NULL, NULL },
 	{ jwin_func_button_proc,16,   70,   40,   21,    vc(14),   vc(1),      0,      0,          0,             0, (void *) "Insert", NULL, (void*) onInsertColor_Hex },
 	{ jwin_func_button_proc,16,   95,   40,   21,    vc(14),   vc(1),      0,      0,          0,             0, (void *) "Jump", NULL, (void*) onJumpHex },
 	
