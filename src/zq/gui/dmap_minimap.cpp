@@ -7,8 +7,6 @@
 #include <cassert>
 #include <utility>
 
-using namespace GUI;
-
 void drawxmap(ALLEGRO_BITMAP* dest, int32_t themap, int32_t xoff, bool large, int dx, int dy);
 
 namespace GUI

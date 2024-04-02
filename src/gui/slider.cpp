@@ -7,8 +7,6 @@
 #include <cassert>
 #include <utility>
 
-using namespace GUI;
-
 namespace GUI
 {
 	Slider::Slider() :

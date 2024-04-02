@@ -7,8 +7,6 @@
 #include <cassert>
 #include <utility>
 
-using namespace GUI;
-
 void custom_vsync();
 
 void drawdmapscreenmarker(BITMAP* dest, int32_t pos, bool large, int dx, int dy, byte c1, byte c2, bool inner)
