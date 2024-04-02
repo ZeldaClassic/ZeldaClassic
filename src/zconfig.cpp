@@ -167,4 +167,3 @@ void zc_set_config_basic(char const* header, char const* name, char const* val)
 {
 	set_config_string(header,name,val);
 }
-

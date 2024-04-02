@@ -27,4 +27,3 @@ DropsetSymbols::DropsetSymbols()
 void DropsetSymbols::generateCode()
 {
 }
-

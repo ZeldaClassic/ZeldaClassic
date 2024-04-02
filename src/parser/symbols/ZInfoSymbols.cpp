@@ -69,4 +69,3 @@ void ZInfoSymbols::generateCode()
 		function->giveCode(code);
 	}
 }
-
