@@ -698,7 +698,7 @@ bool gamedata::get_cont_percent()
 
 void gamedata::set_cont_percent(bool ispercent)
 {
-    set_generic(ispercent ? 1 : 0, 6);
+    set_generic(!!ispercent, 6);
 }
 
 

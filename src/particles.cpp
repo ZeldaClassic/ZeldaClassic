@@ -24,7 +24,7 @@ void particle::draw(BITMAP *dest)
 
 particle::particle(zfix X,zfix Y,int32_t L,int32_t CS,int32_t C)
 {
-    uid = getNextUID();
+	uid = getNextUID();
 	x=X;
 	y=Y;
 	layer=L;
@@ -39,12 +39,12 @@ particle::particle(zfix X,zfix Y,int32_t L,int32_t CS,int32_t C)
 
 void particle::move(zfix s)
 {
-    if(angular)
-    {
-        x += zc::math::Cos(angle)*s;
-        y += zc::math::Sin(angle)*s;
+	if(angular)
+	{
+		x += zc::math::Cos(angle)*s;
+		y += zc::math::Sin(angle)*s;
 		return;
-    }
+	}
 	
 	if(dir<0) return;
 	switch(NORMAL_DIR(dir))
@@ -89,8 +89,8 @@ void particle::move(zfix s)
 
 int32_t particle::getNextUID()
 {
-    static int32_t nextid = 0;
-    return nextid++;
+	static int32_t nextid = 0;
+	return nextid++;
 }
 
 pDivineEscapeDust::pDivineEscapeDust(zfix X,zfix Y,int32_t L,int32_t CS,int32_t C, int32_t T) : particle(X,Y,L,CS,C)
