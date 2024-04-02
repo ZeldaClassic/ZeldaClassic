@@ -530,10 +530,7 @@ void go_tiles()
 	{
 		newundotilebuf[i].format=newtilebuf[i].format;
 		
-		if(newundotilebuf[i].data!=NULL)
-		{
-			free(newundotilebuf[i].data);
-		}
+		free(newundotilebuf[i].data);
 		
 		newundotilebuf[i].data=(byte *)malloc(tilesize(newundotilebuf[i].format));
 		
@@ -555,10 +552,7 @@ void go_slide_tiles(int32_t columns, int32_t rows, int32_t top, int32_t left)
 			int32_t t=((top+r)*TILES_PER_ROW)+left+c;
 			newundotilebuf[t].format=newtilebuf[t].format;
 			
-			if(newundotilebuf[t].data!=NULL)
-			{
-				free(newundotilebuf[t].data);
-			}
+			free(newundotilebuf[t].data);
 			
 			newundotilebuf[t].data=(byte *)malloc(tilesize(newundotilebuf[t].format));
 			
@@ -588,10 +582,7 @@ void comeback_tiles()
 	{
 		newtilebuf[i].format=newundotilebuf[i].format;
 		
-		if(newtilebuf[i].data!=NULL)
-		{
-			free(newtilebuf[i].data);
-		}
+		free(newtilebuf[i].data);
 		
 		newtilebuf[i].data=(byte *)malloc(tilesize(newtilebuf[i].format));
 		
@@ -3756,10 +3747,7 @@ void draw_grab_scr(int32_t tile,int32_t cs,byte *newtile,int32_t black,int32_t w
 	newtilebuf[0].format=newformat[0];
 	blank_tile_table[0] = false;
 	
-	if(newtilebuf[0].data!=NULL)
-	{
-		free(newtilebuf[0].data);
-	}
+	free(newtilebuf[0].data);
 	
 	if(is_valid_format(newtilebuf[0].format))
 	{
@@ -3780,10 +3768,7 @@ void draw_grab_scr(int32_t tile,int32_t cs,byte *newtile,int32_t black,int32_t w
 	newtilebuf[0].format=hold.format;
 	blank_tile_table[0] = holdblank;
 	
-	if(newtilebuf[0].data!=NULL)
-	{
-		free(newtilebuf[0].data);
-	}
+	free(newtilebuf[0].data);
 	
 	if(is_valid_format(newtilebuf[0].format))
 	{
@@ -3799,10 +3784,7 @@ void draw_grab_scr(int32_t tile,int32_t cs,byte *newtile,int32_t black,int32_t w
 		newtilebuf[0].data=NULL;
 	}
 	
-	if(hold.data!=NULL)
-	{
-		free(hold.data);
-	}
+	free(hold.data);
 	
 	puttile16(screen2,tile,208,192+yofs,cs,0);
 	overtile16(screen2,tile,232,192+yofs,cs,0);
@@ -4660,10 +4642,7 @@ bool leech_tiles(tiledata *dest,int32_t start,int32_t cs)
 //      dest[currtile].format=(cdepth==3?imported_format:cdepth);
 			dest[currtile].format=newformat;
 			
-			if(dest[currtile].data!=NULL)
-			{
-				free(dest[currtile].data);
-			}
+			free(dest[currtile].data);
 			
 			dest[currtile].data=(byte *)malloc(tilesize(dest[currtile].format));
 			
@@ -5433,8 +5412,7 @@ void grab_tile(int32_t tile,int32_t &cs)
 				int temptile=tile+((TILES_PER_ROW*y)+x);
 				int format=(bp==8) ? tf8Bit : tf4Bit;
 				
-				if(newtilebuf[temptile].data!=NULL)
-					free(newtilebuf[temptile].data);
+				free(newtilebuf[temptile].data);
 				
 				newtilebuf[temptile].format=format;
 				newtilebuf[temptile].data=(byte *)malloc(tilesize(format));
