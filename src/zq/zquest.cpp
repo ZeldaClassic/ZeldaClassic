@@ -19257,8 +19257,7 @@ int32_t onOrgComboAliases()
 
 int32_t onNewComboAlias()
 {
-    combo_alias *combo;
-    combo = &temp_aliases[comboa_cnt];
+    combo_alias *combo = &temp_aliases[comboa_cnt];
     
     char cwidth[5];
     char cheight[5];
@@ -19611,11 +19610,8 @@ int32_t d_comboabutton_proc(int32_t msg, DIALOG *d, int32_t c)
                 d->flags &= ~D_SELECTED;
                 object_message(d, MSG_DRAW, 0);
             }
-        }
         
-        /* should we close the dialog? */
-        if(down)
-        {
+	    /* should we close the dialog? */
             onNewComboAlias();
             return D_REDRAW;
         }
