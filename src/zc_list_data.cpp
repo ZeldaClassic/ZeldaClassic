@@ -63,7 +63,7 @@ GUI::ListData GUI::ZCListData::fonts(bool ss_fonts, bool numbered, bool sorted)
 	std::vector<std::string> strings;
 	if(ss_fonts)
 	{
-		for(auto q = 0; ssfont2_str[q][0]; ++q)
+		for(int q = 0; ssfont2_str[q][0]; ++q)
 		{
 			char const* fontname = ssfont2_str[q];
 			std::string name;
@@ -79,7 +79,7 @@ GUI::ListData GUI::ZCListData::fonts(bool ss_fonts, bool numbered, bool sorted)
 			else strings.push_back(name);
 		}
 	}
-	else for(auto q = 0; q < font_max; ++q)
+	else for(int q = 0; q < font_max; ++q)
 	{
 		char const* fontname = msgfont_str[q].c_str();
 		std::string name;
@@ -176,7 +176,7 @@ GUI::ListData GUI::ZCListData::shadow_types()
 {
 	std::vector<std::string> strings;
 
-	for(auto q = 0; q < sstsMAX; ++q)
+	for(int q = 0; q < sstsMAX; ++q)
 	{
 		strings.push_back(shadowstyle_str[q]);
 	}

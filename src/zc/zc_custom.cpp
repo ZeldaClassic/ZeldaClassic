@@ -921,6 +921,7 @@ void setupherodefenses()
 {
 	//For now this just zeroes out Hero's defenses by default, set these to appropriate defaults if necessary if defense implementation is extended. -Jman
 	for (int32_t i = 0; i < wMax; i++)
+	{
 		hero_defence[i] = 0;
 	}
 }
