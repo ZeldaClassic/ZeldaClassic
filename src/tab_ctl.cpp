@@ -216,10 +216,7 @@ int32_t tab_count(TABPANEL *panel)
 {
     int32_t i=0;
     
-    for(i=0; panel[i].text; ++i)
-    {
-        /* do nothing */
-    }
+    for (i = 0; panel[i].text; ++i); /* do nothing */
     
     return i;
 }
