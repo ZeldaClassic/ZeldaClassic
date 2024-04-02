@@ -1217,7 +1217,7 @@ int32_t get_qst_buffers()
 	MsgStrings = new MsgStr[msg_strings_size];
         
     //memset(MsgStrings, 0, sizeof(MsgStr)*msg_strings_size);
-	for(auto q = 0; q < msg_strings_size; ++q)
+	for(int q = 0; q < msg_strings_size; ++q)
 	{
 		MsgStrings[q].clear();
 	}
@@ -3579,9 +3579,9 @@ int32_t readrules(PACKFILE *f, zquestheader *Header)
 	}
 	if(compatrule_version < 27) //Noticed some junk data in the QR array...
 	{
-		for(auto q = qr_POLVIRE_NO_SHADOW+1; q < qr_PARSER_250DIVISION; ++q)
+		for(int q = qr_POLVIRE_NO_SHADOW+1; q < qr_PARSER_250DIVISION; ++q)
 			set_qr(q,0);
-		for(auto q = qr_COMBODATA_INITD_MULT_TENK+1; q < qr_MAX; ++q)
+		for(int q = qr_COMBODATA_INITD_MULT_TENK+1; q < qr_MAX; ++q)
 			set_qr(q,0);
 		//This should nuke any remaining junk data... not sure if it affected anything previous. -Em
 	}
@@ -3800,7 +3800,7 @@ int32_t readstrings(PACKFILE *f, zquestheader *Header)
 				delete[] MsgStrings;
 				MsgStrings = new MsgStr[MAXMSGS];
 				msg_strings_size = MAXMSGS;
-				for(auto q = 0; q < msg_strings_size; ++q)
+				for(int q = 0; q < msg_strings_size; ++q)
 				{
 					MsgStrings[q].clear();
 				}
@@ -3902,7 +3902,7 @@ int32_t readstrings(PACKFILE *f, zquestheader *Header)
 			delete[] MsgStrings;
 			MsgStrings = new MsgStr[MAXMSGS];
 			msg_strings_size = MAXMSGS;
-			for(auto q = 0; q < msg_strings_size; ++q)
+			for(int q = 0; q < msg_strings_size; ++q)
 			{
 				MsgStrings[q].clear();
 			}
@@ -6789,7 +6789,7 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					}
 					else
 					{
-						for(auto q = 0; q < 2; ++q)
+						for(int q = 0; q < 2; ++q)
 						{
 							if(!p_igetw(&tempitem.cost_amount[q],f))
 							{
@@ -7013,15 +7013,15 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				{
 					return qe_invalid;
 				}
-				auto num_cost_tmr = (s_version > 52 ? 2 : 1);
-				for(auto q = 0; q < num_cost_tmr; ++q)
+				int num_cost_tmr = (s_version > 52 ? 2 : 1);
+				for(int q = 0; q < num_cost_tmr; ++q)
 				{
 					if(!p_igetl(&tempitem.magiccosttimer[q],f))
 					{
 						return qe_invalid;
 					}
 				}
-				for(auto q = num_cost_tmr; q < 2; ++q)
+				for(int q = num_cost_tmr; q < 2; ++q)
 					tempitem.magiccosttimer[q] = 0;
 			}
 			if ( s_version >= 28 )  //! New itemdata vars for weapon editor. -Z
@@ -7091,7 +7091,7 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				}
 				else
 				{
-					for(auto q = 0; q < 2; ++q)
+					for(int q = 0; q < 2; ++q)
 					{
 						if(!p_getc(&tempitem.cost_counter[q],f))
 						{
@@ -12903,28 +12903,28 @@ int32_t read_one_ffscript(PACKFILE *f, zquestheader *, int32_t script_index, wor
 			if(!p_getcstr(&temp_meta.author,f))
 				return qe_invalid;
 			auto num_meta_attrib = (zmeta_version < 5 ? 4 : 10);
-			for(auto q = 0; q < num_meta_attrib; ++q)
+			for(int q = 0; q < num_meta_attrib; ++q)
 			{
 				if(!p_getcstr(&temp_meta.attributes[q],f))
 					return qe_invalid;
 				if(!p_getwstr(&temp_meta.attributes_help[q],f))
 					return qe_invalid;
 			}
-			for(auto q = 0; q < 8; ++q)
+			for(int q = 0; q < 8; ++q)
 			{
 				if(!p_getcstr(&temp_meta.attribytes[q],f))
 					return qe_invalid;
 				if(!p_getwstr(&temp_meta.attribytes_help[q],f))
 					return qe_invalid;
 			}
-			for(auto q = 0; q < 8; ++q)
+			for(int q = 0; q < 8; ++q)
 			{
 				if(!p_getcstr(&temp_meta.attrishorts[q],f))
 					return qe_invalid;
 				if(!p_getwstr(&temp_meta.attrishorts_help[q],f))
 					return qe_invalid;
 			}
-			for(auto q = 0; q < 16; ++q)
+			for(int q = 0; q < 16; ++q)
 			{
 				if(!p_getcstr(&temp_meta.usrflags[q],f))
 					return qe_invalid;
@@ -12934,14 +12934,14 @@ int32_t read_one_ffscript(PACKFILE *f, zquestheader *, int32_t script_index, wor
 		}
 		if(zmeta_version > 3)
 		{
-			for(auto q = 0; q < 8; ++q)
+			for(int q = 0; q < 8; ++q)
 			{
 				if(!p_getcstr(&temp_meta.initd[q],f))
 					return qe_invalid;
 				if(!p_getwstr(&temp_meta.initd_help[q],f))
 					return qe_invalid;
 			}
-			for(auto q = 0; q < 8; ++q)
+			for(int q = 0; q < 8; ++q)
 			{
 				if(!p_getc(&temp_meta.initd_type[q],f))
 					return qe_invalid;
@@ -12949,7 +12949,7 @@ int32_t read_one_ffscript(PACKFILE *f, zquestheader *, int32_t script_index, wor
 		}
 		else
 		{
-			for(auto q = 0; q < 8; ++q)
+			for(int q = 0; q < 8; ++q)
 			{
 				temp_meta.initd[q] = temp_meta.run_idens[q];
 			}
@@ -17138,7 +17138,7 @@ int32_t readmapscreen(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr, wo
 			tempffc.updateSolid();
 			if(!p_igetw(&(tempffc.script),f))
 				return qe_invalid;
-			for(auto q = 0; q < 8; ++q)
+			for(int q = 0; q < 8; ++q)
 			{
 				if(!p_igetl(&(tempffc.initd[q]),f))
 					return qe_invalid;
@@ -18325,7 +18325,7 @@ int32_t readcomboaliases(PACKFILE *f, zquestheader *Header, word version, word b
 		temp_cpool.clear();
 		
 		int32_t cp_cid; int8_t cp_cs; word cp_quant;
-		for(auto q = 0; q < num_combos_in_pool; ++q)
+		for(int q = 0; q < num_combos_in_pool; ++q)
 		{
 			if(!p_igetl(&cp_cid,f))
 			{
@@ -18402,7 +18402,7 @@ int32_t readcomboaliases(PACKFILE *f, zquestheader *Header, word version, word b
 		temp_cauto.setArg(arg);
 
 		int32_t ca_cid; byte ca_ctype;  int16_t ca_offset; int16_t ca_engrave_offset;
-		for (auto q = 0; q < num_combos_in_cauto; ++q)
+		for (int q = 0; q < num_combos_in_cauto; ++q)
 		{
 			if (!p_getc(&ca_ctype, f))
 			{
@@ -20606,7 +20606,7 @@ int32_t readinitdata_old(PACKFILE *f, zquestheader *Header, word s_version, word
 			return qe_invalid;
 		if (!(numgenscript >= 0 && numgenscript <= NUMSCRIPTSGENERIC))
 			return qe_invalid;
-		for(auto q = 1; q < numgenscript; ++q)
+		for(int q = 1; q < numgenscript; ++q)
 		{
 			if(!p_getc(&tempbyte,f))
 				return qe_invalid;
@@ -20617,7 +20617,7 @@ int32_t readinitdata_old(PACKFILE *f, zquestheader *Header, word s_version, word
 				return qe_invalid;
 			if(!p_igetw(&temp_zinit.gen_reloadState[q],f))
 				return qe_invalid;
-			for(auto p = 0; p < 8; ++p)
+			for(int p = 0; p < 8; ++p)
 				if(!p_igetl(&temp_zinit.gen_initd[q][p],f))
 					return qe_invalid;
 			dword sz;
