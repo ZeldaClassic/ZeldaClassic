@@ -19,7 +19,7 @@ bool call_paledit_dlg(char* namebuf, byte* cdata, PALETTE *pal, int32_t offset, 
 {
 	BITMAP* tmp = create_bitmap_ex(8,192_px,156_px);
 	clear_bitmap(tmp);
-	for(auto pos = 0; pos < 208; ++pos)
+	for(int pos = 0; pos < 208; ++pos)
 	{
 		rectfill(tmp, (pos%16)*12_px, (pos/16)*12_px, ((pos%16)*12_px)+12_px-1_px, ((pos/16)*12_px)+(12_px-1), pos);
 	}
@@ -32,7 +32,7 @@ bool call_paledit_dlg(char* namebuf, byte* cdata, PALETTE *pal, int32_t offset, 
 PalEditDialog::PalEditDialog(BITMAP* bmp, byte* cdata, PALETTE* pal, char* namebuf, int32_t offset, int32_t index) : bmp(bmp),
 	coldata(cdata), palt(pal), namebuf(namebuf), offset(offset), index(index)
 {
-	for(auto i = 0; i < pdLEVEL; ++i)
+	for(int i = 0; i < pdLEVEL; ++i)
 	{
 		load_cset(undo,i,i+offset);
 	}
@@ -316,7 +316,7 @@ bool PalEditDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 	switch(msg.message)
 	{
 		case message::CANCEL:
-			for(auto i = 0; i < pdLEVEL*16; ++i)
+			for(int i = 0; i < pdLEVEL*16; ++i)
 			{
 				coldata[(i*3)+0] = undo[i].r;
 				coldata[(i*3)+1] = undo[i].g;

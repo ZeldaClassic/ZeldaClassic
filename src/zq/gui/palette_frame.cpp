@@ -54,9 +54,7 @@ void PaletteFrame::setPal(PALETTE* value)
 
 int32_t PaletteFrame::getSelection()
 {
-	if (alDialog) return alDialog->d2;
-	
-	return 0;
+	return alDialog ? alDialog->d2 : 0;
 }
 
 void PaletteFrame::setCount(uint8_t value)
