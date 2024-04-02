@@ -1167,7 +1167,7 @@ int32_t onIncreaseFlag()
 {
 	do
 	{
-		Flag=(Flag+1);
+		Flag++;
 
 		if(Flag==mfMAX)
 		{
@@ -1188,7 +1188,7 @@ int32_t onDecreaseFlag()
 			Flag=mfMAX;
 		}
 
-		Flag=(Flag-1);
+		Flag--;
 	} while(!ZI.isUsableMapFlag(Flag));
 	
 	refresh(rMENU);
