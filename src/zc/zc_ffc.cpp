@@ -105,4 +105,3 @@ void zc_ffc_changer(ffcdata& ffc, ffcdata& other, int32_t i, int32_t j)
 	ffc.updateSolid();
 	ffc.solid_update(false);
 }
-

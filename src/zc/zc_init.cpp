@@ -41,7 +41,7 @@ int32_t onCheatConsole()
 		*zinit2 = *base;
 	}
 
-    int32_t rval = doInit(zinit2, true);
+	int32_t rval = doInit(zinit2, true);
 	std::string delta = serialize_init_data_delta(base, zinit2);
 	if (delta.size())
 		cheat_delta = delta;
@@ -49,7 +49,7 @@ int32_t onCheatConsole()
 	delete base;
 	delete zinit2;
 
-    return rval;
+	return rval;
 }
 
 void onInitOK()
