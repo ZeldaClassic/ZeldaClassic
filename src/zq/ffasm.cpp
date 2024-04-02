@@ -3951,10 +3951,9 @@ int32_t set_argument(char const* argbuf, script_data **script, int32_t com, int3
 		arg = &((*script)->zasm[com].arg1);
 	}
 	
-	int32_t i=0;
 	char tempvar[80];
 	
-	while(variable_list[i].id>-1)
+	for (int32_t i=0; variable_list[i].id>-1; ++i)
 	{
 		if(variable_list[i].maxcount>1)
 		{
@@ -3985,8 +3984,6 @@ int32_t set_argument(char const* argbuf, script_data **script, int32_t com, int3
 				return 1;
 			}
 		}
-		
-		++i;
 	}
 	
 	return 0;
