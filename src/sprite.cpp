@@ -161,14 +161,14 @@ sprite::sprite(): solid_object()
 
 sprite::sprite(sprite const & other):
 	solid_object(other),
-    z(other.z), fall(other.fall), fakez(other.fakez), tile(other.tile),
-    shadowtile(other.shadowtile), cs(other.cs), flip(other.flip),
-    c_clk(other.c_clk), clk(other.clk), misc(other.misc), xofs(other.xofs),
-    yofs(other.yofs), zofs(other.zofs), hzsz(other.hzsz), txsz(other.txsz),
-    tysz(other.tysz), id(other.id), slopeid(other.slopeid),
-    onplatid(other.onplatid), angular(other.angular), canfreeze(other.canfreeze),
-    angle(other.angle), lasthit(other.lasthit), lasthitclk(other.lasthitclk),
-    drawstyle(other.drawstyle), extend(other.extend), wpnsprite(other.wpnsprite),
+	z(other.z), fall(other.fall), fakez(other.fakez), tile(other.tile),
+	shadowtile(other.shadowtile), cs(other.cs), flip(other.flip),
+	c_clk(other.c_clk), clk(other.clk), misc(other.misc), xofs(other.xofs),
+	yofs(other.yofs), zofs(other.zofs), hzsz(other.hzsz), txsz(other.txsz),
+	tysz(other.tysz), id(other.id), slopeid(other.slopeid),
+	onplatid(other.onplatid), angular(other.angular), canfreeze(other.canfreeze),
+	angle(other.angle), lasthit(other.lasthit), lasthitclk(other.lasthitclk),
+	drawstyle(other.drawstyle), extend(other.extend), wpnsprite(other.wpnsprite),
 	scriptflag(other.scriptflag), script(other.script), weaponscript(other.weaponscript),
 	scripttile(other.scripttile), scriptflip(other.scriptflip),
 	do_animation(other.do_animation), rotation(other.rotation),
@@ -2072,7 +2072,7 @@ sprite_list::sprite_list() : count(0), active_iterator(0), max_sprites(255),
 void sprite_list::clear(bool force)
 {
 	int32_t ind = 0;
-    while(count>ind)
+	while(count>ind)
 	{
 		if(!del(ind, force))
 			++ind;
@@ -2113,53 +2113,53 @@ bool sprite_list::swap(int32_t a,int32_t b)
 
 bool sprite_list::add(sprite *s)
 {
-    if(count>=max_sprites)
-    {
-        delete s;
-        return false;
-    }
+	if(count>=max_sprites)
+	{
+		delete s;
+		return false;
+	}
     
-    containedUIDs[s->getUID()] = count;
-    sprites[count++]=s;
-    //checkConsistency();
-    return true;
+	containedUIDs[s->getUID()] = count;
+	sprites[count++]=s;
+	//checkConsistency();
+	return true;
 }
 
 bool sprite_list::remove(sprite *s)
 // removes pointer from list but doesn't delete it
 {
 	if(s->ignore_delete) return false;
-    if(s==lastSpriteRequested)
-    {
-        lastUIDRequested=0;
-        lastSpriteRequested=0;
-    }
+	if(s==lastSpriteRequested)
+	{
+		lastUIDRequested=0;
+		lastSpriteRequested=0;
+	}
     
-    map<int32_t, int32_t>::iterator it = containedUIDs.find(s->getUID());
+	map<int32_t, int32_t>::iterator it = containedUIDs.find(s->getUID());
     
-    if(it != containedUIDs.end())
-        containedUIDs.erase(it);
+	if(it != containedUIDs.end())
+		containedUIDs.erase(it);
         
-    int32_t j=0;
+	int32_t j=0;
     
-    for(; j<count; j++)
-        if(sprites[j] == s)
-            goto gotit;
+	for(; j<count; j++)
+		if(sprites[j] == s)
+			goto gotit;
             
-    return false;
+	return false;
     
 gotit:
 
-    for(int32_t i=j; i<count-1; i++)
-    {
-        sprites[i]=sprites[i+1];
-        containedUIDs[sprites[i]->getUID()] = i;
-    }
+	for(int32_t i=j; i<count-1; i++)
+	{
+		sprites[i]=sprites[i+1];
+		containedUIDs[sprites[i]->getUID()] = i;
+	}
     
-    --count;
-    if(j<=active_iterator) --active_iterator;
-    //checkConsistency();
-    return true;
+	--count;
+	if(j<=active_iterator) --active_iterator;
+	//checkConsistency();
+	return true;
 }
 
 zfix sprite_list::getX(int32_t j)
@@ -2755,11 +2755,11 @@ void movingblock::draw(BITMAP *dest)
 		cs = old_cs;
 		tile = old_tile;
 	}
-    else if(clk)
-    {
-        //    sprite::draw(dest);
-        overcombo(dest,real_x(x+xofs),real_y(y+yofs),bcombo ,cs);
-    }
+	else if(clk)
+	{
+		//    sprite::draw(dest);
+		overcombo(dest,real_x(x+xofs),real_y(y+yofs),bcombo ,cs);
+	}
 }
 
 bool movingblock::draw(BITMAP* dest, int layer)
@@ -2917,7 +2917,7 @@ bool insideRotRect(double x, double y, int32_t x1, int32_t y1, int32_t x2, int32
 
 bool lineLineColl(zfix x1, zfix y1, zfix x2, zfix y2, zfix x3, zfix y3, zfix x4, zfix y4)
 {
-	 float denominator = ((x2 - x1) * (y4 - y3)) - ((y2 - y1) * (x4 - x3));
+	float denominator = ((x2 - x1) * (y4 - y3)) - ((y2 - y1) * (x4 - x3));
 	float numerator1 = ((y1 - y3) * (x4 - x3)) - ((x1 - x3) * (y4 - y3));
 	float numerator2 = ((y1 - y3) * (x2 - x1)) - ((x1 - x3) * (y2 - y1));
 	
@@ -2959,8 +2959,8 @@ double comparePointLine(double x, double y, double x1, double y1, double x2, dou
 		if (x1 < x2) return y - y1;
 		else return y1 - y;
 	}
-    double slope = (y2-y1)/(x2-x1);
-    double b = y1 - (slope*x1);
-    double ly = slope*x + b;
-    return y-ly;
+	double slope = (y2-y1)/(x2-x1);
+	double b = y1 - (slope*x1);
+	double ly = slope*x + b;
+	return y-ly;
 }
