@@ -321,7 +321,7 @@ void loadinfo(ItemNameInfo * inf, itemdata const& ref)
 		}
 		case itype_refill:
 		{
-			for(auto q = 0; q < 5; ++q)
+			for(int q = 0; q < 5; ++q)
 			{
 				std::string numstr = std::to_string(q + 1);
 				std::string ordstr = ordinal(q + 1);
@@ -595,14 +595,14 @@ void loadinfo(ItemNameInfo * inf, itemdata const& ref)
 		}
 		case itype_itmbundle:
 		{
-			for(auto q = 0; q < 10; ++q)
+			for(int q = 0; q < 10; ++q)
 				_SET(misc[q], "Item " + std::to_string(q+1) + ":", "If > -1, an item ID to 'collect' when you collect this item bundle.");
 			_SET(flag[0], "Run Pickup Scripts", "Run the collect script of bundled items.");
 			break;
 		}
 		case itype_progressive_itm:
 		{
-			for(auto q = 0; q < 10; ++q)
+			for(int q = 0; q < 10; ++q)
 				_SET(misc[q], "Item " + std::to_string(q+1) + ":", "If > -1, an item ID in the progressive order.");
 			break;
 		}
@@ -2679,7 +2679,7 @@ std::shared_ptr<GUI::Widget> ItemEditorDialog::view()
 
 void load_meta(ItemNameInfo& inf, zasm_meta const& meta)
 {
-	for(auto q = 0; q < 15; ++q)
+	for(int q = 0; q < 15; ++q)
 	{
 		if(meta.usrflags[q].size())
 			inf.flag[q] = meta.usrflags[q];
@@ -2700,7 +2700,7 @@ void ItemEditorDialog::refreshScripts()
 	std::string wp_initd[8];
 	int32_t ty_it_initd[8];
 	int32_t ty_wp_initd[8];
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		it_initd[q] = "InitD[" + std::to_string(q) + "]";
 		h_it_initds[q].clear();
@@ -2716,7 +2716,7 @@ void ItemEditorDialog::refreshScripts()
 	{
 		did_item_scr = true;
 		zasm_meta const& meta = itemspritescripts[local_itemref.sprite_script]->meta;
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 		{
 			if(meta.initd[q].size())
 				it_initd[q] = meta.initd[q];
@@ -2730,7 +2730,7 @@ void ItemEditorDialog::refreshScripts()
 	{
 		did_item_scr = true;
 		zasm_meta const& meta = itemscripts[local_itemref.collect_script]->meta;
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 		{
 			if(meta.initd[q].size())
 				it_initd[q] = meta.initd[q];
@@ -2744,7 +2744,7 @@ void ItemEditorDialog::refreshScripts()
 	{
 		did_item_scr = true;
 		zasm_meta const& meta = itemscripts[local_itemref.script]->meta;
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 		{
 			if(meta.initd[q].size())
 				it_initd[q] = meta.initd[q];
@@ -2756,13 +2756,13 @@ void ItemEditorDialog::refreshScripts()
 	}
 	if(!did_item_scr)
 	{
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 			ty_it_initd[q] = nswapDEC;
 	}
 	if(local_itemref.weaponscript)
 	{
 		zasm_meta const& meta = lwpnscripts[local_itemref.weaponscript]->meta;
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 		{
 			if(meta.initd[q].size())
 				wp_initd[q] = meta.initd[q];
@@ -2774,10 +2774,10 @@ void ItemEditorDialog::refreshScripts()
 	}
 	else
 	{
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 			ty_wp_initd[q] = nswapDEC;
 	}
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		if(ty_it_initd[q] > -1)
 			tf_it_initd[q]->setSwapType(ty_it_initd[q]);

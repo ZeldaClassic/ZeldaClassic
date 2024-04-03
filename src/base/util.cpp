@@ -797,7 +797,7 @@ namespace util
 				{
 					char buf[16] = {0};
 					strcpy(buf, zslongToFix(val).str().c_str());
-					for(auto q = strlen(buf)-1; buf[q] == '0'; --q)
+					for(int q = strlen(buf)-1; buf[q] == '0'; --q)
 					{
 						//Kill trailing zeroes
 						buf[q] = 0;

@@ -32,13 +32,13 @@ bool newcombo::is_blank(bool ignoreEff)
 	if(nexttimer) return false;
 	if(skipanimy) return false;
 	if(animflags) return false;
-	for(auto q = 0; q < 6; ++q)
+	for(int q = 0; q < 6; ++q)
 		if(expansion[q]) return false;
-	for(auto q = 0; q < NUM_COMBO_ATTRIBUTES; ++q)
+	for(int q = 0; q < NUM_COMBO_ATTRIBUTES; ++q)
 		if(attributes[q]) return false;
 	if(usrflags) return false;
 	if(genflags) return false;
-	for(auto q = 0; q < 6; ++q)
+	for(int q = 0; q < 6; ++q)
 		if(triggerflags[q]) return false;
 	if(triggerlevel) return false;
 	if(triggerbtn) return false;
@@ -65,12 +65,12 @@ bool newcombo::is_blank(bool ignoreEff)
 	if(trig_group) return false;
 	if(trig_group_val) return false;
 	if(!label.empty()) return false;
-	for(auto q = 0; q < NUM_COMBO_ATTRIBYTES; ++q)
+	for(int q = 0; q < NUM_COMBO_ATTRIBYTES; ++q)
 		if(attribytes[q]) return false;
-	for(auto q = 0; q < NUM_COMBO_ATTRISHORTS; ++q)
+	for(int q = 0; q < NUM_COMBO_ATTRISHORTS; ++q)
 		if(attrishorts[q]) return false;
 	if(script) return false;
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 		if(initd[q]) return false;
 	if(o_tile) return false;
 	if(cur_frame) return false;

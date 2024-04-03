@@ -78,7 +78,7 @@ bool SetCheatDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 				return false;
 			}
 			int32_t found = 0;
-			for(auto q = 0; q < 4; ++q)
+			for(int q = 0; q < 4; ++q)
 			{
 				if(!strcmp(code.c_str(), zcheats.codes[q]))
 				{
@@ -97,7 +97,7 @@ bool SetCheatDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 				char buf[80];
 				sprintf(buf, "Cheat level %d unlocked!",found);
 				errlabel->setText(buf);
-				for(auto q = 0; q < 5; ++q)
+				for(int q = 0; q < 5; ++q)
 					radios[q]->setChecked(q==found);
 			}
 			else
@@ -105,7 +105,7 @@ bool SetCheatDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 			return false;
 		}
 		case message::OK:
-			for(auto q = 0; q < 5; ++q)
+			for(int q = 0; q < 5; ++q)
 			{
 				if(radios[q]->getChecked())
 				{

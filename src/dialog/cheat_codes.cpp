@@ -71,7 +71,7 @@ bool CheatCodesDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 		case message::OK:
 		{
 			SETFLAG(zcheats.flags, 1, enabledCB->getChecked());
-			for(auto q = 0; q < 4; ++q)
+			for(int q = 0; q < 4; ++q)
 			{
 				std::string str(textFields[q]->getText());
 				strcpy(zcheats.codes[q], str.c_str());
