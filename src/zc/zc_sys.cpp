@@ -6243,12 +6243,10 @@ const char *midilist(int32_t index, int32_t *list_size)
 	
 	int32_t i=0,m=0;
 	
-	while(m<=index && i<=MAXMIDIS)
+	for (; m<=index && i<=MAXMIDIS; ++i)
 	{
 		if(tunes[i].data)
 			++m;
-			
-		++i;
 	}
 	
 	--i;
