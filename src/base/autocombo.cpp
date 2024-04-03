@@ -105,7 +105,7 @@ void combo_auto::updateValid()
 }
 std::string combo_auto::getInvalidReason()
 {
-	std::string ret("");
+	std::string ret;
 	if (invalid_reasons & ACIR_ILLEGAL_TYPE)
 	{
 		if(type==AUTOCOMBO_NONE)
