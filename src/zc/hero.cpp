@@ -18479,7 +18479,7 @@ bool HeroClass::movexy(zfix dx, zfix dy, bool kb, bool ign_sv, bool shove, bool 
 							if(optional<zfix> ty = get_solid_coord(tx,ry,up,mdir,false,ry-shove_offset, (ladderhit != 2)))
 							{
 								zfix dy = zc_max(-1_zf,*ty-y);
-								if((shoved = dy))
+								if(shoved = dy)
 									movexy(0, dy, kb, true, false, false);
 							}
 						}
@@ -18496,7 +18496,7 @@ bool HeroClass::movexy(zfix dx, zfix dy, bool kb, bool ign_sv, bool shove, bool 
 							if(optional<zfix> ty = get_solid_coord(tx,ly,down,mdir,false,ly+shove_offset, (ladderhit != 1)))
 							{
 								zfix dy = zc_min(1_zf,*ty-y);
-								if((shoved = dy))
+								if(shoved = dy)
 									movexy(0, dy, kb, true, false, false);
 							}
 						}
@@ -19465,8 +19465,8 @@ void HeroClass::movehero()
 void HeroClass::get_move(int movedir, zfix& dx, zfix& dy, int32_t& facedir)
 {
 	dx = 0; dy = 0;
-    if(inlikelike || lstunclock > 0 || is_conveyor_stunned || movedir < 0)
-        return;
+	if(inlikelike || lstunclock > 0 || is_conveyor_stunned || movedir < 0)
+		return;
 	
 	zfix base_movepix(zfix(steprate) / 100);
 	zfix movepix(base_movepix);
@@ -19974,8 +19974,8 @@ void HeroClass::moveOld2(int32_t d2, int32_t forceRate)
 			}
 		}
 	}
-    bool slowcharging = charging>0 && (itemsbuf[getWpnPressed(itype_sword)].flags & ITEM_FLAG10);
-    bool is_swimming = (action == swimming);
+	bool slowcharging = charging>0 && (itemsbuf[getWpnPressed(itype_sword)].flags & ITEM_FLAG10);
+	bool is_swimming = (action == swimming);
 	bool fastSwim = (zinit.hero_swim_speed>60);
 	zfix rate(steprate);
 	int32_t shieldid = getCurrentActiveShield();
@@ -23702,7 +23702,7 @@ void HeroClass::checkspecial()
 		}
     }
     
-    // doors
+	// doors
 	bool has_shutter = false;
     for(int32_t i=0; i<4; i++)
         if(tmpscr->door[i]==dSHUTTER)
@@ -25075,7 +25075,7 @@ RaftingStuff:
 						
 		FFCore.warpScriptCheck();
 		draw_screen(tmpscr);
-        advanceframe(true);
+		advanceframe(true);
 		
 		skippedaframe=true;
 		
@@ -26530,65 +26530,65 @@ void HeroClass::exitcave()
 	bool updatemusic = FFCore.can_dmap_change_music(currdmap);
 	bool musicnocut = FFCore.music_update_flags & MUSIC_UPDATE_FLAG_NOCUT;
 
-    stop_sfx(QMisc.miscsfx[sfxLOWHEART]);
-    currscr=homescr;
-    loadscr(0,currdmap,currscr,255,false);                                   // bogus direction
-    x = tmpscr->warpreturnx[0];
-    y = tmpscr->warpreturny[0];
+	stop_sfx(QMisc.miscsfx[sfxLOWHEART]);
+	currscr=homescr;
+	loadscr(0,currdmap,currscr,255,false);                                   // bogus direction
+	x = tmpscr->warpreturnx[0];
+	y = tmpscr->warpreturny[0];
     
-    if(didpit)
-    {
-        didpit=false;
-        x=pitx;
-        y=pity;
-    }
+	if(didpit)
+	{
+		didpit=false;
+		x=pitx;
+		y=pity;
+	}
     
-    if(x+y == 0)
-        x = y = 80;
+	if(x+y == 0)
+		x = y = 80;
         
-    int32_t type1 = combobuf[MAPCOMBO(x,y-16)].type;
-    int32_t type2 = combobuf[MAPCOMBO(x,y)].type;
-    int32_t type3 = combobuf[MAPCOMBO(x,y+16)].type;
-    bool b = COOLSCROLL &&
+	int32_t type1 = combobuf[MAPCOMBO(x,y-16)].type;
+	int32_t type2 = combobuf[MAPCOMBO(x,y)].type;
+	int32_t type3 = combobuf[MAPCOMBO(x,y+16)].type;
+	bool b = COOLSCROLL &&
              ((type1==cCAVE) || (type1>=cCAVEB && type1<=cCAVED) ||
               (type2==cCAVE) || (type2>=cCAVEB && type2<=cCAVED) ||
               (type3==cCAVE2) || (type3>=cCAVE2B && type3<=cCAVE2D) ||
               (type2==cCAVE2) || (type2>=cCAVE2B && type2<=cCAVE2D));
-    ALLOFF();
-    blackscr(30,b?false:true);
-    ringcolor(false);
-    loadlvlpal(DMaps[currdmap].color);
-    lighting(false, true);
+	ALLOFF();
+	blackscr(30,b?false:true);
+	ringcolor(false);
+	loadlvlpal(DMaps[currdmap].color);
+	lighting(false, true);
 	if (updatemusic || !musicnocut)
 		music_stop();
-    kill_sfx();
-    putscr(scrollbuf,0,0,tmpscr);
-    putscrdoors(scrollbuf,0,0,tmpscr);
+	kill_sfx();
+	putscr(scrollbuf,0,0,tmpscr);
+	putscrdoors(scrollbuf,0,0,tmpscr);
     
-    if((type1==cCAVE)||(type1>=cCAVEB && type1<=cCAVED) || (type2==cCAVE)||(type2>=cCAVEB && type2<=cCAVED))
-    {
-        walkup(COOLSCROLL);
-    }
-    else if((type3==cCAVE2)||(type3>=cCAVE2B && type3<=cCAVE2D) || (type2==cCAVE2)||(type2>=cCAVE2B && type2<=cCAVE2D))
-    {
-        walkdown2(COOLSCROLL);
-    }
+	if((type1==cCAVE)||(type1>=cCAVEB && type1<=cCAVED) || (type2==cCAVE)||(type2>=cCAVEB && type2<=cCAVED))
+	{
+		walkup(COOLSCROLL);
+	}
+	else if((type3==cCAVE2)||(type3>=cCAVE2B && type3<=cCAVE2D) || (type2==cCAVE2)||(type2>=cCAVE2B && type2<=cCAVE2D))
+	{
+		walkdown2(COOLSCROLL);
+	}
     
-    show_subscreen_life=true;
-    show_subscreen_numbers=true;
+	show_subscreen_life=true;
+	show_subscreen_numbers=true;
 	if (updatemusic || !musicnocut)
 		playLevelMusic();
-    currcset=DMaps[currdmap].color;
-    dointro();
-    newscr_clk=frame;
-    activated_timed_warp=false;
-    dir=down;
-    set_respawn_point();
-    eat_buttons();
-    didstuff=0;
+	currcset=DMaps[currdmap].color;
+	dointro();
+	newscr_clk=frame;
+	activated_timed_warp=false;
+	dir=down;
+	set_respawn_point();
+	eat_buttons();
+	didstuff=0;
 	usecounts.clear();
-    map_bkgsfx(true);
-    loadside=dir^1;
+	map_bkgsfx(true);
+	loadside=dir^1;
 }
 
 
@@ -26596,18 +26596,18 @@ void HeroClass::stepforward(int32_t steps, bool adjust)
 {
 	if ( FFCore.nostepforward ) return;
 	if ( FFCore.temp_no_stepforward ) { FFCore.temp_no_stepforward = 0; return; }
-    zfix tx=x;           //temp x
-    zfix ty=y;           //temp y
-    zfix tstep(0);        //temp single step distance
-    zfix s(0);            //calculated step distance for all steps
-    z3step=2;
-    int32_t sh=shiftdir;
-    shiftdir=-1;
+	zfix tx=x;           //temp x
+	zfix ty=y;           //temp y
+	zfix tstep(0);        //temp single step distance
+	zfix s(0);            //calculated step distance for all steps
+	z3step=2;
+	int32_t sh=shiftdir;
+	shiftdir=-1;
     
-    for(int32_t i=steps; i>0; --i)
-    {
+	for(int32_t i=steps; i>0; --i)
+	{
 		if(diagonalMovement)
-        {
+		{
 			if(get_qr(qr_NEW_HERO_MOVEMENT) || IsSideSwim())
 			{
 				tstep = 1.5;
@@ -26617,9 +26617,9 @@ void HeroClass::stepforward(int32_t steps, bool adjust)
 				tstep=z3step;
 				z3step=(z3step%2)+1;
 			}
-        }
-        else
-        {
+		}
+		else
+		{
 			if(get_qr(qr_NEW_HERO_MOVEMENT))
 			{
 				tstep = 1.5;
@@ -26647,12 +26647,11 @@ void HeroClass::stepforward(int32_t steps, bool adjust)
 					break;
 				}
 			}
-        }
-        
-        s+=tstep;
-    }
+		}
+		s+=tstep;
+	}
     
-    z3step=2;
+	z3step=2;
     
 	x = x.getInt();
 	y = y.getInt();

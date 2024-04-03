@@ -486,4 +486,3 @@ template class VectorPickDialog<dword>;
 template class MapPickDialog<byte>;
 template class MapPickDialog<word>;
 template class MapPickDialog<dword>;
-
