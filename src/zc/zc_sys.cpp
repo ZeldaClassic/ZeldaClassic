@@ -6470,8 +6470,8 @@ int32_t onMIDICredits()
 		midi_pos = paused_midi_pos;
 	}
 		
-	if(text) free(text);
-	if(zmi) free(zmi);
+	free(text);
+	free(zmi);
 	return D_O_K;
 }
 
