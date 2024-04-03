@@ -36,17 +36,17 @@ extern script_bitmaps scb;
 
 inline double sd_log2( double n )  
 {  
-    // log(n)/log(2) is log2.  
+	// log(n)/log(2) is log2.  
 	double v = log( (double)n ) / log( (double)2 );  
-    return v;
+	return v;
 }  
 
 inline bool isPowerOfTwo(int32_t n) 
 { 
-   if(n==0) 
-   return false; 
+	if(n==0) 
+		return false; 
   
-   return (ceil(sd_log2(n)) == floor(sd_log2(n))); 
+	return (ceil(sd_log2(n)) == floor(sd_log2(n))); 
 } 
 
 
