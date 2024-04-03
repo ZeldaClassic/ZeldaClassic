@@ -34,7 +34,7 @@ void put_msg_str(char const* s, int32_t x, int32_t y, MsgStr const* str, int32_t
 	
 	int16_t old_margins[4] = {8,0,8,-8};
 	int16_t const* copy_from = get_qr(qr_OLD_STRING_EDITOR_MARGINS) ? old_margins : str->margins;
-	for(auto q = 0; q < 4; ++q)
+	for(int q = 0; q < 4; ++q)
 		msg_margins[q] = copy_from[q];
 	
 	int32_t cursor_x = msg_margins[left];
