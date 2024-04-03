@@ -149,7 +149,7 @@ bool ZModule::init(bool d) //bool default
 		strcpy(moduledata.quests[1],"purezc/773/1st-mirrored-vertical-and-horizontal.qst");
 #endif
 
-		for ( auto q = 0; q < 10; q++ )
+		for ( int q = 0; q < 10; q++ )
 		{
 			if ( moduledata.quests[q][0] == '-' )
 				strcpy(moduledata.quests[q],"");
@@ -166,7 +166,7 @@ bool ZModule::init(bool d) //bool default
 		strcpy(moduledata.skipnames[7],zc_get_config_basic("NAMEENTRY","eighth_qst_skip","-"));
 		strcpy(moduledata.skipnames[8],zc_get_config_basic("NAMEENTRY","ninth_qst_skip","-"));
 		strcpy(moduledata.skipnames[9],zc_get_config_basic("NAMEENTRY","tenth_qst_skip","-"));
-		for ( auto q = 0; q < 10; q++ )
+		for ( int q = 0; q < 10; q++ )
 		{
 			if ( moduledata.skipnames[q][0] == '-' )
 				strcpy(moduledata.skipnames[q],"");

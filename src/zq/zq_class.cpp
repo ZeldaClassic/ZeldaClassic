@@ -8564,7 +8564,7 @@ int32_t writeitems(PACKFILE *f, zquestheader *Header)
                 new_return(38);
             }
             
-			for(auto q = 0; q < 2; ++q)
+			for(int q = 0; q < 2; ++q)
 			{
 				if(!p_iputw(itemsbuf[i].cost_amount[q],f))
 				{
@@ -8737,7 +8737,7 @@ int32_t writeitems(PACKFILE *f, zquestheader *Header)
 			{
 				new_return(73);
 			}
-			for(auto q = 0; q < 2; ++q)
+			for(int q = 0; q < 2; ++q)
 			{
 				if(!p_iputl(itemsbuf[i].magiccosttimer[q],f))
 				{
@@ -8781,7 +8781,7 @@ int32_t writeitems(PACKFILE *f, zquestheader *Header)
 				new_return(83);
 			}
 			
-			for(auto q = 0; q < 2; ++q)
+			for(int q = 0; q < 2; ++q)
 			{
 				if(!p_putc(itemsbuf[i].cost_counter[q],f))
 				{
@@ -9106,7 +9106,7 @@ int32_t writemapscreen(PACKFILE *f, int32_t i, int32_t j)
 		}
 	}
 	
-	for(auto q = 0; q < 128; ++q)
+	for(int q = 0; q < 128; ++q)
 	{
 		if(screen.secretcombo[q]
 			|| screen.secretcset[q]
@@ -9117,7 +9117,7 @@ int32_t writemapscreen(PACKFILE *f, int32_t i, int32_t j)
 		}
 	}
 	
-	for(auto q = 0; q < 176; ++q)
+	for(int q = 0; q < 176; ++q)
 	{
 		if(screen.data[q] || screen.cset[q]
 			|| screen.sflag[q])
