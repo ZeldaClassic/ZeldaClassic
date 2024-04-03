@@ -43,7 +43,7 @@ std::string calc_retstr(byte scc, int32_t* args)
 	oss << "\\" << word(scc);
 	auto count = msg_code_operands(scc);
 	int32_t val;
-	for(auto q = 0; q < count; ++q)
+	for(int q = 0; q < count; ++q)
 	{
 		if(unsigned(args[q]) >= MAX_SCC_ARG)
 			val = -1;

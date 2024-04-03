@@ -19305,9 +19305,9 @@ void update_slope_combopos(int32_t lyr, int32_t pos)
 }
 void update_slope_comboposes()
 {
-	for(auto lyr = 0; lyr < 7; ++lyr)
+	for(int lyr = 0; lyr < 7; ++lyr)
 	{
-		for(auto pos = 0; pos < 176; ++pos)
+		for(int pos = 0; pos < 176; ++pos)
 			update_slope_combopos(lyr,pos);
 	}
 }
@@ -19374,7 +19374,7 @@ void screen_ffc_modify_postroutine(word index)
 
 void screen_combo_modify_pre(int32_t cid)
 {
-	for(auto lyr = 0; lyr < 7; ++lyr)
+	for(int lyr = 0; lyr < 7; ++lyr)
 	{
 		mapscr* t = FFCore.tempScreens[lyr];
 		for(int32_t i = 0; i < 176; i++)
@@ -19388,7 +19388,7 @@ void screen_combo_modify_pre(int32_t cid)
 }
 void screen_combo_modify_post(int32_t cid)
 {
-	for(auto lyr = 0; lyr < 7; ++lyr)
+	for(int lyr = 0; lyr < 7; ++lyr)
 	{
 		mapscr* t = FFCore.tempScreens[lyr];
 		for(int32_t i = 0; i < 176; i++)

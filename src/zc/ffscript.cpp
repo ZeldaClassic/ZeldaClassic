@@ -1943,7 +1943,7 @@ byte const& user_genscript::doscript() const
 void countGenScripts()
 {
 	max_valid_genscript = 0;
-	for(auto q = 1; q < NUMSCRIPTSGENERIC; ++q)
+	for(int q = 1; q < NUMSCRIPTSGENERIC; ++q)
 	{
 		if(genericscripts[q] && genericscripts[q]->valid())
 			max_valid_genscript = q;
@@ -1952,7 +1952,7 @@ void countGenScripts()
 void countObjects()
 {
 	max_valid_object = 0;
-	for(auto q = 0; q < MAX_USER_OBJECTS; ++q)
+	for(int q = 0; q < MAX_USER_OBJECTS; ++q)
 	{
 		if(script_objects[q].reserved)
 			max_valid_object = q+1;
@@ -1965,7 +1965,7 @@ void timeExitAllGenscript(byte exState)
 }
 void throwGenScriptEvent(int32_t event)
 {
-	for(auto q = 1; q <= max_valid_genscript; ++q)
+	for(int q = 1; q <= max_valid_genscript; ++q)
 	{
 		user_genscript& scr = user_scripts[q];
 		if(!scr.doscript()) continue;
@@ -2042,7 +2042,7 @@ void FFScript::runGenericPassiveEngine(int32_t scrtm)
 				runGenericPassiveEngine(genscript_timing);
 		}
 	}
-	for(auto q = 1; q <= max_valid_genscript; ++q)
+	for(int q = 1; q <= max_valid_genscript; ++q)
 	{
 		user_genscript& scr = user_scripts[q];
 		if(!scr.doscript()) continue;
@@ -2576,7 +2576,7 @@ std::string ArrayManager::asString(std::function<char const*(int32_t)> formatter
 	if(overflow)
 		s = limit;
 	
-	for(auto q = 0; q < s; ++q)
+	for(int q = 0; q < s; ++q)
 	{
 		oss << formatter(get(q));
 		if (q + 1 < s)
@@ -48377,7 +48377,7 @@ void FFScript::do_varg_max()
 	int32_t val = 0;
 	if (num_args > 0)
 		val = zs_vargs.at(0);
-	for(auto q = 1; q < num_args; ++q)
+	for(int q = 1; q < num_args; ++q)
 	{
 		int32_t tval = zs_vargs.at(q);
 		if(tval > val) val = tval;
@@ -48391,7 +48391,7 @@ void FFScript::do_varg_min()
 	int32_t val = 0;
 	if (num_args > 0)
 		val = zs_vargs.at(0);
-	for(auto q = 1; q < num_args; ++q)
+	for(int q = 1; q < num_args; ++q)
 	{
 		int32_t tval = zs_vargs.at(q);
 		if(tval < val) val = tval;

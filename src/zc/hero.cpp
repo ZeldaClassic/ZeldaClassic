@@ -714,9 +714,9 @@ bool is_moving()
 // called by ALLOFF()
 void HeroClass::resetflags(bool all)
 {
-    refilling=REFILL_NONE;
-    inwallm=false;
-    inlikelike=blowcnt=whirlwind=specialcave=hclk=fairyclk=refill_why=didstuff=0;
+	refilling=REFILL_NONE;
+	inwallm=false;
+	inlikelike=blowcnt=whirlwind=specialcave=hclk=fairyclk=refill_why=didstuff=0;
 	usecounts.clear();
     
 	if(swordclk>0 || all)
@@ -724,40 +724,40 @@ void HeroClass::resetflags(bool all)
 		swordclk=0;
 		verifyAWpn();
 	}
-    if(itemclk>0 || all)
-        itemclk=0;
-    if(shieldjinxclk>0 || all)
-        shieldjinxclk=0;
+	if(itemclk>0 || all)
+		itemclk=0;
+	if(shieldjinxclk>0 || all)
+		shieldjinxclk=0;
         
-    if(all)
-    {
-        DivineProtectionShieldClk=0;
+	if(all)
+	{
+		DivineProtectionShieldClk=0;
+		
+		if(div_prot_item != -1)
+		{
+		    stop_sfx(itemsbuf[div_prot_item].usesound);
+		    stop_sfx(itemsbuf[div_prot_item].usesound+1);
+		}
         
-        if(div_prot_item != -1)
-        {
-            stop_sfx(itemsbuf[div_prot_item].usesound);
-            stop_sfx(itemsbuf[div_prot_item].usesound+1);
-        }
-        
-        div_prot_item = -1;
-        hoverclk=jumping=0;
+		div_prot_item = -1;
+		hoverclk=jumping=0;
 		hoverflags = 0;
-    }
-    damageovertimeclk = 0;
-    newconveyorclk = 0;
-    switchhookclk = switchhookstyle = switchhookarg = switchhookmaxtime = 0;
-	for(auto q = 0; q < 7; ++q)
+	}
+	damageovertimeclk = 0;
+	newconveyorclk = 0;
+	switchhookclk = switchhookstyle = switchhookarg = switchhookmaxtime = 0;
+	for(int q = 0; q < 7; ++q)
 		hooked_undercombos[q] = -1;
-    hopclk=0;
-    hopdir=-1;
-    attackclk=0;
-    stomping=false;
-    reset_swordcharge();
-    diveclk=drownclk=drownCombo=0;
-    action=none; FFCore.setHeroAction(none);
-    conveyor_flags=0;
-    magiccastclk=0;
-    magicitem=-1;
+	hopclk=0;
+	hopdir=-1;
+	attackclk=0;
+	stomping=false;
+	reset_swordcharge();
+	diveclk=drownclk=drownCombo=0;
+	action=none; FFCore.setHeroAction(none);
+	conveyor_flags=0;
+	magiccastclk=0;
+	magicitem=-1;
 }
 
 //Can use this for Hero->Stun. -Z
@@ -1627,27 +1627,27 @@ void HeroClass::init()
 	tliftclk = 0;
 	liftheight = 0;
 	liftflags = 0;
-    if ( dontdraw != 2 ) {  dontdraw = 0; } //scripted dontdraw == 2, normal == 1, draw hero == 0
-    hookshot_used=false;
-    justmoved = 0;
-    hookshot_frozen=false;
-    onpassivedmg=false;
-    dir = up;
-    damageovertimeclk = 0;
-    newconveyorclk = 0;
-    switchhookclk = switchhookstyle = switchhookarg = switchhookmaxtime = 0;
-	for(auto q = 0; q < 7; ++q)
+	if ( dontdraw != 2 ) {  dontdraw = 0; } //scripted dontdraw == 2, normal == 1, draw hero == 0
+	hookshot_used=false;
+	justmoved = 0;
+	hookshot_frozen=false;
+	onpassivedmg=false;
+	dir = up;
+	damageovertimeclk = 0;
+	newconveyorclk = 0;
+	switchhookclk = switchhookstyle = switchhookarg = switchhookmaxtime = 0;
+	for(int q = 0; q < 7; ++q)
 		hooked_undercombos[q] = -1;
-    shiftdir = -1;
-    sideswimdir = right;
-    holddir = -1;
-    landswim = 0;
-    sdir = up;
-    ilswim=true;
-    walkable=false;
-    moveflags = FLAG_OBEYS_GRAV | FLAG_CAN_PITFALL | FLAG_CAN_WATERDROWN;
-    warp_sound = 0;
-    subscr_speed = zinit.subscrSpeed;
+	shiftdir = -1;
+	sideswimdir = right;
+	holddir = -1;
+	landswim = 0;
+	sdir = up;
+	ilswim=true;
+	walkable=false;
+	moveflags = FLAG_OBEYS_GRAV | FLAG_CAN_PITFALL | FLAG_CAN_WATERDROWN;
+	warp_sound = 0;
+	subscr_speed = zinit.subscrSpeed;
 	steprate = zinit.heroStep;
 	shove_offset = zinit.shove_offset;
 	is_warping = false;
@@ -1716,9 +1716,9 @@ void HeroClass::init()
     respawn_y=y;
 	respawn_dmap=currdmap;
 	respawn_scr=currscr;
-    falling_oldy = y;
-    magiccastclk=0;
-    magicitem = div_prot_item = -1;
+	falling_oldy = y;
+	magiccastclk=0;
+	magicitem = div_prot_item = -1;
 	last_lens_id = 0; //Should be -1 (-Z)
 	last_lift_id.reset();
 	last_savepoint_id = 0;
@@ -1729,13 +1729,13 @@ void HeroClass::init()
 	switchblock_offset = false;
 	extra_jump_count = 0;
 	hoverflags = 0;
-    lbunnyclock = 0;
+	lbunnyclock = 0;
 	lamp_paid = false;
     
-    for(int32_t i=0; i<32; i++) miscellaneous[i] = 0;
+	for(int32_t i=0; i<32; i++) miscellaneous[i] = 0;
     
-    setBigHitbox(get_qr(qr_LTTPCOLLISION));
-    diagonalMovement=(get_qr(qr_LTTPWALK));
+	setBigHitbox(get_qr(qr_LTTPCOLLISION));
+	diagonalMovement=(get_qr(qr_LTTPWALK));
     
 	shield_active = false;
 	shield_forcedir = -1;
@@ -8502,7 +8502,7 @@ heroanimate_skip_liftwpn:;
 			{
 				if(ydiff > 0)
 				{
-					for(auto q = 0; q < ydiff; ++q)
+					for(int q = 0; q < ydiff; ++q)
 					{
 						if(on_sideview_solid_oldpos(this, false, 0, 0, q))
 						{
@@ -8513,7 +8513,7 @@ heroanimate_skip_liftwpn:;
 				}
 				else if(ydiff < 0)
 				{
-					for(auto q = 0; q > ydiff; --q)
+					for(int q = 0; q > ydiff; --q)
 					{
 						if(_walkflag(x+4,y+(bigHitbox?0:8)+q-1,1)
 							|| _walkflag(x+12,y+(bigHitbox?0:8)+q,1))
@@ -11483,10 +11483,10 @@ void HeroClass::doSwitchHook(byte style)
 	{
 		int32_t max_layer = get_qr(qr_HOOKSHOTALLLAYER) ? 6 : (get_qr(qr_HOOKSHOTLAYERFIX) ? 2 : 0);
 		hooked_layerbits = 0;
-		for(auto q = 0; q < 7; ++q)
+		for(int q = 0; q < 7; ++q)
 			hooked_undercombos[q] = -1;
 		uint16_t plpos = COMBOPOS(x+8,y+8);
-		for(auto q = max_layer; q > -1; --q)
+		for(int q = max_layer; q > -1; --q)
 		{
 			newcombo const& cmb = combobuf[FFCore.tempScreens[q]->data[hooked_combopos]];
 			newcombo const& comb2 = combobuf[FFCore.tempScreens[q]->data[plpos]];
@@ -11588,7 +11588,7 @@ void HeroClass::doSwitchHook(byte style)
 					else if(!get_qr(qr_BLOCKHOLE_SAME_ONLY))
 					{
 						auto maxLayer = get_qr(qr_PUSHBLOCK_LAYER_1_2) ? 2 : 0;
-						for(auto lyr = 0; lyr < maxLayer; ++lyr)
+						for(int lyr = 0; lyr < maxLayer; ++lyr)
 						{
 							if(lyr == q) continue;
 							switch(FFCore.tempScreens[q]->sflag[plpos])
@@ -12776,7 +12776,7 @@ bool HeroClass::startwpn(int32_t itemid)
 				swordclk = 0;
 				verifyAWpn();
 			}
-			for(auto q = 0; q < 5; ++q)
+			for(int q = 0; q < 5; ++q)
 			{
 				auto ctr = itm.misc(q);
 				if(unsigned(ctr) >= MAX_COUNTERS)
@@ -13248,10 +13248,10 @@ bool isRaftFlag(int32_t flag)
 void handle_lens_triggers(int32_t l_id)
 {
 	bool enabled = l_id >= 0 && (itemsbuf[l_id].flags & ITEM_FLAG6);
-	for(auto layer = 0; layer < 7; ++layer)
+	for(int layer = 0; layer < 7; ++layer)
 	{
 		mapscr* tmp = FFCore.tempScreens[layer];
-		for(auto pos = 0; pos < 176; ++pos)
+		for(int pos = 0; pos < 176; ++pos)
 		{
 			newcombo const& cmb = combobuf[tmp->data[pos]];
 			if(enabled ? (cmb.triggerflags[1] & combotriggerLENSON)
@@ -21288,7 +21288,7 @@ bool canUseKey(int32_t num)
 bool usekey(int32_t num)
 {
 	if(!canUseKey(num)) return false;
-	for(auto q = 0; q < num; ++q)
+	for(int q = 0; q < num; ++q)
 	{
 		if(!usekey()) return false; //should never return false here, but, just to be safe....
 	}
@@ -22033,7 +22033,7 @@ void HeroClass::checkgenpush()
 	}
 	auto pos1 = COMBOPOS(bx,by);
 	auto pos2 = COMBOPOS(bx2,by2);
-	for(auto layer = 0; layer < 7; ++layer)
+	for(int layer = 0; layer < 7; ++layer)
 	{
 		mapscr* tmp = FFCore.tempScreens[layer];
 		
@@ -23630,9 +23630,9 @@ void HeroClass::checkspecial()
         // after beating enemies
         
 		// generic 'Enemies->' trigger
-		for(auto lyr = 0; lyr < 7; ++lyr)
+		for(int lyr = 0; lyr < 7; ++lyr)
 		{
-			for(auto pos = 0; pos < 176; ++pos)
+			for(int pos = 0; pos < 176; ++pos)
 			{
 				newcombo const& cmb = combobuf[FFCore.tempScreens[lyr]->data[pos]];
 				if(cmb.triggerflags[2] & combotriggerENEMIESKILLED)
@@ -24270,9 +24270,9 @@ void HeroClass::checkspecial2(int32_t *ls)
 		else getPoses(poses, tx, ty, tx+15, ty+15);
 		getPoses(sensPoses, tx, ty+(bigHitbox?0:8), tx+15, ty+15);
 		bool hasStep[4] = {false};
-		for(auto p = 0; p < 4; ++p)
+		for(int p = 0; p < 4; ++p)
 		{
-			for(auto lyr = 0; lyr < 7; ++lyr)
+			for(int lyr = 0; lyr < 7; ++lyr)
 			{
 				newcombo const* cmb = poses[p]<0 ? nullptr : &combobuf[FFCore.tempScreens[lyr]->data[poses[p]]];
 				if((cmb && (cmb->triggerflags[0] & (combotriggerSTEP|combotriggerSTEPSENS)))
@@ -24284,7 +24284,7 @@ void HeroClass::checkspecial2(int32_t *ls)
 			}
 		}
 		bool canNormalStep = true;
-		for(auto p = 0; p < 4; ++p)
+		for(int p = 0; p < 4; ++p)
 		{
 			if(poses[p] < 0) continue;
 			if(!hasStep[p])
@@ -24293,9 +24293,9 @@ void HeroClass::checkspecial2(int32_t *ls)
 				break;
 			}
 		}
-		for(auto p = 0; p < 4; ++p)
+		for(int p = 0; p < 4; ++p)
 		{
-			for(auto lyr = 0; lyr < 7; ++lyr)
+			for(int lyr = 0; lyr < 7; ++lyr)
 			{
 				newcombo const* cmb = poses[p]<0 ? nullptr : &combobuf[FFCore.tempScreens[lyr]->data[poses[p]]];
 				newcombo const* cmb2 = sensPoses[p]<0 ? nullptr : &combobuf[FFCore.tempScreens[lyr]->data[sensPoses[p]]];
@@ -24314,9 +24314,9 @@ void HeroClass::checkspecial2(int32_t *ls)
 		for(word i=0; i<c; i++)
 		{
 			bool found = false;
-			for(auto xch = 0; xch < 2; ++xch)
+			for(int xch = 0; xch < 2; ++xch)
 			{
-				for(auto ych = 0; ych < 2; ++ych)
+				for(int ych = 0; ych < 2; ++ych)
 				{
 					if (ffcIsAt(i, xPoses[xch], yPoses[ych]))
 					{
@@ -24343,7 +24343,7 @@ void HeroClass::checkspecial2(int32_t *ls)
 		int yposes[] = {y1,y2,y1,y2};
 		int32_t poses[4];
 		getPoses(poses,x1,y1,x2,y2);
-		for(auto lyr = 0; lyr < 7; ++lyr)
+		for(int lyr = 0; lyr < 7; ++lyr)
 		{
 			mapscr* s = FFCore.tempScreens[lyr];
 			newcombo const& cmb = combobuf[s->data[pos]];
@@ -24353,7 +24353,7 @@ void HeroClass::checkspecial2(int32_t *ls)
 				do_trigger_combo(lyr,pos);
 				didtrig = true;
 			}
-			for(auto q = 0; q < 4; ++q)
+			for(int q = 0; q < 4; ++q)
 			{
 				if(poses[q] < 0) continue;
 				if(poses[q] == pos && didtrig) continue;
@@ -24373,7 +24373,7 @@ void HeroClass::checkspecial2(int32_t *ls)
 			}
 			else if(cmb.triggerflags[3] & combotriggerDIVESENSTRIG)
 			{
-				for(auto q = 0; q < 4; ++q)
+				for(int q = 0; q < 4; ++q)
 				{
 					if(ffcIsAt(i, xposes[q], yposes[q]))
 					{
@@ -29908,7 +29908,7 @@ void getitem(int32_t id, bool nosound, bool doRunPassive)
 			int ids[10] = {idat.misc1, idat.misc2, idat.misc3, idat.misc4, idat.misc5,
 				idat.misc6, idat.misc7, idat.misc8, idat.misc9, idat.misc10};
 			bool pscript = (idat.flags & ITEM_FLAG1);
-			for(auto q = 0; q < 10; ++q)
+			for(int q = 0; q < 10; ++q)
 			{
 				if(unsigned(ids[q]) >= MAXITEMS) continue;
 				if(pscript)
@@ -30068,7 +30068,7 @@ void takeitem(int32_t id)
 		{
 			int ids[10] = {idat.misc1, idat.misc2, idat.misc3, idat.misc4, idat.misc5,
 				idat.misc6, idat.misc7, idat.misc8, idat.misc9, idat.misc10};
-			for(auto q = 0; q < 10; ++q)
+			for(int q = 0; q < 10; ++q)
 			{
 				if(unsigned(ids[q]) >= MAXITEMS) continue;
 				takeitem(ids[q]);
@@ -30141,7 +30141,7 @@ void HeroClass::handle_triforce(int32_t id)
 		{
 			int ids[10] = {itm.misc1, itm.misc2, itm.misc3, itm.misc4, itm.misc5,
 				itm.misc6, itm.misc7, itm.misc8, itm.misc9, itm.misc10};
-			for(auto q = 0; q < 10; ++q)
+			for(int q = 0; q < 10; ++q)
 			{
 				if(unsigned(ids[q]) >= MAXITEMS) continue;
 				handle_triforce(ids[q]);
@@ -30165,7 +30165,7 @@ void HeroClass::checkitems(int32_t index)
 	
 	if(index==-1)
 	{
-		for(auto ind = items.Count()-1; ind >= 0; --ind)
+		for(int ind = items.Count()-1; ind >= 0; --ind)
 		{
 			item* itm = (item*)items.spr(ind);
 			if(itm->get_forcegrab())
@@ -31796,7 +31796,7 @@ void HeroClass::reset_hookshot()
 	hooked_combopos = -1;
 	switchhook_cost_item = -1;
 	hooked_layerbits = 0;
-	for(auto q = 0; q < 7; ++q)
+	for(int q = 0; q < 7; ++q)
 		hooked_undercombos[q] = -1;
 	Lwpns.del(Lwpns.idFirst(wHSHandle));
 	Lwpns.del(Lwpns.idFirst(wHookshot));

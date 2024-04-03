@@ -5384,7 +5384,7 @@ bool weapon::animate(int32_t index)
 				{
 					hooked = check_hshot(-1,tx, ty, sw, &cpos, &ffcpos);
 					
-					for(auto lyr = 1; !hooked && lyr <= maxlayer; ++lyr)
+					for(int lyr = 1; !hooked && lyr <= maxlayer; ++lyr)
 						hooked = check_hshot(lyr,tx,ty,sw, &cpos);
 						
 					if(_walkflag(tx,ty3,1) && !ishookshottable(tx,ty3))
@@ -5394,7 +5394,7 @@ bool weapon::animate(int32_t index)
 				{
 					hooked = check_hshot(-1,tx2, ty2, sw, &cpos, &ffcpos);
 					
-					for(auto lyr = 1; !hooked && lyr <= maxlayer; ++lyr)
+					for(int lyr = 1; !hooked && lyr <= maxlayer; ++lyr)
 						hooked = check_hshot(lyr,tx2,ty2,sw, &cpos);
 						
 					if(_walkflag(tx2,ty3,1) && !ishookshottable(tx2,ty3))

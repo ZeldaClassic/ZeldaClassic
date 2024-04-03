@@ -374,7 +374,7 @@ void trigger_cswitch_block(int32_t layer, int32_t pos)
 		combobuf[newcid].cur_frame=0;
 		combobuf[newcid].aclk = 0;
 	}
-	for(auto lyr = 0; lyr < 7; ++lyr)
+	for(int lyr = 0; lyr < 7; ++lyr)
 	{
 		if(lyr == layer) continue;
 		if(!(cmb.usrflags&(1<<lyr))) continue;
@@ -435,7 +435,7 @@ void trigger_cswitch_block_ffc(int32_t pos)
 		combobuf[newcid].aclk = 0;
 	}
 	int32_t pos2 = COMBOPOS(ffc.x+8, ffc.y+8);
-	for(auto lyr = 0; lyr < 7; ++lyr)
+	for(int lyr = 0; lyr < 7; ++lyr)
 	{
 		if(!(cmb.usrflags&(1<<lyr))) continue;
 		mapscr* scr_2 = FFCore.tempScreens[lyr];
@@ -746,7 +746,7 @@ bool trigger_step(int32_t lyr, int32_t pos)
 		case cSTEPSAME:
 		{
 			int32_t id = tmp->data[pos];
-			for(auto q = 0; q < 176; ++q)
+			for(int q = 0; q < 176; ++q)
 			{
 				if(tmpscr->data[q] == id)
 				{
@@ -770,7 +770,7 @@ bool trigger_step(int32_t lyr, int32_t pos)
 		}
 		case cSTEPALL:
 		{
-			for(auto q = 0; q < 176; ++q)
+			for(int q = 0; q < 176; ++q)
 			{
 				if(isStepType(combobuf[tmpscr->data[q]].type))
 				{
@@ -818,7 +818,7 @@ bool trigger_step_ffc(int32_t pos)
 		case cSTEPSAME:
 		{
 			int32_t id = ffc.data;
-			for(auto q = 0; q < 176; ++q)
+			for(int q = 0; q < 176; ++q)
 			{
 				if(tmpscr->data[q] == id)
 				{
@@ -842,7 +842,7 @@ bool trigger_step_ffc(int32_t pos)
 		}
 		case cSTEPALL:
 		{
-			for(auto q = 0; q < 176; ++q)
+			for(int q = 0; q < 176; ++q)
 			{
 				if(isStepType(combobuf[tmpscr->data[q]].type))
 				{
@@ -2314,7 +2314,7 @@ bool trigger_shooter(newcombo const& cmb, zfix wx, zfix wy)
 		{
 			startangle = radians - (spreadangle * ((shotcount/2.0)-0.5));
 		}
-		for(auto q = 0; q < shotcount; ++q)
+		for(int q = 0; q < shotcount; ++q)
 		{
 			double angle = WrapAngle(startangle + (q*spreadangle));
 			fire_shooter_wpn(cmb, wx, wy, angular, angle, dir);
@@ -2416,9 +2416,9 @@ void do_ex_trigger(int32_t lyr, int32_t pos)
 		{
 			bool skipself = tmp->data[pos] == cid;
 			copycat_id = cmb.trigcopycat;
-			for(auto cclayer = 0; cclayer < 7; ++cclayer)
+			for(int cclayer = 0; cclayer < 7; ++cclayer)
 			{
-				for(auto ccpos = 0; ccpos < 176; ++ccpos)
+				for(int ccpos = 0; ccpos < 176; ++ccpos)
 				{
 					if(cclayer == lyr && ccpos == pos && skipself)
 						continue;
@@ -2468,9 +2468,9 @@ void do_ex_trigger_ffc(int32_t pos)
 		{
 			bool skipself = ffc.data == cid;
 			copycat_id = cmb.trigcopycat;
-			for(auto cclayer = 0; cclayer < 7; ++cclayer)
+			for(int cclayer = 0; cclayer < 7; ++cclayer)
 			{
-				for(auto ccpos = 0; ccpos < 176; ++ccpos)
+				for(int ccpos = 0; ccpos < 176; ++ccpos)
 				{
 					do_copycat_trigger(cclayer, ccpos);
 				}
@@ -2936,9 +2936,9 @@ bool do_trigger_combo(int32_t lyr, int32_t pos, int32_t special, weapon* w)
 				{
 					bool skipself = tmp->data[pos] == cid;
 					copycat_id = cmb.trigcopycat;
-					for(auto cclayer = 0; cclayer < 7; ++cclayer)
+					for(int cclayer = 0; cclayer < 7; ++cclayer)
 					{
-						for(auto ccpos = 0; ccpos < 176; ++ccpos)
+						for(int ccpos = 0; ccpos < 176; ++ccpos)
 						{
 							if(cclayer == lyr && ccpos == pos && skipself)
 								continue;
@@ -3341,9 +3341,9 @@ bool do_trigger_combo_ffc(int32_t pos, int32_t special, weapon* w)
 				{
 					bool skipself = ffc.data == cid;
 					copycat_id = cmb.trigcopycat;
-					for(auto cclayer = 0; cclayer < 7; ++cclayer)
+					for(int cclayer = 0; cclayer < 7; ++cclayer)
 					{
-						for(auto ccpos = 0; ccpos < 176; ++ccpos)
+						for(int ccpos = 0; ccpos < 176; ++ccpos)
 						{
 							do_copycat_trigger(cclayer, ccpos);
 						}
@@ -3606,10 +3606,10 @@ void trig_trigger_groups()
 {
 	mapscr* ffscr = FFCore.tempScreens[0];
 	dword c = ffscr->numFFC();
-	for(auto lyr = 0; lyr < 7; ++lyr)
+	for(int lyr = 0; lyr < 7; ++lyr)
 	{
 		mapscr* scr = FFCore.tempScreens[lyr];
-		for(auto pos = 0; pos < 176; ++pos)
+		for(int pos = 0; pos < 176; ++pos)
 		{
 			cpos_info& timer = cpos_get(lyr, pos);
 			int cid = scr->data[pos];
@@ -3750,8 +3750,8 @@ void cpos_update_cache(int32_t oldid, int32_t newid)
 
 void cpos_clear_all()
 {
-	for(auto lyr = 0; lyr < 7; ++lyr)
-		for(auto pos = 0; pos < 176; ++pos)
+	for(int lyr = 0; lyr < 7; ++lyr)
+		for(int pos = 0; pos < 176; ++pos)
 			combo_posinfos[lyr][pos].clear();
 	
 	int c = tmpscr->numFFC();
@@ -3762,10 +3762,10 @@ void cpos_clear_all()
 }
 void cpos_force_update() //updates without side-effects
 {
-	for(auto lyr = 0; lyr < 7; ++lyr)
+	for(int lyr = 0; lyr < 7; ++lyr)
 	{
 		mapscr* scr = FFCore.tempScreens[lyr];
-		for(auto pos = 0; pos < 176; ++pos)
+		for(int pos = 0; pos < 176; ++pos)
 			cpos_get(lyr, pos).updateData(scr->data[pos]);
 	}
 	dword c = tmpscr->numFFC();
@@ -3782,10 +3782,10 @@ void cpos_update() //updates with side-effects
 	mapscr* ffscr = FFCore.tempScreens[0];
 	dword c = ffscr->numFFC();
 	
-	for(auto lyr = 0; lyr < 7; ++lyr)
+	for(int lyr = 0; lyr < 7; ++lyr)
 	{
 		mapscr* scr = FFCore.tempScreens[lyr];
-		for(auto pos = 0; pos < 176; ++pos)
+		for(int pos = 0; pos < 176; ++pos)
 		{
 			cpos_info& timer = cpos_get(lyr, pos);
 			int cid = scr->data[pos];

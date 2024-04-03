@@ -79,7 +79,7 @@ void call_testqst_dialog()
 	test_start_dmap = -1;
 	test_start_screen = Map.getCurrScr();
 	int32_t pal = Map.getcolor();
-	for(auto q = 0; q < MAXDMAPS; ++q)
+	for(int q = 0; q < MAXDMAPS; ++q)
 	{
 		if(DMaps[q].map == Map.getCurrMap())
 		{

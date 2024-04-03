@@ -514,7 +514,7 @@ std::shared_ptr<GUI::Widget> LauncherDialog::view()
 						relativize_path(path, zthemepath);
 						tf_theme[newind-2]->setText(path);
 						btn_save[newind-2]->setDisabled(false);
-						for(auto q = strlen(zthemepath)-1; q > 0 && !(zthemepath[q] == '/' || zthemepath[q] == '\\'); --q)
+						for(int q = strlen(zthemepath)-1; q > 0 && !(zthemepath[q] == '/' || zthemepath[q] == '\\'); --q)
 						{
 							zthemepath[q] = 0;
 						}
@@ -650,7 +650,7 @@ std::shared_ptr<GUI::Widget> LauncherDialog::view()
 								char path[4096] = {0};
 								relativize_path(path, temppath);
 								tf_theme[0]->setText(path);
-								for(auto q = strlen(temppath)-1; q > 0 && !(temppath[q] == '/' || temppath[q] == '\\'); --q)
+								for(int q = strlen(temppath)-1; q > 0 && !(temppath[q] == '/' || temppath[q] == '\\'); --q)
 								{
 									temppath[q] = 0;
 								}
@@ -690,7 +690,7 @@ std::shared_ptr<GUI::Widget> LauncherDialog::view()
 								char path[4096] = {0};
 								relativize_path(path, temppath);
 								tf_theme[1]->setText(path);
-								for(auto q = strlen(temppath)-1; q > 0 && !(temppath[q] == '/' || temppath[q] == '\\'); --q)
+								for(int q = strlen(temppath)-1; q > 0 && !(temppath[q] == '/' || temppath[q] == '\\'); --q)
 								{
 									temppath[q] = 0;
 								}
@@ -731,7 +731,7 @@ std::shared_ptr<GUI::Widget> LauncherDialog::view()
 								char path[4096] = {0};
 								relativize_path(path, temppath);
 								tf_theme[2]->setText(path);
-								for(auto q = strlen(temppath)-1; q > 0 && !(temppath[q] == '/' || temppath[q] == '\\'); --q)
+								for(int q = strlen(temppath)-1; q > 0 && !(temppath[q] == '/' || temppath[q] == '\\'); --q)
 								{
 									temppath[q] = 0;
 								}

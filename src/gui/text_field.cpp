@@ -243,7 +243,7 @@ void TextField::setVal(int32_t val)
 			else
 			{
 				strcpy(buf, zslongToFix(startVal).str().c_str());
-				for(auto q = strlen(buf)-1; buf[q] == '0'; --q)
+				for(int q = strlen(buf)-1; buf[q] == '0'; --q)
 					buf[q] = 0;
 			}
 			break;

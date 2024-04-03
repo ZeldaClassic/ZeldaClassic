@@ -625,7 +625,7 @@ int32_t readoneitem(PACKFILE *f, int32_t index)
 	}
 	else
 	{
-		for(auto q = 0; q < 2; ++q)
+		for(int q = 0; q < 2; ++q)
 		{
 			if(!p_igetw(&tempitem.cost_amount[q],f))
 			{
@@ -1123,7 +1123,7 @@ int32_t writeoneitem(PACKFILE *f, int32_t i)
 				new_return(38);
 			}
 			
-			for(auto q = 0; q < 2; ++q)
+			for(int q = 0; q < 2; ++q)
 			{
 				if(!p_iputw(itemsbuf[i].cost_amount[q],f))
 				{
@@ -1297,7 +1297,7 @@ int32_t writeoneitem(PACKFILE *f, int32_t i)
 			new_return(73);
 		}
 		
-		for(auto q = 0; q < 2; ++q)
+		for(int q = 0; q < 2; ++q)
 		{
 			if(!p_iputl(itemsbuf[i].magiccosttimer[q],f))
 			{
@@ -1341,7 +1341,7 @@ int32_t writeoneitem(PACKFILE *f, int32_t i)
 			new_return(83);
 		}
 		
-		for(auto q = 0; q < 2; ++q)
+		for(int q = 0; q < 2; ++q)
 		{
 			if(!p_putc(itemsbuf[i].cost_counter[q],f))
 			{
@@ -1536,7 +1536,7 @@ int32_t onMiscSprites()
 	MiscSprsDialog(QMisc.sprites, 20, [](int32_t* newsprs)
 	{
 		saved = false;
-		for(auto q = 0; q < sprMAX; ++q)
+		for(int q = 0; q < sprMAX; ++q)
 			QMisc.sprites[q] = byte(newsprs[q]);
 	}).show();
 	return D_O_K;
@@ -1547,7 +1547,7 @@ int32_t onMiscSFX()
 	MiscSFXDialog(QMisc.miscsfx, 20, [](int32_t* newsfx)
 	{
 		saved = false;
-		for(auto q = 0; q < sfxMAX; ++q)
+		for(int q = 0; q < sfxMAX; ++q)
 			QMisc.miscsfx[q] = byte(newsfx[q]);
 	}).show();
 	return D_O_K;

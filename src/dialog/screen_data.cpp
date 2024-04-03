@@ -138,7 +138,7 @@ lens_cb[1][ind] = Checkbox(checked = local_scr.lens_hide&(1<<ind), \
 void ScreenDataDialog::refreshScript()
 {
 	std::string label[8], help[8];
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		label[q] = "InitD["+std::to_string(q)+"]";
 	}
@@ -153,7 +153,7 @@ void ScreenDataDialog::refreshScript()
 				help[q] = meta.initd_help[q];
 		}
 		
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 		{
 			if(unsigned(meta.initd_type[q]) < nswapMAX)
 				tf_initd[q]->setSwapType(meta.initd_type[q]);
@@ -161,12 +161,12 @@ void ScreenDataDialog::refreshScript()
 	}
 	else
 	{
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 		{
 			tf_initd[q]->setSwapType(nswapDEC);
 		}
 	}
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		l_initds[q]->setText(label[q]);
 		h_initd[q] = help[q];
@@ -221,7 +221,7 @@ std::shared_ptr<GUI::Widget> ScreenDataDialog::view()
 	static const int ene_flag[] = {eneflag_zora,eneflag_trap,eneflag_trp2,eneflag_rock,eneflag_fire};
 	for(int32_t i=0; i<eMAXGUYS && ene_found != 0b11111; i++)
 	{
-		for(auto q = 0; q < 5; ++q)
+		for(int q = 0; q < 5; ++q)
 		{
 			if(ene_found & (1<<q)) continue;
 			if(guysbuf[i].flags2 & ene_flag[q])
@@ -231,7 +231,7 @@ std::shared_ptr<GUI::Widget> ScreenDataDialog::view()
 			}
 		}
 	}
-	for(auto q = 0; q < 5; ++q)
+	for(int q = 0; q < 5; ++q)
 	{
 		if(ene_found & (1<<q)) continue;
 		ene_str[q] = "[No Enemy Set]";

@@ -4283,7 +4283,7 @@ int32_t SW_GaugePiece::read(PACKFILE* f, word s_version)
 {
 	if(auto ret = SubscrWidget::read(f,s_version))
 		return ret;
-	for(auto q = 0; q < 4; ++q)
+	for(int q = 0; q < 4; ++q)
 		if(auto ret = mts[q].read(f,s_version))
 			return ret;
 	if(!p_igetw(&frames, f))

@@ -1762,7 +1762,7 @@ int32_t jwin_vedit_proc(int32_t msg, DIALOG *d, int32_t c)
 		case MSG_CLICK:
 		case MSG_CHAR:
 		{
-			for(auto q = 0; q <= l; ++q)
+			for(int q = 0; q <= l; ++q)
 			{
 				char c = s[q] ? s[q] : ' ';
 				x += char_length(font, c);
@@ -2272,7 +2272,7 @@ int32_t jwin_vedit_proc(int32_t msg, DIALOG *d, int32_t c)
 						}
 						--ind2; --ind;
 					}
-					for(auto q = 0; q < paste_len && paste_start+q < new_l; ++q)
+					for(int q = 0; q < paste_len && paste_start+q < new_l; ++q)
 					{
 						s[paste_start+q] = cb.at(q);
 					}
@@ -2813,7 +2813,7 @@ int32_t jwin_edit_proc(int32_t msg, DIALOG *d, int32_t c)
 						}
 						--ind2; --ind;
 					}
-					for(auto q = 0; q < paste_len && paste_start+q < new_l; ++q)
+					for(int q = 0; q < paste_len && paste_start+q < new_l; ++q)
 					{
 						s[paste_start+q] = cb.at(q);
 					}
@@ -2970,7 +2970,7 @@ int32_t jwin_hexedit_proc(int32_t msg,DIALOG *d,int32_t c)
 	{
 		char* s = (char*)d->dp;
 		caps_paste = false;
-		for(auto q = strlen(s)-1; q >= 0; --q)
+		for(int q = strlen(s)-1; q >= 0; --q)
 		{
 			switch(s[q])
 			{

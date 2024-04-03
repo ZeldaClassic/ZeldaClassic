@@ -300,7 +300,7 @@ bool movingblock::check_hole() const
 	else if(!get_qr(qr_BLOCKHOLE_SAME_ONLY))
 	{
 		auto maxLayer = get_qr(qr_PUSHBLOCK_LAYER_1_2) ? 2 : 0;
-		for(auto lyr = 0; lyr <= maxLayer; ++lyr)
+		for(int lyr = 0; lyr <= maxLayer; ++lyr)
 		{
 			if(lyr==blockLayer) continue;
 			if((FFCore.tempScreens[lyr]->sflag[combopos]==mfBLOCKHOLE)
@@ -597,7 +597,7 @@ bool movingblock::animate(int32_t)
 				}
 				else if(!trig_hole_same_only)
 				{
-					for(auto lyr = 0; lyr <= maxLayer; ++lyr)
+					for(int lyr = 0; lyr <= maxLayer; ++lyr)
 					{
 						if(lyr==blockLayer) continue;
 						if(FFCore.tempScreens[lyr]->sflag[combopos] == mfBLOCKTRIGGER
@@ -629,7 +629,7 @@ bool movingblock::animate(int32_t)
 			}
 			else if(!trig_hole_same_only)
 			{
-				for(auto lyr = 0; lyr <= maxLayer; ++lyr)
+				for(int lyr = 0; lyr <= maxLayer; ++lyr)
 				{
 					if(lyr==blockLayer) continue;
 					if((FFCore.tempScreens[lyr]->sflag[combopos]==mfBLOCKHOLE)
@@ -663,7 +663,7 @@ bool movingblock::animate(int32_t)
 			bool didtrigger = trigger;
 			if(didtrigger)
 			{
-				for(auto lyr = 0; lyr <= maxLayer; ++lyr)
+				for(int lyr = 0; lyr <= maxLayer; ++lyr)
 				{
 					mapscr* tmp = FFCore.tempScreens[lyr];
 					for(int32_t pos=0; pos<176; pos++)
@@ -675,7 +675,7 @@ bool movingblock::animate(int32_t)
 						{
 							bool found = false;
 							if(no_trig_replace)
-								for(auto lyr2 = 0; lyr2 <= maxLayer; ++lyr2)
+								for(int lyr2 = 0; lyr2 <= maxLayer; ++lyr2)
 								{
 									if(is_push(FFCore.tempScreens[lyr2], pos))
 									{
@@ -708,7 +708,7 @@ bool movingblock::animate(int32_t)
 					// and replace triggers with undercombo.
 					// 'no_trig_replace' delays this to now, instead of
 					// happening as each combo is placed.
-					for(auto lyr = 0; lyr <= maxLayer; ++lyr)
+					for(int lyr = 0; lyr <= maxLayer; ++lyr)
 					{
 						mapscr* tmp = FFCore.tempScreens[lyr];
 						for(int32_t pos=0; pos<176; pos++)
@@ -716,7 +716,7 @@ bool movingblock::animate(int32_t)
 							if(tmp->sflag[pos]==mfBLOCKTRIGGER
 								|| combobuf[tmp->data[pos]].flag==mfBLOCKTRIGGER)
 							{
-								for(auto lyr2 = 0; lyr2 <= maxLayer; ++lyr2)
+								for(int lyr2 = 0; lyr2 <= maxLayer; ++lyr2)
 								{
 									if(lyr2 == lyr) continue;
 									if(is_push(FFCore.tempScreens[lyr2], pos))
@@ -795,7 +795,7 @@ bool movingblock::animate(int32_t)
 				}
 				else if(!trig_hole_same_only)
 				{
-					for(auto lyr = 0; lyr <= maxLayer; ++lyr)
+					for(int lyr = 0; lyr <= maxLayer; ++lyr)
 					{
 						if(lyr==blockLayer) continue;
 						if(FFCore.tempScreens[lyr]->sflag[combopos] == mfBLOCKTRIGGER
@@ -827,7 +827,7 @@ bool movingblock::animate(int32_t)
 			}
 			else if(!trig_hole_same_only)
 			{
-				for(auto lyr = 0; lyr <= maxLayer; ++lyr)
+				for(int lyr = 0; lyr <= maxLayer; ++lyr)
 				{
 					if(lyr==blockLayer) continue;
 					if((FFCore.tempScreens[lyr]->sflag[combopos]==mfBLOCKHOLE)
@@ -874,7 +874,7 @@ bool movingblock::animate(int32_t)
 			bool didtrigger = trigger;
 			if(didtrigger)
 			{
-				for(auto lyr = 0; lyr <= maxLayer; ++lyr)
+				for(int lyr = 0; lyr <= maxLayer; ++lyr)
 				{
 					mapscr* tmp = FFCore.tempScreens[lyr];
 					for(int32_t pos=0; pos<176; pos++)
@@ -936,7 +936,7 @@ bool movingblock::animate(int32_t)
 					// and replace triggers with undercombo.
 					// 'no_trig_replace' delays this to now, instead of
 					// happening as each combo is placed.
-					for(auto lyr = 0; lyr <= maxLayer; ++lyr)
+					for(int lyr = 0; lyr <= maxLayer; ++lyr)
 					{
 						mapscr* tmp = FFCore.tempScreens[lyr];
 						for(int32_t pos=0; pos<176; pos++)
@@ -944,7 +944,7 @@ bool movingblock::animate(int32_t)
 							if(tmp->sflag[pos]==mfBLOCKTRIGGER
 								|| combobuf[tmp->data[pos]].flag==mfBLOCKTRIGGER)
 							{
-								for(auto lyr2 = 0; lyr2 <= maxLayer; ++lyr2)
+								for(int lyr2 = 0; lyr2 <= maxLayer; ++lyr2)
 								{
 									if(lyr2 == lyr) continue;
 									if(is_push(FFCore.tempScreens[lyr2], pos))

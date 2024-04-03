@@ -219,7 +219,7 @@ void SubscrSettingsDialog::refr_selector()
 void SubscrSettingsDialog::refr_script()
 {
 	std::string label[8], help[8];
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		label[q] = "InitD["+std::to_string(q)+"]";
 	}
@@ -234,7 +234,7 @@ void SubscrSettingsDialog::refr_script()
 				help[q] = meta.initd_help[q];
 		}
 		
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 		{
 			if(unsigned(meta.initd_type[q]) < nswapMAX)
 				tf_initd[q]->setSwapType(meta.initd_type[q]);
@@ -242,12 +242,12 @@ void SubscrSettingsDialog::refr_script()
 	}
 	else
 	{
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 		{
 			tf_initd[q]->setSwapType(nswapDEC);
 		}
 	}
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		l_initds[q]->setText(label[q]);
 		h_initd[q] = help[q];

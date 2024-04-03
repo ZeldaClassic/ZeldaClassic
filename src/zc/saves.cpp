@@ -635,7 +635,7 @@ static int32_t read_saves(ReadMode read_mode, PACKFILE* f, std::vector<save_t>& 
 				
 				game.set_dcounter(tempshort, j);
 			}
-			for(auto j = num_ctr; j < MAX_COUNTERS; ++j)
+			for(int j = num_ctr; j < MAX_COUNTERS; ++j)
 			{
 				game.set_counter(0,j);
 				game.set_maxcounter(0,j);
@@ -898,7 +898,7 @@ static int32_t read_saves(ReadMode read_mode, PACKFILE* f, std::vector<save_t>& 
 					if(!p_igetl(&sz,f))
 						return 78;
 					game.gen_data[q].resize(sz);
-					for(auto ind = 0; ind < sz; ++ind)
+					for(int ind = 0; ind < sz; ++ind)
 						if(!p_igetl(&(game.gen_data[q][ind]),f))
 							return 79;
 				}

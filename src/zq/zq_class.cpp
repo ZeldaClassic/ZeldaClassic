@@ -737,8 +737,8 @@ void zmap::Template(int32_t floorcombo, int32_t floorcset, int32_t scr)
 
 void zmap::clearscr(int32_t scr)
 {
-    screens[scr].zero_memory();
-    screens[scr].valid=mVERSION;
+	screens[scr].zero_memory();
+	screens[scr].valid=mVERSION;
 	for(int q = 0; q < 6; ++q)
 	{
 		auto layer = map_autolayers[currmap*6+q];
@@ -2505,7 +2505,7 @@ void zmap::draw_darkness(BITMAP* dest, BITMAP* transdest)
 	{
 		layers[0] = &prvscr;
 		basescr = layers[0];
-		for(auto q = 1; q < 7; ++q)
+		for(int q = 1; q < 7; ++q)
 		{
 			if(prvlayers[q-1].valid)
 				layers[q] = &(prvlayers[q-1]);
@@ -2516,7 +2516,7 @@ void zmap::draw_darkness(BITMAP* dest, BITMAP* transdest)
 	{
 		layers[0] = AbsoluteScr(currmap, currscr);
 		basescr = layers[0];
-		for(auto q = 1; q < 7; ++q)
+		for(int q = 1; q < 7; ++q)
 		{
 			int32_t lmap = basescr->layermap[q-1]-1;
 			int32_t lscr = basescr->layerscreen[q-1];
@@ -2525,10 +2525,10 @@ void zmap::draw_darkness(BITMAP* dest, BITMAP* transdest)
 			else layers[q] = AbsoluteScr(lmap, lscr);
 		}
 	}
-	for(auto q = 0; q < 7; ++q)
+	for(int q = 0; q < 7; ++q)
 	{
 		if(!layers[q]) continue;
-		for(auto pos = 0; pos < 176; ++pos)
+		for(int pos = 0; pos < 176; ++pos)
 		{
 			newcombo const& cmb = combobuf[layers[q]->data[pos]];
 			if(cmb.type == cTORCH)
@@ -2536,7 +2536,7 @@ void zmap::draw_darkness(BITMAP* dest, BITMAP* transdest)
 		}
 	}
 	word maxffc = basescr->numFFC();
-	for(auto q = 0; q < maxffc; ++q)
+	for(int q = 0; q < maxffc; ++q)
 	{
 		newcombo const& cmb = combobuf[basescr->ffcs[q].data];
 		if(cmb.type == cTORCH)
@@ -8990,7 +8990,7 @@ int32_t writemapscreen(PACKFILE *f, int32_t i, int32_t j)
 		scr_has_flags |= SCRHAS_ITEM;
 	if((screen.warpreturnc&0x00FF) || screen.tilewarpoverlayflags)
 		scr_has_flags |= SCRHAS_TWARP;
-	else for(auto q = 0; q < 4; ++q)
+	else for(int q = 0; q < 4; ++q)
 	{
 		if(screen.tilewarptype[q]
 			|| screen.tilewarpdmap[q]
@@ -9003,7 +9003,7 @@ int32_t writemapscreen(PACKFILE *f, int32_t i, int32_t j)
 	if((screen.warpreturnc&0xFF00) || screen.sidewarpindex
 		|| screen.sidewarpoverlayflags)
 		scr_has_flags |= SCRHAS_SWARP;
-	else for(auto q = 0; q < 4; ++q)
+	else for(int q = 0; q < 4; ++q)
 	{
 		if(screen.sidewarptype[q] != wtSCROLL
 			|| screen.sidewarpdmap[q]
@@ -9015,7 +9015,7 @@ int32_t writemapscreen(PACKFILE *f, int32_t i, int32_t j)
 	}
 	if(screen.warparrivalx || screen.warparrivaly)
 		scr_has_flags |= SCRHAS_WARPRET;
-	else for(auto q = 0; q < 4; ++q)
+	else for(int q = 0; q < 4; ++q)
 	{
 		if(screen.warpreturnx[q] || screen.warpreturny[q])
 		{
@@ -9487,7 +9487,7 @@ int32_t writemapscreen(PACKFILE *f, int32_t i, int32_t j)
 		if(!p_iputw(tempffc.script,f))
 			return qe_invalid;
 		
-		for(auto q = 0; q < 8; ++q)
+		for(int q = 0; q < 8; ++q)
 		{
 			if(!p_iputl(tempffc.initd[q],f))
 				return qe_invalid;
@@ -9597,7 +9597,7 @@ int32_t writecombo_loop(PACKFILE *f, word section_version, newcombo const& tmp_c
 {
 	//Check what needs writing
 	byte combo_has_flags = 0;
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		if(tmp_cmb.attribytes[q] || tmp_cmb.attrishorts[q]
 			|| (q < 4 && tmp_cmb.attributes[q]))
@@ -10056,7 +10056,7 @@ int32_t writecomboaliases(PACKFILE *f, word version, word build)
 				new_return(13);
 			}
 			
-			for(auto q = 0; q < num_combos; ++q)
+			for(int q = 0; q < num_combos; ++q)
 			{
 				cpool_entry const& entry = pool.combos.at(q);
 				if(!p_iputl(entry.cid,f))
@@ -13038,42 +13038,42 @@ int32_t write_one_ffscript(PACKFILE *f, zquestheader *Header, int32_t i, script_
 		new_return(18);
 	if(!p_putcstr(tmeta.author,f))
 		new_return(19);
-	for(auto q = 0; q < 10; ++q)
+	for(int q = 0; q < 10; ++q)
 	{
 		if(!p_putcstr(tmeta.attributes[q],f))
 			new_return(27);
 		if(!p_putwstr(tmeta.attributes_help[q],f))
 			new_return(28);
 	}
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		if(!p_putcstr(tmeta.attribytes[q],f))
 			new_return(29);
 		if(!p_putwstr(tmeta.attribytes_help[q],f))
 			new_return(30);
 	}
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		if(!p_putcstr(tmeta.attrishorts[q],f))
 			new_return(31);
 		if(!p_putwstr(tmeta.attrishorts_help[q],f))
 			new_return(32);
 	}
-	for(auto q = 0; q < 16; ++q)
+	for(int q = 0; q < 16; ++q)
 	{
 		if(!p_putcstr(tmeta.usrflags[q],f))
 			new_return(33);
 		if(!p_putwstr(tmeta.usrflags_help[q],f))
 			new_return(34);
 	}
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		if(!p_putcstr(tmeta.initd[q],f))
 			new_return(35);
 		if(!p_putwstr(tmeta.initd_help[q],f))
 			new_return(36);
 	}
-	for(auto q = 0; q < 8; ++q)
+	for(int q = 0; q < 8; ++q)
 	{
 		if(!p_putc(tmeta.initd_type[q],f))
 			new_return(37);
@@ -13108,7 +13108,7 @@ int32_t write_one_ffscript(PACKFILE *f, zquestheader *Header, int32_t i, script_
 				sz = zas.strptr->size();
 			if(!p_iputl(sz,f))
 			{
-                new_return(23);
+				new_return(23);
 			}
 			if(sz)
 			{
@@ -13126,7 +13126,7 @@ int32_t write_one_ffscript(PACKFILE *f, zquestheader *Header, int32_t i, script_
 				sz = zas.vecptr->size();
 			if(!p_iputl(sz,f))
 			{
-                new_return(25);
+				new_return(25);
 			}
 			if(sz) //vector found
 			{

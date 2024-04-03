@@ -179,7 +179,7 @@ void user_object::save_arrays(std::map<int32_t,ZScriptArray>& arrs)
 {
 	if(data.size() > owned_vars) //owns arrays!
 	{
-		for(auto ind = owned_vars; ind < data.size(); ++ind)
+		for(int ind = owned_vars; ind < data.size(); ++ind)
 		{
 			auto arrptr = (data.at(ind)/-10000);
 			if(arrptr > 0)
@@ -195,7 +195,7 @@ void user_object::clear_nodestruct()
 	disown();
 	if(data.size() > owned_vars) //owns arrays!
 	{
-		for(auto ind = owned_vars; ind < data.size(); ++ind)
+		for(int ind = owned_vars; ind < data.size(); ++ind)
 		{
 			auto arrptr = data.at(ind)/10000;
 			destroy_object_arr(arrptr);

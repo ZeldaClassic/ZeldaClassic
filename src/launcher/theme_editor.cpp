@@ -104,7 +104,7 @@ std::shared_ptr<GUI::Widget> ThemeEditor::view()
 	get_palette(restore_pal);
 	get_palette(temp_pal);
 	get_palette(work_pal);
-	for(auto q = 1; q <= 8; ++q)
+	for(int q = 1; q <= 8; ++q)
 	{
 		t_jwin_a5_colors[q] = jwin_a5_colors[q];
 		restore_jwin_a5_colors[q] = jwin_a5_colors[q];
@@ -213,7 +213,7 @@ std::shared_ptr<GUI::Widget> ThemeEditor::view()
 						memcpy(jwin_pal, restore_jwin_pal, sizeof(jwin_pal));
 						memcpy(t_jwin_pal, restore_jwin_pal, sizeof(jwin_pal));
 						jwin_set_a5_colors(restore_jwin_a5_colors);
-						for(auto q = 1; q <= 8; ++q)
+						for(int q = 1; q <= 8; ++q)
 						{
 							t_jwin_a5_colors[q] = restore_jwin_a5_colors[q];
 							work_pal[q] = work_pal[dvc(q)];
@@ -272,7 +272,7 @@ bool ThemeEditor::handleMessage(const GUI::DialogMessage<message>& msg)
 				if(saved_path)
 					strcpy(saved_path,path);
 				
-				for(auto q = strlen(temppath)-1; q > 0 && !(temppath[q] == '/' || temppath[q] == '\\'); --q)
+				for(int q = strlen(temppath)-1; q > 0 && !(temppath[q] == '/' || temppath[q] == '\\'); --q)
 				{
 					temppath[q] = 0;
 				}
@@ -280,7 +280,7 @@ bool ThemeEditor::handleMessage(const GUI::DialogMessage<message>& msg)
 			}
 			else return false;
 			//Save things
-			for(auto q = 1; q <= 8; ++q)
+			for(int q = 1; q <= 8; ++q)
 			{
 				work_pal[q].r = work_colors[q][0]/4;
 				work_pal[q].g = work_colors[q][1]/4;

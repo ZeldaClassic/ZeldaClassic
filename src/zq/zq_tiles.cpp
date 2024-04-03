@@ -1379,7 +1379,7 @@ void draw_edit_scr(int32_t tile,int32_t flip,int32_t cs,byte *oldtile, bool crea
 	
 	unpack_tile(newtilebuf, tile, 0, true);
 	if(floating_sel)
-		for(auto q = 0; q < 256; ++q)
+		for(int q = 0; q < 256; ++q)
 			if(floatsel[q])
 				unpackbuf[q] = floatsel[q];
 	byte tmptile[256];
@@ -1806,7 +1806,7 @@ void float_selection(int32_t tile, bool clear)
 	
 	unpack_tile(newtilebuf, tile, 0, true);
 	
-	for(auto q = 0; q < 256; ++q)
+	for(int q = 0; q < 256; ++q)
 	{
 		if(is_in_selection(q%16,q/16))
 		{
@@ -1826,7 +1826,7 @@ void unfloat_selection()
 	
 	unpack_tile(newtilebuf, floating_tile, 0, true);
 	
-	for(auto q = 0; q < 256; ++q)
+	for(int q = 0; q < 256; ++q)
 	{
 		if(floatsel[q])
 		{
@@ -1842,7 +1842,7 @@ void shift_tile_colors(int32_t tile, int32_t amount, bool ignore_transparent)
 {
 	if(floating_sel)
 	{
-		for(auto q = 0; q < 256; ++q)
+		for(int q = 0; q < 256; ++q)
 		{
 			if(ignore_transparent && floatsel[q]==0)
 				continue;
@@ -2126,7 +2126,7 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 	for(auto x = 0; x < 16; ++x)
 		for(auto y = 0; y < 16; ++y)
 			undoselgrid[x][y] = selection_grid[x+1][y+1];
-	for(auto q = 0; q < 256; ++q)
+	for(int q = 0; q < 256; ++q)
 	{
 		floatsel[q] = 0;
 		undofloatsel[q] = 0;
@@ -2277,7 +2277,7 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 					if(all)
 					{
 						//Check all
-						for(auto q = 0; q < 256; ++q)
+						for(int q = 0; q < 256; ++q)
 							if(unpackbuf[q])
 							{
 								canDel = true;
@@ -2287,8 +2287,8 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 					else
 					{
 						//Check selection
-						for(auto x = 0; x < 16; ++x)
-							for(auto y = 0; y < 16; ++y)
+						for(int x = 0; x < 16; ++x)
+							for(int y = 0; y < 16; ++y)
 								if(is_in_selection(x,y))
 									if(unpackbuf[(y<<4)+x])
 									{
@@ -2302,17 +2302,17 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 					{
 						undotile[i]=newtilebuf[tile].data[i];
 					}
-					for(auto x = 0; x < 16; ++x)
-						for(auto y = 0; y < 16; ++y)
+					for(int x = 0; x < 16; ++x)
+						for(int y = 0; y < 16; ++y)
 							undoselgrid[x][y] = selection_grid[x+1][y+1];
-					for(auto q = 0; q < 256; ++q)
+					for(int q = 0; q < 256; ++q)
 						undofloatsel[q] = floatsel[q];
 					undo_is_floatsel = floating_sel;
 					
 					if(CHECK_CTRL_CMD || !has_selection())
 					{
 						//Delete all
-						for(auto q = 0; q < 256; ++q)
+						for(int q = 0; q < 256; ++q)
 						{
 							unpackbuf[q] = 0;
 							floatsel[q] = 0;
@@ -2321,8 +2321,8 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 					else
 					{
 						//Delete selection
-						for(auto x = 0; x < 16; ++x)
-							for(auto y = 0; y < 16; ++y)
+						for(int x = 0; x < 16; ++x)
+							for(int y = 0; y < 16; ++y)
 							{
 								if(floating_sel)
 								{
@@ -2396,10 +2396,10 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 					{
 						for(int32_t i=0; i<undocount; i++)
 							undotile[i]=newtilebuf[tile].data[i];
-						for(auto x = 0; x < 16; ++x)
-							for(auto y = 0; y < 16; ++y)
+						for(int x = 0; x < 16; ++x)
+							for(int y = 0; y < 16; ++y)
 								undoselgrid[x][y] = selection_grid[x+1][y+1];
-						for(auto q = 0; q < 256; ++q)
+						for(int q = 0; q < 256; ++q)
 							undofloatsel[q] = floatsel[q];
 						undo_is_floatsel = floating_sel;
 							
@@ -2423,10 +2423,10 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 					{
 						for(int32_t i=0; i<undocount; i++)
 							undotile[i]=newtilebuf[tile].data[i];
-						for(auto x = 0; x < 16; ++x)
-							for(auto y = 0; y < 16; ++y)
+						for(int x = 0; x < 16; ++x)
+							for(int y = 0; y < 16; ++y)
 								undoselgrid[x][y] = selection_grid[x+1][y+1];
-						for(auto q = 0; q < 256; ++q)
+						for(int q = 0; q < 256; ++q)
 							undofloatsel[q] = floatsel[q];
 						undo_is_floatsel = floating_sel;
 							
@@ -2456,11 +2456,11 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 					for(int32_t i=0; i<undocount; i++)
 						zc_swap(undotile[i],newtilebuf[tile].data[i]);
 					
-					for(auto x = 0; x < 16; ++x)
-						for(auto y = 0; y < 16; ++y)
+					for(int x = 0; x < 16; ++x)
+						for(int y = 0; y < 16; ++y)
 							zc_swap(selection_grid[x+1][y+1], undoselgrid[x][y]);
 						
-					for(auto q = 0; q < 256; ++q)
+					for(int q = 0; q < 256; ++q)
 						zc_swap(undofloatsel[q], floatsel[q]);
 					zc_swap(undo_is_floatsel, floating_sel);
 					
@@ -2474,10 +2474,10 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 						{
 							undotile[i]=newtilebuf[tile].data[i];
 						}
-						for(auto x = 0; x < 16; ++x)
-							for(auto y = 0; y < 16; ++y)
+						for(int x = 0; x < 16; ++x)
+							for(int y = 0; y < 16; ++y)
 								undoselgrid[x][y] = selection_grid[x+1][y+1];
-						for(auto q = 0; q < 256; ++q)
+						for(int q = 0; q < 256; ++q)
 							undofloatsel[q] = floatsel[q];
 						undo_is_floatsel = floating_sel;
 						
@@ -2553,10 +2553,10 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 						{
 							undotile[i]=newtilebuf[tile].data[i];
 						}
-						for(auto x = 0; x < 16; ++x)
-							for(auto y = 0; y < 16; ++y)
+						for(int x = 0; x < 16; ++x)
+							for(int y = 0; y < 16; ++y)
 								undoselgrid[x][y] = selection_grid[x+1][y+1];
-						for(auto q = 0; q < 256; ++q)
+						for(int q = 0; q < 256; ++q)
 							undofloatsel[q] = floatsel[q];
 						undo_is_floatsel = floating_sel;
 						if(has_selection())
@@ -2591,10 +2591,10 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 						{
 							undotile[i]=newtilebuf[tile].data[i];
 						}
-						for(auto x = 0; x < 16; ++x)
-							for(auto y = 0; y < 16; ++y)
+						for(int x = 0; x < 16; ++x)
+							for(int y = 0; y < 16; ++y)
 								undoselgrid[x][y] = selection_grid[x+1][y+1];
-						for(auto q = 0; q < 256; ++q)
+						for(int q = 0; q < 256; ++q)
 							undofloatsel[q] = floatsel[q];
 						undo_is_floatsel = floating_sel;
 						if(has_selection())
@@ -2629,10 +2629,10 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 						{
 							undotile[i]=newtilebuf[tile].data[i];
 						}
-						for(auto x = 0; x < 16; ++x)
-							for(auto y = 0; y < 16; ++y)
+						for(int x = 0; x < 16; ++x)
+							for(int y = 0; y < 16; ++y)
 								undoselgrid[x][y] = selection_grid[x+1][y+1];
-						for(auto q = 0; q < 256; ++q)
+						for(int q = 0; q < 256; ++q)
 							undofloatsel[q] = floatsel[q];
 						undo_is_floatsel = floating_sel;
 						if(has_selection())
@@ -2667,10 +2667,10 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 						{
 							undotile[i]=newtilebuf[tile].data[i];
 						}
-						for(auto x = 0; x < 16; ++x)
-							for(auto y = 0; y < 16; ++y)
+						for(int x = 0; x < 16; ++x)
+							for(int y = 0; y < 16; ++y)
 								undoselgrid[x][y] = selection_grid[x+1][y+1];
-						for(auto q = 0; q < 256; ++q)
+						for(int q = 0; q < 256; ++q)
 							undofloatsel[q] = floatsel[q];
 						undo_is_floatsel = floating_sel;
 						if(has_selection())
@@ -2857,10 +2857,10 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 				{
 					undotile[i]=newtilebuf[tile].data[i];
 				}
-				for(auto x = 0; x < 16; ++x)
-					for(auto y = 0; y < 16; ++y)
+				for(int x = 0; x < 16; ++x)
+					for(int y = 0; y < 16; ++y)
 						undoselgrid[x][y] = selection_grid[x+1][y+1];
-				for(auto q = 0; q < 256; ++q)
+				for(int q = 0; q < 256; ++q)
 					undofloatsel[q] = floatsel[q];
 				undo_is_floatsel = floating_sel;
 				
@@ -3035,10 +3035,10 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 				{
 					undotile[i]=newtilebuf[tile].data[i];
 				}
-				for(auto x = 0; x < 16; ++x)
-					for(auto y = 0; y < 16; ++y)
+				for(int x = 0; x < 16; ++x)
+					for(int y = 0; y < 16; ++y)
 						undoselgrid[x][y] = selection_grid[x+1][y+1];
-				for(auto q = 0; q < 256; ++q)
+				for(int q = 0; q < 256; ++q)
 					undofloatsel[q] = floatsel[q];
 				undo_is_floatsel = floating_sel;
 				
@@ -14169,7 +14169,7 @@ void do_movecombo(combo_move_data const& cmd)
 			cmb.prompt_cid += diff;
 		}
 	}
-	for(auto q = 0; q < MAXCOMBOPOOLS; ++q)
+	for(int q = 0; q < MAXCOMBOPOOLS; ++q)
 	{
 		combo_pool& pool = combo_pools[q];
 		for(cpool_entry& cp : pool.combos)
@@ -14180,7 +14180,7 @@ void do_movecombo(combo_move_data const& cmd)
 			}
 		}
 	}
-	for (auto q = 0; q < MAXAUTOCOMBOS; ++q)
+	for (int q = 0; q < MAXAUTOCOMBOS; ++q)
 	{
 		combo_auto& cauto = combo_autos[q];
 		for (autocombo_entry& ac : cauto.combos)
@@ -14223,9 +14223,9 @@ void do_movecombo(combo_move_data const& cmd)
 			favorite_combos[i] += diff;
 	}
 	
-	for(auto q = 0; q < 256; ++q)
+	for(int q = 0; q < 256; ++q)
 	{
-		for(auto p = 0; p < 3; ++p)
+		for(int p = 0; p < 3; ++p)
 		{
 			if(QMisc.bottle_shop_types[q].comb[p] >= cmd.copy1 && QMisc.bottle_shop_types[q].comb[p] < cmd.copy1+cmd.copycnt)
 				QMisc.bottle_shop_types[q].comb[p] += diff;

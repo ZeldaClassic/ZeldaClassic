@@ -635,7 +635,7 @@ bool HASFLAG(int32_t flag, int32_t layer, int32_t pos)
 bool HASFLAG_ANY(int32_t flag, int32_t pos)
 {
 	if(unsigned(pos) > 175) return false;
-	for(auto q = 0; q < 7; ++q)
+	for(int q = 0; q < 7; ++q)
 	{
 		if(HASFLAG(flag, q, pos))
 			return true;
@@ -2050,9 +2050,9 @@ void hidden_entrance(int32_t tmp,bool refresh, bool high16only,int32_t single) /
 			   "");
 	if(single < 0)
 		triggered_screen_secrets = true;
-	for(auto lyr = 0; lyr < 7; ++lyr)
+	for(int lyr = 0; lyr < 7; ++lyr)
 	{
-		for(auto pos = 0; pos < 176; ++pos)
+		for(int pos = 0; pos < 176; ++pos)
 		{
 			newcombo const& cmb = combobuf[FFCore.tempScreens[lyr]->data[pos]];
 			if(cmb.triggerflags[2] & combotriggerSECRETSTR)
@@ -3791,9 +3791,9 @@ void put_effectflags_a5(int32_t x,int32_t y,int32_t xofs,int32_t yofs, word cmbd
 
 void draw_ladder_platform(BITMAP* dest, int32_t x, int32_t y, int32_t c)
 {
-	for(auto cx = 0; cx < 256; cx += 16)
+	for(int cx = 0; cx < 256; cx += 16)
 	{
-		for(auto cy = 0; cy < 176; cy += 16)
+		for(int cy = 0; cy < 176; cy += 16)
 		{
 			if(isSVLadder(cx,cy))
 			{
@@ -3814,9 +3814,9 @@ void draw_ladder_platform(BITMAP* dest, int32_t x, int32_t y, int32_t c)
 }
 void draw_ladder_platform_a5(int32_t x, int32_t y, ALLEGRO_COLOR c)
 {
-	for(auto cx = 0; cx < 256; cx += 16)
+	for(int cx = 0; cx < 256; cx += 16)
 	{
-		for(auto cy = 0; cy < 176; cy += 16)
+		for(int cy = 0; cy < 176; cy += 16)
 		{
 			if(isSVLadder(cx,cy))
 			{
@@ -5024,10 +5024,10 @@ void openshutters()
 			opened_door = true;
 		}
 	
-	for(auto lyr = 0; lyr < 7; ++lyr)
+	for(int lyr = 0; lyr < 7; ++lyr)
 	{
 		mapscr* scr = FFCore.tempScreens[lyr];
-		for(auto pos = 0; pos < 176; ++pos)
+		for(int pos = 0; pos < 176; ++pos)
 		{
 			newcombo const& cmb = combobuf[scr->data[pos]];
 			if(cmb.triggerflags[0] & combotriggerSHUTTER)
@@ -6648,7 +6648,7 @@ void toggle_gswitches(bool* states, bool entry, mapscr* m, mapscr* t)
 void toggle_gswitches_load(mapscr* m, mapscr* t)
 {
 	bool states[256] = {false};
-	for(auto q = 0; q < 256; ++q)
+	for(int q = 0; q < 256; ++q)
 	{
 		states[q] = game->gswitch_timers[q] != 0;
 	}
@@ -6673,7 +6673,7 @@ void run_gswitch_timers()
 }
 void onload_gswitch_timers() //Reset all timers that were counting down, no trigger necessary
 {
-	for(auto q = 0; q < 256; ++q)
+	for(int q = 0; q < 256; ++q)
 	{
 		if(game->gswitch_timers[q] > 0)
 			game->gswitch_timers[q] = 0;

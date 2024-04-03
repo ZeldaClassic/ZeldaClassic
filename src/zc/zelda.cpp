@@ -852,41 +852,41 @@ void donewmsg(int32_t str)
 	if(msg_onscreen || msg_active)
 		dismissmsg();
 	clr_msg_data();
-    //al_trace("donewmsg %d\n",str);
+	//al_trace("donewmsg %d\n",str);
     
         
-    linkedmsgclk=0;
-    msg_active = true;
-    // Don't set msg_onscreen - not onscreen just yet
-    msgstr = str;
-    msgorig = msgstr;
-    msgfont = setmsgfont();
-    msgcolour=QMisc.colors.msgtext;
-    msgspeed=zinit.msg_speed;
+	linkedmsgclk=0;
+	msg_active = true;
+	// Don't set msg_onscreen - not onscreen just yet
+	msgstr = str;
+	msgorig = msgstr;
+	msgfont = setmsgfont();
+	msgcolour=QMisc.colors.msgtext;
+	msgspeed=zinit.msg_speed;
 	msgstr_layer=MsgStrings[msgstr].drawlayer;
     
-    if(introclk==0 || (introclk>=72 && dmapmsgclk==0))
+	if(introclk==0 || (introclk>=72 && dmapmsgclk==0))
 	{
-        clear_bitmap(msg_bg_display_buf);
-        clear_bitmap(msg_txt_display_buf);
+		clear_bitmap(msg_bg_display_buf);
+		clear_bitmap(msg_txt_display_buf);
 	}
         
-    clear_bitmap(msg_bg_display_buf);
-    set_clip_state(msg_bg_display_buf, 1);
+	clear_bitmap(msg_bg_display_buf);
+	set_clip_state(msg_bg_display_buf, 1);
 	clear_bitmap(msg_portrait_display_buf);
-    set_clip_state(msg_portrait_display_buf, 1);
-    clear_bitmap(msg_txt_display_buf);
-    set_clip_state(msg_txt_display_buf, 1);
-    clear_bitmap(msg_txt_bmp_buf);
-    clear_bitmap(msg_menu_bmp_buf);
-    clear_bitmap(msg_bg_bmp_buf);
-    clear_bitmap(msg_portrait_bmp_buf);
-    msgclk=msgpos=msgptr=0;
-    msgspace=true;
-    msg_w=MsgStrings[msgstr].w;
-    msg_h=MsgStrings[msgstr].h;
-    msg_xpos=MsgStrings[msgstr].x;
-    msg_ypos=MsgStrings[msgstr].y;
+	set_clip_state(msg_portrait_display_buf, 1);
+	clear_bitmap(msg_txt_display_buf);
+	set_clip_state(msg_txt_display_buf, 1);
+	clear_bitmap(msg_txt_bmp_buf);
+	clear_bitmap(msg_menu_bmp_buf);
+	clear_bitmap(msg_bg_bmp_buf);
+	clear_bitmap(msg_portrait_bmp_buf);
+	msgclk=msgpos=msgptr=0;
+	msgspace=true;
+	msg_w=MsgStrings[msgstr].w;
+	msg_h=MsgStrings[msgstr].h;
+	msg_xpos=MsgStrings[msgstr].x;
+	msg_ypos=MsgStrings[msgstr].y;
 	prt_tile=MsgStrings[msgstr].portrait_tile;
 	prt_cset=MsgStrings[msgstr].portrait_cset;
 	prt_x=MsgStrings[msgstr].portrait_x;
@@ -896,15 +896,15 @@ void donewmsg(int32_t str)
 	msg_shdtype=MsgStrings[msgstr].shadow_type;
 	msg_shdcol=MsgStrings[msgstr].shadow_color;
     
-    msg_bg(MsgStrings[msgstr]);
-    msg_prt();
+	msg_bg(MsgStrings[msgstr]);
+	msg_prt();
     
 	int16_t old_margins[4] = {8,0,8,-8};
 	int16_t const* copy_from = get_qr(qr_OLD_STRING_EDITOR_MARGINS) ? old_margins : MsgStrings[msgstr].margins;
-	for(auto q = 0; q < 4; ++q)
+	for(int q = 0; q < 4; ++q)
 		msg_margins[q] = copy_from[q];
-    cursor_x=msg_margins[left];
-    cursor_y=msg_margins[up];
+	cursor_x=msg_margins[left];
+	cursor_y=msg_margins[up];
 }
 
 // Called to make a message disappear

@@ -389,7 +389,7 @@ bool pool_valid()
 	if(pool_dirty)
 	{
 		pool.clear();
-		for(auto q = 0; q < MAXPOOLCOMBOS; ++q)
+		for(int q = 0; q < MAXPOOLCOMBOS; ++q)
 		{
 			if(pool_combos[q].valid())
 				pool.push_back(q);
@@ -8611,7 +8611,7 @@ static void doxypos(byte &px2, byte &py2, int32_t color, int32_t mask,
 				
 				int len[2] = {text_length(font,b1),text_length(font,b2)};
 				
-                if(is_compact)
+				if(is_compact)
 				{
 					xpos[0] = 4;
 					ypos[0] = layer_panel.y - 21;
@@ -8619,18 +8619,18 @@ static void doxypos(byte &px2, byte &py2, int32_t color, int32_t mask,
 					ypos[1] = ypos[0]+10;
 				}
 				else
-                {
-                    xpos[0] = 450;
-                    ypos[0] = 405;
+				{
+					xpos[0] = 450;
+					ypos[0] = 405;
 					xpos[1] = xpos[0];
 					ypos[1] = ypos[0]+10;
-                }
+				}
 				
 				x1 = xpos[0];
 				y1 = ypos[0];
 				x2 = xpos[0];
 				y2 = ypos[0];
-				for(auto q = 0; q < 2; ++q)
+				for(int q = 0; q < 2; ++q)
 				{
 					if(xpos[q] < x1)
 						x1 = xpos[q];
@@ -8648,8 +8648,8 @@ static void doxypos(byte &px2, byte &py2, int32_t color, int32_t mask,
 				auto minx = zc_min(xpos[0],xpos[1]);
 				auto miny = zc_min(ypos[0],ypos[1]);
 				rectfill(screen,x1,y1,x2,y2,vc(0));
-                textprintf_ex(screen,font,xpos[0],ypos[0],vc(15),vc(0),"%s",b1);
-                textprintf_ex(screen,font,xpos[1],ypos[1],vc(15),vc(0),"%s",b2);
+				textprintf_ex(screen,font,xpos[0],ypos[0],vc(15),vc(0),"%s",b1);
+				textprintf_ex(screen,font,xpos[1],ypos[1],vc(15),vc(0),"%s",b2);
 				update_hw_screen(true);
             }
             
@@ -9941,7 +9941,7 @@ void domouse()
 	++scrolldelay;
 	
 	bool x_on_list = false;
-	for(auto q = 0; q < num_combo_cols; ++q)
+	for(int q = 0; q < num_combo_cols; ++q)
 	{
 		if((x>=combolist[q].x) && (x<combolist[q].x+(combolist[q].xscale*combolist[q].w)))
 		{
@@ -10377,7 +10377,7 @@ void domouse()
 					{
 						if(ret)
 						{
-							for(auto q = 0; q < MAXFAVORITECOMBOS; ++q)
+							for(int q = 0; q < MAXFAVORITECOMBOS; ++q)
 							{
 								favorite_combos[q] = -1;
 								favorite_combo_modes[q] = DM_NORMAL;
@@ -10457,7 +10457,7 @@ void domouse()
 						if(ret)
 						{
 							char buf[20];
-							for(auto q = 0; q < MAXFAVORITECOMMANDS; ++q)
+							for(int q = 0; q < MAXFAVORITECOMMANDS; ++q)
 							{
 								write_fav_command(q,0);
 							}
@@ -10953,7 +10953,7 @@ void domouse()
 				}
 			}
 			
-			for(auto q = 0; q < 4; ++q)
+			for(int q = 0; q < 4; ++q)
 			{
 				if(warpret_pos[q].rect(x,y))
 				{
@@ -27006,7 +27006,7 @@ void load_size_poses()
 	commands_list.yscale = 10+text_height(favcmdfont);
 	
 	auto drawmode_wid = 64;
-	for(auto q = 0; q < DM_MAX; ++q)
+	for(int q = 0; q < DM_MAX; ++q)
 	{
 		auto wid = text_length(guifont, dm_names[q]);
 		if(wid > drawmode_wid)
@@ -27053,7 +27053,7 @@ void load_size_poses()
 		auto col_wid = 4*combo_col_scale;
 		auto cols_wid = col_wid * num_combo_cols;
 		auto cols_spacing = (combolist_window.w-cols_wid)/(num_combo_cols+1);
-		for(auto q = 0; q < num_combo_cols; ++q)
+		for(int q = 0; q < num_combo_cols; ++q)
 		{
 			combolist[q].x=combolist_window.x+(cols_spacing*(q+1))+(col_wid*q);
 			combolist[q].y=combolist_window.y+54;
@@ -27278,7 +27278,7 @@ void load_size_poses()
 			stairsqr_pos.set(sqr_x1+(sqr_xdist*1),sqr_y1,20,20);
 			warparrival_pos.set(sqr_x1+(sqr_xdist*2),sqr_y1,20,20);
 			flagsqr_pos.set(sqr_x1+(sqr_xdist*3),sqr_y1,20,20);
-			for(auto q = 0; q < 4; ++q)
+			for(int q = 0; q < 4; ++q)
 			{
 				warpret_pos[q].set(sqr_x1+(sqr_xdist*q),sqr_y2,20,20);
 			}
@@ -27353,7 +27353,7 @@ void load_size_poses()
 		auto col_wid = 4*combo_col_scale;
 		auto cols_wid = col_wid * num_combo_cols;
 		auto cols_spacing = (combolist_window.w-cols_wid)/(num_combo_cols+1);
-		for(auto q = 0; q < num_combo_cols; ++q)
+		for(int q = 0; q < num_combo_cols; ++q)
 		{
 			combolist[q].x=combolist_window.x+(cols_spacing*(q+1))+(col_wid*q);
 			combolist[q].y=combolist_window.y+60;

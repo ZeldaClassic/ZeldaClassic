@@ -379,56 +379,56 @@ zinfo::zinfo()
 
 void zinfo::clear_ic_help()
 {
-	for(auto q = 0; q < itype_max; ++q)
+	for(int q = 0; q < itype_max; ++q)
 	{
 		assignchar(ic_help_string+q,nullptr);
 	}
 }
 void zinfo::clear_ic_name()
 {
-	for(auto q = 0; q < itype_max; ++q)
+	for(int q = 0; q < itype_max; ++q)
 	{
 		assignchar(ic_name+q,nullptr);
 	}
 }
 void zinfo::clear_ctype_name()
 {
-	for(auto q = 0; q < cMAX; ++q)
+	for(int q = 0; q < cMAX; ++q)
 	{
 		assignchar(ctype_name+q,nullptr);
 	}
 }
 void zinfo::clear_ctype_help()
 {
-	for(auto q = 0; q < cMAX; ++q)
+	for(int q = 0; q < cMAX; ++q)
 	{
 		assignchar(ctype_help_string+q,nullptr);
 	}
 }
 void zinfo::clear_mf_name()
 {
-	for(auto q = 0; q < mfMAX; ++q)
+	for(int q = 0; q < mfMAX; ++q)
 	{
 		assignchar(mf_name+q,nullptr);
 	}
 }
 void zinfo::clear_mf_help()
 {
-	for(auto q = 0; q < mfMAX; ++q)
+	for(int q = 0; q < mfMAX; ++q)
 	{
 		assignchar(mf_help_string+q,nullptr);
 	}
 }
 void zinfo::clear_weap_name()
 {
-	for(auto q = 0; q < wMax; ++q)
+	for(int q = 0; q < wMax; ++q)
 	{
 		assignchar(weap_name+q,nullptr);
 	}
 }
 void zinfo::clear_ctr_name()
 {
-	for(auto q = 0; q < MAX_COUNTERS; ++q)
+	for(int q = 0; q < MAX_COUNTERS; ++q)
 	{
 		assignchar(ctr_name+q,nullptr);
 	}
@@ -545,26 +545,26 @@ char const* zinfo::getCtrName(int32_t q)
 void zinfo::copyFrom(zinfo const& other)
 {
 	clear();
-	for(auto q = 0; q < MAX_COUNTERS; ++q)
+	for(int q = 0; q < MAX_COUNTERS; ++q)
 	{
 		assignchar(ctr_name+q, other.ctr_name[q]);
 	}
-	for(auto q = 0; q < itype_max; ++q)
+	for(int q = 0; q < itype_max; ++q)
 	{
 		assignchar(ic_name+q, other.ic_name[q]);
 		assignchar(ic_help_string+q, other.ic_help_string[q]);
 	}
-	for(auto q = 0; q < cMAX; ++q)
+	for(int q = 0; q < cMAX; ++q)
 	{
 		assignchar(ctype_name+q, other.ctype_name[q]);
 		assignchar(ctype_help_string+q, other.ctype_help_string[q]);
 	}
-	for(auto q = 0; q < mfMAX; ++q)
+	for(int q = 0; q < mfMAX; ++q)
 	{
 		assignchar(mf_name+q, other.mf_name[q]);
 		assignchar(mf_help_string+q, other.mf_help_string[q]);
 	}
-	for(auto q = 0; q < wMax; ++q)
+	for(int q = 0; q < wMax; ++q)
 	{
 		assignchar(weap_name+q, other.weap_name[q]);
 	}
@@ -610,7 +610,7 @@ int32_t writezinfo(PACKFILE *f, zinfo const& z)
 		{
 			new_return(6);
 		}
-		for(auto q = 0; q < itype_max; ++q)
+		for(int q = 0; q < itype_max; ++q)
 		{
 			byte namesize = (byte)(vbound(valid_str(z.ic_name[q]) ? strlen(z.ic_name[q]) : 0,0,255));
 			
@@ -637,7 +637,7 @@ int32_t writezinfo(PACKFILE *f, zinfo const& z)
 		{
 			new_return(11);
 		}
-		for(auto q = 0; q < cMAX; ++q)
+		for(int q = 0; q < cMAX; ++q)
 		{
 			byte namesize = (byte)(vbound(valid_str(z.ctype_name[q]) ? strlen(z.ctype_name[q]) : 0,0,255));
 			
@@ -664,7 +664,7 @@ int32_t writezinfo(PACKFILE *f, zinfo const& z)
 		{
 			new_return(16);
 		}
-		for(auto q = 0; q < mfMAX; ++q)
+		for(int q = 0; q < mfMAX; ++q)
 		{
 			byte namesize = (byte)(vbound(valid_str(z.mf_name[q]) ? strlen(z.mf_name[q]) : 0,0,255));
 			
@@ -691,7 +691,7 @@ int32_t writezinfo(PACKFILE *f, zinfo const& z)
 		{
 			new_return(21);
 		}
-		for(auto q = 0; q < MAX_COUNTERS; ++q)
+		for(int q = 0; q < MAX_COUNTERS; ++q)
 		{
 			byte namesize = (byte)(vbound(valid_str(z.ctr_name[q]) ? strlen(z.ctr_name[q]) : 0,0,255));
 			
@@ -708,7 +708,7 @@ int32_t writezinfo(PACKFILE *f, zinfo const& z)
 		{
 			new_return(21);
 		}
-		for(auto q = 0; q < wMax; ++q)
+		for(int q = 0; q < wMax; ++q)
 		{
 			byte namesize = (byte)(vbound(valid_str(z.weap_name[q]) ? strlen(z.weap_name[q]) : 0,0,255));
 			
@@ -764,7 +764,7 @@ int32_t readzinfo(PACKFILE *f, zinfo& z, zquestheader const& hdr)
 			return qe_invalid;
 	if (!(num_itemtypes >= 0 && num_itemtypes <= itype_max))
 		return qe_invalid;
-	for(auto q = 0; q < num_itemtypes; ++q)
+	for(int q = 0; q < num_itemtypes; ++q)
 	{
 		byte namesize;
 		if(!p_getc(&namesize,f))
@@ -799,7 +799,7 @@ int32_t readzinfo(PACKFILE *f, zinfo& z, zquestheader const& hdr)
 			return qe_invalid;
 		if (!(num_combotypes >= 0 && num_combotypes <= cMAX))
 			return qe_invalid;
-		for(auto q = 0; q < num_combotypes; ++q)
+		for(int q = 0; q < num_combotypes; ++q)
 		{
 			byte namesize;
 			if(!p_getc(&namesize,f))
@@ -831,7 +831,7 @@ int32_t readzinfo(PACKFILE *f, zinfo& z, zquestheader const& hdr)
 			return qe_invalid;
 		if (!(num_mapflags >= 0 && num_mapflags <= mfMAX))
 			return qe_invalid;
-		for(auto q = 0; q < num_mapflags; ++q)
+		for(int q = 0; q < num_mapflags; ++q)
 		{
 			byte namesize;
 			if(!p_getc(&namesize,f))
@@ -862,7 +862,7 @@ int32_t readzinfo(PACKFILE *f, zinfo& z, zquestheader const& hdr)
 	else if (get_app_id() == App::zquest)
 	{
 		if(hdr.zelda_version == 0x255) //Old quest naming
-			for(auto q = 0; q < mfMAX; ++q)
+			for(int q = 0; q < mfMAX; ++q)
 			{
 				if(valid_str(old_mapflag_strings[q]))
 				{
@@ -890,7 +890,7 @@ int32_t readzinfo(PACKFILE *f, zinfo& z, zquestheader const& hdr)
 			return qe_invalid;
 		if (!(num_counters >= 0 && num_counters <= MAX_COUNTERS))
 			return qe_invalid;
-		for(auto q = 0; q < num_counters; ++q)
+		for(int q = 0; q < num_counters; ++q)
 		{
 			byte namesize;
 			if(!p_getc(&namesize,f))
@@ -913,7 +913,7 @@ int32_t readzinfo(PACKFILE *f, zinfo& z, zquestheader const& hdr)
 			return qe_invalid;
 		if (!(num_wpns >= 0 && num_wpns <= MAXWPNS))
 			return qe_invalid;
-		for(auto q = 0; q < num_wpns; ++q)
+		for(int q = 0; q < num_wpns; ++q)
 		{
 			byte namesize;
 			if(!p_getc(&namesize,f))
@@ -934,7 +934,7 @@ int32_t readzinfo(PACKFILE *f, zinfo& z, zquestheader const& hdr)
 
 bool zinfo::isNull()
 {
-	for(auto q = 0; q < itype_max; ++q)
+	for(int q = 0; q < itype_max; ++q)
 	{
 		if(ic_name[q]) return false;
 		if(ic_help_string[q]) return false;

@@ -447,9 +447,9 @@ int32_t onStrings()
 				Z_message("Reallocating string buffer...\n");
 				MsgStr* tmp = MsgStrings;
 				MsgStrings = new MsgStr[MAXMSGS];
-				for(auto q = 0; q < msg_strings_size; ++q)
+				for(int q = 0; q < msg_strings_size; ++q)
 					MsgStrings[q] = tmp[q];
-				for(auto q = msg_strings_size; q < MAXMSGS; ++q)
+				for(int q = msg_strings_size; q < MAXMSGS; ++q)
 					MsgStrings[q].clear();
 				delete[] tmp;
 				// MsgStrings=(MsgStr*)_al_sane_realloc(MsgStrings,sizeof(MsgStr)*MAXMSGS);
@@ -716,7 +716,7 @@ int32_t onStrings()
 				SETFLAG(strlist_dlg[12].flags, D_DISABLED, strlist_numerical_sort);
 				SETFLAG(strlist_dlg[13].flags, D_DISABLED, strlist_numerical_sort);
 				SETFLAG(strlist_dlg[14].flags, D_DISABLED, strlist_numerical_sort);
-				for(auto q = 1; q < msg_count-1; ++q)
+				for(int q = 1; q < msg_count-1; ++q)
 				{
 					msglistcache[strlist_numerical_sort ? q : MsgStrings[q].listpos] = q;
 				}
