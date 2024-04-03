@@ -5455,15 +5455,15 @@ END_OF_MAIN()
 
 void remove_installed_timers()
 {
-    al_trace("Removing timers. \n");
-    remove_int(update_throttle_counter);
-    Z_remove_timers();
+	al_trace("Removing timers. \n");
+	remove_int(update_throttle_counter);
+	Z_remove_timers();
 }
 
 
 void delete_everything_else() //blarg.
 {
-    refresh_subscr_buttonitems();
+	refresh_subscr_buttonitems();
 	kill_subscr_items();
 }
 
