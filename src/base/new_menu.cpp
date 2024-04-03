@@ -1208,10 +1208,7 @@ MenuRet TopMenu::run_loop(GuiMenu* parent)
 {
 	reset_state();
 	optional<uint> msel = hovered_ind();
-	if(msel)
-		state.sel_ind = msel;
-	else
-		state.sel_ind = 0;
+	state.sel_ind = msel.value_or(0);
 	auto mb = gui_mouse_b();
 	MenuRet ret = MRET_NIL;
 	bool esc = key[KEY_ESC];
