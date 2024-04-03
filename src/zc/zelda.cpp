@@ -5525,12 +5525,8 @@ void quit_game()
 	for(int32_t i=0; i<WAV_COUNT; i++)
 	{
 		delete [] sfx_string[i];
-		
-		if(customsfxdata[i].data!=NULL)
-		{
-//      delete [] customsfxdata[i].data;
-			free(customsfxdata[i].data);
-		}
+		//      delete [] customsfxdata[i].data;
+		free(customsfxdata[i].data);
 	}
 	
 	al_trace("Misc... \n");
@@ -5618,9 +5614,8 @@ void quit_game()
 	al_trace("Deleting quest buffers... \n");
 	del_qst_buffers();
 	
-	if(qstdir) free(qstdir);
-	
-	if(qstpath) free(qstpath);
+	free(qstdir); 
+	free(qstpath);
 
 	FFCore.shutdown();
 }
