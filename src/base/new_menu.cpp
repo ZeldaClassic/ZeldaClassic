@@ -369,7 +369,7 @@ optional<uint> GuiMenu::ind_at(uint uid)
 		if(mit.uid && *mit.uid == uid)
 			return indx;
 	}
-    return nullopt;
+	return nullopt;
 }
 MenuItem* GuiMenu::by_uid(uint uid)
 {
@@ -380,13 +380,13 @@ MenuItem* GuiMenu::by_uid(uint uid)
 		if(mit.uid && *mit.uid == uid)
 			return &mit;
 	}
-    return nullptr;
+	return nullptr;
 }
 MenuItem* GuiMenu::at(uint indx)
 {
-    if(indx >= entries.size())
-        return nullptr;
-    return &entries[indx];
+	if(indx >= entries.size())
+		return nullptr;
+	return &entries[indx];
 }
 MenuItem* GuiMenu::hovered()
 {
@@ -728,10 +728,7 @@ MenuRet NewMenu::run_loop(GuiMenu* parent)
 {
 	optional<uint> msel = hovered_ind();
 	reset_state();
-	if(msel)
-		state.sel_ind = msel;
-	else
-		state.sel_ind = 0;
+	state.sel_ind = msel.value_or(0);
 	auto mb = gui_mouse_b();
 	
 	MenuRet ret = MRET_NIL;
