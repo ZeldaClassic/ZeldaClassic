@@ -2698,9 +2698,9 @@ int32_t tilesize(byte format)
 		case tf16Bit:
 			return 512;
 
-        case tf8Bit:
+		case tf8Bit:
 		case tf4Bit:
-            return 256;
+			return 256;
 	}
 
 	// BUG: This is triggered by the 'grab' option, and certainly others as well.
