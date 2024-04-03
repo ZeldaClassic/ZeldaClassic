@@ -6336,7 +6336,7 @@ int32_t d_savemidi_proc(int32_t msg,DIALOG *d,int32_t c)
 		//struct ffblk f;
 		char title[40] = "Save MIDI: ";
 		char fname[2048];
-	memset(fname,0,2048);
+		memset(fname,0,2048);
 		static EXT_LIST list[] =
 		{
 			{ (char *)"MIDI files (*.mid)", (char *)"mid" },
@@ -6345,7 +6345,7 @@ int32_t d_savemidi_proc(int32_t msg,DIALOG *d,int32_t c)
 		};
 		
 		strcpy(title+11, tunes[i].title);
-	title[39] = '\0';
+		title[39] = '\0';
 		
 		if(jwin_file_browse_ex(title, fname, list, &sel, 2048, -1, -1, get_zc_font(font_lfont))==0)
 			goto done;
@@ -6810,7 +6810,7 @@ int32_t onCheatKeys()
 			memcpy(cheatkeys, oldcheats, sizeof(cheatkeys));
 			done=true;
 		}
-        rest(1);
+		rest(1);
 	}
 	
 	return D_O_K;
@@ -6890,8 +6890,8 @@ int32_t onSound()
 	{
 		midi_volume   = m;
 		emusic_volume = e;
-		sfx_volume	= s;
-		pan_style	 = p;
+		sfx_volume    = s;
+		pan_style     = p;
 	}
 	
 	return D_O_K;
@@ -8347,8 +8347,6 @@ SAMPLE* sfx_get_sample(int32_t index)
 	{
 		return &customsfxdata[index];
 	}
-
-	return nullptr;
 }
 
 // allocates a voice for the sample "wav_index" (index into zelda.dat)
