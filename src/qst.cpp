@@ -1146,13 +1146,13 @@ void init_spritelists()
 
 bool reset_items(bool validate, zquestheader *Header)
 {
-    bool ret = true;
-    if (get_app_id() == App::zquest)
-        ret = init_section(Header, ID_ITEMS, NULL, NULL, validate);
+	bool ret = true;
+	if (get_app_id() == App::zquest)
+		ret = init_section(Header, ID_ITEMS, NULL, NULL, validate);
     
-    for(int32_t i=0; i<MAXITEMS; i++) reset_itemname(i);
+	for(int32_t i=0; i<MAXITEMS; i++) reset_itemname(i);
     
-    return ret;
+	return ret;
 }
 
 bool reset_guys()
@@ -1176,19 +1176,19 @@ bool reset_wpns(bool validate, zquestheader *Header)
 
 bool reset_mapstyles(bool validate, miscQdata *Misc)
 {
-    Misc->colors.blueframe_tile = 20044;
-    Misc->colors.blueframe_cset = 0;
-    Misc->colors.triforce_tile = 23461;
-    Misc->colors.triforce_cset = 1;
-    Misc->colors.triframe_tile = 18752;
-    Misc->colors.triframe_cset = 1;
-    Misc->colors.overworld_map_tile = 16990;
-    Misc->colors.overworld_map_cset = 2;
-    Misc->colors.HCpieces_tile = 21160;
-    Misc->colors.HCpieces_cset = 8;
-    Misc->colors.dungeon_map_tile = 19651;
-    Misc->colors.dungeon_map_cset = 8;
-    return true;
+	Misc->colors.blueframe_tile = 20044;
+	Misc->colors.blueframe_cset = 0;
+	Misc->colors.triforce_tile = 23461;
+	Misc->colors.triforce_cset = 1;
+	Misc->colors.triframe_tile = 18752;
+	Misc->colors.triframe_cset = 1;
+	Misc->colors.overworld_map_tile = 16990;
+	Misc->colors.overworld_map_cset = 2;
+	Misc->colors.HCpieces_tile = 21160;
+	Misc->colors.HCpieces_cset = 8;
+	Misc->colors.dungeon_map_tile = 19651;
+	Misc->colors.dungeon_map_cset = 8;
+	return true;
 }
 
 int32_t get_qst_buffers()
