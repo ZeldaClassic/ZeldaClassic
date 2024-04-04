@@ -5564,11 +5564,8 @@ bool save_msgstrs_text(const char *path)
     return false;
 }
 
-bool load_msgstrs(const char *path, int32_t startstring)
+bool load_msgstrs(const char *path, [[maybe_unused]] int32_t startstring)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    startstring=startstring;
-    
     dword section_id;
     PACKFILE *f = pack_fopen_password(path,F_READ, "");
     
@@ -7170,11 +7167,8 @@ int32_t writeheader(PACKFILE *f, zquestheader *Header)
     new_return(0);
 }
 
-int32_t writerules(PACKFILE *f, zquestheader *Header)
+int32_t writerules(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    Header=Header;
-    
     dword section_id=ID_RULES;
     dword section_version=V_RULES;
     dword section_cversion=CV_RULES;
@@ -7237,11 +7231,8 @@ int32_t writerules(PACKFILE *f, zquestheader *Header)
 }
 
 
-int32_t writedoorcombosets(PACKFILE *f, zquestheader *Header)
+int32_t writedoorcombosets(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    Header=Header;
-    
     dword section_id=ID_DOORS;
     dword section_version=V_DOORS;
     dword section_cversion=CV_DOORS;
@@ -7496,12 +7487,8 @@ int32_t writedoorcombosets(PACKFILE *f, zquestheader *Header)
     new_return(0);
 }
 
-int32_t writedmaps(PACKFILE *f, word version, word build, word start_dmap, word max_dmaps)
+int32_t writedmaps(PACKFILE *f, [[maybe_unused]] word version, [[maybe_unused]] word build, word start_dmap, word max_dmaps)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    version=version;
-    build=build;
-    
     word dmap_count=count_dmaps();
     dword section_id=ID_DMAPS;
     dword section_version=V_DMAPS;
@@ -7820,11 +7807,8 @@ int32_t writedmaps(PACKFILE *f, word version, word build, word start_dmap, word 
     new_return(0);
 }
 
-int32_t writemisccolors(PACKFILE *f, zquestheader *Header)
+int32_t writemisccolors(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	Header=Header;
-	
 	dword section_id=ID_COLORS;
 	dword section_version=V_COLORS;
 	dword section_cversion=CV_COLORS;
@@ -8022,11 +8006,8 @@ int32_t writemisccolors(PACKFILE *f, zquestheader *Header)
 	new_return(0);
 }
 
-int32_t writegameicons(PACKFILE *f, zquestheader *Header)
+int32_t writegameicons(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    Header=Header;
-    
     dword section_id=ID_ICONS;
     dword section_version=V_ICONS;
     dword section_cversion=CV_ICONS;
@@ -8085,11 +8066,8 @@ int32_t writegameicons(PACKFILE *f, zquestheader *Header)
     new_return(0);
 }
 
-int32_t writemisc(PACKFILE *f, zquestheader *Header)
+int32_t writemisc(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	Header=Header;
-	
 	dword section_id=ID_MISC;
 	dword section_version=V_MISC;
 	dword section_cversion=CV_MISC;
@@ -8337,11 +8315,8 @@ int32_t writemisc(PACKFILE *f, zquestheader *Header)
 	new_return(0);
 }
 
-int32_t writeitems(PACKFILE *f, zquestheader *Header)
+int32_t writeitems(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    Header=Header;
-    
     dword section_id=ID_ITEMS;
     dword section_version=V_ITEMS;
     dword section_cversion=CV_ITEMS;
@@ -8862,11 +8837,8 @@ int32_t writeitems(PACKFILE *f, zquestheader *Header)
     new_return(0);
 }
 
-int32_t writeweapons(PACKFILE *f, zquestheader *Header)
+int32_t writeweapons(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    Header=Header;
-    
     dword section_id=ID_WEAPONS;
     dword section_version=V_WEAPONS;
     dword section_cversion=CV_WEAPONS;
@@ -9866,12 +9838,8 @@ int32_t writecombo_loop(PACKFILE *f, word section_version, newcombo const& tmp_c
 	return 0;
 }
 
-int32_t writecombos(PACKFILE *f, word version, word build, word start_combo, word max_combos)
+int32_t writecombos(PACKFILE *f, [[maybe_unused]] word version, [[maybe_unused]] word build, word start_combo, word max_combos)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    version=version;
-    build=build;
-    
     word combos_used;
     dword section_id=ID_COMBOS;
     dword section_version=V_COMBOS;
@@ -9943,12 +9911,8 @@ int32_t writecombos(PACKFILE *f, word version, word build, word start_combo, wor
     new_return(0);
 }
 
-int32_t writecomboaliases(PACKFILE *f, word version, word build)
+int32_t writecomboaliases(PACKFILE *f, [[maybe_unused]] word version, [[maybe_unused]] word build)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    version=version;
-    build=build;
-    
     dword section_id=ID_COMBOALIASES;
     dword section_version=V_COMBOALIASES;
     dword section_cversion=CV_COMBOALIASES;
@@ -10151,14 +10115,8 @@ int32_t writecomboaliases(PACKFILE *f, word version, word build)
     new_return(0);
 }
 
-int32_t writecolordata(PACKFILE *f, word version, word build, word start_cset, word max_csets)
+int32_t writecolordata(PACKFILE *f, [[maybe_unused]] word version, [[maybe_unused]] word build, [[maybe_unused]] word start_cset, [[maybe_unused]] word max_csets)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    version=version;
-    build=build;
-    start_cset=start_cset;
-    max_csets=max_csets;
-    
     dword section_id=ID_CSETS;
     dword section_version=V_CSETS;
     dword section_cversion=CV_CSETS;
@@ -10255,14 +10213,8 @@ int32_t writecolordata(PACKFILE *f, word version, word build, word start_cset, w
     new_return(0);
 }
 
-int32_t writestrings(PACKFILE *f, word version, word build, word start_msgstr, word max_msgstrs)
+int32_t writestrings(PACKFILE *f, [[maybe_unused]] word version, [[maybe_unused]] word build, [[maybe_unused]] word start_msgstr, [[maybe_unused]] word max_msgstrs)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    version=version;
-    build=build;
-    start_msgstr=start_msgstr;
-    max_msgstrs=max_msgstrs;
-    
     dword section_id=ID_STRINGS;
     dword section_version=V_STRINGS;
     dword section_cversion=CV_STRINGS;
@@ -10691,22 +10643,18 @@ void parse_strings_tsv(std::string tsv)
 }
 
 bool isblanktile(tiledata *buf, int32_t i);
-int32_t writetiles(PACKFILE *f, word version, word build, int32_t start_tile, int32_t max_tiles)
+int32_t writetiles(PACKFILE *f, [[maybe_unused]] word version, [[maybe_unused]] word build, int32_t start_tile, int32_t max_tiles)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    version=version;
-    build=build;
-    
-    int32_t tiles_used;
-    dword section_id=ID_TILES;
-    dword section_version=V_TILES;
-    dword section_cversion=CV_TILES;
+	int32_t tiles_used;
+	dword section_id=ID_TILES;
+	dword section_version=V_TILES;
+	dword section_cversion=CV_TILES;
 	al_trace("Counting tiles used\n");
-    tiles_used = count_tiles(newtilebuf)-start_tile;
-    tiles_used = zc_min(tiles_used, max_tiles);
-    tiles_used = zc_min(tiles_used, NEWMAXTILES);
+	tiles_used = count_tiles(newtilebuf)-start_tile;
+	tiles_used = zc_min(tiles_used, max_tiles);
+	tiles_used = zc_min(tiles_used, NEWMAXTILES);
 	al_trace("writetiles counted %dtiles used.\n",tiles_used); 
-    dword section_size = 0;
+	dword section_size = 0;
     
     //section id
     if(!p_mputl(section_id,f))
@@ -11006,11 +10954,8 @@ int32_t writecheats(PACKFILE *f, zquestheader *Header)
     new_return(0);
 }
 
-int32_t writeguys(PACKFILE *f, zquestheader *Header)
+int32_t writeguys(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	Header=Header;
-	
 	dword section_id=ID_GUYS;
 	dword section_version=V_GUYS;
 	dword section_cversion=CV_GUYS;
@@ -11550,11 +11495,8 @@ int32_t writeguys(PACKFILE *f, zquestheader *Header)
 	new_return(0);
 }
 
-int32_t writeherosprites(PACKFILE *f, zquestheader *Header)
+int32_t writeherosprites(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    Header=Header;
-    
     dword section_id=ID_HEROSPRITES;
     dword section_version=V_HEROSPRITES;
     dword section_cversion=CV_HEROSPRITES;
@@ -12960,12 +12902,8 @@ int32_t writeffscript(PACKFILE *f, zquestheader *Header)
     //the irony is that it causes an "unreachable code" warning.
 }
 
-int32_t write_one_ffscript(PACKFILE *f, zquestheader *Header, int32_t i, script_data **script)
+int32_t write_one_ffscript(PACKFILE *f, [[maybe_unused]] zquestheader *Header, [[maybe_unused]] int32_t i, script_data **script)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    Header=Header;
-    i=i;
-    
     size_t num_commands = (*script)->size;
     
     if(!p_iputl(num_commands,f))
@@ -13148,11 +13086,8 @@ int32_t write_one_ffscript(PACKFILE *f, zquestheader *Header, int32_t i, script_
 extern SAMPLE customsfxdata[WAV_COUNT];
 extern uint8_t customsfxflag[WAV_COUNT>>3];
 
-int32_t writesfx(PACKFILE *f, zquestheader *Header)
+int32_t writesfx(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    Header=Header;
-    
     dword section_id=ID_SFX;
     dword section_version=V_SFX;
     dword section_cversion=CV_SFX;
@@ -13476,11 +13411,8 @@ int32_t writeinitdata(PACKFILE *f, zquestheader *)
 	new_return(0);
 }
 
-int32_t writeitemdropsets(PACKFILE *f, zquestheader *Header)
+int32_t writeitemdropsets(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    Header=Header;
-    
     dword section_id=ID_ITEMDROPSETS;
     dword section_version=V_ITEMDROPSETS;
     dword section_cversion=CV_ITEMDROPSETS;

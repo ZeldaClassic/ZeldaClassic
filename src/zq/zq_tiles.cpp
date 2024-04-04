@@ -1130,12 +1130,8 @@ bool do_graphics_button_reset(int32_t x,int32_t y,int32_t w,int32_t h,BITMAP *bm
 //    circle(BITMAP *bmp, int32_t x, int32_t y, int32_t radius, int32_t color);
 //    circlefill(BITMAP *bmp, int32_t x, int32_t y, int32_t radius, int32_t color);
 
-void draw_layerradio(BITMAP *dest,int32_t x,int32_t y,int32_t bg,int32_t fg, int32_t value)
+void draw_layerradio(BITMAP *dest,int32_t x,int32_t y, [[maybe_unused]] int32_t bg, [[maybe_unusde]] int32_t fg, int32_t value)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	bg=bg;
-	fg=fg;
-	
 	int32_t r, center;
 	
 	for(int32_t k=0; k<7; k++)
@@ -3943,11 +3939,8 @@ RGB_MAP rgb_table;
 COLOR_MAP imagepal_table;
 
 
-extern void return_RAMpal_color(AL_CONST PALETTE pal, int32_t x, int32_t y, RGB *rgb)
+extern void return_RAMpal_color(AL_CONST PALETTE pal, [[maybe_unused]] int32_t x, int32_t y, RGB *rgb)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	x=x;
-	
 	rgb->r = pal[y].r;
 	rgb->g = pal[y].g;
 	rgb->b = pal[y].b;
@@ -18015,12 +18008,8 @@ int32_t onCombos()
 	return D_O_K;
 }
 
-int32_t d_ctile_proc(int32_t msg,DIALOG *d,int32_t c)
+int32_t d_ctile_proc(int32_t msg, [[maybe_unused]] DIALOG *d, [[maybe_unused]] int32_t c)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	d=d;
-	c=c;
-	
 	if(msg==MSG_CLICK)
 	{
 		int32_t t=curr_combo.o_tile;
@@ -18038,11 +18027,8 @@ int32_t d_ctile_proc(int32_t msg,DIALOG *d,int32_t c)
 	return D_O_K;
 }
 
-int32_t d_combo_loader(int32_t msg,DIALOG *d,int32_t c)
+int32_t d_combo_loader(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	c=c;
-	
 	if(msg==MSG_DRAW)
 	{
 		FONT *f = get_zc_font(font_lfont_l);

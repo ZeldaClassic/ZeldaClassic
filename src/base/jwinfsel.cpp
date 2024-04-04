@@ -54,13 +54,8 @@ static attrb_state_t attrb_state[ATTRB_MAX] = DEFAULT_ATTRB_STATE;
 
 static char updir[1024];
 
-static int32_t fs_dummy_proc(int32_t msg, DIALOG *d, int32_t c)
+static int32_t fs_dummy_proc([[maybe_unused]] int32_t msg, [[maybe_unused]] DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    msg=msg;
-    d=d;
-    c=c;
-    
     return D_O_K;
 }
 

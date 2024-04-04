@@ -5450,11 +5450,8 @@ static char str_a[80],str_b[80],str_s[80],str_m[80],str_l[80],str_r[80],str_p[80
 	str_leftmod1[80],str_leftmod2[80],str_rightmod1[80],str_rightmod2[80], str_left[80], str_right[80], str_up[80], str_down[80],
 	str_primary_stick[80], str_secondary_stick[80];
 
-int32_t d_stringloader(int32_t msg,DIALOG *d,int32_t c)
+int32_t d_stringloader(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	c=c;
-
 	if (d->w == 1)
 	{
 		if (!gamepad_dlg_cur_joystick || !al_get_joystick_active(gamepad_dlg_cur_joystick))

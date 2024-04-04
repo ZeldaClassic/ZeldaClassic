@@ -1237,11 +1237,8 @@ const char *stringcatlist(int32_t index, int32_t *list_size)
 // Dialog procs
  //
 
-int32_t d_msgtile_proc(int32_t msg,DIALOG *d,int32_t c)
+int32_t d_msgtile_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	c=c;
-	
 	switch(msg)
 	{
 	case MSG_CLICK:

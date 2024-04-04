@@ -11820,11 +11820,8 @@ int32_t onComboPage()
     return D_O_K;
 }
 
-int32_t d_sel_scombo_proc(int32_t msg, DIALOG *d, int32_t c)
+int32_t d_sel_scombo_proc(int32_t msg, DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    c=c;
-    
     switch(msg)
     {
     case MSG_CLICK:
@@ -11956,11 +11953,8 @@ int32_t select_flag(int32_t &f)
     return false;
 }
 
-int32_t d_scombo_proc(int32_t msg,DIALOG *d,int32_t c)
+int32_t d_scombo_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    c=c;
-    
     switch(msg)
     {
     case MSG_CLICK:
@@ -14009,11 +14003,8 @@ static byte triframe_points[9*4] =
     1,1,1,2,  1,1,2,2,  3,1,3,2,  3,1,2,2
 };
 
-int32_t d_tri_frame_proc(int32_t msg,DIALOG *d,int32_t c)
+int32_t d_tri_frame_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    c=c;
-    
     if(msg==MSG_DRAW)
     {
         int32_t x[5],y[3];
@@ -14192,13 +14183,8 @@ void drawovergrid(BITMAP *dest,int32_t x,int32_t y,int32_t grid,int32_t color,in
     }
 }
 
-void drawgrid(BITMAP *dest,int32_t x,int32_t y,int32_t w, int32_t h, int32_t tw, int32_t th, int32_t *grid,int32_t fg,int32_t bg,int32_t div)
+void drawgrid(BITMAP *dest,int32_t x,int32_t y, [[maybe_unused]] int32_t w, int32_t h, [[maybe_unused]] int32_t tw, [[maybe_unused]] int32_t th, int32_t *grid,int32_t fg,int32_t bg,int32_t div)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    w=w;
-    tw=tw;
-    th=th;
-    
     rectfill(dest,x,y,x+(8*8),y+(1*4),div);
     
     for(int32_t dy=0; dy<h; dy++)
@@ -16772,11 +16758,8 @@ int32_t d_wflag_proc(int32_t msg,DIALOG *d,int32_t)
     return ret;
 }
 
-int32_t d_dmapscrsel_proc(int32_t msg,DIALOG *d,int32_t c)
+int32_t d_dmapscrsel_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    c=c;
-    
     int32_t ret = D_O_K;
     
     switch(msg)
@@ -18816,11 +18799,8 @@ const char *comboalist(int32_t index, int32_t *list_size)
 
 extern int32_t scheme[jcMAX];
 
-int32_t d_comboa_proc(int32_t msg,DIALOG *d,int32_t c)
+int32_t d_comboa_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    c=c;
-    
     combo_alias *combo;
     combo = &temp_aliases[comboa_cnt];
     int32_t position;
@@ -19466,11 +19446,8 @@ int32_t onNewComboAlias()
     return ret;
 }
 
-int32_t d_orgcomboa_proc(int32_t msg, DIALOG *d, int32_t c)
+int32_t d_orgcomboa_proc(int32_t msg, DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    c=c;
-    
     int32_t down=0;
     int32_t selected=(d->flags&D_SELECTED)?1:0;
     int32_t last_draw;
@@ -19544,11 +19521,8 @@ int32_t d_orgcomboa_proc(int32_t msg, DIALOG *d, int32_t c)
     return D_O_K;
 }
 
-int32_t d_comboabutton_proc(int32_t msg, DIALOG *d, int32_t c)
+int32_t d_comboabutton_proc(int32_t msg, DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    c=c;
-    
     int32_t down=0;
     int32_t selected=(d->flags&D_SELECTED)?1:0;
     int32_t last_draw;
@@ -24708,11 +24682,8 @@ int32_t onMapStyles()
     return D_O_K;
 }
 
-int32_t d_misccolors_old_proc(int32_t msg,DIALOG *d,int32_t c)
+int32_t d_misccolors_old_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    c=c;
-    
     if(msg==MSG_DRAW)
     {
         textout_ex(screen,font,"0123456789ABCDEF",d->x+8,d->y,d->fg,d->bg);
@@ -24879,10 +24850,8 @@ int32_t d_misccolors_tab_proc(int32_t msg,DIALOG *d,int32_t c)
 }
 
 
-int32_t d_misccolors_proc(int32_t msg,DIALOG *d,int32_t c)
+int32_t d_misccolors_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    c=c;
     int32_t mul=12;
         
     switch(msg)
@@ -25764,29 +25733,18 @@ int32_t current_item_id(int32_t itemtype, bool, bool, bool)
 }
 
 
-bool can_use_item(int32_t item_type, int32_t item)
+bool can_use_item([[maybe_unused]] int32_t item_type, [[maybe_unused]] int32_t item)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    item_type=item_type;
-    item=item;
-    
     return true;
 }
 
-bool has_item(int32_t item_type, int32_t it)
+bool has_item(int32_t [[maybe_unused]] item_type, [[maybe_unused]] int32_t it)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    item_type=item_type;
-    it=it;
-    
     return true;
 }
 
-int32_t get_bmaps(int32_t si)
+int32_t get_bmaps([[maybe_unused]] int32_t si)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    si=si;
-    
     return 255;
 }
 
@@ -28409,12 +28367,8 @@ int32_t save_config_file()
     return 0;
 }
 
-int32_t d_timer_proc(int32_t msg, DIALOG *d, int32_t c)
+int32_t d_timer_proc(int32_t msg, [[maybe_unused]] DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    c=c;
-    d=d;
-    
     switch(msg)
     {
     case MSG_IDLE:

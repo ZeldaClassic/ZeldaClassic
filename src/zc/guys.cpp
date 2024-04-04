@@ -8835,10 +8835,8 @@ bool eItemFairy::animate(int32_t index)
 	return enemy::animate(index);
 }
 
-void eItemFairy::draw(BITMAP *dest)
+void eItemFairy::draw([[maybe_unused]] BITMAP *dest)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	dest=dest;
 }
 
 ePeahat::ePeahat(zfix X,zfix Y,int32_t Id,int32_t Clk) : enemy(X,Y,Id,Clk)
@@ -10671,10 +10669,8 @@ void eSpinTile::drawshadow(BITMAP *dest, bool translucent)
 	yofs-=4;
 }
 
-eZora::eZora(zfix X,zfix Y,int32_t Id,int32_t Clk) : enemy(X,Y,Id,0)
+eZora::eZora(zfix X,zfix Y,int32_t Id, [[maybe_unused]] int32_t Clk) : enemy(X,Y,Id,0)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	Clk=Clk;
 	mainguy=false;
 	if (!(editorflags&ENEMY_FLAG3)) count_enemy=false;
 	/*if((x>-17 && x<0) && iswaterex(tmpscr->data[(((int32_t)y&0xF0)+((int32_t)x>>4))]))
@@ -15017,10 +15013,8 @@ void esLanmola::draw(BITMAP *dest)
 		enemy::draw(dest);
 }
 
-eManhandla::eManhandla(zfix X,zfix Y,int32_t Id,int32_t Clk) : enemy(X,Y,Id,0)
+eManhandla::eManhandla(zfix X,zfix Y,int32_t Id, [[maybe_unused]] int32_t Clk) : enemy(X,Y,Id,0)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	Clk=Clk;
 	superman=1;
 	dir=(zc_oldrand()&7)+8;
 	armcnt=dmisc2?8:4;//((id==eMANHAN)?4:8);

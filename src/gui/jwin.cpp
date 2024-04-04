@@ -755,11 +755,8 @@ int32_t close_dlg()
     return D_CLOSE;
 }
 
-int32_t jwin_frame_proc(int32_t msg, DIALOG *d, int32_t c)
+int32_t jwin_frame_proc(int32_t msg, DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    c=c;
-    
     if(msg == MSG_DRAW)
     {
         jwin_draw_frame(screen, d->x, d->y, d->w, d->h, d->d1);
@@ -768,11 +765,8 @@ int32_t jwin_frame_proc(int32_t msg, DIALOG *d, int32_t c)
     return D_O_K;
 }
 
-int32_t jwin_guitest_proc(int32_t msg, DIALOG *d, int32_t c)
+int32_t jwin_guitest_proc(int32_t msg, DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    c=c;
-    
     if(msg == MSG_DRAW)
     {
         jwin_draw_frame(screen, d->x, d->y, d->w, d->h, d->d1);
@@ -789,11 +783,8 @@ int32_t jwin_guitest_proc(int32_t msg, DIALOG *d, int32_t c)
   *  If d->dp3 is non-null, it will be read as a help text string, and
   *  a ? button will be drawn, that upon clicking will display the helptext.
   */
-int32_t jwin_win_proc(int32_t msg, DIALOG *d, int32_t c)
+int32_t jwin_win_proc(int32_t msg, DIALOG *d, [[maybe_unused]] int32_t c)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	c=c;
-	
 	rest(1);
 	static bool skipredraw = false;
 	
@@ -6696,9 +6687,7 @@ int32_t jwin_auto_alert3(const char *title, const char *s1, int32_t lenlim, int3
 
 int32_t jwin_auto_alert(const char *title, const char *s1, int32_t lenlim, int32_t vspace, const char *b1, const char *b2, int32_t c1, int32_t c2, FONT *title_font)
 {
-    int32_t ret;
-    
-    ret = jwin_auto_alert3(title, s1, lenlim, vspace, b1, b2, NULL, c1, c2, 0, title_font);
+    int32_t ret = jwin_auto_alert3(title, s1, lenlim, vspace, b1, b2, NULL, c1, c2, 0, title_font);
     
     if(ret > 2)
         ret = 2;
@@ -6710,12 +6699,8 @@ int32_t jwin_auto_alert(const char *title, const char *s1, int32_t lenlim, int32
 /***********  drop list proc  ************/
 /*****************************************/
 int32_t last_droplist_sel = -1;
-static int32_t d_dropcancel_proc(int32_t msg,DIALOG *d,int32_t c)
+static int32_t d_dropcancel_proc(int32_t msg, [[maybe_unused]] DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    d=d;
-    c=c;
-    
     if(msg==MSG_CLICK || msg==MSG_DCLICK)
         return D_CLOSE;
         
@@ -7051,10 +7036,8 @@ int32_t jwin_checkfont_proc(int32_t msg, DIALOG *d, int32_t c)
   *  Who needs C++ after all? This is derived from d_button_proc,
   *  but overrides the drawing routine to provide a check box.
   */
-int32_t jwin_check_proc(int32_t msg, DIALOG *d, int32_t c)
+int32_t jwin_check_proc(int32_t msg, DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    c=c;
     int32_t x;
     int32_t bx=0, tl=0;
     int32_t tx=d->x;

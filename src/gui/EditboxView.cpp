@@ -418,10 +418,8 @@ bool BasicEditboxView::mouseDrag(int32_t x, int32_t y)
 	return false;
 }
 
-bool BasicEditboxView::mouseRelease(int32_t x, int32_t y)
+bool BasicEditboxView::mouseRelease([[maybe_unused]] int32_t x, [[maybe_unused]] int32_t y)
 {
-	x=x;
-	y=y; //these are here to bypass compiler warnings about unused arguments
 	model->getSelection().doneSelection();
 	return false;
 }

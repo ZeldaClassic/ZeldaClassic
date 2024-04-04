@@ -2572,13 +2572,8 @@ void lifemeter(BITMAP *dest,int32_t x,int32_t y,int32_t cs,bool bs_style)
 }
 
 void magicgauge(BITMAP *dest,int32_t x,int32_t y, int32_t container, int32_t notlast_tile, int32_t notlast_cset, bool notlast_mod, int32_t last_tile, int32_t last_cset, bool last_mod,
-                int32_t cap_tile, int32_t cap_cset, bool cap_mod, int32_t aftercap_tile, int32_t aftercap_cset, bool aftercap_mod, int32_t frames, int32_t speed, int32_t delay, bool unique_last, int32_t show)
+                int32_t cap_tile, int32_t cap_cset, bool cap_mod, int32_t aftercap_tile, int32_t aftercap_cset, bool aftercap_mod, [[maybe_unused]] int32_t frames, [[maybe_unused]] int32_t speed, [[maybe_unused]] int32_t delay, bool unique_last, int32_t show)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    frames=frames;
-    speed=speed;
-    delay=delay;
-    
     // show
     //   <0: always
     //  >=0: when drain rate matches show

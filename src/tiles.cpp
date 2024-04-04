@@ -824,11 +824,8 @@ byte rotate_walk(byte v)
 }
 
 
-void puttiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip,int32_t opacity)
+void puttiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip, [[maybe_unused]] int32_t opacity)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    opacity=opacity;
-    
     if(x<-7 || y<-7)
         return;
         
@@ -921,11 +918,8 @@ void puttiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t c
     }
 }
 
-void overtiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip,int32_t opacity)
+void overtiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip, [[maybe_unused]] int32_t opacity)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    opacity=opacity;
-    
     if(x<-7 || y<-7)
         return;
         
@@ -1032,11 +1026,8 @@ void overtiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t 
     }
 }
 
-void puttiletranslucent16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip,int32_t opacity)
+void puttiletranslucent16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip, [[maybe_unused]] int32_t opacity)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    opacity=opacity;
-    
     if(x<-15 || y<-15)
         return;
         
@@ -1150,11 +1141,8 @@ void puttiletranslucent16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t 
     }
 }
 
-void overtiletranslucent16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip,int32_t opacity)
+void overtiletranslucent16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip, [[maybe_unused]] int32_t opacity)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    opacity=opacity;
-    
     if(x<-15 || y<-15)
         return;
         

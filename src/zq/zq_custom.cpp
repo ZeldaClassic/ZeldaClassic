@@ -49,11 +49,8 @@ int32_t hero_animation_speed = 1; //lower is faster animation
 
 int32_t d_ecstile_proc(int32_t msg,DIALOG *d,int32_t c);
 
-int32_t d_cstile_proc(int32_t msg,DIALOG *d,int32_t c)
+int32_t d_cstile_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	c=c;
-	
 	switch(msg)
 	{
 	case MSG_CLICK:
@@ -4552,10 +4549,8 @@ void setEnemyLabels(int32_t family)
 	}
 }
 
-int32_t d_ecstile_proc(int32_t msg,DIALOG *d,int32_t c)
+int32_t d_ecstile_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	c=c;
 	int32_t *tempint=enedata_flags2_list;
 	tempint=tempint;
 	

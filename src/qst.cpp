@@ -1721,13 +1721,8 @@ int32_t tdcmbdat(int32_t map, int32_t scr, int32_t pos)
     return (TheMaps[map*MAPSCRS+TEMPLATE].data[pos]&0xFF)+((TheMaps[map*MAPSCRS+scr].old_cpage)<<8);
 }
 
-int32_t tdcmbcset(int32_t map, int32_t scr, int32_t pos)
+int32_t tdcmbcset([[maybe_unused]] int32_t map, [[maybe_unused]] int32_t scr, [[maybe_unused]] int32_t pos)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    map=map;
-    scr=scr;
-    pos=pos;
-    
     //what does this function do?
     //  return TheMaps[map*MAPSCRS+TEMPLATE].cset[pos];
     return 2;
@@ -5239,11 +5234,8 @@ int32_t readdmaps(PACKFILE *f, zquestheader *Header, word, word, word start_dmap
 	return 0;
 }
 
-int32_t readmisccolors(PACKFILE *f, zquestheader *Header, miscQdata *Misc)
+int32_t readmisccolors(PACKFILE *f, [[maybe_unused]] zquestheader *Header, miscQdata *Misc)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	Header=Header;
-	
 	miscQdata temp_misc;
 	word s_version=0, s_cversion=0;
 	int32_t tempsize=0;
@@ -10005,14 +9997,12 @@ int32_t init_combo_classes()
     return 0;
 }
 
-int32_t readherosprites2(PACKFILE *f, int32_t v_herosprites, int32_t cv_herosprites)
+int32_t readherosprites2(PACKFILE *f, int32_t v_herosprites, [[maybe_unused]] int32_t cv_herosprites)
 {
     bool should_skip = legacy_skip_flags && get_bit(legacy_skip_flags, skip_herosprites);
     if (should_skip) return 0;
 
 	assert(v_herosprites < 6);
-	//these are here to bypass compiler warnings about unused arguments
-	cv_herosprites=cv_herosprites;
 	
 	zinit.hero_swim_speed=67; //default
 	setupherotiles(zinit.heroAnimationStyle);
@@ -10379,11 +10369,8 @@ void setSprite(int32_t* arr, int32_t tile, int32_t flip, int32_t ext)
     arr[spr_extend] = (ext > 2 ? 0 : ext);
 }
 //Used to read the player sprites as int32_t, not word. 
-int32_t readherosprites3(PACKFILE *f, int32_t v_herosprites, int32_t cv_herosprites)
+int32_t readherosprites3(PACKFILE *f, int32_t v_herosprites, [[maybe_unused]] int32_t cv_herosprites)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	cv_herosprites=cv_herosprites;
-	
 	zinit.hero_swim_speed=67; //default
 	setupherotiles(zinit.heroAnimationStyle);
 	setupherodefenses();
@@ -11258,11 +11245,8 @@ int32_t readherosprites3(PACKFILE *f, int32_t v_herosprites, int32_t cv_herospri
 }
 
 
-int32_t readherosprites(PACKFILE *f, zquestheader *Header)
+int32_t readherosprites(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    Header=Header;
-    
     dword dummy;
     word s_version=0, s_cversion=0;
     
@@ -13051,11 +13035,8 @@ const char *old_sfx_string[Z35] =
 };
 char *sfx_string[WAV_COUNT];
 
-int32_t readsfx(PACKFILE *f, zquestheader *Header)
+int32_t readsfx(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 {
-	//these are here to bypass compiler warnings about unused arguments
-	Header=Header;
-	
 	int32_t dummy;
 	word s_version=0, s_cversion=0;
 	//int32_t ret;
@@ -18189,13 +18170,8 @@ int32_t readcombos(PACKFILE *f, zquestheader *Header, word version, word build, 
 	return 0;
 }
 
-int32_t readcomboaliases(PACKFILE *f, zquestheader *Header, word version, word build)
+int32_t readcomboaliases(PACKFILE *f, [[maybe_unused]] zquestheader *Header, [[maybe_unused]] word version, [[maybe_unused]] word build)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    Header=Header;
-    version=version;
-    build=build;
-    
     int32_t dummy;
     word sversion=0, c_sversion;
     
@@ -20879,11 +20855,10 @@ void setupitemdropsets()
 }
 */
 
-int32_t readitemdropsets(PACKFILE *f, int32_t version, word build)
+int32_t readitemdropsets(PACKFILE *f, int32_t version, [[maybe_unused]] word build)
 {
 	bool should_skip = legacy_skip_flags && get_bit(legacy_skip_flags, skip_itemdropsets);
 
-	build=build; // here to prevent compiler warnings
 	dword dummy_dword;
 	word item_drop_sets_to_read=0;
 	item_drop_object tempitemdrop;

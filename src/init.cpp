@@ -66,11 +66,8 @@ extern int32_t onHelp();
 extern int32_t startdmapxy[6];
 extern void onInitOK();
 
-int32_t d_line_proc(int32_t msg, DIALOG *d, int32_t c)
+int32_t d_line_proc(int32_t msg, DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    //these are here to bypass compiler warnings about unused arguments
-    c=c;
-    
     if(msg==MSG_DRAW)
     {
         int32_t fg = (d->flags & D_DISABLED) ? scheme[jcDISABLED_FG] : d->fg;
