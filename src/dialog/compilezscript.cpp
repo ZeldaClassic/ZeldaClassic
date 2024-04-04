@@ -80,8 +80,8 @@ int32_t onCompileScript()
 
 bool doCompileOpenHeaderDlg()
 {
-    call_header_dlg();
-    return false;
+	call_header_dlg();
+	return false;
 }
 
 static bool compile_cancel;
