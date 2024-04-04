@@ -25,19 +25,19 @@ void paymagiccost(int32_t itemid, bool ignoreTimer = false, bool onlyTimer = fal
 class item : public sprite
 {
 public:
-    int32_t pickup,clk2;
-    int32_t aclk,aframe;
-    char PriceIndex;
-    bool flash,twohand,anim, subscreenItem;
-    bool dummy;
-    int32_t o_tile,o_cset, o_speed, o_delay, frames;
-    int32_t fairyUID;
-    word pstring; //pickup string
-    word pickup_string_flags;
-    //int32_t script_UID;
-    int32_t family;
-    byte lvl;
-    int32_t linked_parent;
+	int32_t pickup,clk2;
+	int32_t aclk,aframe;
+	char PriceIndex;
+	bool flash,twohand,anim, subscreenItem;
+	bool dummy;
+	int32_t o_tile,o_cset, o_speed, o_delay, frames;
+	int32_t fairyUID;
+	word pstring; //pickup string
+	word pickup_string_flags;
+	//int32_t script_UID;
+	int32_t family;
+	byte lvl;
+	int32_t linked_parent;
 	bool is_dragged;
 	int16_t from_dropset;
 	int8_t pickupexstate;
@@ -53,10 +53,10 @@ public:
 //
 	void load_gfx(itemdata const& itm);
 
-    item(zfix X,zfix Y,zfix Z,int32_t i,int32_t p,int32_t c, bool isDummy = false);
-    virtual ~item();
-    virtual bool animate(int32_t index);
-    virtual void draw(BITMAP *dest);
+	item(zfix X,zfix Y,zfix Z,int32_t i,int32_t p,int32_t c, bool isDummy = false);
+	virtual ~item();
+	virtual bool animate(int32_t index);
+	virtual void draw(BITMAP *dest);
 #ifndef IS_EDITOR
 	virtual int32_t run_script(int32_t mode);
 #endif
@@ -203,25 +203,25 @@ struct itemdata
 	int32_t weapduration; //default duration, 0 = infinite. 
  
     
-    //To implement next;
-    int32_t duplicates; //Number of duplicate weapons generated.
-    int32_t wpn_misc_d[FFSCRIPT_MISC]; //THe initial Misc[d] that will be assiged to the weapon, 
+	//To implement next;
+	int32_t duplicates; //Number of duplicate weapons generated.
+	int32_t wpn_misc_d[FFSCRIPT_MISC]; //THe initial Misc[d] that will be assiged to the weapon, 
     
-    int32_t weap_initiald[INITIAL_D];
-    byte weap_initiala[INITIAL_A];
+	int32_t weap_initiald[INITIAL_D];
+	byte weap_initiala[INITIAL_A];
     
-    byte drawlayer;
-    int32_t collectflags;
-    int32_t hxofs, hyofs, hxsz, hysz, hzsz, xofs, yofs; //item
-    int32_t weap_hxofs, weap_hyofs, weap_hxsz, weap_hysz, weap_hzsz, weap_xofs, weap_yofs; //weapon
-    int32_t tilew, tileh, weap_tilew, weap_tileh; //New for 2.54
-    int32_t pickup; byte pickupflag;
+	byte drawlayer;
+	int32_t collectflags;
+	int32_t hxofs, hyofs, hxsz, hysz, hzsz, xofs, yofs; //item
+	int32_t weap_hxofs, weap_hyofs, weap_hxsz, weap_hysz, weap_hzsz, weap_xofs, weap_yofs; //weapon
+	int32_t tilew, tileh, weap_tilew, weap_tileh; //New for 2.54
+	int32_t pickup; byte pickupflag;
     
 #define itemdataPSTRING_ALWAYS		0x00000001
 #define itemdataPSTRING_IP_HOLDUP	0x00000002
 #define itemdataPSTRING_NOMARK		0x00000004
-    word pstring;
-    word pickup_string_flags;
+	word pstring;
+	word pickup_string_flags;
     
     
   
@@ -238,21 +238,21 @@ struct itemdata
 #define itemdataOVERRIDE_DRAW_Y_OFFSET  0x00000100
 #define itemdataOVERRIDE_DRAW_Z_OFFSET  0x00000200
 
-    int32_t overrideFLAGS; //Override flags.
-    int32_t weapoverrideFLAGS; 
-    
-    word weaponscript; //If only. -Z This would link an item to a weapon script in the item editor.
-    int32_t wpnsprite; //enemy weapon sprite. 
-    int32_t magiccosttimer[2]; 
-    char cost_counter[2];
-    
-    char initD_label[8][65];
-    char weapon_initD_label[8][65];
-    char sprite_initD_label[8][65];
-    
-    int32_t sprite_initiald[INITIAL_D];
-    byte sprite_initiala[INITIAL_A];
-    word sprite_script;
+	int32_t overrideFLAGS; //Override flags.
+	int32_t weapoverrideFLAGS; 
+
+	word weaponscript; //If only. -Z This would link an item to a weapon script in the item editor.
+	int32_t wpnsprite; //enemy weapon sprite. 
+	int32_t magiccosttimer[2]; 
+	char cost_counter[2];
+
+	char initD_label[8][65];
+	char weapon_initD_label[8][65];
+	char sprite_initD_label[8][65];
+
+	int32_t sprite_initiald[INITIAL_D];
+	byte sprite_initiala[INITIAL_A];
+	word sprite_script;
 	
 	char display_name[256];
 	
