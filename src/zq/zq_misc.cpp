@@ -1202,21 +1202,21 @@ int32_t onDumpScr();
 
 int32_t onExport_Package()
 {
-    std::string package_name = header.title;
-    util::sanitize_spaces_ok(package_name);
+	std::string package_name = header.title;
+	util::sanitize_spaces_ok(package_name);
 	if (package_name.empty())
 		package_name = "Quest";
 
-    if (auto error = package_create(filepath, package_name))
-    {
-        std::string line1 = *error;
-        std::string line2;
-        InfoDialog("Packaging Failed", { line1, line2 }).show();
-        return D_O_K;
-    }
+	if (auto error = package_create(filepath, package_name))
+	{
+		std::string line1 = *error;
+		std::string line2;
+		InfoDialog("Packaging Failed", { line1, line2 }).show();
+		return D_O_K;
+	}
 
-    std::string line1 = fmt::format("Package saved to packages/{}", package_name);
-    std::string line2 = "To learn about packaging, read docs/packaging_quests.md";
-    InfoDialog("Packaging Complete", { line1, line2 }).show();
-    return D_O_K;
+	std::string line1 = fmt::format("Package saved to packages/{}", package_name);
+	std::string line2 = "To learn about packaging, read docs/packaging_quests.md";
+	InfoDialog("Packaging Complete", { line1, line2 }).show();
+	return D_O_K;
 }
