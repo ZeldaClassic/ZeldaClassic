@@ -7926,16 +7926,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_candle:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG3 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
+
 					tempitem.wpn4 = 0;
 					tempitem.wpn5 = 0;
 					tempitem.wpn6 = 0;
@@ -7993,16 +7987,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_letter:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8028,16 +8015,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_wand:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
+
 					tempitem.wpn4 = 0;
 					tempitem.wpn5 = 0;
 					tempitem.wpn6 = 0;
@@ -8085,16 +8066,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_amulet:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8121,16 +8095,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_bow:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8140,16 +8107,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_raft:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8159,16 +8119,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_ladder:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8178,16 +8131,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_book:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
+
 					tempitem.wpn3 = 0;
 					tempitem.wpn4 = 0;
 					tempitem.wpn5 = 0;
@@ -8201,16 +8148,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_magickey:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8219,16 +8159,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_bracelet:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8237,16 +8170,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_flippers:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8255,16 +8181,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_boots:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8308,16 +8227,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_hammer:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
+
 					tempitem.wpn3 = 0;
 					tempitem.wpn4 = 0;
 					tempitem.wpn5 = 0;
@@ -8439,16 +8352,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_key:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
+
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
 
@@ -8457,16 +8364,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_magiccontainer:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8492,16 +8392,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_map:	case itype_compass:	case itype_bosskey:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8528,16 +8421,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_lkey:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8564,16 +8450,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_rupee: case itype_arrowammo:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8599,16 +8478,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_magic: case itype_heart: case itype_heartcontainer: case itype_heartpiece: case itype_killem: case itype_bombammo:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8635,16 +8507,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_rocs:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8690,16 +8555,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_crossscroll:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8881,16 +8739,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_stompboots:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;
@@ -8940,16 +8791,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 				case itype_bowandarrow: case itype_letterpotion: case itype_misc:
 				{
 					tempitem.flags &= ~ (ITEM_FLAG1 | ITEM_FLAG2 | ITEM_FLAG3 | ITEM_FLAG4 | ITEM_FLAG5);
-					tempitem.misc1 = 0;
-					tempitem.misc2 = 0;
-					tempitem.misc3 = 0;
-					tempitem.misc4 = 0;
-					tempitem.misc5 = 0;
-					tempitem.misc6 = 0;
-					tempitem.misc7 = 0;
-					tempitem.misc8 = 0;
-					tempitem.misc9 = 0;
-					tempitem.misc10 = 0;
+
+					for (int32_t& m : tempitem.misc_arr)
+						m = 0;
 
 					for (byte& wpn : tempitem.wpn_arr)
 						wpn = 0;

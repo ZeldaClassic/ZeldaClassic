@@ -189,7 +189,7 @@ struct itemdata
 		    int32_t misc9;
 		    int32_t misc10;
 	    };
-	    int32_t misc_arr;
+	    int32_t misc_arr[10];
 	}; 
 
 	int16_t cost_amount[2]; // Magic usage!
