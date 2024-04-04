@@ -155,7 +155,8 @@ struct itemdata
     int32_t initiald[INITIAL_D];
     byte initiala[INITIAL_A];
 
-    union {
+    union
+    {
 	    struct
 	    {
 		    byte wpn;
@@ -173,25 +174,33 @@ struct itemdata
     };
 
     byte pickup_hearts;
-    int32_t misc1;
-    int32_t misc2;
-    int32_t misc3;
-    int32_t misc4;
-    int32_t misc5;
-    int32_t misc6;
-    int32_t misc7;
-    int32_t misc8;
-    int32_t misc9;
-    int32_t misc10;
+    union
+    {
+	    struct
+	    {
+		    int32_t misc1;
+		    int32_t misc2;
+		    int32_t misc3;
+		    int32_t misc4;
+		    int32_t misc5;
+		    int32_t misc6;
+		    int32_t misc7;
+		    int32_t misc8;
+		    int32_t misc9;
+		    int32_t misc10;
+	    };
+	    int32_t misc_arr;
+	}; 
+
 	int16_t cost_amount[2]; // Magic usage!
-    byte usesound, usesound2;
+	byte usesound, usesound2;
 	byte burnsprs[BURNSPR_MAX];
 	byte light_rads[BURNSPR_MAX];
-    byte useweapon; //lweapon id type -Z
-    byte usedefence; //default defence type -Z
-    int32_t weap_pattern[ITEM_MOVEMENT_PATTERNS]; //formation, arg1, arg2 -Z
-    int32_t weaprange; //default range -Z
-    int32_t weapduration; //default duration, 0 = infinite. 
+	byte useweapon; //lweapon id type -Z
+	byte usedefence; //default defence type -Z
+	int32_t weap_pattern[ITEM_MOVEMENT_PATTERNS]; //formation, arg1, arg2 -Z
+	int32_t weaprange; //default range -Z
+	int32_t weapduration; //default duration, 0 = infinite. 
  
     
     //To implement next;
