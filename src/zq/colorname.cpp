@@ -609,8 +609,7 @@ std::string const& get_color_name(int r, int g, int b)
 }
 std::string const& get_color_name(int c, bool is8b)
 {
-	static std::string tmp;
-	tmp = get_color_name(RAMpal[c].r, RAMpal[c].g, RAMpal[c].b);
+	static std::string tmp = get_color_name(RAMpal[c].r, RAMpal[c].g, RAMpal[c].b);
 	if(!(is8b ? c : c%16))
 		tmp += " (Trans)";
 	return tmp;
@@ -630,10 +629,10 @@ void get_tile_colornames(int tile, int cs, map<string,int>& res)
 	for(int32_t q=0; q<256; ++q)
 	{
 		std::string const& name = get_color_name(offs+si[q], is8b);
-		if(res.find(name) == res.end())
+		if (res.find(name) == res.end())
 			res[name] = 1;
 		else
-			res[name] = res[name]+1;
+			res[name]++;
 	}
 }
 void get_combo_colornames(int combo, int cs, map<string,int>& res)
