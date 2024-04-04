@@ -1029,9 +1029,8 @@ savedportal* gamedata::getSavedPortal(int32_t uid)
 	if(!uid) return nullptr;
 	if(uid == saved_mirror_portal.getUID())
 		return &(saved_mirror_portal);
-	for(auto it = user_portals.begin(); it != user_portals.end(); ++it)
+	for(savedportal& tmp : user_portals)
 	{
-		savedportal& tmp = *it;
 		if(tmp.getUID() == uid)
 			return &tmp;
 	}
