@@ -25,7 +25,7 @@ public:
 	bool angular;
 	double angle;
 	particle(zfix X,zfix Y,int32_t layer,int32_t cset,int32_t color);
-	virtual ~particle();
+	virtual ~particle() = default;
 	virtual bool animate(int32_t index);
 	virtual void draw(BITMAP *dest);
 	virtual void move(zfix s);

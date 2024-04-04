@@ -5,10 +5,6 @@
 #include "particles.h"
 #include "base/zc_math.h"
 
-particle::~particle()
-{
-}
-
 bool particle::animate(int32_t)
 {
 	return true;

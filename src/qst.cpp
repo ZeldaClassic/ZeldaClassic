@@ -18617,7 +18617,7 @@ int32_t readcolordata(PACKFILE *f, miscQdata *Misc, word version, word build, wo
 	}
 	else
 	{
-		int32_t palnamestoread = 0;
+		int32_t palnamestoread;
 		
 		if(s_version < 3)
 			palnamestoread = OLDMAXLEVELS;
