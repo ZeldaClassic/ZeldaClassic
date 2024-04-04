@@ -931,7 +931,7 @@ void calc_dark(int32_t first)
 static DIALOG cycle_dlg[] =
 {
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
-    { jwin_win_proc, 64,   48,   192+1,  152+1,  0,  0,  0,       D_EXIT,          0,             0, (void *) "Palette Cycles", NULL, NULL },
+    { jwin_win_proc,        64,   48,   192+1,  152+1,  0,  0,  0,       D_EXIT,          0,             0, (void *) "Palette Cycles", NULL, NULL },
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
     { jwin_button_proc,     90,   176,  61,   21,   jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
     { jwin_button_proc,     170,  176,  61,   21,   jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
@@ -943,20 +943,20 @@ static DIALOG cycle_dlg[] =
     { jwin_text_proc,       88,   152,  56,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "Speed:", NULL, NULL },
     // 10
     { jwin_edit_proc,       152,  88,   24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
-    { d_hexedit_proc,    152,  104,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
-    { d_hexedit_proc,    152,  120,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
+    { d_hexedit_proc,       152,  104,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
+    { d_hexedit_proc,       152,  120,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
     { jwin_edit_proc,       152,  136,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          3,             0,       NULL, NULL, NULL },
     { jwin_edit_proc,       152,  152,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          3,             0,       NULL, NULL, NULL },
     
     { jwin_edit_proc,       184,  88,   24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
-    { d_hexedit_proc,    184,  104,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
-    { d_hexedit_proc,    184,  120,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
+    { d_hexedit_proc,       184,  104,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
+    { d_hexedit_proc,       184,  120,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
     { jwin_edit_proc,       184,  136,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          3,             0,       NULL, NULL, NULL },
     { jwin_edit_proc,       184,  152,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          3,             0,       NULL, NULL, NULL },
     
     { jwin_edit_proc,       216,  88,   24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
-    { d_hexedit_proc,    216,  104,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
-    { d_hexedit_proc,    216,  120,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
+    { d_hexedit_proc,       216,  104,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
+    { d_hexedit_proc,       216,  120,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
     { jwin_edit_proc,       216,  136,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          3,             0,       NULL, NULL, NULL },
     { jwin_edit_proc,       216,  152,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          3,             0,       NULL, NULL, NULL },
     
