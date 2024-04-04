@@ -8003,16 +8003,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_potion:
@@ -8026,16 +8020,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
 					break;
 				}
 				case itype_wand:
@@ -8072,16 +8059,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_wallet:
@@ -8095,16 +8076,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_amulet:
@@ -8120,16 +8095,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_shield:
@@ -8143,16 +8112,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_bow:
@@ -8168,16 +8131,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_raft:
@@ -8193,16 +8150,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_ladder:
@@ -8218,16 +8169,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_book:
@@ -8266,16 +8211,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
 					break;
 				}
 				case itype_bracelet:
@@ -8291,16 +8229,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
 					break;
 				}
 				case itype_flippers:
@@ -8316,16 +8247,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
 					break;
 				}
 				case itype_boots:
@@ -8341,16 +8265,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
 					break;
 				}
 				case itype_hookshot:
@@ -8382,16 +8299,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_hammer:
@@ -8447,16 +8358,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_divineprotection:
@@ -8525,16 +8430,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_key:
@@ -8550,16 +8449,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_magiccontainer:
@@ -8575,16 +8467,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_triforcepiece:
@@ -8598,16 +8484,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_map:	case itype_compass:	case itype_bosskey:
@@ -8623,16 +8502,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_quiver:
@@ -8646,16 +8519,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_lkey:
@@ -8671,16 +8538,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_cbyrna:
@@ -8713,16 +8574,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_fairy:
@@ -8735,16 +8590,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_magic: case itype_heart: case itype_heartcontainer: case itype_heartpiece: case itype_killem: case itype_bombammo:
@@ -8760,16 +8609,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_bombbag:
@@ -8783,16 +8626,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_rocs:
@@ -8808,16 +8645,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_hoverboots:
@@ -8832,15 +8663,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_spinscroll:
@@ -8855,16 +8681,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_crossscroll:
@@ -8880,16 +8700,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
 					break;
 				}
 				case itype_quakescroll:
@@ -8903,16 +8716,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_whispring:
@@ -8927,16 +8734,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_chargering:
@@ -8950,16 +8751,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_perilscroll:
@@ -8974,16 +8769,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_wealthmedal:
@@ -8998,16 +8787,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
 					break;
 				}
 				case itype_heartring:
@@ -9021,16 +8803,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_magicring:
@@ -9044,16 +8820,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_spinscroll2:
@@ -9068,16 +8838,9 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
 					break;
 				}
 				case itype_quakescroll2:
@@ -9091,16 +8854,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_agony:
@@ -9115,16 +8872,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_stompboots:
@@ -9140,16 +8891,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_whimsicalring:
@@ -9164,16 +8909,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_perilring:
@@ -9188,16 +8927,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 				case itype_custom1: case itype_custom2: case itype_custom3: case itype_custom4: case itype_custom5:
@@ -9217,16 +8950,10 @@ int32_t readitems(PACKFILE *f, word version, word build)
 					tempitem.misc8 = 0;
 					tempitem.misc9 = 0;
 					tempitem.misc10 = 0;
-					tempitem.wpn = 0;
-					tempitem.wpn2 = 0;
-					tempitem.wpn3 = 0;
-					tempitem.wpn4 = 0;
-					tempitem.wpn5 = 0;
-					tempitem.wpn6 = 0;
-					tempitem.wpn7 = 0;
-					tempitem.wpn8 = 0;
-					tempitem.wpn9 = 0;
-					tempitem.wpn10 = 0;
+
+					for (byte& wpn : tempitem.wpn_arr)
+						wpn = 0;
+
 					break;
 				}
 			}
