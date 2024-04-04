@@ -1289,15 +1289,14 @@ int32_t get_qst_buffers()
 
 void free_newtilebuf()
 {
-    if(newtilebuf)
-    {
-        for(int32_t i=0; i<NEWMAXTILES; i++)
-            if(newtilebuf[i].data)
-                free(newtilebuf[i].data);
-                
-        free(newtilebuf);
-	newtilebuf = 0;
-    }
+	if(newtilebuf)
+	{
+		for(int32_t i=0; i<NEWMAXTILES; i++)
+			free(newtilebuf[i].data);
+
+		free(newtilebuf);
+		newtilebuf = 0;
+	}
 }
 
 void free_grabtilebuf()
