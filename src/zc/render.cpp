@@ -329,7 +329,7 @@ void render_zc()
 	if (render_get_debug())
 		render_tree_draw_debug(&rti_root);
 
-    al_flip_display();
+	al_flip_display();
 	
 	screen = tmp;
 	al_restore_state(&oldstate);
@@ -337,10 +337,8 @@ void render_zc()
 
 void clear_tooltip()
 {
-	
-}
-void ttip_uninstall_all()
-{
-	
 }
 
+void ttip_uninstall_all()
+{
+}
