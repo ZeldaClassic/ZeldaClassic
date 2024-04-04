@@ -179,7 +179,7 @@ void loadpalset(int32_t cset, int32_t dataset, bool update_tint)
 	}
     
 	//If writing cset 6 or 14, record which sprite csets are being referenced
-    if(cset==6){
+	if(cset==6){
 		if (!get_qr(qr_NOLEVEL3FIX) && DMaps[currdmap].color == 3) {
 			RAMpal[CSET(6) + 2] = NESpal(0x37);
 		}
@@ -191,7 +191,7 @@ void loadpalset(int32_t cset, int32_t dataset, bool update_tint)
 		{
 			currspal6 = -1;
 		}
-    }
+	}
 	if (cset == 14)
 	{
 		if (dataset >= poSPRITE255 && dataset < poSPRITE255 + pdSPRITE)
@@ -203,7 +203,7 @@ void loadpalset(int32_t cset, int32_t dataset, bool update_tint)
 			currspal14 = -1;
 		}
 	}
-    refreshpal=true;
+	refreshpal=true;
 }
 
 void ringcolor(bool forceDefault)
@@ -224,29 +224,29 @@ void ringcolor(bool forceDefault)
 
 void loadfadepal(int32_t dataset)
 {
-    byte *si = colordata + CSET(dataset)*3;
+	byte *si = colordata + CSET(dataset)*3;
     
-    for(int32_t i=0; i<pdFADE*16; i++)
-    {
-        if(isMonochrome() || isUserTinted())tempgreypal[CSET(2)+i] = _RGB(si);
+	for(int32_t i=0; i<pdFADE*16; i++)
+	{
+		if(isMonochrome() || isUserTinted())tempgreypal[CSET(2)+i] = _RGB(si);
 		else RAMpal[CSET(2)+i] = _RGB(si);
-        si+=3;
-    }
+		si+=3;
+	}
     
-    refreshpal=true;
+	refreshpal=true;
 	
 	if(isMonochrome()){
-	    if(lastMonoPreset){
-		    restoreMonoPreset();
-	    } else {
+		if(lastMonoPreset){
+			restoreMonoPreset();
+		} else {
 			setMonochrome(false);
-		    setMonochrome(true);
-	    }
-    }
+			setMonochrome(true);
+		}
+	}
     
-    if(isUserTinted()){
-	    restoreTint();
-    }
+	if(isUserTinted()){
+		restoreTint();
+	}
 }
 
 void interpolatedfade()

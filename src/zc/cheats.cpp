@@ -452,7 +452,7 @@ void cheats_enqueue(Cheat cheat, int arg1, int arg2, std::string arg3)
 {
 	if(instant_exec(cheat))
 		cheats_execute(cheat, arg1, arg2, arg3);
-    else cheats.push({cheat, arg1, arg2, arg3});
+	else cheats.push({cheat, arg1, arg2, arg3});
 }
 
 void cheats_execute_queued()
