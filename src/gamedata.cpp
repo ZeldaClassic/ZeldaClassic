@@ -1009,8 +1009,7 @@ void gamedata::load_portals()
 void gamedata::clear_portal(int32_t uid)
 {
 	if(!uid) return;
-	savedportal* p = getSavedPortal(uid);
-	if(p)
+	if( savedportal* p = getSavedPortal(uid) )
 	{
 		p->clear();
 		for(auto it = user_portals.begin(); it != user_portals.end();)
