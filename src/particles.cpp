@@ -19,13 +19,9 @@ void particle::draw(BITMAP *dest)
 }
 
 particle::particle(zfix X,zfix Y,int32_t L,int32_t CS,int32_t C)
+	: x(X), y(Y), layer(L), cset(CS), color(C)
 {
 	uid = getNextUID();
-	x=X;
-	y=Y;
-	layer=L;
-	cset=CS;
-	color=C;
 	yofs = 54;
 	dir = 0;
 	step = 0;
