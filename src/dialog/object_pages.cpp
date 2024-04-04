@@ -160,13 +160,13 @@ void ObjectTemplate::draw_info()
 			if(disabled_cb(indx-1))
 			{
 				draw_dis_checkbox(screen, cb_x, cb_y, cbox_h, cbox_h, false);
-				textprintf_ex(screen, tfont, cb_x+cbox_h+2+1, cb_y+1, jwin_pal[jcLIGHT], jwin_pal[jcBOX], "%s", name->c_str());
-				textprintf_ex(screen, tfont, cb_x+cbox_h+2, cb_y, jwin_pal[jcDISABLED_FG], -1, "%s", name->c_str());
+				textprintf_ex(screen, tfont, cb_x + cbox_h + 2 + 1, cb_y + 1, jwin_pal[jcLIGHT], jwin_pal[jcBOX], "%s", name);
+				textprintf_ex(screen, tfont, cb_x + cbox_h + 2, cb_y, jwin_pal[jcDISABLED_FG], -1, "%s", name);
 			}
 			else
 			{
 				draw_checkbox(screen, cb_x, cb_y, cbox_h, get_cb(indx-1));
-				textprintf_ex(screen, tfont, cb_x+cbox_h+2, cb_y, jwin_pal[jcBOXFG], jwin_pal[jcBOX], "%s", name->c_str());
+				textprintf_ex(screen, tfont, cb_x + cbox_h + 2, cb_y, jwin_pal[jcBOXFG], jwin_pal[jcBOX], "%s", name);
 			}
 			cb_y += hei;
 			if(cb_y+hei >= window_h)
@@ -487,7 +487,7 @@ void ObjectTemplate::call_dlg(optional<int> start_val)
 						if(!disabled_cb(indx-1))
 						{
 							int state = cb[indx-1];
-							auto twid = text_length(tfont,name->c_str())+2;
+							auto twid = text_length(tfont,name)+2;
 							if(isinRect(mx, my, cb_x, cb_y, cb_x+cbox_h-1+twid, cb_y+cbox_h-1))
 							{
 								if(lclick)
@@ -771,7 +771,7 @@ bool ObjectTemplate::disabled_cb(uint indx) const
 	}
 	return false;
 }
-optional<string> ObjectTemplate::cb_get_name(uint indx) const
+const char* ObjectTemplate::cb_get_name(uint indx) const
 {
 	switch(indx)
 	{
@@ -780,7 +780,7 @@ optional<string> ObjectTemplate::cb_get_name(uint indx) const
 		case OBJPG_CB_COLMODE:
 			return "4-Columns";
 	}
-	return nullopt;
+	return "";
 }
 optional<string> ObjectTemplate::cb_get_cfg(uint indx) const
 {
@@ -891,7 +891,8 @@ bool ComboPoolPageObj::disabled_cb(uint indx) const
 	}
 	return ObjectTemplate::disabled_cb(indx);
 }
-optional<string> ComboPoolPageObj::cb_get_name(uint indx) const
+
+const char* ComboPoolPageObj::cb_get_name(uint indx) const
 {
 	switch(indx)
 	{
