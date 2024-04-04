@@ -812,7 +812,7 @@ extern int32_t alias_origin;
 
 int32_t onSpacebar()
 {
-    if(draw_mode==3)
+    if(draw_mode == DM_ALIAS)
     {
         alias_origin=(alias_origin+1)%4;
         return D_O_K;
