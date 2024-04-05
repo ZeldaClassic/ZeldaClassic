@@ -18040,14 +18040,13 @@ int32_t onWarpRings()
 
 const char *pattern_list(int32_t index, int32_t *list_size)
 {
-
-    if(index<0)
-    {
-        *list_size = MAXPATTERNS;
-        return NULL;
-    }
+	if(index<0)
+	{
+		*list_size = MAXPATTERNS;
+		return NULL;
+	}
     
-    return pattern_string[index];
+	return pattern_string[index];
 }
 
 static ListData pattern_dlg_list(pattern_list, &font);
@@ -18311,7 +18310,7 @@ int32_t enelist_proc(int32_t msg,DIALOG *d,int32_t c,bool use_abc_list)
 {
 	FONT* oldfont = font;
 	bool is_screen_select = d->dp == &enemy_dlg_list;
-    int32_t ret;
+	int32_t ret;
 	
 	if(!is_screen_select && msg == MSG_XCHAR)
 	{
@@ -18385,15 +18384,15 @@ int32_t enelist_proc(int32_t msg,DIALOG *d,int32_t c,bool use_abc_list)
 		font = get_zc_font(font_lfont_l);
 		int fh = text_height(font);
 		rectfill(screen,x,y+40,x+64,y+40+(10*fh),jwin_pal[jcBOX]);
-        textprintf_ex(screen,font,x,y+40+(0*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"#%d",id);
+		textprintf_ex(screen,font,x,y+40+(0*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"#%d",id);
 		
 		textprintf_ex(screen,font,x,y+40+(1*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Tile: %d",guysbuf[id].tile);
 		
 		textprintf_ex(screen,font,x,y+40+(2*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"sTil: %d",guysbuf[id].s_tile);
 		textprintf_ex(screen,font,x,y+40+(3*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"eTil: %d",guysbuf[id].e_tile);
         
-        textprintf_ex(screen,font,x,y+40+(4*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"HP: %d",guysbuf[id].hp);
-        textprintf_ex(screen,font,x,y+40+(5*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Dmg: %d",guysbuf[id].dp);
+		textprintf_ex(screen,font,x,y+40+(4*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"HP: %d",guysbuf[id].hp);
+		textprintf_ex(screen,font,x,y+40+(5*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Dmg: %d",guysbuf[id].dp);
 		
 		textprintf_ex(screen,font,x,y+40+(6*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Fam: %d",guysbuf[id].family);
 		textprintf_ex(screen,font,x,y+40+(7*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Drop: %d",guysbuf[id].item_set);
@@ -18561,7 +18560,7 @@ int32_t onEnemies()
 		
 		case 3:
 			saved=false;
-            Map.DoPasteScreenCommand(PasteCommandType::ScreenEnemies);
+			Map.DoPasteScreenCommand(PasteCommandType::ScreenEnemies);
 			break;
 			
 		case 5:
