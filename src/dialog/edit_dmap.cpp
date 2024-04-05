@@ -324,6 +324,7 @@ std::shared_ptr<GUI::Widget> EditDMapDialog::view()
 									}
 									refreshGridSquares();
 								}
+								dmap_slider->setVisible(val != 1); // bugfix for https://www.armageddongames.net/showthread.php?98754
 							}),
 						Label(text = "Level:"),
 						TextField(
