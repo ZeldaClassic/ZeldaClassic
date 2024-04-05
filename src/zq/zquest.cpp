@@ -18643,7 +18643,7 @@ int32_t d_showedit_proc(int32_t msg,DIALOG *d,int32_t c)
 int32_t onHeader()
 {
 	call_header_dlg();
-    return D_O_K;
+	return D_O_K;
 }
 
 void call_cheats_dlg();
