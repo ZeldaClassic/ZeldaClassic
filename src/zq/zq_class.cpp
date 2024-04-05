@@ -4677,16 +4677,16 @@ void zmap::DoTemplateCommand(int floorcombo, int floorcset, int scr)
 
 void zmap::Copy()
 {
-    if(screens[currscr].valid&mVALID)
-    {
-        copy_mapscr(&copymapscr, &screens[currscr]);
-        //copymapscr=screens[currscr];
-        can_paste=true;
-        copymap=currmap;
-        copyscr=currscr;
+	if(screens[currscr].valid&mVALID)
+	{
+		copy_mapscr(&copymapscr, &screens[currscr]);
+		//copymapscr=screens[currscr];
+		can_paste=true;
+		copymap=currmap;
+		copyscr=currscr;
 		copyscrdata = zinit.screen_data[currmap*MAPSCRS+currscr];
-        copyffc = -1;
-    }
+		copyffc = -1;
+	}
 }
 
 void zmap::CopyFFC(int32_t n)
