@@ -5249,15 +5249,15 @@ void zmap::update_freeform_combos()
                                 prvscr.ffcs[i].x=prvscr.ffcs[j].x;
                                 prvscr.ffcs[i].y=prvscr.ffcs[j].y;
 				
-								prvscr.ffcs[i].vx=prvscr.ffcs[j].vx;
+				prvscr.ffcs[i].vx=prvscr.ffcs[j].vx;
                                 prvscr.ffcs[i].vy=prvscr.ffcs[j].vy;
-								prvscr.ffcs[i].ax=prvscr.ffcs[j].ax;
+				prvscr.ffcs[i].ax=prvscr.ffcs[j].ax;
                                 prvscr.ffcs[i].ay=prvscr.ffcs[j].ay;
                                 
                                 prvscr.ffcs[i].link=prvscr.ffcs[j].link;
                                 prvscr.ffcs[i].hit_width=prvscr.ffcs[j].hit_width;
                                 prvscr.ffcs[i].hit_height=prvscr.ffcs[j].hit_height;
-								prvscr.ffcs[i].txsz=prvscr.ffcs[j].txsz;
+				prvscr.ffcs[i].txsz=prvscr.ffcs[j].txsz;
                                 prvscr.ffcs[i].tysz=prvscr.ffcs[j].tysz;
                                 
                                 if(prvscr.ffcs[i].flags&ffCARRYOVER)
