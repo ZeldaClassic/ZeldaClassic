@@ -126,7 +126,7 @@ bool do_text_button(int32_t x,int32_t y,int32_t w,int32_t h,const char *text,int
             }
         }
 		
-		update_hw_screen(false);
+	update_hw_screen(false);
     }
     
     return over;
@@ -157,7 +157,7 @@ bool do_text_button_reset(int32_t x,int32_t y,int32_t w,int32_t h,const char *te
             }
         }
         
-		update_hw_screen(false);
+	update_hw_screen(false);
     }
     
     if(over)
@@ -165,7 +165,7 @@ bool do_text_button_reset(int32_t x,int32_t y,int32_t w,int32_t h,const char *te
         vsync();
         draw_button(screen,x,y,w,h,text,bg,fg,0);
         
-		update_hw_screen(false);
+	update_hw_screen(false);
     }
     
     return over;
@@ -508,8 +508,8 @@ int32_t d_tab_proc(int32_t msg, DIALOG *d, int32_t c)
                 
                 if(uses_tab_arrows(panel, d->w))
                 {
-					jwin_draw_icon_button(screen,d->x+d->w-28,d->y+2, 14, 14, BTNICON_ARROW_LEFT, 0, false);
-					jwin_draw_icon_button(screen,d->x+d->w-14,d->y+2, 14, 14, BTNICON_ARROW_RIGHT, 0, false);
+			jwin_draw_icon_button(screen,d->x+d->w-28,d->y+2, 14, 14, BTNICON_ARROW_LEFT, 0, false);
+			jwin_draw_icon_button(screen,d->x+d->w-14,d->y+2, 14, 14, BTNICON_ARROW_RIGHT, 0, false);
                 }
             }
             
