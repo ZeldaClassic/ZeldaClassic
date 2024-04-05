@@ -257,8 +257,7 @@ bool zmap::reset_templates(bool validate)
         return false;
     }
     
-    char *deletefilename=(char *)malloc(1);
-    ASSERT(deletefilename);
+    char deletefilename[1];
     deletefilename[0]=0;
     
     //int32_t ret;
