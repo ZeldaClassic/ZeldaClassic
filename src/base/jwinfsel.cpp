@@ -540,8 +540,7 @@ static int32_t fs_flist_proc(int32_t msg, DIALOG *d, int32_t c)
         else
         {
             for(i=0; i<flist->size; i++)
-                if(flist->name[i])
-                    free(flist->name[i]);
+               free(flist->name[i]);
         }
         
         flist->size = 0;
@@ -576,8 +575,7 @@ static int32_t fs_flist_proc(int32_t msg, DIALOG *d, int32_t c)
         if(flist)
         {
             for(i=0; i<flist->size; i++)
-                if(flist->name[i])
-                    free(flist->name[i]);
+                free(flist->name[i]);
                     
             free(flist);
             flist = NULL;
@@ -956,11 +954,8 @@ int32_t jwin_file_select_ex(AL_CONST char *message, char *path, AL_CONST char *e
     enlarge_file_selector(width, height);
     ret = do_zqdialog(file_selector, FS_EDIT);
     
-    if(fext)
-    {
-        free(fext);
-        fext = NULL;
-    }
+    free(fext);
+    fext = NULL;
     
     if(fext_p)
     {
@@ -1149,11 +1144,8 @@ int32_t jwin_dfile_select_ex(AL_CONST char *message, char *path, AL_CONST char *
     enlarge_file_selector(width, height);
     ret = do_zqdialog(file_selector, FS_EDIT);
     
-    if(fext)
-    {
-        free(fext);
-        fext = NULL;
-    }
+    free(fext);
+    fext = NULL;
     
     if(fext_p)
     {
@@ -1318,11 +1310,8 @@ int32_t jwin_file_browse_ex(AL_CONST char *message, char *path, EXT_LIST *list, 
     
     if((ret == FS_CANCEL) || (ret == FS_WIN) || (!ugetc(get_filename(path))))
     {
-        if(fext)
-        {
-            free(fext);
-            fext = NULL;
-        }
+        free(fext);
+        fext = NULL;
 
         if(fext_p)
         {
@@ -1347,11 +1336,8 @@ int32_t jwin_file_browse_ex(AL_CONST char *message, char *path, EXT_LIST *list, 
         }
     }
 
-    if(fext)
-    {
-        free(fext);
-        fext = NULL;
-    }
+    free(fext);
+    fext = NULL;
 
     if(fext_p)
     {
@@ -1367,8 +1353,7 @@ void FLIST::load(const char* path)
 {
 	char tmp[32];
 	for(int32_t i=0; i<size; i++)
-		if(name[i])
-			free(name[i]);
+		free(name[i]);
 
 	size = 0;
 
@@ -1407,8 +1392,7 @@ bool FLIST::get(int32_t index, char* buf)
 void FLIST::clear()
 {
 	for(int32_t i=0; i<size; i++)
-		if(name[i])
-			free(name[i]);
+		free(name[i]);
 	
 	size = 0;
 }
