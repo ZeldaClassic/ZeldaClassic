@@ -22444,11 +22444,9 @@ byte reload_scripts(map<string, disassembled_script_data> &scripts)
 	char temp[100];
 	for(int32_t i = 0; i < NUMSCRIPTFFC-1; i++)
 	{
-		if(ffcmap[i].isEmpty())
-			sprintf(temp, "Slot %d:", i+1);
-		else
+		sprintf(temp, "Slot %d:", i+1);
+		if(!ffcmap[i].isEmpty())
 		{
-			sprintf(temp, "Slot %d:", i+1);
 			if(ffcmap[i].isZASM())
 			{
 				if(ffcmap[i].isImportedZASM()) slotflags |= SLOTMSGFLAG_IMPORTED;
@@ -22487,11 +22485,9 @@ byte reload_scripts(map<string, disassembled_script_data> &scripts)
 	}
 	for(int32_t i = 0; i < NUMSCRIPTITEM-1; i++)
 	{
-		if(itemmap[i].isEmpty())
-			sprintf(temp, "Slot %d:", i+1);
-		else
+		sprintf(temp, "Slot %d:", i+1);
+		if(!itemmap[i].isEmpty())
 		{
-			sprintf(temp, "Slot %d:", i+1);
 			if(itemmap[i].isZASM())
 			{
 				if(itemmap[i].isImportedZASM()) slotflags |= SLOTMSGFLAG_IMPORTED;
@@ -22510,11 +22506,9 @@ byte reload_scripts(map<string, disassembled_script_data> &scripts)
 	}
 	for(int32_t i = 0; i < NUMSCRIPTGUYS-1; i++)
 	{
-		if(npcmap[i].isEmpty())
-			sprintf(temp, "Slot %d:", i+1);
-		else
+		sprintf(temp, "Slot %d:", i+1);
+		if(!npcmap[i].isEmpty())
 		{
-			sprintf(temp, "Slot %d:", i+1);
 			if(npcmap[i].isZASM())
 			{
 				if(npcmap[i].isImportedZASM()) slotflags |= SLOTMSGFLAG_IMPORTED;
@@ -22533,11 +22527,9 @@ byte reload_scripts(map<string, disassembled_script_data> &scripts)
 	} 
 	for(int32_t i = 0; i < NUMSCRIPTWEAPONS-1; i++)
 	{
-		if(ewpnmap[i].isEmpty())
-			sprintf(temp, "Slot %d:", i+1);
-		else
+		sprintf(temp, "Slot %d:", i+1);
+		if(!ewpnmap[i].isEmpty())
 		{
-			sprintf(temp, "Slot %d:", i+1);
 			if(ewpnmap[i].isZASM())
 			{
 				if(ewpnmap[i].isImportedZASM()) slotflags |= SLOTMSGFLAG_IMPORTED;
@@ -22556,11 +22548,9 @@ byte reload_scripts(map<string, disassembled_script_data> &scripts)
 	}
 	for(int32_t i = 0; i < NUMSCRIPTWEAPONS-1; i++)
 	{
-		if(lwpnmap[i].isEmpty())
-			sprintf(temp, "Slot %d:", i+1);
-		else
+		sprintf(temp, "Slot %d:", i+1);
+		if(!lwpnmap[i].isEmpty())
 		{
-			sprintf(temp, "Slot %d:", i+1);
 			if(lwpnmap[i].isZASM())
 			{
 				if(lwpnmap[i].isImportedZASM()) slotflags |= SLOTMSGFLAG_IMPORTED;
@@ -22599,11 +22589,9 @@ byte reload_scripts(map<string, disassembled_script_data> &scripts)
 	}
 	for(int32_t i = 0; i < NUMSCRIPTSCREEN-1; i++)
 	{
-		if(screenmap[i].isEmpty())
-			sprintf(temp, "Slot %d:", i+1);
-		else
+		sprintf(temp, "Slot %d:", i+1);
+		if(!screenmap[i].isEmpty())
 		{
-			sprintf(temp, "Slot %d:", i+1);
 			if(screenmap[i].isZASM())
 			{
 				if(screenmap[i].isImportedZASM()) slotflags |= SLOTMSGFLAG_IMPORTED;
@@ -22622,11 +22610,9 @@ byte reload_scripts(map<string, disassembled_script_data> &scripts)
 	}
 	for(int32_t i = 0; i < NUMSCRIPTSDMAP-1; i++)
 	{
-		if(dmapmap[i].isEmpty())
-			sprintf(temp, "Slot %d:", i+1);
-		else
+		sprintf(temp, "Slot %d:", i+1);
+		if(!dmapmap[i].isEmpty())
 		{
-			sprintf(temp, "Slot %d:", i+1);
 			if(dmapmap[i].isZASM())
 			{
 				if(dmapmap[i].isImportedZASM()) slotflags |= SLOTMSGFLAG_IMPORTED;
@@ -22645,11 +22631,9 @@ byte reload_scripts(map<string, disassembled_script_data> &scripts)
 	}
 	for(int32_t i = 0; i < NUMSCRIPTSITEMSPRITE-1; i++)
 	{
-		if(itemspritemap[i].isEmpty())
-			sprintf(temp, "Slot %d:", i+1);
-		else
+		sprintf(temp, "Slot %d:", i+1);
+		if(!itemspritemap[i].isEmpty())
 		{
-			sprintf(temp, "Slot %d:", i+1);
 			if(itemspritemap[i].isZASM())
 			{
 				if(itemspritemap[i].isImportedZASM()) slotflags |= SLOTMSGFLAG_IMPORTED;
@@ -22668,11 +22652,9 @@ byte reload_scripts(map<string, disassembled_script_data> &scripts)
 	}
 	for(int32_t i = 0; i < NUMSCRIPTSCOMBODATA-1; i++)
 	{
-		if(comboscriptmap[i].isEmpty())
-			sprintf(temp, "Slot %d:", i+1);
-		else
+		sprintf(temp, "Slot %d:", i+1);
+		if(!comboscriptmap[i].isEmpty())
 		{
-			sprintf(temp, "Slot %d:", i+1);
 			if(comboscriptmap[i].isZASM())
 			{
 				if(comboscriptmap[i].isImportedZASM()) slotflags |= SLOTMSGFLAG_IMPORTED;
@@ -22691,11 +22673,9 @@ byte reload_scripts(map<string, disassembled_script_data> &scripts)
 	}
 	for(int32_t i = 0; i < NUMSCRIPTSGENERIC-1; i++)
 	{
-		if(genericmap[i].isEmpty())
-			sprintf(temp, "Slot %d:", i+1);
-		else
+		sprintf(temp, "Slot %d:", i+1);
+		if(!genericmap[i].isEmpty())
 		{
-			sprintf(temp, "Slot %d:", i+1);
 			if(genericmap[i].isZASM())
 			{
 				if(genericmap[i].isImportedZASM()) slotflags |= SLOTMSGFLAG_IMPORTED;
@@ -22714,11 +22694,9 @@ byte reload_scripts(map<string, disassembled_script_data> &scripts)
 	}
 	for(int32_t i = 0; i < NUMSCRIPTSSUBSCREEN-1; i++)
 	{
-		if(subscreenmap[i].isEmpty())
-			sprintf(temp, "Slot %d:", i+1);
-		else
+		sprintf(temp, "Slot %d:", i+1);
+		if(!subscreenmap[i].isEmpty())
 		{
-			sprintf(temp, "Slot %d:", i+1);
 			if(subscreenmap[i].isZASM())
 			{
 				if(subscreenmap[i].isImportedZASM()) slotflags |= SLOTMSGFLAG_IMPORTED;
