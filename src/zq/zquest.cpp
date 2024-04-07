@@ -20712,37 +20712,37 @@ const char *gscriptlist2(int32_t index, int32_t *list_size)
     return NULL;
 }
 
-static int32_t as_ffc_list[] = { 4, 5, 6, -1};
-static int32_t as_global_list[] = { 7, 8, 9, -1}; //Why does putting 15 in here not place my message only on the global tab? ~Joe
-static int32_t as_item_list[] = { 10, 11, 12, -1};
-static int32_t as_npc_list[] = { 18, 19, 20, -1}; //npc scripts TAB
-static int32_t as_lweapon_list[] = { 21, 22, 23, -1}; //lweapon scripts TAB
-static int32_t as_eweapon_list[] = { 24, 25, 26, -1}; //eweapon scripts TAB
-static int32_t as_hero_list[] = { 27, 28, 29, -1}; //player scripts TAB
-static int32_t as_screen_list[] = { 30, 31, 32, -1}; //screendata scripts TAB
-static int32_t as_dmap_list[] = { 33, 34, 35, -1}; //dmapdata scripts TAB
-static int32_t as_itemsprite_list[] = { 36, 37, 38, -1}; //dmapdata scripts TAB
-static int32_t as_comboscript_list[] = { 39, 40, 41, -1}; //combodata scripts TAB
-static int32_t as_genericscript_list[] = { 45, 46, 47, -1}; //generic scripts TAB
+static int32_t as_ffc_list[]             = { 4, 5, 6, -1};
+static int32_t as_global_list[]          = { 7, 8, 9, -1}; //Why does putting 15 in here not place my message only on the global tab? ~Joe
+static int32_t as_item_list[]            = { 10, 11, 12, -1};
+static int32_t as_npc_list[]             = { 18, 19, 20, -1}; //npc scripts TAB
+static int32_t as_lweapon_list[]         = { 21, 22, 23, -1}; //lweapon scripts TAB
+static int32_t as_eweapon_list[]         = { 24, 25, 26, -1}; //eweapon scripts TAB
+static int32_t as_hero_list[]            = { 27, 28, 29, -1}; //player scripts TAB
+static int32_t as_screen_list[]          = { 30, 31, 32, -1}; //screendata scripts TAB
+static int32_t as_dmap_list[]            = { 33, 34, 35, -1}; //dmapdata scripts TAB
+static int32_t as_itemsprite_list[]      = { 36, 37, 38, -1}; //dmapdata scripts TAB
+static int32_t as_comboscript_list[]     = { 39, 40, 41, -1}; //combodata scripts TAB
+static int32_t as_genericscript_list[]   = { 45, 46, 47, -1}; //generic scripts TAB
 static int32_t as_subscreenscript_list[] = { 48, 49, 50, -1}; //generic scripts TAB
 
 static TABPANEL assignscript_tabs[] =
 {
     // (text)
-    { (char *)"FFC",     D_SELECTED,  as_ffc_list,    0, NULL },
-    { (char *)"Global",	 0,         as_global_list, 0, NULL },
+    { (char *)"FFC",            D_SELECTED,  as_ffc_list,    0, NULL },
+    { (char *)"Global",   	 0,         as_global_list, 0, NULL },
     { (char *)"Item",		 0,         as_item_list,   0, NULL },
     { (char *)"NPC",		 0,         as_npc_list,   0, NULL },
-    { (char *)"LWeapon",		 0,         as_lweapon_list,   0, NULL },
-    { (char *)"EWeapon",		 0,         as_eweapon_list,   0, NULL },
+    { (char *)"LWeapon",	 0,         as_lweapon_list,   0, NULL },
+    { (char *)"EWeapon",	 0,         as_eweapon_list,   0, NULL },
     { (char *)"Hero",		 0,         as_hero_list,   0, NULL },
     { (char *)"DMap",		 0,         as_dmap_list,   0, NULL },
     { (char *)"Screen",		 0,         as_screen_list,   0, NULL },
-    { (char *)"Item Sprite",		 0,         as_itemsprite_list,   0, NULL },
+    { (char *)"Item Sprite",	 0,         as_itemsprite_list,   0, NULL },
     { (char *)"Combo",		 0,         as_comboscript_list,   0, NULL },
-    { (char *)"Generic",		 0,         as_genericscript_list,   0, NULL },
-    { (char *)"Subscreen",		 0,         as_subscreenscript_list,   0, NULL },
-    { NULL,                0,           NULL,         0, NULL }
+    { (char *)"Generic",        0,         as_genericscript_list,   0, NULL },
+    { (char *)"Subscreen",      0,         as_subscreenscript_list,   0, NULL },
+    { NULL,                     0,           NULL,         0, NULL }
 };
 
 const char *assignffclist(int32_t index, int32_t *list_size)
@@ -21165,7 +21165,7 @@ int32_t txtout(BITMAP* dest, const char* txt, int32_t x, int32_t y, bool disable
 int32_t jwin_zmeta_proc(int32_t msg, DIALOG *d, int32_t )
 {
 	int32_t ret = D_O_K;
-    ASSERT(d);
+	ASSERT(d);
     
 	BITMAP* target = (msg==MSG_START ? NULL : screen);
     switch(msg)
@@ -21351,14 +21351,14 @@ int32_t onZScriptCompilerSettings()
 
 static DIALOG edit_zscript_dlg[] =
 {
-    /* (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)      (d2)      (dp) */
-    { jwin_win_proc,        0,   0,   320,  240,  0,       vc(15), 0,      D_EXIT,       0,          0, (void *) "Edit ZScript", NULL, NULL },
-    { jwin_frame_proc,   4,   23,   320-8,  240-27,   0,       0,      0,       0,             FR_DEEP,       0,       NULL, NULL, NULL },
-    { d_editbox_proc,    6,   25,   320-12,  240-6-25,  0,       0,      0,       0/*D_SELECTED*/,          0,        0,        NULL, NULL, NULL },
-    { d_keyboard_proc,   0,    0,    0,    0,    0,       0,      0,       0,          0,        KEY_ESC, (void *) close_dlg, NULL, NULL },
-    { d_keyboard_proc,   0,    0,    0,    0,    0,       0,      0,       0,          0,        KEY_F12, (void *) onSnapshot, NULL, NULL },
-    { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    /* (dialog proc)    (x)   (y)   (w)           (h)   (fg)    (bg)     (key)    (flags)     (d1)      (d2)      (dp) */
+    { jwin_win_proc,     0,    0,   320,          240,    0,     vc(15),  0,      D_EXIT,       0,          0, (void *) "Edit ZScript", NULL, NULL },
+    { jwin_frame_proc,   4,   23,   320-8,     240-27,    0,     0,       0,       0,             FR_DEEP,       0,       NULL, NULL, NULL },
+    { d_editbox_proc,    6,   25,   320-12,  240-6-25,    0,     0,       0,       0/*D_SELECTED*/,          0,        0,        NULL, NULL, NULL },
+    { d_keyboard_proc,   0,    0,        0,         0,    0,     0,       0,       0,          0,        KEY_ESC, (void *) close_dlg, NULL, NULL },
+    { d_keyboard_proc,   0,    0,        0,         0,    0,     0,       0,       0,          0,        KEY_F12, (void *) onSnapshot, NULL, NULL },
+    { d_timer_proc,      0,    0,        0,         0,    0,     0,       0,       0,          0,          0,         NULL, NULL, NULL },
+    { NULL,              0,    0,        0,         0,    0,     0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 void doEditZScript(int32_t bg,int32_t fg)
@@ -22210,12 +22210,12 @@ script_slot_type getType(ScriptType type)
 {
 	switch(type)
 	{
-		case ScriptType::FFC: return type_ffc;
+		case ScriptType::FFC:    return type_ffc;
 		case ScriptType::Global: return type_global;
-		case ScriptType::Item: return type_itemdata;
-		case ScriptType::NPC: return type_npc;
-		case ScriptType::Lwpn: return type_lweapon;
-		case ScriptType::Ewpn: return type_eweapon;
+		case ScriptType::Item:   return type_itemdata;
+		case ScriptType::NPC:    return type_npc;
+		case ScriptType::Lwpn:   return type_lweapon;
+		case ScriptType::Ewpn:   return type_eweapon;
 		case ScriptType::Player: return type_hero;
 		case ScriptType::DMap:
 		case ScriptType::ScriptedActiveSubscreen:
@@ -22224,11 +22224,11 @@ script_slot_type getType(ScriptType type)
 			return type_dmap;
 		case ScriptType::Generic: case ScriptType::GenericFrozen:
 			return type_generic;
-		case ScriptType::Screen: return type_screen;
-		case ScriptType::ItemSprite: return type_itemsprite;
-		case ScriptType::Combo: return type_combo;
+		case ScriptType::Screen:          return type_screen;
+		case ScriptType::ItemSprite:      return type_itemsprite;
+		case ScriptType::Combo:           return type_combo;
 		case ScriptType::EngineSubscreen: return type_subscreen;
-		default: return type_ffc; //Default
+		default:                          return type_ffc; //Default
 	}
 }
 #define SLOTMSGFLAG_MISSING		0x01
@@ -22743,9 +22743,9 @@ bool handle_slot(script_slot_data& slotdata, int indx, script_data** scriptdata)
 }
 bool handle_slot_map(map<int32_t, script_slot_data>& mp, int offs, script_data** scriptdata)
 {
-	for(auto it = mp.begin(); it != mp.end(); it++)
+	for(auto& m_elem : mp)
 	{
-		if(!handle_slot(it->second, it->first+offs, scriptdata))
+		if(!handle_slot(m_elem.second, m_elem.first+offs, scriptdata))
 			return false;
 	}
 	return true;
@@ -22795,9 +22795,8 @@ void smart_slot_type(map<string, disassembled_script_data> &scripts,
 	vector<string> const& scriptnames, map<int32_t, script_slot_data>& mp,
 	int slotcount)
 {
-	for(string const& sn : scriptnames )
+	for(string const& rval : scriptnames )
 	{
-		auto const& rval = sn;
 		if(rval == "<none>") continue;
 		script_slot_data* first_open_slot = nullptr;
 		bool done = false;
