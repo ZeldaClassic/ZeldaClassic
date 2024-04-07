@@ -27807,24 +27807,18 @@ void quit_game()
     if(newundotilebuf)
     {
         for(int32_t i=0; i<NEWMAXTILES; i++)
-            if(newundotilebuf[i].data) free(newundotilebuf[i].data);
+            free(newundotilebuf[i].data);
             
         free(newundotilebuf);
     }
     
-    if(filepath) free(filepath);
-    
-    if(temppath) free(temppath);
-    
-    if(datapath) free(datapath);
-    
-    if(midipath) free(midipath);
-    
-    if(imagepath) free(imagepath);
-    
-    if(tmusicpath) free(tmusicpath);
-    
-    if(last_timed_save) free(last_timed_save);
+    free(filepath); 
+    free(temppath); 
+    free(datapath); 
+    free(midipath); 
+    free(imagepath); 
+    free(tmusicpath); 
+    free(last_timed_save);
     
     cleanup_datafiles_on_exit();
     destroy_bitmaps_on_exit();
@@ -27843,11 +27837,8 @@ void quit_game2()
     
     for(int32_t i=0; i<WAV_COUNT; i++)
     {
-        if(customsfxdata[i].data!=NULL)
-        {
 //      delete [] customsfxdata[i].data;
             free(customsfxdata[i].data);
-        }
         
         delete [] sfx_string[i];
     }
@@ -27947,24 +27938,18 @@ void quit_game2()
     if(newundotilebuf)
     {
         for(int32_t i=0; i<NEWMAXTILES; i++)
-            if(newundotilebuf[i].data) free(newundotilebuf[i].data);
+            free(newundotilebuf[i].data);
             
         free(newundotilebuf);
     }
     
-    if(filepath) free(filepath);
-    
-    if(temppath) free(temppath);
-    
-    if(datapath) free(datapath);
-    
-    if(midipath) free(midipath);
-    
-    if(imagepath) free(imagepath);
-    
-    if(tmusicpath) free(tmusicpath);
-    
-    if(last_timed_save) free(last_timed_save);
+    free(filepath); 
+    free(temppath); 
+    free(datapath); 
+    free(midipath); 
+    free(imagepath); 
+    free(tmusicpath); 
+    free(last_timed_save);
     
     cleanup_datafiles_on_exit();
     //destroy_bitmaps_on_exit();
