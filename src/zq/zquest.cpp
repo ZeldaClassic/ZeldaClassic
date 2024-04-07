@@ -23887,7 +23887,7 @@ int32_t onImportZASM()
 	}
 	fclose(zasm_import_file);
 
-    std::string namebuf;
+	std::string namebuf;
 	if(temp_slot->meta.valid()) //Found metadata
 	{
 		importzasm_dlg[3].d1 = getType(temp_slot->meta.script_type);
@@ -24078,13 +24078,13 @@ void center_zscript_dialogs()
 
 static DIALOG sfxlist_dlg[] =
 {
-    // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
-    { jwin_win_proc,     60-12,   40,   200+24,  148,  vc(14),  vc(1),  0,       D_EXIT,          0,             0,       NULL, NULL, NULL },
-    { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { jwin_abclist_proc,       72-12-4,   60+4,   176+24+8,  92+3,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0,       NULL, NULL, NULL },
-    { jwin_button_proc,     90,   163,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "Edit", NULL, NULL },
-    { jwin_button_proc,     170,  163,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Done", NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    // (dialog proc)          (x)     (y)         (w)    (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
+    { jwin_win_proc,       60-12,     40,     200+24,   148,  vc(14),  vc(1),  0,       D_EXIT,          0,             0,       NULL, NULL, NULL },
+    { d_timer_proc,            0,      0,          0,     0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+    { jwin_abclist_proc, 72-12-4,   60+4,   176+24+8,  92+3,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0,       NULL, NULL, NULL },
+    { jwin_button_proc,       90,    163,         61,    21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "Edit", NULL, NULL },
+    { jwin_button_proc,      170,    163,         61,    21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Done", NULL, NULL },
+    { NULL,                    0,      0,          0,     0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 int32_t select_sfx(const char *prompt,int32_t index)
