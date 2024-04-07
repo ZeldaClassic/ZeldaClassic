@@ -4,7 +4,7 @@
 namespace AutoPattern
 {
 
-	bool autopattern_cakemtn::execute(int32_t exscreen, int32_t expos)
+	bool cakemtn::execute(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -22,7 +22,7 @@ namespace AutoPattern
 		apply_changes();
 		return true;
 	}
-	bool autopattern_cakemtn::erase(int32_t exscreen, int32_t expos)
+	bool cakemtn::erase(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -49,7 +49,7 @@ namespace AutoPattern
 		apply_changes();
 		return true;
 	}
-	int32_t autopattern_cakemtn::get_floating_cid(int32_t exscreen, int32_t expos)
+	int32_t cakemtn::get_floating_cid(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -59,12 +59,12 @@ namespace AutoPattern
 		recalculate_height(ap, height);
 		return ap->cid;
 	}
-	void autopattern_cakemtn::flip_single(apcombo*& ap)
+	void cakemtn::flip_single(apcombo*& ap)
 	{
 		autopattern_fence::flip_single(ap);
 		recalculate_height(ap, height);
 	}
-	uint32_t autopattern_cakemtn::slot_to_flags(int32_t slot)
+	uint32_t cakemtn::slot_to_flags(int32_t slot)
 	{
 		switch (slot)
 		{
@@ -106,7 +106,7 @@ namespace AutoPattern
 		}
 		return 0;
 	}
-	int32_t autopattern_cakemtn::flags_to_slot(uint32_t flags)
+	int32_t cakemtn::flags_to_slot(uint32_t flags)
 	{
 		switch (flags)
 		{
@@ -138,7 +138,7 @@ namespace AutoPattern
 		}
 		return -1;
 	}
-	int32_t autopattern_cakemtn::flip_slot(int32_t slot)
+	int32_t cakemtn::flip_slot(int32_t slot)
 	{
 		switch (slot)
 		{
@@ -173,7 +173,7 @@ namespace AutoPattern
 		}
 		return slot;
 	}
-	void autopattern_cakemtn::get_turn_flags(int32_t &ret, int32_t dir, int32_t adjslot)
+	void cakemtn::get_turn_flags(int32_t &ret, int32_t dir, int32_t adjslot)
 	{
 		switch (dir)
 		{
@@ -231,7 +231,7 @@ namespace AutoPattern
 				break;
 		}
 	}
-	int32_t autopattern_cakemtn::get_south_face_id(int32_t slot)
+	int32_t cakemtn::get_south_face_id(int32_t slot)
 	{
 		switch (slot)
 		{
@@ -260,7 +260,7 @@ namespace AutoPattern
 		}
 		return -1;
 	}
-	void autopattern_cakemtn::recalculate_height(apcombo*& ap, int32_t oldheight)
+	void cakemtn::recalculate_height(apcombo*& ap, int32_t oldheight)
 	{
 		int32_t slot = cid_to_slot(ap->cid);
 		int32_t south_face = get_south_face_id(slot);
@@ -357,7 +357,7 @@ namespace AutoPattern
 			}
 		}
 	}
-	void autopattern_cakemtn::resize_connected(int32_t exscreen, int32_t expos, int32_t max, int32_t newheight)
+	void cakemtn::resize_connected(int32_t exscreen, int32_t expos, int32_t max, int32_t newheight)
 	{
 		apcombo* ap = add(exscreen, expos);
 		if (!ap)

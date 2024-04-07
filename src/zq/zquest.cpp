@@ -7550,7 +7550,7 @@ void draw_autocombo(int32_t pos, bool rclick, bool pressframe)
 			}
 			case AUTOCOMBO_Z4:
 			{
-				AutoPattern::autopattern_cakemtn ap(ca.getType(), CurrentLayer, scr, pos, &ca, cauto_height);
+				AutoPattern::cakemtn ap(ca.getType(), CurrentLayer, scr, pos, &ca, cauto_height);
 				if (rclick)
 					ap.erase(scr, pos);
 				else
@@ -7640,7 +7640,7 @@ void draw_autocombo_command(int32_t pos, int32_t cmd, int32_t arg)
 			}
 			case AUTOCOMBO_Z4:
 			{
-				AutoPattern::autopattern_cakemtn ap(ca.getType(), CurrentLayer, scr, pos, &ca, cauto_height);
+				AutoPattern::cakemtn ap(ca.getType(), CurrentLayer, scr, pos, &ca, cauto_height);
 				switch (cmd)
 				{
 					case 0: // Flip
@@ -7686,7 +7686,7 @@ int32_t get_autocombo_floating_cid(int32_t pos, bool clicked)
 			}
 			case AUTOCOMBO_Z4:
 			{
-				AutoPattern::autopattern_cakemtn ap(ca.getType(), CurrentLayer, scr, pos, &ca, cauto_height);
+				AutoPattern::cakemtn ap(ca.getType(), CurrentLayer, scr, pos, &ca, cauto_height);
 				cid = ap.get_floating_cid(scr, pos);
 				break;
 			}
