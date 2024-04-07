@@ -20847,9 +20847,7 @@ void putmsg()
 			if(do_run_menu)
 			{
 				if(runMenuCursor())
-				{
 					do_run_menu = false;
-				}
 				else break;
 			}
 			if(doing_name_insert)
@@ -21193,8 +21191,9 @@ void clear_script_one_frame_conditions()
 {
 	for(int32_t j=0; j<guys.Count(); j++)
 	{
-				enemy *e = (enemy*)guys.spr(j);
-		for ( int32_t q = 0; q < NUM_HIT_TYPES_USED; q++ ) e->hitby[q] = 0;
+		enemy *e = (enemy*)guys.spr(j);
+		for ( int32_t q = 0; q < NUM_HIT_TYPES_USED; q++ )
+			e->hitby[q] = 0;
 	}
 }
 
@@ -21272,15 +21271,11 @@ void check_enemy_lweapon_collision(weapon *w)
 				}
 				
 				if(h==2)
-				{
 					break;
-				}
 			}
 			
 			if(w->Dead())
-			{
 				break;
-			}
 		}
 
 		// Item flags added in 2.55:
@@ -21425,9 +21420,7 @@ void dragging_item()
 				int32_t id = dragItem->id;
 				
 				if(itemsbuf[id].family ==itype_fairy && itemsbuf[id].misc3)
-				{
 					movefairynew2(w->x,w->y,*dragItem);
-				}
 			}
 		}
 	}
@@ -21438,12 +21431,8 @@ int32_t more_carried_items()
 	int32_t hasmorecarries = 0;
 	
 	for(int32_t i=0; i<items.Count(); i++)
-	{
 		if(((item*)items.spr(i))->pickup & ipENEMY)
-		{
 			hasmorecarries++;
-		}
-	}
 	
 	return hasmorecarries;
 }
@@ -21456,9 +21445,7 @@ void roaming_item()
 	
 	// All enemies already dead upon entering a room?
 	if(guys.Count()==0)
-	{
 		return;
-	}
 	
 	// Lost track of the carrier?
 	if(guycarryingitem<0 || guycarryingitem>=guys.Count() ||
@@ -21480,12 +21467,8 @@ void roaming_item()
 		guycarryingitem = -1;
 		
 		for(int32_t i=0; i<guys.Count(); i++)
-		{
 			if(((enemy*)guys.spr(i))->itemguy)
-			{
 				guycarryingitem = i;
-			}
-		}
 		
 		if(guycarryingitem == -1)                                      //This happens when "default enemies" such as
 		{
