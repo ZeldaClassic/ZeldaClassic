@@ -2250,78 +2250,78 @@ int32_t enemy::defendNew(int32_t wpnId, int32_t *power, int32_t edef, byte unblo
 					//Fixme: possible enemy memory leak. (minor)
 					case eeWALK:
 					{
-					enemy *e = new eStalfos(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eStalfos(x,y,new_id,clk);
+						guys.add(e);
 					}
 					break;
 				
 					case eeLEV:
 					{
-					enemy *e = new eLeever(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eLeever(x,y,new_id,clk);
+						guys.add(e);
 					}
 					break;
 				
 					case eeTEK:
 					{
-					enemy *e = new eTektite(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eTektite(x,y,new_id,clk);
+						guys.add(e);
 					}
 					break;
 				
 					case eePEAHAT:
 					{
-					enemy *e = new ePeahat(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new ePeahat(x,y,new_id,clk);
+						guys.add(e);
 					}
 					break;
 				
 					case eeZORA:
 					{
-					enemy *e = new eZora(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eZora(x,y,new_id,clk);
+						guys.add(e);
 					}
 					break;
 				
 					case eeGHINI:
 					{
-					enemy *e = new eGhini(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eGhini(x,y,new_id,clk);
+						guys.add(e);
 					}
 					break;
 					
 					case eeKEESE:
 					{
-					enemy *e = new eKeese(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eKeese(x,y,new_id,clk);
+						guys.add(e);
 					}
 					break;
 					
 					case eeWIZZ:
 					{
-					enemy *e = new eWizzrobe(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eWizzrobe(x,y,new_id,clk);
+						guys.add(e);
 					}
 					break;
 					
 					case eePROJECTILE:
 					{
-					enemy *e = new eProjectile(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eProjectile(x,y,new_id,clk);
+						guys.add(e);
 					}
 					break;
 					
 					case eeWALLM:
 					{
-					enemy *e = new eWallM(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eWallM(x,y,new_id,clk);
+						guys.add(e);
 					}
 					break;
 					
 					case eeAQUA:
 					{
-					enemy *e = new eAquamentus(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eAquamentus(x,y,new_id,clk);
+						guys.add(e);
 						e->x = x;
 						e->y = y;
 					}
@@ -2329,8 +2329,8 @@ int32_t enemy::defendNew(int32_t wpnId, int32_t *power, int32_t edef, byte unblo
 					
 					case eeMOLD:
 					{
-					enemy *e = new eMoldorm(x,y,new_id,zc_max(1,zc_min(254,guysbuf[new_id&0xFFF].misc1)));
-					guys.add(e);
+						enemy *e = new eMoldorm(x,y,new_id,zc_max(1,zc_min(254,guysbuf[new_id&0xFFF].misc1)));
+						guys.add(e);
 						e->x = x;
 						e->y = y;
 					}
@@ -2338,8 +2338,8 @@ int32_t enemy::defendNew(int32_t wpnId, int32_t *power, int32_t edef, byte unblo
 					
 					case eeMANHAN:
 					{
-					enemy *e = new eManhandla(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eManhandla(x,y,new_id,clk);
+						guys.add(e);
 						e->x = x;
 						e->y = y;
 					}
@@ -2385,8 +2385,8 @@ int32_t enemy::defendNew(int32_t wpnId, int32_t *power, int32_t edef, byte unblo
 					
 					case eeGHOMA:
 					{
-					enemy *e = new eGohma(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eGohma(x,y,new_id,clk);
+						guys.add(e);
 						e->x = x;
 						e->y = y;
 					}
@@ -2394,8 +2394,8 @@ int32_t enemy::defendNew(int32_t wpnId, int32_t *power, int32_t edef, byte unblo
 					
 					case eeLANM:
 					{
-					enemy *e = new eLanmola(x,y,new_id,zc_max(1,zc_min(253,guysbuf[new_id&0xFFF].misc1)));
-					guys.add(e);
+						enemy *e = new eLanmola(x,y,new_id,zc_max(1,zc_min(253,guysbuf[new_id&0xFFF].misc1)));
+						guys.add(e);
 						e->x = x;
 						e->y = y;
 					}
@@ -2403,8 +2403,8 @@ int32_t enemy::defendNew(int32_t wpnId, int32_t *power, int32_t edef, byte unblo
 					
 					case eeGANON:
 					{
-					enemy *e = new eGanon(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eGanon(x,y,new_id,clk);
+						guys.add(e);
 						e->x = x;
 						e->y = y;
 					}
@@ -2412,8 +2412,8 @@ int32_t enemy::defendNew(int32_t wpnId, int32_t *power, int32_t edef, byte unblo
 					
 					case eeFAIRY:
 					{
-					enemy *e = new eItemFairy(x,y,new_id+0x1000*clk,clk);
-					guys.add(e);
+						enemy *e = new eItemFairy(x,y,new_id+0x1000*clk,clk);
+						guys.add(e);
 						e->x = x;
 						e->y = y;
 					}
@@ -2421,8 +2421,8 @@ int32_t enemy::defendNew(int32_t wpnId, int32_t *power, int32_t edef, byte unblo
 					
 					case eeFIRE:
 					{
-					enemy *e = new eFire(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eFire(x,y,new_id,clk);
+						guys.add(e);
 						e->x = x;
 						e->y = y;
 					}
@@ -2430,8 +2430,8 @@ int32_t enemy::defendNew(int32_t wpnId, int32_t *power, int32_t edef, byte unblo
 					
 					case eeOTHER: 
 					{
-					enemy *e = new eOther(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eOther(x,y,new_id,clk);
+						guys.add(e);
 						e->x = x;
 						e->y = y;
 					}
@@ -2439,8 +2439,8 @@ int32_t enemy::defendNew(int32_t wpnId, int32_t *power, int32_t edef, byte unblo
 					
 					case eeSPINTILE:
 					{
-					enemy *e = new eSpinTile(x,y,new_id,clk);
-					guys.add(e);
+						enemy *e = new eSpinTile(x,y,new_id,clk);
+						guys.add(e);
 						e->x = x;
 						e->y = y;
 					}
@@ -2453,8 +2453,8 @@ int32_t enemy::defendNew(int32_t wpnId, int32_t *power, int32_t edef, byte unblo
 						{
 							case 1:
 							{
-							enemy *e = new eBoulder(x,y,new_id,clk);
-							guys.add(e);
+								enemy *e = new eBoulder(x,y,new_id,clk);
+								guys.add(e);
 								e->x = x;
 								e->y = y;
 							}
