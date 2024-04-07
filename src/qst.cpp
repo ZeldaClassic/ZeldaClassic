@@ -20950,46 +20950,16 @@ static int32_t _lq_int(const char *filename, zquestheader *Header, miscQdata *Mi
 		
 		//new script types -- prevent carrying over to a quest that you load after reading them
 		//e.g., a quest has an npc script, and you make a blank quest, that now believes that it has an npc script, too!
-		for(int32_t i=0; i<NUMSCRIPTGUYS-1; i++)
-		{
-			npcmap[i].clear();
-		}
-		for(int32_t i=0; i<NUMSCRIPTWEAPONS-1; i++)
-		{
-			lwpnmap[i].clear();
-		}
-		for(int32_t i=0; i<NUMSCRIPTWEAPONS-1; i++)
-		{
-			ewpnmap[i].clear();
-		}
-		for(int32_t i=0; i<NUMSCRIPTPLAYER-1; i++)
-		{
-			playermap[i].clear();
-		}
-		for(int32_t i=0; i<NUMSCRIPTSDMAP-1; i++)
-		{
-			dmapmap[i].clear();
-		}
-		for(int32_t i=0; i<NUMSCRIPTSCREEN-1; i++)
-		{
-			screenmap[i].clear();
-		}
-		for(int32_t i=0; i<NUMSCRIPTSITEMSPRITE-1; i++)
-		{
-			itemspritemap[i].clear();
-		}
-		for(int32_t i=0; i<NUMSCRIPTSCOMBODATA-1; i++)
-		{
-			comboscriptmap[i].clear();
-		}
-		for(int32_t i=0; i<NUMSCRIPTSGENERIC-1; i++)
-		{
-			genericmap[i].clear();
-		}
-		for(int32_t i=0; i<NUMSCRIPTSSUBSCREEN-1; i++)
-		{
-			subscreenmap[i].clear();
-		}
+		for(int32_t i=0; i<NUMSCRIPTGUYS-1;        i++) npcmap        [i].clear();
+		for(int32_t i=0; i<NUMSCRIPTWEAPONS-1;     i++) lwpnmap       [i].clear();
+		for(int32_t i=0; i<NUMSCRIPTWEAPONS-1;     i++) ewpnmap       [i].clear();
+		for(int32_t i=0; i<NUMSCRIPTPLAYER-1;      i++) playermap     [i].clear();
+		for(int32_t i=0; i<NUMSCRIPTSDMAP-1;       i++) dmapmap       [i].clear();
+		for(int32_t i=0; i<NUMSCRIPTSCREEN-1;      i++) screenmap     [i].clear();
+		for(int32_t i=0; i<NUMSCRIPTSITEMSPRITE-1; i++) itemspritemap [i].clear();
+		for(int32_t i=0; i<NUMSCRIPTSCOMBODATA-1;  i++) comboscriptmap[i].clear();
+		for(int32_t i=0; i<NUMSCRIPTSGENERIC-1;    i++) genericmap    [i].clear();
+		for(int32_t i=0; i<NUMSCRIPTSSUBSCREEN-1;  i++) subscreenmap  [i].clear();
 		
 		reset_scripts();
 	}
