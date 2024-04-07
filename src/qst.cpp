@@ -5935,139 +5935,85 @@ int32_t readmisc(PACKFILE *f, zquestheader *Header, miscQdata *Misc)
 	if(s_version<3)
 	{
 		if(!p_getc(&temp_misc.colors.text,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.caption,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.overw_bg,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.dngn_bg,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.dngn_fg,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.cave_fg,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.bs_dk,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.bs_goal,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.compass_lt,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.compass_dk,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.subscr_bg,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.triframe_color,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.hero_dot,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.bmap_bg,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.bmap_fg,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.triforce_cset,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.triframe_cset,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.overworld_map_cset,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.dungeon_map_cset,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.blueframe_cset,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_igetw(&temp_misc.colors.triforce_tile,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_igetw(&temp_misc.colors.triframe_tile,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_igetw(&temp_misc.colors.overworld_map_tile,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_igetw(&temp_misc.colors.dungeon_map_tile,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_igetw(&temp_misc.colors.blueframe_tile,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_igetw(&temp_misc.colors.HCpieces_tile,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_misc.colors.HCpieces_cset,f))
-		{
 			return qe_invalid;
-		}
 		
 		temp_misc.colors.msgtext = 0x01;
 		
