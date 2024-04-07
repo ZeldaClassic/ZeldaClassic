@@ -145,16 +145,9 @@ void ItemWizardDialog::updateTitle()
 }
 void item_default(itemdata& ref)
 {
-	ref.misc1 = 0;
-	ref.misc2 = 0;
-	ref.misc3 = 0;
-	ref.misc4 = 0;
-	ref.misc5 = 0;
-	ref.misc6 = 0;
-	ref.misc7 = 0;
-	ref.misc8 = 0;
-	ref.misc9 = 0;
-	ref.misc10 = 0;
+	for (int32_t& m : ref.misc_arr)
+		m = 0;
+	
 	ref.flags &= ~(ITEM_FLAG1|ITEM_FLAG2|ITEM_FLAG3|ITEM_FLAG4|
 		ITEM_FLAG5|ITEM_FLAG6|ITEM_FLAG7|ITEM_FLAG8|
 		ITEM_FLAG9|ITEM_FLAG10|ITEM_FLAG11|ITEM_FLAG12|
