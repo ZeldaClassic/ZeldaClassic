@@ -3633,21 +3633,13 @@ int32_t enemy::takehit(weapon *w, weapon* realweap)
 		wpnDir=zc_oldrand()&3;
 		
 		if((ddir<=(((-1)*PI)/4))&&(ddir>(((-3)*PI)/4)))
-		{
 			wpnDir=down;
-		}
 		else if((ddir<=(((1)*PI)/4))&&(ddir>(((-1)*PI)/4)))
-		{
 			wpnDir=right;
-		}
 		else if((ddir<=(((3)*PI)/4))&&(ddir>(((1)*PI)/4)))
-		{
 			wpnDir=up;
-		}
 		else
-		{
 			wpnDir=left;
-		}
 	}
 	
 	int32_t xdir = dir;
@@ -4356,14 +4348,10 @@ void enemy::drawblock(BITMAP *dest,int32_t mask)
 void enemy::drawshadow(BITMAP *dest, bool translucent)
 {
 	if(dont_draw() || isSideViewGravity())
-	{
 		return;
-	}
 	
 	if(dying)
-	{
 		return;
-	}
 	
 	if(((tmpscr->flags3&fINVISROOM)&& !(current_item(itype_amulet)))||
 			(darkroom))
@@ -4552,8 +4540,8 @@ void enemy::fix_coords(bool bound)
 	{
 		if ( ((unsigned)(id&0xFFF)) < MAXGUYS )
 		{
-		x=vbound(x, 0_zf, (( guysbuf[id].SIZEflags&guyflagOVERRIDE_TILE_WIDTH && !isflier(id) ) ? (256_zf -((txsz-1)*16)) : 240_zf));
-		y=vbound(y, 0_zf,(( guysbuf[id].SIZEflags&guyflagOVERRIDE_TILE_HEIGHT && !isflier(id) ) ? (176_zf -((txsz-1)*16)) : 160_zf));
+		x=vbound(x, 0_zf, (( guysbuf[id].SIZEflags&guyflagOVERRIDE_TILE_WIDTH  && !isflier(id) ) ? (256_zf -((txsz-1)*16)) : 240_zf));
+		y=vbound(y, 0_zf, (( guysbuf[id].SIZEflags&guyflagOVERRIDE_TILE_HEIGHT && !isflier(id) ) ? (176_zf -((txsz-1)*16)) : 160_zf));
 		}
 		else
 		{
@@ -4666,9 +4654,6 @@ bool enemy::canmove_old(int32_t ndir,zfix s,int32_t special,int32_t dx1,int32_t 
 	
 	return ok;
 }
-
-
-
 
 // returns true if next step is ok, false if there is something there
 bool enemy::canmove(int32_t ndir,zfix s,int32_t special,int32_t dx1,int32_t dy1,int32_t dx2,int32_t dy2, bool kb)
@@ -4974,10 +4959,9 @@ bool enemy::canmove(int32_t ndir,zfix s,int32_t special,int32_t dx1,int32_t dy1,
 	return ok;
 }
 
-
 bool enemy::canmove(int32_t ndir,zfix s,int32_t special, bool kb)
 {
-	int32_t usewid = (SIZEflags&guyflagOVERRIDE_HIT_WIDTH) ? hit_width : 16;
+	int32_t usewid = (SIZEflags&guyflagOVERRIDE_HIT_WIDTH)  ? hit_width  : 16;
 	int32_t usehei = (SIZEflags&guyflagOVERRIDE_HIT_HEIGHT) ? hit_height : 16;
 	if (usewid % 16 != 0) usewid += (16 - (usewid%16));
 	if (usehei % 16 != 0) usehei += (16 - (usehei%16));
@@ -5054,9 +5038,7 @@ void enemy::newdir_8_old(int32_t newrate,int32_t newhoming,int32_t special,int32
 			ndir = lined_up(8,true);
 			
 			if(ndir>=0 && canmove(ndir,special,false))
-			{
 				dir=ndir;
-			}
 			
 			return;
 		}
@@ -5183,9 +5165,7 @@ void enemy::newdir_8(int32_t newrate,int32_t newhoming,int32_t special,int32_t d
 			ndir = lined_up(8,true);
 			if (newhoming < 0 && ndir >= 0) ndir = oppositeDir[ndir];
 			if(ndir>=0 && canmove(ndir,special,false))
-			{
 				dir=ndir;
-			}
 			
 			return;
 		}
@@ -5404,9 +5384,7 @@ bool enemy::can_slide()
 		return false;
 		
 	if((sclk&255)==16 && (get_qr(qr_OLD_ENEMY_KNOCKBACK_COLLISION) || knockbackSpeed!=4 ? !canmove(sclk>>8,(zfix) (dmisc2==e2tSPLITHIT ? 1 : 12),0,true) : !canmove(sclk>>8,(zfix) (dmisc2==e2tSPLITHIT ? 1 : knockbackSpeed),0,true)))
-	{
 		return false;
-	}
 	
 	return true;
 }
@@ -5935,14 +5913,10 @@ void enemy::variable_walk(int32_t newrate,int32_t newhoming,int32_t special)
 void enemy::halting_walk(int32_t newrate,int32_t newhoming,int32_t special,int32_t newhrate, int32_t haltcnt)
 {
 	if(sclk && clk2)
-	{
 		clk3=0;
-	}
 	
 	if(slide() || clk<0 || dying || stunclk || watch || ceiling || frozenclock)
-	{
 		return;
-	}
 	
 	if(clk2>0)
 	{
@@ -6257,9 +6231,7 @@ int32_t enemy::lined_up(int32_t range, bool dir8)
 	if(abs(lx-int32_t(x))<=range)
 	{
 		if(ly<y)
-		{
 			return up;
-		}
 		
 		return down;
 	}
@@ -6267,9 +6239,7 @@ int32_t enemy::lined_up(int32_t range, bool dir8)
 	if(abs(ly-int32_t(y))<=range)
 	{
 		if(lx<x)
-		{
 			return left;
-		}
 		
 		return right;
 	}
@@ -6282,24 +6252,16 @@ int32_t enemy::lined_up(int32_t range, bool dir8)
 			if(ly<y)
 			{
 				if(lx<x)
-				{
 					return l_up;
-				}
 				else
-				{
 					return r_up;
-				}
 			}
 			else
 			{
 				if(lx<x)
-				{
 					return l_down;
-				}
 				else
-				{
 					return r_down;
-				}
 			}
 		}
 	}
@@ -6323,7 +6285,6 @@ void enemy::place_on_axis(bool floater, bool solid_ok)
 	int32_t pos2=zc_oldrand()%23;
 	int32_t tried=0;
 	bool last_resort,placed=false;
-	
 	
 	do
 	{
@@ -6769,24 +6730,16 @@ void enemy::update_enemy_frame()
 		{
 			// bloated
 			if(clk2>=0)
-			{
 				fr4=3;
-			}
 			
 			if(clk2>=16)
-			{
 				fr4=2;
-			}
 			
 			if(clk2>=32)
-			{
 				fr4=1;
-			}
 			
 			if(clk2>=48)
-			{
 				fr4=0;
-			}
 			
 			switch(dir)
 			{
@@ -6857,24 +6810,16 @@ void enemy::update_enemy_frame()
 		{
 			// bloated
 			if(clk2>=0)
-			{
 				fr4=3;
-			}
 			
 			if(clk2>=16)
-			{
 				fr4=2;
-			}
 			
 			if(clk2>=32)
-			{
 				fr4=1;
-			}
 			
 			if(clk2>=48)
-			{
 				fr4=0;
-			}
 			
 			switch(dir)
 			{
@@ -6958,16 +6903,12 @@ void enemy::update_enemy_frame()
 		if(dmisc1)
 		{
 			if(clk&8)
-			{
 				++tile;
-			}
 		}
 		else
 		{
 			if(frame&4)
-			{
 				++tile;
-			}
 		}
 		
 		switch(dir)
@@ -7001,21 +6942,15 @@ void enemy::update_enemy_frame()
 		if(dmisc1)                                            //walking wizzrobe
 		{
 			if(clk&8)
-			{
 				tile+=2;
-			}
 			
 			if(clk&4)
-			{
 				tile+=1;
-			}
 			
 			if(!(dummy_bool[1]||dummy_bool[2]))                               //should never be charging or firing for these wizzrobes
 			{
 				if(dummy_int[1]>0)
-				{
 					tile+=40;
-				}
 			}
 		}
 		else
@@ -7025,9 +6960,7 @@ void enemy::update_enemy_frame()
 				tile+=20;
 				
 				if(dummy_bool[2])
-				{
 					tile+=20;
-				}
 			}
 			
 			tile+=((frame>>1)&3);
@@ -7050,9 +6983,7 @@ void enemy::update_enemy_frame()
 	case aVIRE:
 	{
 		if(dir==up)
-		{
 			tile+=2;
-		}
 		
 		tile+=fx;
 	}
@@ -7110,13 +7041,9 @@ waves2:
 		else
 		{
 			if(clk<36)
-			{
 				dl=clk+5;
-			}
 			else
-			{
 				dl=clk-36-66;
-			}
 			
 			tile+=((dl/5)&3);
 		}
@@ -7136,38 +7063,14 @@ waves2:
 		double ddir=atan2_MSVC2022_FIX(double(fakey-(Hero.y)),double(Hero.x-fakex));
 		int32_t lookat=zc_oldrand()&15;
 		
-		if((ddir<=(((-5)*PI)/8))&&(ddir>(((-7)*PI)/8)))
-		{
-			lookat=l_down;
-		}
-		else if((ddir<=(((-3)*PI)/8))&&(ddir>(((-5)*PI)/8)))
-		{
-			lookat=down;
-		}
-		else if((ddir<=(((-1)*PI)/8))&&(ddir>(((-3)*PI)/8)))
-		{
-			lookat=r_down;
-		}
-		else if((ddir<=(((1)*PI)/8))&&(ddir>(((-1)*PI)/8)))
-		{
-			lookat=right;
-		}
-		else if((ddir<=(((3)*PI)/8))&&(ddir>(((1)*PI)/8)))
-		{
-			lookat=r_up;
-		}
-		else if((ddir<=(((5)*PI)/8))&&(ddir>(((3)*PI)/8)))
-		{
-			lookat=up;
-		}
-		else if((ddir<=(((7)*PI)/8))&&(ddir>(((5)*PI)/8)))
-		{
-			lookat=l_up;
-		}
-		else
-		{
-			lookat=left;
-		}
+		if     ((ddir<=(((-5)*PI)/8))&&(ddir>(((-7)*PI)/8)))		lookat=l_down;
+		else if((ddir<=(((-3)*PI)/8))&&(ddir>(((-5)*PI)/8)))		lookat=down;
+		else if((ddir<=(((-1)*PI)/8))&&(ddir>(((-3)*PI)/8)))		lookat=r_down;
+		else if((ddir<=(((1) *PI)/8))&&(ddir>(((-1)*PI)/8)))		lookat=right;
+		else if((ddir<=(((3) *PI)/8))&&(ddir>(((1) *PI)/8)))		lookat=r_up;
+		else if((ddir<=(((5) *PI)/8))&&(ddir>(((3) *PI)/8)))		lookat=up;
+		else if((ddir<=(((7) *PI)/8))&&(ddir>(((5) *PI)/8)))		lookat=l_up;
+		else								lookat=left;
 		
 		int32_t dir2 = dir;
 		dir = lookat;
