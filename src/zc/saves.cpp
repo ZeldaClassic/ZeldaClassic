@@ -107,10 +107,10 @@ static int move_to_folder(fs::path path, fs::path dir, std::string stem = "", bo
 
 static fs::path create_path_for_new_save(gamedata_header* header)
 {
-    char timestamp[80];
+	char timestamp[80];
 	std::time_t rawtime;
-    std::time(&rawtime);
-    std::strftime(timestamp,80,"%Y-%m-%d",std::localtime(&rawtime));
+	std::time(&rawtime);
+	std::strftime(timestamp,80,"%Y-%m-%d",std::localtime(&rawtime));
 
 	std::string title = header->title;
 	if (title.empty())

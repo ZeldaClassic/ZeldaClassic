@@ -202,13 +202,9 @@ bool item::animate(int32_t)
 		cs = o_cset;
 		
 		if(frame&8)
-		{
 			cs >>= 4;
-		}
 		else
-		{
 			cs &= 15;
-		}
 	}
 	
 	if(do_animation && ((get_qr(qr_0AFRAME_ITEMS_IGNORE_AFRAME_CHANGES) ? (anim) : (frames>0)) || itm->family==itype_bottle))
@@ -216,18 +212,14 @@ bool item::animate(int32_t)
 		int32_t spd = o_speed;
 		
 		if(aframe==0)
-		{
 			spd *= o_delay+1;
-		}
 		
 		if(++aclk >= spd)
 		{
 			aclk=0;
 			
 			if(++aframe >= frames)
-			{
 				aframe=0;
-			}
 		}
 		
 		//tile = o_tile + aframe;
@@ -274,9 +266,7 @@ bool item::animate(int32_t)
 	if(pickup&ipTIMER)
 	{
 		if(++clk2 == 512)
-		{
 			return true;
-		}
 	}
 	
 	return false;
@@ -295,9 +285,7 @@ void item::draw(BITMAP *dest)
 	if(!(pickup&ipFADE) || fadeclk<0 || fadeclk&1 || fallclk || drownclk)
 	{
 		if(clk2>32 || (clk2&2)==0 || itemsbuf[id].family == itype_fairy || fallclk || drownclk)
-		{
 			sprite::draw(dest);
-		}
 	}
 }
 
@@ -477,18 +465,14 @@ void item::load_gfx(itemdata const& itm)
 		int32_t spd = o_speed;
 		
 		if(aframe==0)
-		{
 			spd *= o_delay+1;
-		}
 		
 		if(aclk >= spd)
 		{
 			aclk=0;
 			
 			if(++aframe >= frames)
-			{
 				aframe=0;
-			}
 		}
 		else if(aframe >= frames)
 		{
