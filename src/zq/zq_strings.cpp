@@ -58,10 +58,10 @@ static int32_t editmsg_portrait_list[] =
 static TABPANEL editmsg_tabs[] =
 {
 	// (text)
-	{ (char*)"String",      D_SELECTED,  editmsg_string_list,      0,  NULL },
-	{ (char*)"Attributes",     0,        editmsg_attributes_list,     0,  NULL },
-	{ (char*)"Portrait",     0,        editmsg_portrait_list,     0,  NULL },
-	{ NULL,             0,           NULL,                         0,  NULL }
+	{ (char*)"String",       D_SELECTED,  editmsg_string_list,       0,  NULL },
+	{ (char*)"Attributes",   0,           editmsg_attributes_list,   0,  NULL },
+	{ (char*)"Portrait",     0,           editmsg_portrait_list,     0,  NULL },
+	{ NULL,                  0,           NULL,                      0,  NULL }
 };
 
 DIALOG strlist_dlg[] =

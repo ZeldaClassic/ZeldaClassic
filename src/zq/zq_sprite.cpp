@@ -9,17 +9,14 @@ bool freeze_guys=false;
 
 void sprite::handle_sprlighting()
 {
-	return;
 }
 
 void sprite::check_conveyor()
 {
-    return;
 }
 
 void movingblock::push(zfix,zfix,int32_t,int32_t)
 {
-    return;
 }
 
 bool movingblock::animate(int32_t)

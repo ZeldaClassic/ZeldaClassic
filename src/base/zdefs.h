@@ -2485,19 +2485,19 @@ INLINE void SCRFIX()
 extern void flushItemCache(bool justcost = false);
 extern void removeFromItemCache(int32_t itemclass);
 
-#define GLOBAL_SCRIPT_INIT 			0
-#define GLOBAL_SCRIPT_GAME			1
-#define GLOBAL_SCRIPT_END			2
+#define GLOBAL_SCRIPT_INIT 		0
+#define GLOBAL_SCRIPT_GAME		1
+#define GLOBAL_SCRIPT_END		2
 #define GLOBAL_SCRIPT_ONSAVELOAD	3
 #define GLOBAL_SCRIPT_ONLAUNCH		4
 #define GLOBAL_SCRIPT_ONCONTGAME	5
-#define GLOBAL_SCRIPT_F6			6
+#define GLOBAL_SCRIPT_F6		6
 #define GLOBAL_SCRIPT_ONSAVE		7
 
-#define SCRIPT_PLAYER_INIT 1
+#define SCRIPT_PLAYER_INIT   1
 #define SCRIPT_PLAYER_ACTIVE 2
-#define SCRIPT_PLAYER_DEATH 3
-#define SCRIPT_PLAYER_WIN 4
+#define SCRIPT_PLAYER_DEATH  3
+#define SCRIPT_PLAYER_WIN    4
 
 //Hero Internal Flags
 #define LF_PAID_SWORD_COST		0x01
@@ -2506,9 +2506,9 @@ extern void removeFromItemCache(int32_t itemclass);
 
 #define RUNSCRIPT_OK			0
 #define RUNSCRIPT_ERROR			1
-#define RUNSCRIPT_SELFDELETE	2
+#define RUNSCRIPT_SELFDELETE		2
 #define RUNSCRIPT_STOPPED		3
-#define RUNSCRIPT_SELFREMOVE	4
+#define RUNSCRIPT_SELFREMOVE		4
 
 bool runscript_do_earlyret(int runscript_val);
 
