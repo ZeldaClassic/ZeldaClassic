@@ -24726,7 +24726,6 @@ int32_t d_misccolors_hexedit_proc(int32_t msg,DIALOG *d,int32_t c)
 }
 
 
-int32_t d_misccolors_proc(int32_t msg,DIALOG *d,int32_t c);
 
 static int32_t misccolor1_list[] =
 {
@@ -24761,6 +24760,7 @@ static TABPANEL misccolor_tabs[] =
     { NULL,         0,           NULL, 0, NULL }
 };
 
+int32_t d_misccolors_proc(int32_t msg,DIALOG *d,int32_t c);
 int32_t d_misccolors_tab_proc(int32_t msg,DIALOG *d,int32_t c);
 
 static DIALOG misccolors_dlg[] =
@@ -24997,15 +24997,15 @@ void cycle_palette()
 
 static DIALOG help_dlg[] =
 {
-    /* (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)      (d2)      (dp) */
-//  { jwin_textbox_proc,    4,   2+21,   320-8,  240-6-21,  0,       0,      0,       0,          0,        0,        NULL, NULL, NULL },
-    { jwin_win_proc,        0,   0,   320,  240,  0,       vc(15), 0,      D_EXIT,       0,          0, (void *) "ZQuest Help", NULL, NULL },
-    { jwin_frame_proc,   4,   23,   320-8,  240-27,   0,       0,      0,       0,             FR_DEEP,       0,       NULL, NULL, NULL },
-    { d_editbox_proc,    6,   25,   320-8-4,  240-27-4,  0,       0,      0,       0/*D_SELECTED*/,          0,        0,       NULL, NULL, NULL },
-    { d_keyboard_proc,   0,    0,    0,    0,    0,       0,      0,       0,          0,        KEY_ESC, (void *) close_dlg, NULL, NULL },
-    { d_keyboard_proc,   0,    0,    0,    0,    0,       0,      0,       0,          0,        KEY_F12, (void *) onSnapshot, NULL, NULL },
-    { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    /* (dialog proc)       (x)     (y)        (w)        (h)    (fg)     (bg)    (key)    (flags)     (d1)      (d2)      (dp) */
+//  { jwin_textbox_proc,    4,   2+21,     320-8,  240-6-21,      0,       0,      0,      0,          0,        0,        NULL, NULL, NULL },
+    { jwin_win_proc,        0,      0,       320,       240,      0,  vc(15),      0,      D_EXIT,     0,        0, (void *) "ZQuest Help", NULL, NULL },
+    { jwin_frame_proc,      4,     23,     320-8,    240-27,      0,       0,      0,      0,          FR_DEEP,  0,       NULL, NULL, NULL },
+    { d_editbox_proc,       6,     25,   320-8-4,  240-27-4,      0,       0,      0,      0/*D_SELECTED*/,      0,        0,       NULL, NULL, NULL },
+    { d_keyboard_proc,      0,      0,         0,         0,      0,       0,      0,      0,          0,        KEY_ESC, (void *) close_dlg, NULL, NULL },
+    { d_keyboard_proc,      0,      0,         0,         0,      0,       0,      0,      0,          0,        KEY_F12, (void *) onSnapshot, NULL, NULL },
+    { d_timer_proc,         0,      0,         0,         0,      0,       0,      0,      0,          0,        0,        NULL, NULL, NULL },
+    { NULL,                 0,      0,         0,         0,      0,       0,      0,      0,          0,        0,       NULL,                           NULL,  NULL }
 };
 
 void doHelp(int32_t bg,int32_t fg)
@@ -25026,15 +25026,15 @@ int32_t onHelp()
 
 static DIALOG Zstringshelp_dlg[] =
 {
-    /* (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)      (d2)      (dp) */
+    /* (dialog proc)      (x)     (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)      (d2)      (dp) */
 //  { jwin_textbox_proc,    4,   2+21,   320-8,  240-6-21,  0,       0,      0,       0,          0,        0,        NULL, NULL, NULL },
-    { jwin_win_proc,        0,   0,   320,  240,  0,       vc(15), 0,      D_EXIT,       0,          0, (void *) "Zstrings Help", NULL, NULL },
-    { jwin_frame_proc,   4,   23,   320-8,  240-27,   0,       0,      0,       0,             FR_DEEP,       0,       NULL, NULL, NULL },
-    { d_editbox_proc,    6,   25,   320-8-4,  240-27-4,  0,       0,      0,       0/*D_SELECTED*/,          0,        0,       NULL, NULL, NULL },
-    { d_keyboard_proc,   0,    0,    0,    0,    0,       0,      0,       0,          0,        KEY_ESC, (void *) close_dlg, NULL, NULL },
-    { d_keyboard_proc,   0,    0,    0,    0,    0,       0,      0,       0,          0,        KEY_F12, (void *) onSnapshot, NULL, NULL },
+    { jwin_win_proc,        0,   0,    320,  240,  0,       vc(15), 0,      D_EXIT,       0,          0, (void *) "Zstrings Help", NULL, NULL },
+    { jwin_frame_proc,      4,   23,   320-8,  240-27,   0,       0,      0,       0,             FR_DEEP,       0,       NULL, NULL, NULL },
+    { d_editbox_proc,       6,   25,   320-8-4,  240-27-4,  0,       0,      0,       0/*D_SELECTED*/,          0,        0,       NULL, NULL, NULL },
+    { d_keyboard_proc,      0,    0,     0,    0,    0,       0,      0,       0,          0,        KEY_ESC, (void *) close_dlg, NULL, NULL },
+    { d_keyboard_proc,      0,    0,     0,    0,    0,       0,      0,       0,          0,        KEY_F12, (void *) onSnapshot, NULL, NULL },
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    { NULL,                 0,    0,     0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 void doZstringshelp(int32_t bg,int32_t fg)
@@ -25168,22 +25168,22 @@ int32_t edit_layers(mapscr* tempscr)
 
 static DIALOG autolayer_dlg[] =
 {
-	/* (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
-	{ jwin_win_proc,        64,   32+48,   192+1,  184+1-64,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Autolayer Setup", NULL, NULL },
-	{ jwin_text_proc,       76,   56+48,   136,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Map for layer ?: ", NULL, NULL },
+	/* (dialog proc)         (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
+	{ jwin_win_proc,         64,   32+48,   192+1,  184+1-64,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Autolayer Setup", NULL, NULL },
+	{ jwin_text_proc,        76,   56+48,   136,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Map for layer ?: ", NULL, NULL },
 	{ jwin_edit_proc,       212,  56+48,   32,   16,    vc(12),  vc(1),  0,       0,          3,             0,       NULL, NULL, NULL },
-	{ jwin_check_proc,      76,   56+18+48,   153,   8,    vc(14),  vc(1),  0,       D_EXIT,          1,             0, (void *) "Only Blank Screens", NULL, NULL },
-	{ jwin_button_proc,     90,   188-12,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
+	{ jwin_check_proc,       76,   56+18+48,   153,   8,    vc(14),  vc(1),  0,       D_EXIT,          1,             0, (void *) "Only Blank Screens", NULL, NULL },
+	{ jwin_button_proc,      90,   188-12,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
 	
 	//5
 	{ jwin_button_proc,     170,  188-12,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-	{ d_keyboard_proc,   0,    0,    0,    0,    0,    0,    0,       0,       KEY_F1,   0, (void *) onHelp, NULL, NULL },
-	{ d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-	{ jwin_check_proc,      76,   56+28+48,   153,   8,    vc(14),  vc(1),  0,       D_EXIT,          1,             0, (void *) "Only Blank Layers", NULL, NULL },
-	{ jwin_check_proc,      76,   56+38+48,   153,   8,    vc(14),  vc(1),  0,       D_EXIT,          1,             0, (void *) "Overwrite Layers", NULL, NULL },
+	{ d_keyboard_proc,        0,    0,    0,    0,    0,    0,    0,       0,       KEY_F1,   0, (void *) onHelp, NULL, NULL },
+	{ d_timer_proc,           0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+	{ jwin_check_proc,       76,   56+28+48,   153,   8,    vc(14),  vc(1),  0,       D_EXIT,          1,             0, (void *) "Only Blank Layers", NULL, NULL },
+	{ jwin_check_proc,       76,   56+38+48,   153,   8,    vc(14),  vc(1),  0,       D_EXIT,          1,             0, (void *) "Overwrite Layers", NULL, NULL },
 	
 	//10
-	{ NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+	{ NULL,                   0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 enum
 {
