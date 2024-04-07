@@ -20865,10 +20865,10 @@ static int maybe_skip_section(PACKFILE* f, dword& section_id, const byte* skip_f
 //Internal function for loadquest wrapper
 static int32_t _lq_int(const char *filename, zquestheader *Header, miscQdata *Misc, zctune *tunes, bool show_progress, byte *skip_flags, byte printmetadata)
 {
-    DMapEditorLastMaptileUsed = 0;
-    combosread=false;
-    mapsread=false;
-    fixffcs=false;
+	DMapEditorLastMaptileUsed = 0;
+	combosread=false;
+	mapsread=false;
+	fixffcs=false;
 	
 	bool do_clear_scripts = !get_bit(skip_flags,skip_ffscript);
 	if(loading_tileset_flags & TILESET_CLEARSCRIPTS)
@@ -20884,32 +20884,32 @@ static int32_t _lq_int(const char *filename, zquestheader *Header, miscQdata *Mi
 		set_bit(skip_flags, skip_maps, 1);
 	}
     
-    //  show_progress=true;
-    char tmpfilename[L_tmpnam];
-    temp_name(tmpfilename);
-//  char percent_done[30];
-    bool catchup=false;
-    byte tempbyte;
-    word old_map_count=map_count;
+	//  show_progress=true;
+	char tmpfilename[L_tmpnam];
+	temp_name(tmpfilename);
+	//  char percent_done[30];
+	bool catchup=false;
+	byte tempbyte;
+	word old_map_count=map_count;
+
+	byte old_quest_rules[QUESTRULES_NEW_SIZE] = {0};
+	byte old_extra_rules[EXTRARULES_SIZE] = {0};
+	byte old_midi_flags[MIDIFLAGS_SIZE] = {0};
     
-    byte old_quest_rules[QUESTRULES_NEW_SIZE] = {0};
-    byte old_extra_rules[EXTRARULES_SIZE] = {0};
-    byte old_midi_flags[MIDIFLAGS_SIZE] = {0};
+	if(get_bit(skip_flags, skip_rules))
+	{
+		memcpy(old_quest_rules, quest_rules, QUESTRULES_NEW_SIZE);
+		memcpy(old_extra_rules, extra_rules, EXTRARULES_SIZE);
+	}
     
-    if(get_bit(skip_flags, skip_rules))
-    {
-        memcpy(old_quest_rules, quest_rules, QUESTRULES_NEW_SIZE);
-        memcpy(old_extra_rules, extra_rules, EXTRARULES_SIZE);
-    }
-    
-    memset(quest_rules, 0, QUESTRULES_NEW_SIZE); //clear here to prevent any kind of carryover -Z
+	memset(quest_rules, 0, QUESTRULES_NEW_SIZE); //clear here to prevent any kind of carryover -Z
 	unpack_qrs();
-   // memset(extra_rules, 0, EXTRARULES_SIZE); //clear here to prevent any kind of carryover -Z
+	// memset(extra_rules, 0, EXTRARULES_SIZE); //clear here to prevent any kind of carryover -Z
    
-    if(get_bit(skip_flags, skip_midis))
-    {
-        memcpy(old_midi_flags, midi_flags, MIDIFLAGS_SIZE);
-    }
+	if(get_bit(skip_flags, skip_midis))
+	{
+		memcpy(old_midi_flags, midi_flags, MIDIFLAGS_SIZE);
+	}
     
     
 	if(do_clear_scripts)
@@ -20994,32 +20994,32 @@ static int32_t _lq_int(const char *filename, zquestheader *Header, miscQdata *Mi
 		reset_scripts();
 	}
 	
-    zquestheader tempheader;
-    memset(&tempheader, 0, sizeof(zquestheader));
+	zquestheader tempheader;
+	memset(&tempheader, 0, sizeof(zquestheader));
 	zinfo tempzi;
 	tempzi.clear();
 	load_tmp_zi = &tempzi;
     
-    // oldquest flag is set when an unencrypted qst file is suspected.
-    bool oldquest = false;
-    int32_t open_error=0;
-    PACKFILE *f=open_quest_file(&open_error, filename, show_progress);
+	// oldquest flag is set when an unencrypted qst file is suspected.
+	bool oldquest = false;
+	int32_t open_error=0;
+	PACKFILE *f=open_quest_file(&open_error, filename, show_progress);
     
-    if (!f)
-    {
-        ASSERT(open_error != 0);
-        return open_error;
-    }
+	if (!f)
+	{
+		ASSERT(open_error != 0);
+		return open_error;
+	}
 	char zinfofilename[2048];
 	replace_extension(zinfofilename, filename, "zinfo", 2047);
-    int32_t ret=0;
+	int32_t ret=0;
     
-    //header
-    box_out("Reading Header...");
-    ret=readheader(f, &tempheader, printmetadata);
-    checkstatus(ret);
-    box_out("okay.");
-    box_eol();
+	//header
+	box_out("Reading Header...");
+	ret=readheader(f, &tempheader, printmetadata);
+	checkstatus(ret);
+	box_out("okay.");
+	box_eol();
     
 	if(read_zinfo)
 	{
