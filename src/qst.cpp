@@ -21529,7 +21529,7 @@ static int32_t _lq_int(const char *filename, zquestheader *Header, miscQdata *Mi
                 
                 if(!p_getc(&tempbyte,f))
                 {
-					goto invalid;
+			goto invalid;
                 }
                 
                 section_id+=tempbyte;
@@ -21641,20 +21641,20 @@ static int32_t _lq_int(const char *filename, zquestheader *Header, miscQdata *Mi
     
 	init_spritelists();
 	
-    // check data
-    if(f)
-    {
-        pack_fclose(f);
-    }
+	// check data
+	if(f)
+	{
+		pack_fclose(f);
+	}
 	clear_quest_tmpfile();
     
-    if(!oldquest)
-    {
-        if(exists(tmpfilename))
-        {
-            delete_file(tmpfilename);
-        }
-    }
+	if(!oldquest)
+	{
+		if(exists(tmpfilename))
+		{
+		    delete_file(tmpfilename);
+		}
+	}
     
     if(fixffcs && combosread && mapsread)
     {
@@ -21689,7 +21689,7 @@ static int32_t _lq_int(const char *filename, zquestheader *Header, miscQdata *Mi
     }
     if(!get_bit(skip_flags, skip_zinfo))
     {
-		ZI.copyFrom(tempzi);
+	ZI.copyFrom(tempzi);
     }
     
     if(get_bit(skip_flags, skip_maps))
@@ -21701,7 +21701,7 @@ static int32_t _lq_int(const char *filename, zquestheader *Header, miscQdata *Mi
     {
         memcpy(quest_rules, old_quest_rules, QUESTRULES_NEW_SIZE);
         memcpy(extra_rules, old_extra_rules, EXTRARULES_SIZE);
-		unpack_qrs();
+	unpack_qrs();
     }
     
     if(get_bit(skip_flags, skip_midis))
@@ -21844,7 +21844,6 @@ invalid:
     }
     
     return qe_invalid;
-    
 }
 
 static bool _is_loading_quest;
