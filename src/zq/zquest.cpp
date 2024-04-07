@@ -667,7 +667,7 @@ void set_last_timed_save(char const* buf)
 	{
 		if(buf != last_timed_save)
 			strcpy(last_timed_save, buf);
-    }
+	}
 	else
 	{
 		last_timed_save[0] = 0;
@@ -1238,24 +1238,24 @@ static NewMenu quest_menu
 
 static NewMenu paste_menu
 {
-	{ "Paste &To All", onPasteToAll },
+	{ "Paste &To All",     onPasteToAll },
 	{ "Paste &All To All", onPasteAllToAll },
 };
 
 static NewMenu paste_item_menu
 {
-	{ "&Undercombo", onPasteUnderCombo },
-	{ "&Secret Combos", onPasteSecretCombos },
+	{ "&Undercombo",      onPasteUnderCombo },
+	{ "&Secret Combos",   onPasteSecretCombos },
 	{ "&Freeform Combos", onPasteFFCombos },
-	{ "Screen &Data", onPasteScreenData },
-	{ "&Warps", onPasteWarps },
-	{ "Warp &Return", onPasteWarpLocations },
-	{ "&Enemies", onPasteEnemies },
-	{ "Room &Type Data", onPasteRoom },
-	{ "&Guy/String", onPasteGuy },
-	{ "Doo&rs", onPasteDoors },
-	{ "&Layers", onPasteLayers },
-	{ "&Palette", onPastePalette },
+	{ "Screen &Data",     onPasteScreenData },
+	{ "&Warps",           onPasteWarps },
+	{ "Warp &Return",     onPasteWarpLocations },
+	{ "&Enemies",         onPasteEnemies },
+	{ "Room &Type Data",  onPasteRoom },
+	{ "&Guy/String",      onPasteGuy },
+	{ "Doo&rs",           onPasteDoors },
+	{ "&Layers",          onPasteLayers },
+	{ "&Palette",         onPastePalette },
 };
 
 enum
@@ -1469,25 +1469,25 @@ static NewMenu data_menu
 
 static NewMenu tunes_menu
 {
-	{ "Wind Fish", playTune1 },
-	{ "Overworld", playTune2 },
-	{ "Hyrule Castle", playTune3 },
-	{ "Lost Woods", playTune4 },
-	{ "Great Sea", playTune5 },
-	{ "East Hyrule", playTune6 },
-	{ "Dancing Dragon", playTune7 },
-	{ "Stone Tower", playTune8 },
-	{ "Villages", playTune9 },
-	{ "Swamp + Desert", playTune10 },
-	{ "Outset Island", playTune11 },
+	{ "Wind Fish",        playTune1 },
+	{ "Overworld",        playTune2 },
+	{ "Hyrule Castle",    playTune3 },
+	{ "Lost Woods",       playTune4 },
+	{ "Great Sea",        playTune5 },
+	{ "East Hyrule",      playTune6 },
+	{ "Dancing Dragon",   playTune7 },
+	{ "Stone Tower",      playTune8 },
+	{ "Villages",         playTune9 },
+	{ "Swamp + Desert",   playTune10 },
+	{ "Outset Island",    playTune11 },
 	{ "Kakariko Village", playTune12 },
-	{ "Clock Town", playTune13 },
-	{ "Temple", playTune14 },
-	{ "Dark World", playTune15 },
-	{ "Dragon Roost", playTune16 },
-	{ "Horse Race", playTune17 },
-	{ "Credits", playTune18 },
-	{ "Zelda's Lullaby", playTune19 },
+	{ "Clock Town",       playTune13 },
+	{ "Temple",           playTune14 },
+	{ "Dark World",       playTune15 },
+	{ "Dragon Roost",     playTune16 },
+	{ "Horse Race",       playTune17 },
+	{ "Credits",          playTune18 },
+	{ "Zelda's Lullaby",  playTune19 },
 };
 
 enum
@@ -1531,12 +1531,12 @@ static NewMenu etc_menu
 
 static NewMenu zscript_menu
 {
-	{ "Compile &ZScript...", onCompileScript },
+	{ "Compile &ZScript...",    onCompileScript },
 	{},
-	{ "&Compiler Settings", onZScriptCompilerSettings },
+	{ "&Compiler Settings",     onZScriptCompilerSettings },
 	{ "&Quest Script Settings", onZScriptSettings },
 	{},
-	{ "&Import ZASM Script", onImportZASM },
+	{ "&Import ZASM Script",    onImportZASM },
 };
 
 void set_console_state()
@@ -1548,14 +1548,14 @@ NewMenu foo_menu{{"FOO",[](){InfoDialog("PLACEHOLDER","THIS IS A PLACEHOLDER").s
 
 TopMenu the_menu
 {
-    { "&File", &file_menu },
-    { "&Quest", &quest_menu },
-    { "&Edit", &edit_menu },
-    { "&View", &view_menu },
-    { "&Tools", &tool_menu },
-    { "&Screen", &data_menu },
+    { "&File",    &file_menu },
+    { "&Quest",   &quest_menu },
+    { "&Edit",    &edit_menu },
+    { "&View",    &view_menu },
+    { "&Tools",   &tool_menu },
+    { "&Screen",  &data_menu },
     { "&ZScript", &zscript_menu },
-    { "Et&C", &etc_menu },
+    { "Et&C",     &etc_menu },
 };
 
 void rebuild_trans_table();
@@ -1852,16 +1852,16 @@ static DIALOG save_tiles_dlg[] =
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
 
 
-	{ jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Save Tile Pack", NULL, NULL },
+    { jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Save Tile Pack", NULL, NULL },
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
     //for future tabs
     { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
     { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
     //4
-    {  jwin_text_proc,        10,    28,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "First",               NULL,   NULL  },
+    { jwin_text_proc,        10,    28,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "First",               NULL,   NULL  },
     { jwin_edit_proc,          55,     26,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     //6
-    {  jwin_text_proc,        10,    46,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Count",               NULL,   NULL  },
+    { jwin_text_proc,        10,    46,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Count",               NULL,   NULL  },
     { jwin_edit_proc,          55,     44,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     //8
     { jwin_button_proc,   15,   72,  36,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "Save", NULL, NULL },
@@ -1872,7 +1872,6 @@ static DIALOG save_tiles_dlg[] =
 
 void savesometiles(const char *prompt,int32_t initialval)
 {
-	
 	char firsttile[8], tilecount[8];
 	int32_t first_tile_id = 0; int32_t the_tile_count = 1;
 	sprintf(firsttile,"%d",0);
@@ -1920,16 +1919,16 @@ static DIALOG read_tiles_dlg[] =
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
 
 
-	{ jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Load Tilepack To:", NULL, NULL },
+    { jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Load Tilepack To:", NULL, NULL },
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
     //for future tabs
     { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
     { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
     //4
-    {  jwin_text_proc,        10,    28,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Starting at:",               NULL,   NULL  },
+    { jwin_text_proc,        10,    28,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Starting at:",               NULL,   NULL  },
     { jwin_edit_proc,          55,     26,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     //6
-    {  d_dummy_proc,        10,    46,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Count",               NULL,   NULL  },
+    { d_dummy_proc,        10,    46,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Count",               NULL,   NULL  },
     { d_dummy_proc,          55,     44,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     //8
     { jwin_button_proc,   15,   72,  36,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "Load", NULL, NULL },
@@ -1993,16 +1992,16 @@ static DIALOG save_combofiles_dlg[] =
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
 
 
-	{ jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Save Combo Pack", NULL, NULL },
+    { jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Save Combo Pack", NULL, NULL },
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
     //for future tabs
     { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
     { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
     //4
-    {  jwin_text_proc,        10,    28,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "First",               NULL,   NULL  },
+    { jwin_text_proc,        10,    28,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "First",               NULL,   NULL  },
     { jwin_edit_proc,          55,     26,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     //6
-    {  jwin_text_proc,        10,    46,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Count",               NULL,   NULL  },
+    { jwin_text_proc,        10,    46,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Count",               NULL,   NULL  },
     { jwin_edit_proc,          55,     44,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     //8
     { jwin_button_proc,   15,   72,  36,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "Save", NULL, NULL },
@@ -2013,7 +2012,6 @@ static DIALOG save_combofiles_dlg[] =
 
 void savesomecombos(const char *prompt,int32_t initialval)
 {
-	
 	char firsttile[8], tilecount[8];
 	int32_t first_tile_id = 0; int32_t the_tile_count = 1;
 	sprintf(firsttile,"%d",0);
@@ -2061,17 +2059,16 @@ static DIALOG load_comboset_dlg[] =
 {
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
 
-
-	{ jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Combo Set (Range)", NULL, NULL },
+    { jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Combo Set (Range)", NULL, NULL },
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
     //for future tabs
     { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
     { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
     //4
-    {  jwin_text_proc,        10,    28,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "First:",               NULL,   NULL  },
+    { jwin_text_proc,        10,    28,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "First:",               NULL,   NULL  },
     { jwin_edit_proc,          55,     26,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     //6
-    {  d_dummy_proc,        10,    46,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Count",               NULL,   NULL  },
+    { d_dummy_proc,        10,    46,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Count",               NULL,   NULL  },
     { d_dummy_proc,          55,     44,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     //8
     { jwin_button_proc,   15,   72,  36,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "Load", NULL, NULL },
@@ -2143,16 +2140,16 @@ static DIALOG load_combopack_dlg[] =
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
 
 
-	{ jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Import Full Combo Package 1:1", NULL, NULL },
+    { jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Import Full Combo Package 1:1", NULL, NULL },
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
     //for future tabs
     { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
     { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
     //4
-    {  d_dummy_proc,        10,    28,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Starting at:",               NULL,   NULL  },
+    { d_dummy_proc,        10,    28,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Starting at:",               NULL,   NULL  },
     { d_dummy_proc,          55,     26,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     //6
-    {  d_dummy_proc,        10,    46,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Count",               NULL,   NULL  },
+    { d_dummy_proc,        10,    46,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Count",               NULL,   NULL  },
     { d_dummy_proc,          55,     44,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     //8
     { jwin_button_proc,   15,   72,  36,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "Load", NULL, NULL },
@@ -2225,16 +2222,16 @@ static DIALOG read_combopack_dlg[] =
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
 
 
-	{ jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Load Combos (Specific Dest)", NULL, NULL },
+    { jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Load Combos (Specific Dest)", NULL, NULL },
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
     //for future tabs
     { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
     { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
     //4
-    {  jwin_text_proc,        10,    24,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Starting at:",               NULL,   NULL  },
+    { jwin_text_proc,        10,    24,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Starting at:",               NULL,   NULL  },
     { jwin_edit_proc,          55,     22,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     //6
-    {  d_dummy_proc,        10,    46,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Count",               NULL,   NULL  },
+    { d_dummy_proc,        10,    46,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Count",               NULL,   NULL  },
     { d_dummy_proc,          55,     44,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     //8
     { jwin_button_proc,   15,   72,  36,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "Load", NULL, NULL },
@@ -2242,7 +2239,7 @@ static DIALOG read_combopack_dlg[] =
     //10
     { jwin_check_proc,        10,     58,     95,      9,    vc(14),                 vc(1),                   0,       0,           1,    0, (void *) "Don't Overwrite",                      NULL,   NULL                  },
     //11
-    {  jwin_text_proc,        10,    42,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Skip:",               NULL,   NULL  },
+    { jwin_text_proc,        10,    42,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Skip:",               NULL,   NULL  },
     //12
     { jwin_edit_proc,          55,     40,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     
@@ -2323,21 +2320,21 @@ static DIALOG save_dmaps_dlg[] =
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
 
 
-	{ jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Save DMaps (.zdmap)", NULL, NULL },
-    { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+    { jwin_win_proc,       0,    0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Save DMaps (.zdmap)", NULL, NULL },
+    { d_timer_proc,        0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
     //for future tabs
-    { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
-    { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
+    { d_dummy_proc,      120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
+    { d_dummy_proc,      120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
     //4
-    {  jwin_text_proc,        10,    28,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "First",               NULL,   NULL  },
-    { jwin_edit_proc,          55,     26,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
+    { jwin_text_proc,     10,   28,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "First",               NULL,   NULL  },
+    { jwin_edit_proc,     55,   26,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     //6
-    {  jwin_text_proc,        10,    46,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Last",               NULL,   NULL  },
-    { jwin_edit_proc,          55,     44,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
+    { jwin_text_proc,     10,   46,     20,      8,    vc(11),     vc(1),      0,    0,          0,    0, (void *) "Last",               NULL,   NULL  },
+    { jwin_edit_proc,     55,   44,    40,     16,    vc(12),                 vc(1),                   0,       0,          63,    0,  NULL,                                           NULL,   NULL                  },
     //8
     { jwin_button_proc,   15,   72,  36,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "Save", NULL, NULL },
-    { jwin_button_proc,   69,  72,  36,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    { jwin_button_proc,   69,   72,  36,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
+    { NULL,                0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 
