@@ -3937,17 +3937,17 @@ zasmfile_fail_str:
 	return success?D_O_K:D_CLOSE;
 }
 
-int32_t set_argument(char const* argbuf, script_data **script, int32_t com, int32_t argument)
+int32_t set_argument(char const* argbuf, script_data *script, int32_t com, int32_t argument)
 {
 	int32_t *arg;
 	
 	if(argument)
 	{
-		arg = &((*script)->zasm[com].arg2);
+		arg = &(script->zasm[com].arg2);
 	}
 	else
 	{
-		arg = &((*script)->zasm[com].arg1);
+		arg = &(script->zasm[com].arg1);
 	}
 	
 	char tempvar[80];
@@ -4046,7 +4046,7 @@ int32_t parse_script_section(char const* combuf, char const* arg1buf, char const
 					}
 					else
 					{
-						if(!set_argument(arg2buf, script, com, 1))
+						if(!set_argument(arg2buf, *script, com, 1))
 						{
 							retcode=ERR_PARAM2;
 							return 0;
@@ -4070,7 +4070,7 @@ int32_t parse_script_section(char const* combuf, char const* arg1buf, char const
 					}
 					else
 					{
-						if(!set_argument(arg1buf, script, com, 0))
+						if(!set_argument(arg1buf, *script, com, 0))
 						{
 							retcode=ERR_PARAM1;
 							return 0;
@@ -4091,7 +4091,7 @@ int32_t parse_script_section(char const* combuf, char const* arg1buf, char const
 						}
 						else
 						{
-							if(!set_argument(arg2buf, script, com, 1))
+							if(!set_argument(arg2buf, *script, com, 1))
 							{
 								retcode=ERR_PARAM2;
 								return 0;
