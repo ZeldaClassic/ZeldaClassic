@@ -3446,10 +3446,9 @@ int32_t parse_script_file(script_data **script, FILE* fscript, bool report_succe
 zasmfile_fail:
 	return success?D_O_K:D_CLOSE;
 }
-int32_t parse_script_string(script_data **script, std::string const& scriptstr, bool report_success)
+int32_t parse_script_string(script_data *script, std::string const& scriptstr, bool report_success)
 {
-	// TODO: refactor to just take a script_data*
-	ASSERT(*script);
+	ASSERT(script);
 	saved=false;
 	std::string buffer;
 	char combuf[SUBBUFSZ] = {0};
@@ -3603,7 +3602,7 @@ int32_t parse_script_string(script_data **script, std::string const& scriptstr, 
 				jwin_alert("Error",buf,buf2,buf3,"O&K",NULL,'k',0,get_zc_font(font_lfont));
 				stop=true;
 				success=false;
-				(*script)->disable();
+				script->disable();
 				goto zasmfile_fail_str;
 			}
 			labels[lbl] = i;
@@ -3623,13 +3622,13 @@ int32_t parse_script_string(script_data **script, std::string const& scriptstr, 
 	stop = false;
 	meta_done = false;
 	
-	(*script)->null_script(num_commands);
+	script->null_script(num_commands);
 	
 	for(int32_t i=0; i<num_commands; ++i)
 	{
 		if(stop)
 		{
-			(*script)->zasm[i].clear();
+			script->zasm[i].clear();
 			break;
 		}
 		else
@@ -3744,7 +3743,7 @@ int32_t parse_script_string(script_data **script, std::string const& scriptstr, 
 			
 			if(meta_mode)
 			{
-				(*script)->meta.parse_meta(buffer.c_str());
+				script->meta.parse_meta(buffer.c_str());
 				--i; continue;
 			}
 			meta_done = true;
@@ -3886,7 +3885,7 @@ int32_t parse_script_string(script_data **script, std::string const& scriptstr, 
 			
 			int32_t parse_err;
 			if(bad_dstr || bad_dvec ||
-				!(parse_script_section(combuf, arg1buf, arg2buf, script, i, parse_err, has_vec ? &arr_vec : nullptr, has_str ? &arr_str : nullptr)))
+				!(parse_script_section(combuf, arg1buf, arg2buf, &script, i, parse_err, has_vec ? &arr_vec : nullptr, has_str ? &arr_str : nullptr)))
 			{
 				if(bad_dstr) parse_err = 3;
 				if(bad_dvec) parse_err = 4;
@@ -3917,14 +3916,14 @@ int32_t parse_script_string(script_data **script, std::string const& scriptstr, 
 				InfoDialog("Error",buf).show();
 				stop=true;
 				success=false;
-				(*script)->zasm[i].strptr = nullptr;
-				(*script)->zasm[i].vecptr = nullptr;
-				(*script)->disable();
+				script->zasm[i].strptr = nullptr;
+				script->zasm[i].vecptr = nullptr;
+				script->disable();
 			}
 		}
 	}
 
-	(*script)->recalc_size();
+	script->recalc_size();
 
 	if(report_success && success) //(!stop) // stop is never true here
 	{

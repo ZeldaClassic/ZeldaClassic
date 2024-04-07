@@ -22750,7 +22750,7 @@ bool handle_slot(script_slot_data& slotdata, int indx, script_data** scriptdata)
 	{
 		std::string scriptstr;
 		(*doslot_scripts)[slotdata.scriptname].write(scriptstr, doslots_log_output);
-		parse_script_string(&scriptdata[indx],scriptstr,false);
+		parse_script_string(scriptdata[indx],scriptstr,false);
 		
 		if(slotdata.isDisassembled()) scriptdata[indx]->meta.setFlag(ZMETA_DISASSEMBLED);
 		else if(slotdata.isImportedZASM()) scriptdata[indx]->meta.setFlag(ZMETA_IMPORTED);
