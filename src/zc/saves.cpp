@@ -830,45 +830,27 @@ static int32_t read_saves(ReadMode read_mode, PACKFILE* f, std::vector<save_t>& 
 		if(section_version >= 23)
 		{
 			if(!p_igetw(&(game.saved_mirror_portal.destdmap), f))
-			{
 				return 65;
-			}
 			if(!p_igetw(&(game.saved_mirror_portal.srcdmap), f))
-			{
 				return 66;
-			}
 			if(!p_getc(&(game.saved_mirror_portal.srcscr),f))
-			{
 				return 67;
-			}
 			if(section_version >= 32)
 			{
 				if(!p_getc(&(game.saved_mirror_portal.destscr),f))
-				{
 					return 67;
-				}
 			}
 			else game.saved_mirror_portal.destscr = game.saved_mirror_portal.srcscr;
 			if(!p_igetl(&(game.saved_mirror_portal.x), f))
-			{
 				return 68;
-			}
 			if(!p_igetl(&(game.saved_mirror_portal.y), f))
-			{
 				return 69;
-			}
 			if(!p_getc(&(game.saved_mirror_portal.sfx),f))
-			{
 				return 70;
-			}
 			if(!p_igetl(&(game.saved_mirror_portal.warpfx), f))
-			{
 				return 71;
-			}
 			if(!p_igetw(&(game.saved_mirror_portal.spr), f))
-			{
 				return 72;
-			}
 		}
 		else game.saved_mirror_portal.clear();
 		
@@ -1526,9 +1508,7 @@ static int load_from_save_file(ReadMode read_mode, fs::path filename, std::vecto
 			}
 		}
 		else if (read_mode == ReadMode::Size)
-		{
 			out_saves.resize(count);
-		}
 	}
 
 	if (pf)
@@ -1711,10 +1691,8 @@ static void do_save_order()
 
 	std::ofstream out(get_save_order_path(), std::ios::binary);
 	for (auto& save : saves)
-	{
 		out << fs::proximate(save.path, get_save_folder_path()).string() << "\n";
-	}
-    out.close();
+	out.close();
 
 #ifdef __EMSCRIPTEN__
 	em_sync_fs();
@@ -1768,9 +1746,7 @@ static int init_from_save_folder()
 			});
 	}
 	else if (!saves.empty())
-	{
 		do_save_order();
-	}
 
 	return 0;
 }
@@ -1832,18 +1808,15 @@ static void update_icon(int index)
 	int32_t maxringid = getHighestLevelOfFamily(save->game, itemsbuf, itype_ring);
 	int32_t ring = 0;
 	if (maxringid != -1)
-	{
 		ring = itemsbuf[maxringid].fam_type;
-	}
+
 	if (ring > 0) --ring;
 	int32_t i = ring;
 
 	int32_t t = QMisc.icons[i];
 		
 	if(t<0 || t>=NEWMAXTILES)
-	{
 		t=0;
-	}
 	
 	int32_t tileind = t ? t : 28;
 	
@@ -1865,16 +1838,12 @@ static void update_icon(int index)
 	if(newtilebuf[tileind].format==tf8Bit)
 	{
 		for(int32_t j=0; j<128; j++)
-		{
 			save->game->header.icon[j] = 0;
-		}
 	}
 	else
 	{
 		for(int32_t j=0; j<128; j++)
-		{
 			save->game->header.icon[j] = *(si++);
-		}
 	}
 	
 	if(t)
@@ -1884,28 +1853,20 @@ static void update_icon(int index)
 	else
 	{
 		if (i)
-		{
 			si = colordata + CSET(pSprite(i-1+spBLUE))*3;
-		}
 		else
-		{
 			si = colordata + CSET(6)*3;
-		}
 	}
 	
 	if(newtilebuf[tileind].format==tf8Bit)
 	{
 		for(int32_t j=0; j<48; j++)
-		{
 			save->game->header.pal[j] = 0;
-		}
 	}
 	else
 	{
 		for(int32_t j=0; j<48; j++)
-		{
 			save->game->header.pal[j] = *(si++);
-		}
 	}
 }
 
@@ -2449,4 +2410,3 @@ bool saves_test()
 	delete game;
 	return true;
 }
-

@@ -20526,15 +20526,15 @@ bool parsemsgcode()
 		{
 			msg_menu_data[MNU_CURSOR_TILE] = grab_next_argument();
 			msg_menu_data[MNU_CURSOR_CSET] = grab_next_argument();
-			msg_menu_data[MNU_CURSOR_WID] = grab_next_argument();
-			msg_menu_data[MNU_CURSOR_HEI] = grab_next_argument();
+			msg_menu_data[MNU_CURSOR_WID]  = grab_next_argument();
+			msg_menu_data[MNU_CURSOR_HEI]  = grab_next_argument();
 			msg_menu_data[MNU_CURSOR_FLIP] = grab_next_argument();
 			return true;
 		}
 		
 		case MSGC_MENUCHOICE:
 		{
-			int32_t pos = grab_next_argument();
+			int32_t pos  = grab_next_argument();
 			int32_t upos = grab_next_argument();
 			int32_t dpos = grab_next_argument();
 			int32_t lpos = grab_next_argument();
@@ -20673,9 +20673,8 @@ void wrapmsgstr(char *s3)
 			if(c != ' ' && c >= 32 && c <= 126)
 			{
 				for(int32_t k=0; MsgStrings[msgstr].s[msgptr+k] && MsgStrings[msgstr].s[msgptr+k] != ' '; k++)
-				{
-					if(MsgStrings[msgstr].s[msgptr+k] >= 32 && MsgStrings[msgstr].s[msgptr+k] <= 126) s3[j++] = MsgStrings[msgstr].s[msgptr+k];
-				}
+					if(MsgStrings[msgstr].s[msgptr+k] >= 32 && MsgStrings[msgstr].s[msgptr+k] <= 126)
+						s3[j++] = MsgStrings[msgstr].s[msgptr+k];
 				
 				s3[j] = 0;
 				msgspace = false;
@@ -21026,9 +21025,7 @@ reparsesinglechar:
 			char s3[9] = {0};
 			
 			if(MsgStrings[msgstr].stringflags & STRINGFLAG_WRAP)
-			{
 				strcpy(s3, nameptr);
-			}
 			else
 			{
 				s3[0] = *nameptr;
@@ -21337,9 +21334,7 @@ void check_enemy_lweapon_collision(weapon *w)
 							|| (((itemsbuf[pitem].flags & ITEM_FLAG4)||(theItem->pickup & ipCANGRAB)||((itemsbuf[pitem].flags & ITEM_FLAG7)&&isKey))&& !priced)))
 						{
 							if(itemsbuf[theItem->id].collect_script)
-							{
 								ZScriptVersion::RunScript(ScriptType::Item, itemsbuf[theItem->id].collect_script, theItem->id & 0xFFF);
-							}
 							
 							Hero.checkitems(j);
 						}
@@ -21378,9 +21373,7 @@ void check_enemy_lweapon_collision(weapon *w)
 							bool nullify = ev[4] != 0;
 							if(nullify) continue;
 							if(w->id == wBrang)
-							{
 								w->onhit(false);
-							}
 
 							if(w->dragging==-1)
 							{
@@ -21487,9 +21480,7 @@ void roaming_item()
 			hasitem |= 2;
 		}
 		else
-		{
 			return;
-		}
 	}
 	
 	for(int32_t i=0; i<items.Count(); i++)
