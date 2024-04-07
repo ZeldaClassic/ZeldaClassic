@@ -12117,9 +12117,7 @@ void eWizzrobe::wizzrobe_attack_for_real()
 		for(int32_t gc=0; gc<guys.Count(); gc++)
 		{
 			if((((enemy*)guys.spr(gc))->id) == dmisc3)
-			{
 				++bc;
-			}
 		}
 		
 		if(bc<=40)
@@ -12140,9 +12138,7 @@ void eWizzrobe::wizzrobe_attack_for_real()
 	else if(dmisc2==3)  //summon from layer
 	{
 		if(count_layer_enemies()==0)
-		{
 			return;
-		}
 		
 		int32_t kids = guys.Count();
 		
@@ -12181,9 +12177,7 @@ void eWizzrobe::wizzrobe_attack_for_real()
 			}
 			
 			if(summoned)
-			{
 				sfx(get_qr(qr_MORESOUNDS) ? WAV_ZN1SUMMON : WAV_FIRE,pan(int32_t(x)));
-			}
 		}
 	}
 }
@@ -12208,9 +12202,7 @@ void eWizzrobe::wizzrobe_attack()
 				clk3=16;
 				
 				if(!canmove(dir,(zfix)1,spw_wizzrobe,false))
-				{
 					wizzrobe_newdir(0);
-				}
 			}
 			
 			break;
@@ -12344,9 +12336,7 @@ void eWizzrobe::wizzrobe_attack()
 	if(!(charging||firing))                               //should never be charging or firing for these wizzrobes
 	{
 		if(fclk>0)
-		{
 			--fclk;
-		}
 	}
 	
 }
@@ -12395,14 +12385,11 @@ eDodongo::eDodongo(zfix X,zfix Y,int32_t Id,int32_t Clk) : enemy(X,Y,Id,Clk)
 	fading=fade_flash_die;
 	//nets+5120;
 	if(dir==down&&y>=128)
-	{
 		dir=up;
-	}
 	
 	if(dir==right&&x>=208)
-	{
 		dir=left;
-	}
+
 	SIZEflags = d->SIZEflags;
 	if ( ((SIZEflags&guyflagOVERRIDE_TILE_WIDTH) != 0) && txsz > 0 ) { txsz = d->txsz; if ( txsz > 1 ) extend = 3; } //! Don;t forget to set extend if the tilesize is > 1. 
 	//al_trace("->txsz:%i\n", txsz); Verified that this is setting the value. -Z
@@ -12428,14 +12415,10 @@ bool eDodongo::animate(int32_t index)
 {
 	if(switch_hooked) return enemy::animate(index);
 	if(dying)
-	{
 		return Dead(index);
-	}
 	
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	if(clk2)                                                  // ate a bomb
 	{
@@ -12543,14 +12526,11 @@ eDodongo2::eDodongo2(zfix X,zfix Y,int32_t Id,int32_t Clk) : enemy(X,Y,Id,Clk)
 	//nets+5180;
 	previous_dir=-1;
 	if(dir==down&&y>=128)
-	{
 		dir=up;
-	}
 	
 	if(dir==right&&x>=208)
-	{
 		dir=left;
-	}
+
 	SIZEflags = d->SIZEflags;
 	if ( ((SIZEflags&guyflagOVERRIDE_TILE_WIDTH) != 0) && txsz > 0 ) { txsz = d->txsz; if ( txsz > 1 ) extend = 3; } //! Don;t forget to set extend if the tilesize is > 1. 
 	//al_trace("->txsz:%i\n", txsz); Verified that this is setting the value. -Z
@@ -12576,14 +12556,10 @@ bool eDodongo2::animate(int32_t index)
 {
 	if(switch_hooked) return enemy::animate(index);
 	if(dying)
-	{
 		return Dead(index);
-	}
 	
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	if(clk2)                                                  // ate a bomb
 	{
@@ -12751,9 +12727,7 @@ eAquamentus::eAquamentus(zfix X,zfix Y,int32_t Id,int32_t Clk) : enemy(X,Y,Id,Cl
 	else
 	{
 		if(dmisc1)
-		{
 			flip=1;
-		}
 	}
 	
 	yofs=(get_qr(qr_OLD_DRAWOFFSET)?playing_field_offset:original_playing_field_offset)+1;
@@ -12790,9 +12764,7 @@ bool eAquamentus::animate(int32_t index)
 		
 	//  fbx=x+((id==eRAQUAM)?4:-4);
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	fbx=x;
 	
@@ -12814,55 +12786,39 @@ bool eAquamentus::animate(int32_t index)
 	}
 	
 	if(clk3<-80 && !(zc_oldrand()&63))
-	{
 		clk3=32;
-	}
 	
 	if(!((clk4+1)&63))
 	{
 		int32_t d2=(zc_oldrand()%3)+1;
 		
 		if(d2>=left)
-		{
 			dir=d2;
-		}
 		
 		if(dmisc1)
 		{
 			if(x<=40)
-			{
 				dir=right;
-			}
 			
 			if(x>=104)
-			{
 				dir=left;
-			}
 		}
 		else
 		{
 			if(x<=136)
-			{
 				dir=right;
-			}
 			
 			if(x>=200)
-			{
 				dir=left;
-			}
 		}
 	}
 	
 	if(clk4>=-1 && !((clk4+1)&7))
 	{
 		if(dir==left)
-		{
 			x-=1;
-		}
 		else
-		{
 			x+=1;
-		}
 	}
 	
 	clk4=(clk4+1)%256;
@@ -12883,9 +12839,7 @@ void eAquamentus::draw(BITMAP *dest)
 			enemy::draw(dest);
 		}
 		else
-		{
 			drawblock(dest,15);
-		}
 	}
 	else
 	{
@@ -12898,7 +12852,7 @@ void eAquamentus::draw(BITMAP *dest)
 			return;
 		}
 		if ( do_animation ) 
-	{
+		{
 		// face (0=firing, 2=resting)
 		tile=o_tile+((clk3>0)?0:2);
 		enemy::draw(dest);
@@ -12940,7 +12894,6 @@ bool eAquamentus::hit(weapon *w)
 
 eGohma::eGohma(zfix X,zfix Y,int32_t Id,int32_t Clk) : enemy(X,Y,Id,Clk)  // enemy((zfix)128,(zfix)48,Id,0)
 {
-	
 	if ( !(editorflags & ENEMY_FLAG5) )
 	{
 		x = 128;
@@ -13285,7 +13238,7 @@ void eLilDig::draw(BITMAP *dest)
 		}
 		else
 		{
-		tile+=(clk>=6)?1:0;
+			tile+=(clk>=6)?1:0;
 		}
 	}
 	
@@ -13347,24 +13300,16 @@ bool eBigDig::animate(int32_t index)
 		
 	case 2:
 		for(int32_t i=0; i<dmisc5; i++)
-		{
 			addenemy(x,y,dmisc1+0x1000,-15);
-		}
 		
 		for(int32_t i=0; i<dmisc6; i++)
-		{
 			addenemy(x,y,dmisc2+0x1000,-15);
-		}
 		
 		for(int32_t i=0; i<dmisc7; i++)
-		{
 			addenemy(x,y,dmisc3+0x1000,-15);
-		}
 		
 		for(int32_t i=0; i<dmisc8; i++)
-		{
 			addenemy(x,y,dmisc4+0x1000,-15);
-		}
 		
 		if(itemguy) // Hand down the carried item
 		{
@@ -13797,13 +13742,10 @@ eGanon::eGanon(zfix X,zfix Y,int32_t Id,int32_t Clk) : enemy(X,Y,Id,Clk)
 bool eGanon::animate(int32_t index) //DO NOT ADD a check for do_animation to this version of GANON!! -Z
 {
 	if(dying)
-	
 		return Dead(index);
 		
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
    
 	switch(misc)
 	{
@@ -14089,9 +14031,7 @@ void getBigTri(int32_t id2)
 			for(int32_t cs=2; cs<5; cs++)
 			{
 				for(int32_t i=1; i<16; i++)
-				{
 					RAMpal[CSET(cs)+i]=_RGB(63,63,63);
-				}
 			}
 			
 			refreshpal=true;
@@ -14115,9 +14055,7 @@ void getBigTri(int32_t id2)
 	playLevelMusic();
 	
 	if(itemsbuf[id2].flags & ITEM_FLAG1 && currscr < 128)
-	{
 		Hero.dowarp(1,0); //side warp
-	}
 }
 
 /**********************************/
@@ -14176,9 +14114,7 @@ bool eMoldorm::animate(int32_t index)
 	
 
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	if(clk2)
 	{
@@ -14330,9 +14266,7 @@ bool esMoldorm::animate(int32_t index)
 			parentclk=(parentclk+1)%((int32_t)(8.0/step));
 		
 		if(!watch)
-		{
 			sprite::move(step);
-		}
 	}
 	
 	return enemy::animate(index);
@@ -14502,9 +14436,7 @@ bool eLanmola::animate(int32_t index)
 {
 	if(switch_hooked) return enemy::animate(index);
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	if(clk2)
 	{
@@ -14548,13 +14480,9 @@ bool eLanmola::animate(int32_t index)
 		segment->o_tile=o_tile;
 		segment->parent_script_UID = this->script_UID;
 		if((i==index+segcnt)&&(i!=index+1))
-		{
 			segment->dummy_int[1]=1;                //tail
-		}
 		else
-		{
 			segment->dummy_int[1]=0;
-		}
 		
 		if(segment->hp <= 0)
 		{
@@ -14805,9 +14733,7 @@ bool eManhandla::animate(int32_t index)
 		return Dead(index);
 		
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	
 	// check arm status, move dead ones to end of group
@@ -15144,9 +15070,7 @@ void eManhandla::draw(BITMAP *dest)
 	else
 	{
 		if(!dmisc2)
-		{
 			enemy::draw(dest);
-		}
 		else
 		{
 			xofs-=8;
@@ -15334,9 +15258,7 @@ bool eGleeok::animate(int32_t index)
 		return Dead(index);
 		
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	// Check if a head was killed somehow...
 	if(index+1+clk3>=guys.Count())
@@ -15527,9 +15449,7 @@ void eGleeok::draw2(BITMAP *dest)
 	yofs=(get_qr(qr_OLD_DRAWOFFSET)?playing_field_offset:original_playing_field_offset);
 	
 	if(get_qr(qr_NEWENEMYTILES))
-	{
 		tile+=((clk&24)>>3);
-	}
 	
 	if(hp > 0 && !dont_draw())
 	{
@@ -15679,14 +15599,10 @@ bool esGleeok::animate(int32_t index)
 			else
 			{
 				if(x <= (int32_t)parent->x-(dmisc5*6))
-				{
 					clk3=right;
-				}
 				
 				if(x >= (int32_t)parent->x+(dmisc5*6))
-				{
 					clk3=left;
-				}
 				
 				if(y <= (int32_t)parent->y+(dmisc5*6) && !(zc_oldrand()&15))
 				{
@@ -15722,10 +15638,7 @@ bool esGleeok::animate(int32_t index)
 		
 	case 1:                                                 // flying head
 		if(clk>=0)
-		
-		{
 			variable_walk_8(rate,homing,hrate,spw_floater);
-		}
 		
 		break;
 		
@@ -15751,9 +15664,7 @@ bool esGleeok::animate(int32_t index)
 	if(timer)
 	{
 		if(!(timer%8))
-		{
 			FireBreath(true);
-		}
 		
 		--timer;
 	}
@@ -15969,9 +15880,7 @@ bool ePatra::animate(int32_t index)
 	if(dying)
 	{
 		for(int32_t i=index+1; i<index+flycnt+flycnt2+1; i++)
-		{
 			((enemy*)guys.spr(i))->hp = -1000;
-		}
 		
 		return Dead(index);
 	}
@@ -15985,9 +15894,7 @@ bool ePatra::animate(int32_t index)
 
 	
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	if ((clk4 <=0 || clk4%2) && (clk7 <= 0 || clk6 <= -16))
 	{
