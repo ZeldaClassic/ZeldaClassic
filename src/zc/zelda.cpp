@@ -2517,21 +2517,21 @@ void putintro()
 	if (!get_qr(qr_OLD_DMAP_INTRO_STRINGS))
 		return;
 
-    if(!stricmp("                                                                        ", DMaps[currdmap].intro))
-    {
-        introclk=intropos=72;
-        return;
-    }
+	if(!stricmp("                                                                        ", DMaps[currdmap].intro))
+	{
+		introclk=intropos=72;
+		return;
+	}
     
-    if((cBbtn())&&(get_qr(qr_ALLOWMSGBYPASS)))
-    {
-        //finish writing out the string
-        for(; intropos<72; ++intropos)
-        {
-            textprintf_ex(msg_txt_display_buf,get_zc_font(font_zfont),((intropos%24)<<3)+32,((intropos/24)<<3)+40,QMisc.colors.msgtext,-1,
-                          "%c",DMaps[currdmap].intro[intropos]);
-        }
-    }
+	if((cBbtn())&&(get_qr(qr_ALLOWMSGBYPASS)))
+	{
+		//finish writing out the string
+		for(; intropos<72; ++intropos)
+		{
+			textprintf_ex(msg_txt_display_buf,get_zc_font(font_zfont),((intropos%24)<<3)+32,((intropos/24)<<3)+40,QMisc.colors.msgtext,-1,
+				  "%c",DMaps[currdmap].intro[intropos]);
+		}
+	}
     
     if(intropos>=72)
     {
