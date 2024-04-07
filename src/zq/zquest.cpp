@@ -25570,7 +25570,6 @@ int32_t isFullScreen()
 void hit_close_button()
 {
     close_button_quit=true;
-    return;
 }
 
 /********************/
@@ -25682,11 +25681,11 @@ int32_t get_homescr()
 
 int current_item(int item_type, bool checkmagic, bool jinx_check, bool check_bunny)
 {
-    //TODO remove as special case?? -DD
-    if(item_type==itype_shield)
-    {
-        return 2;
-    }
+	//TODO remove as special case?? -DD
+	if(item_type==itype_shield)
+	{
+		return 2;
+	}
     
 	int id = current_item_id(item_type, checkmagic, jinx_check, check_bunny);
 	return id > -1 ? itemsbuf[id].fam_type : 0;
@@ -25699,7 +25698,7 @@ int current_item_power(int itemtype, bool checkmagic, bool jinx_check, bool chec
 		int result = current_item_id(itemtype, checkmagic, jinx_check, check_bunny);
 		return (result<0) ? 0 : itemsbuf[result].power;
 	}
-    return 1;
+	return 1;
 }
 
 int32_t current_item_id(int32_t itemtype, bool, bool, bool)
@@ -25722,13 +25721,13 @@ int32_t current_item_id(int32_t itemtype, bool, bool, bool)
 		}
 		return result;
 	}
-    for(int32_t i=0; i<MAXITEMS; i++)
-    {
-        if(itemsbuf[i].family==itemtype)
-            return i;
-    }
+	for(int32_t i=0; i<MAXITEMS; i++)
+	{
+		if(itemsbuf[i].family==itemtype)
+			return i;
+	}
     
-    return -1;
+	return -1;
 }
 
 
@@ -25852,7 +25851,7 @@ static void allocate_crap()
 		delete lwpnscripts[i];
 		lwpnscripts[i] = new script_data(ScriptType::Lwpn, i);
 	}
-	 for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
+	for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
 	{
 		delete ewpnscripts[i];
 		ewpnscripts[i] = new script_data(ScriptType::Ewpn, i);
@@ -26440,14 +26439,14 @@ int32_t main(int32_t argc,char **argv)
 	DuplicateAction[1]			 = zc_get_config("zquest","horizontal_duplicate_action",0);
 	DuplicateAction[2]			 = zc_get_config("zquest","vertical_duplicate_action",0);
 	DuplicateAction[3]			 = zc_get_config("zquest","both_duplicate_action",0);
-	LeechUpdate					= zc_get_config("zquest","leech_update",500);
+	LeechUpdate				= zc_get_config("zquest","leech_update",500);
 	LeechUpdateTiles			   = zc_get_config("zquest","leech_update_tiles",1);
 	OnlyCheckNewTilesForDuplicates = zc_get_config("zquest","only_check_new_tiles_for_duplicates",0);
 	//gui_colorset				   = zc_get_config("zquest","gui_colorset",0);
 	
 	strcpy(last_timed_save,zc_get_config("zquest","last_timed_save",""));
 	
-	midi_volume					= zc_get_config("zquest", "midi", 255);
+	midi_volume				= zc_get_config("zquest", "midi", 255);
 	
 	abc_patternmatch			   = zc_get_config("zquest", "lister_pattern_matching", 1);
 	NoScreenPreview			   = zc_get_config("zquest", "no_preview", 0);
@@ -26811,9 +26810,9 @@ int32_t main(int32_t argc,char **argv)
 	pause_refresh = false;
 	refresh_pal();
 	refresh(rALL);
-    for(int q = 0; q < brush_width_menu.size(); ++q)
+	for(int q = 0; q < brush_width_menu.size(); ++q)
 		brush_width_menu.at(q)->select(q==0);
-    for(int q = 0; q < brush_height_menu.size(); ++q)
+	for(int q = 0; q < brush_height_menu.size(); ++q)
 		brush_height_menu.at(q)->select(q==0);
 	set_filltype(1);
 	
@@ -27657,36 +27656,37 @@ void cleanup_datafiles_on_exit()
 
 void destroy_bitmaps_on_exit()
 {
-    al_trace("Cleaning bitmaps...");
-    destroy_bitmap(screen2);
-    destroy_bitmap(tmp_scr);
-    destroy_bitmap(menu1);
-    destroy_bitmap(menu3);
-    destroy_bitmap(mapscreenbmp);
-    destroy_bitmap(dmapbmp_small);
-    destroy_bitmap(dmapbmp_large);
-    destroy_bitmap(brushbmp);
-    destroy_bitmap(brushscreen);
-    al_trace("...");
+	al_trace("Cleaning bitmaps...");
+	destroy_bitmap(screen2);
+	destroy_bitmap(tmp_scr);
+	destroy_bitmap(menu1);
+	destroy_bitmap(menu3);
+	destroy_bitmap(mapscreenbmp);
+	destroy_bitmap(dmapbmp_small);
+	destroy_bitmap(dmapbmp_large);
+	destroy_bitmap(brushbmp);
+	destroy_bitmap(brushscreen);
+	al_trace("...");
     
-    for(int32_t i=0; i<MOUSE_BMP_MAX*4; i++)
+	for(int32_t i=0; i<MOUSE_BMP_MAX*4; i++)
 	{
-        destroy_bitmap(mouse_bmp[i/4][i%4]);
-        destroy_bitmap(mouse_bmp_1x[i/4][i%4]);
+		destroy_bitmap(mouse_bmp[i/4][i%4]);
+		destroy_bitmap(mouse_bmp_1x[i/4][i%4]);
 	}
         
-    for(int32_t i=0; i<ICON_BMP_MAX*4; i++)
-        destroy_bitmap(icon_bmp[i/4][i%4]);
+	for(int32_t i=0; i<ICON_BMP_MAX*4; i++)
+		destroy_bitmap(icon_bmp[i/4][i%4]);
         
-    for(int32_t i=0; i<16*4; i++)
+	for(int32_t i=0; i<16*4; i++)
 		destroy_bitmap(flag_bmp[i/4][i%4]);
-    for(int32_t i=0; i<2; i++)
-        destroy_bitmap(select_bmp[i]);
+
+	for(int32_t i=0; i<2; i++)
+		destroy_bitmap(select_bmp[i]);
         
-    for(int32_t i=0; i<MAXARROWS; i++)
-        destroy_bitmap(arrow_bmp[i]);
+	for(int32_t i=0; i<MAXARROWS; i++)
+		destroy_bitmap(arrow_bmp[i]);
         
-    al_trace(" OK. \n");
+	al_trace(" OK. \n");
 }
 
 
@@ -28308,62 +28308,62 @@ void write_includepaths()
 
 int32_t save_config_file()
 {
-    char qtnametitle[20];
-    char qtpathtitle[20];
-    char *datapath2=(char *)malloc(2048);
-    char *midipath2=(char *)malloc(2048);
-    char *imagepath2=(char *)malloc(2048);
-    char *tmusicpath2=(char *)malloc(2048);
-    strcpy(datapath2, datapath);
-    strcpy(midipath2, midipath);
-    strcpy(imagepath2, imagepath);
-    strcpy(tmusicpath2, tmusicpath);
-    chop_path(datapath2);
-    chop_path(midipath2);
-    chop_path(imagepath2);
-    chop_path(tmusicpath2);
+	char qtnametitle[20];
+	char qtpathtitle[20];
+	char *datapath2=(char *)malloc(2048);
+	char *midipath2=(char *)malloc(2048);
+	char *imagepath2=(char *)malloc(2048);
+	char *tmusicpath2=(char *)malloc(2048);
+	strcpy(datapath2, datapath);
+	strcpy(midipath2, midipath);
+	strcpy(imagepath2, imagepath);
+	strcpy(tmusicpath2, tmusicpath);
+	chop_path(datapath2);
+	chop_path(midipath2);
+	chop_path(imagepath2);
+	chop_path(tmusicpath2);
     
 	zc_set_config("ZCMODULE","current_module",moduledata.module_name);
 	//
 	write_includepaths();
 	
-    zc_set_config("zquest",data_path_name,datapath2);
-    zc_set_config("zquest",midi_path_name,midipath2);
-    zc_set_config("zquest",image_path_name,imagepath2);
-    zc_set_config("zquest",tmusic_path_name,tmusicpath2);
+	zc_set_config("zquest",data_path_name,datapath2);
+	zc_set_config("zquest",midi_path_name,midipath2);
+	zc_set_config("zquest",image_path_name,imagepath2);
+	zc_set_config("zquest",tmusic_path_name,tmusicpath2);
 	
-    if (all_get_display() && !all_get_fullscreen_flag() && SaveDragResize) 
-    {
+	if (all_get_display() && !all_get_fullscreen_flag() && SaveDragResize) 
+	{
 		window_width = al_get_display_width(all_get_display());
 		window_height = al_get_display_height(all_get_display());
 		zc_set_config("zquest","window_width",window_width);
 		zc_set_config("zquest","window_height",window_height);
-    }
-    if (all_get_display() && !all_get_fullscreen_flag() && SaveWinPos)
-    {
+	}
+	if (all_get_display() && !all_get_fullscreen_flag() && SaveWinPos)
+	{
 		int o_window_x, o_window_y;
 		al_get_window_position(all_get_display(), &o_window_x, &o_window_y);
 		zc_set_config("zquest", "window_x", o_window_x);
 		zc_set_config("zquest", "window_y", o_window_y);
-    }
+	}
     
 	byte b = 0;
-    for(int32_t x=0; x<7; x++)
-    {
-        set_bit(&b,x,LayerMaskInt[x]);
-    }
+	for(int32_t x=0; x<7; x++)
+	{
+		set_bit(&b,x,LayerMaskInt[x]);
+	}
     
-    zc_set_config("zquest","layer_mask",b);
+	zc_set_config("zquest","layer_mask",b);
     
-    flush_config_file();
+	flush_config_file();
 #ifdef __EMSCRIPTEN__
-    em_sync_fs();
+	em_sync_fs();
 #endif
-    free(datapath2);
-    free(midipath2);
-    free(imagepath2);
-    free(tmusicpath2);
-    return 0;
+	free(datapath2);
+	free(midipath2);
+	free(imagepath2);
+	free(tmusicpath2);
+	return 0;
 }
 
 int32_t d_timer_proc(int32_t msg, [[maybe_unused]] DIALOG *d, [[maybe_unused]] int32_t c)
@@ -28658,13 +28658,13 @@ void highlight_frag(BITMAP* dest, int color, int x1, int y1, int w, int h, int f
 	int x2 = x1+w-1;
 	int y2 = y1+h-1;
 	
-    _allegro_hline(dest, x1, y1, x2, color);
-    _allegro_vline(dest, x1, y1, y2, color);
+	_allegro_hline(dest, x1, y1, x2, color);
+	_allegro_vline(dest, x1, y1, y2, color);
     
-    _allegro_hline(dest, x1, y2, xc, color);
-    _allegro_vline(dest, x2, y1, yc, color);
-    _allegro_hline(dest, xc, yc, x2, color);
-    _allegro_vline(dest, xc, yc, y2, color);
+	_allegro_hline(dest, x1, y2, xc, color);
+	_allegro_vline(dest, x2, y1, yc, color);
+	_allegro_hline(dest, xc, yc, x2, color);
+	_allegro_vline(dest, xc, yc, y2, color);
 }
 void highlight_frag(BITMAP* dest, int color, size_and_pos const& rec, int thick)
 {
@@ -29056,13 +29056,8 @@ bool isSideViewGravity(int32_t t)
     return (Map.CurrScr()->flags7&fSIDEVIEW) != 0;
 }
 
-
-
-
 void FFScript::ZScriptConsole(bool open)
 {
-
-
 	#ifdef _WIN32
 	if ( console_is_open )
 	{
@@ -29115,19 +29110,16 @@ void FFScript::ZASMPrint(bool open)
 void FFScript::ZASMPrintCommand(const word scommand)
 {
 	//overloaded from class
-	return;
 }
 
 void FFScript::ZASMPrintVarSet(const int32_t arg, int32_t argval)
 {
 	//overloaded from class
-	return;
 }
 
 void FFScript::ZASMPrintVarGet(const int32_t arg, int32_t argval)
 {
 	//overloaded from class
-	return;
 }
 
 int32_t getpitfall(int32_t x, int32_t y){return 0;}
@@ -29212,11 +29204,9 @@ bool checkmagiccost(int32_t itemid, bool checkTime)
 
 void payCost(int32_t ctr, int32_t amnt, int32_t tmr, bool ignoreTimer)
 {
-	return;
 }
 void paymagiccost(int32_t itemid, bool ignoreTimer, bool onlyTimer)
 {
-	return;
 }
 
 void enter_sys_pal(){}
