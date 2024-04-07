@@ -26,7 +26,6 @@ int32_t engraving_proc(int32_t msg,DIALOG *d,int32_t)
 			
 			if(buf && bigbmp)
 			{
-				
 				clear_bitmap(buf);
 				
 				blit((BITMAP*)zcdata[BMP_ENGRAVINGS].dat, buf, d->d1, d->d2, 0, 0, 16, 16);
