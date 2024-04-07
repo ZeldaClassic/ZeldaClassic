@@ -2766,23 +2766,23 @@ void do_magic_casting()
         
         if((magiccastclk++)>=226)
         {
-			if(itemsbuf[magicitem].flags & ITEM_FLAG1) //Act as F6->Continue
-			{
-				Quit = qCONT;
-				skipcont = 1;
-			}
-			else
-			{
-				//attackclk=0;
-				int32_t div_prot_temp=div_prot_item;
-				restart_level();
-				div_prot_item=div_prot_temp;
-				//xofs=0;
-				//action=none;
-				magicitem=-1;
-				magiccastclk=0;
-				if ( Hero.getDontDraw() < 2 ) { Hero.setDontDraw(0); }
-			}
+		if(itemsbuf[magicitem].flags & ITEM_FLAG1) //Act as F6->Continue
+		{
+			Quit = qCONT;
+			skipcont = 1;
+		}
+		else
+		{
+			//attackclk=0;
+			int32_t div_prot_temp=div_prot_item;
+			restart_level();
+			div_prot_item=div_prot_temp;
+			//xofs=0;
+			//action=none;
+			magicitem=-1;
+			magiccastclk=0;
+			if ( Hero.getDontDraw() < 2 ) { Hero.setDontDraw(0); }
+		}
         }
     }
     break;
@@ -2908,7 +2908,7 @@ void update_hookshot()
     
     if(check_hs)
     {
-		weapon* hookweap = (weapon*)Lwpns.spr(Lwpns.idFirst(wHookshot));
+	weapon* hookweap = (weapon*)Lwpns.spr(Lwpns.idFirst(wHookshot));
         int32_t parentitem = hookweap->parentitem;
         hs_x=hookweap->x;
         hs_y=hookweap->y;
@@ -3045,18 +3045,16 @@ void do_dcounters()
     for(int32_t i=0; i<32; i++)
     {
         if(game->get_dcounter(i)==0)
-        {
             continue;
-        }
         
-		byte sfx_to_use = 0;
+	byte sfx_to_use = 0;
         if(frame&1)
         {
             if(game->get_dcounter(i)>0)
             {
-				sfx_to_use = QMisc.miscsfx[sfxREFILL];
+		sfx_to_use = QMisc.miscsfx[sfxREFILL];
                 int32_t drain = (i==4 ? game->get_mp_per_block()/4 : 1);
-				if(get_qr(qr_FASTCOUNTERDRAIN)) drain *= 4;
+		if(get_qr(qr_FASTCOUNTERDRAIN)) drain *= 4;
                 drain = zc_min(game->get_dcounter(i),drain);
                 
                 if(game->get_counter(i) < game->get_maxcounter(i))
@@ -3079,7 +3077,7 @@ void do_dcounters()
                     sfx_to_use = QMisc.miscsfx[sfxDRAIN];;
                     
                 int32_t drain = (i==4 ? 2*game->get_magicdrainrate() : 1);
-				if(get_qr(qr_FASTCOUNTERDRAIN)) drain *= 4;
+		if(get_qr(qr_FASTCOUNTERDRAIN)) drain *= 4;
                 drain = zc_min(-game->get_dcounter(i),drain);
                 
                 if(game->get_counter(i)>0)
@@ -3201,16 +3199,12 @@ void game_loop()
 			for(int32_t i=0; i<176; i++)
 			{
 				if(guygrid[i]>0)
-				{
 					--guygrid[i];
-				}
 			}
 			for(int32_t i=0; i<MAXFFCS; i++)
 			{
 				if(guygridffc[i]>0)
-				{
 					--guygridffc[i];
-				}
 			}
 		}
 		#if LOGGAMELOOP > 0
@@ -3518,9 +3512,7 @@ void game_loop()
 			Hero.Freeze();
 			
 			if(dmapmsgclk<=50)
-			{
 				--dmapmsgclk;
-			}
 		}
 		
 		if(dmapmsgclk==1)
