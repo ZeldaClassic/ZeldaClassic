@@ -7497,7 +7497,7 @@ void update_combobrush()
 
 byte relational_source_grid[256]=
 {
-    0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15,
+    0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15,
     16, 16, 17, 17, 18, 18, 19, 19, 16, 16, 17, 17, 18, 18, 19, 19,
     20, 20, 20, 20, 21, 21, 21, 21, 22, 22, 22, 22, 23, 23, 23, 23,
     24, 24, 24, 24, 25, 25, 25, 25, 24, 24, 24, 24, 25, 25, 25, 25,
@@ -7918,7 +7918,7 @@ void draw(bool justcset)
 				case DM_CPOOL:
 				{
 					int32_t cid = Combo;
-                    int8_t cs = CSet;
+					int8_t cs = CSet;
 					pool.pick(cid,cs);
 					
 					if(!combo_cols)
@@ -9014,15 +9014,15 @@ int32_t set_brush_height_11()
 
 static NewMenu brush_width_menu
 {
-	{ "1", set_brush_width_1 },
-	{ "2", set_brush_width_2 },
-	{ "3", set_brush_width_3 },
-	{ "4", set_brush_width_4 },
-	{ "5", set_brush_width_5 },
-	{ "6", set_brush_width_6 },
-	{ "7", set_brush_width_7 },
-	{ "8", set_brush_width_8 },
-	{ "9", set_brush_width_9 },
+	{ "1",  set_brush_width_1 },
+	{ "2",  set_brush_width_2 },
+	{ "3",  set_brush_width_3 },
+	{ "4",  set_brush_width_4 },
+	{ "5",  set_brush_width_5 },
+	{ "6",  set_brush_width_6 },
+	{ "7",  set_brush_width_7 },
+	{ "8",  set_brush_width_8 },
+	{ "9",  set_brush_width_9 },
 	{ "10", set_brush_width_10 },
 	{ "11", set_brush_width_11 },
 	{ "12", set_brush_width_12 },
@@ -9033,15 +9033,15 @@ static NewMenu brush_width_menu
 };
 static NewMenu brush_height_menu
 {
-	{ "1", set_brush_height_1 },
-	{ "2", set_brush_height_2 },
-	{ "3", set_brush_height_3 },
-	{ "4", set_brush_height_4 },
-	{ "5", set_brush_height_5 },
-	{ "6", set_brush_height_6 },
-	{ "7", set_brush_height_7 },
-	{ "8", set_brush_height_8 },
-	{ "9", set_brush_height_9 },
+	{ "1",  set_brush_height_1 },
+	{ "2",  set_brush_height_2 },
+	{ "3",  set_brush_height_3 },
+	{ "4",  set_brush_height_4 },
+	{ "5",  set_brush_height_5 },
+	{ "6",  set_brush_height_6 },
+	{ "7",  set_brush_height_7 },
+	{ "8",  set_brush_height_8 },
+	{ "9",  set_brush_height_9 },
 	{ "10", set_brush_height_10 },
 	{ "11", set_brush_height_11 },
 };
@@ -9367,8 +9367,8 @@ void fill2_4()
         drawmap=Map.CurrScr()->layermap[CurrentLayer-1]-1;
         drawscr=Map.CurrScr()->layerscreen[CurrentLayer-1];
     }
-	mapscr* draw_mapscr = Map.AbsoluteScr(drawmap, drawscr);
-	if(!draw_mapscr) return;
+    mapscr* draw_mapscr = Map.AbsoluteScr(drawmap, drawscr);
+    if(!draw_mapscr) return;
     
     int32_t x=gui_mouse_x()-mapscreen_x-(showedges?(16*mapscreensize):0);
     int32_t y=gui_mouse_y()-mapscreen_y-(showedges?(16*mapscreensize):0);;
@@ -11908,36 +11908,36 @@ void questminrev_help()
 
 int32_t select_cflag(const char *prompt,int32_t flag)
 {
-    cflag_dlg[0].dp=(void *)prompt;
-    cflag_dlg[0].dp2=get_zc_font(font_lfont);
-    GUI::ListData ld = GUI::ZCListData::mapflag(numericalFlags, true);
+	cflag_dlg[0].dp=(void *)prompt;
+	cflag_dlg[0].dp2=get_zc_font(font_lfont);
+	GUI::ListData ld = GUI::ZCListData::mapflag(numericalFlags, true);
 	ListData select_cflag_list = ld.getJWin(&font);
-    int32_t index = ld.findIndex(flag);
+	int32_t index = ld.findIndex(flag);
 	cflag_dlg[2].d1=index;
 	cflag_dlg[2].dp=(void *) &select_cflag_list;
     
-    large_dialog(cflag_dlg);
+	large_dialog(cflag_dlg);
         
-    int32_t ret;
+	int32_t ret;
     
-    do
-    {
-        ret=do_zqdialog(cflag_dlg,2);
+	do
+	{
+		ret=do_zqdialog(cflag_dlg,2);
         
-        if(ret==5)
-        {
-            cflag_help(ld.getValue(cflag_dlg[2].d1));
-        }
-    }
-    while(ret==5);
+		if(ret==5)
+		{
+		    cflag_help(ld.getValue(cflag_dlg[2].d1));
+		}
+	}
+	while(ret==5);
     
-    if(ret==0||ret==4)
-    {
-        position_mouse_z(0);
-        return -1;
-    }
+	if(ret==0||ret==4)
+	{
+		position_mouse_z(0);
+		return -1;
+	}
     
-    return ld.getValue(cflag_dlg[2].d1);
+	return ld.getValue(cflag_dlg[2].d1);
 }
 
 int32_t select_flag(int32_t &f)
@@ -12332,10 +12332,10 @@ static DIALOG secret_dlg[] =
     {  d_scombo_proc,           260,    137,     16,     16,    0,          0,          0,       0,          0,           0,  NULL,                            NULL,   NULL                },
     //136 Secrets->Next
     {  jwin_frame_proc,         158,     47,     20,     20,    0,          0,          0,       0,          FR_DEEP,     0,  NULL,                            NULL,   NULL                },
-	{  d_scombo_proc,           160,     49,     16,     16,    0,          1,          0,       0,          0,           0,  NULL,                            NULL,   NULL                },
+    {  d_scombo_proc,           160,     49,     16,     16,    0,          1,          0,       0,          0,           0,  NULL,                            NULL,   NULL                },
     //138
-    {  d_keyboard_proc,           0,      0,      0,      0,    0,          0,          0,       0,          KEY_F1,      0, (void *) onHelp,                 NULL,   NULL                },
-    {  d_keyboard_proc,           0,      0,      0,      0,    0,          0,          'f',     0,          0,           0, (void *) onSecretF,              NULL,   NULL                },
+    {  d_keyboard_proc,           0,      0,      0,      0,    0,          0,          0,       0,          KEY_F1,      0, (void *) onHelp,                  NULL,   NULL                },
+    {  d_keyboard_proc,           0,      0,      0,      0,    0,          0,          'f',     0,          0,           0, (void *) onSecretF,               NULL,   NULL                },
     {  d_timer_proc,              0,      0,      0,      0,    0,          0,          0,       0,          0,           0,  NULL,                            NULL,   NULL                },
     {  NULL,                      0,      0,      0,      0,    0,          0,          0,       0,          0,           0,  NULL,                            NULL,   NULL                }
 };
