@@ -10,7 +10,7 @@ namespace AutoPattern
 		if (!ap)
 			return false;
 		init_connections(ap);
-		autopattern_fence::form_connections(ap, true);
+		fence::form_connections(ap, true);
 		recalculate_height(ap, height);
 		for (int32_t i = 0; i < 4; ++i)
 		{
@@ -37,7 +37,7 @@ namespace AutoPattern
 		init_connections(ap);
 		ap->write(layer, true);
 		ap->in_set = false;
-		autopattern_fence::form_connections(ap, false);
+		fence::form_connections(ap, false);
 		recalculate_height(ap, height);
 		for (int32_t i = 0; i < 4; ++i)
 		{
@@ -55,13 +55,13 @@ namespace AutoPattern
 		if (!ap)
 			return 0;
 		init_connections(ap);
-		autopattern_fence::form_connections(ap, true);
+		fence::form_connections(ap, true);
 		recalculate_height(ap, height);
 		return ap->cid;
 	}
 	void cakemtn::flip_single(apcombo*& ap)
 	{
-		autopattern_fence::flip_single(ap);
+		fence::flip_single(ap);
 		recalculate_height(ap, height);
 	}
 	uint32_t cakemtn::slot_to_flags(int32_t slot)

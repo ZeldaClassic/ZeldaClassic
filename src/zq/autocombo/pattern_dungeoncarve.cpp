@@ -5,7 +5,7 @@
 namespace AutoPattern
 {
 
-	bool autopattern_dungeoncarve::execute(int32_t exscreen, int32_t expos)
+	bool dungeoncarve::execute(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -14,7 +14,7 @@ namespace AutoPattern
 		apply_changes();
 		return true;
 	}
-	bool autopattern_dungeoncarve::erase(int32_t exscreen, int32_t expos)
+	bool dungeoncarve::erase(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -26,7 +26,7 @@ namespace AutoPattern
 		apply_changes();
 		return true;
 	}
-	int32_t autopattern_dungeoncarve::get_floating_cid(int32_t exscreen, int32_t expos)
+	int32_t dungeoncarve::get_floating_cid(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -34,7 +34,7 @@ namespace AutoPattern
 		form_connections(ap, false);
 		return ap->cid;
 	}
-	void autopattern_dungeoncarve::form_connections(apcombo* p, bool rem)
+	void dungeoncarve::form_connections(apcombo* p, bool rem)
 	{
 		apcombo* relatives[5][5];
 		for (int32_t x = 0; x < 5; ++x)
@@ -83,7 +83,7 @@ namespace AutoPattern
 			}
 		}
 	}
-	void autopattern_dungeoncarve::calculate_connections(apcombo* p)
+	void dungeoncarve::calculate_connections(apcombo* p)
 	{
 		int32_t h = p->connflags & 0x100;
 		uint32_t newflags = 0;
@@ -109,7 +109,7 @@ namespace AutoPattern
 		}
 		p->connflags = newflags | h;
 	}
-	uint32_t autopattern_dungeoncarve::slot_to_flags(int32_t slot)
+	uint32_t dungeoncarve::slot_to_flags(int32_t slot)
 	{
 		switch (slot)
 		{
@@ -319,7 +319,7 @@ namespace AutoPattern
 				return 0x0;
 		}
 	}
-	int32_t autopattern_dungeoncarve::flags_to_slot(uint32_t flags)
+	int32_t dungeoncarve::flags_to_slot(uint32_t flags)
 	{
 		// Mask out diagonal flags for disabled directions
 		if (!(flags & U))

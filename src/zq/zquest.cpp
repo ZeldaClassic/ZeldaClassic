@@ -7541,7 +7541,7 @@ void draw_autocombo(int32_t pos, bool rclick, bool pressframe)
 			}
 			case AUTOCOMBO_FENCE:
 			{
-				AutoPattern::autopattern_fence ap(ca.getType(), CurrentLayer, scr, pos, &ca);
+				AutoPattern::fence ap(ca.getType(), CurrentLayer, scr, pos, &ca);
 				if (rclick)
 					ap.erase(scr, pos);
 				else
@@ -7559,7 +7559,7 @@ void draw_autocombo(int32_t pos, bool rclick, bool pressframe)
 			}
 			case AUTOCOMBO_RELATIONAL:
 			{
-				AutoPattern::autopattern_relational ap(ca.getType(), CurrentLayer, scr, pos, &ca);
+				AutoPattern::relational ap(ca.getType(), CurrentLayer, scr, pos, &ca);
 				if (rclick)
 					ap.erase(scr, pos);
 				else
@@ -7568,7 +7568,7 @@ void draw_autocombo(int32_t pos, bool rclick, bool pressframe)
 			}
 			case AUTOCOMBO_DGNCARVE:
 			{
-				AutoPattern::autopattern_dungeoncarve ap(ca.getType(), CurrentLayer, scr, pos, &ca);
+				AutoPattern::dungeoncarve ap(ca.getType(), CurrentLayer, scr, pos, &ca);
 				if (rclick)
 					ap.erase(scr, pos);
 				else
@@ -7634,7 +7634,7 @@ void draw_autocombo_command(int32_t pos, int32_t cmd, int32_t arg)
 		{
 			case AUTOCOMBO_FENCE:
 			{
-				AutoPattern::autopattern_fence ap(ca.getType(), CurrentLayer, scr, pos, &ca);
+				AutoPattern::fence ap(ca.getType(), CurrentLayer, scr, pos, &ca);
 				ap.flip_all_connected(scr, pos, 2048);
 				break;
 			}
@@ -7680,7 +7680,7 @@ int32_t get_autocombo_floating_cid(int32_t pos, bool clicked)
 			}
 			case AUTOCOMBO_FENCE:
 			{
-				AutoPattern::autopattern_fence ap(ca.getType(), CurrentLayer, scr, pos, &ca);
+				AutoPattern::fence ap(ca.getType(), CurrentLayer, scr, pos, &ca);
 				cid = ap.get_floating_cid(scr, pos);
 				break;
 			}
@@ -7692,13 +7692,13 @@ int32_t get_autocombo_floating_cid(int32_t pos, bool clicked)
 			}
 			case AUTOCOMBO_RELATIONAL:
 			{
-				AutoPattern::autopattern_relational ap(ca.getType(), CurrentLayer, scr, pos, &ca);
+				AutoPattern::relational ap(ca.getType(), CurrentLayer, scr, pos, &ca);
 				cid = ap.get_floating_cid(scr, pos);
 				break;
 			}
 			case AUTOCOMBO_DGNCARVE:
 			{
-				AutoPattern::autopattern_dungeoncarve ap(ca.getType(), CurrentLayer, scr, pos, &ca);
+				AutoPattern::dungeoncarve ap(ca.getType(), CurrentLayer, scr, pos, &ca);
 				cid = ap.get_floating_cid(scr, pos);
 				break;
 			}

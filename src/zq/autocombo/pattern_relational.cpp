@@ -4,8 +4,7 @@
 
 namespace AutoPattern
 {
-
-	bool autopattern_relational::execute(int32_t exscreen, int32_t expos)
+	bool relational::execute(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -32,7 +31,7 @@ namespace AutoPattern
 		apply_changes();
 		return true;
 	}
-	bool autopattern_relational::erase(int32_t exscreen, int32_t expos)
+	bool relational::erase(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -60,7 +59,7 @@ namespace AutoPattern
 		apply_changes();
 		return true;
 	}
-	int32_t autopattern_relational::get_floating_cid(int32_t exscreen, int32_t expos)
+	int32_t relational::get_floating_cid(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -70,7 +69,7 @@ namespace AutoPattern
 		ap->set_cid(slot_to_cid_pair(flags_to_slot(ap->connflags)));
 		return ap->cid;
 	}
-	void autopattern_relational::calculate_connections(apcombo* p)
+	void relational::calculate_connections(apcombo* p)
 	{
 		p->connflags = 0;
 		if (connectsolid && (p->read_solid(layer) & 0xF) == 0xF)
@@ -94,7 +93,7 @@ namespace AutoPattern
 				p->connflags |= (1 << q);
 		}
 	}
-	uint32_t autopattern_relational::slot_to_flags(int32_t slot)
+	uint32_t relational::slot_to_flags(int32_t slot)
 	{
 		switch (slot)
 		{
@@ -196,7 +195,7 @@ namespace AutoPattern
 				return 0;
 		}
 	}
-	int32_t autopattern_relational::flags_to_slot(uint32_t flags)
+	int32_t relational::flags_to_slot(uint32_t flags)
 	{
 		if (flags == -1)
 			return -1;

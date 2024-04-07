@@ -9,11 +9,11 @@
 namespace AutoPattern
 {
 
-	class cakemtn : public autopattern_fence
+	class cakemtn : public fence
 	{
 	public:
 		explicit cakemtn(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource, byte nheight = 1) :
-			autopattern_fence(ntype, nlayer, nbasescreen, nbasepos, nsource), height(nheight) {}
+			fence(ntype, nlayer, nbasescreen, nbasepos, nsource), height(nheight) {}
 		virtual bool execute(int32_t exscreen, int32_t expos) override;
 		virtual bool erase(int32_t exscreen, int32_t expos) override;
 		virtual int32_t get_floating_cid(int32_t s, int32_t p) override;

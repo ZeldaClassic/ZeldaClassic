@@ -8,10 +8,10 @@
 namespace AutoPattern
 {
 
-	class autopattern_dungeoncarve : public autopattern_container
+	class dungeoncarve : public autopattern_container
 	{
 	public:
-		explicit autopattern_dungeoncarve(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource) :
+		explicit dungeoncarve(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource) :
 			autopattern_container(ntype, nlayer, nbasescreen, nbasepos, nsource) {}
 		virtual bool execute(int32_t exscreen, int32_t expos) override;
 		virtual bool erase(int32_t exscreen, int32_t expos) override;

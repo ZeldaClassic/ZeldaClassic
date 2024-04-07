@@ -4,7 +4,7 @@
 namespace AutoPattern
 {
 
-	bool autopattern_fence::execute(int32_t exscreen, int32_t expos)
+	bool fence::execute(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -14,7 +14,7 @@ namespace AutoPattern
 		apply_changes();
 		return true;
 	}
-	bool autopattern_fence::erase(int32_t exscreen, int32_t expos)
+	bool fence::erase(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -27,7 +27,7 @@ namespace AutoPattern
 		apply_changes();
 		return true;
 	}
-	int32_t autopattern_fence::get_floating_cid(int32_t exscreen, int32_t expos)
+	int32_t fence::get_floating_cid(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -36,7 +36,7 @@ namespace AutoPattern
 		form_connections(ap, true);
 		return ap->cid;
 	}
-	void autopattern_fence::flip_single(apcombo*& ap)
+	void fence::flip_single(apcombo*& ap)
 	{
 		int32_t slot = cid_to_slot(ap->cid);
 		if (slot == -1)
@@ -45,7 +45,7 @@ namespace AutoPattern
 		ap->cid = slot_to_cid(slot);
 		ap->changed = true;
 	}
-	void autopattern_fence::flip_all_connected(int32_t exscreen, int32_t expos, int32_t max)
+	void fence::flip_all_connected(int32_t exscreen, int32_t expos, int32_t max)
 	{
 		apcombo* ap = add(exscreen, expos);
 		if (!ap)
@@ -116,7 +116,7 @@ namespace AutoPattern
 
 		apply_changes();
 	}
-	void autopattern_fence::form_connections(apcombo* p, bool changecombo, bool noadj)
+	void fence::form_connections(apcombo* p, bool changecombo, bool noadj)
 	{
 		if (noadj && p->connflags & 0x100)
 			return;
@@ -181,7 +181,7 @@ namespace AutoPattern
 			}
 		}
 	}
-	uint32_t autopattern_fence::slot_to_flags(int32_t slot)
+	uint32_t fence::slot_to_flags(int32_t slot)
 	{
 		switch (slot)
 		{
@@ -213,7 +213,7 @@ namespace AutoPattern
 		}
 		return 0;
 	}
-	int32_t autopattern_fence::flags_to_slot(uint32_t flags)
+	int32_t fence::flags_to_slot(uint32_t flags)
 	{
 		switch (flags)
 		{
@@ -246,13 +246,13 @@ namespace AutoPattern
 		return -1;
 	}
 	// will not override slots that share a flagset
-	int32_t autopattern_fence::flags_to_slot_s(int32_t curslot, uint32_t flags)
+	int32_t fence::flags_to_slot_s(int32_t curslot, uint32_t flags)
 	{
 		if (curslot != -1 && flags == slot_to_flags(curslot))
 			return curslot;
 		return flags_to_slot(flags);
 	}
-	int32_t autopattern_fence::flip_slot(int32_t slot)
+	int32_t fence::flip_slot(int32_t slot)
 	{
 		switch (slot)
 		{
@@ -285,7 +285,7 @@ namespace AutoPattern
 		return 1;
 	}
 	// Returns connecting bitflags along the edge of a combo
-	int32_t autopattern_fence::get_edge_flags(apcombo* &ap, int32_t dir, bool flipped)
+	int32_t fence::get_edge_flags(apcombo* &ap, int32_t dir, bool flipped)
 	{
 		int32_t ret = 0;
 		switch (dir)
@@ -347,7 +347,7 @@ namespace AutoPattern
 	}
 	// Get connecting edge flags for an edge of this combo that connects
 	// to an adjacent one, accounting for turning corners
-	int32_t autopattern_fence::get_turn_edge_flags(apcombo*& ap, int32_t dir)
+	int32_t fence::get_turn_edge_flags(apcombo*& ap, int32_t dir)
 	{
 		apcombo* adj = ap->adj[dir];
 		int32_t ret = 0;
@@ -416,7 +416,7 @@ namespace AutoPattern
 		}
 		return ret;
 	}
-	void autopattern_fence::get_turn_flags(int32_t &ret, int32_t dir, int32_t adjslot)
+	void fence::get_turn_flags(int32_t &ret, int32_t dir, int32_t adjslot)
 	{
 		switch (dir)
 		{
@@ -474,7 +474,7 @@ namespace AutoPattern
 				break;
 		}
 	}
-	int32_t autopattern_fence::get_num_connections(apcombo*& ap)
+	int32_t fence::get_num_connections(apcombo*& ap)
 	{
 		int32_t num_connections = 0;
 		for (int32_t i = 0; i < 4; ++i)
