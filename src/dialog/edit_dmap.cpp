@@ -250,6 +250,10 @@ std::shared_ptr<GUI::Widget> EditDMapDialog::view()
 		title = titlebuf,
 		onClose = message::CANCEL,
 		use_vsync = true,
+		onLoad = [&]()
+		{
+			dmap_slider->setVisible(sm_dmap(local_dmap.type)); // bugfix for https://www.armageddongames.net/showthread.php?98754
+		},
 		onTick = [&]()
 		{
 			zcmixer_update(zcmixer, midi_volume, 1000000, false);
