@@ -14072,24 +14072,24 @@ int32_t d_tri_edit_proc(int32_t msg,DIALOG *d,int32_t c)
 
 static DIALOG tp_dlg[] =
 {
-    /* (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
-    { jwin_win_proc,     56,   32,   208,  160,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Triforce Pieces", NULL, NULL },
-    { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { d_tri_frame_proc,  64,   56,   192,    96,   jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0,       NULL, NULL, NULL },
+    /* (dialog proc)      (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
+    { jwin_win_proc,      56,  32,   208,  160,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Triforce Pieces", NULL, NULL },
+    { d_timer_proc,        0,   0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+    { d_tri_frame_proc,   64,  56,   192,    96,   jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0,       NULL, NULL, NULL },
     // 3
-    { d_tri_edit_proc,   138,  82,   17,   17,   vc(14),  vc(1),  0,       0,          0,             0, (void *) "1", NULL, NULL },
-    { d_tri_edit_proc,   166,  82,   17,   17,   vc(14),  vc(1),  0,       0,          0,             1, (void *) "2", NULL, NULL },
-    { d_tri_edit_proc,   90,   130,  17,   17,   vc(14),  vc(1),  0,       0,          0,             2, (void *) "3", NULL, NULL },
-    { d_tri_edit_proc,   214,  130,  17,   17,   vc(14),  vc(1),  0,       0,          0,             3, (void *) "4", NULL, NULL },
+    { d_tri_edit_proc,   138,  82,   17,   17,   vc(14),  vc(1),  0,       0,          0,             0, (void *) "1",      NULL, NULL },
+    { d_tri_edit_proc,   166,  82,   17,   17,   vc(14),  vc(1),  0,       0,          0,             1, (void *) "2",      NULL, NULL },
+    { d_tri_edit_proc,    90,  130,  17,   17,   vc(14),  vc(1),  0,       0,          0,             2, (void *) "3",      NULL, NULL },
+    { d_tri_edit_proc,   214,  130,  17,   17,   vc(14),  vc(1),  0,       0,          0,             3, (void *) "4",      NULL, NULL },
     // 7
-    { d_tri_edit_proc,   138,  110,  17,   17,   vc(14),  vc(1),  0,       0,          0,             4, (void *) "5", NULL, NULL },
-    { d_tri_edit_proc,   118,  130,  17,   17,   vc(14),  vc(1),  0,       0,          0,             5, (void *) "6", NULL, NULL },
-    { d_tri_edit_proc,   166,  110,  17,   17,   vc(14),  vc(1),  0,       0,          0,             6, (void *) "7", NULL, NULL },
-    { d_tri_edit_proc,   186,  130,  17,   17,   vc(14),  vc(1),  0,       0,          0,             7, (void *) "8", NULL, NULL },
+    { d_tri_edit_proc,   138,  110,  17,   17,   vc(14),  vc(1),  0,       0,          0,             4, (void *) "5",      NULL, NULL },
+    { d_tri_edit_proc,   118,  130,  17,   17,   vc(14),  vc(1),  0,       0,          0,             5, (void *) "6",      NULL, NULL },
+    { d_tri_edit_proc,   166,  110,  17,   17,   vc(14),  vc(1),  0,       0,          0,             6, (void *) "7",      NULL, NULL },
+    { d_tri_edit_proc,   186,  130,  17,   17,   vc(14),  vc(1),  0,       0,          0,             7, (void *) "8",      NULL, NULL },
     // 11
-    { jwin_button_proc,     90,   166,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
-    { jwin_button_proc,     170,  166,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    { jwin_button_proc,   90,  166,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK",     NULL, NULL },
+    { jwin_button_proc,  170,  166,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
+    { NULL,                0,    0,   0,    0,   0,       0,       0,      0,          0,             0, NULL,              NULL,  NULL }
 };
 
 int32_t onTriPieces()
