@@ -561,15 +561,15 @@ void putitem2(BITMAP *dest,int32_t x,int32_t y,int32_t item_id, int32_t &aclk, i
 	}
 	if ( itemsbuf[item_id].overrideFLAGS > 0 ) {
 		temp.extend = 3;
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_TILEWIDTH ) { temp.txsz = itemsbuf[item_id].tilew;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_TILEHEIGHT ){temp.tysz = itemsbuf[item_id].tileh;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_WIDTH ) { temp.hit_width = itemsbuf[item_id].hxsz;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_HEIGHT ) {temp.hit_height = itemsbuf[item_id].hysz;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_Z_HEIGHT ) { temp.hzsz = itemsbuf[item_id].hzsz;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_X_OFFSET ) { temp.hxofs = itemsbuf[item_id].hxofs;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_Y_OFFSET ) {temp.hyofs = itemsbuf[item_id].hyofs;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_DRAW_X_OFFSET ) {temp.xofs = itemsbuf[item_id].xofs;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_DRAW_Y_OFFSET ) { temp.yofs = itemsbuf[item_id].yofs; }
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_TILEWIDTH     ) { temp.txsz       = itemsbuf[item_id].tilew;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_TILEHEIGHT    ) { temp.tysz       = itemsbuf[item_id].tileh;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_WIDTH     ) { temp.hit_width  = itemsbuf[item_id].hxsz;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_HEIGHT    ) { temp.hit_height = itemsbuf[item_id].hysz;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_Z_HEIGHT  ) { temp.hzsz       = itemsbuf[item_id].hzsz;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_X_OFFSET  ) { temp.hxofs      = itemsbuf[item_id].hxofs;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_Y_OFFSET  ) { temp.hyofs      = itemsbuf[item_id].hyofs;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_DRAW_X_OFFSET ) { temp.xofs       = itemsbuf[item_id].xofs;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_DRAW_Y_OFFSET ) { temp.yofs       = itemsbuf[item_id].yofs;}
 	}	    
 	
 	temp.animate(0);
@@ -597,15 +597,15 @@ void dummyitem_animate(item* dummy, int32_t clk)
 	if ( itemsbuf[item_id].overrideFLAGS > 0 )
 	{
 		dummy->extend = 3;
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_TILEWIDTH ) {dummy->txsz = itemsbuf[item_id].tilew;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_TILEHEIGHT ) {dummy->tysz = itemsbuf[item_id].tileh;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_WIDTH ) {dummy->hit_width = itemsbuf[item_id].hxsz;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_HEIGHT ) {dummy->hit_height = itemsbuf[item_id].hysz;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_Z_HEIGHT ) {dummy->hzsz = itemsbuf[item_id].hzsz;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_X_OFFSET ) {dummy->hxofs = itemsbuf[item_id].hxofs;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_Y_OFFSET ) {dummy->hyofs = itemsbuf[item_id].hyofs;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_DRAW_X_OFFSET ) {dummy->xofs = itemsbuf[item_id].xofs;}
-		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_DRAW_Y_OFFSET ) {dummy->yofs = itemsbuf[item_id].yofs;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_TILEWIDTH     ) {dummy->txsz       = itemsbuf[item_id].tilew;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_TILEHEIGHT    ) {dummy->tysz       = itemsbuf[item_id].tileh;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_WIDTH     ) {dummy->hit_width  = itemsbuf[item_id].hxsz;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_HEIGHT    ) {dummy->hit_height = itemsbuf[item_id].hysz;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_Z_HEIGHT  ) {dummy->hzsz       = itemsbuf[item_id].hzsz;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_X_OFFSET  ) {dummy->hxofs      = itemsbuf[item_id].hxofs;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_HIT_Y_OFFSET  ) {dummy->hyofs      = itemsbuf[item_id].hyofs;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_DRAW_X_OFFSET ) {dummy->xofs       = itemsbuf[item_id].xofs;}
+		if ( itemsbuf[item_id].overrideFLAGS&itemdataOVERRIDE_DRAW_Y_OFFSET ) {dummy->yofs       = itemsbuf[item_id].yofs;}
 	}	    
 	
 	dummy->animate(0);
