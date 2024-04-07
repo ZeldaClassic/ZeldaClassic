@@ -25783,7 +25783,7 @@ static void allocate_crap()
 	
 	for(int32_t i=0; i<WAV_COUNT; i++)
 	{
-		if(sfx_string[i]!=NULL) delete sfx_string[i];
+		delete sfx_string[i];
 		customsfxdata[i].data=NULL;
 		sfx_string[i] = new char[36];
 		memset(sfx_string[i], 0, 36);
@@ -25791,21 +25791,21 @@ static void allocate_crap()
 	
 	for(int32_t i=0; i<MAXWPNS; i++)
 	{
-		if(weapon_string[i]!=NULL) delete weapon_string[i];
+		delete weapon_string[i];
 		weapon_string[i] = new char[64];
 		memset(weapon_string[i], 0, 64);
 	}
 	
 	for(int32_t i=0; i<MAXITEMS; i++)
 	{
-		if(item_string[i]!=NULL) delete item_string[i];
+		delete item_string[i];
 		item_string[i] = new char[64];
 		memset(item_string[i], 0, 64);
 	}
 	
 	for(int32_t i=0; i<eMAXGUYS; i++)
 	{
-		if(guy_string[i]!=NULL) delete guy_string[i];
+		delete guy_string[i];
 		guy_string[i] = new char[64];
 		memset(guy_string[i], 0, 64);
 	}
@@ -27703,11 +27703,8 @@ void quit_game()
     
     for(int32_t i=0; i<WAV_COUNT; i++)
     {
-        if(customsfxdata[i].data!=NULL)
-        {
 //      delete [] customsfxdata[i].data;
             free(customsfxdata[i].data);
-        }
         
         delete [] sfx_string[i];
     }
@@ -27731,59 +27728,59 @@ void quit_game()
     
     for(int32_t i=0; i<NUMSCRIPTFFC; i++)
     {
-        if(ffscripts[i]!=NULL) delete ffscripts[i];
+        delete ffscripts[i];
     }
     
     for(int32_t i=0; i<NUMSCRIPTITEM; i++)
     {
-        if(itemscripts[i]!=NULL) delete itemscripts[i];
+        delete itemscripts[i];
     }
     
     for(int32_t i=0; i<NUMSCRIPTGUYS; i++)
     {
-        if(guyscripts[i]!=NULL) delete guyscripts[i];
+        delete guyscripts[i];
     }
     
     for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
     {
-        if(lwpnscripts[i]!=NULL) delete lwpnscripts[i];
+        delete lwpnscripts[i];
     }
     
     for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
     {
-        if(ewpnscripts[i]!=NULL) delete ewpnscripts[i];
+        delete ewpnscripts[i];
     }
     
     for(int32_t i=0; i<NUMSCRIPTSCREEN; i++)
     {
-        if(screenscripts[i]!=NULL) delete screenscripts[i];
+        delete screenscripts[i];
     }
     
     for(int32_t i=0; i<3; i++) //should this be NUMSCRIPTGLOBAL or NUMSCRIPTGLOBALOLD? -Z
     {
-        if(globalscripts[i]!=NULL) delete globalscripts[i];
+        delete globalscripts[i];
     }
     
     for(int32_t i=0; i<NUMSCRIPTPLAYER; i++)
     {
-        if(playerscripts[i]!=NULL) delete playerscripts[i];
+        delete playerscripts[i];
     }
     
     for(int32_t i=0; i<NUMSCRIPTSDMAP; i++)
     {
-        if(dmapscripts[i]!=NULL) delete dmapscripts[i];
+        delete dmapscripts[i];
     }
     for(int32_t i=0; i<NUMSCRIPTSITEMSPRITE; i++)
     {
-        if(itemspritescripts[i]!=NULL) delete itemspritescripts[i];
+        delete itemspritescripts[i];
     }
     for(int32_t i=0; i<NUMSCRIPTSCOMBODATA; i++)
     {
-        if(comboscripts[i]!=NULL) delete comboscripts[i];
+        delete comboscripts[i];
     }
     for(int32_t i=0; i<NUMSCRIPTSSUBSCREEN; i++)
     {
-        if(subscreenscripts[i]!=NULL) delete subscreenscripts[i];
+        delete subscreenscripts[i];
     }
     
     al_trace("Cleaning qst buffers. \n");
@@ -27862,59 +27859,59 @@ void quit_game2()
     
     for(int32_t i=0; i<NUMSCRIPTFFC; i++)
     {
-        if(ffscripts[i]!=NULL) delete ffscripts[i];
+        delete ffscripts[i];
     }
     
     for(int32_t i=0; i<NUMSCRIPTITEM; i++)
     {
-        if(itemscripts[i]!=NULL) delete itemscripts[i];
+        delete itemscripts[i];
     }
     
     for(int32_t i=0; i<NUMSCRIPTGUYS; i++)
     {
-        if(guyscripts[i]!=NULL) delete guyscripts[i];
+        delete guyscripts[i];
     }
     
     for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
     {
-        if(lwpnscripts[i]!=NULL) delete lwpnscripts[i];
+        delete lwpnscripts[i];
     }
     
     for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
     {
-        if(ewpnscripts[i]!=NULL) delete ewpnscripts[i];
+        delete ewpnscripts[i];
     }
     
     for(int32_t i=0; i<NUMSCRIPTSCREEN; i++)
     {
-        if(screenscripts[i]!=NULL) delete screenscripts[i];
+        delete screenscripts[i];
     }
     
     for(int32_t i=0; i<3; i++) //should this be NUMSCRIPTGLOBAL or NUMSCRIPTGLOBALOLD? -Z
     {
-        if(globalscripts[i]!=NULL) delete globalscripts[i];
+        delete globalscripts[i];
     }
     
     for(int32_t i=0; i<NUMSCRIPTPLAYER; i++)
     {
-        if(playerscripts[i]!=NULL) delete playerscripts[i];
+        delete playerscripts[i];
     }
     
     for(int32_t i=0; i<NUMSCRIPTSDMAP; i++)
     {
-        if(dmapscripts[i]!=NULL) delete dmapscripts[i];
+        delete dmapscripts[i];
     }
     for(int32_t i=0; i<NUMSCRIPTSITEMSPRITE; i++)
     {
-        if(itemspritescripts[i]!=NULL) delete itemspritescripts[i];
+        delete itemspritescripts[i];
     }
     for(int32_t i=0; i<NUMSCRIPTSCOMBODATA; i++)
     {
-        if(comboscripts[i]!=NULL) delete comboscripts[i];
+        delete comboscripts[i];
     }
     for(int32_t i=0; i<NUMSCRIPTSSUBSCREEN; i++)
     {
-        if(subscreenscripts[i]!=NULL) delete subscreenscripts[i];
+        delete subscreenscripts[i];
     }
     
     al_trace("Cleaning qst buffers. \n");
