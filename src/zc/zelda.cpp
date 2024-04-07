@@ -5524,19 +5524,13 @@ void quit_game()
 	al_trace("Misc... \n");
 	
 	for(int32_t i=0; i<MAXWPNS; i++)
-	{
 		delete [] weapon_string[i];
-	}
 	
 	for(int32_t i=0; i<MAXITEMS; i++)
-	{
 		delete [] item_string[i];
-	}
 	
 	for(int32_t i=0; i<eMAXGUYS; i++)
-	{
 		delete [] guy_string[i];
-	}
 	
 	al_trace("Script buffers... \n");
 	
