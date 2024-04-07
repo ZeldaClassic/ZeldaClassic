@@ -18,20 +18,20 @@ DitherPickDialog::DitherPickDialog(byte& ditherTy, byte& ditherArg, byte& dither
 
 static GUI::ListData list_dithertype
 {
-	{ "Checkerboard", dithChecker },
-	{ "Criss-Cross", dithCrissCross },
+	{ "Checkerboard",  dithChecker },
+	{ "Criss-Cross",   dithCrissCross },
 	{ "Diagonal (\\)", dithDiagULDR },
-	{ "Diagonal (/)", dithDiagURDL },
-	{ "Rows", dithRow },
-	{ "Columns", dithCol },
-	{ "Dots", dithDots },
-	{ "Grid", dithGrid },
-	{ "Static 1", dithStatic },
-	{ "Static 2", dithStatic2 },
-	{ "Static 3", dithStatic3 },
-	{ "Dots 2", dithDots2 },
-	{ "Dots 3", dithDots3 },
-	{ "Dots 4", dithDots4 },
+	{ "Diagonal (/)",  dithDiagURDL },
+	{ "Rows",          dithRow },
+	{ "Columns",       dithCol },
+	{ "Dots",          dithDots },
+	{ "Grid",          dithGrid },
+	{ "Static 1",      dithStatic },
+	{ "Static 2",      dithStatic2 },
+	{ "Static 3",      dithStatic3 },
+	{ "Dots 2",        dithDots2 },
+	{ "Dots 3",        dithDots3 },
+	{ "Dots 4",        dithDots4 },
 };
 
 std::shared_ptr<GUI::Widget> DitherPickDialog::view()

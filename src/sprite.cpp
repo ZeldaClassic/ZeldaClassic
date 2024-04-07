@@ -2891,14 +2891,10 @@ bool insideRotRect(double x, double y, int32_t x1, int32_t y1, int32_t x2, int32
 	if(y < y1 && y < y3) return false;
 	if(y > y2 && y > y4) return false;
 
-	double slope1 = (y2-y1)/double(x2-x1);
-	double b1 = y1 - (slope1*x1);
-	double slope2 = (y4-y3)/double(x4-x3);
-	double b2 = y3 - (slope2*x3);
-	double slope3 = (y3-y1)/double(x3-x1);
-	double b3 = y3 - (slope3*x3);
-	double slope4 = (y4-y2)/double(x4-x2);
-	double b4 = y4 - (slope4*x4);
+	double slope1 = (y2-y1)/double(x2-x1); double b1 = y1 - (slope1*x1);
+	double slope2 = (y4-y3)/double(x4-x3); double b2 = y3 - (slope2*x3);
+	double slope3 = (y3-y1)/double(x3-x1); double b3 = y3 - (slope3*x3);
+	double slope4 = (y4-y2)/double(x4-x2); double b4 = y4 - (slope4*x4);
 	double l1y = slope1*x + b1;
 	double l2y = slope2*x + b2;
 	double l3y = slope3*x + b3;
