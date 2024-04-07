@@ -4,8 +4,7 @@
 
 namespace AutoPattern
 {
-
-	bool autopattern_replace::execute(int32_t exscreen, int32_t expos)
+	bool replace::execute(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -21,7 +20,7 @@ namespace AutoPattern
 		apply_changes();
 		return true;
 	}
-	bool autopattern_replace::erase(int32_t exscreen, int32_t expos)
+	bool replace::erase(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -37,7 +36,7 @@ namespace AutoPattern
 		apply_changes();
 		return true;
 	}
-	int32_t autopattern_replace::get_floating_cid(int32_t exscreen, int32_t expos)
+	int32_t replace::get_floating_cid(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -48,16 +47,16 @@ namespace AutoPattern
 		return ap->cid;
 	}
 
-	uint32_t autopattern_replace::slot_to_flags(int32_t slot)
+	uint32_t replace::slot_to_flags(int32_t slot)
 	{
 		return 0;
 	}
-	int32_t autopattern_replace::flags_to_slot(uint32_t flags)
+	int32_t replace::flags_to_slot(uint32_t flags)
 	{
 		return 0;
 	}
 
-	int32_t autopattern_replace::convert_cid(int32_t cid, bool revert)
+	int32_t replace::convert_cid(int32_t cid, bool revert)
 	{
 		for (int32_t q = revert ? 1 : 0; q < source->combos.size(); q += 2)
 		{

@@ -7603,7 +7603,7 @@ void draw_autocombo(int32_t pos, bool rclick, bool pressframe)
 			}
 			case AUTOCOMBO_REPLACE:
 			{
-				AutoPattern::autopattern_replace ap(ca.getType(), CurrentLayer, scr, pos, &ca);
+				AutoPattern::replace ap(ca.getType(), CurrentLayer, scr, pos, &ca);
 				if (rclick)
 					ap.erase(scr, pos);
 				else
@@ -7726,7 +7726,7 @@ int32_t get_autocombo_floating_cid(int32_t pos, bool clicked)
 			}
 			case AUTOCOMBO_REPLACE:
 			{
-				AutoPattern::autopattern_replace ap(ca.getType(), CurrentLayer, scr, pos, &ca);
+				AutoPattern::replace ap(ca.getType(), CurrentLayer, scr, pos, &ca);
 				cid = ap.get_floating_cid(scr, pos);
 				break;
 			}

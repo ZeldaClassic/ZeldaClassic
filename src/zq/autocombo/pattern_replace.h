@@ -7,11 +7,10 @@
 
 namespace AutoPattern
 {
-
-	class autopattern_replace : public autopattern_container
+	class replace : public autopattern_container
 	{
 	public:
-		explicit autopattern_replace(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource) :
+		explicit replace(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource) :
 			autopattern_container(ntype, nlayer, nbasescreen, nbasepos, nsource) {}
 		virtual bool execute(int32_t exscreen, int32_t expos) override;
 		virtual bool erase(int32_t exscreen, int32_t expos) override;
@@ -20,7 +19,6 @@ namespace AutoPattern
 		virtual int32_t flags_to_slot(uint32_t flags) override;
 		int32_t convert_cid(int32_t cid, bool revert);
 	};
-
 }
 
 #endif
