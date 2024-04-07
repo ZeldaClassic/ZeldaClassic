@@ -84,20 +84,20 @@ int32_t select_dropitem(int32_t item_set)
                 current_chance=0;
             }
 			
-			if(get_qr(qr_SMARTDROPS))
+		if(get_qr(qr_SMARTDROPS))
+		{
+			if(itemsbuf[current_item].amount > 0 && game->get_maxcounter(itemsbuf[current_item].count) == 0)
 			{
-				if(itemsbuf[current_item].amount > 0 && game->get_maxcounter(itemsbuf[current_item].count) == 0)
-				{
-					current_chance = 0;
-				}
+				current_chance = 0;
 			}
-			if(get_qr(qr_SMARTER_DROPS))
+		}
+		if(get_qr(qr_SMARTER_DROPS))
+		{
+			if(itemsbuf[current_item].amount > 0 && game->get_counter(itemsbuf[current_item].count) >= game->get_maxcounter(itemsbuf[current_item].count))
 			{
-				if(itemsbuf[current_item].amount > 0 && game->get_counter(itemsbuf[current_item].count) >= game->get_maxcounter(itemsbuf[current_item].count))
-				{
-					current_chance = 0;
-				}
+				current_chance = 0;
 			}
+		}
         }
         
         total_chance+=current_chance;

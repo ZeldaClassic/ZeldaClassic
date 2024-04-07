@@ -202,15 +202,15 @@ static bool CanComboTrigger(weapon *w)
 	int32_t wid = (w->useweapon > 0) ? w->useweapon : w->id;
 	switch(wid)
 	{
-		case wSword: case wBeam: case wBrang: case wBomb: case wSBomb: case wLitBomb: case wLitSBomb:
-		case wArrow: case wFire: case wWhistle: case wBait: case wWand: case wMagic: case wWind:
-		case wRefMagic: case wRefFireball: case wRefRock: case wHammer: case wHookshot:
-		case wFSparkle: case wSSparkle: case wCByrna: case wRefBeam: case wStomp:
-		case wScript1: case wScript2: case wScript3: case wScript4: case wScript5:
-		case wScript6: case wScript7: case wScript8: case wScript9: case wScript10:
+		case wSword:     case wBeam: case wBrang: case wBomb: case wSBomb: case wLitBomb: case wLitSBomb:
+		case wArrow:     case wFire: case wWhistle: case wBait: case wWand: case wMagic: case wWind:
+		case wRefMagic:  case wRefFireball: case wRefRock: case wHammer: case wHookshot:
+		case wFSparkle:  case wSSparkle: case wCByrna: case wRefBeam: case wStomp:
+		case wScript1:   case wScript2: case wScript3: case wScript4: case wScript5:
+		case wScript6:   case wScript7: case wScript8: case wScript9: case wScript10:
 		case ewFireball: case ewFireball2: case ewArrow: case ewBrang: case ewSword: case ewRock:
-		case ewMagic: case ewBomb: case ewSBomb: case ewLitBomb: case ewLitSBomb: case ewFireTrail:
-		case ewFlame: case ewWind: case ewFlame2: case wThrown:
+		case ewMagic:    case ewBomb: case ewSBomb: case ewLitBomb: case ewLitSBomb: case ewFireTrail:
+		case ewFlame:    case ewWind: case ewFlame2: case wThrown:
 		case wRefArrow: case wRefFire: case wRefFire2:
 			return true;
 	}
