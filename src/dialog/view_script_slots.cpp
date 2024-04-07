@@ -66,19 +66,19 @@ void ViewScriptSlotsDialog::UpdateSlotList(ScriptType t)
 
 void ViewScriptSlotsDialog::RebuildLists()
 {
-	list_ffcslots = GUI::ZCListData::slots_ffc_script(alphabetize, skipempty);
-	list_globalslots = GUI::ZCListData::slots_global_script(alphabetize, skipempty);
-	list_itemslots = GUI::ZCListData::slots_itemdata_script(alphabetize, skipempty);
-	list_npcslots = GUI::ZCListData::slots_npc_script(alphabetize, skipempty);
-	list_lweaponslots = GUI::ZCListData::slots_lweapon_script(alphabetize, skipempty);
-	list_eweaponslots = GUI::ZCListData::slots_eweapon_script(alphabetize, skipempty);
-	list_heroslots = GUI::ZCListData::slots_hero_script(alphabetize, skipempty);
-	list_dmapslots = GUI::ZCListData::slots_dmap_script(alphabetize, skipempty);
-	list_screenslots = GUI::ZCListData::slots_screen_script(alphabetize, skipempty);
+	list_ffcslots        = GUI::ZCListData::slots_ffc_script       (alphabetize, skipempty);
+	list_globalslots     = GUI::ZCListData::slots_global_script    (alphabetize, skipempty);
+	list_itemslots       = GUI::ZCListData::slots_itemdata_script  (alphabetize, skipempty);
+	list_npcslots        = GUI::ZCListData::slots_npc_script       (alphabetize, skipempty);
+	list_lweaponslots    = GUI::ZCListData::slots_lweapon_script   (alphabetize, skipempty);
+	list_eweaponslots    = GUI::ZCListData::slots_eweapon_script   (alphabetize, skipempty);
+	list_heroslots       = GUI::ZCListData::slots_hero_script      (alphabetize, skipempty);
+	list_dmapslots       = GUI::ZCListData::slots_dmap_script      (alphabetize, skipempty);
+	list_screenslots     = GUI::ZCListData::slots_screen_script    (alphabetize, skipempty);
 	list_itemspriteslots = GUI::ZCListData::slots_itemsprite_script(alphabetize, skipempty);
-	list_comboslots = GUI::ZCListData::slots_combo_script(alphabetize, skipempty);
-	list_genericslots = GUI::ZCListData::slots_generic_script(alphabetize, skipempty);
-	list_subscreenslots = GUI::ZCListData::slots_subscreen_script(alphabetize, skipempty);
+	list_comboslots      = GUI::ZCListData::slots_combo_script     (alphabetize, skipempty);
+	list_genericslots    = GUI::ZCListData::slots_generic_script   (alphabetize, skipempty);
+	list_subscreenslots  = GUI::ZCListData::slots_subscreen_script (alphabetize, skipempty);
 }
 
 std::shared_ptr<GUI::Widget> ViewScriptSlotsDialog::view()
