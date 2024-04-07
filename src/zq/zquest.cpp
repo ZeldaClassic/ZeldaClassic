@@ -3765,8 +3765,7 @@ bool getname_nogo(const char *prompt,const char *ext,EXT_LIST *list,const char *
     }
     
     //  int32_t ret = file_select_ex(prompt,temppath,ext,255,-1,-1);
-    int32_t ret=0;
-    int32_t sel=0;
+    int32_t ret;
     
     if(list==NULL)
     {
@@ -3774,6 +3773,7 @@ bool getname_nogo(const char *prompt,const char *ext,EXT_LIST *list,const char *
     }
     else
     {
+        int32_t sel=0;
         ret = jwin_file_browse_ex(prompt, temppath, list, &sel, 2048, -1, -1, get_zc_font(font_lfont));
     }
     
@@ -4108,11 +4108,11 @@ static int32_t gamemisc4_list[] =
 static TABPANEL gamemisc_tabs[] =
 {
     // (text)
-    { (char *)" Misc[0-7] ",     D_SELECTED, gamemisc1_list, 0, NULL },
-    { (char *)" Misc[8-15] ",     0,          gamemisc2_list, 0, NULL },
-    { (char *)" Misc[16-23] ",     0,          gamemisc3_list, 0, NULL },
-    { (char *)" Misc[24-31] ",     0,          gamemisc4_list, 0, NULL },
-    { NULL,              0,          NULL,            0, NULL }
+    { (char *)" Misc[0-7] ",   D_SELECTED, gamemisc1_list, 0, NULL },
+    { (char *)" Misc[8-15] ",  0,          gamemisc2_list, 0, NULL },
+    { (char *)" Misc[16-23] ", 0,          gamemisc3_list, 0, NULL },
+    { (char *)" Misc[24-31] ", 0,          gamemisc4_list, 0, NULL },
+    { NULL,                    0,          NULL,           0, NULL }
 };
 
 //to do: Make string boxes larger, and split into two tabs. 
@@ -4246,7 +4246,7 @@ static DIALOG gamemiscarray_dlg[] =
 	{ jwin_swapbtn_proc,    156,   162,    16,    16,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL },
 	{ jwin_swapbtn_proc,    156,   182,    16,    16,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL },
 	
-	{ NULL,                0,    0,    0,    0,  0,                   0,                      0,      0,          0,             0,       NULL,                           NULL,  NULL }
+	{ NULL,                   0,     0,     0,      0,  0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 void EditGameMiscArray()
@@ -4853,11 +4853,11 @@ static DIALOG loadmap_dlg[] =
     // 11
     {  jwin_button_proc,      42,    110,     61,     21,    vc(14),     vc(1),     13,    D_EXIT,     0,    0, (void *) "OK",                       NULL,   NULL  },
     {  jwin_button_proc,     122,    110,     61,     21,    vc(14),     vc(1),     27,    D_EXIT,     0,    0, (void *) "Cancel",                   NULL,   NULL  },
-    {  jwin_check_proc,       16,    88,     97,      9,    vc(14),     vc(1),      0,    0,          1,    0, (void *) "Save to Image",  NULL,   NULL  },
+    {  jwin_check_proc,       16,    88,      97,      9,    vc(14),     vc(1),      0,    0,          1,    0, (void *) "Save to Image",  NULL,   NULL  },
 	// 14
-	{  jwin_radio_proc,       16,    66,     97,      9,    vc(14),     vc(1),       0,    0,          0,    0, (void*)"2x  - 8192x2816",		   NULL,   NULL  },
-	{  jwin_radio_proc,       16,    76,     97,      9,    vc(14),     vc(1),       0,    0,          0,    0, (void*)"4x  - 16384x5632",		   NULL,   NULL  },
-	 {  NULL,                   0,     0,      0,      0,    0,          0,          0,    0,          0,    0,  NULL,                                NULL,   NULL  }
+    {  jwin_radio_proc,       16,    66,      97,      9,    vc(14),     vc(1),       0,    0,          0,    0, (void*)"2x  - 8192x2816",		   NULL,   NULL  },
+    {  jwin_radio_proc,       16,    76,      97,      9,    vc(14),     vc(1),       0,    0,          0,    0, (void*)"4x  - 16384x5632",		   NULL,   NULL  },
+    {  NULL,                   0,     0,      0,       0,    0,          0,           0,    0,          0,    0,  NULL,                                NULL,   NULL  }
 };
 
 int32_t load_the_map(bool skipmenu)
