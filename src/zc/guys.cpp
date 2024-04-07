@@ -1930,9 +1930,7 @@ void enemy::FireWeapon()
 		for(int32_t gc=0; gc<guys.Count(); gc++)
 		{
 			if((((enemy*)guys.spr(gc))->id) == dmisc3)
-			{
 				++bc;
-			}
 		}
 		
 		if(bc<=40)  // Not too many enemies
@@ -1962,9 +1960,7 @@ void enemy::FireWeapon()
 	case e1tSUMMONLAYER: // Summoner
 	{
 		if(count_layer_enemies()==0)
-		{
 			break;
-		}
 		
 		int32_t kids = guys.Count();
 		
@@ -2061,41 +2057,41 @@ int32_t weaponToDefence(int32_t wid)
 			//al_trace("Weapon resolved as a whistle, using edef: %s\n", "edefWhistle");
 			return edefWhistle;
 		}
-		case wBait: return edefBAIT;
-		case wWand: return edefWAND;
-		case wMagic: return edefMAGIC;
-		case wCatching: return -1;
-		case wWind: return edefWIND;
-		case wRefMagic: return edefREFMAGIC;
+		case wBait:        return edefBAIT;
+		case wWand:        return edefWAND;
+		case wMagic:       return edefMAGIC;
+		case wCatching:    return -1;
+		case wWind:        return edefWIND;
+		case wRefMagic:    return edefREFMAGIC;
 		case wRefFireball: return edefREFBALL;
-		case wRefRock: return edefREFROCK;
-		case wHammer: return edefHAMMER;
-		case wHookshot: return edefHOOKSHOT;
-		case wHSHandle: return edefHOOKSHOT;
-		case wHSChain: return edefHOOKSHOT;
-		case wSSparkle: return edefSPARKLE;
-		case wFSparkle:  return edefSPARKLE;
-		case wSmack: return -1; // is this the candle object?
-		case wPhantom:  return -1; //engine created visual effects. 
-		case wCByrna: return edefBYRNA;
-		case wRefBeam:  return edefREFBEAM;
-		case wStomp: return edefSTOMP;
-		case wScript1:  return edefSCRIPT01;
-		case wScript2:  return edefSCRIPT02;
-		case wScript3:  return edefSCRIPT03;
-		case wScript4: return edefSCRIPT04;
-		case wScript5:  return edefSCRIPT05;
-		case wScript6:  return edefSCRIPT06;
-		case wScript7:  return edefSCRIPT07;
-		case wScript8: return edefSCRIPT08;
-		case wScript9:  return edefSCRIPT09;
-		case wScript10:  return edefSCRIPT10;
-		case wIce:  return edefICE;
-		case wSound: return edefSONIC;
-		case wThrown: return edefTHROWN;
-		case wRefArrow: return edefREFARROW;
-		case wRefFire: return edefREFFIRE;
-		case wRefFire2: return edefREFFIRE2;
+		case wRefRock:     return edefREFROCK;
+		case wHammer:      return edefHAMMER;
+		case wHookshot:    return edefHOOKSHOT;
+		case wHSHandle:    return edefHOOKSHOT;
+		case wHSChain:     return edefHOOKSHOT;
+		case wSSparkle:    return edefSPARKLE;
+		case wFSparkle:    return edefSPARKLE;
+		case wSmack:       return -1; // is this the candle object?
+		case wPhantom:     return -1; //engine created visual effects. 
+		case wCByrna:      return edefBYRNA;
+		case wRefBeam:     return edefREFBEAM;
+		case wStomp:       return edefSTOMP;
+		case wScript1:     return edefSCRIPT01;
+		case wScript2:     return edefSCRIPT02;
+		case wScript3:     return edefSCRIPT03;
+		case wScript4:     return edefSCRIPT04;
+		case wScript5:     return edefSCRIPT05;
+		case wScript6:     return edefSCRIPT06;
+		case wScript7:     return edefSCRIPT07;
+		case wScript8:     return edefSCRIPT08;
+		case wScript9:     return edefSCRIPT09;
+		case wScript10:    return edefSCRIPT10;
+		case wIce:         return edefICE;
+		case wSound:       return edefSONIC;
+		case wThrown:      return edefTHROWN;
+		case wRefArrow:    return edefREFARROW;
+		case wRefFire:     return edefREFFIRE;
+		case wRefFire2:    return edefREFFIRE2;
 		//case wPot: return edefPOT;
 //		case wLitZap: return edefELECTRIC;
 //		case wZ3Sword: return edefZ3SWORD;
