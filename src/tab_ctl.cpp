@@ -197,7 +197,7 @@ bool do_icon_button_reset(int32_t x,int32_t y,int32_t w,int32_t h,int icon,int32
             }
         }
         
-		update_hw_screen(false);
+	update_hw_screen(false);
     }
     
     if(over)
@@ -216,7 +216,8 @@ int32_t tab_count(TABPANEL *panel)
 {
     int32_t i=0;
     
-    for (i = 0; panel[i].text; ++i); /* do nothing */
+    while (panel[i].text)
+            ++i;
     
     return i;
 }

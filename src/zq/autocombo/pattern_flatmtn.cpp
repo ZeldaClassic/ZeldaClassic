@@ -4,7 +4,7 @@
 namespace AutoPattern
 {
 
-	bool autopattern_flatmtn::execute(int32_t exscreen, int32_t expos)
+	bool flatmtn::execute(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -31,7 +31,7 @@ namespace AutoPattern
 		apply_changes();
 		return true;
 	}
-	bool autopattern_flatmtn::erase(int32_t exscreen, int32_t expos)
+	bool flatmtn::erase(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -59,7 +59,7 @@ namespace AutoPattern
 		apply_changes();
 		return true;
 	}
-	int32_t autopattern_flatmtn::get_floating_cid(int32_t exscreen, int32_t expos)
+	int32_t flatmtn::get_floating_cid(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -69,7 +69,7 @@ namespace AutoPattern
 		ap->set_cid(slot_to_cid_pair(flags_to_slot(ap->connflags)));
 		return ap->cid;
 	}
-	void autopattern_flatmtn::calculate_connections(apcombo* p)
+	void flatmtn::calculate_connections(apcombo* p)
 	{
 		p->connflags = 0;
 		for (int32_t q = 0; q < 4; ++q)
@@ -83,7 +83,7 @@ namespace AutoPattern
 				p->connflags |= (1 << q);
 		}
 	}
-	uint32_t autopattern_flatmtn::slot_to_flags(int32_t slot)
+	uint32_t flatmtn::slot_to_flags(int32_t slot)
 	{
 		switch (slot)
 		{
@@ -103,7 +103,7 @@ namespace AutoPattern
 			return U | D | L | R;
 		}
 	}
-	int32_t autopattern_flatmtn::flags_to_slot(uint32_t flags)
+	int32_t flatmtn::flags_to_slot(uint32_t flags)
 	{
 		switch (flags & 0xF)
 		{
