@@ -4,7 +4,6 @@
 
 namespace AutoPattern
 {
-
 	bool autopattern_dormtn::execute(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);

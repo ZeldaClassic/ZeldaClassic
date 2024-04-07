@@ -3,7 +3,6 @@
 
 namespace AutoPattern
 {
-
 	bool cakemtn::execute(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);

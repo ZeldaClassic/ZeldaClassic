@@ -6,12 +6,11 @@
 #include "zq/autocombo/autopattern_base.h"
 
 namespace AutoPattern
-{
-
-	class autopattern_basic : public autopattern_container
+{ 
+	class basic : public autopattern_container
 	{
 	public:
-		explicit autopattern_basic(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource) :
+		explicit basic(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource) :
 			autopattern_container(ntype, nlayer, nbasescreen, nbasepos, nsource), connectsolid(nsource->flags& ACF_CONNECTSOLID) {}
 		virtual bool execute(int32_t exscreen, int32_t expos) override;
 		virtual bool erase(int32_t exscreen, int32_t expos) override;
@@ -21,8 +20,7 @@ namespace AutoPattern
 		virtual int32_t flags_to_slot(uint32_t flags) override;
 	private:
 		bool connectsolid;
-	};
-
+	}; 
 }
 
 #endif
