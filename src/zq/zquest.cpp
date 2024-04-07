@@ -13565,8 +13565,8 @@ int32_t onUsedCombos()
         }
         else
         {
-			drawmap=Map.CurrScr()->layermap[layer-1]-1;
-			drawscr=Map.CurrScr()->layerscreen[layer-1];
+		drawmap=Map.CurrScr()->layermap[layer-1]-1;
+		drawscr=Map.CurrScr()->layerscreen[layer-1];
         }
 		mapscr* draw_mapscr = Map.AbsoluteScr(drawmap, drawscr);
 		if(!draw_mapscr) continue;
@@ -13714,11 +13714,11 @@ static ListData levelnum_list(levelnumlist, &font);
 static DIALOG screen_pal_dlg[] =
 {
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
-    { jwin_win_proc,      60-12,   40,   200-16,  96,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Select Palette", NULL, NULL },
+    { jwin_win_proc,       60-12,   40,   200-16,  96,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Select Palette", NULL, NULL },
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { jwin_droplist_proc, 72-12,   84+4,   161,  16,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0, (void *) &levelnum_list, NULL, NULL },
-    { jwin_button_proc,   70,   111,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
-    { jwin_button_proc,   150,  111,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
+    { jwin_droplist_proc,   72-12,   84+4,   161,  16,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0, (void *) &levelnum_list, NULL, NULL },
+    { jwin_button_proc,     70,   111,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
+    { jwin_button_proc,     150,  111,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
     { jwin_text_proc,       72-12,   60+4,  168,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Note: This does not affect how the", NULL, NULL },
     { jwin_text_proc,       72-12,   72+4,  168,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "room will be displayed in-game!", NULL, NULL },
     { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
@@ -13775,14 +13775,14 @@ int32_t onDecScrPal()
 		lpal_dsa();
 		return D_O_K;
 	}
-    restore_mouse();
-    int32_t c=Map.getcolor();
-    c+=511;
-    c=c%512;
-    Map.setcolor(c);
-    refresh(rALL);
+	restore_mouse();
+	int32_t c=Map.getcolor();
+	c+=511;
+	c=c%512;
+	Map.setcolor(c);
+	refresh(rALL);
 	saved = false;
-    return D_O_K;
+	return D_O_K;
 }
 
 int32_t onIncScrPal()
@@ -13792,14 +13792,14 @@ int32_t onIncScrPal()
 		lpal_dsa();
 		return D_O_K;
 	}
-    restore_mouse();
-    int32_t c=Map.getcolor();
-    c+=1;
-    c=c%512;
-    Map.setcolor(c);
-    refresh(rALL);
+	restore_mouse();
+	int32_t c=Map.getcolor();
+	c+=1;
+	c=c%512;
+	Map.setcolor(c);
+	refresh(rALL);
 	saved = false;
-    return D_O_K;
+	return D_O_K;
 }
 
 int32_t PalWrap(int32_t kX, int32_t const kLowerBound, int32_t const kUpperBound)
@@ -13819,15 +13819,15 @@ int32_t onDecScrPal16()
 		lpal_dsa();
 		return D_O_K;
 	}
-    restore_mouse(); 
-    int32_t c=Map.getcolor();
+	restore_mouse(); 
+	int32_t c=Map.getcolor();
       
-    c = PalWrap( ( c-0x10 ), 0, 511 );
+	c = PalWrap( ( c-0x10 ), 0, 511 );
      
-    Map.setcolor(c);
-    refresh(rALL);
+	Map.setcolor(c);
+	refresh(rALL);
 	saved = false;
-    return D_O_K;
+	return D_O_K;
 }
 
 int32_t onIncScrPal16()
@@ -13837,14 +13837,14 @@ int32_t onIncScrPal16()
 		lpal_dsa();
 		return D_O_K;
 	}
-    restore_mouse();
-    int32_t c=Map.getcolor();
+	restore_mouse();
+	int32_t c=Map.getcolor();
       	    
-    c = PalWrap( ( c+0x10 ), 0, 511 );
-    Map.setcolor(c);
-    refresh(rALL);
+	c = PalWrap( ( c+0x10 ), 0, 511 );
+	Map.setcolor(c);
+	refresh(rALL);
 	saved = false;
-    return D_O_K;
+	return D_O_K;
 }
 
 int32_t d_ndroplist_proc(int32_t msg,DIALOG *d,int32_t c)
