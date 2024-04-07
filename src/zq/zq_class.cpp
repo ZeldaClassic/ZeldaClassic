@@ -462,13 +462,13 @@ mapscr* zmap::AbsoluteScr(int32_t scr)
 {
 	if(unsigned(scr) >= MAPSCRS*getMapCount())
 		return nullptr;
-    return &TheMaps[scr];
+	return &TheMaps[scr];
 }
 mapscr* zmap::AbsoluteScr(int32_t map, int32_t scr)
 {
 	if(map < 0 || map >= getMapCount() || scr < 0 || scr >= MAPSCRS)
 		return nullptr;
-    return AbsoluteScr((map*MAPSCRS)+scr);
+	return AbsoluteScr((map*MAPSCRS)+scr);
 }
 void zmap::set_prvscr(int32_t map, int32_t scr)
 {

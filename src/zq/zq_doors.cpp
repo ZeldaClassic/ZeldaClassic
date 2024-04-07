@@ -106,22 +106,22 @@ static ListData doorcomboset_list(&doorcombosetlist, &font);
 
 static DIALOG door_select_dlg[] =
 {
-    /* (dialog proc)         (x)   (y)   (w)   (h)    (fg)                (bg)                 (key)      (flags)     (d1)           (d2)     (dp) */
-    { jwin_win_proc,         40,   32,   240,  164,   vc(14),              vc(1),                 0,       D_EXIT,     0,             0, (void *) "Select Door", NULL, NULL },
-    { d_timer_proc,           0,    0,     0,    0,   0,                   0,                     0,       0,          0,             0,       NULL, NULL, NULL },
-    { jwin_button_proc,     119,   87,    81,   15,   vc(14),              vc(9),                 0,       D_EXIT,     0,             0,       NULL, NULL, NULL },
-    { jwin_button_proc,     119,  117,    81,   15,   vc(14),              vc(9),                 0,       D_EXIT,     0,             0,       NULL, NULL, NULL },
-    { jwin_button_proc,      82,  102,    75,   15,   vc(14),              vc(9),                 0,       D_EXIT,     0,             0,       NULL, NULL, NULL },
-    //5
-	{ jwin_button_proc,     158,  102,    75,   15,   vc(14),              vc(9),                 0,       D_EXIT,     0,             0,       NULL, NULL, NULL },
-    { jwin_button_proc,      86,  171,    61,   21,   vc(14),              vc(1),                27,       D_EXIT,     0,             0, (void *) "O&K", NULL, NULL },
-    { jwin_button_proc,     170,  171,    61,   21,   vc(14),              vc(1),                27,       D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-    { jwin_text_proc,        64,  142,   120,    8,   vc(15),              vc(1),                 0,       0,          0,             0, (void *) "Door Combo Set:",                                   NULL, NULL },
-    { jwin_droplist_proc,    64,  150,   192,   16,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],    0,       D_EXIT,     1,             0, (void *) &doorcomboset_list,                                  NULL, NULL },
-    //10
-	{ jwin_text_proc,        48,   48,   150,    8,   vc(15),              vc(1),                 0,       0,          0,             0, (void *) "Note: This only applies to 'NES Dungeon' screens!", NULL, NULL },
-    { jwin_button_proc,     119,   64,    81,   15,   vc(14),              vc(1),                27,       D_EXIT,     0,             0, (void *) "Clear", NULL, NULL },
-    { NULL,                   0,    0,     0,    0,   0,                   0,                     0,       0,          0,             0,       NULL,                                                         NULL, NULL }
+	/* (dialog proc)       (x)   (y)   (w)   (h)    (fg)               (bg)               (key)      (flags)     (d1)     (d2)     (dp) */
+	{ jwin_win_proc,       40,   32,   240,  164,   vc(14),             vc(1),               0,       D_EXIT,     0,      0, (void *) "Select Door", NULL, NULL },
+	{ d_timer_proc,         0,    0,     0,    0,   0,                  0,                   0,       0,          0,      0,       NULL, NULL, NULL },
+	{ jwin_button_proc,   119,   87,    81,   15,   vc(14),             vc(9),               0,       D_EXIT,     0,      0,       NULL, NULL, NULL },
+	{ jwin_button_proc,   119,  117,    81,   15,   vc(14),             vc(9),               0,       D_EXIT,     0,      0,       NULL, NULL, NULL },
+	{ jwin_button_proc,    82,  102,    75,   15,   vc(14),             vc(9),               0,       D_EXIT,     0,      0,       NULL, NULL, NULL },
+	//5
+	{ jwin_button_proc,   158,  102,    75,   15,   vc(14),             vc(9),               0,       D_EXIT,     0,      0,       NULL, NULL, NULL },
+	{ jwin_button_proc,    86,  171,    61,   21,   vc(14),             vc(1),              27,       D_EXIT,     0,      0, (void *) "O&K", NULL, NULL },
+	{ jwin_button_proc,   170,  171,    61,   21,   vc(14),             vc(1),              27,       D_EXIT,     0,      0, (void *) "Cancel", NULL, NULL },
+	{ jwin_text_proc,      64,  142,   120,    8,   vc(15),             vc(1),               0,       0,          0,      0, (void *) "Door Combo Set:",                                   NULL, NULL },
+	{ jwin_droplist_proc,  64,  150,   192,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       D_EXIT,     1,      0, (void *) &doorcomboset_list,                                  NULL, NULL },
+	//10
+	{ jwin_text_proc,      48,   48,   150,    8,   vc(15),             vc(1),               0,       0,          0,      0, (void *) "Note: This only applies to 'NES Dungeon' screens!", NULL, NULL },
+	{ jwin_button_proc,   119,   64,    81,   15,   vc(14),             vc(1),              27,       D_EXIT,     0,      0, (void *) "Clear", NULL, NULL },
+	{ NULL,                 0,    0,     0,    0,   0,                  0,                   0,       0,          0,      0,       NULL,                                                         NULL, NULL }
 };
 
 
