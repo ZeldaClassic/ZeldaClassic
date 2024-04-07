@@ -15095,9 +15095,8 @@ int32_t readsomedmaps(PACKFILE *f)
 
 int32_t writeonedmap(PACKFILE *f, int32_t i)
 {
-    
-    dword section_version=V_DMAPS;
-    dword section_cversion=CV_DMAPS;
+	dword section_version=V_DMAPS;
+	dword section_cversion=CV_DMAPS;
 	int32_t zversion = ZELDA_VERSION;
 	int32_t zbuild = VERSION_BUILD;
 	
@@ -15126,7 +15125,6 @@ int32_t writeonedmap(PACKFILE *f, int32_t i)
 	}
     
    
-        
             if(!p_putc(DMaps[i].map,f))
             {
                 new_return(6);
@@ -15419,21 +15417,13 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
 	if ( datatype_version < 0 )
 	{
 		if(!p_igetl(&max,f))
-		{
 			return 0;
-		}
 		if(!p_igetl(&first,f))
-		{
 			return 0;
-		}
 		if(!p_igetl(&last,f))
-		{
 			return 0;
-		}
 		if(!p_igetl(&count,f))
-		{
 			return 0;
-		}
 	}
 	if ( zversion > ZELDA_VERSION )
 	{
@@ -15458,44 +15448,28 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
    
         
             if(!p_getc(&tempdmap.map,f))
-            {
                 return 0;
-            }
             
             if(!p_igetw(&tempdmap.level,f))
-            {
                 return 0;
-            }
             
             if(!p_getc(&tempdmap.xoff,f))
-            {
                 return 0;
-            }
             
             if(!p_getc(&tempdmap.compass,f))
-            {
                 return 0;
-            }
             
             if(!p_igetw(&tempdmap.color,f))
-            {
                 return 0;
-            }
             
             if(!p_getc(&tempdmap.midi,f))
-            {
                 return 0;
-            }
             
             if(!p_getc(&tempdmap.cont,f))
-            {
                 return 0;
-            }
             
             if(!p_getc(&tempdmap.type,f))
-            {
                 return 0;
-            }
             
             for(int32_t j=0; j<8; j++)
             {
@@ -15529,74 +15503,46 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
 			}
 
             if(!pfread(&tempdmap.title,sizeof(DMaps[0].title),f))
-            {
                 return 0;
-            }
             
             if(!pfread(&tempdmap.intro,sizeof(DMaps[0].intro),f))
-            {
                 return 0;
-            }
             
             if(!p_igetl(&tempdmap.minimap_1_tile,f))
-            {
                 return 0;
-            }
             
             if(!p_getc(&tempdmap.minimap_1_cset,f))
-            {
                 return 0;
-            }
             
             if(!p_igetl(&tempdmap.minimap_2_tile,f))
-            {
                 return 0;
-            }
             
             if(!p_getc(&tempdmap.minimap_2_cset,f))
-            {
                 return 0;
-            }
             
             if(!p_igetl(&tempdmap.largemap_1_tile,f))
-            {
                 return 0;
-            }
             
             if(!p_getc(&tempdmap.largemap_1_cset,f))
-            {
                 return 0;
-            }
             
             if(!p_igetl(&tempdmap.largemap_2_tile,f))
-            {
                 return 0;
-            }
             
             if(!p_getc(&tempdmap.largemap_2_cset,f))
-            {
                 return 0;
-            }
             
             if(!pfread(&tempdmap.tmusic,sizeof(DMaps[0].tmusic),f))
-            {
                 return 0;
-            }
             
             if(!p_getc(&tempdmap.tmusictrack,f))
-            {
                 return 0;
-            }
             
             if(!p_getc(&tempdmap.active_subscreen,f))
-            {
                 return 0;
-            }
             
             if(!p_getc(&tempdmap.passive_subscreen,f))
-            {
                 return 0;
-            }
             
             byte disabled[32];
 	    memset(disabled,0,32);
