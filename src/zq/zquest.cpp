@@ -8254,102 +8254,102 @@ void draw(bool justcset)
 void replace(int32_t c)
 {
 	int32_t cid = Combo;
-    int8_t cs = CSet;
+	int8_t cs = CSet;
 	combo_pool const& pool = combo_pools[combo_pool_pos];
 	if(draw_mode == DM_CPOOL && !pool.valid())
 		return;
 	
-    saved=false;
-    int32_t drawmap, drawscr;
+	saved=false;
+	int32_t drawmap, drawscr;
     
-    if(CurrentLayer==0)
-    {
-        drawmap=Map.getCurrMap();
-        drawscr=Map.getCurrScr();
-    }
-    else
-    {
-        drawmap=Map.CurrScr()->layermap[CurrentLayer-1]-1;
-        drawscr=Map.CurrScr()->layerscreen[CurrentLayer-1];
-    }
+	if(CurrentLayer==0)
+	{
+		drawmap=Map.getCurrMap();
+		drawscr=Map.getCurrScr();
+	}
+	else
+	{
+		drawmap=Map.CurrScr()->layermap[CurrentLayer-1]-1;
+		drawscr=Map.CurrScr()->layerscreen[CurrentLayer-1];
+	}
 	mapscr* draw_mapscr = Map.AbsoluteScr(drawmap, drawscr);
 	if(!draw_mapscr) return;
     
-    int32_t targetcombo = draw_mapscr->data[c];
-    int32_t targetcset  = draw_mapscr->cset[c];
+	int32_t targetcombo = draw_mapscr->data[c];
+	int32_t targetcset  = draw_mapscr->cset[c];
     
-    Map.StartListCommand();
-    if(key[KEY_LSHIFT] || key[KEY_RSHIFT])
-    {
-        for(int32_t i=0; i<176; i++)
-        {
-            if((draw_mapscr->cset[i])==targetcset)
-            {
-				if(draw_mode == DM_CPOOL)
-					pool.pick(cid,cs);
-                Map.DoSetComboCommand(drawmap, drawscr, i, -1, cs);
-            }
-        }
-    }
-    else
-    {
-        for(int32_t i=0; i<176; i++)
-        {
-            if(((draw_mapscr->data[i])==targetcombo) &&
-                    ((draw_mapscr->cset[i])==targetcset))
-            {
-				if(draw_mode == DM_CPOOL)
-					pool.pick(cid,cs);
-                Map.DoSetComboCommand(drawmap, drawscr, i, cid, cs);
-            }
-        }
-    }
-    Map.FinishListCommand();
+	Map.StartListCommand();
+	if(key[KEY_LSHIFT] || key[KEY_RSHIFT])
+	{
+		for(int32_t i=0; i<176; i++)
+		{
+		    if((draw_mapscr->cset[i])==targetcset)
+		    {
+					if(draw_mode == DM_CPOOL)
+						pool.pick(cid,cs);
+			Map.DoSetComboCommand(drawmap, drawscr, i, -1, cs);
+		    }
+		}
+	}
+	else
+	{
+		for(int32_t i=0; i<176; i++)
+		{
+		    if(((draw_mapscr->data[i])==targetcombo) &&
+			    ((draw_mapscr->cset[i])==targetcset))
+		    {
+					if(draw_mode == DM_CPOOL)
+						pool.pick(cid,cs);
+			Map.DoSetComboCommand(drawmap, drawscr, i, cid, cs);
+		    }
+		}
+	}
+	Map.FinishListCommand();
     
-    refresh(rMAP);
+	refresh(rMAP);
 }
 
 void draw_block(int32_t start,int32_t w,int32_t h)
 {
 	int32_t cid = Combo;
-    int8_t cs = CSet;
+	int8_t cs = CSet;
 	if(draw_mode == DM_CPOOL)
 	{
 		combo_pool const& pool = combo_pools[combo_pool_pos];
 		if(!pool.pick(cid,cs)) return;
 	}
-    saved=false;
-    int32_t drawmap, drawscr;
+	saved=false;
+	int32_t drawmap, drawscr;
     
-    if(CurrentLayer==0)
-    {
-        drawmap=Map.getCurrMap();
-        drawscr=Map.getCurrScr();
-    }
-    else
-    {
-        drawmap=Map.CurrScr()->layermap[CurrentLayer-1]-1;
-        drawscr=Map.CurrScr()->layerscreen[CurrentLayer-1];
-    }
+	if(CurrentLayer==0)
+	{
+		drawmap=Map.getCurrMap();
+		drawscr=Map.getCurrScr();
+	}
+	else
+	{
+		drawmap=Map.CurrScr()->layermap[CurrentLayer-1]-1;
+		drawscr=Map.CurrScr()->layerscreen[CurrentLayer-1];
+	}
 	mapscr* draw_mapscr = Map.AbsoluteScr(drawmap, drawscr);
 	if(!draw_mapscr) return;
     
-    if(!(draw_mapscr->valid&mVALID))
-    {
-        Map.CurrScr()->valid|=mVALID;
-        draw_mapscr->valid|=mVALID;
-        Map.setcolor(Color);
-    }
+	if(!(draw_mapscr->valid&mVALID))
+	{
+		Map.CurrScr()->valid|=mVALID;
+		draw_mapscr->valid|=mVALID;
+		Map.setcolor(Color);
+	}
     
-    Map.StartListCommand();
-    for(int32_t y=0; y<h && (y<<4)+start < 176; y++)
+	Map.StartListCommand();
+	for(int32_t y=0; y<h && (y<<4)+start < 176; y++)
         for(int32_t x=0; x<w && (start&15)+x < 16; x++)
         {
             Map.DoSetComboCommand(drawmap, drawscr, start+(y<<4)+x, cid+(y*4)+x, cs);
         }
     
-    Map.FinishListCommand();
-    refresh(rMAP+rSCRMAP);
+	Map.FinishListCommand();
+	refresh(rMAP+rSCRMAP);
 }
 
 static void fill(int32_t map, int32_t screen_index, mapscr* fillscr, int32_t targetcombo, int32_t targetcset, int32_t sx, int32_t sy, int32_t dir, int32_t diagonal, bool only_cset, bool* filled_combos)
@@ -8459,7 +8459,7 @@ static void fill_flag(int32_t map, int32_t screen_index, mapscr* fillscr, int32_
 	if((fillscr->sflag[((sy<<4)+sx)])!=targetflag)
 		return;
 	
-    Map.DoSetFlagCommand(map, screen_index, (sy<<4)+sx, Flag);
+	Map.DoSetFlagCommand(map, screen_index, (sy<<4)+sx, Flag);
 	
 	if((sy>0) && (dir!=down))
 		fill_flag(map, screen_index, fillscr, targetflag, sx, sy-1, up, diagonal);
