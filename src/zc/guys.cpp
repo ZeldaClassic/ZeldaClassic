@@ -136,9 +136,7 @@ int32_t random_layer_enemy()
 	int32_t cnt=count_layer_enemies();
 	
 	if(cnt==0)
-	{
 		return eNONE;
-	}
 	
 	int32_t ret=zc_oldrand()%cnt;
 	cnt=0;
@@ -154,9 +152,7 @@ int32_t random_layer_enemy()
 				if(layerscreen->enemy[j]>0&&layerscreen->enemy[j]<MAXGUYS)
 				{
 					if(cnt==ret)
-					{
 						return layerscreen->enemy[j];
-					}
 					
 					++cnt;
 				}
@@ -180,9 +176,7 @@ int32_t count_layer_enemies()
 			for(int32_t j=0; j<10; ++j)
 			{
 				if(layerscreen->enemy[j]!=0)
-				{
 					++cnt;
-				}
 			}
 		}
 	}
@@ -218,7 +212,7 @@ int32_t hero_on_wall()
 
 bool tooclose(int32_t x,int32_t y,int32_t d)
 {
-	return (abs(int32_t(HeroX())-x)<d && abs(int32_t(HeroY())-y)<d);
+	return abs(int32_t(HeroX())-x)<d && abs(int32_t(HeroY())-y)<d;
 }
 
 bool enemy::overpit(enemy *e)
@@ -317,13 +311,13 @@ bool flyerblocked(int32_t dx, int32_t dy, int32_t special, guydata const& gd)
 {
 	bool pit_blocks = (!(gd.moveflags & FLAG_CAN_PITWALK) && !(gd.moveflags & FLAG_CAN_PITFALL));
 	bool water_blocks = !(gd.moveflags & FLAG_CAN_WATERWALK);
-	return ((special==spw_floater)&&
+	return (special==spw_floater)&&
 			((COMBOTYPE(dx,dy)==cNOFLYZONE)||
 			 (combo_class_buf[COMBOTYPE(dx,dy)].block_enemies&4)||
 			 (MAPFLAG(dx,dy)==mfNOENEMY)||
 			 (MAPCOMBOFLAG(dx,dy)==mfNOENEMY)||
 			 (water_blocks && iswaterex(MAPCOMBO(dx,dy), currmap, currscr, -1, dx, dy, false, false, true)) ||
-			 (pit_blocks && ispitfall(dx,dy))));
+			 (pit_blocks && ispitfall(dx,dy)));
 }
 
 /**********************************/
@@ -461,14 +455,10 @@ enemy::enemy(zfix X,zfix Y,int32_t Id,int32_t Clk) : sprite()
 	
 	
 	if(bosspal>-1)
-	{
 		loadpalset(csBOSS,pSprite(bosspal));
-	}
 	
 	if(bgsfx>-1)
-	{
 		cont_sfx(bgsfx);
-	}
 	
 	if(get_qr(qr_NEWENEMYTILES))
 	{
@@ -524,9 +514,9 @@ enemy::enemy(zfix X,zfix Y,int32_t Id,int32_t Clk) : sprite()
 	if ( ((d->SIZEflags&guyflagOVERRIDE_HIT_HEIGHT) != 0) && d->hysz >= 0 ) hit_height = d->hysz;
 	if ( ((d->SIZEflags&guyflagOVERRIDE_HIT_Z_HEIGHT) != 0) && d->hzsz >= 0  ) hzsz = d->hzsz;
 	if ( (d->SIZEflags&guyflagOVERRIDE_HIT_X_OFFSET) != 0 ) hxofs = d->hxofs;
-	if (  (d->SIZEflags&guyflagOVERRIDE_HIT_Y_OFFSET) != 0 ) hyofs = d->hyofs;
+	if ( (d->SIZEflags&guyflagOVERRIDE_HIT_Y_OFFSET) != 0 ) hyofs = d->hyofs;
 //    if ( (d->SIZEflags&guyflagOVERRIDEHITZOFFSET) != 0 ) hzofs = d->hzofs;
-	if (  (d->SIZEflags&guyflagOVERRIDE_DRAW_X_OFFSET) != 0 ) xofs = (int32_t)d->xofs;
+	if ( (d->SIZEflags&guyflagOVERRIDE_DRAW_X_OFFSET) != 0 ) xofs = (int32_t)d->xofs;
 	if ( (d->SIZEflags&guyflagOVERRIDE_DRAW_Y_OFFSET) != 0 ) 
 	{
 		yofs = (int32_t)d->yofs; //This seems to be setting to +48 or something with any value set?! -Z
@@ -1128,9 +1118,7 @@ bool enemy::animate(int32_t index)
 			if (!didScriptThisFrame)
 			{
 				if (runscript_do_earlyret(run_script(MODE_NORMAL)))
-				{
 					return 0; //Avoid NULLPO if this object deleted itself
-				}
 			}
 		}
 		return false;
@@ -1186,9 +1174,7 @@ bool enemy::animate(int32_t index)
 	int32_t ny = real_y(y);
 	
 	if(ox!=nx || oy!=ny)
-	{
 		posframe=(posframe+1)%(get_qr(qr_NEWENEMYTILES)?4:2);
-	}
 	
 	ox = nx;
 	oy = ny;
@@ -1319,16 +1305,12 @@ bool enemy::animate(int32_t index)
 	if(!isSideViewGravity() && (moveflags & FLAG_CAN_PITFALL))
 	{
 		if(can_pitfall() && ((z <= 0 && fakez <= 0 && !isflier(id)) || (isflier(id) && (stunclk))) && !superman)
-		{
 			fallCombo = check_pits();
-		}
 	}
 	if(!isSideViewGravity() && (moveflags & FLAG_CAN_WATERDROWN))
 	{
 		if(can_pitfall() && ((z <= 0 && fakez <= 0 && !isflier(id)) || (isflier(id) && (stunclk))) && !superman)
-		{
 			drownCombo = check_water();
-		}
 	}
 	
 	runKnockback(); //scripted knockback handling
@@ -1359,9 +1341,7 @@ bool enemy::animate(int32_t index)
 	if (!didScriptThisFrame)
 	{
 		if (runscript_do_earlyret(run_script(MODE_NORMAL)))
-		{
 			return 0; //Avoid NULLPO if this object deleted itself
-		}
 	}
 	
 	// returns true when enemy is defeated
