@@ -2907,8 +2907,7 @@ int32_t ffparse(char const* string)
 		ret-=atoi(ptr);
 	else ret+=atoi(ptr);
 	
-	if(tempstring1) //may be safer
-		free(tempstring1);
+	free(tempstring1);
 	return ret;
 }
 bool ffcheck(char const* arg)
