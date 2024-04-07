@@ -245,11 +245,11 @@ void put_msg_str(char const* s, int32_t x, int32_t y, MsgStr const* str, int32_t
 					
 					case MSGC_DRAWTILE:
 					{
-						int32_t tl = grab_next_argument(s2, &i);
-						int32_t cs = grab_next_argument(s2, &i);
+						int32_t tl    = grab_next_argument(s2, &i);
+						int32_t cs    = grab_next_argument(s2, &i);
 						int32_t t_wid = grab_next_argument(s2, &i);
 						int32_t t_hei = grab_next_argument(s2, &i);
-						int32_t fl = grab_next_argument(s2, &i);
+						int32_t fl    = grab_next_argument(s2, &i);
 						
 						if(cursor_x+str->hspace + t_wid > w-msg_margins[right])
 						{
@@ -269,11 +269,11 @@ void put_msg_str(char const* s, int32_t x, int32_t y, MsgStr const* str, int32_t
 					
 					case MSGC_SETUPMENU:
 					{
-						_menu_tl = grab_next_argument(s2, &i);
-						_menu_cs = grab_next_argument(s2, &i);
+						_menu_tl    = grab_next_argument(s2, &i);
+						_menu_cs    = grab_next_argument(s2, &i);
 						_menu_t_wid = grab_next_argument(s2, &i);
 						_menu_t_hei = grab_next_argument(s2, &i);
-						_menu_fl = grab_next_argument(s2, &i);
+						_menu_fl    = grab_next_argument(s2, &i);
 						break;
 					}
 					case MSGC_MENUCHOICE:

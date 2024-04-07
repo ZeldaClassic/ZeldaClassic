@@ -137,8 +137,6 @@ void gamedata::set_counter(word change, byte c)
 	}
 	else
 		_counter[c]=zc_max(change, 0);
-		
-	return;
 }
 
 void gamedata::change_counter(int16_t change, byte c)
@@ -162,8 +160,6 @@ void gamedata::change_counter(int16_t change, byte c)
 	}
 	else
 		_counter[c]=vbound(_counter[c]+change, 0, _maxcounter[c]);
-		
-	return;
 }
 
 word gamedata::get_maxcounter(byte c) const
@@ -192,7 +188,6 @@ void gamedata::set_maxcounter(word change, byte c)
         return;
         
     _maxcounter[c]=change;
-    return;
 }
 
 void gamedata::change_maxcounter(int16_t change, byte c)
@@ -211,7 +206,6 @@ void gamedata::change_maxcounter(int16_t change, byte c)
         return;
         
     _maxcounter[c]=zc_max(0, _maxcounter[c]+change);
-    return;
 }
 
 int16_t gamedata::get_dcounter(byte c) const
@@ -244,8 +238,6 @@ void gamedata::set_dcounter(int16_t change, byte c)
     }
     else
         _dcounter[c]=change;
-        
-    return;
 }
 
 void gamedata::change_dcounter(int16_t change, byte c)
@@ -844,8 +836,8 @@ void gamedata::set_spriteflickertransp(byte val)
 
 void gamedata::set_item(int32_t id, bool value)
 {
-    set_item_no_flush(id, value);
-    flushItemCache();
+	set_item_no_flush(id, value);
+	flushItemCache();
 }
 
 void gamedata::set_item_no_flush(int32_t id, bool value)

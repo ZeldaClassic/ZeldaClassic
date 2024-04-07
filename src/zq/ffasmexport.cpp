@@ -121,4 +121,3 @@ void write_script(FILE* dest, script_data const* script)
 {
 	write_script(dest, disassemble_script(script));
 }
-
