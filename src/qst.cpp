@@ -475,10 +475,6 @@ bool find_section(PACKFILE *f, int32_t section_id_requested)
     return false;
 }
 
-
-
-
-
 bool valid_zqt(PACKFILE *f)
 {
     //word tiles_used;
