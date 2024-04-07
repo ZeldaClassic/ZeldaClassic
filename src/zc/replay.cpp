@@ -381,7 +381,7 @@ struct MouseReplayStep : ReplayStep
 struct StateReplayStep : ReplayStep
 {
 	ReplayStateType state_type;
-    int value;
+	int value;
 
 	StateReplayStep(int frame, ReplayStateType state_type, int value) : ReplayStep(frame, TypeState), state_type(state_type), value(value)
 	{
@@ -438,13 +438,9 @@ static bool steps_are_equal(const ReplayStep* step1, const ReplayStep* step2)
 	bool are_equal = false;
 
 	if (step1 == nullptr && step2 == nullptr)
-	{
 		are_equal = true;
-	}
 	else if (step1 == nullptr || step2 == nullptr || step1->frame != step2->frame || step1->type != step2->type)
-	{
 		are_equal = false;
-	}
 	else
 		switch (step2->type)
 		{
@@ -962,7 +958,7 @@ static void save_result(bool stopped = false, bool changed = false)
 		out << fmt::format("unexpected_gfx_segments: {}", segments_to_string(unexpected_gfx_segments)) << '\n';
 	if (has_assert_failed && !unexpected_gfx_segments_limited.empty())
 		out << fmt::format("unexpected_gfx_segments_limited: {}", segments_to_string(unexpected_gfx_segments_limited)) << '\n';
-    out << fmt::format("stopped: {}", stopped) << '\n';
+	out << fmt::format("stopped: {}", stopped) << '\n';
 
 	out.close();
 }
@@ -1211,7 +1207,7 @@ void replay_start(ReplayMode mode_, std::filesystem::path path, int frame)
     current_mouse_state = {0, 0, 0, 0};
     replay_log.clear();
     record_log.clear();
-	snapshot_frames.clear();
+    snapshot_frames.clear();
     framebuf_history_index = 0;
     version_use_latest = false;
     replay_forget_input();
@@ -1254,9 +1250,7 @@ void replay_start(ReplayMode mode_, std::filesystem::path path, int frame)
     }
 
     if (replay_is_recording() && version >= 5)
-    {
         record_log.push_back(std::make_shared<KeyMapReplayStep>(0, KeyMapReplayStep::current.button_keys));
-    }
 
     save_result();
 }
@@ -1650,7 +1644,7 @@ void replay_stop()
     {
         if (framebuf_history[i].bitmap)
 		{
-            destroy_bitmap(framebuf_history[i].bitmap);
+		    destroy_bitmap(framebuf_history[i].bitmap);
 			framebuf_history[i].bitmap = nullptr;
 		}
     }
@@ -1950,16 +1944,12 @@ int replay_get_version()
 bool replay_version_check(int min, int max)
 {
 	if (!replay_is_active())
-	{
 		return max == -1;
-	}
 
 	if (max == -1)
-	{
 		return version >= min;
-	}
 
-    return version >= min && version < max;
+	return version >= min && version < max;
 }
 
 int replay_get_frame()
@@ -1995,18 +1985,18 @@ std::string replay_get_buttons_string()
 
 bool replay_is_active()
 {
-    return mode != ReplayMode::Off;
+	return mode != ReplayMode::Off;
 }
 
 void replay_set_debug(bool enable_debug)
 {
-    debug = enable_debug;
-    replay_set_meta_bool("debug", debug);
+	debug = enable_debug;
+	replay_set_meta_bool("debug", debug);
 }
 
 bool replay_is_debug()
 {
-    return mode != ReplayMode::Off && debug;
+	return mode != ReplayMode::Off && debug;
 }
 
 void replay_set_snapshot_all_frames(bool enable_snapshot_all_frames)
@@ -2021,18 +2011,18 @@ bool replay_is_snapshot_all_frames()
 
 void replay_set_sync_rng(bool enable)
 {
-    sync_rng = enable;
-    replay_set_meta_bool("sync_rng", sync_rng);
+	sync_rng = enable;
+	replay_set_meta_bool("sync_rng", sync_rng);
 }
 
 bool replay_is_replaying()
 {
-    return mode == ReplayMode::Replay || mode == ReplayMode::Assert || mode == ReplayMode::Update;
+	return mode == ReplayMode::Replay || mode == ReplayMode::Assert || mode == ReplayMode::Update;
 }
 
 bool replay_is_recording()
 {
-    return mode == ReplayMode::Record || mode == ReplayMode::Assert || mode == ReplayMode::Update || mode == ReplayMode::ManualTakeover;
+	return mode == ReplayMode::Record || mode == ReplayMode::Assert || mode == ReplayMode::Update || mode == ReplayMode::ManualTakeover;
 }
 
 void replay_set_frame_arg(int frame)
@@ -2175,9 +2165,7 @@ int replay_get_state(ReplayStateType state_type, int fn())
 	}
 
 	if (replay_is_recording())
-	{
 		record_log.push_back(std::make_shared<StateReplayStep>(frame_count, state_type, value));
-	}
 
 	return value;
 }

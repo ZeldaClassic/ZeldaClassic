@@ -253,9 +253,7 @@ static int32_t read_saves(ReadMode read_mode, PACKFILE* f, std::vector<save_t>& 
 		}
 		
 		if(!p_getc(&tempbyte,f))
-		{
 			return 17;
-		}
 		
 		if (section_version < 24) tempbyte = (tempbyte ? DIDCHEAT_BIT : 0);
 		game._cheat = tempbyte;
@@ -272,33 +270,23 @@ static int32_t read_saves(ReadMode read_mode, PACKFILE* f, std::vector<save_t>& 
 		
 		size_t versz = section_version<31 ? 9 : 16;
 		if(!p_getstr(game.version,versz,f))
-		{
 			return 20;
-		}
 
 		if (!p_getstr(&game.header.title,65,f))
-		{
 			return 21;
-		}
 		
 		if(!p_getc(&tempbyte,f))
-		{
 			return 22;
-		}
 		
 		game.set_hasplayed(tempbyte);
 		
 		if(!p_igetl(&tempdword,f))
-		{
 			return 23;
-		}
 		
 		game.set_time(tempdword);
 		
 		if(!p_getc(&tempbyte,f))
-		{
 			return 24;
-		}
 		
 		game.set_timevalid(tempbyte);
 		
@@ -523,10 +511,8 @@ static int32_t read_saves(ReadMode read_mode, PACKFILE* f, std::vector<save_t>& 
 			{
 				for(int32_t j=0; j<MAX_SCRIPT_REGISTERS; j++)
 				{
-				if(!p_igetl(&game.global_d[j],f))
-				{
-					return 45;
-				}
+					if(!p_igetl(&game.global_d[j],f))
+						return 45;
 				}
 			}
 			else
@@ -585,9 +571,7 @@ static int32_t read_saves(ReadMode read_mode, PACKFILE* f, std::vector<save_t>& 
 			for(int32_t j=0; j<256; j++)
 			{
 				if(!p_getc(&tempbyte,f))
-				{
 					return 49;
-				}
 				
 				game.set_generic(tempbyte, j);
 			}
