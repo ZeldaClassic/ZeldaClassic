@@ -16029,38 +16029,14 @@ bool ePatra::animate(int32_t index)
 			double _MSVC2022_tmp1, _MSVC2022_tmp2;
 			double ddir=atan2_MSVC2022_FIX(double(temp_y),double(temp_x));
 			
-			if((ddir<=(((-5)*PI)/8))&&(ddir>(((-7)*PI)/8)))
-			{
-				guys.spr(i)->dir=l_down;
-			}
-			else if((ddir<=(((-3)*PI)/8))&&(ddir>(((-5)*PI)/8)))
-			{
-				guys.spr(i)->dir=left;
-			}
-			else if((ddir<=(((-1)*PI)/8))&&(ddir>(((-3)*PI)/8)))
-			{
-				guys.spr(i)->dir=l_up;
-			}
-			else if((ddir<=(((1)*PI)/8))&&(ddir>(((-1)*PI)/8)))
-			{
-				guys.spr(i)->dir=up;
-			}
-			else if((ddir<=(((3)*PI)/8))&&(ddir>(((1)*PI)/8)))
-			{
-				guys.spr(i)->dir=r_up;
-			}
-			else if((ddir<=(((5)*PI)/8))&&(ddir>(((3)*PI)/8)))
-			{
-				guys.spr(i)->dir=right;
-			}
-			else if((ddir<=(((7)*PI)/8))&&(ddir>(((5)*PI)/8)))
-			{
-				guys.spr(i)->dir=r_down;
-			}
-			else
-			{
-				guys.spr(i)->dir=down;
-			}
+			if     ((ddir<=(((-5)*PI)/8))&&(ddir>(((-7)*PI)/8))) guys.spr(i)->dir=l_down;
+			else if((ddir<=(((-3)*PI)/8))&&(ddir>(((-5)*PI)/8))) guys.spr(i)->dir=left;
+			else if((ddir<=(((-1)*PI)/8))&&(ddir>(((-3)*PI)/8))) guys.spr(i)->dir=l_up;
+			else if((ddir<=(((1) *PI)/8))&&(ddir>(((-1)*PI)/8))) guys.spr(i)->dir=up;
+			else if((ddir<=(((3) *PI)/8))&&(ddir>(((1) *PI)/8))) guys.spr(i)->dir=r_up;
+			else if((ddir<=(((5) *PI)/8))&&(ddir>(((3) *PI)/8))) guys.spr(i)->dir=right;
+			else if((ddir<=(((7) *PI)/8))&&(ddir>(((5) *PI)/8))) guys.spr(i)->dir=r_down;
+			else                                                 guys.spr(i)->dir=down;
 			
 			guys.spr(i)->x += x;
 			guys.spr(i)->y += y;
@@ -16073,13 +16049,11 @@ bool ePatra::animate(int32_t index)
 		int patbreath = (zc_oldrand()%50+50);
 		if ((patbreath % 4) == 0) ++patbreath;
 		if (dmisc28 == patratBREATH)
-		{
 			timeneeded = 48 + patbreath;
-		}
+
 		if (dmisc28 == patratSTREAM)
-		{
 			timeneeded = 48 + 96;
-		}
+
 		if (((((dmisc18 > 0 || ((editorflags & ENEMY_FLAG10) && !flycnt && !flycnt2)) && !(zc_oldrand() % zc_max(dmisc18, 1))) || //New 1/N chance
 		(dmisc18 == 0 && !(zc_oldrand()&127)) //Old hardcoded firing chance
 		|| (dmisc18 == -1 && loopcnt > 0 && (clk2 == round(halfsize) && (!(editorflags & ENEMY_FLAG3) || !get_qr(qr_NEWENEMYTILES))
@@ -16223,13 +16197,9 @@ bool ePatra::animate(int32_t index)
 			}
 			
 			if(flycnt>0)
-			{
 				((enemy*)guys.spr(i))->superman=true;
-			}
 			else
-			{
 				((enemy*)guys.spr(i))->superman=false;
-			}
 			
 			if(((enemy*)guys.spr(i))->hp <= 0)
 			{
@@ -16284,38 +16254,14 @@ bool ePatra::animate(int32_t index)
 				double _MSVC2022_tmp1, _MSVC2022_tmp2;
 				double ddir=atan2_MSVC2022_FIX(double(temp_y),double(temp_x));
 				
-				if((ddir<=(((-5)*PI)/8))&&(ddir>(((-7)*PI)/8)))
-				{
-					guys.spr(i)->dir=l_down;
-				}
-				else if((ddir<=(((-3)*PI)/8))&&(ddir>(((-5)*PI)/8)))
-				{
-					guys.spr(i)->dir=left;
-				}
-				else if((ddir<=(((-1)*PI)/8))&&(ddir>(((-3)*PI)/8)))
-				{
-					guys.spr(i)->dir=l_up;
-				}
-				else if((ddir<=(((1)*PI)/8))&&(ddir>(((-1)*PI)/8)))
-				{
-					guys.spr(i)->dir=up;
-				}
-				else if((ddir<=(((3)*PI)/8))&&(ddir>(((1)*PI)/8)))
-				{
-					guys.spr(i)->dir=r_up;
-				}
-				else if((ddir<=(((5)*PI)/8))&&(ddir>(((3)*PI)/8)))
-				{
-					guys.spr(i)->dir=right;
-				}
-				else if((ddir<=(((7)*PI)/8))&&(ddir>(((5)*PI)/8)))
-				{
-					guys.spr(i)->dir=r_down;
-				}
-				else
-				{
-					guys.spr(i)->dir=down;
-				}
+				if     ((ddir<=(((-5)*PI)/8))&&(ddir>(((-7)*PI)/8))) guys.spr(i)->dir=l_down;
+				else if((ddir<=(((-3)*PI)/8))&&(ddir>(((-5)*PI)/8))) guys.spr(i)->dir=left;
+				else if((ddir<=(((-1)*PI)/8))&&(ddir>(((-3)*PI)/8))) guys.spr(i)->dir=l_up;
+				else if((ddir<=(((1) *PI)/8))&&(ddir>(((-1)*PI)/8))) guys.spr(i)->dir=up;
+				else if((ddir<=(((3) *PI)/8))&&(ddir>(((1) *PI)/8))) guys.spr(i)->dir=r_up;
+				else if((ddir<=(((5) *PI)/8))&&(ddir>(((3) *PI)/8))) guys.spr(i)->dir=right;
+				else if((ddir<=(((7) *PI)/8))&&(ddir>(((5) *PI)/8))) guys.spr(i)->dir=r_down;
+				else                                                 guys.spr(i)->dir=down;
 				
 				guys.spr(i)->x += x;
 				guys.spr(i)->y = y-guys.spr(i)->y;
@@ -16783,9 +16729,7 @@ bool ePatraBS::animate(int32_t index)
 		return Dead(index);
 		
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	variable_walk_8(rate,homing,hrate,spw_floater);
 	
@@ -16812,13 +16756,9 @@ bool ePatraBS::animate(int32_t index)
 			((enemy*)guys.spr(i))->hp=dmisc3;
 			
 			if(get_qr(qr_NEWENEMYTILES))
-			{
 				((enemy*)guys.spr(i))->o_tile=o_tile+dmisc8;
-			}
 			else
-			{
 				((enemy*)guys.spr(i))->o_tile=o_tile+1;
-			}
 			
 			((enemy*)guys.spr(i))->cs = dmisc9;
 		}
@@ -16826,9 +16766,7 @@ bool ePatraBS::animate(int32_t index)
 		if(((enemy*)guys.spr(i))->hp <= 0)
 		{
 			for(int32_t j=i; j<index+flycnt+flycnt2; j++)
-			{
 				guys.swap(j,j+1);
-			}
 			
 			--flycnt;
 		}
