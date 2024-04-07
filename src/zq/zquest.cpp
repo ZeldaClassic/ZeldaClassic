@@ -22795,9 +22795,9 @@ void smart_slot_type(map<string, disassembled_script_data> &scripts,
 	vector<string> const& scriptnames, map<int32_t, script_slot_data>& mp,
 	int slotcount)
 {
-	for(size_t rind = 0; rind < scriptnames.size(); ++rind)
+	for(string const& sn : scriptnames )
 	{
-		auto const& rval = scriptnames[rind];
+		auto const& rval = sn;
 		if(rval == "<none>") continue;
 		script_slot_data* first_open_slot = nullptr;
 		bool done = false;
