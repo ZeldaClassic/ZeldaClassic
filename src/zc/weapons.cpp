@@ -652,25 +652,25 @@ void checkLightSources(bool perm = false)
 {
 	int32_t isPerm = 0;
 	if(perm)isPerm=3;
-    for(int32_t i=0; i<Lwpns.Count(); i++)
-    {
-        if(((weapon *)Lwpns.spr(i))->isLit)
-        {
-            lighting(true, false, isPerm);
-            return;
-        }
-    }
+	for(int32_t i=0; i<Lwpns.Count(); i++)
+	{
+		if(((weapon *)Lwpns.spr(i))->isLit)
+		{
+		    lighting(true, false, isPerm);
+		    return;
+		}
+	}
     
-    for(int32_t i=0; i<Ewpns.Count(); i++)
-    {
-        if(((weapon *)Ewpns.spr(i))->isLit)
-        {
-            lighting(true, false, isPerm);
-            return;
-        }
-    }
+	for(int32_t i=0; i<Ewpns.Count(); i++)
+	{
+		if(((weapon *)Ewpns.spr(i))->isLit)
+		{
+			lighting(true, false, isPerm);
+			return;
+		}
+	}
     
-    lighting(false,false,isPerm);
+	lighting(false,false,isPerm);
 }
 
 void getdraggeditem(int32_t j)
