@@ -7119,9 +7119,7 @@ waves2:
 			tile+=20;
 			
 			if(clk2<17)                                           //firing
-			{
 				tile+=20;
-			}
 		}
 	}
 	break;
@@ -7142,9 +7140,7 @@ waves2:
 			tile+=40;
 			
 			if(clk2<17)                                           //firing
-			{
 				tile+=40;
-			}
 		}
 	}
 	break;
@@ -7160,9 +7156,7 @@ waves2:
 			tile+=80;
 			
 			if(clk2<17)                                           //firing
-			{
 				tile+=80;
-			}
 		}
 		ignore_extend = true;
 	}
@@ -7179,9 +7173,7 @@ waves2:
 			tile+=40;
 			
 			if(clk2<17)                                           //firing
-			{
 				tile+=40;
-			}
 		}
 		ignore_extend = true;
 	}
@@ -7277,13 +7269,9 @@ waves2:
 	case aTEK:
 	{
 		if(misc==0)
-		{
 			tile += f2;
-		}
 		else if(misc!=1)
-		{
 			++tile;
-		}
 	}
 	break;
 	
@@ -7336,13 +7324,9 @@ waves2:
 		}
 		
 		if(misc==0)
-		{
 			tile+=f4;
-		}
 		else if(misc!=1)
-		{
 			tile+=2;
-		}
 	}
 	break;
 	
@@ -7383,9 +7367,7 @@ waves2:
 		}
 		
 		if(!fading)
-		{
 			tile+=f4;
-		}
 	}
 	break;
 	
@@ -7441,9 +7423,7 @@ waves2:
 			tile+=20;
 			
 			if(clk2<17)                                           //firing
-			{
 				tile+=20;
-			}
 		}
 		
 		//        tile+=f2;
@@ -7471,9 +7451,7 @@ waves2:
 			tile+=40;
 			
 			if(clk2<17)                                           //firing
-			{
 				tile+=40;
-			}
 		}
 		
 		tile+=posframe;
@@ -7544,9 +7522,7 @@ waves2:
 	case aWALLM:
 	{
 		if(!dummy_bool[1])
-		{
 			tile += f2;
-		}
 	}
 	break;
 	
@@ -7593,27 +7569,19 @@ waves2:
 	// flashing
 //  if(d->flags2 & guy_flashing)
 	if(flags2 & guy_flashing)
-	{
 		cs = (frame&3) + 6;
-	}
 	
 	if(flags2&guy_transparent)
-	{
 		drawstyle=1;
-	}
 	
 	int32_t change = tile-basetile;
 	
 	if(extend > 2 && (!ignore_extend || get_qr(qr_BROKEN_BIG_ENEMY_ANIMATION)))
 	{
 		if(basetile/TILES_PER_ROW==(basetile+((txsz*change)/tilerows))/TILES_PER_ROW)
-		{
 			tile=basetile+txsz*change;
-		}
 		else
-		{
 			tile=basetile+(txsz*change)+((tysz-1)*TILES_PER_ROW)*(((basetile+txsz*change)/TILES_PER_ROW)-(basetile/TILES_PER_ROW));
-		}
 	}
 	else
 	{
@@ -8206,9 +8174,7 @@ void enemy::removearmos(int32_t ax,int32_t ay, word ffcactive)
 		return;
 	}
 	if(did_armos)
-	{
 		return;
-	}
 	
 	did_armos=true;
 	ax&=0xF0;
@@ -8218,9 +8184,7 @@ void enemy::removearmos(int32_t ax,int32_t ay, word ffcactive)
 	int32_t f2 = MAPCOMBOFLAG(ax,ay);
 	
 	if(combobuf[tmpscr->data[cd]].type!=cARMOS)
-	{
 		return;
-	}
 	
 	tmpscr->data[cd] = tmpscr->undercombo;
 	tmpscr->cset[cd] = tmpscr->undercset;
@@ -8249,9 +8213,7 @@ void enemy::removearmos(int32_t ax,int32_t ay, word ffcactive)
 void enemy::removearmosffc(int32_t pos)
 {
 	if(did_armos)
-	{
 		return;
-	}
 	
 	did_armos=true;
 	ffcdata& ffc = tmpscr->ffcs[pos];
@@ -8259,9 +8221,7 @@ void enemy::removearmosffc(int32_t pos)
 	int32_t f2 = cmb.flag;
 	
 	if(cmb.type!=cARMOS)
-	{
 		return;
-	}
 	
 	zc_ffc_set(ffc, tmpscr->undercombo);
 	ffc.cset = tmpscr->undercset;
@@ -8414,14 +8374,10 @@ bool eTektite::animate(int32_t index)
 		return Dead(index);
 		
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	if(get_qr(qr_ENEMIESZAXIS))
-	{
 		y=floor_y;
-	}
 	
 	if(clk>=0 && !stunclk && !frozenclock && (!watch || misc==0))
 	{
@@ -8460,72 +8416,42 @@ bool eTektite::animate(int32_t index)
 			if(step>0)                                            //going down
 			{
 				if(COMBOTYPE(x+8,y+16)==cNOJUMPZONE)
-				{
 					step=0-step;
-				}
 				else if(COMBOTYPE(x+8,y+16)==cNOENEMY)
-				{
 					step=0-step;
-				}
 				else if(ispitfall(x+8,y+16))
-				{
 					step=0-step;
-				}
 				else if(MAPFLAG(x+8,y+16)==mfNOENEMY)
-				{
 					step=0-step;
-				}
 				else if(MAPCOMBOFLAG(x+8,y+16)==mfNOENEMY)
-				{
 					step=0-step;
-				}
 			}
 			else if(step<0)
 			{
 				if(COMBOTYPE(x+8,y)==cNOJUMPZONE)
-				{
 					step=0-step;
-				}
 				else if(COMBOTYPE(x+8,y)==cNOENEMY)
-				{
 					step=0-step;
-				}
 				else if(ispitfall(x+8,y))
-				{
 					step=0-step;
-				}
 				else if(MAPFLAG(x+8,y)==mfNOENEMY)
-				{
 					step=0-step;
-				}
 				else if(MAPCOMBOFLAG(x+8,y)==mfNOENEMY)
-				{
 					step=0-step;
-				}
 			}
 			
 			if(clk3==left)
 			{
 				if(COMBOTYPE(x,y+8)==cNOJUMPZONE)
-				{
 					clk3^=1;
-				}
 				else if(COMBOTYPE(x,y+8)==cNOENEMY)
-				{
 					clk3^=1;
-				}
 				else if(ispitfall(x,y+8))
-				{
 					clk3^=1;
-				}
 				else if(MAPFLAG(x,y+8)==mfNOENEMY)
-				{
 					clk3^=1;
-				}
 				else if(MAPCOMBOFLAG(x,y+8)==mfNOENEMY)
-				{
 					clk3^=1;
-				}
 			}
 			else
 			{
@@ -8630,22 +8556,16 @@ void eTektite::drawshadow(BITMAP *dest,bool translucent)
 	if(get_qr(qr_NEWENEMYTILES))
 	{
 		if(misc==0)
-		{
 			shadowtile+=f2;
-		}
 		else if(misc!=1)
 			shadowtile+=2;
 	}
 	else
 	{
 		if(misc==0)
-		{
 			shadowtile += f2 ? 1 : 0;
-		}
 		else if(misc!=1)
-		{
 			++shadowtile;
-		}
 	}
 	
 	yofs+=8;
@@ -8707,9 +8627,7 @@ bool eItemFairy::animate(int32_t index)
 	watch=w;
 	
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	return enemy::animate(index);
 }
@@ -8753,17 +8671,13 @@ bool ePeahat::animate(int32_t index)
 	if(switch_hooked) return enemy::animate(index);
 	if(fallclk||drownclk) return enemy::animate(index);
 	if(slide())
-	{
 		return false;
-	}
 	
 	if(dying)
 		return Dead(index);
 		
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	if(stunclk==0 && clk>96)
 		misc=1;
@@ -8892,23 +8806,18 @@ bool eLeever::isSubmerged() const
 {
 	Z_scripterrlog("misc is: %d\n", misc);
 	return misc <= 0;
-	
 }
 
 bool eLeever::animate(int32_t index)
 {
 	if(switch_hooked) return enemy::animate(index);
 	if(fallclk||drownclk)
-	{
 		return enemy::animate(index);
-	}
 	if(dying)
 		return Dead(index);
 		
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	if(clk>=0 && !slide())
 	{
@@ -8963,9 +8872,7 @@ bool eLeever::animate(int32_t index)
 				for(int32_t i=0; i<guys.Count(); i++)
 				{
 					if(guys.spr(i)->id==id && ((enemy*)guys.spr(i))->misc==1)
-					{
 						++s;
-					}
 				}
 				
 				if(s>0)
@@ -8976,9 +8883,7 @@ bool eLeever::animate(int32_t index)
 				int32_t d2=zc_oldrand()&1;
 				
 				if(HeroDir()>=left)
-				{
 					d2+=2;
-				}
 				
 				if(canplace(d2) || canplace(d2^1))
 				{
@@ -9172,16 +9077,12 @@ bool eWallM::animate(int32_t index)
 {
 	if(switch_hooked) return enemy::animate(index);
 	if(fallclk||drownclk)
-	{
 		return enemy::animate(index);
-	}
 	if(dying)
 		return Dead(index);
 		
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	hxofs=1000;
 	if(misc==0) //inside wall, ready to spawn?
@@ -9293,15 +9194,11 @@ void eWallM::wallm_crawl()
 	hxofs=0;
 	
 	if(slide())
-	{
 		return;
-	}
 	
 	//  if(dying || watch || (!hashero && stunclk))
 	if(dying || (!hashero && ( stunclk || frozenclock )))
-	{
 		return;
-	}
 	
 	watch=false;
 	++clk2;
@@ -9425,9 +9322,7 @@ bool eTrap::animate(int32_t index)
 		return enemy::animate(index);
 		
 	if(clk==0)
-	{
 		removearmos(x,y,ffcactivated);
-	}
 	
 	if(misc==0)                                               // waiting
 	{
