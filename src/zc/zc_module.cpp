@@ -73,16 +73,16 @@ bool ZModule::init(bool d) //bool default
 	memset(moduledata.moduletimezone, 0, sizeof(moduledata.moduletimezone));
 	//memset(moduledata.module_base_nsf, 0, sizeof(moduledata.module_base_nsf));
 		
-	moduledata.modver_1 = 0;
-	moduledata.modver_2 = 0;	
-	moduledata.modver_3 = 0;
-	moduledata.modver_4 = 0;
-	moduledata.modbuild = 0;
-	moduledata.modbeta = 0;
-	moduledata.modmonth = 0;
-	moduledata.modday = 0;
-	moduledata.modyear = 0;
-	moduledata.modhour = 0;
+	moduledata.modver_1  = 0;
+	moduledata.modver_2  = 0;	
+	moduledata.modver_3  = 0;
+	moduledata.modver_4  = 0;
+	moduledata.modbuild  = 0;
+	moduledata.modbeta   = 0;
+	moduledata.modmonth  = 0;
+	moduledata.modday    = 0;
+	moduledata.modyear   = 0;
+	moduledata.modhour   = 0;
 	moduledata.modminute = 0;
 
 	
@@ -117,16 +117,16 @@ bool ZModule::init(bool d) //bool default
 		strcpy(moduledata.moduleinfo4,zc_get_config_basic("METADATA","info_4",""));
 		strcpy(moduledata.moduletimezone,zc_get_config_basic("METADATA","timezone","GMT"));
 		//strcpy(moduledata.module_base_nsf,zc_get_config_basic("METADATA","nsf",""));
-		moduledata.modver_1 = zc_get_config_basic("METADATA","version_first",0);
-		moduledata.modver_2 = zc_get_config_basic("METADATA","version_second",0);	
-		moduledata.modver_3 = zc_get_config_basic("METADATA","version_third",0);
-		moduledata.modver_4 = zc_get_config_basic("METADATA","version_fourth",0);
-		moduledata.modbuild = zc_get_config_basic("METADATA","version_build",0);
-		moduledata.modbeta = zc_get_config_basic("METADATA","version_beta",0);
-		moduledata.modmonth = zc_get_config_basic("METADATA","version_month",0);
-		moduledata.modday = zc_get_config_basic("METADATA","version_day",0);
-		moduledata.modyear = zc_get_config_basic("METADATA","version_year",0);
-		moduledata.modhour = zc_get_config_basic("METADATA","version_hour",0);
+		moduledata.modver_1  = zc_get_config_basic("METADATA","version_first",0);
+		moduledata.modver_2  = zc_get_config_basic("METADATA","version_second",0);	
+		moduledata.modver_3  = zc_get_config_basic("METADATA","version_third",0);
+		moduledata.modver_4  = zc_get_config_basic("METADATA","version_fourth",0);
+		moduledata.modbuild  = zc_get_config_basic("METADATA","version_build",0);
+		moduledata.modbeta   = zc_get_config_basic("METADATA","version_beta",0);
+		moduledata.modmonth  = zc_get_config_basic("METADATA","version_month",0);
+		moduledata.modday    = zc_get_config_basic("METADATA","version_day",0);
+		moduledata.modyear   = zc_get_config_basic("METADATA","version_year",0);
+		moduledata.modhour   = zc_get_config_basic("METADATA","version_hour",0);
 		moduledata.modminute = zc_get_config_basic("METADATA","version_minute",0); 
 		
 		//quests
@@ -223,11 +223,11 @@ bool ZModule::init(bool d) //bool default
 		strcpy(moduledata.base_NSF_file,zc_get_config_basic("DATAFILES","base_NSF_file","zelda.nsf"));
 		al_trace("Base NSF file: %s\n", moduledata.base_NSF_file);
 		
-		moduledata.title_track = zc_get_config_basic("DATAFILES","title_track",0);
-		moduledata.ending_track = zc_get_config_basic("DATAFILES","ending_track",1);
-		moduledata.tf_track = zc_get_config_basic("DATAFILES","tf_track",5);
-		moduledata.gameover_track = zc_get_config_basic("DATAFILES","gameover_track",0);
-		moduledata.dungeon_track = zc_get_config_basic("DATAFILES","dungeon_track",0);
+		moduledata.title_track     = zc_get_config_basic("DATAFILES","title_track",0);
+		moduledata.ending_track    = zc_get_config_basic("DATAFILES","ending_track",1);
+		moduledata.tf_track        = zc_get_config_basic("DATAFILES","tf_track",5);
+		moduledata.gameover_track  = zc_get_config_basic("DATAFILES","gameover_track",0);
+		moduledata.dungeon_track   = zc_get_config_basic("DATAFILES","dungeon_track",0);
 		moduledata.overworld_track = zc_get_config_basic("DATAFILES","overworld_track",0);
 		moduledata.lastlevel_track = zc_get_config_basic("DATAFILES","lastlevel_track",0);
 		

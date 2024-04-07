@@ -27,7 +27,7 @@ char const* get_config_base_name(App a)
 		a = get_app_id();
 	switch (a)
 	{
-		case App::zelda:   return "base_config/zc.cfg";
+		case App::zelda:    return "base_config/zc.cfg";
 		case App::zquest:   return "base_config/zquest.cfg";
 		case App::zscript:  return "base_config/zscript.cfg";
 		case App::launcher: return "base_config/zcl.cfg";
