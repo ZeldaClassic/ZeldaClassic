@@ -8156,7 +8156,7 @@ int32_t weapon::run_script(int32_t mode)
 			}
 			break;
 	}
-    return ret;
+	return ret;
 }
 ALLEGRO_COLOR weapon::hitboxColor(byte opacity) const
 {
@@ -8203,43 +8203,42 @@ weapon::weapon(zfix X,zfix Y,zfix Z,int32_t Id,int32_t usesprite, int32_t Dir, i
 	lift_height = 8;
 	has_shadow = true;
 	death_item_pflags = 0;
-    x=X;
-    y=Y;
-    z=Z;
+	x=X;
+	y=Y;
+	z=Z;
 	txsz = width > 0 ? width : 1;
 	tysz = height > 0 ? height : 1;
-    id=Id;
-    type=0;
-    power=0;
-    specialinfo = 0;
-    parentitem=-1;
-    dir=zc_max(Dir,0);
-    clk=clk2=flip=misc=misc2=0;
-    frames=flash=wid=aframe=csclk=0;
-    ignorecombo=-1;
-    step=0;
-    dead=-1;
-    ref_o_tile = 0;
-    bounce= false;
+	id=Id;
+	type=0;
+	power=0;
+	specialinfo = 0;
+	parentitem=-1;
+	dir=zc_max(Dir,0);
+	clk=clk2=flip=misc=misc2=0;
+	frames=flash=wid=aframe=csclk=0;
+	ignorecombo=-1;
+	step=0;
+	dead=-1;
+	ref_o_tile = 0;
+	bounce= false;
 	ignoreHero=true;
-    yofs=(get_qr(qr_OLD_DRAWOFFSET)?playing_field_offset:original_playing_field_offset) - 2;
-    dragging=-1;
-    width=1;
-    height=1;
-    hzsz=1;
+	yofs=(get_qr(qr_OLD_DRAWOFFSET)?playing_field_offset:original_playing_field_offset) - 2;
+	dragging=-1;
+	width=1;
+	height=1;
+	hzsz=1;
 	hyofs = -32768;
-    useweapon = usedefence = 0;
-    weaprange = weapduration = 0;
-    script_wrote_otile = 0;
-    isLWeapon = 0;
-    ScriptGenerated = 0;
-    LOADGFX(usesprite);
-    //Z_scripterrlog("After calling LOADGFX(), the dummy weapon o_tile is: %d\n", o_tile);
-    step=0;
-    weaponscript = 0;
+	useweapon = usedefence = 0;
+	weaprange = weapduration = 0;
+	script_wrote_otile = 0;
+	isLWeapon = 0;
+	ScriptGenerated = 0;
+	LOADGFX(usesprite);
+	//Z_scripterrlog("After calling LOADGFX(), the dummy weapon o_tile is: %d\n", o_tile);
+	step=0;
+	weaponscript = 0;
 	weapon_dying_frame = false;
 	rundeath = false;
 	shd_aclk = shd_aframe = 0;
 	last_burnstate = 0;
 }
-
