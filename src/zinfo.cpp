@@ -380,58 +380,42 @@ zinfo::zinfo()
 void zinfo::clear_ic_help()
 {
 	for(int q = 0; q < itype_max; ++q)
-	{
 		assignchar(ic_help_string+q,nullptr);
-	}
 }
 void zinfo::clear_ic_name()
 {
 	for(int q = 0; q < itype_max; ++q)
-	{
 		assignchar(ic_name+q,nullptr);
-	}
 }
 void zinfo::clear_ctype_name()
 {
 	for(int q = 0; q < cMAX; ++q)
-	{
 		assignchar(ctype_name+q,nullptr);
-	}
 }
 void zinfo::clear_ctype_help()
 {
 	for(int q = 0; q < cMAX; ++q)
-	{
 		assignchar(ctype_help_string+q,nullptr);
-	}
 }
 void zinfo::clear_mf_name()
 {
 	for(int q = 0; q < mfMAX; ++q)
-	{
 		assignchar(mf_name+q,nullptr);
-	}
 }
 void zinfo::clear_mf_help()
 {
 	for(int q = 0; q < mfMAX; ++q)
-	{
 		assignchar(mf_help_string+q,nullptr);
-	}
 }
 void zinfo::clear_weap_name()
 {
 	for(int q = 0; q < wMax; ++q)
-	{
 		assignchar(weap_name+q,nullptr);
-	}
 }
 void zinfo::clear_ctr_name()
 {
 	for(int q = 0; q < MAX_COUNTERS; ++q)
-	{
 		assignchar(ctr_name+q,nullptr);
-	}
 }
 void zinfo::clear()
 {
@@ -936,12 +920,12 @@ bool zinfo::isNull()
 {
 	for(int q = 0; q < itype_max; ++q)
 	{
-		if(ic_name[q]) return false;
-		if(ic_help_string[q]) return false;
-		if(ctype_name[q]) return false;
+		if(ic_name[q])           return false;
+		if(ic_help_string[q])    return false;
+		if(ctype_name[q])        return false;
 		if(ctype_help_string[q]) return false;
-		if(mf_name[q]) return false;
-		if(mf_help_string[q]) return false;
+		if(mf_name[q])           return false;
+		if(mf_help_string[q])    return false;
 	}
 	return true;
 }

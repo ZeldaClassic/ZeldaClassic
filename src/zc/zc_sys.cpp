@@ -6151,13 +6151,13 @@ static NewMenu replay_menu
 
 static DIALOG credits_dlg[] =
 {
-	/* (dialog proc)	   (x)   (y)   (w)   (h)   (fg)	 (bg)	 (key)	(flags)	(d1)	  (d2)	 (dp)	 (dp2) (dp3) */
-	{ jwin_win_proc,	   40,   38,   241,  173,  vc(14),  vc(1),   0,	   D_EXIT,	0,		0, (void *) "ZQuest Classic Credits", NULL,  NULL },
-	{ jwin_frame_proc,	 47,   65,   227,  115,  vc(15),  vc(1),   0,	   0,		 FR_DEEP,  0,	   NULL, NULL,  NULL },
-	{ d_bitmap_proc,	   49,   67,   222,  110,  vc(15),  vc(1),   0,	   0,		 0,		0,	   NULL, NULL,  NULL },
-	{ jwin_button_proc,	140,  184,  41,   21,   vc(14),  vc(1),   0,	   D_EXIT,	0,		0, (void *) "OK", NULL,  NULL },
-	{ d_timer_proc,		 0,	0,	 0,	0,	0,	   0,	   0,	   0,		  0,		  0,		 NULL, NULL, NULL },
-	{ NULL,				 0,	0,	0,	0,   0,	   0,	   0,	   0,		  0,			 0,	   NULL,						   NULL,  NULL }
+	/* (dialog proc)     (x)   (y)   (w)   (h)   (fg)	 (bg)	 (key)	(flags)	(d1)	  (d2)	 (dp)	 (dp2) (dp3) */
+	{ jwin_win_proc,     40,   38,   241,  173,  vc(14),  vc(1),   0,	   D_EXIT,	0,		0, (void *) "ZQuest Classic Credits", NULL,  NULL },
+	{ jwin_frame_proc,   47,   65,   227,  115,  vc(15),  vc(1),   0,	   0,		 FR_DEEP,  0,	   NULL, NULL,  NULL },
+	{ d_bitmap_proc,     49,   67,   222,  110,  vc(15),  vc(1),   0,	   0,		 0,		0,	   NULL, NULL,  NULL },
+	{ jwin_button_proc, 140,  184,  41,   21,   vc(14),  vc(1),   0,	   D_EXIT,	0,		0, (void *) "OK", NULL,  NULL },
+	{ d_timer_proc,	      0,	0,	 0,	0,	0,	   0,	   0,	   0,		  0,		  0,		 NULL, NULL, NULL },
+	{ NULL,	   	 0,	0,	0,	0,   0,	   0,	   0,	   0,		  0,			 0,	   NULL,						   NULL,  NULL }
 };
 
 static ListData dmap_list(dmaplist, &font);
