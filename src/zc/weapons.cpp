@@ -694,13 +694,13 @@ void weapon::setAngle(double angletoset)
     doAutoRotate();
     
     if(angle==-PI || angle==PI) dir=left;
-    else if(angle==-PI/2) dir=up;
-    else if(angle==PI/2)  dir=down;
-    else if(angle==0)     dir=right;
-    else if(angle<-PI/2)  dir=l_up;
-    else if(angle<0)      dir=r_up;
-    else if(angle>(PI/2))   dir=l_down;
-    else                  dir=r_down;
+    else if(angle==-PI/2)       dir=up;
+    else if(angle==PI/2)        dir=down;
+    else if(angle==0)           dir=right;
+    else if(angle<-PI/2)        dir=l_up;
+    else if(angle<0)            dir=r_up;
+    else if(angle>(PI/2))       dir=l_down;
+    else                        dir=r_down;
 }
 
 void weapon::seekHero()
@@ -711,13 +711,13 @@ void weapon::seekHero()
     doAutoRotate();
     
     if(angle==-PI || angle==PI) dir=left;
-    else if(angle==-PI/2) dir=up;
-    else if(angle==PI/2)  dir=down;
-    else if(angle==0)     dir=right;
-    else if(angle<-PI/2)  dir=l_up;
-    else if(angle<0)      dir=r_up;
-    else if(angle>(PI/2))   dir=l_down;
-    else                  dir=r_down;
+    else if(angle==-PI/2)       dir=up;
+    else if(angle==PI/2)        dir=down;
+    else if(angle==0)           dir=right;
+    else if(angle<-PI/2)        dir=l_up;
+    else if(angle<0)            dir=r_up;
+    else if(angle>(PI/2))       dir=l_down;
+    else                        dir=r_down;
     
     if(z>HeroZ()) z--;
     else if(z<HeroZ()) z++;
