@@ -28408,9 +28408,8 @@ void check_autosave()
 }
 
 void flushItemCache(bool) {}
-void ringcolor(bool forceDefault)
+void ringcolor(bool [[maybe_unused]] forceDefault)
 {
-    forceDefault=forceDefault;
 }
 
 bool item_disabled(int32_t)

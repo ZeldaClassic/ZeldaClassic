@@ -30,9 +30,6 @@ Checkbox \
 )
 //}
 
-PaletteConvertDialog::PaletteConvertDialog()
-{}
-
 static int32_t CSet_Checked = 0, lowpal = 0, highpal = 0x1FF;
 
 std::shared_ptr<GUI::Widget> PaletteConvertDialog::view()
