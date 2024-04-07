@@ -17172,12 +17172,8 @@ int32_t GuyHit(int32_t tx,int32_t ty,int32_t tz,int32_t txsz,int32_t tysz,int32_
 int32_t GuyHitFrom(int32_t index,int32_t tx,int32_t ty,int32_t tz,int32_t txsz,int32_t tysz,int32_t tzsz)
 {
 	for(int32_t i=zc_max(0, index); i<guys.Count(); i++)
-	{
 		if(guys.spr(i)->hit(tx,ty,tz,txsz,tysz,tzsz))
-		{
 			return i;
-		}
-	}
    
 	return -1;
 }
@@ -17203,12 +17199,8 @@ int32_t GuyHit(int32_t index,int32_t tx,int32_t ty,int32_t tz,int32_t txsz,int32
 bool hasMainGuy()
 {
 	for(int32_t i=0; i<guys.Count(); i++)
-	{
 		if(((enemy*)guys.spr(i))->mainguy)
-		{
 			return true;
-		}
-	}
 	
 	return false;
 }
@@ -17309,10 +17301,8 @@ void killfairy(int32_t misc)
 int32_t getGuyIndex(const int32_t eid)
 {
 	for(word i = 0; i < guys.Count(); i++)
-	{
 		if(guys.spr(i)->getUID() == eid)
 			return i;
-	}
 	
 	return -1;
 }
@@ -17466,9 +17456,9 @@ int32_t addchild(int32_t x,int32_t y,int32_t z,int32_t id,int32_t clk, int32_t p
 	case eeFFRIENDLY09:
 	case eeFFRIENDLY10:
 	{
-		if ( !get_qr(qr_SCRIPT_FRIENDLY_ENEMY_TYPES) )
+		if (!get_qr(qr_SCRIPT_FRIENDLY_ENEMY_TYPES))
 		{
-			e = new eFriendly((zfix)x,(zfix)y,id,clk); break;
+			e = new eFriendly((zfix)x, (zfix)y, id, clk); break;
 		}
 		else return 0;
 				
@@ -17600,9 +17590,7 @@ int32_t addchild(int32_t x,int32_t y,int32_t z,int32_t id,int32_t clk, int32_t p
 	ret++; // Made one enemy.
 	
 	if(z && canfall(id))
-	{
 		 e->z = (zfix)z;
-	}
 	
 	((enemy*)e)->ceiling = (z && canfall(id));
 	((enemy*)e)->parent_script_UID = parent_scriptUID;
@@ -17613,9 +17601,7 @@ int32_t addchild(int32_t x,int32_t y,int32_t z,int32_t id,int32_t clk, int32_t p
 			
 	
 	if(!guys.add(e))
-	{
 		return 0;
-	}
 	
 	// add segments of segmented enemies
 	int32_t c=0;
@@ -18038,7 +18024,6 @@ int32_t addenemy(int32_t x,int32_t y,int32_t z,int32_t id,int32_t clk)
 		{
 			e = new eTrigger((zfix)x,(zfix)y,id,clk);
 			break;
-			break;
 		}
 		[[fallthrough]];
 	default:
@@ -18056,9 +18041,7 @@ int32_t addenemy(int32_t x,int32_t y,int32_t z,int32_t id,int32_t clk)
 	((enemy*)e)->ceiling = (z && canfall(id));
 	
 	if(!guys.add(e))
-	{
 		return 0;
-	}
 	
 	// add segments of segmented enemies
 	int32_t c=0;
@@ -18137,9 +18120,7 @@ int32_t addenemy(int32_t x,int32_t y,int32_t z,int32_t id,int32_t clk)
 				al_trace("Manhandla head %d could not be created!\n",i+1);
 				
 				for(int32_t j=0; j<i+1; j++)
-				{
 					guys.del(guys.Count()-1);
-				}
 				
 				return 0;
 			}
@@ -18163,9 +18144,7 @@ int32_t addenemy(int32_t x,int32_t y,int32_t z,int32_t id,int32_t clk)
 				al_trace("Gleeok head %d could not be created!\n",i+1);
 				
 				for(int32_t j=0; j<i+1; j++)
-				{
 					guys.del(guys.Count()-1);
-				}
 				
 				return false;
 			}
@@ -18631,9 +18610,7 @@ void never_return(int32_t index)
 		
 	for(int32_t i=0; i<guys.Count(); i++)
 		if(((((enemy*)guys.spr(i))->d->flags)&guy_neverret) && i!=index)
-		{
 			goto dontdoit;
-		}
 		
 doit:
 	setmapflag(mNEVERRET);
@@ -18772,14 +18749,10 @@ void activate_fireball_statue(int32_t pos)
 void activate_fireball_statues()
 {
 	if(!(tmpscr->enemyflags&efFIREBALLS))
-	{
 		return;
-	}
 	
 	for(int32_t i=0; i<176; i++)
-	{
 		activate_fireball_statue(i);
-	}
 }
 
 void load_default_enemies()
@@ -18887,21 +18860,15 @@ void update_slope_combopos(int32_t lyr, int32_t pos)
 	bool isSlope = cmb.type == cSLOPE;
 	
 	if(isSlope && !wasSlope)
-	{
 		slopes.try_emplace(id, &(s->data[pos]), nullptr, id, pos);
-	}
 	else if(wasSlope && !isSlope)
-	{
 		slopes.erase(it);
-	}
 }
 void update_slope_comboposes()
 {
 	for(int lyr = 0; lyr < 7; ++lyr)
-	{
 		for(int pos = 0; pos < 176; ++pos)
 			update_slope_combopos(lyr,pos);
-	}
 }
 
 // Everything that must be done before we change a screen's combo to another combo, or a combo's type to another type.
@@ -18914,7 +18881,6 @@ void screen_combo_modify_preroutine(mapscr *s, int32_t pos)
 //Placeholder in case we need it.
 void screen_ffc_modify_preroutine(word index)
 {
-	return;
 }
 
 // Everything that must be done after we change a screen's combo to another combo. -L
@@ -18970,12 +18936,8 @@ void screen_combo_modify_pre(int32_t cid)
 	{
 		mapscr* t = FFCore.tempScreens[lyr];
 		for(int32_t i = 0; i < 176; i++)
-		{
 			if(t->data[i] == cid)
-			{
 				screen_combo_modify_preroutine(t,i);
-			}
-		}
 	}
 }
 void screen_combo_modify_post(int32_t cid)
@@ -18984,12 +18946,8 @@ void screen_combo_modify_post(int32_t cid)
 	{
 		mapscr* t = FFCore.tempScreens[lyr];
 		for(int32_t i = 0; i < 176; i++)
-		{
 			if(t->data[i] == cid)
-			{
 				screen_combo_modify_postroutine(t,i);
-			}
-		}
 	}
 	for(word ind = 0; ind < MAXFFCS; ++ind)
 	{
