@@ -15814,7 +15814,7 @@ int32_t onDmaps()
         }
         else
         {
-			call_editdmap_dialog(d);
+		call_editdmap_dialog(d);
         }
         
         ret=do_zqdialog(selectdmap_dlg,2);
@@ -16165,9 +16165,9 @@ static DIALOG selectmidi_dlg[] =
     
     { jwin_button_proc,     90,   160+12+12,  61,   21,   vc(14),  vc(1),  13,     D_EXIT,     0,             0, (void *) "Edit", NULL, NULL },
     { jwin_button_proc,     170,  160+12+12,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Done", NULL, NULL },
-    { d_keyboard_proc,   0,    0,    0,    0,    0,       0,      0,       0,          0,             KEY_DEL, (void *) close_dlg, NULL, NULL },
-    { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    { d_keyboard_proc,      0,    0,           0,    0,    0,       0,      0,       0,          0,             KEY_DEL, (void *) close_dlg, NULL, NULL },
+    { d_timer_proc,         0,    0,           0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+    { NULL,                 0,    0,           0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 int32_t onMidis()
@@ -16220,8 +16220,8 @@ int32_t onMidis()
 
 static DIALOG editmusic_dlg[] =
 {
-    /* (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
-    { jwin_win_proc,     24,   20,   273,  189,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Music Specs", NULL, NULL },
+    /* (dialog proc)       (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
+    { jwin_win_proc,       24,   20,   273,  189,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Music Specs", NULL, NULL },
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
     // 2
     { jwin_text_proc,       56,   94-16,   48,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Music:", NULL, NULL },
@@ -16253,10 +16253,10 @@ static DIALOG editmusic_dlg[] =
     { jwin_text_proc,       56,   104-8,  48,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Time:", NULL, NULL },
     { jwin_text_proc,       104,  104-8,  32,   8,    vc(11),  vc(1),  0,       0,          0,             0,       NULL, NULL, NULL },
     // 26
-    { jwin_button_proc,     90,   160+12+12,  61,   21,   vc(14),  vc(1),  'k',     D_EXIT,     0,             0, (void *) "O&K", NULL, NULL },
+    { jwin_button_proc,      90,   160+12+12,  61,   21,   vc(14),  vc(1),  'k',     D_EXIT,     0,             0, (void *) "O&K", NULL, NULL },
     { jwin_button_proc,     170,  160+12+12,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-    { d_keyboard_proc,   0,    0,    0,    0,    0,    0,    0,       0,       KEY_F1,   0, (void *) onHelp, NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    { d_keyboard_proc,        0,    0,    0,    0,    0,    0,    0,       0,       KEY_F1,   0, (void *) onHelp, NULL, NULL },
+    { NULL,                   0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 int32_t d_musiclist_proc(int32_t msg,DIALOG *d,int32_t c)
@@ -16268,14 +16268,14 @@ static ListData enhancedmusic_list(enhancedmusiclist, &font);
 
 static DIALOG selectmusic_dlg[] =
 {
-    /* (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
-    { jwin_win_proc,     24,   20,   273,  189,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Select Enhanced Music", NULL, NULL },
-    { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { d_musiclist_proc,   31,   44,   164, (1+16)*8,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0, (void *) &enhancedmusic_list, NULL, NULL },
-    { jwin_button_proc,     90,   160+12+12,  61,   21,   vc(14),  vc(1),  13,     D_EXIT,     0,             0, (void *) "Edit", NULL, NULL },
+    /* (dialog proc)        (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
+    { jwin_win_proc,         24,   20,   273,  189,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Select Enhanced Music", NULL, NULL },
+    { d_timer_proc,           0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+    { d_musiclist_proc,      31,   44,   164, (1+16)*8,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0, (void *) &enhancedmusic_list, NULL, NULL },
+    { jwin_button_proc,      90,   160+12+12,  61,   21,   vc(14),  vc(1),  13,     D_EXIT,     0,             0, (void *) "Edit", NULL, NULL },
     { jwin_button_proc,     170,  160+12+12,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Done", NULL, NULL },
-    { d_keyboard_proc,   0,    0,    0,    0,    0,       0,      0,       0,          0,             KEY_DEL, (void *) close_dlg, NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    { d_keyboard_proc,        0,    0,    0,    0,    0,       0,      0,       0,          0,             KEY_DEL, (void *) close_dlg, NULL, NULL },
+    { NULL,                   0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 int32_t onEnhancedMusic()
@@ -16631,7 +16631,7 @@ static DIALOG sidewarp_dlg[] =
 	{ d_wflag_proc,             18,     47,     15,      8,    vc(4),                  vc(0),                   0, 0,          1,             0,  NULL, NULL, NULL },
 	// 20
 	{ d_wflag_proc,              8,     27,      8,     15,    vc(4),                  vc(0),                   0, 0,          1,             0,  NULL, NULL, NULL },
-	{ d_wflag_proc,            	37,     27,      8,     15,    vc(4),                  vc(0),                   0, 0,          1,             0,  NULL, NULL, NULL },
+	{ d_wflag_proc,             37,     27,      8,     15,    vc(4),                  vc(0),                   0, 0,          1,             0,  NULL, NULL, NULL },
 	
 	{ NULL,                      0,      0,      0,      0,    0,                      0,                       0, 0,          0,             0,  NULL, NULL, NULL }
 };
@@ -16931,13 +16931,13 @@ struct tw_data
 };
 int32_t onTileWarp()
 {
-    restore_mouse();
-    tilewarp_dlg[0].dp=(void *) "Tile Warp";
-    tilewarp_dlg[0].dp2=get_zc_font(font_lfont);
+	restore_mouse();
+	tilewarp_dlg[0].dp=(void *) "Tile Warp";
+	tilewarp_dlg[0].dp2=get_zc_font(font_lfont);
     
 	mapscr* mptr = Map.CurrScr();
-    char buf[10];
-    tilewarp_dlg[6].dp=buf;
+	char buf[10];
+	tilewarp_dlg[6].dp=buf;
 	tilewarp_dlg[13].dp = buf;
 	tilewarp_dlg[13].dp3 = &tilewarp_dlg[5].d1;
 	
@@ -16949,15 +16949,15 @@ int32_t onTileWarp()
 	tw_data data(mptr);
 	data.load(0);
     
-    dmap_list_size=MAXDMAPS;
-    dmap_list_zero=true;
+	dmap_list_size=MAXDMAPS;
+	dmap_list_zero=true;
     
 	large_dialog(tilewarp_dlg);
     
 	bool running = true;
 	int ret;
 	do
-    {
+	{
 		ret = do_zqdialog(tilewarp_dlg,-1);
 		switch(ret)
 		{
@@ -17100,13 +17100,13 @@ struct sw_data
 };
 int32_t onSideWarp()
 {
-    restore_mouse();
-    sidewarp_dlg[0].dp=(void *) "Side Warp";
-    sidewarp_dlg[0].dp2=get_zc_font(font_lfont);
+	restore_mouse();
+	sidewarp_dlg[0].dp=(void *) "Side Warp";
+	sidewarp_dlg[0].dp2=get_zc_font(font_lfont);
     
 	mapscr* mptr = Map.CurrScr();
-    char buf[10];
-    sidewarp_dlg[6].dp=buf;
+	char buf[10];
+	sidewarp_dlg[6].dp=buf;
 	sidewarp_dlg[13].dp = buf;
 	sidewarp_dlg[13].dp3 = &sidewarp_dlg[5].d1;
 	
@@ -17118,8 +17118,8 @@ int32_t onSideWarp()
 	sw_data data(mptr);
 	data.load(0);
     
-    dmap_list_size=MAXDMAPS;
-    dmap_list_zero=true;
+	dmap_list_size=MAXDMAPS;
+	dmap_list_zero=true;
     
 	large_dialog(sidewarp_dlg);
     
@@ -17192,25 +17192,25 @@ static ListData path_dlg_list(dirlist, &font);
 
 static DIALOG path_dlg[] =
 {
-    /* (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
-    { jwin_win_proc,      80,   57,   161,  164,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Maze Path", NULL, NULL },
-    { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { jwin_text_proc,       94,   106,   192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "1st", NULL, NULL },
-    { jwin_text_proc,       94,   124,  192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "2nd", NULL, NULL },
-    { jwin_text_proc,       94,   142,  192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "3rd", NULL, NULL },
-    { jwin_text_proc,       94,   160,  192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Secret Exit", NULL, NULL },
-    { jwin_text_proc,       94,   178,  192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Normal Exit", NULL, NULL },
-    { jwin_droplist_proc,   140,  102,   80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
-    { jwin_droplist_proc,   140,  120,   80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
-    { jwin_droplist_proc,   140,  138,  80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
-    { jwin_droplist_proc,   140,  156,  80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
-    { jwin_droplist_proc,   140,  174,  80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
-    { jwin_button_proc,     90,   194,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
-    { jwin_button_proc,     170,  194,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-    { d_keyboard_proc,   0,    0,    0,    0,    0,    0,    0,       0,       KEY_F1,   0, (void *) onHelp, NULL, NULL },
-    { jwin_text_proc,       87,   82,   192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "A Lost Woods-style maze screen", NULL, NULL },
-    { jwin_text_proc,       87,   92,   192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "with a normal and secret exit.", NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    /* (dialog proc)       (x)     (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
+    { jwin_win_proc,        80,     57,   161,  164,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Maze Path", NULL, NULL },
+    { d_timer_proc,          0,      0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+    { jwin_text_proc,       94,    106,   192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "1st", NULL, NULL },
+    { jwin_text_proc,       94,    124,  192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "2nd", NULL, NULL },
+    { jwin_text_proc,       94,    142,  192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "3rd", NULL, NULL },
+    { jwin_text_proc,       94,    160,  192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Secret Exit", NULL, NULL },
+    { jwin_text_proc,       94,    178,  192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Normal Exit", NULL, NULL },
+    { jwin_droplist_proc,   140,   102,   80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
+    { jwin_droplist_proc,   140,   120,   80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
+    { jwin_droplist_proc,   140,   138,  80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
+    { jwin_droplist_proc,   140,   156,  80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
+    { jwin_droplist_proc,   140,   174,  80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
+    { jwin_button_proc,      90,   194,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
+    { jwin_button_proc,     170,   194,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
+    { d_keyboard_proc,        0,     0,    0,    0,    0,    0,    0,       0,       KEY_F1,   0, (void *) onHelp, NULL, NULL },
+    { jwin_text_proc,        87,    82,   192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "A Lost Woods-style maze screen", NULL, NULL },
+    { jwin_text_proc,        87,    92,   192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "with a normal and secret exit.", NULL, NULL },
+    { NULL,                   0,     0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 int32_t onPath()
@@ -17285,9 +17285,9 @@ static DIALOG editinfo_dlg[] =
     { jwin_text_proc,     24,   42,   88,    8,  vc(14),              vc(1),                  0,           0,     0,             0, (void *) "Name:", NULL, NULL },
     { jwin_edit_proc,     56,   38,  137,   16,  vc(12),              vc(1),                  0,           0,    31,             0,       NULL, NULL, NULL },
     // 16
-    { jwin_button_proc,   34,  188,   61,   21,  vc(14),              vc(1),                 13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
+    { jwin_button_proc,   34,  188,   61,   21,  vc(14),              vc(1),                 13,      D_EXIT,     0,             0, (void *) "OK",     NULL, NULL },
     { jwin_button_proc,  114,  188,   61,   21,  vc(14),              vc(1),                 27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-    { NULL,                0,    0,    0,    0,  0,                   0,                      0,           0,     0,             0,       NULL,                           NULL,  NULL }
+    { NULL,                0,    0,    0,    0,  0,                   0,                      0,           0,     0,             0,       NULL,        NULL,  NULL }
 };
 
 void EditInfoType(int32_t index)
@@ -17430,11 +17430,11 @@ static DIALOG editshop_dlg[] =
     { jwin_text_proc,    130,  106,   88,    8,  vc(14),              vc(1),                  0,           0,     0,             0, (void *) "Info:", NULL, NULL },
     { jwin_text_proc,    130,  152,   88,    8,  vc(14),              vc(1),                  0,           0,     0,             0, (void *) "Info:", NULL, NULL },
     // 21
-    { jwin_edit_proc,     155,   56,   32,   16,  vc(12),              vc(1),                  0,           0,     5,             0,       NULL, NULL, NULL },
-    { jwin_edit_proc,     155,   102,   32,   16,  vc(12),              vc(1),                  0,           0,     5,             0,       NULL, NULL, NULL },
-    { jwin_edit_proc,     155,   148,   32,   16,  vc(12),              vc(1),                  0,           0,     5,             0,       NULL, NULL, NULL },
+    { jwin_edit_proc,     155,   56,    32,   16,  vc(12),            vc(1),                  0,           0,     5,             0,       NULL, NULL, NULL },
+    { jwin_edit_proc,     155,   102,   32,   16,  vc(12),            vc(1),                  0,           0,     5,             0,       NULL, NULL, NULL },
+    { jwin_edit_proc,     155,   148,   32,   16,  vc(12),            vc(1),                  0,           0,     5,             0,       NULL, NULL, NULL },
     
-    { NULL,                0,    0,    0,    0,  0,                   0,                      0,      0,          0,             0,       NULL,                           NULL,  NULL }
+    { NULL,                0,    0,    0,    0,  0,                   0,                      0,      0,          0,             0,       NULL, NULL,  NULL }
 };
 
 void EditShopType(int32_t index)
@@ -17650,7 +17650,7 @@ static DIALOG edititemdropset_dlg[] =
     { jwin_text_proc,        9,     47,   88,    8,  vc(14),              vc(1),                  0,           0,     0,             0, (void *) "Nothing Chance:", NULL, NULL },
     { d_itemdropedit_proc,  84,     43,   26,   16,  vc(12),              vc(1),                  0,           0,     5,             0,       NULL, NULL, NULL },
     
-    { jwin_tab_proc,         4,     65,  312,   143, vc(0),               vc(15),                 0,           0,     0,             0, (void *) edititemdropset_tabs,                    NULL, (void *)edititemdropset_dlg },
+    { jwin_tab_proc,         4,     65,  312,   143, vc(0),               vc(15),                 0,           0,     0,             0, (void *) edititemdropset_tabs,  NULL, (void *)edititemdropset_dlg },
     { jwin_text_proc,      114,   43+4,   26,    16, vc(14),              vc(1),                  0,           0,     0,             0,       NULL, NULL, NULL },
     // 10
     { jwin_text_proc,       10,     87,   88,    8,  vc(14),              vc(1),                  0,           0,     0,             0, (void *) "Chance:", NULL, NULL },
@@ -17961,8 +17961,8 @@ static ListData wc_list(wclist, &font);
 static DIALOG warpring_dlg[] =
 {
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
-    { jwin_win_proc,          0,      0,    193,    166,    vc(14),                 vc(1),                   0,    D_EXIT,     0,          0,  NULL,                    NULL,   NULL            },
-    { d_timer_proc,           0,      0,      0,      0,    0,                      0,                       0,    0,          0,          0,  NULL,                    NULL,   NULL            },
+    { jwin_win_proc,          0,      0,    193,    166,    vc(14),                 vc(1),                   0,    D_EXIT,     0,          0,  NULL,                   NULL,   NULL            },
+    { d_timer_proc,           0,      0,      0,      0,    0,                      0,                       0,    0,          0,          0,  NULL,                   NULL,   NULL            },
     { jwin_text_proc,        16,     33,     48,      8,    vc(14),                 vc(1),                   0,    0,          0,          0, (void *) "Count:",       NULL,   NULL            },
     { d_wclist_proc,         72,     29,     48,     16,    jwin_pal[jcTEXTFG],     jwin_pal[jcTEXTBG],      0,    0,          1,          0, (void *) &wc_list,       NULL,   NULL            },
     // 4
@@ -17970,7 +17970,7 @@ static DIALOG warpring_dlg[] =
     { jwin_button_proc,      26,    140,     61,     21,    vc(14),                 vc(1),                  13,    D_EXIT,     0,          0, (void *) "Edit",         NULL,   NULL            },
     { jwin_button_proc,     106,    140,     61,     21,    vc(14),                 vc(1),                  27,    D_EXIT,     0,          0, (void *) "Done",         NULL,   NULL            },
     { d_keyboard_proc,        0,      0,      0,      0,    0,                      0,                       0,    0,          KEY_F1,     0, (void *) onHelp,         NULL,   NULL            },
-    { NULL,                   0,      0,      0,      0,    0,                      0,                       0,    0,          0,          0,  NULL,                    NULL,   NULL            }
+    { NULL,                   0,      0,      0,      0,    0,                      0,                       0,    0,          0,          0,  NULL,                   NULL,   NULL            }
 };
 
 int32_t select_warp()
@@ -18054,16 +18054,16 @@ static ListData pattern_dlg_list(pattern_list, &font);
 static DIALOG pattern_dlg[] =
 {
     /* (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
-    { jwin_win_proc, 72,   56,   176+1,  164+1,   vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Enemy Pattern", NULL, NULL },
+    { jwin_win_proc,        72,   56,   176+1,  164+1,   vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Enemy Pattern", NULL, NULL },
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
     { jwin_list_proc,       80,   124,   160+1,  58,   jwin_pal[jcTEXTFG],jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0, (void *) &pattern_dlg_list, NULL, NULL },
     // 3
     { jwin_button_proc,     90,   190,  61,   21,   vc(14),  vc(1),  'k',     D_EXIT,     0,             0, (void *) "O&K", NULL, NULL },
     { jwin_button_proc,     170,  190,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-    { jwin_text_proc,     90,  78,  61,   10,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Classic: pseudorandom locations near", NULL, NULL },
-    { jwin_text_proc,     90,  88,  61,   10,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "the middle of the screen.", NULL, NULL },
-    { jwin_text_proc,     90,  102,  61,   10,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Random: any available location", NULL, NULL },
-    { jwin_text_proc,     90,  112,  61,   10,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "at a sufficient distance from the Player.", NULL, NULL },
+    { jwin_text_proc,      90,  78,  61,   10,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Classic: pseudorandom locations near", NULL, NULL },
+    { jwin_text_proc,      90,  88,  61,   10,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "the middle of the screen.", NULL, NULL },
+    { jwin_text_proc,      90,  102,  61,   10,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Random: any available location", NULL, NULL },
+    { jwin_text_proc,      90,  112,  61,   10,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "at a sufficient distance from the Player.", NULL, NULL },
     { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
@@ -18202,10 +18202,10 @@ void save_enemy(int32_t index = -1);
 void load_enemy(int32_t index = -1);
 DIALOG elist_dlg[] =
 {
-    /* (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
-    { jwin_win_proc,     50,   40,   288,  175,  vc(14),  vc(1),  0,       D_EXIT,          0,             0,       NULL, NULL, NULL },
+    /* (dialog proc)       (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
+    { jwin_win_proc,       50,   40,   288,  175,  vc(14),  vc(1),  0,       D_EXIT,          0,             0,       NULL, NULL, NULL },
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { d_enelist_proc,    62,   68,   188,  98,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0,       NULL, NULL, NULL },
+    { d_enelist_proc,       62,   68,   188,  98,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0,       NULL, NULL, NULL },
     { jwin_button_proc,     90,   160+25,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "Edit", NULL, NULL },
     { jwin_button_proc,     170,  160+25,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Done", NULL, NULL },
     { jwin_button_proc,     220,   160+25,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "Edit", NULL, NULL },
@@ -18214,14 +18214,14 @@ DIALOG elist_dlg[] =
 
 static DIALOG glist_dlg[] =
 {
-    /* (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
-    { jwin_win_proc,     50,   40,   220,  145,  vc(14),  vc(1),  0,       D_EXIT,          0,             0,       NULL, NULL, NULL },
-    { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { jwin_abclist_proc,    62,   68,   196,  88,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0,       NULL, NULL, NULL },
-    { jwin_button_proc,     70,   160,  51,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
-    { jwin_button_proc,     190,  160,  51,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-    { jwin_button_proc,     130,  160,  51,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Help", NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    /* (dialog proc)      (x)   (y)   (w)   (h)    (fg)     (bg)    (key)    (flags)       (d1)           (d2)     (dp) */
+    { jwin_win_proc,        50,   40,   220,  145,  vc(14),  vc(1),  0,       D_EXIT,         0,            0,     NULL, NULL, NULL },
+    { d_timer_proc,         0,    0,    0,    0,    0,       0,       0,       0,             0,            0,     NULL, NULL, NULL },
+    { jwin_abclist_proc,    62,   68,   196,  88,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0, D_EXIT,     0,     0,       NULL, NULL, NULL },
+    { jwin_button_proc,     70,   160,  51,   21,   vc(14),  vc(1),  13,      D_EXIT,         0,             0, (void *) "OK",     NULL, NULL },
+    { jwin_button_proc,     190,  160,  51,   21,   vc(14),  vc(1),  27,      D_EXIT,         0,             0, (void *) "Cancel", NULL, NULL },
+    { jwin_button_proc,     130,  160,  51,   21,   vc(14),  vc(1),  27,      D_EXIT,         0,             0, (void *) "Help",   NULL, NULL },
+    { NULL,                 0,    0,    0,    0,    0,       0,       0,       0,             0,             0,  NULL,             NULL,  NULL }
 };
 
 int32_t efrontfacingtile(int32_t id)
@@ -18386,17 +18386,17 @@ int32_t enelist_proc(int32_t msg,DIALOG *d,int32_t c,bool use_abc_list)
 		rectfill(screen,x,y+40,x+64,y+40+(10*fh),jwin_pal[jcBOX]);
 		textprintf_ex(screen,font,x,y+40+(0*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"#%d",id);
 		
-		textprintf_ex(screen,font,x,y+40+(1*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Tile: %d",guysbuf[id].tile);
+		textprintf_ex(screen,font,x,y+40+(1*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Tile: %d",   guysbuf[id].tile);
 		
-		textprintf_ex(screen,font,x,y+40+(2*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"sTil: %d",guysbuf[id].s_tile);
-		textprintf_ex(screen,font,x,y+40+(3*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"eTil: %d",guysbuf[id].e_tile);
+		textprintf_ex(screen,font,x,y+40+(2*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"sTil: %d",   guysbuf[id].s_tile);
+		textprintf_ex(screen,font,x,y+40+(3*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"eTil: %d",   guysbuf[id].e_tile);
         
-		textprintf_ex(screen,font,x,y+40+(4*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"HP: %d",guysbuf[id].hp);
-		textprintf_ex(screen,font,x,y+40+(5*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Dmg: %d",guysbuf[id].dp);
+		textprintf_ex(screen,font,x,y+40+(4*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"HP: %d",     guysbuf[id].hp);
+		textprintf_ex(screen,font,x,y+40+(5*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Dmg: %d",    guysbuf[id].dp);
 		
-		textprintf_ex(screen,font,x,y+40+(6*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Fam: %d",guysbuf[id].family);
-		textprintf_ex(screen,font,x,y+40+(7*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Drop: %d",guysbuf[id].item_set);
-		textprintf_ex(screen,font,x,y+40+(8*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Script: %d",guysbuf[id].script);
+		textprintf_ex(screen,font,x,y+40+(6*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Fam: %d",    guysbuf[id].family);
+		textprintf_ex(screen,font,x,y+40+(7*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Drop: %d",   guysbuf[id].item_set);
+		textprintf_ex(screen,font,x,y+40+(8*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Script: %d", guysbuf[id].script);
 		textprintf_ex(screen,font,x,y+40+(9*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"WScript: %d",guysbuf[id].weaponscript);
     }
     font = oldfont;
@@ -19612,29 +19612,29 @@ static ListData comboa_list(comboalist, &font);
 
 static DIALOG editcomboa_dlg[] =
 {
-    /* (dialog proc)     (x)   (y)    (w)   (h)   (fg)      (bg)     (key)    (flags)       (d1)           (d2)      (dp) */
-    { jwin_win_proc,        0,    0,  320,  240,  vc(14),   vc(1),      0,       D_EXIT,     0,             0, (void *) "Combo Alias Edit", NULL, NULL },
+    /* (dialog proc)        (x)   (y)    (w)   (h)   (fg)      (bg)     (key)    (flags)       (d1)           (d2)      (dp) */
+    { jwin_win_proc,          0,    0,  320,  240,  vc(14),   vc(1),      0,       D_EXIT,     0,             0, (void *) "Combo Alias Edit", NULL, NULL },
     { jwin_button_proc,     148,  212,  61,   21,   vc(14),  vc(1),  'k',     D_EXIT,     0,             0, (void *) "O&K", NULL, NULL },
     { jwin_button_proc,     232,  212,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-    { jwin_frame_proc,      4+121,   28+81,   1,   1,       0,       0,      0,       0,          FR_DEEP,       0,       NULL, NULL, NULL },
+    { jwin_frame_proc,    4+121,   28+81,   1,   1,       0,       0,      0,       0,          FR_DEEP,       0,       NULL, NULL, NULL },
     { d_comboabutton_proc,   25,  212,  81,   21,   vc(14),  vc(1),  'p',     D_EXIT,     0,             0, (void *) "&Properties", NULL, NULL },
-    { d_dummy_proc,         0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL },
+    { d_dummy_proc,           0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL },
     { d_comboa_radio_proc,  285,   44,  30,   8+1,    vc(14),  vc(1),  0,       D_SELECTED,          0,             0, (void *) "0", NULL, NULL },
     { d_comboa_radio_proc,  285,   54,  30,   8+1,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "1", NULL, NULL },
     { d_comboa_radio_proc,  285,   64,  30,   8+1,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "2", NULL, NULL },
     { d_comboa_radio_proc,  285,   74,  30,   8+1,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "3", NULL, NULL },
     { d_comboa_radio_proc,  285,   84,   30,   8+1,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "4", NULL, NULL },
     
-    { d_comboa_radio_proc,  285,   94,   30,   8+1,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "5", NULL, NULL },
-    { d_comboa_radio_proc,  285,   104,  30,   8+1,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "6", NULL, NULL },
-    { d_comboacheck_proc,     285,   164,   17,   9,    vc(12),  vc(1),  0,       0,          1,             0,      NULL, NULL, NULL },
-    { d_comboa_proc,         6,    27,  256,  176,  0,   0,      0,       0,     0,             0,       NULL, NULL, NULL },
-    { jwin_ctext_proc,     290,   176,   27,   8,   0,        0,       0,      0,        0,              0, (void *) "Only Show", NULL, NULL },
-    { jwin_ctext_proc,     290,   186,   27,   8,   0,        0,       0,      0,        0,              0, (void *) "Current", NULL, NULL },
-    { jwin_ctext_proc,     290,   196,   27,   8,   0,        0,       0,      0,        0,              0, (void *) "Layer", NULL, NULL },
-    { jwin_ctext_proc,     290,   122,   27,   8,   0,        0,       0,      0,        0,              0, (void *) "Thumbnail", NULL, NULL },
-    { jwin_frame_proc,     280,   132,   20,   20,  0,        0,      0,       0,         FR_DEEP,       0,       NULL, NULL, NULL },
-    { d_comboat_proc,      282,   134,   16,   16,  0,   0,      0,       0,     0,             0,       NULL, NULL, NULL },
+    { d_comboa_radio_proc,  285,    94,   30,   8+1,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "5", NULL, NULL },
+    { d_comboa_radio_proc,  285,   104,   30,   8+1,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "6", NULL, NULL },
+    { d_comboacheck_proc,   285,   164,   17,   9,    vc(12),  vc(1),  0,       0,          1,             0,      NULL, NULL, NULL },
+    { d_comboa_proc,          6,    27,  256,  176,  0,   0,      0,       0,     0,             0,       NULL, NULL, NULL },
+    { jwin_ctext_proc,      290,   176,   27,   8,   0,        0,       0,      0,        0,              0, (void *) "Only Show", NULL, NULL },
+    { jwin_ctext_proc,      290,   186,   27,   8,   0,        0,       0,      0,        0,              0, (void *) "Current", NULL, NULL },
+    { jwin_ctext_proc,      290,   196,   27,   8,   0,        0,       0,      0,        0,              0, (void *) "Layer", NULL, NULL },
+    { jwin_ctext_proc,      290,   122,   27,   8,   0,        0,       0,      0,        0,              0, (void *) "Thumbnail", NULL, NULL },
+    { jwin_frame_proc,      280,   132,   20,   20,  0,        0,      0,       0,         FR_DEEP,       0,       NULL, NULL, NULL },
+    { d_comboat_proc,       282,   134,   16,   16,  0,   0,      0,       0,     0,             0,       NULL, NULL, NULL },
     
     //21
     { d_orgcomboa_proc,   106,  212,  21,   21,   vc(14),  vc(1),  'p',     D_EXIT,     0,             0, (void *) "&Org", NULL, NULL },
@@ -19793,14 +19793,14 @@ static ListData ffcombo_list(ffcombolist, &font);
 
 static DIALOG ffcombo_sel_dlg[] =
 {
-    { jwin_win_proc,        0,    0,  200,   179,  vc(14),   vc(1),      0,       D_EXIT,     0,             0, (void *) "Choose Freeform Combo", NULL, NULL },
-    { jwin_button_proc,     35,   152,   61,   21,  vc(14),   vc(1),     13,       D_EXIT,     0,             0, (void *) "Edit", NULL, NULL },
-    { jwin_button_proc,    104,   152,   61,   21,  vc(14),   vc(1),     27,       D_EXIT,     0,             0, (void *) "Done", NULL, NULL },
-    { d_ffcombolist_proc,  11,   24,   49,   16,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       0,          1,             0, (void *) &ffcombo_list, NULL, NULL },
-    { d_comboframe_proc,   68,  23,   20,   20,   0,       0,      0,       0,             FR_DEEP,       0,       NULL, NULL, NULL },
-    { d_bitmap_proc,     70,  25,   16,   16,   0,       0,      0,       0,             0,             0,       NULL, NULL, NULL },
-    { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    { jwin_win_proc,       0,      0,  200,   179,  vc(14),   vc(1),      0,       D_EXIT,     0,             0, (void *) "Choose Freeform Combo", NULL, NULL },
+    { jwin_button_proc,    35,   152,   61,   21,   vc(14),   vc(1),     13,       D_EXIT,     0,             0, (void *) "Edit", NULL, NULL },
+    { jwin_button_proc,   104,   152,   61,   21,   vc(14),   vc(1),     27,       D_EXIT,     0,             0, (void *) "Done", NULL, NULL },
+    { d_ffcombolist_proc,  11,    24,   49,   16,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       0,          1,             0, (void *) &ffcombo_list, NULL, NULL },
+    { d_comboframe_proc,   68,    23,   20,   20,   0,       0,      0,       0,             FR_DEEP,       0,       NULL, NULL, NULL },
+    { d_bitmap_proc,       70,    25,   16,   16,   0,       0,      0,       0,             0,             0,       NULL, NULL, NULL },
+    { d_timer_proc,         0,     0,    0,    0,   0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+    { NULL,                 0,     0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 int32_t d_ffcombolist_proc(int32_t msg,DIALOG *d,int32_t c)
