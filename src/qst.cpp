@@ -2166,102 +2166,67 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		byte padding;
 		
 		if(!p_getc(&padding,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_igetw(&tempheader.zelda_version,f))
-		{
 			return qe_invalid;
-		}
 		
 		FFCore.quest_format[vZelda] = tempheader.zelda_version;
 		
 		if(tempheader.zelda_version > ZELDA_VERSION)
-		{
 			return qe_version;
-		}
 		
 		FFCore.quest_format[vZelda] = tempheader.zelda_version;
 		
 		if(strcmp(tempheader.id_str,QH_IDSTR))
-		{
 			return qe_invalid;
-		}
 		
 		if(bad_version(tempheader.zelda_version))
-		{
 			return qe_obsolete;
-		}
 		
 		if(!p_igetw(&tempheader.internal,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&tempheader.quest_number,f))
-		{
 			return qe_invalid;
-		}
 		
 		FFCore.quest_format[qQuestNumber] = tempheader.quest_number;
 		
 		if(!pfread(&quest_rules[0],2,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_map_count,f))
-		{
 			return qe_invalid;
-		}
 		
 		FFCore.quest_format[qMapCount] = temp_map_count;
 		
 		if(!p_getc(&tempheader.old_str_count,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&tempheader.data_flags[ZQ_TILES],f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!pfread(temp_midi_flags,4,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&tempheader.data_flags[ZQ_CHEATS2],f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!pfread(dummybuf,14,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!pfread(&quest_rules[2],2,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&dummybuf,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!pfread(tempheader.version,9,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!pfread(tempheader.title,sizeof(tempheader.title),f))
-		{
 			return qe_invalid;
-		}
+
 		// These fields are expected to end in null bytes!
 		tempheader.title[sizeof(tempheader.title)-1] = 0;
 		
@@ -2272,19 +2237,13 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		tempheader.author[sizeof(tempheader.author)-1] = 0;
 		
 		if(!p_getc(&padding,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_igetw(&temp_pwdkey,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!pfread(temp_pwd,30,f))
-		{
 			return qe_invalid;
-		}
 	
 		get_questpwd(temp_pwd, temp_pwdkey, temp_pwd2);
 		cvs_MD5Init(&ctx);
@@ -2303,26 +2262,18 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		else
 		{
 			if(!pfread(tempheader.minver,9,f))
-			{
 				return qe_invalid;
-			}
 			
 			if(!p_getc(&tempheader.build,f))
-			{
 				return qe_invalid;
-			}
 			
 			FFCore.quest_format[vBuild] = tempheader.build;
 			
 			if(!p_getc(&tempheader.use_keyfile,f))
-			{
 				return qe_invalid;
-			}
 			
 			if(!pfread(dummybuf,9,f))
-			{
 				return qe_invalid;
-			}
 		}                                                       // starting at minver
 		
 		if(tempheader.zelda_version < 0x187)                    // lacks newer header stuff...
@@ -2332,9 +2283,7 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		else
 		{
 			if(!pfread(&quest_rules[4],16,f))                      // read new header additions
-			{
 				return qe_invalid;                                  // starting at rules3
-			}
 			
 			if(tempheader.zelda_version <= 0x190)
 			{
@@ -2361,14 +2310,10 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 			}
 			
 			if(!pfread(mf,32,f))                  // read new header additions
-			{
 				return qe_invalid;                                  // starting at foo2
-			}
 			
 			if(!pfread(dummybuf,18,f))                        // read new header additions
-			{
 				return qe_invalid;                                  // starting at foo2
-			}
 		}
 		
 		if((tempheader.zelda_version < 0x192)||
@@ -2379,9 +2324,7 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		else
 		{
 			if(!pfread(tempheader.templatepath,280,f))               // read templatepath
-			{
 				return qe_invalid;
-			}
 		}
 		
 		if((tempheader.zelda_version < 0x192)||
@@ -2394,71 +2337,49 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 	{
 		//section id
 		if(!p_mgetl(&dummy,f))
-		{
 			return qe_invalid;
-		}
 		
 		//section version info
 		if(!p_igetw(&version,f))
-		{
 			return qe_invalid;
-		}
 		
 		FFCore.quest_format[vHeader] = version;
 		
 		if(!p_igetw(&dummy,f))
-		{
 			return qe_invalid;
-		}
 		
 		//section size
 		if(!p_igetl(&dummy,f))
-		{
 			return qe_invalid;
-		}
 		
 		//finally...  section data
 		if(!p_igetw(&tempheader.zelda_version,f))
-		{
 			return qe_invalid;
-		}
 		
 		FFCore.quest_format[vZelda] = tempheader.zelda_version;
 	
 		//do some quick checking...
 		if(tempheader.zelda_version > ZELDA_VERSION)
-		{
 			return qe_version;
-		}
 		
 		if(strcmp(tempheader.id_str,QH_NEWIDSTR))
-		{
 			return qe_invalid;
-		}
 		
 		if(bad_version(tempheader.zelda_version))
-		{
 			return qe_obsolete;
-		}
 		
 		if(!p_getc(&tempheader.build,f))
-		{
 			return qe_invalid;
-		}
 	
 		FFCore.quest_format[vBuild] = tempheader.build;
 	
 		if(version<3)
 		{
 			if(!pfread(temp_pwd,30,f))
-			{
 				return qe_invalid;
-			}
 			
 			if(!p_igetw(&temp_pwdkey,f))
-			{
 				return qe_invalid;
-			}
 			
 			get_questpwd(temp_pwd, temp_pwdkey, temp_pwd2);
 			cvs_MD5Init(&ctx);
@@ -2468,53 +2389,37 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		else
 		{
 			if(!pfread(tempheader.pwd_hash,sizeof(tempheader.pwd_hash),f))
-			{
 				return qe_invalid;
-			}
 		}
 		
 		if(!p_igetw(&tempheader.internal,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&tempheader.quest_number,f))
-		{
 			return qe_invalid;
-		}
 		
 		FFCore.quest_format[qQuestNumber] = tempheader.quest_number;
 		
 		size_t versz = version < 8 ? 9 : 16;
 		if(!pfread(tempheader.version,versz,f))
-		{
 			return qe_invalid;
-		}
 	
 		//FFCore.quest_format[qQuestVersion] = tempheader.version;
 		//needs to be copied as char[9] or stored as a s.str
 		if(!pfread(tempheader.minver,versz,f))
-		{
 			return qe_invalid;
-		}
 	
 		//FFCore.quest_format[qMinQuestVersion] = tempheader.minver;
 		if(!pfread(tempheader.title,sizeof(tempheader.title),f))
-		{
 			return qe_invalid;
-		}
 		tempheader.title[sizeof(tempheader.title)-1] = 0;
 		
 		if(!pfread(tempheader.author,sizeof(tempheader.author),f))
-		{
 			return qe_invalid;
-		}
 		tempheader.author[sizeof(tempheader.author)-1] = 0;
 		
 		if(!p_getc(&tempheader.use_keyfile,f))
-		{
 			return qe_invalid;
-		}
 		
 		/*
 		  if(!pfread(tempheader.data_flags,sizeof(tempheader.data_flags),f))
@@ -2523,24 +2428,16 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		  }
 		  */
 		if(!p_getc(&tempheader.data_flags[ZQ_TILES],f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!pfread(&dummybuf,4,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&tempheader.data_flags[ZQ_CHEATS2],f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!pfread(dummybuf,14,f))
-		{
 			return qe_invalid;
-		}
 		
 		templatepath_len=sizeof(tempheader.templatepath);
 		
@@ -2550,14 +2447,10 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		}
 		
 		if(!pfread(tempheader.templatepath,templatepath_len,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&temp_map_count,f))
-		{
 			return qe_invalid;
-		}
 	
 		if(version>=4)
 		{
