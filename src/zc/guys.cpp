@@ -11936,9 +11936,7 @@ bool eWizzrobe::animate(int32_t index)
 							}
 									
 							if(!m_walkflag(x,y,spw_door, dir)&&((abs(x-Hero.getX())>=32)||(abs(y-Hero.getY())>=32)))
-							{
 								placed=true;
-							}
 									
 							++t;
 						}
@@ -11946,24 +11944,16 @@ bool eWizzrobe::animate(int32_t index)
 						if(abs(x-Hero.getX())<abs(y-Hero.getY()))
 						{
 							if(y<Hero.getY())
-							{
 								dir=down;
-							}
 							else
-							{
 								dir=up;
-							}
 						}
 						else
 						{
 							if(x<Hero.getX())
-							{
 								dir=right;
-							}
 							else
-							{
 								dir=left;
-							}
 						}
 								
 						if(!placed)                                       // can't place him, he's gone
@@ -11994,9 +11984,7 @@ bool eWizzrobe::animate(int32_t index)
 						}
 						
 						if(!m_walkflag(x,y,spw_door, dir)&&((abs(x-Hero.getX())>=32)||(abs(y-Hero.getY())>=32)))
-						{
 							placed=true;
-						}
 						
 						++t;
 					}
@@ -12004,24 +11992,16 @@ bool eWizzrobe::animate(int32_t index)
 					if(abs(x-Hero.getX())<abs(y-Hero.getY()))
 					{
 						if(y<Hero.getY())
-						{
 							dir=down;
-						}
 						else
-						{
 							dir=up;
-						}
 					}
 					else
 					{
 						if(x<Hero.getX())
-						{
 							dir=right;
-						}
 						else
-						{
 							dir=left;
-						}
 					}
 					
 					if(!placed)                                       // can't place him, he's gone
@@ -12108,25 +12088,24 @@ void eWizzrobe::wizzrobe_attack_for_real()
 	{
 		switch(wpn)
 		{
-			case ewFireball: sfx(40,pan(int32_t(x))); break;
-				
-			case ewArrow: sfx(1,pan(int32_t(x))); break; //Ghost.zh has 0?
-			case ewBrang: sfx(4,pan(int32_t(x))); break; //Ghost.zh has 0?
-			case ewSword: sfx(20,pan(int32_t(x))); break; //Ghost.zh has 0?
-			case ewRock: sfx(51,pan(int32_t(x))); break;
-			case ewMagic: sfx(32,pan(int32_t(x))); break;
-			case ewBomb: sfx(3,pan(int32_t(x))); break; //Ghost.zh has 0?
-			case ewSBomb: sfx(3,pan(int32_t(x))); break; //Ghost.zh has 0?
-			case ewLitBomb: sfx(21,pan(int32_t(x))); break; //Ghost.zh has 0?
-			case ewLitSBomb:  sfx(21,pan(int32_t(x))); break; //Ghost.zh has 0?
-			case ewFireTrail:  sfx(13,pan(int32_t(x))); break;
-			case ewFlame: sfx(13,pan(int32_t(x))); break;
-			case ewWind: sfx(32,pan(int32_t(x))); break;
-			case ewFlame2: sfx(13,pan(int32_t(x))); break;
+			case ewFireball:    sfx(40,pan(int32_t(x))); break; 
+			case ewArrow:       sfx(1,pan(int32_t(x)));  break; //Ghost.zh has 0?
+			case ewBrang:       sfx(4,pan(int32_t(x)));  break; //Ghost.zh has 0?
+			case ewSword:       sfx(20,pan(int32_t(x))); break; //Ghost.zh has 0?
+			case ewRock:        sfx(51,pan(int32_t(x))); break;
+			case ewMagic:       sfx(32,pan(int32_t(x))); break;
+			case ewBomb:        sfx(3,pan(int32_t(x)));  break; //Ghost.zh has 0?
+			case ewSBomb:       sfx(3,pan(int32_t(x)));  break; //Ghost.zh has 0?
+			case ewLitBomb:     sfx(21,pan(int32_t(x))); break; //Ghost.zh has 0?
+			case ewLitSBomb:    sfx(21,pan(int32_t(x))); break; //Ghost.zh has 0?
+			case ewFireTrail:   sfx(13,pan(int32_t(x))); break;
+			case ewFlame:       sfx(13,pan(int32_t(x))); break;
+			case ewWind:        sfx(32,pan(int32_t(x))); break;
+			case ewFlame2:      sfx(13,pan(int32_t(x))); break;
 			case ewFlame2Trail: sfx(13,pan(int32_t(x))); break;
-			case ewIce: sfx(44,pan(int32_t(x))); break;
-			case ewFireball2: sfx(40,pan(int32_t(x))); break; //fireball (rising)
-			default: sfx(WAV_FIRE,pan(int32_t(x)));  break;
+			case ewIce:         sfx(44,pan(int32_t(x))); break;
+			case ewFireball2:   sfx(40,pan(int32_t(x))); break; //fireball (rising)
+			default:            sfx(WAV_FIRE,pan(int32_t(x)));  break;
 			
 		}
 	}
