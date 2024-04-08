@@ -73,12 +73,12 @@ void zprint2(const char * const format, ...)
 
 static int32_t used_switch(int32_t argc,char *argv[],const char *s)
 {
-    // assumes a switch won't be in argv[0]
-    for(int32_t i=1; i<argc; i++)
-        if(stricmp(argv[i],s)==0)
-            return i;
+	// assumes a switch won't be in argv[0]
+	for(int32_t i=1; i<argc; i++)
+		if(stricmp(argv[i],s)==0)
+			return i;
             
-    return 0;
+	return 0;
 }
 
 [[noreturn]] static void fatal(std::string msg)
