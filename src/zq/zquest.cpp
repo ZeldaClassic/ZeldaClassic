@@ -20995,18 +20995,17 @@ static DIALOG assignscript_dlg[] =
     { jwin_button_proc,  174+78-24,  158,     48,     16,     vc(14), vc(1),  0, D_EXIT, 0,  0,  (void *) "Script Info",  NULL, NULL },
     { jwin_button_proc,   87+78-24,  158,     48,     16,     vc(14), vc(1),  0, D_EXIT, 0,  0,  (void *) "Clear",  NULL, NULL },
     //45
-	{ jwin_abclist_proc,    10,	45,		136,	105,	jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,0,0, 0, (void *)&assigngeneric_list, NULL, NULL },
+    { jwin_abclist_proc,    10,	45,		136,	105,	jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,0,0, 0, (void *)&assigngeneric_list, NULL, NULL },
     { jwin_abclist_proc,    174+10,	45,		136,	105,	jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,0,0, 0, (void *)&assigngenericscript_list, NULL, NULL },
     //47
     { jwin_button_proc,	  154+5,	93,		15,		10,		vc(14),	vc(1),	0,	D_EXIT,	0,	0,	(void *) "<<", NULL, NULL },
     //48
-	{ jwin_abclist_proc,    10,	45,		136,	105,	jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,0,0, 0, (void *)&assignsubscreen_list, NULL, NULL },
+    { jwin_abclist_proc,    10,	45,		136,	105,	jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,0,0, 0, (void *)&assignsubscreen_list, NULL, NULL },
     { jwin_abclist_proc,    174+10,	45,		136,	105,	jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,0,0, 0, (void *)&assignsubscreenscript_list, NULL, NULL },
     //50
     { jwin_button_proc,	  154+5,	93,		15,		10,		vc(14),	vc(1),	0,	D_EXIT,	0,	0,	(void *) "<<", NULL, NULL },
     
     { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,        NULL, NULL, NULL }
-    
 };
 
 int32_t txtout(BITMAP* dest, const char* txt, int32_t x, int32_t y, bool disabled)
@@ -24132,14 +24131,14 @@ int32_t pan(int32_t x)
 
 void change_sfx(SAMPLE *sfx1, SAMPLE *sfx2)
 {
-    sfx1->bits = sfx2->bits;
-    sfx1->stereo = sfx2->stereo;
-    sfx1->freq = sfx2->freq;
-    sfx1->priority = sfx2->priority;
-    sfx1->len = sfx2->len;
+    sfx1->bits       = sfx2->bits;
+    sfx1->stereo     = sfx2->stereo;
+    sfx1->freq       = sfx2->freq;
+    sfx1->priority   = sfx2->priority;
+    sfx1->len        = sfx2->len;
     sfx1->loop_start = sfx2->loop_start;
-    sfx1->loop_end = sfx2->loop_end;
-    sfx1->param = sfx2->param;
+    sfx1->loop_end   = sfx2->loop_end;
+    sfx1->param      = sfx2->param;
     
     free(sfx1->data);
     
@@ -24573,7 +24572,7 @@ static TABPANEL misccolor_tabs[] =
     { (char *)"2",  0,           misccolor2_list, 0, NULL },
     { (char *)"3",  0,           misccolor3_list, 0, NULL },
     { (char *)"4",  0,           misccolor4_list, 0, NULL },
-    { NULL,         0,           NULL, 0, NULL }
+    { NULL,         0,           NULL,            0, NULL }
 };
 
 int32_t d_misccolors_proc(int32_t msg,DIALOG *d,int32_t c);
@@ -24589,11 +24588,11 @@ static DIALOG misccolors_dlg[] =
     //3
     { d_misccolors_tab_proc,  150+14-2+10-15,   60-14,  150-10+15,  144-20-10,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],      0,      0,          0,             0, (void *) misccolor_tabs, NULL, (void *)misccolors_dlg },
     //4
-    { jwin_text_proc,       215-25-12-15,    76-4,     0,  8,    vc(11),  vc(1),  0,       0,          0,             0, (void *) "Text:", NULL, NULL },
-    { jwin_text_proc,       215-25-12-15,    94-4,     0,  8,    vc(11),  vc(1),  0,       0,          0,             0, (void *) "Caption:", NULL, NULL },
-    { jwin_text_proc,       215-25-12-15,    112-4,    0,  8,    vc(11),  vc(1),  0,       0,          0,             0, (void *) "Overworld Minmap:", NULL, NULL },
-    { jwin_text_proc,       215-25-12-15,    130-4,    0,  8,    vc(11),  vc(1),  0,       0,          0,             0, (void *) "Minimap Background:", NULL, NULL },
-    { jwin_text_proc,       215-25-12-15,    148-4,    0,  8,    vc(11),  vc(1),  0,       0,          0,             0, (void *) "Minimap Foreground 1:", NULL, NULL },
+    { jwin_text_proc,       215-25-12-15,   76-4,      0,  8,    vc(11),  vc(1),  0,       0,          0,             0, (void *) "Text:", NULL, NULL },
+    { jwin_text_proc,       215-25-12-15,   94-4,      0,  8,    vc(11),  vc(1),  0,       0,          0,             0, (void *) "Caption:", NULL, NULL },
+    { jwin_text_proc,       215-25-12-15,   112-4,     0,  8,    vc(11),  vc(1),  0,       0,          0,             0, (void *) "Overworld Minmap:", NULL, NULL },
+    { jwin_text_proc,       215-25-12-15,   130-4,     0,  8,    vc(11),  vc(1),  0,       0,          0,             0, (void *) "Minimap Background:", NULL, NULL },
+    { jwin_text_proc,       215-25-12-15,   148-4,     0,  8,    vc(11),  vc(1),  0,       0,          0,             0, (void *) "Minimap Foreground 1:", NULL, NULL },
     { jwin_text_proc,       215-25-12-15,   76-4,      0,  8,    vc(11),  vc(1),  0,       0,          0,             0, (void *) "Minimap Foreground 2:", NULL, NULL },
     { jwin_text_proc,       215-25-12-15,   94-4,      0,  8,    vc(11),  vc(1),  0,       0,          0,             0, (void *) "BS Minimap Dark:", NULL, NULL },
     { jwin_text_proc,       215-25-12-15,   112-4,     0,  8,    vc(11),  vc(1),  0,       0,          0,             0, (void *) "BS Minimap Goal:", NULL, NULL },
@@ -24625,11 +24624,11 @@ static DIALOG misccolors_dlg[] =
     { d_misccolors_hexedit_proc,       294-25+14+2,   76-8,    21,   16,    vc(11),  vc(1),  0,       0,          2,             0,       NULL, NULL, (void *)15, },
     
     //36
-    { jwin_text_proc,       283-25+14+2,    76-4,     0,    8,    vc(11),  vc(1),  0,       0,          2,             0, (void *) "0x", NULL, NULL },
-    { jwin_text_proc,       283-25+14+2,    94-4,     0,    8,    vc(11),  vc(1),  0,       0,          2,             0, (void *) "0x", NULL, NULL },
-    { jwin_text_proc,       283-25+14+2,    112-4,    0,    8,    vc(11),  vc(1),  0,       0,          2,             0, (void *) "0x", NULL, NULL },
-    { jwin_text_proc,       283-25+14+2,    130-4,    0,    8,    vc(11),  vc(1),  0,       0,          2,             0, (void *) "0x", NULL, NULL },
-    { jwin_text_proc,       283-25+14+2,    148-4,    0,    8,    vc(11),  vc(1),  0,       0,          2,             0, (void *) "0x", NULL, NULL },
+    { jwin_text_proc,       283-25+14+2,   76-4,     0,    8,    vc(11),  vc(1),  0,       0,          2,             0, (void *) "0x", NULL, NULL },
+    { jwin_text_proc,       283-25+14+2,   94-4,     0,    8,    vc(11),  vc(1),  0,       0,          2,             0, (void *) "0x", NULL, NULL },
+    { jwin_text_proc,       283-25+14+2,   112-4,    0,    8,    vc(11),  vc(1),  0,       0,          2,             0, (void *) "0x", NULL, NULL },
+    { jwin_text_proc,       283-25+14+2,   130-4,    0,    8,    vc(11),  vc(1),  0,       0,          2,             0, (void *) "0x", NULL, NULL },
+    { jwin_text_proc,       283-25+14+2,   148-4,    0,    8,    vc(11),  vc(1),  0,       0,          2,             0, (void *) "0x", NULL, NULL },
     { jwin_text_proc,       283-25+14+2,   76-4,     0,    8,    vc(11),  vc(1),  0,       0,          2,             0, (void *) "0x", NULL, NULL },
     { jwin_text_proc,       283-25+14+2,   94-4,     0,    8,    vc(11),  vc(1),  0,       0,          2,             0, (void *) "0x", NULL, NULL },
     { jwin_text_proc,       283-25+14+2,   112-4,    0,    8,    vc(11),  vc(1),  0,       0,          2,             0, (void *) "0x", NULL, NULL },
