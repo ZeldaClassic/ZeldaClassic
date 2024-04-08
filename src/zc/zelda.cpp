@@ -599,11 +599,11 @@ char SaveScreenText[7][32]={"CONTINUE", "SAVE AND QUIT", "QUIT WITHOUT SAVING", 
 void ResetSaveScreenSettings()
 {
 	SaveScreenSettings[SAVESC_TEXT_CONTINUE_COLOUR] = QMisc.colors.msgtext; 
-	SaveScreenSettings[SAVESC_TEXT_SAVE_COLOUR] = QMisc.colors.msgtext; 
-	SaveScreenSettings[SAVESC_TEXT_RETRY_COLOUR] = QMisc.colors.msgtext; 
-	SaveScreenSettings[SAVESC_TEXT_CONTINUE_FLASH] = QMisc.colors.caption; 
-	SaveScreenSettings[SAVESC_TEXT_SAVE_FLASH] = QMisc.colors.caption; 
-	SaveScreenSettings[SAVESC_TEXT_RETRY_FLASH] = QMisc.colors.caption;
+	SaveScreenSettings[SAVESC_TEXT_SAVE_COLOUR]     = QMisc.colors.msgtext; 
+	SaveScreenSettings[SAVESC_TEXT_RETRY_COLOUR]    = QMisc.colors.msgtext; 
+	SaveScreenSettings[SAVESC_TEXT_CONTINUE_FLASH]  = QMisc.colors.caption; 
+	SaveScreenSettings[SAVESC_TEXT_SAVE_FLASH]      = QMisc.colors.caption; 
+	SaveScreenSettings[SAVESC_TEXT_RETRY_FLASH]     = QMisc.colors.caption;
 	SaveScreenSettings[SAVESC_MIDI] = -4;
 	//SaveScreenSettings[SAVESC_BACKGROUND] = BLACK;
 	SaveScreenSettings[SAVESC_BACKGROUND] = 0; //Isle of Rebirth changed the game over background by changing color 0 of the palette; this needs to be respected!
@@ -614,12 +614,12 @@ void ResetSaveScreenSettings()
 	SaveScreenSettings[SAVESC_CUR_FLIP] = 0;
 	SaveScreenSettings[SAVESC_TEXT_DONTSAVE_COLOUR] = QMisc.colors.msgtext;
 	SaveScreenSettings[SAVESC_TEXT_SAVEQUIT_COLOUR] = QMisc.colors.msgtext;
-	SaveScreenSettings[SAVESC_TEXT_SAVE2_COLOUR] = QMisc.colors.msgtext;
-	SaveScreenSettings[SAVESC_TEXT_QUIT_COLOUR] = QMisc.colors.msgtext;
-	SaveScreenSettings[SAVESC_TEXT_DONTSAVE_FLASH] = QMisc.colors.caption;
-	SaveScreenSettings[SAVESC_TEXT_SAVEQUIT_FLASH] = QMisc.colors.caption;
-	SaveScreenSettings[SAVESC_TEXT_SAVE2_FLASH] = QMisc.colors.caption;
-	SaveScreenSettings[SAVESC_TEXT_QUIT_FLASH] = QMisc.colors.caption;
+	SaveScreenSettings[SAVESC_TEXT_SAVE2_COLOUR]    = QMisc.colors.msgtext;
+	SaveScreenSettings[SAVESC_TEXT_QUIT_COLOUR]     = QMisc.colors.msgtext;
+	SaveScreenSettings[SAVESC_TEXT_DONTSAVE_FLASH]  = QMisc.colors.caption;
+	SaveScreenSettings[SAVESC_TEXT_SAVEQUIT_FLASH]  = QMisc.colors.caption;
+	SaveScreenSettings[SAVESC_TEXT_SAVE2_FLASH]     = QMisc.colors.caption;
+	SaveScreenSettings[SAVESC_TEXT_QUIT_FLASH]      = QMisc.colors.caption;
 	SaveScreenSettings[SAVESC_EXTRA1] = 0;
 	SaveScreenSettings[SAVESC_EXTRA2] = 0;
 	SaveScreenSettings[SAVESC_EXTRA3] = 0;
@@ -910,19 +910,19 @@ void donewmsg(int32_t str)
 // Called to make a message disappear
 void dismissmsg()
 {
-    linkedmsgclk=0;
-    msgstr = msgclk=msgpos=msgptr=0;
-    cursor_x=0;
-    cursor_y=0;
+	linkedmsgclk=0;
+	msgstr = msgclk=msgpos=msgptr=0;
+	cursor_x=0;
+	cursor_y=0;
 	prt_tile=0;
-    msg_onscreen = msg_active = false;
-    //Hero.finishedmsg(); //Not possible?
-    clear_bitmap(msg_bg_display_buf);
-    set_clip_state(msg_bg_display_buf, 1);
-    clear_bitmap(msg_txt_display_buf);
-    set_clip_state(msg_txt_display_buf, 1);
-    clear_bitmap(msg_portrait_display_buf);
-    set_clip_state(msg_portrait_display_buf, 1);
+	msg_onscreen = msg_active = false;
+	//Hero.finishedmsg(); //Not possible?
+	clear_bitmap(msg_bg_display_buf);
+	set_clip_state(msg_bg_display_buf, 1);
+	clear_bitmap(msg_txt_display_buf);
+	set_clip_state(msg_txt_display_buf, 1);
+	clear_bitmap(msg_portrait_display_buf);
+	set_clip_state(msg_portrait_display_buf, 1);
 	clr_msg_data();
 }
 
