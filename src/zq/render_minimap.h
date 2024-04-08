@@ -1,5 +1,4 @@
-#ifndef _RENDER_MINIMAP_H_
-#define _RENDER_MINIMAP_H_
+#pragma once
 
 #include "base/render.h"
 
@@ -17,5 +16,3 @@ private:
 	void prepare();
 	void render(bool bitmap_resized);
 };
-
-#endif

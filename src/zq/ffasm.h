@@ -1,5 +1,4 @@
-#ifndef _FFASM_H_
-#define _FFASM_H_
+#pragma once
 
 #include "base/zdefs.h"
 #include <utility>
@@ -16,6 +15,3 @@ int32_t parse_script_file(script_data **script, const char *path, bool report_su
 int32_t parse_script_file(script_data **script, FILE* fscript, bool report_success);
 int32_t parse_script_string(script_data *script, std::string const& scriptstr, bool report_success);
 int32_t ffparse(char *string);
-
-#endif
-

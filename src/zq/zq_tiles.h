@@ -1,8 +1,6 @@
-#ifndef _ZQ_TILES_H_
-#define _ZQ_TILES_H_
+#pragma once
 
 #include "base/zdefs.h"
-
 #include "base/zc_alleg.h"
 
 struct newcombo;
@@ -142,4 +140,3 @@ int32_t d_itile_proc(int32_t msg,DIALOG *d,int32_t c);
 int32_t onIcons();
 void center_zq_tiles_dialogs();
 int32_t d_combo_proc(int32_t msg,DIALOG *d,int32_t c);
-#endif

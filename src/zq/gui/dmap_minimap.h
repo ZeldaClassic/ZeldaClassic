@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_DMAPXMAP_H
-#define ZC_GUI_DMAPXMAP_H
+#pragma once
 
 #include "gui/widget.h"
 #include "gui/dialog_ref.h"
@@ -65,5 +64,3 @@ namespace GUI
 	};
 
 }
-
-#endif

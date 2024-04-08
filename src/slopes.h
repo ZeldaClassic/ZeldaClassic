@@ -1,5 +1,4 @@
-#ifndef _SLOPES_H_
-#define _SLOPES_H_
+#pragma once
 
 #include "base/zfix.h"
 #include "ffc.h"
@@ -66,6 +65,3 @@ zfix check_slope(solid_object* o, bool onlyNew = false);
 slope_object const& get_slope(solid_object* o, bool onlyNew = false);
 bool slide_slope(solid_object* obj, zfix& dx, zfix& dy, zfix& ID);
 void slope_push_int(slope_info const& s, solid_object* obj, zfix& dx, zfix& dy, bool onplatform = false, bool fallthrough = false);
-
-#endif
-

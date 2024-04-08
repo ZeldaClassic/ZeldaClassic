@@ -1,5 +1,4 @@
-#ifndef _SUBSCR_H_
-#define _SUBSCR_H_
+#pragma once
 
 #include "sprite.h"
 #include "items.h"
@@ -152,5 +151,3 @@ void sso_bounding_box(BITMAP *bmp, SubscrWidget* widg, int32_t color);
 
 bool findWeaponWithParent(int32_t id, int32_t type);
 int32_t countWeaponWithParent(int32_t id, int32_t type);
-
-#endif

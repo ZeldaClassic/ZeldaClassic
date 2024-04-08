@@ -1,5 +1,4 @@
-#ifndef _AUTOPATTERN_FENCE_H_
-#define _AUTOPATTERN_FENCE_H_
+#pragma once
 
 #include <functional>
 #include "base/autocombo.h"
@@ -30,5 +29,3 @@ namespace AutoPattern
 		bool flip;
 	};
 }
-
-#endif

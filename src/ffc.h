@@ -1,5 +1,4 @@
-#ifndef _FFC_H_
-#define _FFC_H_
+#pragma once
 
 #include "base/zdefs.h"
 #include "base/cpos_info.h"
@@ -76,5 +75,3 @@ private:
 #define ffCHANGEPREV         0x10000000 //Decrease combo ID
 #define ffCHANGETHIS         0x08000000 //Change combo/cset to this
 #define ffCHANGESPEED        0x04000000 //Change speed to this (default, not implemented yet)
-
-#endif

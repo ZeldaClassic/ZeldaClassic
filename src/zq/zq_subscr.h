@@ -1,5 +1,4 @@
-#ifndef _ZQ_SUBSCR_H_
-#define _ZQ_SUBSCR_H_
+#pragma once
 
 //subscreen object alignment
 enum { ssoaLEFT, ssoaCENTER, ssoaRIGHT, ssoaTOP, ssoaMIDDLE, ssoaBOTTOM };
@@ -22,5 +21,3 @@ void update_sscpy_name();
 void update_up_dn_btns();
 extern bool show_new_ss;
 extern DIALOG sslist_dlg[];
-
-#endif

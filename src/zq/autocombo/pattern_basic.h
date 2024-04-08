@@ -1,5 +1,4 @@
-#ifndef _AUTOPATTERN_BASIC_H_
-#define _AUTOPATTERN_BASIC_H_
+#pragma once
 
 #include <functional>
 #include "base/autocombo.h"
@@ -22,5 +21,3 @@ namespace AutoPattern
 		bool connectsolid;
 	}; 
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_SCC_H
-#define ZC_DIALOG_SCC_H
+#pragma once
 
 #include "base/msgstr.h"
 #include <gui/dialog.h>
@@ -42,5 +41,3 @@ private:
 	void default_args();
 	bool load_scc_str(std::string const& str);
 };
-
-#endif

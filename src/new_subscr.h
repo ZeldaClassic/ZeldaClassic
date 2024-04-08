@@ -1,5 +1,4 @@
-#ifndef _NEW_SUBSCR_H_
-#define _NEW_SUBSCR_H_
+#pragma once
 
 #include "base/ints.h"
 #include "base/zc_alleg.h"
@@ -1121,5 +1120,3 @@ struct ZCSubscreen
 private:
 	bool wrap_pg(int& pg, bool nowrap);
 };
-#endif
-

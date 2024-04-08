@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_TILEANIM_FRAME_H
-#define ZC_GUI_TILEANIM_FRAME_H
+#pragma once
 
 #include "gui/widget.h"
 #include "gui/dialog_ref.h"
@@ -40,5 +39,3 @@ private:
 };
 
 }
-
-#endif

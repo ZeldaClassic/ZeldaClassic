@@ -1,5 +1,4 @@
-#ifndef _AUTOPATTERN_CAKEMTN_H_
-#define _AUTOPATTERN_CAKEMTN_H_
+#pragma once
 
 #include <functional>
 #include "base/autocombo.h"
@@ -31,5 +30,3 @@ namespace AutoPattern
 	};
 
 }
-
-#endif

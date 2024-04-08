@@ -1,5 +1,4 @@
-#ifndef ZQ_HOTKEY_H
-#define ZQ_HOTKEY_H
+#pragma once
 
 struct Hotkey;
 
@@ -208,6 +207,3 @@ void disable_hotkey(uint hkey, bool dis);
 bool disabled_hotkey(uint hkey);
 
 bool selected_hotkey(uint hkey);
-
-#endif
-

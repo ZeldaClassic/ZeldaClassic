@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_MSGSTR_PREVIEW_H
-#define ZC_GUI_MSGSTR_PREVIEW_H
+#pragma once
 
 #include "base/msgstr.h"
 #include "gui/widget.h"
@@ -45,5 +44,3 @@ private:
 };
 
 }
-
-#endif

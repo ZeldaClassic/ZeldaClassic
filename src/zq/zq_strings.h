@@ -1,5 +1,4 @@
-#ifndef _ZQ_STRINGS_H_
-#define _ZQ_STRINGS_H_
+#pragma once
 
 #include <map>
 #include <cstdint>
@@ -20,5 +19,3 @@ extern DIALOG strlist_dlg[];
 extern DIALOG editmsg_help_dlg[];
 
 extern std::map<int32_t, int32_t> msglistcache;
-
-#endif

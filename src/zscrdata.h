@@ -1,5 +1,4 @@
-#ifndef ZSCR_DATA_H
-#define ZSCR_DATA_H
+#pragma once
 
 #include "base/zdefs.h"
 #include "zconsole/ConsoleLogger.h"
@@ -695,6 +694,3 @@ bool zasm_meta::parse_meta(const char *buffer)
 	
 	return true;
 }
-
-#endif
-

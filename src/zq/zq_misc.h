@@ -1,5 +1,4 @@
-#ifndef _ZQ_MISC_H_
-#define _ZQ_MISC_H_
+#pragma once
 
 #include "base/zc_alleg.h"
 #include "base/zdefs.h"
@@ -297,5 +296,3 @@ int32_t onDecMap();
 int32_t onDumpScr();
 
 int32_t onExport_Package();
-
-#endif

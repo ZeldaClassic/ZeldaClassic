@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_SPRITEDATA_H
-#define ZC_DIALOG_SPRITEDATA_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/drop_down_list.h>
@@ -37,5 +36,3 @@ private:
 	wpndata tempSprite;
 	void updateAnimation();
 };
-
-#endif

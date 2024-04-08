@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_SCREENDATADLG_H
-#define ZC_DIALOG_SCREENDATADLG_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/checkbox.h>
@@ -59,5 +58,3 @@ private:
 	
 	GUI::ListData list_screenscript, list_maps, list_screens, list_sfx, list_screenmidi;
 };
-
-#endif

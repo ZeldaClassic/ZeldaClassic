@@ -1,5 +1,4 @@
-#ifndef _ZQ_CUSTOM_H_
-#define _ZQ_CUSTOM_H_
+#pragma once
 
 #include "items.h"
 
@@ -42,5 +41,3 @@ void center_zq_custom_dialogs();
 
 int32_t onMiscSprites();
 int32_t onMiscSFX();
-
-#endif

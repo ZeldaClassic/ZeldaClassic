@@ -1,5 +1,4 @@
-#ifndef _ZQ_FILES_H_
-#define _ZQ_FILES_H_
+#pragma once
 
 #include "base/zc_alleg.h"
 
@@ -59,6 +58,3 @@ int32_t readonezdoorset(PACKFILE *f, int32_t index);
 
 int32_t onExport_Doorset();
 int32_t onImport_Doorset();
-
-#endif
- 

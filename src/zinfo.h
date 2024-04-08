@@ -1,5 +1,4 @@
-#ifndef _ZINFO_H
-#define _ZINFO_H
+#pragma once
 #include "base/mapscr.h"
 
 void assignchar(char** p, char const* str);
@@ -108,6 +107,3 @@ struct zcmodule
 	//char module_base_nsf[255];
 	
 }; //zcmodule
-
-#endif
-

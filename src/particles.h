@@ -1,5 +1,4 @@
-#ifndef _PARTICLES_H_
-#define _PARTICLES_H_
+#pragma once
 
 #include "base/zdefs.h"
 #include "base/zfix.h"
@@ -81,6 +80,3 @@ public:
 	bool has_space(int32_t space);
 	int32_t Count();
 };
-
-
-#endif
