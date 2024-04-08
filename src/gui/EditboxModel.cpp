@@ -14,12 +14,12 @@ extern int32_t d_timer_proc(int32_t msg, DIALOG *d, int32_t c);
 
 static DIALOG help_dlg[] =
 {
-	{ jwin_win_proc,        0,    0,   320,  240,    0,       vc(15),  0,       D_EXIT,     0,          0, (void *) "ZQuest Help", NULL, NULL },
-	{ jwin_frame_proc,      4,   23,   312,  213,    0,       0,       0,       0,          FR_DEEP,    0,         NULL, NULL, NULL },
-	{ d_editbox_proc,       6,   25,   308,  209,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-	{ d_keyboard_proc,      0,    0,     0,    0,    0,       0,       0,       0,          0,          KEY_ESC, (void *) close_dlg, NULL, NULL },
-	{ d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-	{ NULL,                 0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL }
+	{ jwin_win_proc,        0,    0,   320,  240,    0,       vc(15),  0,       D_EXIT,     0,          0,       (void *) "ZQuest Help", NULL, NULL },
+	{ jwin_frame_proc,      4,   23,   312,  213,    0,       0,       0,       0,          FR_DEEP,    0,       NULL,                   NULL, NULL },
+	{ d_editbox_proc,       6,   25,   308,  209,    0,       0,       0,       0,          0,          0,       NULL,                   NULL, NULL },
+	{ d_keyboard_proc,      0,    0,     0,    0,    0,       0,       0,       0,          0,          KEY_ESC, (void *) close_dlg,     NULL, NULL },
+	{ d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,       NULL,                   NULL, NULL },
+	{ NULL,                 0,    0,     0,    0,    0,       0,       0,       0,          0,          0,       NULL,                   NULL, NULL }
 };
 
 int32_t Unicode::indexToOffset(string &s, int32_t i)

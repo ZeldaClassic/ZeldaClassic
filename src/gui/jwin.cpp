@@ -6709,11 +6709,11 @@ static int32_t d_dropcancel_proc(int32_t msg, [[maybe_unused]] DIALOG *d, [[mayb
 
 static DIALOG droplist_dlg[] =
 {
-    /* (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)     (d2)      (dp)              (dp2)   (dp3)*/
-    { d_dropcancel_proc, 0,    0,    0,    0,    0,       0,      0,       0,          0,       0,        NULL,             NULL,   NULL },
-    { d_list_proc,       0,    0,    0,    0,    0,       0,      0,       D_EXIT,     0,       0,        NULL,             NULL,   NULL },
+    /* (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)     (d2)     (dp)              (dp2)   (dp3)*/
+    { d_dropcancel_proc, 0,    0,    0,    0,    0,       0,      0,       0,          0,       0,       NULL,             NULL,   NULL },
+    { d_list_proc,       0,    0,    0,    0,    0,       0,      0,       D_EXIT,     0,       0,       NULL,             NULL,   NULL },
     { d_keyboard_proc,   0,    0,    0,    0,    0,       0,      0,       0,          0,       KEY_ESC, (void*)close_dlg, NULL,   NULL },
-    { NULL,              0,    0,    0,    0,    0,       0,      0,       0,          0,       0,        NULL,             NULL,   NULL }
+    { NULL,              0,    0,    0,    0,    0,       0,      0,       0,          0,       0,       NULL,             NULL,   NULL }
 };
 
 static int32_t droplist(DIALOG *d)

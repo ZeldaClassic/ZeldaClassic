@@ -5835,15 +5835,11 @@ int32_t move_intersection_ss(int32_t check_first, int32_t check_last, int32_t se
 {
 	// if selection is before or after check...
 	if((check_first>selection_last)||(selection_first>check_last))
-	{
 		return ti_none;
-	}
 	
 	// if selection envelopes check
 	if((selection_first<=check_first)&&(selection_last>=check_last))
-	{
 		return ti_encompass;  //encompass
-	}
 	
 	//everything else is a break
 	return ti_broken;  //intersect
@@ -6060,9 +6056,6 @@ int32_t move_intersection_rr(int32_t check_left, int32_t check_top, int32_t chec
 	
 	return ti_none;
 }
-
-
-
 
 static DIALOG tile_move_list_dlg[] =
 {

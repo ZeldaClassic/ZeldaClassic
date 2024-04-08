@@ -108,13 +108,13 @@ bool ZModule::init(bool d) //bool default
 		//al_trace("Module name set to %s\n",moduledata.module_name);
 		
 		//Metadata
-		strcpy(moduledata.moduletitle,zc_get_config_basic("METADATA","title",""));
-		strcpy(moduledata.moduleauthor,zc_get_config_basic("METADATA","author",""));
-		strcpy(moduledata.moduleinfo0,zc_get_config_basic("METADATA","info_0",""));
-		strcpy(moduledata.moduleinfo1,zc_get_config_basic("METADATA","info_1",""));
-		strcpy(moduledata.moduleinfo2,zc_get_config_basic("METADATA","info_2",""));
-		strcpy(moduledata.moduleinfo3,zc_get_config_basic("METADATA","info_3",""));
-		strcpy(moduledata.moduleinfo4,zc_get_config_basic("METADATA","info_4",""));
+		strcpy(moduledata.moduletitle,   zc_get_config_basic("METADATA","title",""));
+		strcpy(moduledata.moduleauthor,  zc_get_config_basic("METADATA","author",""));
+		strcpy(moduledata.moduleinfo0,   zc_get_config_basic("METADATA","info_0",""));
+		strcpy(moduledata.moduleinfo1,   zc_get_config_basic("METADATA","info_1",""));
+		strcpy(moduledata.moduleinfo2,   zc_get_config_basic("METADATA","info_2",""));
+		strcpy(moduledata.moduleinfo3,   zc_get_config_basic("METADATA","info_3",""));
+		strcpy(moduledata.moduleinfo4,   zc_get_config_basic("METADATA","info_4",""));
 		strcpy(moduledata.moduletimezone,zc_get_config_basic("METADATA","timezone","GMT"));
 		//strcpy(moduledata.module_base_nsf,zc_get_config_basic("METADATA","nsf",""));
 		moduledata.modver_1  = zc_get_config_basic("METADATA","version_first",0);

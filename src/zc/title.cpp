@@ -867,18 +867,18 @@ static bool delete_save(int32_t file)
 
 DIALOG gamemode_dlg[] =
 {
-	// (dialog proc)      (x)   (y)   (w)   (h)   (fg)     (bg)     (key)    (flags)     (d1)           (d2)     (dp)                            (dp2)  (dp3)
-	{ jwin_win_proc,       40,   44,  240,  180,   0,       0,       0,       D_EXIT,     0,             0, (void *) "Select Custom Quest", NULL,  NULL },
+	// (dialog proc)      (x)   (y)   (w)   (h)   (fg)     (bg)     (key)    (flags)     (d1)         (d2)     (dp)                            (dp2)  (dp3)
+	{ jwin_win_proc,       40,   44,  240,  180,   0,       0,       0,       D_EXIT,     0,          0, (void *) "Select Custom Quest", NULL,  NULL },
 	// 1
-	{ jwin_button_proc,   205,   76,   61,   21,   0,       0,       'b',     D_EXIT,     0,             0, (void *) "&Browse",             NULL,  NULL },
-	{ jwin_textbox_proc,   55,   78,  140,   16,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL },
-	{ jwin_text_proc,      76,  106,   64,    8,   vc(0),   vc(11),  0,       0,          0,             0, (void *) "Info:",               NULL,  NULL },
-	{ jwin_textbox_proc,   76,  118,  168,   60,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL },
+	{ jwin_button_proc,   205,   76,   61,   21,   0,       0,       'b',     D_EXIT,     0,          0, (void *) "&Browse",             NULL,  NULL },
+	{ jwin_textbox_proc,   55,   78,  140,   16,   0,       0,       0,       0,          0,          0, NULL,                           NULL,  NULL },
+	{ jwin_text_proc,      76,  106,   64,    8,   vc(0),   vc(11),  0,       0,          0,          0, (void *) "Info:",               NULL,  NULL },
+	{ jwin_textbox_proc,   76,  118,  168,   60,   0,       0,       0,       0,          0,          0, NULL,                           NULL,  NULL },
 	// 5
-	{ jwin_button_proc,    90,  191,   61,   21,   0,       0,       'k',     D_EXIT,     0,             0, (void *) "O&K",                 NULL,  NULL },
-	{ jwin_button_proc,   170,  191,   61,   21,   0,       0,       27,      D_EXIT,     0,             0, (void *) "Cancel",              NULL,  NULL },
-	{ d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-	{ NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+	{ jwin_button_proc,    90,  191,   61,   21,   0,       0,       'k',     D_EXIT,     0,          0, (void *) "O&K",                 NULL,  NULL },
+	{ jwin_button_proc,   170,  191,   61,   21,   0,       0,       27,      D_EXIT,     0,          0, (void *) "Cancel",              NULL,  NULL },
+	{ d_timer_proc,         0,    0,    0,    0,   0,       0,       0,       0,          0,          0, NULL,                           NULL,  NULL },
+	{ NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,          0, NULL,                           NULL,  NULL }
 };
 
 
