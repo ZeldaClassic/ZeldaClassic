@@ -1,5 +1,4 @@
-#ifndef _SPRITE_H_
-#define _SPRITE_H_
+#pragma once
 
 #include "base/zc_alleg.h"
 #include "base/headers.h"
@@ -327,4 +326,3 @@ bool lineBoxCollision(zfix linex1, zfix liney1, zfix linex2, zfix liney2, zfix b
 double comparePointLine(double x, double y, double x1, double x2, double y1, double y2);
 
 #include "items.h"
-#endif

@@ -1,5 +1,4 @@
-#ifndef _ITEMS_H_
-#define _ITEMS_H_
+#pragma once
 
 #include "sprite.h"
 #include "base/zdefs.h"
@@ -309,4 +308,3 @@ void addOldStyleFamily(zinitdata *dest, itemdata *items, int32_t family, char le
 
 std::string bottle_name(size_t type);
 std::string bottle_slot_name(size_t slot, std::string const& emptystr);
-#endif

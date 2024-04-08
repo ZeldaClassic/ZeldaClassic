@@ -1,5 +1,4 @@
-#ifndef _GAMEDATA_H_
-#define _GAMEDATA_H_
+#pragma once
 
 #include "base/general.h"
 #include "base/ints.h"
@@ -390,6 +389,3 @@ struct gamedata
 };
 
 extern gamedata *game;
-
-#endif
-
