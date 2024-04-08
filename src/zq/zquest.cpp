@@ -18267,58 +18267,54 @@ int32_t enelist_proc(int32_t msg,DIALOG *d,int32_t c,bool use_abc_list)
 
 int32_t select_enemy(const char *prompt,int32_t enemy,bool hide,bool via_menu,int32_t &exit_status)
 {
-    //if(bie_cnt==-1)
-    {
-        build_bie_list(hide);
-    }
-    int32_t index=0;
+	//if(bie_cnt==-1)
+	{
+		build_bie_list(hide);
+	}
+	int32_t index=0;
     
-    for(int32_t j=0; j<bie_cnt; j++)
-    {
-        if(bie[j].i == enemy)
-        {
-            index=j;
-        }
-    }
+	for(int32_t j=0; j<bie_cnt; j++)
+	{
+		if(bie[j].i == enemy)
+		    index=j;
+	}
     
-    elist_dlg[0].dp=(void *)prompt;
-    elist_dlg[0].dp2=get_zc_font(font_lfont);
-    elist_dlg[2].d1=index;
-    ListData enemy_list(enemylist, &font);
-    elist_dlg[2].dp=(void *) &enemy_list;
+	elist_dlg[0].dp=(void *)prompt;
+	elist_dlg[0].dp2=get_zc_font(font_lfont);
+	elist_dlg[2].d1=index;
+	ListData enemy_list(enemylist, &font);
+	elist_dlg[2].dp=(void *) &enemy_list;
     
-    large_dialog(elist_dlg);
+	large_dialog(elist_dlg);
     
-    if(via_menu)
-    {
-        elist_dlg[2].dp3 = (void *)&elist_rclick_func;
-        elist_dlg[2].flags|=(D_USER<<1);
-        elist_dlg[3].dp = (void *)"Edit";
-        elist_dlg[4].dp = (void *)"Done";
-        elist_dlg[3].x = 285;
-        elist_dlg[4].x = 405;
-        elist_dlg[5].flags |= D_HIDDEN;
-    }
-    else
-    {
-        elist_dlg[2].dp3 = NULL;
-        elist_dlg[2].flags&=~(D_USER<<1);
-        elist_dlg[3].dp = (void *)"OK";
-        elist_dlg[4].dp = (void *)"Cancel";
-        elist_dlg[3].x = 250;
-        elist_dlg[4].x = 350;
-        elist_dlg[5].flags &= ~D_HIDDEN;
-    }
+	if(via_menu)
+	{
+		elist_dlg[2].dp3 = (void *)&elist_rclick_func;
+		elist_dlg[2].flags|=(D_USER<<1);
+		elist_dlg[3].dp = (void *)"Edit";
+		elist_dlg[4].dp = (void *)"Done";
+		elist_dlg[3].x = 285;
+		elist_dlg[4].x = 405;
+		elist_dlg[5].flags |= D_HIDDEN;
+	}
+	else
+	{
+		elist_dlg[2].dp3 = NULL;
+		elist_dlg[2].flags&=~(D_USER<<1);
+		elist_dlg[3].dp = (void *)"OK";
+		elist_dlg[4].dp = (void *)"Cancel";
+		elist_dlg[3].x = 250;
+		elist_dlg[4].x = 350;
+		elist_dlg[5].flags &= ~D_HIDDEN;
+	}
     
-    exit_status=do_zqdialog(elist_dlg,2);
+	exit_status=do_zqdialog(elist_dlg,2);
     
-    if(exit_status==0||exit_status==4)
-    {
-        return -1;
-    }
+	if(exit_status==0||exit_status==4)
+		return -1;
     
-    index = elist_dlg[2].d1;
-    return bie[index].i;
+	index = elist_dlg[2].d1;
+	return bie[index].i;
 }
 
 uint8_t check[2] = { (uint8_t)'\x81',0 };
@@ -18999,19 +18995,21 @@ static DIALOG newcomboa_dlg[] =
 
 bool swapComboAlias(int32_t source, int32_t dest)
 {
-    if(source==dest)
+	if(source==dest)
 		return false;
+
 	zc_swap(temp_aliases[source],temp_aliases[dest]);
-    return true;
+	return true;
 }
 
 
 bool copyComboAlias(int32_t source, int32_t dest)
 {
-    if(source == dest)
+	if(source == dest)
 		return false;
-    temp_aliases[dest] = temp_aliases[source];
-    return true;
+
+	temp_aliases[dest] = temp_aliases[source];
+	return true;
 }
 
 int32_t getcurrentcomboalias();
@@ -19122,10 +19120,10 @@ int32_t onNewComboAlias()
     newcomboa_dlg[0].dp2 = get_zc_font(font_lfont);
     newcomboa_dlg[6].dp = cwidth;
     newcomboa_dlg[7].dp = cheight;
-    newcomboa_dlg[8].flags = (combo->layermask&1)? D_SELECTED : 0;
-    newcomboa_dlg[9].flags = (combo->layermask&2)? D_SELECTED : 0;
-    newcomboa_dlg[10].flags = (combo->layermask&4)? D_SELECTED : 0;
-    newcomboa_dlg[11].flags = (combo->layermask&8)? D_SELECTED : 0;
+    newcomboa_dlg[8] .flags = (combo->layermask&1) ? D_SELECTED : 0;
+    newcomboa_dlg[9] .flags = (combo->layermask&2) ? D_SELECTED : 0;
+    newcomboa_dlg[10].flags = (combo->layermask&4) ? D_SELECTED : 0;
+    newcomboa_dlg[11].flags = (combo->layermask&8) ? D_SELECTED : 0;
     newcomboa_dlg[12].flags = (combo->layermask&16)? D_SELECTED : 0;
     newcomboa_dlg[13].flags = (combo->layermask&32)? D_SELECTED : 0;
     
