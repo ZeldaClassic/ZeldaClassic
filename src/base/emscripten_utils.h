@@ -1,5 +1,4 @@
-#ifndef __emscripten_utils_h_
-#define __emscripten_utils_h_
+#pragma once
 
 #include <emscripten/emscripten.h>
 #include <string>
@@ -14,5 +13,3 @@ void em_mark_ready_status();
 bool em_is_mobile();
 void em_open_test_mode(const char* qstpath, int dmap, int scr, int retsquare);
 int em_compile_zscript(const char* script_path, const char* console_path, const char* qr);
-
-#endif
