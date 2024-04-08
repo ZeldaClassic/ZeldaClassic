@@ -23508,8 +23508,8 @@ extern ListData comboscript_list;
 
 static EXT_LIST zasm_extlist[] =
 {
-	{ (char *)"ZASM Files (*.zasm)",                        (char *)"zasm"                                     },
-	{ NULL,                                                  NULL                                              }
+	{ (char *)"ZASM Files (*.zasm)",            (char *)"zasm"    },
+	{ NULL,                                     NULL              }
 };
 
 int32_t onExportZASM()
