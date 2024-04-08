@@ -4,9 +4,7 @@
 
 namespace AutoPattern
 {
-
-    // autopattern_container
-
+	// autopattern_container
 	autopattern_container::autopattern_container(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource) :
 		source(nsource), type(ntype), layer(nlayer), basescreen(nbasescreen), basepos(nbasepos), 
 		basescreen_x((basescreen % 16) * 16), basescreen_y((basescreen / 16) * 11),
@@ -109,13 +107,13 @@ namespace AutoPattern
 		byte appos = ((x % 16) + (y % 11) * 16);
 		switch (dir)
 		{
-			case up: --y; break;
-			case down: ++y; break;
-			case left: --x; break;
-			case right: ++x; break;
-			case l_up: --x; --y; break;
-			case r_up: ++x; --y; break;
-			case l_down: --x; ++ y; break;
+			case up:     --y;      break;
+			case down:   ++y;      break;
+			case left:   --x;      break;
+			case right:  ++x;      break;
+			case l_up:   --x; --y; break;
+			case r_up:   ++x; --y; break;
+			case l_down: --x; ++y; break;
 			case r_down: ++x; ++y; break;
 		}
 		if (offscreen(x, y))
@@ -231,12 +229,12 @@ namespace AutoPattern
 			byte appos = ((x % 16) + (y % 11) * 16);
 			switch (q)
 			{
-				case up: --y; break;
-				case down: ++y; break;
-				case left: --x; break;
-				case right: ++x; break;
-				case l_up: --x;  --y; break;
-				case r_up: ++x;  --y; break;
+				case up:     --y;       break;
+				case down:   ++y;       break;
+				case left:   --x;       break;
+				case right:  ++x;       break;
+				case l_up:   --x;  --y; break;
+				case r_up:   ++x;  --y; break;
 				case l_down: --x;  ++y; break;
 				case r_down: ++x;  ++y; break;
 			}
@@ -279,9 +277,7 @@ namespace AutoPattern
 		if (screenboundary_x|| screenboundary_y)
 		{
 			if (x<basescreen_x - screenboundary_x || x > basescreen_x + 15 + screenboundary_x || y < basescreen_y - screenboundary_y || y > basescreen_y + 10 + screenboundary_y)
-			{
 				return true;
-			}
 		}
 		return false;
 	}

@@ -133,4 +133,3 @@ bool DitherPickDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 	}
 	return false;
 }
-
