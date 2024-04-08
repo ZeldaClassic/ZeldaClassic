@@ -11,20 +11,20 @@ namespace GUI
 static const ListData csTyList
 {
 	{ "Misc. CSet", ssctMISC },
-	{ "CSet 0", 0 },
-	{ "CSet 1", 1 },
-	{ "CSet 2", 2 },
-	{ "CSet 3", 3 },
-	{ "CSet 4", 4 },
-	{ "CSet 5", 5 },
-	{ "CSet 6", 6 },
-	{ "CSet 7", 7 },
-	{ "CSet 8", 8 },
-	{ "CSet 9", 9 },
-	{ "CSet 10", 10 },
-	{ "CSet 11", 11 },
-	{ "CSet 12", 12 },
-	{ "CSet 13", 13 }
+	{ "CSet 0",     0 },
+	{ "CSet 1",     1 },
+	{ "CSet 2",     2 },
+	{ "CSet 3",     3 },
+	{ "CSet 4",     4 },
+	{ "CSet 5",     5 },
+	{ "CSet 6",     6 },
+	{ "CSet 7",     7 },
+	{ "CSet 8",     8 },
+	{ "CSet 9",     9 },
+	{ "CSet 10",   10 },
+	{ "CSet 11",   11 },
+	{ "CSet 12",   12 },
+	{ "CSet 13",   13 }
 };
 static const ListData miscCSList
 {

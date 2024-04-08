@@ -53,21 +53,21 @@ void ffdata::clear()
 void ffdata::load(mapscr const* scr, int32_t ind)
 {
 	if(unsigned(ind)>MAXFFCS-1) return;
-	x = scr->ffcs[ind].x.getZLong();
-	y = scr->ffcs[ind].y.getZLong();
-	dx = scr->ffcs[ind].vx.getZLong();
-	dy = scr->ffcs[ind].vy.getZLong();
-	ax = scr->ffcs[ind].ax.getZLong();
-	ay = scr->ffcs[ind].ay.getZLong();
-	data = scr->ffcs[ind].data;
-	cset = scr->ffcs[ind].cset;
-	delay = scr->ffcs[ind].delay;
-	flags = scr->ffcs[ind].flags;
-	link = scr->ffcs[ind].link;
-	twid = scr->ffTileWidth(ind)-1;
-	thei = scr->ffTileHeight(ind)-1;
-	fwid = scr->ffEffectWidth(ind)-1;
-	fhei = scr->ffEffectHeight(ind)-1;
+	x      = scr->ffcs[ind].x.getZLong();
+	y      = scr->ffcs[ind].y.getZLong();
+	dx     = scr->ffcs[ind].vx.getZLong();
+	dy     = scr->ffcs[ind].vy.getZLong();
+	ax     = scr->ffcs[ind].ax.getZLong();
+	ay     = scr->ffcs[ind].ay.getZLong();
+	data   = scr->ffcs[ind].data;
+	cset   = scr->ffcs[ind].cset;
+	delay  = scr->ffcs[ind].delay;
+	flags  = scr->ffcs[ind].flags;
+	link   = scr->ffcs[ind].link;
+	twid   = scr->ffTileWidth(ind)-1;
+	thei   = scr->ffTileHeight(ind)-1;
+	fwid   = scr->ffEffectWidth(ind)-1;
+	fhei   = scr->ffEffectHeight(ind)-1;
 	script = scr->ffcs[ind].script;
 	for(int q = 0; q < 2; ++q)
 		inita[q] = scr->ffcs[ind].inita[q];
@@ -102,24 +102,24 @@ void ffdata::save(mapscr* scr, int32_t ind)
 
 ffdata& ffdata::operator=(ffdata const& other)
 {
-	x = other.x;
-	y = other.y;
-	dx = other.dx;
-	dy = other.dy;
-	ax = other.ax;
-	ay = other.ay;
-	data = other.data;
-	cset = other.cset;
-	delay = other.delay;
-	flags = other.flags;
-	link = other.link;
-	twid = other.twid;
-	thei = other.thei;
-	fwid = other.fwid;
-	fhei = other.fhei;
+	x      = other.x;
+	y      = other.y;
+	dx     = other.dx;
+	dy     = other.dy;
+	ax     = other.ax;
+	ay     = other.ay;
+	data   = other.data;
+	cset   = other.cset;
+	delay  = other.delay;
+	flags  = other.flags;
+	link   = other.link;
+	twid   = other.twid;
+	thei   = other.thei;
+	fwid   = other.fwid;
+	fhei   = other.fhei;
 	script = other.script;
-	initd = other.initd;
-	inita = other.inita;
+	initd  = other.initd;
+	inita  = other.inita;
 	return *this;
 }
 
@@ -243,9 +243,7 @@ void FFCDialog::refreshScript()
 	else
 	{
 		for(int q = 0; q < 8; ++q)
-		{
 			tf_initd[q]->setSwapType(nswapDEC);
-		}
 	}
 	for(int q = 0; q < 8; ++q)
 	{

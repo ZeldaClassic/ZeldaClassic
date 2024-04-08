@@ -57,13 +57,9 @@ void ffcdata::draw(BITMAP* dest, int32_t xofs, int32_t yofs, bool overlay)
 		int32_t ty = y + yofs;
 		
 		if(flags&ffTRANS)
-		{
 			overcomboblocktranslucent(dest, tx, ty, data, cset, txsz, tysz,128);
-		}
 		else
-		{
 			overcomboblock(dest, tx, ty, data, cset, txsz, tysz);
-		}
 	}
 }
 
