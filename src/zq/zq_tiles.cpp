@@ -431,7 +431,7 @@ void merge_tiles(int32_t dest_tile, int32_t src_quarter1, int32_t src_quarter2, 
 
 static void make_combos(int32_t startTile, int32_t endTile, int32_t cs)
 {
-	 al_trace("inside make_combos()\n");
+	al_trace("inside make_combos()\n");
 	int32_t startCombo=0;
 	
 	if(!select_combo_2(startCombo,cs))
