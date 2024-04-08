@@ -15,4 +15,3 @@ std::string XTableHelper::formatStr(std::string const* format, ...)
 
 	return std::string(buffer);
 }
-

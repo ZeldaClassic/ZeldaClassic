@@ -279,4 +279,3 @@ void GraphicsSymbols::generateCode()
 		function->giveCode(code);
 	}
 }
-
