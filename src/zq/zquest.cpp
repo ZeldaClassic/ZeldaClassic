@@ -9512,9 +9512,9 @@ static NewMenu draw_block_menu
 
 static NewMenu paste_screen_menu
 {
-	{ "Paste", onPaste },
-	{ "Paste All", onPasteAll },
-	{ "Paste to All", onPasteToAll },
+	{ "Paste",            onPaste },
+	{ "Paste All",        onPasteAll },
+	{ "Paste to All",     onPasteToAll },
 	{ "Paste All to All", onPasteAllToAll },
 };
 
@@ -9627,10 +9627,10 @@ enum
 };
 static NewMenu rc_menu_screen
 {
-	{ "Copy Screen", onCopy },
-	{ "Paste Screen", &paste_screen_menu, MENUID_RCSCREEN_PASTE },
-	{ "...Advanced Paste", &paste_menu, MENUID_RCSCREEN_ADVPASTE },
-	{ "...Special Paste", &paste_item_menu, MENUID_RCSCREEN_SPECPASTE },
+	{ "Copy Screen",       onCopy },
+	{ "Paste Screen",      &paste_screen_menu, MENUID_RCSCREEN_PASTE },
+	{ "...Advanced Paste", &paste_menu,        MENUID_RCSCREEN_ADVPASTE },
+	{ "...Special Paste",  &paste_item_menu,   MENUID_RCSCREEN_SPECPASTE },
 };
 
 void follow_twarp(int warpindex)
@@ -11688,12 +11688,12 @@ int32_t onTemplate()
 static DIALOG cpage_dlg[] =
 {
     /* (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
-    { jwin_win_proc, 72,   20,   176+1,  212+1,  vc(14),  vc(1),  0,       0,          0,             0,       NULL, NULL, NULL },
-    { d_ctext2_proc,      160,  28,     0,  8,    vc(15),  vc(1),  0,       0,          0,             0, (void *) "Combo Page", NULL, NULL },
-    { jwin_button_proc,     90,   182,  61,   21,   vc(14),  vc(1),  's',     D_EXIT,     0,             0, (void *) "&Set", NULL, NULL },
+    { jwin_win_proc,         72,   20,   176+1,  212+1,  vc(14),  vc(1),  0,       0,          0,             0,       NULL, NULL, NULL },
+    { d_ctext2_proc,        160,  28,     0,  8,    vc(15),  vc(1),  0,       0,          0,             0, (void *) "Combo Page", NULL, NULL },
+    { jwin_button_proc,      90,   182,  61,   21,   vc(14),  vc(1),  's',     D_EXIT,     0,             0, (void *) "&Set", NULL, NULL },
     { jwin_button_proc,     170,  182,  61,   21,   vc(14),  vc(1),  'c',     D_EXIT,     0,             0, (void *) "&Cancel", NULL, NULL },
-    { jwin_button_proc,     90,   210,  61,   21,   vc(14),  vc(1),  'a',     D_EXIT,     0,             0, (void *) "Set &All", NULL, NULL },
-    { d_keyboard_proc,   0,    0,    0,    0,    0,       0,      0,       0,          KEY_F1,        0, (void *) onHelp, NULL, NULL },
+    { jwin_button_proc,      90,   210,  61,   21,   vc(14),  vc(1),  'a',     D_EXIT,     0,             0, (void *) "Set &All", NULL, NULL },
+    { d_keyboard_proc,        0,    0,    0,    0,    0,       0,      0,       0,          KEY_F1,        0, (void *) onHelp, NULL, NULL },
     // 6
     { jwin_radio_proc,       76,  44,   33,   9,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "0"  , NULL, NULL },
     { jwin_radio_proc,       76,  52,   33,   9,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "1"  , NULL, NULL },
@@ -11759,8 +11759,8 @@ static DIALOG cpage_dlg[] =
     { jwin_radio_proc,      208, 148,   33,   9,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "61" , NULL, NULL },
     { jwin_radio_proc,      208, 156,   33,   9,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "62" , NULL, NULL },
     { jwin_radio_proc,      208, 164,   33,   9,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "63" , NULL, NULL },
-    { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    { d_timer_proc,         0,    0,     0,   0,         0,      0,  0,       0,          0,          0,         NULL, NULL, NULL },
+    { NULL,                 0,    0,     0,   0,         0,      0,  0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 int32_t onComboPage()
@@ -11949,7 +11949,6 @@ int32_t d_scombo_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
             if(select_flag(f))
             {
                 d->d2=f;
-                
             }
         }
         else if(key[KEY_LSHIFT])
@@ -12131,14 +12130,14 @@ static int32_t secret_misc_list[] =
 static TABPANEL secret_tabs[] =
 {
     // (text)
-    { (char *)"Burn",       D_SELECTED,   secret_burn_list, 0, NULL },
-    { (char *)"Arrow",       0,           secret_arrow_list, 0, NULL },
-    { (char *)"Bomb",        0,           secret_bomb_list, 0, NULL },
-    { (char *)"Boomerang",   0,           secret_boomerang_list, 0, NULL },
-    { (char *)"Magic",       0,           secret_magic_list, 0, NULL },
-    { (char *)"Sword",       0,           secret_sword_list, 0, NULL },
-    { (char *)"Misc",        0,           secret_misc_list, 0, NULL },
-    { NULL,                  0,           NULL, 0, NULL }
+    { (char *)"Burn",       D_SELECTED,  secret_burn_list,      0, NULL },
+    { (char *)"Arrow",      0,           secret_arrow_list,     0, NULL },
+    { (char *)"Bomb",       0,           secret_bomb_list,      0, NULL },
+    { (char *)"Boomerang",  0,           secret_boomerang_list, 0, NULL },
+    { (char *)"Magic",      0,           secret_magic_list,     0, NULL },
+    { (char *)"Sword",      0,           secret_sword_list,     0, NULL },
+    { (char *)"Misc",       0,           secret_misc_list,      0, NULL },
+    { NULL,                 0,           NULL,                  0, NULL }
 };
 
 static DIALOG secret_dlg[] =
@@ -12520,7 +12519,7 @@ int32_t onSecretCombo()
             s->secretcset[sSECRET01+i] = secret_dlg[120+i].fg;
             s->secretflag[sSECRET01+i] = secret_dlg[120+i].d2;
         }
-		s->secretflag[sSECNEXT] = secret_dlg[137].d2;
+	s->secretflag[sSECNEXT] = secret_dlg[137].d2;
         
     }
     
@@ -12798,65 +12797,43 @@ int32_t writeoneweapon(PACKFILE *f, int32_t index)
   
     //section version info
     if(!p_iputl(zversion,f))
-    {
 	    return 0;
-    }
+
     if(!p_iputl(zbuild,f))
-    {
 	    return 0;
-    }
+
     if(!p_iputw(section_version,f))
-    {
 	    return 0;
-    }
     
     if(!p_iputw(section_cversion,f))
-    {
 	    return 0;
-    }
     
     //weapon string
 	
     if(!pfwrite((char *)weapon_string[iid], 64, f))
-    {
         return 0;
-    }
             
     if(!p_putc(wpnsbuf[iid].misc,f))
-    {
         return 0;
-    }
             
     if(!p_putc(wpnsbuf[iid].csets,f))
-    {
         return 0;
-    }
             
     if(!p_putc(wpnsbuf[iid].frames,f))
-    {
         return 0;
-    }
             
     if(!p_putc(wpnsbuf[iid].speed,f))
-    {
         return 0;
-    }
             
     if(!p_putc(wpnsbuf[iid].type,f))
-    {
         return 0;
-    }
 	    
     if(!p_iputw(wpnsbuf[iid].script,f))
-    {
         return 0;
-    }
 	    
     //2.55 starts here
     if(!p_iputl(wpnsbuf[iid].tile,f))
-    {
         return 0;
-    }
 
     return 1;
 }
@@ -13506,14 +13483,13 @@ int32_t onFlags()
 
 static DIALOG usedcombo_list_dlg[] =
 {
-    // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
-    { jwin_win_proc,     60-12,   40,   200+24,  148,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Combos Used", NULL, NULL },
-    { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { jwin_textbox_proc,       72-12,   60+4,   176+24+1,  92+4,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0,      NULL, NULL, NULL },
-    { jwin_button_proc,     130,   163,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    // (dialog proc)         (x)      (y)      (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
+    { jwin_win_proc,      60-12,      40,   200+24,  148,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Combos Used", NULL, NULL },
+    { d_timer_proc,           0,       0,        0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+    { jwin_textbox_proc,  72-12,    60+4,   176+24+1,  92+4,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0,      NULL, NULL, NULL },
+    { jwin_button_proc,     130,     163,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
+    { NULL,                   0,       0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
-
 
 
 int32_t onUsedCombos()
@@ -14412,9 +14388,8 @@ static byte dmapcopied = 0;
 
 int32_t writesomedmaps(PACKFILE *f, int32_t first, int32_t last, int32_t max)
 {
-    
-    dword section_version=V_DMAPS;
-    dword section_cversion=CV_DMAPS;
+	dword section_version=V_DMAPS;
+	dword section_cversion=CV_DMAPS;
 	int32_t zversion = ZELDA_VERSION;
 	int32_t zbuild = VERSION_BUILD;
 	
@@ -14522,7 +14497,7 @@ int32_t writesomedmaps(PACKFILE *f, int32_t first, int32_t last, int32_t max)
                 new_return(17);
             }
 
-			if(!p_putwstr(DMaps[i].title,f))
+	    if(!p_putwstr(DMaps[i].title,f))
             {
                 new_return(18);
             }
@@ -16267,25 +16242,10 @@ const char *warpeffectlist(int32_t index, int32_t *list_size)
     return NULL;
 }
 
-static int32_t warp1_list[] =
-{
-    2,3,4,5,6,7,8,9,10,11,12,13,53,54,63,67,-1
-};
-
-static int32_t warp2_list[] =
-{
-    17,18,19,20,21,22,23,24,25,26,27,28,55,56,64,68,-1
-};
-
-static int32_t warp3_list[] =
-{
-    29,30,31,32,33,34,35,36,37,38,39,40,57,58,65,69,-1
-};
-
-static int32_t warp4_list[] =
-{
-    41,42,43,44,45,46,47,48,49,50,51,52,59,60,66,70,-1
-};
+static int32_t warp1_list[] = { 2,  3, 4, 5, 6, 7, 8, 9,10,11,12,13,53,54,63,67,-1 }; 
+static int32_t warp2_list[] = { 17,18,19,20,21,22,23,24,25,26,27,28,55,56,64,68,-1 }; 
+static int32_t warp3_list[] = { 29,30,31,32,33,34,35,36,37,38,39,40,57,58,65,69,-1 }; 
+static int32_t warp4_list[] = { 41,42,43,44,45,46,47,48,49,50,51,52,59,60,66,70,-1 };
 
 static TABPANEL warp_tabs[] =
 {
@@ -17047,7 +17007,7 @@ int32_t onSideWarp()
 	bool running = true;
 	int ret;
 	do
-    {
+	{
 		ret = do_zqdialog(sidewarp_dlg,-1);
 		switch(ret)
 		{
@@ -17113,25 +17073,25 @@ static ListData path_dlg_list(dirlist, &font);
 
 static DIALOG path_dlg[] =
 {
-    /* (dialog proc)       (x)     (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
-    { jwin_win_proc,        80,     57,   161,  164,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Maze Path", NULL, NULL },
-    { d_timer_proc,          0,      0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { jwin_text_proc,       94,    106,   192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "1st", NULL, NULL },
-    { jwin_text_proc,       94,    124,  192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "2nd", NULL, NULL },
-    { jwin_text_proc,       94,    142,  192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "3rd", NULL, NULL },
-    { jwin_text_proc,       94,    160,  192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Secret Exit", NULL, NULL },
-    { jwin_text_proc,       94,    178,  192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Normal Exit", NULL, NULL },
+    /* (dialog proc)       (x)     (y)     (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
+    { jwin_win_proc,        80,     57,    161,  164,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Maze Path", NULL, NULL },
+    { d_timer_proc,          0,      0,      0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+    { jwin_text_proc,       94,    106,    192,    8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "1st", NULL, NULL },
+    { jwin_text_proc,       94,    124,    192,    8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "2nd", NULL, NULL },
+    { jwin_text_proc,       94,    142,    192,    8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "3rd", NULL, NULL },
+    { jwin_text_proc,       94,    160,    192,    8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Secret Exit", NULL, NULL },
+    { jwin_text_proc,       94,    178,    192,    8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Normal Exit", NULL, NULL },
     { jwin_droplist_proc,   140,   102,   80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
     { jwin_droplist_proc,   140,   120,   80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
-    { jwin_droplist_proc,   140,   138,  80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
-    { jwin_droplist_proc,   140,   156,  80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
-    { jwin_droplist_proc,   140,   174,  80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
-    { jwin_button_proc,      90,   194,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
-    { jwin_button_proc,     170,   194,  61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-    { d_keyboard_proc,        0,     0,    0,    0,    0,    0,    0,       0,       KEY_F1,   0, (void *) onHelp, NULL, NULL },
-    { jwin_text_proc,        87,    82,   192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "A Lost Woods-style maze screen", NULL, NULL },
-    { jwin_text_proc,        87,    92,   192,  8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "with a normal and secret exit.", NULL, NULL },
-    { NULL,                   0,     0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    { jwin_droplist_proc,   140,   138,   80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
+    { jwin_droplist_proc,   140,   156,   80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
+    { jwin_droplist_proc,   140,   174,   80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
+    { jwin_button_proc,      90,   194,     61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
+    { jwin_button_proc,     170,   194,     61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
+    { d_keyboard_proc,        0,     0,      0,    0,    0,    0,    0,       0,       KEY_F1,   0, (void *) onHelp, NULL, NULL },
+    { jwin_text_proc,        87,    82,    192,    8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "A Lost Woods-style maze screen", NULL, NULL },
+    { jwin_text_proc,        87,    92,    192,    8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "with a normal and secret exit.", NULL, NULL },
+    { NULL,                   0,     0,      0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 int32_t onPath()
@@ -17360,7 +17320,6 @@ static DIALOG editshop_dlg[] =
 
 void EditShopType(int32_t index)
 {
-
     build_bii_list(true);
     char ps1[6],ps2[6],ps3[6];
 	char info1[6],info2[6],info3[6];
@@ -17535,17 +17494,9 @@ const char *itemdropsetlist(int32_t index, int32_t *list_size)
 
 int32_t d_itemdropedit_proc(int32_t msg,DIALOG *d,int32_t c);
 
-static int32_t edititemdropset_1_list[] =
-{
-    // dialog control number
-    10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,24,25,26,27,28, -1
-};
-
-static int32_t edititemdropset_2_list[] =
-{
-    // dialog control number
-    12, 13, 29, 30, 31, 32, 33,34,35,36,37,38,39,40,41,42,43, -1
-};
+// dialog control numbers
+static int32_t edititemdropset_1_list[] = { 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, -1 }; 
+static int32_t edititemdropset_2_list[] = { 12, 13, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, -1 };
 
 static TABPANEL edititemdropset_tabs[] =
 {
@@ -17826,19 +17777,13 @@ int32_t d_warplist_proc(int32_t msg,DIALOG *d,int32_t c)
         }
         
         if(xy[2]||xy[3])
-        {
             textprintf_ex(screen,font,d->x+int32_t(xy[2]*temp_scale),d->y+int32_t(xy[3]*temp_scale),jwin_pal[jcBOXFG],jwin_pal[jcBOX],"Map: %d ",DMaps[dmap].map+1);
-        }
         
         if(xy[4]||xy[5])
-        {
             textprintf_ex(screen,font,d->x+int32_t(xy[4]*temp_scale),d->y+int32_t(xy[5]*temp_scale),jwin_pal[jcBOXFG],jwin_pal[jcBOX],"Level:%2d ",DMaps[dmap].level);
-        }
         
         if(xy[6]||xy[7])
-        {
             textprintf_ex(screen,font,d->x+int32_t(xy[6]*temp_scale),d->y+int32_t(xy[7]*temp_scale),jwin_pal[jcBOXFG],jwin_pal[jcBOX],"Scr: 0x%02X ",QMisc.warp[ring].scr[d->d1]);
-        }
     }
     
     return jwin_list_proc(msg,d,c);
@@ -20650,20 +20595,20 @@ static int32_t as_subscreenscript_list[] = { 48, 49, 50, -1}; //generic scripts 
 static TABPANEL assignscript_tabs[] =
 {
     // (text)
-    { (char *)"FFC",            D_SELECTED,  as_ffc_list,    0, NULL },
-    { (char *)"Global",   	 0,         as_global_list, 0, NULL },
-    { (char *)"Item",		 0,         as_item_list,   0, NULL },
-    { (char *)"NPC",		 0,         as_npc_list,   0, NULL },
-    { (char *)"LWeapon",	 0,         as_lweapon_list,   0, NULL },
-    { (char *)"EWeapon",	 0,         as_eweapon_list,   0, NULL },
-    { (char *)"Hero",		 0,         as_hero_list,   0, NULL },
-    { (char *)"DMap",		 0,         as_dmap_list,   0, NULL },
-    { (char *)"Screen",		 0,         as_screen_list,   0, NULL },
-    { (char *)"Item Sprite",	 0,         as_itemsprite_list,   0, NULL },
-    { (char *)"Combo",		 0,         as_comboscript_list,   0, NULL },
-    { (char *)"Generic",        0,         as_genericscript_list,   0, NULL },
-    { (char *)"Subscreen",      0,         as_subscreenscript_list,   0, NULL },
-    { NULL,                     0,           NULL,         0, NULL }
+    { (char *)"FFC",            D_SELECTED,  as_ffc_list,             0, NULL },
+    { (char *)"Global",         0,           as_global_list,          0, NULL },
+    { (char *)"Item",           0,           as_item_list,            0, NULL },
+    { (char *)"NPC",            0,           as_npc_list,             0, NULL },
+    { (char *)"LWeapon",        0,           as_lweapon_list,         0, NULL },
+    { (char *)"EWeapon",        0,           as_eweapon_list,         0, NULL },
+    { (char *)"Hero",           0,           as_hero_list,            0, NULL },
+    { (char *)"DMap",           0,           as_dmap_list,            0, NULL },
+    { (char *)"Screen",         0,           as_screen_list,          0, NULL },
+    { (char *)"Item Sprite",    0,           as_itemsprite_list,      0, NULL },
+    { (char *)"Combo",          0,           as_comboscript_list,     0, NULL },
+    { (char *)"Generic",        0,           as_genericscript_list,   0, NULL },
+    { (char *)"Subscreen",      0,           as_subscreenscript_list, 0, NULL },
+    { NULL,                     0,           NULL,                    0, NULL }
 };
 
 const char *assignffclist(int32_t index, int32_t *list_size)
