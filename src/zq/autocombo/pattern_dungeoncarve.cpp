@@ -539,5 +539,4 @@ namespace AutoPattern
 				return -1;
 		}
 	}
-
 }

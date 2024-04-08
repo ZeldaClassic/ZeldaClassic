@@ -1,7 +1,7 @@
+#pragma once
+
 #include "base/zdefs.h"
 
-#ifndef _ZC_JIT_H_
-#define _ZC_JIT_H_
 
 struct JittedScriptHandle;
 
@@ -22,5 +22,3 @@ typedef int32_t (*JittedFunction)(int32_t *registers, int32_t *global_registers,
 								  uint32_t *wait_index);
 JittedFunction jit_compile_script(script_data* script);
 void jit_release(JittedFunction function);
-
-#endif

@@ -284,30 +284,30 @@ private:
 		std::set<int> group_misc_ids;
 		for (int i = ZQKEY_UNDO; i < ZQKEY_MAX; i++)
 		{
-			if (group_skip_ids.contains(i)) continue;
-			if (group_action_ids.contains(i)) continue;
-			if (group_toggle_ids.contains(i)) continue;
-			if (group_map_navigation_ids.contains(i)) continue;
+			if (group_skip_ids            .contains(i)) continue;
+			if (group_action_ids          .contains(i)) continue;
+			if (group_toggle_ids          .contains(i)) continue;
+			if (group_map_navigation_ids  .contains(i)) continue;
 			if (group_combo_navigation_ids.contains(i)) continue;
-			if (group_dialog_ids.contains(i)) continue;
-			if (group_import_export_ids.contains(i)) continue;
-			if (group_paste_ids.contains(i)) continue;
-			if (group_report_ids.contains(i)) continue;
+			if (group_dialog_ids          .contains(i)) continue;
+			if (group_import_export_ids   .contains(i)) continue;
+			if (group_paste_ids           .contains(i)) continue;
+			if (group_report_ids          .contains(i)) continue;
 
 			group_misc_ids.insert(i);
 		}
 
 		// Vector of (group name, hotkeys).
 		std::vector<std::pair<std::string, const std::set<int>&>> groups = {
-			{"Actions", group_action_ids},
-			{"Toggles", group_toggle_ids},
-			{"Map Navigation", group_map_navigation_ids},
+			{"Actions",          group_action_ids},
+			{"Toggles",          group_toggle_ids},
+			{"Map Navigation",   group_map_navigation_ids},
 			{"Combo Navigation", group_combo_navigation_ids},
-			{"Dialogs", group_dialog_ids},
-			{"Import/Export", group_import_export_ids},
-			{"Copy/Paste", group_paste_ids},
-			{"Reports", group_report_ids},
-			{"Misc.", group_misc_ids},
+			{"Dialogs",          group_dialog_ids},
+			{"Import/Export",    group_import_export_ids},
+			{"Copy/Paste",       group_paste_ids},
+			{"Reports",          group_report_ids},
+			{"Misc.",            group_misc_ids},
 		};
 
 		int padding = 0;

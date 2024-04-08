@@ -428,5 +428,4 @@ namespace AutoPattern
 
 		apply_changes();
 	}
-
 }

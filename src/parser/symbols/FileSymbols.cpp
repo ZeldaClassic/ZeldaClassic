@@ -5,37 +5,37 @@ FileSymbols FileSymbols::singleton = FileSymbols();
 static AccessorTable FileTable[] =
 {
 	//name,                       tag,            rettype,   var,               funcFlags,  params,optparams
-	{ "Open",                       0,          ZTID_BOOL,   -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR },{} },
-	{ "Create",                     0,          ZTID_BOOL,   -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR },{} },
-	{ "OpenMode",                   0,          ZTID_BOOL,   -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR, ZTID_CHAR },{} },
-	{ "Close",                      0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_FILE },{} },
-	{ "Free",                       0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_FILE },{} },
-	{ "Own",                        0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_FILE },{} },
-	{ "isAllocated",                0,          ZTID_BOOL,   -1,                   FL_INL,  { ZTID_FILE },{} },
-	{ "isValid",                    0,          ZTID_BOOL,   -1,                   FL_INL,  { ZTID_FILE },{} },
-	{ "Allocate",                   0,          ZTID_BOOL,   -1,                   FL_INL,  { ZTID_FILE },{} },
-	{ "Flush",                      0,          ZTID_BOOL,   -1,                   FL_INL,  { ZTID_FILE },{} },
-	{ "ReadChars",                  0,         ZTID_FLOAT,   -1,                        0,  { ZTID_FILE, ZTID_CHAR, ZTID_FLOAT, ZTID_FLOAT },{ -10000, 0 } },
-	{ "ReadInts",                   0,         ZTID_FLOAT,   -1,                        0,  { ZTID_FILE, ZTID_CHAR, ZTID_FLOAT, ZTID_FLOAT },{ -10000, 0 } },
-	{ "WriteChars",                 0,         ZTID_FLOAT,   -1,                        0,  { ZTID_FILE, ZTID_CHAR, ZTID_FLOAT, ZTID_FLOAT },{ -10000, 0 } },
-	{ "WriteInts",                  0,         ZTID_FLOAT,   -1,                        0,  { ZTID_FILE, ZTID_CHAR, ZTID_FLOAT, ZTID_FLOAT },{ -10000, 0 } },
-	{ "ReadString",                 0,         ZTID_FLOAT,   -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR },{} },
-	{ "WriteString",                0,         ZTID_FLOAT,   -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR },{} },
-	{ "GetChar",                    0,          ZTID_CHAR,   -1,                   FL_INL,  { ZTID_FILE },{} },
-	{ "PutChar",                    0,          ZTID_CHAR,   -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR },{} },
-	{ "UngetChar",                  0,          ZTID_CHAR,   -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR },{} },
-	{ "Seek",                       0,          ZTID_BOOL,   -1,                   FL_INL,  { ZTID_FILE, ZTID_LONG, ZTID_BOOL },{ 0 } },
-	{ "Rewind",                     0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_FILE },{} },
-	{ "ClearError",                 0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_FILE },{} },
-	{ "getPos",                     0,          ZTID_LONG,   FILEPOS,                   0,  { ZTID_FILE },{} },
-	{ "getEOF",                     0,         ZTID_FLOAT,   FILEEOF,                   0,  { ZTID_FILE },{} },
-	{ "getError",                   0,         ZTID_FLOAT,   FILEERR,                   0,  { ZTID_FILE },{} },
-	{ "GetError",                   0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR },{} },
-	{ "Remove",                     0,          ZTID_BOOL,   -1,                   FL_INL,  { ZTID_FILE },{} },
-	{ "WriteBytes",                 0,         ZTID_FLOAT,   -1,                        0,  { ZTID_FILE, ZTID_CHAR, ZTID_FLOAT, ZTID_FLOAT },{ -10000, 0 } },
-	{ "ReadBytes",                  0,         ZTID_FLOAT,   -1,                        0,  { ZTID_FILE, ZTID_CHAR, ZTID_FLOAT, ZTID_FLOAT },{ -10000, 0 } },
+	{ "Open",                       0,          ZTID_BOOL,    -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR },{} },
+	{ "Create",                     0,          ZTID_BOOL,    -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR },{} },
+	{ "OpenMode",                   0,          ZTID_BOOL,    -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR, ZTID_CHAR },{} },
+	{ "Close",                      0,          ZTID_VOID,    -1,                   FL_INL,  { ZTID_FILE },{} },
+	{ "Free",                       0,          ZTID_VOID,    -1,                   FL_INL,  { ZTID_FILE },{} },
+	{ "Own",                        0,          ZTID_VOID,    -1,                   FL_INL,  { ZTID_FILE },{} },
+	{ "isAllocated",                0,          ZTID_BOOL,    -1,                   FL_INL,  { ZTID_FILE },{} },
+	{ "isValid",                    0,          ZTID_BOOL,    -1,                   FL_INL,  { ZTID_FILE },{} },
+	{ "Allocate",                   0,          ZTID_BOOL,    -1,                   FL_INL,  { ZTID_FILE },{} },
+	{ "Flush",                      0,          ZTID_BOOL,    -1,                   FL_INL,  { ZTID_FILE },{} },
+	{ "ReadChars",                  0,          ZTID_FLOAT,   -1,                        0,  { ZTID_FILE, ZTID_CHAR, ZTID_FLOAT, ZTID_FLOAT },{ -10000, 0 } },
+	{ "ReadInts",                   0,          ZTID_FLOAT,   -1,                        0,  { ZTID_FILE, ZTID_CHAR, ZTID_FLOAT, ZTID_FLOAT },{ -10000, 0 } },
+	{ "WriteChars",                 0,          ZTID_FLOAT,   -1,                        0,  { ZTID_FILE, ZTID_CHAR, ZTID_FLOAT, ZTID_FLOAT },{ -10000, 0 } },
+	{ "WriteInts",                  0,          ZTID_FLOAT,   -1,                        0,  { ZTID_FILE, ZTID_CHAR, ZTID_FLOAT, ZTID_FLOAT },{ -10000, 0 } },
+	{ "ReadString",                 0,          ZTID_FLOAT,   -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR },{} },
+	{ "WriteString",                0,          ZTID_FLOAT,   -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR },{} },
+	{ "GetChar",                    0,          ZTID_CHAR,    -1,                   FL_INL,  { ZTID_FILE },{} },
+	{ "PutChar",                    0,          ZTID_CHAR,    -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR },{} },
+	{ "UngetChar",                  0,          ZTID_CHAR,    -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR },{} },
+	{ "Seek",                       0,          ZTID_BOOL,    -1,                   FL_INL,  { ZTID_FILE, ZTID_LONG, ZTID_BOOL },{ 0 } },
+	{ "Rewind",                     0,          ZTID_VOID,    -1,                   FL_INL,  { ZTID_FILE },{} },
+	{ "ClearError",                 0,          ZTID_VOID,    -1,                   FL_INL,  { ZTID_FILE },{} },
+	{ "getPos",                     0,          ZTID_LONG,    FILEPOS,                   0,  { ZTID_FILE },{} },
+	{ "getEOF",                     0,          ZTID_FLOAT,   FILEEOF,                   0,  { ZTID_FILE },{} },
+	{ "getError",                   0,          ZTID_FLOAT,   FILEERR,                   0,  { ZTID_FILE },{} },
+	{ "GetError",                   0,          ZTID_VOID,    -1,                   FL_INL,  { ZTID_FILE, ZTID_CHAR },{} },
+	{ "Remove",                     0,          ZTID_BOOL,    -1,                   FL_INL,  { ZTID_FILE },{} },
+	{ "WriteBytes",                 0,          ZTID_FLOAT,   -1,                        0,  { ZTID_FILE, ZTID_CHAR, ZTID_FLOAT, ZTID_FLOAT },{ -10000, 0 } },
+	{ "ReadBytes",                  0,          ZTID_FLOAT,   -1,                        0,  { ZTID_FILE, ZTID_CHAR, ZTID_FLOAT, ZTID_FLOAT },{ -10000, 0 } },
 	
-	{ "",                           0,          ZTID_VOID,   -1,                        0,  {},{} }
+	{ "",                           0,           ZTID_VOID,   -1,                        0,  {},{} }
 };
 
 FileSymbols::FileSymbols()
@@ -405,4 +405,3 @@ void FileSymbols::generateCode()
 		function->giveCode(code);
 	}
 }
-

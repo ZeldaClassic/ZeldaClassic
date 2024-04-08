@@ -92,8 +92,8 @@ ComboWizardDialog::ComboWizardDialog(ComboEditorDialog& parent) : local_ref(pare
 static const GUI::ListData list_clippings
 {
 	{ "Bush Leaves", 0 },
-	{ "Flowers", 2 },
-	{ "Grass", 3 },
+	{ "Flowers",     2 },
+	{ "Grass",       3 },
 };
 
 static const GUI::ListData list_chest_content
@@ -112,7 +112,7 @@ static const GUI::ListData list_chest_content
 static const GUI::ListData list_torch_shapes
 {
 	{ "Circle", 0 },
-	{ "Cone", 1 },
+	{ "Cone",   1 },
 	{ "Square", 2 }
 };
 
@@ -344,11 +344,11 @@ void ComboWizardDialog::update(bool first)
 				ddls[5]->setDisabled(rad2 != 1);
 				
 				rset[3][0]->setDisabled(rad2 != 1);
-				btns[0]->setDisabled(rad2 != 1);
+				btns[0]   ->setDisabled(rad2 != 1);
 				rset[3][1]->setDisabled(rad2 != 1);
-				btns[1]->setDisabled(rad2 != 1);
+				btns[1]   ->setDisabled(rad2 != 1);
 				rset[3][2]->setDisabled(rad2 != 1);
-				btns[2]->setDisabled(rad2 != 1);
+				btns[2]   ->setDisabled(rad2 != 1);
 			}
 			break;
 		}
@@ -4237,4 +4237,3 @@ bool ComboWizardDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 	}
 	return false;
 }
-

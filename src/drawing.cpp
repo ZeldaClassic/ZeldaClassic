@@ -43,10 +43,10 @@ void doDarkroomCircle(int32_t cx, int32_t cy, byte glowRad,BITMAP* dest, BITMAP*
 	if(dest == darkscr_bmp_scrollscr) transdest = darkscr_bmp_scrollscr_trans;
 	else if(!transdest || dest == darkscr_bmp_curscr) transdest = darkscr_bmp_curscr_trans;
 	#endif
-	if(dith_perc < 0) dith_perc = DITH_PERC;
+	if(dith_perc  < 0) dith_perc  = DITH_PERC;
 	if(trans_perc < 0) trans_perc = TRANS_PERC;
-	if(dith_type < 0) dith_type = DITH_TYPE;
-	if(dith_arg < 0) dith_arg = DITH_ARG;
+	if(dith_type  < 0) dith_type  = DITH_TYPE;
+	if(dith_arg   < 0) dith_arg   = DITH_ARG;
 	
 	int32_t ditherRad = glowRad + (int32_t)(glowRad * (dith_perc/(double)100.0));
 	int32_t transRad = glowRad + (int32_t)(glowRad * (trans_perc/(double)100.0));
@@ -72,10 +72,10 @@ void doDarkroomCone(int32_t sx, int32_t sy, byte glowRad, int32_t dir, BITMAP* d
 	if(dest == darkscr_bmp_scrollscr) transdest = darkscr_bmp_scrollscr_trans;
 	else if(!transdest || dest == darkscr_bmp_curscr) transdest = darkscr_bmp_curscr_trans;
 	#endif
-	if(dith_perc < 0) dith_perc = DITH_PERC;
+	if(dith_perc  < 0) dith_perc  = DITH_PERC;
 	if(trans_perc < 0) trans_perc = TRANS_PERC;
-	if(dith_type < 0) dith_type = DITH_TYPE;
-	if(dith_arg < 0) dith_arg = DITH_ARG;
+	if(dith_type  < 0) dith_type  = DITH_TYPE;
+	if(dith_arg   < 0) dith_arg   = DITH_ARG;
 	
 	int32_t ditherDiff = (int32_t)(glowRad * (dith_perc/(double)100.0));
 	int32_t transDiff = (int32_t)(glowRad * (trans_perc/(double)100.0));
@@ -89,12 +89,12 @@ void doDarkroomCone(int32_t sx, int32_t sy, byte glowRad, int32_t dir, BITMAP* d
 	if(d<0) return;
 	switch(d)
 	{
-		case up: case l_up: case r_up: ys=1; break;
+		case up:   case l_up:   case r_up:   ys=1;  break;
 		case down: case l_down: case r_down: ys=-1; break;
 	}
 	switch(d)
 	{
-		case left: case l_up: case l_down: xs=1; break;
+		case left:  case l_up: case l_down: xs=1;  break;
 		case right: case r_up: case r_down: xs=-1; break;
 	}
 	if(d&4) {xs*=0.75; ys*=0.75;}
@@ -937,4 +937,3 @@ vector<byte> getColors(BITMAP* bmp, int maxCount)
 	bmp_unwrite_line(bmp);
 	return ret;
 }
-

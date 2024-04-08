@@ -10,10 +10,10 @@
 
 static const GUI::ListData miscSprsList
 {
-	{ "Falling Sprite:", sprFALL, "Shown when an enemy/item/etc falls in a pit" },
-	{ "Drowning Sprite:", sprDROWN, "Shown when an enemy/item/etc falls in non-lava liquid" },
-	{ "Lava Drowning Sprite:", sprLAVADROWN, "Shown when an enemy/item/etc falls in lava" },
-	{ "Switch Poof:", sprSWITCHPOOF, "Shown when 'switching' objects with the poof switch style." }
+	{ "Falling Sprite:",       sprFALL,       "Shown when an enemy/item/etc falls in a pit" },
+	{ "Drowning Sprite:",      sprDROWN,      "Shown when an enemy/item/etc falls in non-lava liquid" },
+	{ "Lava Drowning Sprite:", sprLAVADROWN,  "Shown when an enemy/item/etc falls in lava" },
+	{ "Switch Poof:",          sprSWITCHPOOF, "Shown when 'switching' objects with the poof switch style." }
 };
 
 MiscSprsDialog::MiscSprsDialog(byte* vals, size_t vals_per_tab, std::function<void(int32_t*)> setVals):

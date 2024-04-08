@@ -483,5 +483,4 @@ namespace AutoPattern
 		}
 		return num_connections;
 	}
-
 }

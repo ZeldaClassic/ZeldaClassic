@@ -158,4 +158,3 @@ void clear_tooltip()
 {
 	ttip_uninstall_all();
 }
-

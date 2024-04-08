@@ -726,21 +726,21 @@ namespace // file local
 	};
 	//the 'this' 'this->' stuff. -Z
 	ScriptTypeData scriptTypes[ParserScriptType::idEnd] = {
-		{"invalid", ZTID_VOID},
-		{"global", ZTID_VOID},
-		{"ffc", ZTID_FFC},
-		{"item", ZTID_ITEMCLASS},
-		{"npc", ZTID_NPC},
-		{"eweapon", ZTID_EWPN},
-		{"lweapon", ZTID_LWPN},
-		{"player", ZTID_PLAYER},
-		{"screendata", ZTID_SCREEN},
-		{"dmapdata", ZTID_DMAPDATA},
-		{"itemsprite", ZTID_ITEM},
-		{"untyped", ZTID_VOID},
-		{"combodata", ZTID_COMBOS},
+		{"invalid",       ZTID_VOID},
+		{"global",        ZTID_VOID},
+		{"ffc",           ZTID_FFC},
+		{"item",          ZTID_ITEMCLASS},
+		{"npc",           ZTID_NPC},
+		{"eweapon",       ZTID_EWPN},
+		{"lweapon",       ZTID_LWPN},
+		{"player",        ZTID_PLAYER},
+		{"screendata",    ZTID_SCREEN},
+		{"dmapdata",      ZTID_DMAPDATA},
+		{"itemsprite",    ZTID_ITEM},
+		{"untyped",       ZTID_VOID},
+		{"combodata",     ZTID_COMBOS},
 		{"subscreendata", ZTID_SUBSCREENDATA},
-		{"generic",ZTID_GENERICDATA},
+		{"generic",       ZTID_GENERICDATA},
 	};
 }
 

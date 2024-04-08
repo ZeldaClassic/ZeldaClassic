@@ -1699,4 +1699,3 @@ void GlobalSymbols::generateCode()
 		function->giveCode(code);
 	}
 }
-

@@ -18,9 +18,7 @@ namespace AutoPattern
 	autopattern_container::~autopattern_container()
 	{
 		for (auto c : combos)
-		{
 			delete c.second;
-		}
 	}
 	void autopattern_container::init_pattern()
 	{

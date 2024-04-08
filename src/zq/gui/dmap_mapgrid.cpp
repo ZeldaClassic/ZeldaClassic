@@ -82,14 +82,10 @@ namespace GUI
 			auto continue_screen = widg->getShowContinue() ? widg->getContinueScreen() : -1;
 
 			if (compass_screen > -1)
-			{
 				drawdmapscreenmarker(tempbmp, compass_screen, d->d1, d->x + header_width + 2, d->y + header_height + 2, 0xE4, 0xEC, compass_screen == continue_screen);
-			}
 
 			if (continue_screen > -1)
-			{
 				drawdmapscreenmarker(tempbmp, continue_screen, d->d1, d->x + header_width + 2, d->y + header_height + 2, 0xE2, 0xEA, false);
-			}
 
 			masked_blit(tempbmp, screen, 0, 0, 0, 0, screen->w, screen->h);
 			destroy_bitmap(tempbmp);

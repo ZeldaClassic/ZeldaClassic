@@ -79,8 +79,8 @@ void ffdata::save(mapscr* scr, int32_t ind)
 	if(unsigned(ind)>MAXFFCS-1) return;
 
 	Map.DoSetFFCCommand(Map.getCurrMap(), Map.getCurrScr(), ind, {
-		.x = zslongToFix(x),
-		.y = zslongToFix(y),
+		.x  = zslongToFix(x),
+		.y  = zslongToFix(y),
 		.vx = zslongToFix(dx),
 		.vy = zslongToFix(dy),
 		.ax = zslongToFix(ax),

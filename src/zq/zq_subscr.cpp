@@ -64,7 +64,7 @@ static ListData item_list(itemlist_num, &font);
 
 int32_t sso_properties(SubscrWidget* widg, int32_t obj_ind)
 {
-    return call_subscrprop_dialog(widg,obj_ind) ? 0 : -1;
+	return call_subscrprop_dialog(widg,obj_ind) ? 0 : -1;
 }
 
 int32_t onBringToFront();
@@ -174,8 +174,8 @@ SubscrWidget* paste_widget_new()
 	}
 	pg.push_back(widg);
     
-    update_sso_name();
-    update_up_dn_btns();
+	update_sso_name();
+	update_up_dn_btns();
 	return widg;
 }
 SubscrWidget* paste_widget_new_at(int x, int y)
@@ -193,41 +193,41 @@ int32_t onDuplCopiedWidget()
 {
 	if(force_paste_xy)
 		paste_widget_new_at(force_paste_xy[0],force_paste_xy[1]);
-    else paste_widget_new();
-    return D_O_K;
+	else paste_widget_new();
+	return D_O_K;
 }
 int32_t onNewWidget()
 {
 	if(force_paste_xy)
 		create_new_widget(force_paste_xy[0],force_paste_xy[1]);
-    else create_new_widget();
-    return D_O_K;
+	else create_new_widget();
+	return D_O_K;
 }
 int32_t onDuplicateWidget()
 {
 	SubscrPage& pg = subscr_edit.cur_page();
-    size_t objs = pg.size();
+	size_t objs = pg.size();
     
-    if(objs==0 || (key_shifts&KB_SHIFT_FLAG))
+	if(objs==0 || (key_shifts&KB_SHIFT_FLAG))
 		return onDuplCopiedWidget();
     
-    for(int32_t i=0; i<objs; ++i)
-    {
-        if(sso_selection[i] || i==curr_widg)
-        {
+	for(int32_t i=0; i<objs; ++i)
+	{
+		if(sso_selection[i] || i==curr_widg)
+		{
 			SubscrWidget* widg = pg[i]->clone();
 			if(!widg) continue;
-			
-            widg->x+=zc_max(zinit.ss_grid_x,8);
-            widg->y+=zc_max(zinit.ss_grid_y,8);
+				
+			widg->x+=zc_max(zinit.ss_grid_x,8);
+			widg->y+=zc_max(zinit.ss_grid_y,8);
 			pg.push_back(widg);
-        }
-    }
+		}
+	}
     
-    update_sso_name();
-    update_up_dn_btns();
+	update_sso_name();
+	update_up_dn_btns();
     
-    return D_O_K;
+	return D_O_K;
 }
 
 int32_t onWidgetProperties()
@@ -265,36 +265,36 @@ int32_t onNewSubscreenObject();
 bool delete_widget()
 {
 	SubscrPage& pg = subscr_edit.cur_page();
-    size_t objs=pg.size();
+	size_t objs=pg.size();
     
-    if(objs==0)
-        return false;
+	if(objs==0)
+		return false;
     
 	pg.delete_widg(curr_widg);
 	
 	//...shift the selection array
-    for(int32_t i=curr_widg; i<objs-1; ++i)
-    {
-        sso_selection[i]=sso_selection[i+1];
-    }
+	for(int32_t i=curr_widg; i<objs-1; ++i)
+	{
+		sso_selection[i]=sso_selection[i+1];
+	}
     
-    sso_selection[objs-1]=false;
+	sso_selection[objs-1]=false;
     
-    if(curr_widg==objs-1)
-        --curr_widg;
+	if(curr_widg==objs-1)
+		--curr_widg;
     
-    update_sso_name();
-    update_up_dn_btns();
-    
-    return true;
+	update_sso_name();
+	update_up_dn_btns();
+
+	return true;
 }
 int32_t onDeleteWidgetC()
 {
 	SubscrPage& pg = subscr_edit.cur_page();
-    size_t objs=pg.size();
+	size_t objs=pg.size();
     
-    if(objs==0)
-        return D_O_K;
+	if(objs==0)
+		return D_O_K;
 	auto* widg = pg.get_widget(curr_widg);
 	if(widg)
 	{
@@ -374,56 +374,56 @@ static int32_t onShowHideGrid();
 static NewMenu ss_arrange_menu
 {
 	{ "Bring to Front", onBringToFront },
-	{ "Bring Forward", onBringForward },
-	{ "Send Backward", onSendBackward },
-	{ "Send to Back", onSendToBack },
-	{ "Reverse", onReverseArrangement },
+	{ "Bring Forward",  onBringForward },
+	{ "Send Backward",  onSendBackward },
+	{ "Send to Back",   onSendToBack },
+	{ "Reverse",        onReverseArrangement },
 };
 
 static NewMenu ss_grid_snap_menu
 {
-	{ "Left Edges", onGridSnapLeft },
+	{ "Left Edges",         onGridSnapLeft },
 	{ "Horizontal Centers", onGridSnapCenter },
-	{ "Right Edges", onGridSnapRight },
+	{ "Right Edges",        onGridSnapRight },
 	{},
-	{ "Top Edges", onGridSnapTop },
-	{ "Vertical Centers", onGridSnapMiddle },
-	{ "Bottom Edges", onGridSnapBottom },
+	{ "Top Edges",          onGridSnapTop },
+	{ "Vertical Centers",   onGridSnapMiddle },
+	{ "Bottom Edges",       onGridSnapBottom },
 };
 
 static NewMenu ss_align_menu
 {
-	{ "Left Edges", onAlignLeft },
+	{ "Left Edges",         onAlignLeft },
 	{ "Horizontal Centers", onAlignCenter },
-	{ "Right Edges", onAlignRight },
+	{ "Right Edges",        onAlignRight },
 	{},
-	{ "Top Edges", onAlignTop },
-	{ "Vertical Centers", onAlignMiddle },
-	{ "Bottom Edges", onAlignBottom },
+	{ "Top Edges",          onAlignTop },
+	{ "Vertical Centers",   onAlignMiddle },
+	{ "Bottom Edges",       onAlignBottom },
 	{},
-	{ "To Grid", &ss_grid_snap_menu },
+	{ "To Grid",            &ss_grid_snap_menu },
 };
 
 static NewMenu ss_distribute_menu
 {
-	{ "Left Edges", onDistributeLeft },
+	{ "Left Edges",         onDistributeLeft },
 	{ "Horizontal Centers", onDistributeCenter },
-	{ "Right Edges", onDistributeRight },
+	{ "Right Edges",        onDistributeRight },
 	{},
-	{ "Top Edges", onDistributeTop },
-	{ "Vertical Centers", onDistributeMiddle },
-	{ "Bottom Edges", onDistributeBottom },
+	{ "Top Edges",          onDistributeTop },
+	{ "Vertical Centers",   onDistributeMiddle },
+	{ "Bottom Edges",       onDistributeBottom },
 };
 
 static NewMenu ss_wizard_menu
 {
-	{ "Item Grid", onItemGrid },
+	{ "Item Grid",     onItemGrid },
 	{ "Counter Block", onCounterBlock},
 };
 
 static NewMenu ss_wizard_menu_rc
 {
-	{ "Item Grid", onItemGrid },
+	{ "Item Grid",     onItemGrid },
 	{ "Counter Block", onCounterBlock},
 };
 
@@ -435,33 +435,33 @@ enum
 };
 static NewMenu ss_copypaste_menu
 {
-	{ "&Copy Widget", onSubscrCopy },
-	{ "&Duplicate Widget", onDuplicateWidget },
+	{ "&Copy Widget",          onSubscrCopy },
+	{ "&Duplicate Widget",     onDuplicateWidget },
 	{ "Paste Properties","&v", onSubscrPasteProps, MENUID_SS_COPYPASTE_PASTE },
-	{ "Paste All", onSubscrPasteAll, MENUID_SS_COPYPASTE_PASTEALL },
+	{ "Paste All",             onSubscrPasteAll,   MENUID_SS_COPYPASTE_PASTEALL },
 	{},
-	{ "Paste New", onDuplCopiedWidget, MENUID_SS_COPYPASTE_PASTENEW },
+	{ "Paste New",             onDuplCopiedWidget, MENUID_SS_COPYPASTE_PASTENEW },
 };
 static NewMenu subscreen_rc_menu
 {
-	{ "Properties ", onWidgetProperties },
-	{ "New ", onNewWidget },
-	{ "Delete ", onDeleteWidgetC },
+	{ "Properties ",  onWidgetProperties },
+	{ "New ",         onNewWidget },
+	{ "Delete ",      onDeleteWidgetC },
 	{},
 	{ "&Copy/Paste ", &ss_copypaste_menu },
 	{},
-	{ "A&rrange ", &ss_arrange_menu },
-	{ "&Align ", &ss_align_menu },
+	{ "A&rrange ",    &ss_arrange_menu },
+	{ "&Align ",      &ss_align_menu },
 	{ "&Distribute ", &ss_distribute_menu },
 	{},
-	{ "&Wizards", &ss_wizard_menu_rc },
+	{ "&Wizards",     &ss_wizard_menu_rc },
 };
 static NewMenu subscreen_rc_menu_nowidg
 {
-	{ "New ", onNewWidget },
+	{ "New ",       onNewWidget },
 	{ "Paste New ", onDuplCopiedWidget, MENUID_SS_COPYPASTE_PASTENEW },
 	{},
-	{ "&Wizards", &ss_wizard_menu_rc },
+	{ "&Wizards",   &ss_wizard_menu_rc },
 };
 void update_subscr_dlg(bool start);
 int32_t d_subscreen_proc(int32_t msg,DIALOG *d,int32_t)
@@ -839,12 +839,9 @@ int32_t d_ssup_btn2_proc(int32_t msg,DIALOG *d,int32_t c)
 	switch(msg)
 	{
 		case MSG_CLICK:
-		{
 			jwin_iconbutton_proc(msg, d, c);
 			onSSUp();
 			return D_O_K;
-		}
-		break;
 	}
 	
 	return jwin_iconbutton_proc(msg, d, c);
@@ -855,12 +852,9 @@ int32_t d_ssdn_btn2_proc(int32_t msg,DIALOG *d,int32_t c)
 	switch(msg)
 	{
 		case MSG_CLICK:
-		{
 			jwin_iconbutton_proc(msg, d, c);
 			onSSDown();
 			return D_O_K;
-		}
-		break;
 	}
 	
 	return jwin_iconbutton_proc(msg, d, c);
@@ -1003,12 +997,9 @@ int32_t d_ssup_btn4_proc(int32_t msg,DIALOG *d,int32_t c)
 	switch(msg)
 	{
 		case MSG_CLICK:
-		{
 			jwin_iconbutton_proc(msg, d, c);
 			subscr_edit.cur_page().move_cursor(SEL_UP);
 			return D_O_K;
-		}
-		break;
 	}
 	
 	return jwin_iconbutton_proc(msg, d, c);
@@ -1019,12 +1010,9 @@ int32_t d_ssdn_btn4_proc(int32_t msg,DIALOG *d,int32_t c)
 	switch(msg)
 	{
 		case MSG_CLICK:
-		{
 			jwin_iconbutton_proc(msg, d, c);
 			subscr_edit.cur_page().move_cursor(SEL_DOWN);
 			return D_O_K;
-		}
-		break;
 	}
 	
 	return jwin_iconbutton_proc(msg, d, c);
@@ -1035,12 +1023,9 @@ int32_t d_sslt_btn4_proc(int32_t msg,DIALOG *d,int32_t c)
 	switch(msg)
 	{
 		case MSG_CLICK:
-		{
 			jwin_iconbutton_proc(msg, d, c);
 			subscr_edit.cur_page().move_cursor(SEL_LEFT);
 			return D_O_K;
-		}
-		break;
 	}
 	
 	return jwin_iconbutton_proc(msg, d, c);
@@ -1051,12 +1036,9 @@ int32_t d_ssrt_btn4_proc(int32_t msg,DIALOG *d,int32_t c)
 	switch(msg)
 	{
 		case MSG_CLICK:
-		{
 			jwin_iconbutton_proc(msg, d, c);
 			subscr_edit.cur_page().move_cursor(SEL_RIGHT);
 			return D_O_K;
-		}
-		break;
 	}
 	
 	return jwin_iconbutton_proc(msg, d, c);
@@ -1108,18 +1090,18 @@ const char *sso_alignment[3]=
 
 static NewMenu ss_edit_menu
 {
-	{ "&New Ins", onNewSubscreenObject },
+	{ "&New Ins",    onNewSubscreenObject },
 	{ "&Delete Del", onDeleteWidgetC },
 	{},
 	{ "&Copy/Paste", &ss_copypaste_menu },
 	{},
 	{ "&Properties", "&E", onWidgetProperties },
 	{},
-	{ "&Arrange", &ss_arrange_menu },
-	{ "Al&ign", &ss_align_menu },
-	{ "Dis&tribute", &ss_distribute_menu },
+	{ "&Arrange",     &ss_arrange_menu },
+	{ "Al&ign",       &ss_align_menu },
+	{ "Dis&tribute",  &ss_distribute_menu },
 	{},
-	{ "&Wizards", &ss_wizard_menu },
+	{ "&Wizards",     &ss_wizard_menu },
 	{},
 	{ "&Take Snapshot", "&Z", onSnapshot },
 };
@@ -1149,27 +1131,27 @@ enum
 };
 static NewMenu ss_view_menu
 {
-	{ "&Edit Grid", onEditGrid },
-	{ "&Show Grid", onShowHideGrid, MENUID_SS_VIEW_SHOW_GRID },
+	{ "&Edit Grid",                 onEditGrid },
+	{ "&Show Grid",                 onShowHideGrid,      MENUID_SS_VIEW_SHOW_GRID },
 	{},
-	{ "Show In&visible Items", onToggleInvis, MENUID_SS_VIEW_SHOW_INVIS },
-	{ "Show Unowned Items", onToggleShowUnowned, MENUID_SS_VIEW_SHOW_UNOWNED },
-	{ "Max Out Counters", onToggleMaxCtr, MENUID_SS_VIEW_MAX_COUNTERS },
-	{ "Max Out Max Counters", onToggleMaxMaxCtr, MENUID_SS_VIEW_MAX_MAX_COUNTERS },
-	{ "Don't Show 'Infinite's", onToggleNoInf, MENUID_SS_VIEW_NO_INFINITE },
-	{ "Show Everything 'Infinite'", onToggleAllInf, MENUID_SS_VIEW_ALL_INFINITE },
+	{ "Show In&visible Items",      onToggleInvis,       MENUID_SS_VIEW_SHOW_INVIS },
+	{ "Show Unowned Items",         onToggleShowUnowned, MENUID_SS_VIEW_SHOW_UNOWNED },
+	{ "Max Out Counters",           onToggleMaxCtr,      MENUID_SS_VIEW_MAX_COUNTERS },
+	{ "Max Out Max Counters",       onToggleMaxMaxCtr,   MENUID_SS_VIEW_MAX_MAX_COUNTERS },
+	{ "Don't Show 'Infinite's",     onToggleNoInf,       MENUID_SS_VIEW_NO_INFINITE },
+	{ "Show Everything 'Infinite'", onToggleAllInf,      MENUID_SS_VIEW_ALL_INFINITE },
 	{},
-	{ "Set Preview &DMap", onSetSubscrDmap },
+	{ "Set Preview &DMap",          onSetSubscrDmap },
 	{},
-	{ "&Help", onSubscrViewInfo },
+	{ "&Help",                      onSubscrViewInfo },
 };
 
 static NewMenu ss_selection_menu
 {
-	{ "&Add to Selection", onAddToSelection },
+	{ "&Add to Selection",      onAddToSelection },
 	{ "&Remove from Selection", onRemoveFromSelection },
-	{ "&Invert Selection", onInvertSelection },
-	{ "&Clear Selection", onClearSelection },
+	{ "&Invert Selection",      onInvertSelection },
+	{ "&Clear Selection",       onClearSelection },
 };
 
 int32_t set_ssmouse(int ty);
@@ -1219,16 +1201,16 @@ static NewMenu ss_settings_menu
 {
 	{ "&Subscreen Settings", onSubscreenSettings },
 	{ "Se&lection Settings", onSelectionOptions },
-	{ "&Mouse Settings", &ss_mouseset_menu },
-	{ "Confirm Delete", onToggleConfDelete, MENUID_SS_SETTINGS_DELETE },
+	{ "&Mouse Settings",     &ss_mouseset_menu },
+	{ "Confirm Delete",      onToggleConfDelete, MENUID_SS_SETTINGS_DELETE },
 };
 
 static TopMenu subscreen_menu
 {
-	{ "&Edit", &ss_edit_menu },
-	{ "&View", &ss_view_menu },
+	{ "&Edit",      &ss_edit_menu },
+	{ "&View",      &ss_view_menu },
 	{ "&Selection", &ss_selection_menu },
-	{ "&Options", &ss_settings_menu },
+	{ "&Options",   &ss_settings_menu },
 };
 
 static std::string arrow_infos[5] =
@@ -1322,11 +1304,11 @@ DIALOG subscreen_dlg[] =
 	{ jwin_button_proc,      0,   0,      15,     15,    0,                 0,                0,       D_EXIT,     0,                      0, (void*)"Copy Pg", NULL, NULL },
 	{ jwin_button_proc,      0,   0,      15,     15,    0,                 0,                0,       D_EXIT,     0,                      0, (void*)"Paste New Pg", NULL, NULL },
 	
-	{ d_keyboard_proc,      0,    0,      0,       0,    0,                 0,                'v',     0,          0,                      0, (void *) onSubscrPaste, NULL, NULL },
-	{ d_keyboard_proc,      0,    0,      0,       0,    0,                 0,                'c',     0,          0,                      0, (void *) onSubscrCopy, NULL, NULL },
-	{ d_vsync_proc,         0,    0,      0,       0,    0,                 0,                0,       0,          0,                      0, NULL, NULL, NULL },
-	{ d_timer_proc,         0,    0,      0,       0,    0,                 0,                0,       0,          0,                      0, NULL, NULL, NULL },
-	{ NULL,                 0,    0,      0,       0,    0,                 0,                0,       0,          0,                      0, NULL, NULL, NULL }
+	{ d_keyboard_proc,       0,    0,      0,       0,    0,                 0,                'v',     0,          0,                      0, (void *) onSubscrPaste, NULL, NULL },
+	{ d_keyboard_proc,       0,    0,      0,       0,    0,                 0,                'c',     0,          0,                      0, (void *) onSubscrCopy, NULL, NULL },
+	{ d_vsync_proc,          0,    0,      0,       0,    0,                 0,                0,       0,          0,                      0, NULL, NULL, NULL },
+	{ d_timer_proc,          0,    0,      0,       0,    0,                 0,                0,       0,          0,                      0, NULL, NULL, NULL },
+	{ NULL,                  0,    0,      0,       0,    0,                 0,                0,       0,          0,                      0, NULL, NULL, NULL }
 };
 
 const char *color_str[16] =
@@ -1366,8 +1348,8 @@ static DIALOG grid_dlg[] =
 	{ jwin_edit_proc,       126,   45,     26,    16,   0,                  0,                0,       0,          3,             0,       NULL, NULL, NULL },
 	{ jwin_text_proc,       6,     69,    186,    16,   0,                  0,                0,       0,          0,             0, (void *) "Color:", NULL, NULL },
 	{ jwin_droplist_proc,   36,    65,    116,    16,   0,                  0,                0,       0,          0,             0, (void *) &color_list, NULL, NULL },
-	{ d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-	{ NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+	{ d_timer_proc,         0,      0,      0,     0,   0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+	{ NULL,                 0,      0,      0,     0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 static DIALOG sel_options_dlg[] =
@@ -1383,8 +1365,8 @@ static DIALOG sel_options_dlg[] =
 	{ jwin_droplist_proc,   94,    37,   116,    16,   0,                  0,                0,       0,          0,             0, (void *) &color_list, NULL, NULL },
 	{ jwin_text_proc,       14,    61,   186,    16,   0,                  0,                0,       0,          0,             0, (void *) "Secondary Color:", NULL, NULL },
 	{ jwin_droplist_proc,   94,    57,   116,    16,   0,                  0,                0,       0,          0,             0, (void *) &color_list, NULL, NULL },
-	{ d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-	{ NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+	{ d_timer_proc,         0,      0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+	{ NULL,                 0,      0,     0,    0,    0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 SubscrWidget* create_new_widget_of(int32_t type, int x, int y, bool runDialog)
@@ -2170,12 +2152,9 @@ int32_t d_ssup_btn_proc(int32_t msg,DIALOG *d,int32_t c)
 {
 	switch(msg)
 	{
-	case MSG_CLICK:
-	{
-		jwin_iconbutton_proc(msg, d, c);
-		return onSSCtrlPgUp();
-	}
-	break;
+		case MSG_CLICK:
+			jwin_iconbutton_proc(msg, d, c);
+			return onSSCtrlPgUp();
 	}
 	
 	return jwin_iconbutton_proc(msg, d, c);
@@ -2185,12 +2164,9 @@ int32_t d_ssdn_btn_proc(int32_t msg,DIALOG *d,int32_t c)
 {
 	switch(msg)
 	{
-	case MSG_CLICK:
-	{
-		jwin_iconbutton_proc(msg, d, c);
-		return onSSCtrlPgDn();
-	}
-	break;
+		case MSG_CLICK:
+			jwin_iconbutton_proc(msg, d, c);
+			return onSSCtrlPgDn();
 	}
 	
 	return jwin_iconbutton_proc(msg, d, c);
@@ -2200,13 +2176,10 @@ int32_t d_sslt_btn_proc(int32_t msg,DIALOG *d,int32_t c)
 {
 	switch(msg)
 	{
-	case MSG_CLICK:
-	{
-		jwin_iconbutton_proc(msg, d, c);
-		onSSPgDn();
-		return D_O_K;
-	}
-	break;
+		case MSG_CLICK:
+			jwin_iconbutton_proc(msg, d, c);
+			onSSPgDn();
+			return D_O_K;
 	}
 	
 	return jwin_iconbutton_proc(msg, d, c);
@@ -2216,13 +2189,10 @@ int32_t d_ssrt_btn_proc(int32_t msg,DIALOG *d,int32_t c)
 {
 	switch(msg)
 	{
-	case MSG_CLICK:
-	{
-		jwin_iconbutton_proc(msg, d, c);
-		onSSPgUp();
-		return D_O_K;
-	}
-	break;
+		case MSG_CLICK:
+			jwin_iconbutton_proc(msg, d, c);
+			onSSPgUp();
+			return D_O_K;
 	}
 	
 	return jwin_iconbutton_proc(msg, d, c);
@@ -2445,11 +2415,11 @@ bool edit_subscreen()
 {
 	bool b = zq_ignore_item_ownership;
 	zq_ignore_item_ownership = zc_get_config("editsubscr","show_all_items",1);
-	zq_view_fullctr = zc_get_config("editsubscr","show_full_counters",0);
-	zq_view_maxctr = zc_get_config("editsubscr","show_maxed_maxcounters",0);
-	zq_view_noinf = zc_get_config("editsubscr","show_no_infinites",0);
-	zq_view_allinf = zc_get_config("editsubscr","show_all_infinites",0);
-	subscr_confirm_delete = zc_get_config("editsubscr","confirm_delete",0);
+	zq_view_fullctr          = zc_get_config("editsubscr","show_full_counters",0);
+	zq_view_maxctr           = zc_get_config("editsubscr","show_maxed_maxcounters",0);
+	zq_view_noinf            = zc_get_config("editsubscr","show_no_infinites",0);
+	zq_view_allinf           = zc_get_config("editsubscr","show_all_infinites",0);
+	subscr_confirm_delete    = zc_get_config("editsubscr","confirm_delete",0);
 	game = new gamedata();
 	game->set_time(0);
 	resetItems(game,&zinit,true);
@@ -2663,16 +2633,16 @@ static ListData activepassive_list(activepassivelist, &font);
 
 static DIALOG sstemplatelist_dlg[] =
 {
-	// (dialog proc)         (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
-	{ jwin_win_proc,          0,    0,   265,  87,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "New Subscreen", NULL, NULL },
-	{ d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-	{ jwin_text_proc,         4,   28,     8,   8,   0,                  0,                0,       0,          0,             0, (void *) "Type:", NULL, NULL },
-	{ jwin_text_proc,         4,   46,     8,   8,   0,                  0,                0,       0,          0,             0, (void *) "Template:", NULL, NULL },
-	{ sstype_drop_proc,      33,   24,    72,  16,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,         0,     0,             0, (void *) &activepassive_list, NULL, NULL },
-	{ jwin_droplist_proc,    50,   42,   211,  16,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,         0,     0,             0, (void *) &active_list, NULL, NULL },
+	// (dialog proc)         (x)   (y)   (w)    (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
+	{ jwin_win_proc,          0,    0,   265,   87,   vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "New Subscreen", NULL, NULL },
+	{ d_timer_proc,           0,    0,     0,    0,   0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+	{ jwin_text_proc,         4,   28,     8,    8,   0,                  0,                0,       0,          0,             0, (void *) "Type:", NULL, NULL },
+	{ jwin_text_proc,         4,   46,     8,    8,   0,                  0,                0,       0,          0,             0, (void *) "Template:", NULL, NULL },
+	{ sstype_drop_proc,      33,   24,    72,   16,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,         0,     0,             0, (void *) &activepassive_list, NULL, NULL },
+	{ jwin_droplist_proc,    50,   42,   211,   16,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,         0,     0,             0, (void *) &active_list, NULL, NULL },
 	{ jwin_button_proc,      61,   62,    61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
 	{ jwin_button_proc,     142,   62,    61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-	{ NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+	{ NULL,                   0,    0,     0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 bool show_new_ss=true;

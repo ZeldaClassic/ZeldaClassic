@@ -13,7 +13,7 @@ static AccessorTable TextTable[] =
 	{ "MessageWidth",               0,         ZTID_FLOAT,   -1,                   FL_INL,  { ZTID_TEXT, ZTID_FLOAT },{} },
 	{ "MessageHeight",              0,         ZTID_FLOAT,   -1,                   FL_INL,  { ZTID_TEXT, ZTID_FLOAT },{} },
 	
-	{ "",                           0,          ZTID_VOID,   -1,                        0,  {},{} }
+	{ "",                           0,         ZTID_VOID,    -1,                        0,  {},{} }
 };
 
 TextPtrSymbols::TextPtrSymbols()
@@ -131,4 +131,3 @@ void TextPtrSymbols::generateCode()
 		function->giveCode(code);
 	}
 }
-

@@ -4,13 +4,13 @@ FileSystemSymbols FileSystemSymbols::singleton = FileSystemSymbols();
 
 static AccessorTable FileSystemTable[] =
 {
-	//name,                       tag,            rettype,   var,               funcFlags,  params,optparams
-	{ "DirExists",                  0,          ZTID_BOOL,   -1,                   FL_INL,  { ZTID_FILESYSTEM, ZTID_CHAR },{} },
-	{ "FileExists",                 0,          ZTID_BOOL,   -1,                   FL_INL,  { ZTID_FILESYSTEM, ZTID_CHAR },{} },
-	{ "Remove",                     0,          ZTID_BOOL,   -1,                   FL_INL,  { ZTID_FILESYSTEM, ZTID_CHAR },{} },
+	//name,                       tag,     rettype,         var,               funcFlags,  params,optparams
+	{ "DirExists",                  0,     ZTID_BOOL,        -1,                   FL_INL,  { ZTID_FILESYSTEM, ZTID_CHAR },{} },
+	{ "FileExists",                 0,     ZTID_BOOL,        -1,                   FL_INL,  { ZTID_FILESYSTEM, ZTID_CHAR },{} },
+	{ "Remove",                     0,     ZTID_BOOL,        -1,                   FL_INL,  { ZTID_FILESYSTEM, ZTID_CHAR },{} },
 	{ "LoadDirectory",              0,     ZTID_DIRECTORY,   -1,                   FL_INL,  { ZTID_FILESYSTEM, ZTID_CHAR },{} },
 	
-	{ "",                           0,          ZTID_VOID,   -1,                        0,  {},{} }
+	{ "",                           0,     ZTID_VOID,        -1,                        0,  {},{} }
 };
 
 FileSystemSymbols::FileSystemSymbols()
@@ -78,4 +78,3 @@ void FileSystemSymbols::generateCode()
 		function->giveCode(code);
 	}
 }
-
