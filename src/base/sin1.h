@@ -7,8 +7,7 @@
  * @author stfwi
  *
  */
-#ifndef __SW__SIN1_H__
-#define __SW__SIN1_H__
+#pragma once
  
 #include <stdint.h>
  
@@ -35,5 +34,3 @@ int16_t sin1(int16_t angle);
  * @return int16_t Q15
  */
 int16_t cos1(int16_t angle);
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef _CONTAINERS_H_
-#define _CONTAINERS_H_
+#pragma once
 
 #include "base/headers.h"
 #include <array>
@@ -353,5 +352,3 @@ void bounded_map<Sz,T>::normalize()
 	for(auto& [k,v] : cont)
 		_do_normalize(v);
 }
-#endif
-

@@ -1,5 +1,4 @@
-#ifndef _MSGSTR_H_
-#define _MSGSTR_H_
+#pragma once
 
 #include <string>
 #include "base/ints.h"
@@ -102,6 +101,3 @@ struct MsgStr
 };
 
 extern MsgStr* MsgStrings;
-
-#endif
-

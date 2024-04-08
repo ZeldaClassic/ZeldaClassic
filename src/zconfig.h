@@ -1,5 +1,4 @@
-#ifndef ZC_ZCONFIG_H
-#define ZC_ZCONFIG_H
+#pragma once
 
 #include "base/zapp.h"
 
@@ -27,5 +26,3 @@ void zc_set_config_basic(char const* header, char const* name, int32_t val);
 void zc_set_config_basic_hex(char const* header, char const* name, int32_t val);
 void zc_set_config_basic(char const* header, char const* name, double default_val);
 void zc_set_config_basic(char const* header, char const* name, char const* val);
-
-#endif

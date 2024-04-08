@@ -1,5 +1,4 @@
-#ifndef _ZAPP_H_
-#define _ZAPP_H_
+#pragma once
 
 #include <utility>
 
@@ -23,5 +22,3 @@ void zc_process_display_events();
 void zapp_reporting_add_breadcrumb(const char* category, const char* message);
 void zapp_reporting_set_tag(const char* key, const char* value);
 void zapp_reporting_set_tag(const char* key, int value);
-
-#endif

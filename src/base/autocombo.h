@@ -1,5 +1,4 @@
-#ifndef _AUTOCOMBO_H_
-#define _AUTOCOMBO_H_
+#pragma once
 
 #include <vector>
 #include <map>
@@ -156,6 +155,3 @@ private:
 };
 
 extern combo_auto combo_autos[MAXCOMBOPOOLS];
-
-#endif
-

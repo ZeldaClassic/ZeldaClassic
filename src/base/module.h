@@ -1,5 +1,4 @@
-#ifndef _ZC_MODULE_H_
-#define _ZC_MODULE_H_
+#pragma once
 
 class ZModule
 {
@@ -11,6 +10,3 @@ class ZModule
 	private:
 		char n;
 };
-
-#endif
-

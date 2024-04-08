@@ -1,5 +1,4 @@
-#ifndef RANDOM_H
-#define RANDOM_H
+#pragma once
 
 #include "base/zdefs.h"
 #include <random>
@@ -29,6 +28,3 @@ int32_t db_rand(char const* f, int l,int32_t upper,int32_t lower=0,zc_randgen* r
 void db_srand(char const* f, int l, int32_t seedval, zc_randgen* rng=NULL);
 
 #endif
-
-#endif
-

@@ -1,5 +1,4 @@
-#ifndef _COMBO_H_
-#define _COMBO_H_
+#pragma once
 
 #include "base/ints.h"
 #include "base/zfix.h"
@@ -291,6 +290,3 @@ enum //cCRUMBLE types
 extern std::vector<newcombo> combobuf;
 
 bool is_push_flag(int flag, optional<int> dir = nullopt);
-
-#endif
-

@@ -1,5 +1,4 @@
-#ifndef _MAPSCR_H_
-#define _MAPSCR_H_
+#pragma once
 
 #include "base/zdefs.h"
 #include "ffc.h"
@@ -302,6 +301,3 @@ enum
 extern std::vector<mapscr> TheMaps;
 extern std::vector<word>   map_autolayers;
 extern word map_count;
-
-#endif
-

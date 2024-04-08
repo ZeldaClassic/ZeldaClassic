@@ -1,5 +1,4 @@
-#ifndef _PACKFILE_H_
-#define _PACKFILE_H_
+#pragma once
 
 #include "base/zc_alleg.h"
 #include "base/ints.h"
@@ -1029,6 +1028,3 @@ inline bool p_putlvec(vector<T> const& vec, PACKFILE *f)
 	}
 	return true;
 }
-
-#endif
-

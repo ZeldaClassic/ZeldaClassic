@@ -178,10 +178,10 @@ SCCDialog::SCCDialog() :
 
 static const GUI::ListData list_arrivals
 {
-	{ "A", 0 },
-	{ "B", 1 },
-	{ "C", 2 },
-	{ "D", 3 },
+	{ "A",        0 },
+	{ "B",        1 },
+	{ "C",        2 },
+	{ "D",        3 },
 	{ "Pit Warp", 5 }
 };
 std::string scc_help(byte scc)

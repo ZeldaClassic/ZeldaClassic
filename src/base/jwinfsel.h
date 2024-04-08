@@ -1,5 +1,4 @@
-#ifndef _JWIN_FSEL_H_
-#define _JWIN_FSEL_H_
+#pragma once
 
 #include "gui/jwin.h"
 
@@ -69,4 +68,3 @@ int32_t jwin_file_browse_ex(AL_CONST char *message, char *path, EXT_LIST *list, 
 // #ifdef __cplusplus
 // }
 // #endif
-#endif                                                      // _JWIN_FSEL_H_

@@ -1,5 +1,4 @@
-#ifndef ZC_LIST_DATA_H
-#define ZC_LIST_DATA_H
+#pragma once
 
 #include "gui/list_data.h"
 
@@ -63,5 +62,3 @@ namespace GUI::ZCListData
 	GUI::ListData const& autocombotypes();
 	GUI::ListData const& scripttypes();
 }
-
-#endif

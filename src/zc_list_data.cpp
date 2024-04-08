@@ -283,7 +283,7 @@ GUI::ListData GUI::ZCListData::itemclass(bool numbered, bool zero_none)
 		if(!ZI.isUsableItemclass(i))
 			continue; //Hidden
 		char const* itname = ZI.getItemClassName(i);
-        if(i < itype_last || itname[0])
+		if(i < itype_last || itname[0])
 		{
 			std::string name;
 			if(numbered)
@@ -575,8 +575,6 @@ GUI::ListData GUI::ZCListData::midinames(bool numbered, bool incl_engine)
 	
 	return ls;
 }
-
-
 
 GUI::ListData GUI::ZCListData::lpals()
 {
@@ -930,27 +928,27 @@ GUI::ListData GUI::ZCListData::slots_subscreen_script(bool alphabetize, bool ski
 
 static const GUI::ListData defense_types
 {
-	{ "(None)", 0 },
-	{ "1/2 Damage", 1 },
-	{ "1/4 Damage", 2 },
-	{ "Stun", 3 },
-	{ "Stun Or Block", 4 },
+	{ "(None)",         0 },
+	{ "1/2 Damage",     1 },
+	{ "1/4 Damage",     2 },
+	{ "Stun",           3 },
+	{ "Stun Or Block",  4 },
 	{ "Stun Or Ignore", 5 },
-	{ "Block If < 1", 6 },
-	{ "Block If < 2", 7 },
-	{ "Block If < 4", 8 },
-	{ "Block If < 6", 9 },
-	{ "Block If < 8", 10 },
-	{ "Block", 11 },
+	{ "Block If < 1",   6 },
+	{ "Block If < 2",   7 },
+	{ "Block If < 4",   8 },
+	{ "Block If < 6",   9 },
+	{ "Block If < 8",  10 },
+	{ "Block",         11 },
 	{ "Ignore If < 1", 12 },
-	{ "Ignore", 13 },
-	{ "One-Hit-Kill", 14 },
-	{ "Block if Power < 10", 15 },
-	{ "Double Damage", 16 },
-	{ "Triple Damage", 17 },
-	{ "Quadruple Damage", 18 },
+	{ "Ignore",                  13 },
+	{ "One-Hit-Kill",            14 },
+	{ "Block if Power < 10",     15 },
+	{ "Double Damage",           16 },
+	{ "Triple Damage",           17 },
+	{ "Quadruple Damage",        18 },
 	{ "Enemy Gains HP = Damage", 19 },
-	{ "Trigger Screen Secrets", 20 },
+	{ "Trigger Screen Secrets",  20 },
 	// { "-freeze", 21 },
 	// { "-msgnotenabled", 22 },
 	// { "-msgline", 23 }, 
@@ -990,11 +988,11 @@ GUI::ListData const& GUI::ZCListData::deftypes()
 
 static const GUI::ListData warp_effects
 {
-	{ "None", 0 },
-	{ "Zap", 1 },
-	{ "Wave", 2 },
+	{ "None",    0 },
+	{ "Zap",     1 },
+	{ "Wave",    2 },
 	{ "Instant", 3 },
-	{ "Open", 4 }
+	{ "Open",    4 }
 };
 
 GUI::ListData const& GUI::ZCListData::warpeffects()
@@ -1012,12 +1010,12 @@ static const GUI::ListData screen_state
 	{ "Special Item", 5 },
 	{ "Enemies Never Return", 6 },
 	{ "Enemies Temp No Return", 7 },
-	{ "Lockblock", 8 },
-	{ "Boss Lockblock", 9 },
-	{ "Chest", 10 },
-	{ "Locked Chest", 11 },
-	{ "Boss Chest", 12 },
-	{ "Secrets", 13 },
+	{ "Lockblock",              8 },
+	{ "Boss Lockblock",         9 },
+	{ "Chest",                 10 },
+	{ "Locked Chest",          11 },
+	{ "Boss Chest",            12 },
+	{ "Secrets",               13 },
 	{ "Visited", 14 },
 	{ "Light Triggers", 15 }
 };

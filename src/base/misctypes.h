@@ -1,5 +1,4 @@
-#ifndef _MISCTYPES_H_
-#define _MISCTYPES_H_
+#pragma once
 
 #include "base/ints.h"
 #include "base/general.h"
@@ -224,6 +223,3 @@ struct miscQdata
 
 extern DoorComboSet *DoorComboSets;
 extern miscQdata QMisc;
-
-#endif
-

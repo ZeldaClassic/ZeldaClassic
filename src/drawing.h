@@ -1,5 +1,4 @@
-#ifndef DRAW_H
-#define DRAW_H
+#pragma once
 
 #include "base/headers.h"
 
@@ -52,5 +51,3 @@ void replColors(BITMAP* dest, vector<byte> srcCol, vector<byte> dstCol);
 int32_t countColor(BITMAP* src, BITMAP* mask, int32_t x, int32_t y, int32_t checkCol, int32_t maskCol);
 
 vector<byte> getColors(BITMAP* bmp, int maxCount);
-
-#endif

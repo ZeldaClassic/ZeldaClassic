@@ -1,5 +1,4 @@
-#ifndef _ZC_COLORS_H_
-#define _ZC_COLORS_H_
+#pragma once
 
 #include "base/zdefs.h"
 
@@ -57,5 +56,3 @@ extern byte nes_colors[];
 
 //bool init_colordata();
 extern bool init_palnames();
-#endif                                                      // _ZC_COLORS_H_
- 

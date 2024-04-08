@@ -1,5 +1,4 @@
-#ifndef _ZABOUT_H_
-#define _ZABOUT_H_
+#pragma once
 
 int getProgramAlphaVer();
 char const* getProgramAlphaVerStr();
@@ -8,5 +7,3 @@ char const* getReleaseTag();
 char const* getReleasePlatform();
 char const* getReleaseChannel();
 char const* getRepo();
-
-#endif
