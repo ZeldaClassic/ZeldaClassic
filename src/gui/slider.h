@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_SLIDER_H
-#define ZC_GUI_SLIDER_H
+#pragma once
 
 #include "gui/widget.h"
 #include "gui/dialog_ref.h"
@@ -54,5 +53,3 @@ namespace GUI
 	};
 
 }
-
-#endif

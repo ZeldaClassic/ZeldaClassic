@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_MACROS_H
-#define ZC_GUI_MACROS_H
+#pragma once
 
 #include <type_traits>
 #include <utility>
@@ -339,5 +338,3 @@ inline std::shared_ptr<::GUI:: widgetType> ZCGUI_WIDGET_NAME(functionName)(Props
         std::forward<PropsType>(props)...);                                                        \
     return ret.resolve();                                                                          \
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_BUILDUTIL_H
-#define ZC_GUI_BUILDUTIL_H
+#pragma once
 
 #include "builder.h"
 
@@ -12,5 +11,3 @@ public:
 private:
 	std::map<std::string, std::shared_ptr<GUI::Widget>> contents;
 };
-#endif
-

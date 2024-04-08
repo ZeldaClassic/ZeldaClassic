@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_BUILDER_HPP
-#define ZC_GUI_BUILDER_HPP
+#pragma once
 
 #include "gui/use_size.h"
 extern int32_t zq_screen_w, zq_screen_h;
@@ -912,5 +911,3 @@ Column(padding = 0_px, _INTBTN_PANEL_HELPER2(var,ltxt)
 #define _EX_RBOX hAlign = 1.0,boxPlacement = GUI::Checkbox::boxPlacement::RIGHT
 
 //}
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_RADIOSET_H
-#define ZC_GUI_RADIOSET_H
+#pragma once
 
 #include "gui/widget.h"
 #include "gui/radio.h"
@@ -53,5 +52,3 @@ private:
 };
 
 }
-
-#endif

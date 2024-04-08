@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_COMMON_H
-#define ZC_GUI_COMMON_H
+#pragma once
 
 #include <string_view>
 #include <cstdint>
@@ -24,5 +23,3 @@ int32_t newGUIProc(int32_t msg, DIALOG* d, int32_t c)
 int32_t getAccelKey(const std::string_view text);
 
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef ZCGUI_PROPS_H
-#define ZCGUI_PROPS_H
+#pragma once
 
 namespace GUI::Props
 {
@@ -221,5 +220,3 @@ inline void applyArgs(PropsSoFar psf, BuilderType&& builder, PropType&& prop,
 #endif
 
 } // namespace GUI::Internal
-
-#endif
