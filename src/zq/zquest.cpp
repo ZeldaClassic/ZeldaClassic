@@ -25574,12 +25574,12 @@ bool no_subscreen()
 
 static void allocate_crap()
 {
-	filepath=(char*)malloc(2048);
-	temppath=(char*)malloc(2048);
-	datapath=(char*)malloc(2048);
-	midipath=(char*)malloc(2048);
-	imagepath=(char*)malloc(2048);
-	tmusicpath=(char*)malloc(2048);
+	filepath       =(char*)malloc(2048);
+	temppath       =(char*)malloc(2048);
+	datapath       =(char*)malloc(2048);
+	midipath       =(char*)malloc(2048);
+	imagepath      =(char*)malloc(2048);
+	tmusicpath     =(char*)malloc(2048);
 	last_timed_save=(char*)malloc(2048);
 	
 	if(!filepath || !datapath || !temppath || !imagepath || !midipath || !tmusicpath || !last_timed_save)
