@@ -1,6 +1,4 @@
-#ifndef _BASE_RENDER_TREE_H_
-#define _BASE_RENDER_TREE_H_
-
+#pragma once
 #include "allegro5/color.h"
 #include "base/zc_alleg.h"
 #include "base/headers.h"
@@ -283,5 +281,3 @@ std::pair<int, int> zc_get_mouse();
 
 int window_mouse_x();
 int window_mouse_y();
-
-#endif

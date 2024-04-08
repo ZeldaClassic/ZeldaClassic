@@ -19,12 +19,12 @@ extern int32_t doInit(zinitdata *zinit);
 
 int32_t onInit()
 {
-    dmap_list_size=MAXDMAPS;
-    dmap_list_zero=true;
-    return doInit(&zinit, false);
+	dmap_list_size=MAXDMAPS;
+	dmap_list_zero=true;
+	return doInit(&zinit, false);
 }
 
 void onInitOK()
 {
-    saved=false;
+	saved=false;
 }

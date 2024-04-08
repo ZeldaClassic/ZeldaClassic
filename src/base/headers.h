@@ -1,6 +1,4 @@
-#ifndef _HEADERS_H_
-#define _HEADERS_H_
-
+#pragma once
 #include <optional>
 #include <string>
 #include <vector>
@@ -14,5 +12,3 @@ using std::string;
 using std::vector;
 using std::map;
 using std::to_string;
-
-#endif
