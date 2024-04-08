@@ -226,7 +226,7 @@ struct KeyReplayStep : public ReplayStep
     }
 
     int button_index;
-	int key_index;
+    int key_index;
 
     KeyReplayStep(int frame, int type, int button_index, int key_index) : ReplayStep(frame, type), button_index(button_index), key_index(key_index)
     {
@@ -1053,47 +1053,47 @@ static bool stored_control_state[KeyMapReplayStep::NumButtons];
 
 static void start_manual_takeover()
 {
-    manual_takeover_start_index = replay_log_current_index;
-    old_start_of_next_screen_index = -1;
-    for (size_t i = manual_takeover_start_index; i < replay_log.size(); i++)
-    {
-        if (replay_log[i]->type != TypeComment)
-            continue;
+	manual_takeover_start_index = replay_log_current_index;
+	old_start_of_next_screen_index = -1;
+	for (size_t i = manual_takeover_start_index; i < replay_log.size(); i++)
+	{
+		if (replay_log[i]->type != TypeComment)
+			continue;
 
-        auto comment_step = static_cast<CommentReplayStep *>(replay_log[i].get());
-        if (comment_step->comment.rfind("scr=", 0) != 0 && comment_step->comment.rfind("dmap=", 0) != 0)
-            continue;
+		auto comment_step = static_cast<CommentReplayStep *>(replay_log[i].get());
+		if (comment_step->comment.rfind("scr=", 0) != 0 && comment_step->comment.rfind("dmap=", 0) != 0)
+			continue;
 
-        old_start_of_next_screen_index = i;
-        break;
-    }
-    // TODO: support updating the very last screen.
-    ASSERT(old_start_of_next_screen_index != -1);
+		old_start_of_next_screen_index = i;
+		break;
+	}
+	// TODO: support updating the very last screen.
+	ASSERT(old_start_of_next_screen_index != -1);
 
-    // Calculate what the button state is at the beginning of the next screen.
-    // The state will be restored to this after the manual takeover is done.
-    for (int i = 0; i < KeyMapReplayStep::NumButtons; i++)
-        stored_control_state[i] = raw_control_state[i];
-    for (size_t i = manual_takeover_start_index; i < old_start_of_next_screen_index; i++)
-    {
-        if (replay_log[i]->type != TypeKeyDown && replay_log[i]->type != TypeKeyUp)
-            continue;
+	// Calculate what the button state is at the beginning of the next screen.
+	// The state will be restored to this after the manual takeover is done.
+	for (int i = 0; i < KeyMapReplayStep::NumButtons; i++)
+		stored_control_state[i] = raw_control_state[i];
+	for (size_t i = manual_takeover_start_index; i < old_start_of_next_screen_index; i++)
+	{
+		if (replay_log[i]->type != TypeKeyDown && replay_log[i]->type != TypeKeyUp)
+			continue;
 
-        auto key_step = static_cast<KeyReplayStep *>(replay_log[i].get());
-        stored_control_state[key_step->key_index] = key_step->type == TypeKeyDown;
-    }
+		auto key_step = static_cast<KeyReplayStep *>(replay_log[i].get());
+		stored_control_state[key_step->key_index] = key_step->type == TypeKeyDown;
+	}
 
-    // Avoid unexpected input when manual takeover starts, which can be awkward to play.
+	// Avoid unexpected input when manual takeover starts, which can be awkward to play.
 	for (int i = 0; i < KEY_MAX; i++)
 	{
 		_key[i] = 0;
 		key[i] = 0;
 	}
 
-    mode = ReplayMode::ManualTakeover;
-    uninstall_keyboard_handlers();
-    Throttlefps = true;
-    Paused = true;
+	mode = ReplayMode::ManualTakeover;
+	uninstall_keyboard_handlers();
+	Throttlefps = true;
+	Paused = true;
 }
 
 static void maybe_take_snapshot()
@@ -1257,16 +1257,16 @@ void replay_start(ReplayMode mode_, std::filesystem::path path, int frame)
 
 void replay_continue(std::filesystem::path path)
 {
-    ASSERT(mode == ReplayMode::Off);
-    mode = ReplayMode::Record;
-    frame_arg = -1;
-    prev_mouse_state = {0, 0, 0, 0};
-    current_mouse_state = {0, 0, 0, 0};
-    replay_forget_input();
-    replay_path = path;
-    load_replay(replay_path);
-    record_log = replay_log;
-    frame_count = record_log.back()->frame + 1;
+	ASSERT(mode == ReplayMode::Off);
+	mode = ReplayMode::Record;
+	frame_arg = -1;
+	prev_mouse_state = {0, 0, 0, 0};
+	current_mouse_state = {0, 0, 0, 0};
+	replay_forget_input();
+	replay_path = path;
+	load_replay(replay_path);
+	record_log = replay_log;
+	frame_count = record_log.back()->frame + 1;
 }
 
 void replay_poll()
