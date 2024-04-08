@@ -20896,39 +20896,39 @@ const char *assignsubscreenscriptlist(int32_t index, int32_t *list_size)
     return assubscreenscripts[index].c_str();
 }
 
-static ListData assignffc_list(assignffclist, &font);
-static ListData assignffcscript_list(assignffcscriptlist, &font);
-static ListData assignglobal_list(assigngloballist, &font);
-static ListData assignglobalscript_list(assignglobalscriptlist, &font);
-static ListData assignitem_list(assignitemlist, &font);
-static ListData assignitemscript_list(assignitemscriptlist, &font);
-static ListData assignnpc_list(assignnpclist, &font);
-static ListData assignnpcscript_list(assignnpcscriptlist, &font);
-static ListData assignlweapon_list(assignlweaponlist, &font);
-static ListData assignlweaponscript_list(assignlweaponscriptlist, &font);
-static ListData assigneweapon_list(assigneweaponlist, &font);
-static ListData assigneweaponscript_list(assigneweaponscriptlist, &font);
+static ListData assignffc_list             (assignffclist,              &font);
+static ListData assignffcscript_list       (assignffcscriptlist,        &font);
+static ListData assignglobal_list          (assigngloballist,           &font);
+static ListData assignglobalscript_list    (assignglobalscriptlist,     &font);
+static ListData assignitem_list            (assignitemlist,             &font);
+static ListData assignitemscript_list      (assignitemscriptlist,       &font);
+static ListData assignnpc_list             (assignnpclist,              &font);
+static ListData assignnpcscript_list       (assignnpcscriptlist,        &font);
+static ListData assignlweapon_list         (assignlweaponlist,          &font);
+static ListData assignlweaponscript_list   (assignlweaponscriptlist,    &font);
+static ListData assigneweapon_list         (assigneweaponlist,          &font);
+static ListData assigneweaponscript_list   (assigneweaponscriptlist,    &font);
 
-static ListData assignplayer_list(assignplayerlist, &font);
-static ListData assignplayerscript_list(assignplayerscriptlist, &font);
+static ListData assignplayer_list          (assignplayerlist,           &font);
+static ListData assignplayerscript_list    (assignplayerscriptlist,     &font);
 
-static ListData assigndmap_list(assigndmaplist, &font);
-static ListData assigndmapscript_list(assigndmapscriptlist, &font);
+static ListData assigndmap_list            (assigndmaplist,             &font);
+static ListData assigndmapscript_list      (assigndmapscriptlist,       &font);
 
-static ListData assignscreen_list(assignscreenlist, &font);
-static ListData assignscreenscript_list(assignscreenscriptlist, &font);
+static ListData assignscreen_list          (assignscreenlist,           &font);
+static ListData assignscreenscript_list    (assignscreenscriptlist,     &font);
 
-static ListData assignitemsprite_list(assignitemspritelist, &font);
+static ListData assignitemsprite_list      (assignitemspritelist,       &font);
 static ListData assignitemspritescript_list(assignitemspritescriptlist, &font);
 
-static ListData assigncombo_list(assigncombolist, &font);
-static ListData assigncomboscript_list(assigncomboscriptlist, &font);
+static ListData assigncombo_list           (assigncombolist,            &font);
+static ListData assigncomboscript_list     (assigncomboscriptlist,      &font);
 
-static ListData assigngeneric_list(assigngenericlist, &font);
-static ListData assigngenericscript_list(assigngenericscriptlist, &font);
+static ListData assigngeneric_list         (assigngenericlist,          &font);
+static ListData assigngenericscript_list   (assigngenericscriptlist,    &font);
 
-static ListData assignsubscreen_list(assignsubscreenlist, &font);
-static ListData assignsubscreenscript_list(assignsubscreenscriptlist, &font);
+static ListData assignsubscreen_list      (assignsubscreenlist,         &font);
+static ListData assignsubscreenscript_list(assignsubscreenscriptlist,   &font);
 
 static DIALOG assignscript_dlg[] =
 {
@@ -21034,8 +21034,8 @@ int32_t jwin_zmeta_proc(int32_t msg, DIALOG *d, int32_t )
 	ASSERT(d);
     
 	BITMAP* target = (msg==MSG_START ? NULL : screen);
-    switch(msg)
-    {
+	switch(msg)
+	{
 		case MSG_START:
 		case MSG_DRAW:
 		{
@@ -21164,9 +21164,9 @@ int32_t jwin_zmeta_proc(int32_t msg, DIALOG *d, int32_t )
 			font = oldfont;
 			break;
 		}
-    }
+	}
     
-    return ret;
+	return ret;
 }
 
 void resize_scriptinfo_dlg();
@@ -22097,10 +22097,10 @@ script_slot_type getType(ScriptType type)
 		default:                          return type_ffc; //Default
 	}
 }
-#define SLOTMSGFLAG_MISSING		0x01
-#define SLOTMSGFLAG_PRESERVED	0x02
-#define SLOTMSGFLAG_IMPORTED	0x04
-#define SLOTMSG_SIZE			512
+#define SLOTMSGFLAG_MISSING     0x01
+#define SLOTMSGFLAG_PRESERVED   0x02
+#define SLOTMSGFLAG_IMPORTED    0x04
+#define SLOTMSG_SIZE            512 
 bool checkSkip(int32_t format, byte flags)
 {
 	switch(format)
@@ -23401,17 +23401,17 @@ static ListData slottype_sel_list(slottype_list, &font);
 
 static DIALOG clearslots_dlg[] =
 {
-	{ jwin_win_proc,        0,       0,       200,  159,    vc(14),             vc(1),              0,   D_EXIT,     0,  0, (void *) "Clear Slots", NULL, NULL },
-	{ jwin_button_proc,     35,      132,     61,   21,     vc(14),             vc(1),              13,  D_EXIT,     0,  0, (void *) "Confirm", NULL, NULL },
-	{ jwin_button_proc,     104,     132,     61,   21,     vc(14),             vc(1),              27,  D_EXIT,     0,  0, (void *) "Cancel", NULL, NULL },
-	{ jwin_droplist_proc,   50,      28+16,   70,   16,     jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG], 0,   0,          0,  0, (void *) &slottype_sel_list, NULL, NULL },
-	{ jwin_radio_proc,      40,      34+00,   81,   9,      vc(14),             vc(1),              0,   D_SELECTED, 0,  0, (void *) "Clear Script Type:", NULL, NULL },
-	{ jwin_radio_proc,      40,      34+32,   81,   9,      vc(14),             vc(1),              0,   0,          0,  0, (void *) "Clear Missing (--) Slots", NULL, NULL },
+	{ jwin_win_proc,        0,       0,       200,  159,    vc(14),             vc(1),              0,   D_EXIT,     0,  0, (void *) "Clear Slots",                NULL, NULL },
+	{ jwin_button_proc,     35,      132,     61,   21,     vc(14),             vc(1),              13,  D_EXIT,     0,  0, (void *) "Confirm",                    NULL, NULL },
+	{ jwin_button_proc,     104,     132,     61,   21,     vc(14),             vc(1),              27,  D_EXIT,     0,  0, (void *) "Cancel",                     NULL, NULL },
+	{ jwin_droplist_proc,   50,      28+16,   70,   16,     jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG], 0,   0,          0,  0, (void *) &slottype_sel_list,           NULL, NULL },
+	{ jwin_radio_proc,      40,      34+00,   81,   9,      vc(14),             vc(1),              0,   D_SELECTED, 0,  0, (void *) "Clear Script Type:",         NULL, NULL },
+	{ jwin_radio_proc,      40,      34+32,   81,   9,      vc(14),             vc(1),              0,   0,          0,  0, (void *) "Clear Missing (--) Slots",   NULL, NULL },
 	{ jwin_radio_proc,      40,      34+48,   81,   9,      vc(14),             vc(1),              0,   0,          0,  0, (void *) "Clear Preserved (++) Slots", NULL, NULL },
-	{ jwin_radio_proc,      40,      34+64,   81,   9,      vc(14),             vc(1),              0,   0,          0,  0, (void *) "Clear Imported (==) Slots", NULL, NULL },
-	{ jwin_radio_proc,      40,      34+80,   81,   9,      vc(14),             vc(1),              0,   0,          0,  0, (void *) "Clear All", NULL, NULL },
-	{ d_timer_proc,         0,       0,       0,    0,      0,                  0,                  0,   0,          0,  0, NULL, NULL, NULL },
-	{ NULL,                 0,       0,       0,    0,      0,                  0,                  0,   0,          0,  0, NULL, NULL, NULL }
+	{ jwin_radio_proc,      40,      34+64,   81,   9,      vc(14),             vc(1),              0,   0,          0,  0, (void *) "Clear Imported (==) Slots",  NULL, NULL },
+	{ jwin_radio_proc,      40,      34+80,   81,   9,      vc(14),             vc(1),              0,   0,          0,  0, (void *) "Clear All",                  NULL, NULL },
+	{ d_timer_proc,         0,       0,       0,    0,      0,                  0,                  0,   0,          0,  0, NULL,                                  NULL, NULL },
+	{ NULL,                 0,       0,       0,    0,      0,                  0,                  0,   0,          0,  0, NULL,                                  NULL, NULL }
 };
 
 void doClearSlots(byte* flags)
