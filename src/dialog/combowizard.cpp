@@ -99,14 +99,14 @@ static const GUI::ListData list_clippings
 static const GUI::ListData list_chest_content
 {
 	{ "Screen Catchall ('Special Item')", -1 },
-	{ "Screen->D[0]", -10 },
-	{ "Screen->D[1]", -11 },
-	{ "Screen->D[2]", -12 },
-	{ "Screen->D[3]", -13 },
-	{ "Screen->D[4]", -14 },
-	{ "Screen->D[5]", -15 },
-	{ "Screen->D[6]", -16 },
-	{ "Screen->D[7]", -17 },
+	{ "Screen->D[0]",                    -10 },
+	{ "Screen->D[1]",                    -11 },
+	{ "Screen->D[2]",                    -12 },
+	{ "Screen->D[3]",                    -13 },
+	{ "Screen->D[4]",                    -14 },
+	{ "Screen->D[5]",                    -15 },
+	{ "Screen->D[6]",                    -16 },
+	{ "Screen->D[7]",                    -17 },
 };
 
 static const GUI::ListData list_torch_shapes
