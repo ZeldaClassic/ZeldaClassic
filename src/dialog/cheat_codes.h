@@ -16,7 +16,7 @@ class CheatCodesDialog: public GUI::Dialog<CheatCodesDialog>
 public:
 	enum class message { REFR_INFO, OK, CANCEL };
 
-	CheatCodesDialog();
+	CheatCodesDialog() = default;
 
 	std::shared_ptr<GUI::Widget> view() override;
 	bool handleMessage(const GUI::DialogMessage<message>& msg);

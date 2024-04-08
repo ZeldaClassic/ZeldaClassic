@@ -8,9 +8,6 @@ void call_cheats_dlg()
 	CheatCodesDialog().show();
 }
 
-CheatCodesDialog::CheatCodesDialog()
-{}
-
 std::shared_ptr<GUI::Widget> CheatCodesDialog::view()
 {
 	using namespace GUI::Builder;

@@ -34,9 +34,9 @@ void call_editdmap_dialog(size_t forceTab, int32_t slot)
 
 static const GUI::ListData ScriptDataList
 {
-	{ "None", DSCRDATA_NONE },
-	{ "All", DSCRDATA_ALL },
-	{ "Active", DSCRDATA_ACTIVE },
+	{ "None",    DSCRDATA_NONE },
+	{ "All",     DSCRDATA_ALL },
+	{ "Active",  DSCRDATA_ACTIVE },
 	{ "Passive", DSCRDATA_PASSIVE }
 };
 
