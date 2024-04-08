@@ -19397,88 +19397,58 @@ int32_t writecomboaliasfile(PACKFILE *f, int32_t index, int32_t count)
 	int32_t zbuild = VERSION_BUILD;
 	
 	if(!p_iputl(zversion,f))
-	{
 		return 0;
-	}
 	if(!p_iputl(zbuild,f))
-	{
 		return 0;
-	}
 	if(!p_iputw(section_version,f))
-	{
 		return 0;
-	}
-	
 	if(!p_iputw(section_cversion,f))
-	{
 		return 0;
-	}
 	
 	//start tile id
 	if(!p_iputl(index,f))
-	{
 		return 0;
-	}
 	
 	//count
 	if(!p_iputl(count,f))
-	{
 		return 0;
-	}
 	
 	for ( int32_t tilect = 0; tilect < count; tilect++ )
 	{
-	
 		if(!p_iputw(combo_aliases[index+(tilect)].combo,f))
-			{
-				return 0;
-			}
+			return 0;
 			
-			if(!p_putc(combo_aliases[index+(tilect)].cset,f))
-			{
-				return 0;
-			}
+		if(!p_putc(combo_aliases[index+(tilect)].cset,f))
+			return 0;
 			
-			int32_t count2 = ((combo_aliases[index+(tilect)].width+1)*(combo_aliases[index+(tilect)].height+1))*(comboa_lmasktotal(combo_aliases[index+(tilect)].layermask)+1);
+		int32_t count2 = ((combo_aliases[index+(tilect)].width+1)*(combo_aliases[index+(tilect)].height+1))*(comboa_lmasktotal(combo_aliases[index+(tilect)].layermask)+1);
 			
 		if(!p_iputl(count2,f))
-			{
-				return 0;
-			}
+			return 0;
+
 		al_trace("Write`, Combo alias count is: %d\n", count2);
 		
-			if(!p_putc(combo_aliases[index+(tilect)].width,f))
-			{
+		if(!p_putc(combo_aliases[index+(tilect)].width,f))
+			return 0;
+		
+		if(!p_putc(combo_aliases[index+(tilect)].height,f))
+			return 0;
+		
+		if(!p_putc(combo_aliases[index+(tilect)].layermask,f))
+			return 0;
+			
+		for(int32_t k=0; k<count2; k++)
+		{
+			if(!p_iputw(combo_aliases[index+(tilect)].combos[k],f))
 				return 0;
-			}
-			
-			if(!p_putc(combo_aliases[index+(tilect)].height,f))
-			{
+		}
+		
+		for(int32_t k=0; k<count2; k++)
+		{
+			if(!p_putc(combo_aliases[index+(tilect)].csets[k],f))
 				return 0;
-			}
-			
-			if(!p_putc(combo_aliases[index+(tilect)].layermask,f))
-			{
-				return 0;
-			}
-			
-			for(int32_t k=0; k<count2; k++)
-			{
-				if(!p_iputw(combo_aliases[index+(tilect)].combos[k],f))
-				{
-					return 0;
-				}
-			}
-			
-			for(int32_t k=0; k<count2; k++)
-			{
-				if(!p_putc(combo_aliases[index+(tilect)].csets[k],f))
-				{
-					return 0;
-				}
-			}
+		}
 	}
 	
 	return 1;
-	
 }
