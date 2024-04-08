@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_SUBSCR_SETTINGS_H
-#define ZC_DIALOG_SUBSCR_SETTINGS_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/window.h>
@@ -47,5 +46,3 @@ protected:
 	void refr_info();
 	void refr_script();
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_ALERTFUNC_H
-#define ZC_DIALOG_ALERTFUNC_H
+#pragma once
 
 #include "info.h"
 #include <gui/button.h>
@@ -31,5 +30,3 @@ private:
 		std::initializer_list<std::function<bool()>> buttonProcs,
 		uint32_t numButtons, uint32_t focused_button);
 };
-
-#endif

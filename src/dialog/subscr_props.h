@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_SUBSCR_PROPS_H
-#define ZC_DIALOG_SUBSCR_PROPS_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/checkbox.h>
@@ -75,5 +74,3 @@ protected:
 	void update_wh();
 	void refr_info();
 };
-
-#endif

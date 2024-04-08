@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_TILESETWIZARD_H
-#define ZC_DIALOG_TILESETWIZARD_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/checkbox.h>
@@ -25,5 +24,3 @@ private:
 	dword tsetflags;
 	word new_map_count;
 };
-
-#endif

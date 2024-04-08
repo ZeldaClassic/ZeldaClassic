@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_INITDLG_H
-#define ZC_DIALOG_INITDLG_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/checkbox.h>
@@ -76,4 +75,3 @@ private:
 	
 	std::shared_ptr<GUI::Widget> GEN_INITD(int ind,zasm_meta const& meta);
 };
-#endif

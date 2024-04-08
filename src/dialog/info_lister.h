@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_INFOLISTER_H
-#define ZC_DIALOG_INFOLISTER_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/label.h>
@@ -76,5 +75,3 @@ protected:
 	void postinit() override;
 	void update() override;
 };
-
-#endif

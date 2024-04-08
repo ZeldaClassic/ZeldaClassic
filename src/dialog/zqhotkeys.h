@@ -1,5 +1,4 @@
-#ifndef ZQ_DIALOG_HOTKEYS_H
-#define ZQ_DIALOG_HOTKEYS_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/label.h>
@@ -29,6 +28,3 @@ private:
 	
 	void load_labels();
 };
-
-#endif
-

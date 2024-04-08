@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_COMBOEDITOR_H
-#define ZC_DIALOG_COMBOEDITOR_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/button.h>
@@ -96,5 +95,3 @@ private:
 	friend bool call_combo_editor(int32_t index);
 	friend class ComboWizardDialog;
 };
-
-#endif

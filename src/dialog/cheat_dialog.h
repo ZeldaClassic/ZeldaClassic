@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_CHEATDLG_H
-#define ZC_DIALOG_CHEATDLG_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/label.h>
@@ -25,5 +24,3 @@ private:
 	std::shared_ptr<GUI::Radio> radios[5];
 	std::shared_ptr<GUI::Label> errlabel;
 };
-
-#endif

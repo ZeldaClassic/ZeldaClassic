@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_CHEATCODES_H
-#define ZC_DIALOG_CHEATCODES_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/checkbox.h>
@@ -26,5 +25,3 @@ private:
 	std::shared_ptr<GUI::Checkbox> enabledCB;
 	std::shared_ptr<GUI::TextField> textFields[4];
 };
-
-#endif

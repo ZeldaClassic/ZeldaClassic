@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_PICKRULESET_H
-#define ZC_DIALOG_PICKRULESET_H
+#pragma once
 
 #include <gui/dialog.h>
 #include "gui/radioset.h"
@@ -24,5 +23,3 @@ private:
 	std::shared_ptr<GUI::Label> rulesetInfo;
 	std::function<void(int32_t,byte*)> setRuleset;
 };
-
-#endif

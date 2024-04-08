@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_CHECKLIST_H
-#define ZC_DIALOG_CHECKLIST_H
+#pragma once
 
 #include "base/headers.h"
 #include <gui/dialog.h>
@@ -30,5 +29,3 @@ protected:
 	bool& confirm;
 	std::shared_ptr<GUI::Window> window;
 };
-
-#endif
