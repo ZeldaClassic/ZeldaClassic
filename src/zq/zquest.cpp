@@ -8535,21 +8535,21 @@ static void doxypos(byte &px2, byte &py2, int32_t color, int32_t mask,
 	int32_t shiftmask, bool immediately, int32_t cursoroffx,
 	int32_t cursoroffy, int32_t iconw, int32_t iconh)
 {
-    int32_t tempcb=ComboBrush;
-    ComboBrush=0;
-    MouseSprite::set(ZQM_POINT_BOX);
-    
-    int32_t oldpx=px2, oldpy=py2;
-    int32_t startxint=mapscreen_x+(showedges?int32_t(16*mapscreensize):0);
-    int32_t startyint=mapscreen_y+(showedges?int32_t(16*mapscreensize):0);
-    showxypos_x=px2;
-    showxypos_y=py2;
-    showxypos_w=iconw;
-    showxypos_h=iconh;
-    showxypos_color=vc(color);
-    showxypos_icon=!showxypos_dummy;
-    bool canedit=false;
-    bool done=false;
+	int32_t tempcb=ComboBrush;
+	ComboBrush=0;
+	MouseSprite::set(ZQM_POINT_BOX);
+
+	int32_t oldpx=px2, oldpy=py2;
+	int32_t startxint=mapscreen_x+(showedges?int32_t(16*mapscreensize):0);
+	int32_t startyint=mapscreen_y+(showedges?int32_t(16*mapscreensize):0);
+	showxypos_x=px2;
+	showxypos_y=py2;
+	showxypos_w=iconw;
+	showxypos_h=iconh;
+	showxypos_color=vc(color);
+	showxypos_icon=!showxypos_dummy;
+	bool canedit=false;
+	bool done=false;
 	
 	clear_tooltip();
     
@@ -8834,21 +8834,21 @@ finished:
 // Drag FFCs around
 void moveffc(int32_t i, int32_t cx, int32_t cy)
 {
-    int32_t ffx = vbound(Map.CurrScr()->ffcs[i].x.getFloor(),0,240);
-    int32_t ffy = vbound(Map.CurrScr()->ffcs[i].y.getFloor(),0,160);
+	int32_t ffx = vbound(Map.CurrScr()->ffcs[i].x.getFloor(),0,240);
+	int32_t ffy = vbound(Map.CurrScr()->ffcs[i].y.getFloor(),0,160);
 	int32_t offx = ffx, offy = ffy;
-    showxypos_ffc = i;
-    doxypos((byte&)ffx,(byte&)ffy,15,SNAP_HALF,SNAP_NONE,true,cx-ffx,cy-ffy,(Map.CurrScr()->ffTileWidth(i)*16),(Map.CurrScr()->ffTileHeight(i)*16));
-    if(ffx > 240) ffx = 240;
-    if(ffy > 160) ffy = 160;
-    if((ffx != offx) || (ffy != offy))
-    {
-        auto set_ffc_data = set_ffc_command::create_data(Map.CurrScr()->ffcs[i]);
-        set_ffc_data.x = ffx;
-        set_ffc_data.y = ffy;
-        Map.DoSetFFCCommand(Map.getCurrMap(), Map.getCurrScr(), i, set_ffc_data);
-        saved = false;
-    }
+	showxypos_ffc = i;
+	doxypos((byte&)ffx,(byte&)ffy,15,SNAP_HALF,SNAP_NONE,true,cx-ffx,cy-ffy,(Map.CurrScr()->ffTileWidth(i)*16),(Map.CurrScr()->ffTileHeight(i)*16));
+	if(ffx > 240) ffx = 240;
+	if(ffy > 160) ffy = 160;
+	if((ffx != offx) || (ffy != offy))
+	{
+		auto set_ffc_data = set_ffc_command::create_data(Map.CurrScr()->ffcs[i]);
+		set_ffc_data.x = ffx;
+		set_ffc_data.y = ffy;
+		Map.DoSetFFCCommand(Map.getCurrMap(), Map.getCurrScr(), i, set_ffc_data);
+		saved = false;
+	}
 }
 
 void set_brush_width(int32_t width);
