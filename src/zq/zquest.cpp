@@ -18069,7 +18069,7 @@ void load_enemy(int32_t index = -1);
 DIALOG elist_dlg[] =
 {
     /* (dialog proc)       (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
-    { jwin_win_proc,       50,   40,   288,  175,  vc(14),  vc(1),  0,       D_EXIT,          0,             0,       NULL, NULL, NULL },
+    { jwin_win_proc,        50,   40,   288,  175,  vc(14),  vc(1),  0,       D_EXIT,          0,             0,       NULL, NULL, NULL },
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
     { d_enelist_proc,       62,   68,   188,  98,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0,       NULL, NULL, NULL },
     { jwin_button_proc,     90,   160+25,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "Edit", NULL, NULL },
@@ -18203,49 +18203,45 @@ int32_t enelist_proc(int32_t msg,DIALOG *d,int32_t c,bool use_abc_list)
 		}
 	}
     
-    if(use_abc_list)
-        ret= jwin_abclist_proc(msg,d,c);
-    else
-        ret= jwin_list_proc(msg,d,c);
+	if(use_abc_list)
+		ret= jwin_abclist_proc(msg,d,c);
+	else
+		ret= jwin_list_proc(msg,d,c);
         
-    if(msg==MSG_DRAW||msg==MSG_CHAR)
-    {
-        int32_t id;
+	if(msg==MSG_DRAW||msg==MSG_CHAR)
+	{
+		int32_t id;
+		
+		// Conveniently hacking the Select Enemy and Screen Enemy dialogs together -L
+		if(d->dp == &enemy_dlg_list)
+		    id = Map.CurrScr()->enemy[d->d1];
+		else
+		    id = bie[d->d1].i;
+		
+		int32_t tile = get_qr(qr_NEWENEMYTILES) ? guysbuf[id].e_tile
+			   : guysbuf[id].tile;
+		int32_t cset = guysbuf[id].cset;
+		int32_t x = d->x + int32_t(195 * 1.5);
+		int32_t y = d->y + 3;
+		int32_t w = 36;
+		int32_t h = 36;
+		
+		BITMAP *buf = create_bitmap_ex(8,20,20);
+		BITMAP *bigbmp = create_bitmap_ex(8,w,h);
         
-        // Conveniently hacking the Select Enemy and Screen Enemy dialogs together -L
-        if(d->dp == &enemy_dlg_list)
-        {
-            id = Map.CurrScr()->enemy[d->d1];
-        }
-        else
-        {
-            id = bie[d->d1].i;
-        }
-        
-        int32_t tile = get_qr(qr_NEWENEMYTILES) ? guysbuf[id].e_tile
-                   : guysbuf[id].tile;
-        int32_t cset = guysbuf[id].cset;
-        int32_t x = d->x + int32_t(195 * 1.5);
-        int32_t y = d->y + 3;
-        int32_t w = 36;
-        int32_t h = 36;
-        
-        BITMAP *buf = create_bitmap_ex(8,20,20);
-        BITMAP *bigbmp = create_bitmap_ex(8,w,h);
-        
-        if(buf && bigbmp)
-        {
-            clear_bitmap(buf);
+		if(buf && bigbmp)
+		{
+			clear_bitmap(buf);
             
-            if(tile)
-                overtile16(buf, tile+efrontfacingtile(id),2,2,cset,0);
+			if(tile)
+				overtile16(buf, tile+efrontfacingtile(id),2,2,cset,0);
                 
-            stretch_blit(buf, bigbmp, 2,2, 17, 17, 2, 2,w-2, h-2);
-            destroy_bitmap(buf);
-            jwin_draw_frame(bigbmp,0,0,w,h,FR_DEEP);
-            blit(bigbmp,screen,0,0,x,y,w,h);
-            destroy_bitmap(bigbmp);
-        }
+			stretch_blit(buf, bigbmp, 2,2, 17, 17, 2, 2,w-2, h-2);
+			destroy_bitmap(buf);
+			jwin_draw_frame(bigbmp,0,0,w,h,FR_DEEP);
+			blit(bigbmp,screen,0,0,x,y,w,h);
+			destroy_bitmap(bigbmp);
+		}
         
 		font = get_zc_font(font_lfont_l);
 		int fh = text_height(font);
@@ -18264,9 +18260,9 @@ int32_t enelist_proc(int32_t msg,DIALOG *d,int32_t c,bool use_abc_list)
 		textprintf_ex(screen,font,x,y+40+(7*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Drop: %d",   guysbuf[id].item_set);
 		textprintf_ex(screen,font,x,y+40+(8*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"Script: %d", guysbuf[id].script);
 		textprintf_ex(screen,font,x,y+40+(9*fh),jwin_pal[jcTEXTFG],jwin_pal[jcBOX],"WScript: %d",guysbuf[id].weaponscript);
-    }
-    font = oldfont;
-    return ret;
+	}
+	font = oldfont;
+	return ret;
 }
 
 int32_t select_enemy(const char *prompt,int32_t enemy,bool hide,bool via_menu,int32_t &exit_status)
