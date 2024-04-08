@@ -1,8 +1,7 @@
 /**
  * A file for basic utility functions
  */
-#ifndef _UTIL_H_
-#define _UTIL_H_
+#pragma once
 
 #include "base/zdefs.h"
 #include <string>
@@ -111,6 +110,3 @@ enum
 };
 int binary_search_int(int b1, int b2, std::function<int(int,int&)> proc, int defval = 0);
 zfix binary_search_zfix(zfix b1, zfix b2, std::function<int(zfix,zfix&)> proc, zfix defval = 0);
-
-#endif
-

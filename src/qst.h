@@ -1,5 +1,4 @@
-#ifndef _ZC_QST_H_
-#define _ZC_QST_H_
+#pragma once
 
 #include "base/zdefs.h"
 #include "subscr.h"
@@ -315,5 +314,3 @@ void init_favorites();
 #define TILESET_CLEARMAPS      0x01
 #define TILESET_CLEARSCRIPTS   0x02
 #define TILESET_CLEARHEADER    0x04
-
-#endif                                                      // _ZC_QST_H_
