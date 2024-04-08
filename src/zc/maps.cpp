@@ -133,16 +133,16 @@ void debugging_box(int32_t x1, int32_t y1, int32_t x2, int32_t y2)
         
     int32_t *sdci = &script_drawing_commands[index][0];
     
-    sdci[0] = RECTR;
-    sdci[1] = 30000;
-    sdci[2] = x1*10000;
-    sdci[3] = y1*10000;
-    sdci[4] = x2*10000;
-    sdci[5] = y2*10000;
-    sdci[6] = 10000;
-    sdci[7] = 10000;
-    sdci[8] = 0;
-    sdci[9] = 0;
+    sdci[0]  = RECTR;
+    sdci[1]  = 30000;
+    sdci[2]  = x1*10000;
+    sdci[3]  = y1*10000;
+    sdci[4]  = x2*10000;
+    sdci[5]  = y2*10000;
+    sdci[6]  = 10000;
+    sdci[7]  = 10000;
+    sdci[8]  = 0;
+    sdci[9]  = 0;
     sdci[10] = 0;
     sdci[11] = 10000;
     sdci[12] = 1280000;
@@ -273,20 +273,20 @@ int32_t MAPCOMBOFLAGL(int32_t layer,int32_t x,int32_t y)
 bool ffcIsAt(int32_t index, int32_t x, int32_t y)
 {
 	if(tmpscr->ffcs[index].data<=0)
-        return false;
+		return false;
 
-    int32_t fx=tmpscr->ffcs[index].x.getInt();
-    if(x<fx || x>fx+(tmpscr->ffEffectWidth(index)-1)) // FFC sizes are weird.
-        return false;
+	int32_t fx=tmpscr->ffcs[index].x.getInt();
+	if(x<fx || x>fx+(tmpscr->ffEffectWidth(index)-1)) // FFC sizes are weird.
+		return false;
     
-    int32_t fy=tmpscr->ffcs[index].y.getInt();
-    if(y<fy || y>fy+(tmpscr->ffEffectHeight(index)-1))
-        return false;
+	int32_t fy=tmpscr->ffcs[index].y.getInt();
+	if(y<fy || y>fy+(tmpscr->ffEffectHeight(index)-1))
+		return false;
     
-    if((tmpscr->ffcs[index].flags&(ffCHANGER|ffETHEREAL))!=0)
-        return false;
+	if((tmpscr->ffcs[index].flags&(ffCHANGER|ffETHEREAL))!=0)
+		return false;
     
-    return true;
+	return true;
 }
 
 int32_t MAPFFCOMBO(int32_t x,int32_t y)
@@ -296,7 +296,7 @@ int32_t MAPFFCOMBO(int32_t x,int32_t y)
 	{
 		return tmpscr->ffcs[ffcid].data;
 	}
-    return 0;
+	return 0;
 }
 
 int32_t MAPCSET(int32_t x,int32_t y)
@@ -349,7 +349,7 @@ int32_t COMBOTYPE(int32_t x,int32_t y)
 
 int32_t FFCOMBOTYPE(int32_t x,int32_t y)
 {
-    return combobuf[MAPFFCOMBO(x,y)].type;
+	return combobuf[MAPFFCOMBO(x,y)].type;
 }
 
 int32_t FFORCOMBO(int32_t x, int32_t y)
@@ -422,19 +422,19 @@ int32_t MAPFFCOMBOFLAG(int32_t x,int32_t y)
 	{
 		return combobuf[tmpscr->ffcs[current_ffcombo].data].flag;
 	}
-    return 0;
+	return 0;
 }
 
 int32_t getFFCAt(int32_t x, int32_t y)
 {
 	word c = tmpscr->numFFC();
-    for(word i=0; i<c; i++)
-    {
-        if(ffcIsAt(i, x, y))
-            return i;
-    }
+	for(word i=0; i<c; i++)
+	{
+		if(ffcIsAt(i, x, y))
+			return i;
+	}
     
-    return -1;
+	return -1;
 }
 
 int32_t MAPCOMBO2(int32_t layer,int32_t x,int32_t y)
