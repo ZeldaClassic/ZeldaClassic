@@ -26137,8 +26137,8 @@ int32_t main(int32_t argc,char **argv)
 	chop_path(imagepath);
 	chop_path(tmusicpath);
 	
-	DisableLPalShortcuts        = zc_get_config("zquest","dis_lpal_shortcut",1);
-	DisableCompileConsole        = zc_get_config("zquest","internal_compile_console",0);
+	DisableLPalShortcuts              = zc_get_config("zquest","dis_lpal_shortcut",1);
+	DisableCompileConsole             = zc_get_config("zquest","internal_compile_console",0);
 	MouseScroll					= zc_get_config("zquest","mouse_scroll",0);
 	WarnOnInitChanged			  = zc_get_config("zquest","warn_initscript_changes",1);
 	MMapCursorStyle				= zc_get_config("zquest","cursorblink_style",1);
@@ -26164,11 +26164,11 @@ int32_t main(int32_t argc,char **argv)
 	SaveWinPos						= zc_get_config("zquest","save_window_position",0)!=0;
 	ComboBrush					 = zc_get_config("zquest","combo_brush",0);
 	FloatBrush					 = zc_get_config("zquest","float_brush",0);
-	AutoBrush = zc_get_config("zquest","autobrush",1);
-	LinkedScroll = zc_get_config("zquest","linked_comboscroll",0);
-	allowHideMouse = zc_get_config("ZQ_GUI","allowHideMouse",0);
+	AutoBrush              = zc_get_config("zquest","autobrush",1);
+	LinkedScroll           = zc_get_config("zquest","linked_comboscroll",0);
+	allowHideMouse         = zc_get_config("ZQ_GUI","allowHideMouse",0);
 	ShowFavoriteComboModes = zc_get_config("ZQ_GUI","show_fav_combo_modes",1);
-	NoHighlightLayer0 = zc_get_config("zquest","no_highlight_layer0",0);
+	NoHighlightLayer0      = zc_get_config("zquest","no_highlight_layer0",0);
 	RulesetDialog				  = zc_get_config("zquest","rulesetdialog",1);
 	EnableTooltips				 = zc_get_config("zquest","enable_tooltips",1);
 	TooltipsHighlight				 = zc_get_config("zquest","ttip_highlight",1);
@@ -26179,8 +26179,8 @@ int32_t main(int32_t argc,char **argv)
 	ShowInfo					   = zc_get_config("zquest","showinfo",1);
 	skipLayerWarning			   = zc_get_config("zquest","skip_layer_warning",0);
 	numericalFlags			  	 = zc_get_config("zquest","numerical_flags",0);
-	ViewLayer2BG = zc_get_config("zquest","layer2_bg",0);
-	ViewLayer3BG = zc_get_config("zquest","layer3_bg",0);
+	ViewLayer2BG         = zc_get_config("zquest","layer2_bg",0);
+	ViewLayer3BG         = zc_get_config("zquest","layer3_bg",0);
 	ActiveLayerHighlight = zc_get_config("zquest","hl_active_lyr",0);
 	
 	OpenLastQuest				  = zc_get_config("zquest","open_last_quest",0);
@@ -26198,24 +26198,24 @@ int32_t main(int32_t argc,char **argv)
 	
 //  Frameskip					 = zc_get_config("zquest","frameskip",0); //todo: this is not actually supported yet.
 	RequestedFPS				  = zc_get_config("zquest","fps",60);
-	ForceExit					 = zc_get_config("zquest","force_exit",0);
+	ForceExit                                 = zc_get_config("zquest","force_exit",0);
 	
 	// Autofill for Combo Page, Tile Page
 	PreFillTileEditorPage	  = zc_get_config("zquest","PreFillTileEditorPage",0);
 	PreFillComboEditorPage	  = zc_get_config("zquest","PreFillComboEditorPage",0);
 	
 	pixeldb = zc_get_config("ZQ_GUI","bottom_8_pixels",0);
-	infobg = zc_get_config("ZQ_GUI","info_text_bg",0);
+	infobg  = zc_get_config("ZQ_GUI","info_text_bg",0);
 	
-	large_merged_combopane = zc_get_config("ZQ_GUI","merge_cpane_large",0);
+	large_merged_combopane   = zc_get_config("ZQ_GUI","merge_cpane_large",0);
 	compact_merged_combopane = zc_get_config("ZQ_GUI","merge_cpane_compact",1);
 	
-	compact_square_panels = zc_get_config("ZQ_GUI","square_panels_compact",0);
+	compact_square_panels    = zc_get_config("ZQ_GUI","square_panels_compact",0);
 	
-	large_zoomed_fav = zc_get_config("ZQ_GUI","zoom_fav_large",0);
-	compact_zoomed_fav = zc_get_config("ZQ_GUI","zoom_fav_compact",1);
-	large_zoomed_cmd = zc_get_config("ZQ_GUI","zoom_cmd_large",1);
-	compact_zoomed_cmd = zc_get_config("ZQ_GUI","zoom_cmd_compact",1);
+	large_zoomed_fav         = zc_get_config("ZQ_GUI","zoom_fav_large",0);
+	compact_zoomed_fav       = zc_get_config("ZQ_GUI","zoom_fav_compact",1);
+	large_zoomed_cmd         = zc_get_config("ZQ_GUI","zoom_cmd_large",1);
+	compact_zoomed_cmd       = zc_get_config("ZQ_GUI","zoom_cmd_compact",1);
 	
 	if(zc_get_config("gui","disable_window_resizing",0))
 		all_set_resize_flag(false);
@@ -26281,12 +26281,12 @@ int32_t main(int32_t argc,char **argv)
 	
 	is_compact = zc_get_config("ZQ_GUI","compact_mode",1);
 	mapscreenbmp = nullptr;
-	brushbmp = nullptr;
-	brushscreen = nullptr;
-	screen2 = nullptr;
-	tmp_scr = nullptr;
-	menu1 = nullptr;
-	menu3 = nullptr;
+	brushbmp     = nullptr;
+	brushscreen  = nullptr;
+	screen2      = nullptr;
+	tmp_scr      = nullptr;
+	menu1        = nullptr;
+	menu3        = nullptr;
 	
 	for(int32_t i=0; i<MAXFAVORITECOMBOS; ++i)
 	{
