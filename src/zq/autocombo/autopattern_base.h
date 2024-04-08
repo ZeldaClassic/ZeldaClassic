@@ -21,11 +21,11 @@ namespace AutoPattern
 
 	class apcombo;
 
-	class autopattern_container
+	class container
 	{
 	public:
-		autopattern_container(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource);
-		~autopattern_container();
+		container(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource);
+		~container();
 		virtual bool execute(int32_t s, int32_t p) = 0;
 		virtual bool erase(int32_t s, int32_t p) = 0;
 		virtual int32_t get_floating_cid(int32_t s, int32_t p) = 0;

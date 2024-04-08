@@ -19,11 +19,11 @@ namespace AutoPattern
 
 	class dor_face;
 
-	class autopattern_dormtn : public autopattern_container
+	class dormtn : public container
 	{
 	public:
-		explicit autopattern_dormtn(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource, byte nheight = 1) :
-			autopattern_container(ntype, nlayer, nbasescreen, nbasepos, nsource), tops(), sides(), side_faces(), height(nheight)
+		explicit dormtn(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource, byte nheight = 1) :
+			container(ntype, nlayer, nbasescreen, nbasepos, nsource), tops(), sides(), side_faces(), height(nheight)
 		{
 			screenboundary_x = 16;
 			screenboundary_y = 11;
@@ -65,11 +65,11 @@ namespace AutoPattern
 		bool special_corner;
 		bool steep;
 
-		dor_face(apcombo* firstvertex, autopattern_dormtn* npattern, byte nheight);
-		dor_face(apcombo* firstvertex, autopattern_dormtn* npattern, byte ndir, byte nheight);
+		dor_face(apcombo* firstvertex, dormtn* npattern, byte nheight);
+		dor_face(apcombo* firstvertex, dormtn* npattern, byte ndir, byte nheight);
 		void get_vertex_dir(apcombo* v, byte& facing, byte& vertexfacing, byte& scan, bool first);
 	private:
-		autopattern_dormtn* pattern;
+		dormtn* pattern;
 	};
 
 }

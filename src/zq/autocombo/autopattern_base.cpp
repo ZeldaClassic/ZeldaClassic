@@ -5,7 +5,7 @@
 namespace AutoPattern
 {
 	// autopattern_container
-	autopattern_container::autopattern_container(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource) :
+	container::container(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource) :
 		source(nsource), type(ntype), layer(nlayer), basescreen(nbasescreen), basepos(nbasepos), 
 		basescreen_x((basescreen % 16) * 16), basescreen_y((basescreen / 16) * 11),
 		base_x(basescreen_x + (basepos % 16)), base_y(basescreen_y + (basepos / 16)),
@@ -15,12 +15,12 @@ namespace AutoPattern
 		erase_cid = source->getEraseCombo();
 		init_pattern();
 	}
-	autopattern_container::~autopattern_container()
+	container::~container()
 	{
 		for (auto c : combos)
 			delete c.second;
 	}
-	void autopattern_container::init_pattern()
+	void container::init_pattern()
 	{
 		for (auto ca : source->combos)
 		{
@@ -28,7 +28,7 @@ namespace AutoPattern
 			pattern_slots[ca.cid] = ca.offset + 1;
 		}
 	}
-	void autopattern_container::apply_changes()
+	void container::apply_changes()
 	{
 		for (auto c : combos)
 		{
@@ -39,7 +39,7 @@ namespace AutoPattern
 		}
 	}
 	
-	int32_t autopattern_container::cid_to_slot(int32_t cid)
+	int32_t container::cid_to_slot(int32_t cid)
 	{
 		if (pattern_slots.count(cid))
 		{
@@ -47,7 +47,7 @@ namespace AutoPattern
 		}
 		return -1;
 	}
-	int32_t autopattern_container::slot_to_cid(int32_t slot)
+	int32_t container::slot_to_cid(int32_t slot)
 	{
 		if (pattern_cids.count(slot))
 		{
@@ -55,12 +55,12 @@ namespace AutoPattern
 		}
 		return 0;
 	}
-	std::pair<int32_t, int32_t> autopattern_container::slot_to_cid_pair(int32_t slot)
+	std::pair<int32_t, int32_t> container::slot_to_cid_pair(int32_t slot)
 	{
 		return std::make_pair(slot_to_cid(slot), slot);
 	}
 
-	apcombo* autopattern_container::add(int32_t screenpos, bool forcevalid, bool andgenerate)
+	apcombo* container::add(int32_t screenpos, bool forcevalid, bool andgenerate)
 	{
 		if (!combos.count(screenpos))
 		{
@@ -78,7 +78,7 @@ namespace AutoPattern
 		else
 			return combos[screenpos];
 	}
-	apcombo* autopattern_container::add(int32_t screen, int32_t pos, bool forcevalid, bool andgenerate)
+	apcombo* container::add(int32_t screen, int32_t pos, bool forcevalid, bool andgenerate)
 	{
 		int32_t screenpos = screen * 176 + pos;
 		if (!combos.count(screenpos))
@@ -97,7 +97,7 @@ namespace AutoPattern
 		else
 			return combos[screenpos];
 	}
-	apcombo* autopattern_container::add(apcombo*& ap, int32_t dir, bool forcevalid, bool andgenerate)
+	apcombo* container::add(apcombo*& ap, int32_t dir, bool forcevalid, bool andgenerate)
 	{
 		int32_t x = (ap->screen % 16) * 16 + ap->pos % 16;
 		int32_t y = (ap->screen / 16) * 11 + ap->pos / 16;
@@ -130,7 +130,7 @@ namespace AutoPattern
 			return ret;
 		}
 	}
-	apcombo* autopattern_container::add_relative(apcombo*& ap, int32_t xoff, int32_t yoff)
+	apcombo* container::add_relative(apcombo*& ap, int32_t xoff, int32_t yoff)
 	{
 		int32_t dx = std::abs(xoff);
 		int32_t dy = std::abs(yoff);
@@ -208,12 +208,12 @@ namespace AutoPattern
 		else
 			return ap;
 	}
-	void autopattern_container::remove(apcombo* ptr)
+	void container::remove(apcombo* ptr)
 	{
 		combos.erase(ptr->screenpos);
 		delete ptr;
 	}
-	void autopattern_container::init_connections(apcombo* p, bool andgenerate)
+	void container::init_connections(apcombo* p, bool andgenerate)
 	{
 		if (!p)
 			return;
@@ -262,7 +262,7 @@ namespace AutoPattern
 			}
 		}
 	}
-	bool autopattern_container::offscreen(int32_t x, int32_t y)
+	bool container::offscreen(int32_t x, int32_t y)
 	{
 		if (x < 0 || x>255 || y < 0 || y>87)
 			return true;

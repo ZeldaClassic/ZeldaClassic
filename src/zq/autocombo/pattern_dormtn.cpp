@@ -4,7 +4,7 @@
 
 namespace AutoPattern
 {
-	bool autopattern_dormtn::execute(int32_t exscreen, int32_t expos)
+	bool dormtn::execute(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -23,7 +23,7 @@ namespace AutoPattern
 		apply_changes();
 		return true;
 	}
-	bool autopattern_dormtn::erase(int32_t exscreen, int32_t expos)
+	bool dormtn::erase(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, false);
 		if (!ap)
@@ -51,7 +51,7 @@ namespace AutoPattern
 		}
 		return true;
 	}
-	int32_t autopattern_dormtn::get_floating_cid(int32_t exscreen, int32_t expos)
+	int32_t dormtn::get_floating_cid(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
 		if (!ap)
@@ -63,7 +63,7 @@ namespace AutoPattern
 		update_top_combos();
 		return ap->cid;
 	}
-	void autopattern_dormtn::calculate_connections(apcombo* p)
+	void dormtn::calculate_connections(apcombo* p)
 	{
 		p->connflags = 0;
 		if (is_top(p->slot))
@@ -84,7 +84,7 @@ namespace AutoPattern
 			}
 		}
 	}
-	uint32_t autopattern_dormtn::slot_to_flags(int32_t slot)
+	uint32_t dormtn::slot_to_flags(int32_t slot)
 	{
 		switch (slot)
 		{
@@ -119,7 +119,7 @@ namespace AutoPattern
 		}
 		return 0;
 	}
-	int32_t autopattern_dormtn::flags_to_slot(uint32_t flags)
+	int32_t dormtn::flags_to_slot(uint32_t flags)
 	{
 		if (flags & TOP)
 		{
@@ -346,7 +346,7 @@ namespace AutoPattern
 		
 		return 34;
 	}
-	bool autopattern_dormtn::is_top(int32_t slot)
+	bool dormtn::is_top(int32_t slot)
 	{
 		switch (slot)
 		{
@@ -368,7 +368,7 @@ namespace AutoPattern
 		}
 		return false;
 	}
-	void autopattern_dormtn::load_all_tops(apcombo* p)
+	void dormtn::load_all_tops(apcombo* p)
 	{
 		p->connflags = 0;
 		for (int32_t q = 0; q < 4; ++q)
@@ -394,7 +394,7 @@ namespace AutoPattern
 			}
 		}
 	}
-	void autopattern_dormtn::update_top_combos()
+	void dormtn::update_top_combos()
 	{
 		for (auto a : tops)
 		{
@@ -403,7 +403,7 @@ namespace AutoPattern
 			ap->set_cid(slot_to_cid_pair(flags_to_slot(ap->connflags)));
 		}
 	}
-	bool autopattern_dormtn::is_vertex(apcombo* ap)
+	bool dormtn::is_vertex(apcombo* ap)
 	{
 		int32_t adj_slot[8];
 		for (int32_t q = 0; q < 8; ++q)
@@ -451,7 +451,7 @@ namespace AutoPattern
 		}
 		return false;
 	}
-	void autopattern_dormtn::find_sides()
+	void dormtn::find_sides()
 	{
 		for (auto a : tops)
 		{
@@ -491,7 +491,7 @@ namespace AutoPattern
 			}
 		}
 	}
-	void autopattern_dormtn::update_sides()
+	void dormtn::update_sides()
 	{
 		for (auto a : side_faces)
 		{
@@ -508,7 +508,7 @@ namespace AutoPattern
 			a.second->force_cset = true;
 		}
 	}
-	void autopattern_dormtn::write_side(dor_face* p)
+	void dormtn::write_side(dor_face* p)
 	{
 		int32_t h = p->height - 1;
 		switch (p->facing_dir)
@@ -787,7 +787,7 @@ namespace AutoPattern
 				break;
 		}
 	}
-	void autopattern_dormtn::mask_out_context(apcombo* center)
+	void dormtn::mask_out_context(apcombo* center)
 	{
 		for (auto a : combos)
 		{
@@ -796,7 +796,7 @@ namespace AutoPattern
 				ap->changed = false;
 		}
 	}
-	void autopattern_dormtn::erase_sides(apcombo* center)
+	void dormtn::erase_sides(apcombo* center)
 	{
 		for (int32_t x = -height; x <= height; ++x)
 		{
@@ -830,7 +830,7 @@ namespace AutoPattern
 			}
 		}
 	}
-	apcombo* autopattern_dormtn::add_side_combo(apcombo* p, int32_t x, int32_t y)
+	apcombo* dormtn::add_side_combo(apcombo* p, int32_t x, int32_t y)
 	{
 		apcombo* ret = add_relative(p, x, y);
 		if (ret)
@@ -846,7 +846,7 @@ namespace AutoPattern
 		return ret;
 	}
 
-	dor_face::dor_face(apcombo* firstvertex, autopattern_dormtn* npattern, byte nheight) :
+	dor_face::dor_face(apcombo* firstvertex, dormtn* npattern, byte nheight) :
 		valid(true), facing_dir(0), scan_dir(0), height(nheight), side_length(0), special_corner(false), steep(false), pattern(npattern)
 	{
 		byte vertexfacing = 255;
@@ -897,7 +897,7 @@ namespace AutoPattern
 			}
 		}
 	}
-	dor_face::dor_face(apcombo* firstvertex, autopattern_dormtn* npattern, byte ndir, byte nheight) :
+	dor_face::dor_face(apcombo* firstvertex, dormtn* npattern, byte ndir, byte nheight) :
 		valid(true), facing_dir(ndir), scan_dir(0), height(nheight), side_length(0), special_corner(true), steep(false), pattern(npattern)
 	{
 		if (firstvertex)
