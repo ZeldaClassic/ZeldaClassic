@@ -7183,39 +7183,39 @@ void clear_cpool()
 
 bool select_favorite()
 {
-    int32_t tempcb=ComboBrush;
-    ComboBrush=0;
-    bool valid=false;
+	int32_t tempcb=ComboBrush;
+	ComboBrush=0;
+	bool valid=false;
     
-    while(gui_mouse_b())
-    {
-        valid=false;
-        int32_t x=gui_mouse_x();
+	while(gui_mouse_b())
+	{
+		valid=false;
+		int32_t x=gui_mouse_x();
         
-        if(x<favorites_list.x)
+		if(x<favorites_list.x)
 			x=favorites_list.x;
         
-        if(x>favorites_list.x+(favorites_list.w*favorites_list.xscale)-1)
+		if(x>favorites_list.x+(favorites_list.w*favorites_list.xscale)-1)
 			x=favorites_list.x+(favorites_list.w*favorites_list.xscale)-1;
         
-        int32_t y=gui_mouse_y();
+		int32_t y=gui_mouse_y();
         
-        if(y<favorites_list.y)
+		if(y<favorites_list.y)
 			y=favorites_list.y;
         
-        if(y>favorites_list.y+(favorites_list.h*favorites_list.yscale)-1)
+		if(y>favorites_list.y+(favorites_list.h*favorites_list.yscale)-1)
 			y=favorites_list.y+(favorites_list.h*favorites_list.yscale)-1;
         
-        int32_t tempc=(((y-favorites_list.y)/favorites_list.yscale)*FAVORITECOMBO_PER_ROW)+((x-favorites_list.x)/favorites_list.xscale) + FAVORITECOMBO_PER_PAGE * FavoriteComboPage;
+		int32_t tempc=(((y-favorites_list.y)/favorites_list.yscale)*FAVORITECOMBO_PER_ROW)+((x-favorites_list.x)/favorites_list.xscale) + FAVORITECOMBO_PER_PAGE * FavoriteComboPage;
 
 		if(tempc >=  MAXFAVORITECOMBOS)
 		{
 			//Nothing, invalid
 		}
-        else
-        {
+		else
+		{
 			if(favorite_combos[tempc]!=-1)
-            {
+			{
 				switch(favorite_combo_modes[tempc])
 				{
 					case DM_ALIAS:
@@ -7236,24 +7236,24 @@ bool select_favorite()
 				}
 				if(AutoBrush)
 					BrushWidth = BrushHeight = 1;
-                valid=true;
+				valid=true;
 				fix_drawing_mode_menu();
-            }
-        }
+			}
+		}
         
-        custom_vsync();
-        refresh(rALL);
-    }
+		custom_vsync();
+		refresh(rALL);
+	}
     
-    ComboBrush=tempcb;
-    return valid;
+	ComboBrush=tempcb;
+	return valid;
 }
 
 void select_combo(int32_t clist)
 {
-    current_combolist=clist;
-    int32_t tempcb=ComboBrush;
-    ComboBrush=0;
+	current_combolist=clist;
+	int32_t tempcb=ComboBrush;
+	ComboBrush=0;
     
 	int autobrush_cx = -1, autobrush_cy = -1;
 	int autobrush_first = First[current_combolist];
