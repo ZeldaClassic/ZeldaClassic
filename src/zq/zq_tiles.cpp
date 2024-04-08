@@ -6059,16 +6059,16 @@ int32_t move_intersection_rr(int32_t check_left, int32_t check_top, int32_t chec
 
 static DIALOG tile_move_list_dlg[] =
 {
-	// (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
-	{ jwin_win_proc,      0,   0,   254,  178,  vc(14),  vc(1),  0,       D_EXIT,          0,             0,      NULL, NULL, NULL },
-	{ jwin_ctext_proc,   127,  24,     0,  8,    vc(15),  vc(1),  0,       0,          0,             0, (void *) "", NULL, NULL },
-	{ jwin_ctext_proc,   127,  34,     0,  8,    vc(15),  vc(1),  0,       0,          0,             0, (void *) "", NULL, NULL },
-	{ jwin_ctext_proc,   127,  44,     0,  8,    vc(15),  vc(1),  0,       0,          0,             0, (void *) "", NULL, NULL },
-	{ jwin_textbox_proc,  12,   54,   231,  96,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0,      NULL, NULL, NULL },
-	{ jwin_button_proc,   57,   153,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
-	{ jwin_button_proc,  137,   153,  61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-	{ d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-	{ NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+	// (dialog proc)     (x)     (y)   (w)    (h)      (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
+	{ jwin_win_proc,      0,      0,   254,  178,    vc(14),  vc(1),  0,       D_EXIT,          0,             0,      NULL, NULL, NULL },
+	{ jwin_ctext_proc,   127,    24,     0,    8,    vc(15),  vc(1),  0,       0,          0,             0, (void *) "", NULL, NULL },
+	{ jwin_ctext_proc,   127,    34,     0,    8,    vc(15),  vc(1),  0,       0,          0,             0, (void *) "", NULL, NULL },
+	{ jwin_ctext_proc,   127,    44,     0,    8,    vc(15),  vc(1),  0,       0,          0,             0, (void *) "", NULL, NULL },
+	{ jwin_textbox_proc,  12,    54,   231,   96,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       D_EXIT,     0,             0,      NULL, NULL, NULL },
+	{ jwin_button_proc,   57,   153,    61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
+	{ jwin_button_proc,  137,   153,    61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
+	{ d_timer_proc,        0,     0,     0,    0,        0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+	{ NULL,                0,     0,     0,    0,        0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 
