@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_MISC_COLOR_SEL_H
-#define ZC_GUI_MISC_COLOR_SEL_H
+#pragma once
 
 #include "gui/widget.h"
 #include "gui/label.h"
@@ -47,5 +46,3 @@ private:
 };
 
 }
-
-#endif

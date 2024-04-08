@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_CHECKBOX_H
-#define ZC_GUI_CHECKBOX_H
+#pragma once
 
 #include "gui/widget.h"
 #include "gui/dialog_ref.h"
@@ -58,5 +57,3 @@ private:
 };
 
 }
-
-#endif
