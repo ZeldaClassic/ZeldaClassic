@@ -289,9 +289,7 @@ void particle_list::animate()
 	while(active_iterator<count)
 	{
 		if(particles[active_iterator]->animate(active_iterator))
-		{
 			del(active_iterator);
-		}
 		
 		++active_iterator;
 	}

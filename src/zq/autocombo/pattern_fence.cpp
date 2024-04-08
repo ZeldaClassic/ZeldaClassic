@@ -3,7 +3,6 @@
 
 namespace AutoPattern
 {
-
 	bool fence::execute(int32_t exscreen, int32_t expos)
 	{
 		apcombo* ap = add(exscreen, expos, true);
@@ -186,17 +185,17 @@ namespace AutoPattern
 		switch (slot)
 		{
 			// 3x3 ring
-			case 0:	return D | R | DR;
-			case 1: return L | R | DL | DR;
-			case 2: return D | L | DL;
-			case 3:	return U | D | UR | DR;
-			case 4: return 0;
-			case 5: return U | D | UL | DL;
-			case 6: return U | R | UR;
-			case 7: return L | R | UL | UR;
-			case 8: return U | L | UL;
+			case 0:	 return D | R | DR;
+			case 1:  return L | R | DL | DR;
+			case 2:  return D | L | DL;
+			case 3:	 return U | D | UR | DR;
+			case 4:  return 0;
+			case 5:  return U | D | UL | DL;
+			case 6:  return U | R | UR;
+			case 7:  return L | R | UL | UR;
+			case 8:  return U | L | UL;
 				// Outer corners
-			case 9: return D | R | UR | DL;
+			case 9:  return D | R | UR | DL;
 			case 10: return D | L | UL | DR;
 			case 11: return U | R | UL | DR;
 			case 12: return U | L | UR | DL;
@@ -218,15 +217,15 @@ namespace AutoPattern
 		switch (flags)
 		{
 			// 3x3 ring
-			case D | R | DR: return 0;
+			case D | R | DR:      return 0;
 			case L | R | DL | DR: return 1;
-			case D | L | DL: return 2;
+			case D | L | DL:      return 2;
 			case U | D | UR | DR: return 3;
-			case 0: return 4;
+			case 0:               return 4;
 			case U | D | UL | DL: return 5;
-			case U | R | UR: return 6;
+			case U | R | UR:      return 6;
 			case L | R | UL | UR: return 7;
-			case U | L | UL: return 8;
+			case U | L | UL:      return 8;
 				// Outer corners
 			case D | R | UR | DL: return 9;
 			case D | L | UL | DR: return 10;
@@ -257,17 +256,17 @@ namespace AutoPattern
 		switch (slot)
 		{
 			// 3x3 ring
-			case 0:	return 9;
-			case 1: return 7;
-			case 2: return 10;
-			case 3:	return 5;
-			case 4: return 4;
-			case 5: return 3;
-			case 6: return 11;
-			case 7: return 1;
-			case 8: return 12;
+			case 0:	 return 9;
+			case 1:  return 7;
+			case 2:  return 10;
+			case 3:	 return 5;
+			case 4:  return 4;
+			case 5:  return 3;
+			case 6:  return 11;
+			case 7:  return 1;
+			case 8:  return 12;
 			// Outer corners
-			case 9: return 0;
+			case 9:  return 0;
 			case 10: return 2;
 			case 11: return 6;
 			case 12: return 8;

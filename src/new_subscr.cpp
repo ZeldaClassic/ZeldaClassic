@@ -148,23 +148,23 @@ bool is_counter_item(int32_t itmid, int32_t ctr)
 	if(ctr == itm.cost_counter[0] ||
 		ctr == itm.cost_counter[1])
 		return true;
-    return false;
+	return false;
 }
 
 int old_ssc_to_new_ctr(int ssc)
 {
 	switch(ssc)
 	{
-		case 0: return crMONEY;
-		case 1: return crBOMBS;
-		case 2: return crSBOMBS;
-		case 3: return crARROWS;
-		case 4: return sscGENKEYMAGIC;
-		case 5: return sscGENKEYNOMAGIC;
-		case 6: return sscLEVKEYMAGIC;
-		case 7: return sscLEVKEYNOMAGIC;
-		case 8: return sscANYKEYMAGIC;
-		case 9: return sscANYKEYNOMAGIC;
+		case 0:  return crMONEY;
+		case 1:  return crBOMBS;
+		case 2:  return crSBOMBS;
+		case 3:  return crARROWS;
+		case 4:  return sscGENKEYMAGIC;
+		case 5:  return sscGENKEYNOMAGIC;
+		case 6:  return sscLEVKEYMAGIC;
+		case 7:  return sscLEVKEYNOMAGIC;
+		case 8:  return sscANYKEYMAGIC;
+		case 9:  return sscANYKEYNOMAGIC;
 		case 35: return crLIFE;
 		case 36: return crMAGIC;
 		case 37: return sscMAXHP;
