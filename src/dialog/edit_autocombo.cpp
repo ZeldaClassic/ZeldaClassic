@@ -48,7 +48,6 @@ void call_autocombo_dlg(int32_t index)
 AutoComboDialog::AutoComboDialog() :
 	list_autocombotypes(GUI::ZCListData::autocombotypes())
 { 
-
 }
 
 void AutoComboDialog::addCombos(int32_t count)
@@ -962,4 +961,3 @@ bool AutoComboDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 	}
 	return false;
 }
-

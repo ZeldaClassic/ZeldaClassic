@@ -1664,11 +1664,11 @@ script_variable variable_list[]=
 //	{ "EWPNINDEX",                     EWPNINDEX,          0,             0 },
 //	{ "NPCINDEX",                      NPCINDEX,          0,             0 },
 //	TABLE END
-	{ "IDATAUSEWPN",   IDATAUSEWPN, 0, 0 }, //UseWeapon
-	{ "IDATAUSEDEF",   IDATAUSEDEF, 0, 0 }, //UseDefense
-	{ "IDATAWRANGE",   IDATAWRANGE, 0, 0 }, //Range
-	{ "IDATAUSEMVT",   IDATAUSEMVT, 0, 0 }, //Movement[]
-	{ "IDATADURATION", IDATADURATION, 0, 0 }, //Duration
+	{ "IDATAUSEWPN",       IDATAUSEWPN, 0, 0 }, //UseWeapon
+	{ "IDATAUSEDEF",       IDATAUSEDEF, 0, 0 }, //UseDefense
+	{ "IDATAWRANGE",       IDATAWRANGE, 0, 0 }, //Range
+	{ "IDATAUSEMVT",       IDATAUSEMVT, 0, 0 }, //Movement[]
+	{ "IDATADURATION",     IDATADURATION, 0, 0 }, //Duration
 	
 	{ "IDATADUPLICATES",   IDATADUPLICATES, 0, 0 }, //Duplicates
 	{ "IDATADRAWLAYER",    IDATADRAWLAYER, 0, 0 }, //DrawLayer
@@ -1753,16 +1753,16 @@ script_variable variable_list[]=
 	{"IDATAHYOFSWEAP",      IDATAHYOFSWEAP, 0, 0 },
 	{"IDATAHXOFSWEAP",      IDATAHXOFSWEAP, 0, 0 },
 	{"IDATAOVERRIDEFL",     IDATAOVERRIDEFL, 0, 0 },
-	{"IDATAPICKUP", IDATAPICKUP, 0, 0 },
-	{"IDATATILEH",  IDATATILEH, 0, 0 },
-	{"IDATATILEW",  IDATATILEW, 0, 0 },
-	{"IDATAHZSZ",   IDATAHZSZ, 0, 0 },
-	{"IDATAHYSZ",   IDATAHYSZ, 0, 0 },
-	{"IDATAHXSZ",   IDATAHXSZ, 0, 0 },
-	{"IDATADYOFS",  IDATADYOFS, 0, 0 },
-	{"IDATADXOFS",  IDATADXOFS, 0, 0 },
-	{"IDATAHYOFS",  IDATAHYOFS, 0, 0 },
-	{"IDATAHXOFS",  IDATAHXOFS, 0, 0 },
+	{"IDATAPICKUP",         IDATAPICKUP, 0, 0 },
+	{"IDATATILEH",          IDATATILEH, 0, 0 },
+	{"IDATATILEW",          IDATATILEW, 0, 0 },
+	{"IDATAHZSZ",           IDATAHZSZ, 0, 0 },
+	{"IDATAHYSZ",           IDATAHYSZ, 0, 0 },
+	{"IDATAHXSZ",           IDATAHXSZ, 0, 0 },
+	{"IDATADYOFS",          IDATADYOFS, 0, 0 },
+	{"IDATADXOFS",          IDATADXOFS, 0, 0 },
+	{"IDATAHYOFS",          IDATAHYOFS, 0, 0 },
+	{"IDATAHXOFS",          IDATAHXOFS, 0, 0 },
 	//spritedata sd->
 	{"SPRITEDATATILE",   SPRITEDATATILE, 0, 0 },
 	{"SPRITEDATAMISC",   SPRITEDATAMISC, 0, 0 },
@@ -2177,17 +2177,17 @@ script_variable variable_list[]=
 	
 	{"DMAPDATASIDEVIEW", DMAPDATASIDEVIEW, 0, 0 },
 	
-	{"DONULL",           DONULL, 0, 0 },
-	{"DEBUGD",           DEBUGD, 0, 0 },
-	{"GETPIXEL",         GETPIXEL, 0, 0 },
-	{"DOUNTYPE",         DOUNTYPE, 0, 0 },
-	{"NPCBEHAVIOUR",     NPCBEHAVIOUR, 0, 0 },
-	{"NPCDATABEHAVIOUR", NPCDATABEHAVIOUR, 0, 0 },
-	{"CREATEBITMAP",     CREATEBITMAP, 0, 0 },
-	{"LINKTILEMOD",      LINKTILEMOD, 0, 0 },
-	{"NPCINITD",         NPCINITD, 0, 0 },
-	{"NPCCOLLISION",     NPCCOLLISION, 0, 0 },
-	{"NPCLINEDUP",       NPCLINEDUP, 0, 0 },
+	{"DONULL",             DONULL, 0, 0 },
+	{"DEBUGD",             DEBUGD, 0, 0 },
+	{"GETPIXEL",           GETPIXEL, 0, 0 },
+	{"DOUNTYPE",           DOUNTYPE, 0, 0 },
+	{"NPCBEHAVIOUR",       NPCBEHAVIOUR, 0, 0 },
+	{"NPCDATABEHAVIOUR",   NPCDATABEHAVIOUR, 0, 0 },
+	{"CREATEBITMAP",       CREATEBITMAP, 0, 0 },
+	{"LINKTILEMOD",        LINKTILEMOD, 0, 0 },
+	{"NPCINITD",           NPCINITD, 0, 0 },
+	{"NPCCOLLISION",       NPCCOLLISION, 0, 0 },
+	{"NPCLINEDUP",         NPCLINEDUP, 0, 0 },
 	
 	{"NPCDATAINITD",       NPCLINEDUP, 0, 0 },
 	{"NPCDATASCRIPT",      NPCDATASCRIPT, 0, 0 },
@@ -2870,8 +2870,6 @@ script_variable variable_list[]=
 
 	{ " ", -1, 0, 0 }
 };
-
-
 
 int32_t ffparse(char const* string)
 {
@@ -3987,10 +3985,10 @@ int32_t set_argument(char const* argbuf, script_data *script, int32_t com, int32
 }
 
 #define ERR_INSTRUCTION 0
-#define ERR_PARAM1 1
-#define ERR_PARAM2 2
-#define ERR_STR    3
-#define ERR_VEC    4
+#define ERR_PARAM1      1
+#define ERR_PARAM2      2
+#define ERR_STR         3
+#define ERR_VEC         4
 
 int32_t parse_script_section(char const* combuf, char const* arg1buf, char const* arg2buf, script_data **script, int32_t com, int32_t &retcode, std::vector<int32_t> *vptr, std::string *sptr)
 {

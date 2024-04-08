@@ -12,19 +12,19 @@ extern BITMAP *darkscr_bmp_curscr, *darkscr_bmp_curscr_trans, *darkscr_bmp_scrol
 
 #include "base/initdata.h"
 #include "gamedata.h"
-#define DITH_PERC (game ? game->get_dither_perc() : zinit.dither_percent)
+#define DITH_PERC  (game ? game->get_dither_perc()    : zinit.dither_percent)
 #define TRANS_PERC (game ? game->get_transdark_perc() : zinit.transdark_percent)
-#define DITH_TYPE (game ? game->get_dither_type() : zinit.dither_type)
-#define DITH_ARG (game ? game->get_dither_arg() : zinit.dither_arg)
+#define DITH_TYPE  (game ? game->get_dither_type()    : zinit.dither_type)
+#define DITH_ARG   (game ? game->get_dither_arg()     : zinit.dither_arg)
 //end IS_PLAYER
 #elif defined(IS_EDITOR)
 
 #include "base/initdata.h"
 #include "gamedata.h"
-#define DITH_PERC (game ? game->get_dither_perc() : zinit.dither_percent)
+#define DITH_PERC  (game ? game->get_dither_perc()    : zinit.dither_percent)
 #define TRANS_PERC (game ? game->get_transdark_perc() : zinit.transdark_percent)
-#define DITH_TYPE (game ? game->get_dither_type() : zinit.dither_type)
-#define DITH_ARG (game ? game->get_dither_arg() : zinit.dither_arg)
+#define DITH_TYPE  (game ? game->get_dither_type()    : zinit.dither_type)
+#define DITH_ARG   (game ? game->get_dither_arg()     : zinit.dither_arg)
 #else
 #define DITH_PERC 0
 #define TRANS_PERC 0
@@ -120,10 +120,10 @@ void doDarkroomSquare(int32_t cx, int32_t cy, byte glowRad, BITMAP* dest, BITMAP
 	if(dest == darkscr_bmp_scrollscr) transdest = darkscr_bmp_scrollscr_trans;
 	else if(!transdest || dest == darkscr_bmp_curscr) transdest = darkscr_bmp_curscr_trans;
 	#endif
-	if(dith_perc < 0) dith_perc = DITH_PERC;
+	if(dith_perc  < 0) dith_perc  = DITH_PERC;
 	if(trans_perc < 0) trans_perc = TRANS_PERC;
-	if(dith_type < 0) dith_type = DITH_TYPE;
-	if(dith_arg < 0) dith_arg = DITH_ARG;
+	if(dith_type  < 0) dith_type  = DITH_TYPE;
+	if(dith_arg   < 0) dith_arg   = DITH_ARG;
 	
 	int32_t ditherRad = glowRad + (int32_t)(glowRad * (dith_perc/(double)100.0));
 	int32_t transRad = glowRad + (int32_t)(glowRad * (trans_perc/(double)100.0));

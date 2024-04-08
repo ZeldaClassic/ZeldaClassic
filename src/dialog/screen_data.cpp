@@ -71,13 +71,13 @@ std::shared_ptr<GUI::Widget> ScreenDataDialog::SCREEN_INITD(int index)
 
 static const GUI::ListData list_lenseff
 {
-	{ "Normal", 0 },
-	{ "Hide Layer 1", llLENSHIDES|0 },
-	{ "Hide Layer 2", llLENSHIDES|1 },
-	{ "Hide Layer 3", llLENSHIDES|2 },
-	{ "Hide Layer 4", llLENSHIDES|3 },
-	{ "Hide Layer 5", llLENSHIDES|4 },
-	{ "Hide Layer 6", llLENSHIDES|5 },
+	{ "Normal",                     0 },
+	{ "Hide Layer 1",   llLENSHIDES|0 },
+	{ "Hide Layer 2",   llLENSHIDES|1 },
+	{ "Hide Layer 3",   llLENSHIDES|2 },
+	{ "Hide Layer 4",   llLENSHIDES|3 },
+	{ "Hide Layer 5",   llLENSHIDES|4 },
+	{ "Hide Layer 6",   llLENSHIDES|5 },
 	{ "Reveal Layer 1", llLENSSHOWS|0 },
 	{ "Reveal Layer 2", llLENSSHOWS|1 },
 	{ "Reveal Layer 3", llLENSSHOWS|2 },
@@ -716,4 +716,3 @@ bool ScreenDataDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 	}
 	return false;
 }
-
