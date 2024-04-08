@@ -19659,8 +19659,8 @@ static DIALOG ffcombo_sel_dlg[] =
     { d_ffcombolist_proc,  11,    24,   49,   16,   jwin_pal[jcTEXTFG],  jwin_pal[jcTEXTBG],  0,       0,          1,             0, (void *) &ffcombo_list, NULL, NULL },
     { d_comboframe_proc,   68,    23,   20,   20,   0,       0,      0,       0,             FR_DEEP,       0,       NULL, NULL, NULL },
     { d_bitmap_proc,       70,    25,   16,   16,   0,       0,      0,       0,             0,             0,       NULL, NULL, NULL },
-    { d_timer_proc,         0,     0,    0,    0,   0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { NULL,                 0,     0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    { d_timer_proc,         0,     0,    0,    0,   0,       0,      0,       0,          0,          0,         NULL, NULL, NULL },
+    { NULL,                 0,     0,    0,    0,   0,       0,      0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 int32_t d_ffcombolist_proc(int32_t msg,DIALOG *d,int32_t c)
@@ -19744,14 +19744,14 @@ int32_t d_ffcombolist_proc(int32_t msg,DIALOG *d,int32_t c)
 }
 int32_t onSelectFFCombo()
 {
-    ffcombo_sel_dlg[0].dp2 = get_zc_font(font_lfont);
-    ffcombo_sel_dlg[3].d1 = ff_combo;
-    ffcur = create_bitmap_ex(8,32,32);
+	ffcombo_sel_dlg[0].dp2 = get_zc_font(font_lfont);
+	ffcombo_sel_dlg[3].d1 = ff_combo;
+	ffcur = create_bitmap_ex(8,32,32);
     
-    if(!ffcur) return D_O_K;
+	if(!ffcur) return D_O_K;
     
-    putcombo(ffcur,0,0,Map.CurrScr()->ffcs[ff_combo].data,Map.CurrScr()->ffcs[ff_combo].cset);
-    ffcombo_sel_dlg[5].dp = ffcur;
+	putcombo(ffcur,0,0,Map.CurrScr()->ffcs[ff_combo].data,Map.CurrScr()->ffcs[ff_combo].cset);
+	ffcombo_sel_dlg[5].dp = ffcur;
     
 	bool resize = !(ffcombo_sel_dlg[0].d1);
 	large_dialog(ffcombo_sel_dlg);
@@ -19762,17 +19762,17 @@ int32_t onSelectFFCombo()
 		ffcombo_sel_dlg[5].y--;
 	}
     
-    int32_t ret=do_zqdialog(ffcombo_sel_dlg,0);
+	int32_t ret=do_zqdialog(ffcombo_sel_dlg,0);
     
-    while(ret==1)
-    {
-        ff_combo = ffcombo_sel_dlg[3].d1;
-        call_ffc_dialog(ff_combo);
-        ret=do_zqdialog(ffcombo_sel_dlg,0);
-    }
+	while(ret==1)
+	{
+		ff_combo = ffcombo_sel_dlg[3].d1;
+		call_ffc_dialog(ff_combo);
+		ret=do_zqdialog(ffcombo_sel_dlg,0);
+	}
     
-    destroy_bitmap(ffcur);
-    return D_O_K;
+	destroy_bitmap(ffcur);
+	return D_O_K;
 }
 
 const char *globalscriptlist(int32_t index, int32_t *list_size);
