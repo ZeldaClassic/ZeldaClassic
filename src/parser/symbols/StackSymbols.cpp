@@ -4,22 +4,22 @@ StackSymbols StackSymbols::singleton = StackSymbols();
 
 static AccessorTable StackTable[] =
 {
-	//name,                       tag,            rettype,   var,               funcFlags,  params,optparams
-	{ "getSize",                    0,          ZTID_LONG,   STACKSIZE,                 0,  { ZTID_STACK },{} },
-	{ "getFull",                    0,          ZTID_BOOL,   STACKFULL,                 0,  { ZTID_STACK },{} },
-	{ "Free",                       0,          ZTID_VOID,   -1,                        0,  { ZTID_STACK },{} },
-	{ "Own",                        0,          ZTID_VOID,   -1,                        0,  { ZTID_STACK },{} },
-	{ "Clear",                      0,          ZTID_VOID,   -1,                        0,  { ZTID_STACK },{} },
-	{ "PushBack",                   0,          ZTID_VOID,   -1,                        0,  { ZTID_STACK, ZTID_UNTYPED },{} },
-	{ "PushFront",                  0,          ZTID_VOID,   -1,                        0,  { ZTID_STACK, ZTID_UNTYPED },{} },
+	//name,                       tag,         rettype,      var,               funcFlags,  params,optparams
+	{ "getSize",                    0,       ZTID_LONG,      STACKSIZE,                 0,  { ZTID_STACK },{} },
+	{ "getFull",                    0,       ZTID_BOOL,      STACKFULL,                 0,  { ZTID_STACK },{} },
+	{ "Free",                       0,       ZTID_VOID,      -1,                        0,  { ZTID_STACK },{} },
+	{ "Own",                        0,       ZTID_VOID,      -1,                        0,  { ZTID_STACK },{} },
+	{ "Clear",                      0,       ZTID_VOID,      -1,                        0,  { ZTID_STACK },{} },
+	{ "PushBack",                   0,       ZTID_VOID,      -1,                        0,  { ZTID_STACK, ZTID_UNTYPED },{} },
+	{ "PushFront",                  0,       ZTID_VOID,      -1,                        0,  { ZTID_STACK, ZTID_UNTYPED },{} },
 	{ "PopBack",                    0,       ZTID_UNTYPED,   -1,                        0,  { ZTID_STACK },{} },
 	{ "PopFront",                   0,       ZTID_UNTYPED,   -1,                        0,  { ZTID_STACK },{} },
 	{ "PeekBack",                   0,       ZTID_UNTYPED,   -1,                        0,  { ZTID_STACK },{} },
 	{ "PeekFront",                  0,       ZTID_UNTYPED,   -1,                        0,  { ZTID_STACK },{} },
 	{ "Get",                        0,       ZTID_UNTYPED,   -1,                        0,  { ZTID_STACK, ZTID_LONG },{} },
-	{ "Set",                        0,          ZTID_VOID,   -1,                        0,  { ZTID_STACK, ZTID_LONG, ZTID_UNTYPED },{} },
+	{ "Set",                        0,       ZTID_VOID,      -1,                        0,  { ZTID_STACK, ZTID_LONG, ZTID_UNTYPED },{} },
 	
-	{ "",                           0,          ZTID_VOID,   -1,                        0,  {},{} }
+	{ "",                           0,       ZTID_VOID,      -1,                        0,  {},{} }
 };
 
 StackSymbols::StackSymbols()
@@ -175,4 +175,3 @@ void StackSymbols::generateCode()
 		function->giveCode(code);
 	}
 }
-
