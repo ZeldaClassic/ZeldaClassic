@@ -1002,13 +1002,13 @@ GUI::ListData const& GUI::ZCListData::warpeffects()
 
 static const GUI::ListData screen_state
 {
-	{ "Door Up", 0 },
-	{ "Door Down", 1 },
-	{ "Door Left", 2 },
-	{ "Door Right", 3 },
-	{ "Screen Item", 4 },
-	{ "Special Item", 5 },
-	{ "Enemies Never Return", 6 },
+	{ "Door Up",                0 },
+	{ "Door Down",              1 },
+	{ "Door Left",              2 },
+	{ "Door Right",             3 },
+	{ "Screen Item",            4 },
+	{ "Special Item",           5 },
+	{ "Enemies Never Return",   6 },
 	{ "Enemies Temp No Return", 7 },
 	{ "Lockblock",              8 },
 	{ "Boss Lockblock",         9 },
@@ -1016,8 +1016,8 @@ static const GUI::ListData screen_state
 	{ "Locked Chest",          11 },
 	{ "Boss Chest",            12 },
 	{ "Secrets",               13 },
-	{ "Visited", 14 },
-	{ "Light Triggers", 15 }
+	{ "Visited",               14 },
+	{ "Light Triggers",        15 }
 };
 
 GUI::ListData const& GUI::ZCListData::screenstate()
@@ -1027,27 +1027,27 @@ GUI::ListData const& GUI::ZCListData::screenstate()
 
 static const GUI::ListData subscrWidgets =
 {
-	{ "(None)", widgNULL, "No Widget" },
-	{ "2x2 Frame", widgFRAME, "Draws a frame made up of 8x8 sections of a 2x2 of tiles" },
-	{ "Text", widgTEXT, "Displays some fixed text on the screen" },
-	{ "Line", widgLINE, "Draws a line" },
-	{ "Rectangle", widgRECT, "Draws a rectangle" },
-	{ "Playtime", widgTIME, "Draws the current playtime" },
-	{ "Magic Meter", widgMMETER, "Draws the old, hardcoded magic meter" },
-	{ "Life Meter", widgLMETER, "Draws the old, hardcoded life meter" },
-	{ "Button Item", widgBTNITM, "Draws the item currently equipped to a given button" },
-	{ "Counter", widgCOUNTER, "Draws a counter value (or sum of up to 3 counter values)" },
-	{ "Counter Block", widgOLDCTR, "Draws the classic counter block" },
-	{ "Minimap Title", widgMMAPTITLE, "Displays the title of the minimap" },
-	{ "Minimap", widgMMAP, "Draws the minimap, showing your location and surroundings" },
-	{ "Large Map", widgLMAP, "Draws the big map, showing more detailed location information" },
+	{ "(None)",           widgNULL, "No Widget" },
+	{ "2x2 Frame",        widgFRAME, "Draws a frame made up of 8x8 sections of a 2x2 of tiles" },
+	{ "Text",             widgTEXT, "Displays some fixed text on the screen" },
+	{ "Line",             widgLINE, "Draws a line" },
+	{ "Rectangle",        widgRECT, "Draws a rectangle" },
+	{ "Playtime",         widgTIME, "Draws the current playtime" },
+	{ "Magic Meter",      widgMMETER, "Draws the old, hardcoded magic meter" },
+	{ "Life Meter",       widgLMETER, "Draws the old, hardcoded life meter" },
+	{ "Button Item",      widgBTNITM, "Draws the item currently equipped to a given button" },
+	{ "Counter",          widgCOUNTER, "Draws a counter value (or sum of up to 3 counter values)" },
+	{ "Counter Block",    widgOLDCTR, "Draws the classic counter block" },
+	{ "Minimap Title",    widgMMAPTITLE, "Displays the title of the minimap" },
+	{ "Minimap",          widgMMAP, "Draws the minimap, showing your location and surroundings" },
+	{ "Large Map",        widgLMAP, "Draws the big map, showing more detailed location information" },
 	{ "Background Color", widgBGCOLOR, "Draws a color that covers the whole screen" },
-	{ "Item Slot", widgITEMSLOT, "A slot for an item, whether equippable or not." },
-	{ "McGuffin Frame", widgMCGUFF_FRAME, "A frame for showing off the McGuffins" },
-	{ "McGuffin Piece", widgMCGUFF, "A single McGuffin piece on display" },
-	{ "Tile Block", widgTILEBLOCK, "Draws a block of tiles" },
-	{ "Minitile", widgMINITILE, "Draws a quarter-tile" },
-	{ "Selector", widgSELECTOR, "Draws the selector cursor on the currently selected widget" },
+	{ "Item Slot",        widgITEMSLOT, "A slot for an item, whether equippable or not." },
+	{ "McGuffin Frame",   widgMCGUFF_FRAME, "A frame for showing off the McGuffins" },
+	{ "McGuffin Piece",   widgMCGUFF, "A single McGuffin piece on display" },
+	{ "Tile Block",       widgTILEBLOCK, "Draws a block of tiles" },
+	{ "Minitile",         widgMINITILE, "Draws a quarter-tile" },
+	{ "Selector",         widgSELECTOR, "Draws the selector cursor on the currently selected widget" },
 	{ "Gauge Piece: Life", widgLGAUGE, "Allows building highly customizable life gauges" },
 	{ "Gauge Piece: Magic", widgMGAUGE, "Allows building highly customizable magic gauges" },
 	{ "Text Box", widgTEXTBOX, "Displays some fixed text in a formatted box" },
@@ -1065,9 +1065,9 @@ GUI::ListData const& GUI::ZCListData::subscr_widgets()
 
 static const GUI::ListData dmap_types
 {
-	{ "NES Dungeon", dmDNGN },
-	{ "Overworld", dmOVERW },
-	{ "Interior", dmCAVE },
+	{ "NES Dungeon",  dmDNGN },
+	{ "Overworld",    dmOVERW },
+	{ "Interior",     dmCAVE },
 	{ "BS Overworld", dmBSOVERW }
 };
 
@@ -1076,12 +1076,11 @@ GUI::ListData const& GUI::ZCListData::dmaptypes()
 	return dmap_types;
 }
 
-
 static const GUI::ListData aligns
 {
-	{ "Left", 0 },
+	{ "Left",   0 },
 	{ "Center", 1 },
-	{ "Right", 2 }
+	{ "Right",  2 }
 };
 
 GUI::ListData const& GUI::ZCListData::alignments()
@@ -1104,16 +1103,16 @@ GUI::ListData const& GUI::ZCListData::buttons()
 
 static const GUI::ListData autocombo_types
 {
-	{ "(None)", AUTOCOMBO_NONE },
-	{ "Basic Relational", AUTOCOMBO_BASIC },
-	{ "Relational", AUTOCOMBO_RELATIONAL },
-	{ "Flat Mountain", AUTOCOMBO_Z1 },
-	{ "Pancake Mountain", AUTOCOMBO_Z4 },
-	{ "Fence", AUTOCOMBO_FENCE },
-	{ "Dungeon Carving", AUTOCOMBO_DGNCARVE },
-	{ "Complex Mountain", AUTOCOMBO_DOR },
+	{ "(None)",            AUTOCOMBO_NONE },
+	{ "Basic Relational",  AUTOCOMBO_BASIC },
+	{ "Relational",        AUTOCOMBO_RELATIONAL },
+	{ "Flat Mountain",     AUTOCOMBO_Z1 },
+	{ "Pancake Mountain",  AUTOCOMBO_Z4 },
+	{ "Fence",             AUTOCOMBO_FENCE },
+	{ "Dungeon Carving",   AUTOCOMBO_DGNCARVE },
+	{ "Complex Mountain",  AUTOCOMBO_DOR },
 	{ "Positional Tiling", AUTOCOMBO_TILING },
-	{ "Replace", AUTOCOMBO_REPLACE}
+	{ "Replace",           AUTOCOMBO_REPLACE}
 };
 
 GUI::ListData const& GUI::ZCListData::autocombotypes()
@@ -1123,19 +1122,19 @@ GUI::ListData const& GUI::ZCListData::autocombotypes()
 
 static const GUI::ListData script_types
 {
-	{ "FFC", int(ScriptType::FFC) },
-	{ "Global", int(ScriptType::Global) },
-	{ "Item", int(ScriptType::Item) },
-	{ "NPC", int(ScriptType::NPC) },
-	{ "LWeapon", int(ScriptType::Lwpn) },
-	{ "EWeapon", int(ScriptType::Ewpn) },
-	{ "Hero", int(ScriptType::Player) },
-	{ "DMap", int(ScriptType::DMap) },
-	{ "Screen", int(ScriptType::Screen) },
+	{ "FFC",         int(ScriptType::FFC) },
+	{ "Global",      int(ScriptType::Global) },
+	{ "Item",        int(ScriptType::Item) },
+	{ "NPC",         int(ScriptType::NPC) },
+	{ "LWeapon",     int(ScriptType::Lwpn) },
+	{ "EWeapon",     int(ScriptType::Ewpn) },
+	{ "Hero",        int(ScriptType::Player) },
+	{ "DMap",        int(ScriptType::DMap) },
+	{ "Screen",      int(ScriptType::Screen) },
 	{ "Item Sprite", int(ScriptType::ItemSprite) },
-	{ "Combo", int(ScriptType::Combo) },
-	{ "Generic", int(ScriptType::Generic) },
-	{ "Subscreen", int(ScriptType::EngineSubscreen) }
+	{ "Combo",       int(ScriptType::Combo) },
+	{ "Generic",     int(ScriptType::Generic) },
+	{ "Subscreen",   int(ScriptType::EngineSubscreen) }
 };
 
 GUI::ListData const& GUI::ZCListData::scripttypes()
