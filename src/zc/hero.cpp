@@ -280,7 +280,7 @@ int32_t getCurrentActiveShield()
 int32_t refreshActiveShield()
 {
 	int32_t id = -1;
-    if(DrunkcBbtn())
+	if(DrunkcBbtn())
 	{
 		itemdata const& dat = itemsbuf[NEG_OR_MASK(Bwpn,0xFFF)];
 		if(dat.family == itype_shield && (dat.flags & ITEM_FLAG9))
@@ -288,7 +288,7 @@ int32_t refreshActiveShield()
 			id = NEG_OR_MASK(Bwpn,0xFFF);
 		}
 	}
-    if(id < 0 && DrunkcAbtn())
+	if(id < 0 && DrunkcAbtn())
 	{
 		itemdata const& dat = itemsbuf[NEG_OR_MASK(Awpn,0xFFF)];
 		if(dat.family == itype_shield && (dat.flags & ITEM_FLAG9))
@@ -296,7 +296,7 @@ int32_t refreshActiveShield()
 			id = NEG_OR_MASK(Awpn,0xFFF);
 		}
 	}
-    if(id < 0 && DrunkcEx1btn())
+	if(id < 0 && DrunkcEx1btn())
 	{
 		itemdata const& dat = itemsbuf[NEG_OR_MASK(Xwpn,0xFFF)];
 		if(dat.family == itype_shield && (dat.flags & ITEM_FLAG9))
@@ -304,7 +304,7 @@ int32_t refreshActiveShield()
 			id = NEG_OR_MASK(Xwpn,0xFFF);
 		}
 	}
-    if(id < 0 && DrunkcEx2btn())
+	if(id < 0 && DrunkcEx2btn())
 	{
 		itemdata const& dat = itemsbuf[NEG_OR_MASK(Ywpn,0xFFF)];
 		if(dat.family == itype_shield && (dat.flags & ITEM_FLAG9))
@@ -314,7 +314,7 @@ int32_t refreshActiveShield()
 	}
 	if(!usingActiveShield(id))
 		return -1;
-    return id;
+	return id;
 }
 static bool is_immobile()
 {
@@ -547,35 +547,35 @@ bool HeroClass::can_pitfall(bool ignore_hover)
 
 int32_t HeroClass::DrunkClock()
 {
-    return drunkclk;
+	return drunkclk;
 }
 void HeroClass::setDrunkClock(int32_t newdrunkclk)
 {
-    drunkclk=newdrunkclk;
+	drunkclk=newdrunkclk;
 }
 
 int32_t HeroClass::StunClock()
 {
-    return lstunclock;
+	return lstunclock;
 }
 void HeroClass::setStunClock(int32_t v)
 {
-    lstunclock=v;
+	lstunclock=v;
 }
 
 int32_t HeroClass::BunnyClock()
 {
-    return lbunnyclock;
+	return lbunnyclock;
 }
 void HeroClass::setBunnyClock(int32_t v)
 {
-    lbunnyclock=v;
+	lbunnyclock=v;
 }
 
 HeroClass::HeroClass() : sprite()
 {
 	lift_wpn = nullptr;
-    init();
+	init();
 }
 
 //2.6
@@ -653,15 +653,15 @@ bool  HeroClass::getDiagMove()
 }
 void HeroClass::setDiagMove(bool newdiag)
 {
-    diagonalMovement=newdiag;
+	diagonalMovement=newdiag;
 }
 bool  HeroClass::getBigHitbox()
 {
-    return bigHitbox;
+	return bigHitbox;
 }
 void HeroClass::setBigHitbox(bool newbigHitbox)
 {
-    bigHitbox=newbigHitbox;
+	bigHitbox=newbigHitbox;
 	syofs = bigHitbox?0:8;
 	sysz_ofs = bigHitbox?0:-8;
 }
@@ -915,62 +915,62 @@ int32_t  HeroClass::getLadderY()
 
 void HeroClass::setX(int32_t new_x)
 {
-    zfix dx=new_x-x;
-    justmoved = 2;
-    if(Lwpns.idFirst(wHookshot)>-1)
-    {
-        Lwpns.spr(Lwpns.idFirst(wHookshot))->x+=dx;
-	hs_startx+=(int32_t)dx;
-    }
+	zfix dx=new_x-x;
+	justmoved = 2;
+	if(Lwpns.idFirst(wHookshot)>-1)
+	{
+		Lwpns.spr(Lwpns.idFirst(wHookshot))->x+=dx;
+		hs_startx+=(int32_t)dx;
+	}
     
-    if(Lwpns.idFirst(wHSHandle)>-1)
-    {
-        Lwpns.spr(Lwpns.idFirst(wHSHandle))->x+=dx;
-    }
+	if(Lwpns.idFirst(wHSHandle)>-1)
+	{
+		Lwpns.spr(Lwpns.idFirst(wHSHandle))->x+=dx;
+	}
 	
 	if(chainlinks.Count()>0)
 	{
 		for(int32_t j=0; j<chainlinks.Count(); j++)
-        {
-            chainlinks.spr(j)->x+=dx;
-        }
+		{
+			chainlinks.spr(j)->x+=dx;
+		}
 	}
     
-    x=new_x;
+	x=new_x;
     
-    // A kludge
-    if(!diagonalMovement && dir<=down)
-        is_on_conveyor=true;
+	// A kludge
+	if(!diagonalMovement && dir<=down)
+		is_on_conveyor=true;
 }
 
 void HeroClass::setY(int32_t new_y)
 {
-    zfix dy=new_y-y;
-    justmoved = 2;
-    if(Lwpns.idFirst(wHookshot)>-1)
-    {
-        Lwpns.spr(Lwpns.idFirst(wHookshot))->y+=dy;
-	hs_starty+=(int32_t)dy;
-    }
+	zfix dy=new_y-y;
+	justmoved = 2;
+	if(Lwpns.idFirst(wHookshot)>-1)
+	{
+		Lwpns.spr(Lwpns.idFirst(wHookshot))->y+=dy;
+		hs_starty+=(int32_t)dy;
+	}
     
-    if(Lwpns.idFirst(wHSHandle)>-1)
-    {
-        Lwpns.spr(Lwpns.idFirst(wHSHandle))->y+=dy;
-    }
+	if(Lwpns.idFirst(wHSHandle)>-1)
+	{
+		Lwpns.spr(Lwpns.idFirst(wHSHandle))->y+=dy;
+	}
 	
 	if(chainlinks.Count()>0)
 	{
 		for(int32_t j=0; j<chainlinks.Count(); j++)
-        {
-            chainlinks.spr(j)->y+=dy;
-        }
+		{
+			chainlinks.spr(j)->y+=dy;
+		}
 	}
     
-    y=new_y;
+	y=new_y;
     
-    // A kludge
-    if(!diagonalMovement && dir>=left)
-        is_on_conveyor=true;
+	// A kludge
+	if(!diagonalMovement && dir>=left)
+		is_on_conveyor=true;
 }
 
 void HeroClass::setZ(int32_t new_z)
@@ -1060,62 +1060,62 @@ void HeroClass::setFakeZ(int32_t new_z)
 void HeroClass::setXfix(zfix new_x)
 {
 	//Z_scripterrlog("setxdbl: %f\n",new_x);
-    zfix dx=new_x-x;
-    justmoved = 2;
-    if(Lwpns.idFirst(wHookshot)>-1)
-    {
-        Lwpns.spr(Lwpns.idFirst(wHookshot))->x+=dx;
-	hs_startx+=(int32_t)dx;
-    }
+	zfix dx=new_x-x;
+	justmoved = 2;
+	if(Lwpns.idFirst(wHookshot)>-1)
+	{
+		Lwpns.spr(Lwpns.idFirst(wHookshot))->x+=dx;
+		hs_startx+=(int32_t)dx;
+	}
     
-    if(Lwpns.idFirst(wHSHandle)>-1)
-    {
-        Lwpns.spr(Lwpns.idFirst(wHSHandle))->x+=dx;
-    }
+	if(Lwpns.idFirst(wHSHandle)>-1)
+	{
+		Lwpns.spr(Lwpns.idFirst(wHSHandle))->x+=dx;
+	}
 	
 	if(chainlinks.Count()>0)
 	{
 		for(int32_t j=0; j<chainlinks.Count(); j++)
-        {
-            chainlinks.spr(j)->x+=dx;
-        }
+		{
+			chainlinks.spr(j)->x+=dx;
+		}
 	}
     
-    x=new_x;
+	x=new_x;
     
-    // A kludge
-    if(!diagonalMovement && dir<=down)
-        is_on_conveyor=true;
+	// A kludge
+	if(!diagonalMovement && dir<=down)
+		is_on_conveyor=true;
 }
 
 void HeroClass::setYfix(zfix new_y)
 {
-    zfix dy=new_y-y;
-    justmoved = 2;
-    if(Lwpns.idFirst(wHookshot)>-1)
-    {
-        Lwpns.spr(Lwpns.idFirst(wHookshot))->y+=dy;
-	hs_starty+=(int32_t)dy;
-    }
+	zfix dy=new_y-y;
+	justmoved = 2;
+	if(Lwpns.idFirst(wHookshot)>-1)
+	{
+		Lwpns.spr(Lwpns.idFirst(wHookshot))->y+=dy;
+		hs_starty+=(int32_t)dy;
+	}
     
-    if(Lwpns.idFirst(wHSHandle)>-1)
-    {
-        Lwpns.spr(Lwpns.idFirst(wHSHandle))->y+=dy;
-    }
+	if(Lwpns.idFirst(wHSHandle)>-1)
+	{
+		Lwpns.spr(Lwpns.idFirst(wHSHandle))->y+=dy;
+	}
 	
 	if(chainlinks.Count()>0)
 	{
 		for(int32_t j=0; j<chainlinks.Count(); j++)
-        {
-            chainlinks.spr(j)->y+=dy;
-        }
+		{
+		    chainlinks.spr(j)->y+=dy;
+		}
 	}
     
-    y=new_y;
+	y=new_y;
     
-    // A kludge
-    if(!diagonalMovement && dir>=left)
-        is_on_conveyor=true;
+	// A kludge
+	if(!diagonalMovement && dir>=left)
+		is_on_conveyor=true;
 }
 
 void HeroClass::setZfix(zfix new_z)
@@ -1204,14 +1204,14 @@ void HeroClass::setFakeZfix(zfix new_z)
 
 void HeroClass::setFall(zfix new_fall)
 {
-    fall=new_fall;
-    justmoved = 2;
-    jumping=-1;
+	fall=new_fall;
+	justmoved = 2;
+	jumping=-1;
 }
 void HeroClass::setFakeFall(zfix new_fall)
 {
-    fakefall=new_fall;
-    jumping=-1;
+	fakefall=new_fall;
+	jumping=-1;
 }
 void HeroClass::setClimbCoverX(int32_t new_x)
 {
@@ -1255,7 +1255,7 @@ int32_t  HeroClass::getItemClk()
 }
 void HeroClass::setSwordClk(int32_t newclk)
 {
-    swordclk=newclk;
+	swordclk=newclk;
 	verifyAWpn();
 }
 void HeroClass::setItemClk(int32_t newclk)
@@ -1674,46 +1674,46 @@ void HeroClass::init()
     z=fakez=fall=fakefall=0;
     hzsz = 12; // So that flying peahats can still hit him.
     
-    if(x==0)   dir=right;
+	if(x==0)   dir=right;
+
+	if(x==240) dir=left;
+
+	if(y==0)   dir=down;
+
+	if(y==160) dir=up;
     
-    if(x==240) dir=left;
-    
-    if(y==0)   dir=down;
-    
-    if(y==160) dir=up;
-    
-    lstep=0;
-    skipstep=0;
-    autostep=false;
-    attackclk=holdclk=hoverclk=jumping=raftclk=0;
-    attack=wNone;
-    attackid=-1;
-    action=none; FFCore.setHeroAction(none); tempaction=none;
-    xofs=0;
-    yofs=(get_qr(qr_OLD_DRAWOFFSET)?playing_field_offset:original_playing_field_offset);
-    cs=6;
-    pushing=fairyclk=0;
-    id=0;
-    inlikelike=0;
-    superman=inwallm=false;
-    scriptcoldet=1;
-    blowcnt=whirlwind=specialcave=0;
-    hopclk=diveclk=fallclk=0;
+	lstep=0;
+	skipstep=0;
+	autostep=false;
+	attackclk=holdclk=hoverclk=jumping=raftclk=0;
+	attack=wNone;
+	attackid=-1;
+	action=none; FFCore.setHeroAction(none); tempaction=none;
+	xofs=0;
+	yofs=(get_qr(qr_OLD_DRAWOFFSET)?playing_field_offset:original_playing_field_offset);
+	cs=6;
+	pushing=fairyclk=0;
+	id=0;
+	inlikelike=0;
+	superman=inwallm=false;
+	scriptcoldet=1;
+	blowcnt=whirlwind=specialcave=0;
+	hopclk=diveclk=fallclk=0;
 	fallCombo = 0;
 	pit_pulldir = -1;
-    hopdir=-1;
-    conveyor_flags=0;
-    drunkclk=0;
-    lstunclock = 0;
+	hopdir=-1;
+	conveyor_flags=0;
+	drunkclk=0;
+	lstunclock = 0;
 	is_conveyor_stunned=0;
-    convey_forcex=convey_forcey=0;
-    drawstyle=3;
-    ffwarp = false;
-    stepoutindex=stepoutwr=stepoutdmap=stepoutscr=0;
-    stepnext=stepsecret=-1;
-    ffpit = false;
-    respawn_x=x;
-    respawn_y=y;
+	convey_forcex=convey_forcey=0;
+	drawstyle=3;
+	ffwarp = false;
+	stepoutindex=stepoutwr=stepoutdmap=stepoutscr=0;
+	stepnext=stepsecret=-1;
+	ffpit = false;
+	respawn_x=x;
+	respawn_y=y;
 	respawn_dmap=currdmap;
 	respawn_scr=currscr;
 	falling_oldy = y;
@@ -1803,11 +1803,11 @@ void HeroClass::draw_under(BITMAP* dest)
 
 void HeroClass::drawshadow(BITMAP* dest, bool translucent)
 {
-    int32_t tempy=yofs;
-    yofs+=8;
-    shadowtile = wpnsbuf[spr_shadow].tile;
-    sprite::drawshadow(dest,translucent);
-    yofs=tempy;
+	int32_t tempy=yofs;
+	yofs+=8;
+	shadowtile = wpnsbuf[spr_shadow].tile;
+	sprite::drawshadow(dest,translucent);
+	yofs=tempy;
 }
 
 // The Stone of Agony reacts to these flags.
@@ -3285,45 +3285,45 @@ void passiveitem_script(int32_t id, bool doRun = false)
 // the main weapon checking is in the global function check_collisions()
 bool HeroClass::checkstab()
 {
-    if(action!=attacking && action!=sideswimattacking || (attack!=wSword && attack!=wWand && attack!=wHammer && attack!=wCByrna && attack!=wFire && attack != wBugNet)
+	if(action!=attacking && action!=sideswimattacking || (attack!=wSword && attack!=wWand && attack!=wHammer && attack!=wCByrna && attack!=wFire && attack != wBugNet)
             || (attackclk<=4))
         return false;
         
-    weapon *w=NULL;
+	weapon *w=NULL;
     
-    int32_t wx=0,wy=0,wz=0,wxsz=0,wysz=0;
-    bool found = false;
-    int32_t melee_weapon_index = 0;
+	int32_t wx=0,wy=0,wz=0,wxsz=0,wysz=0;
+	bool found = false;
+	int32_t melee_weapon_index = 0;
 	int32_t parentitem=-1;
-    weapon* meleeweap = nullptr;
-    for(int32_t i=0; i<Lwpns.Count(); i++)
-    {
-        w = (weapon*)Lwpns.spr(i);
-        
-        if(w->id == (attack==wCByrna || attack==wFire ? wWand : attack))  // Kludge: Byrna and Candle sticks are wWand-type.
-        {
-            found = true;
-            melee_weapon_index = i+1;
-			meleeweap = w;
-            // Position the sword as Hero slashes with it.
-            if(w->id!=wHammer&&w->id!=wBugNet)
-                positionSword(w,w->parentitem);
-                
-            wx=w->x;
-            wy=w->y;
-            wz=w->z;
-            wxsz = w->hit_width;
-            wysz = w->hit_height;
-			parentitem = w->parentitem;
-            break;
-        }
-    }
+	weapon* meleeweap = nullptr;
+	for(int32_t i=0; i<Lwpns.Count(); i++)
+	{
+		w = (weapon*)Lwpns.spr(i);
+		
+		if(w->id == (attack==wCByrna || attack==wFire ? wWand : attack))  // Kludge: Byrna and Candle sticks are wWand-type.
+		{
+		    found = true;
+		    melee_weapon_index = i+1;
+				meleeweap = w;
+		    // Position the sword as Hero slashes with it.
+		    if(w->id!=wHammer&&w->id!=wBugNet)
+			positionSword(w,w->parentitem);
+			
+		    wx=w->x;
+		    wy=w->y;
+		    wz=w->z;
+		    wxsz = w->hit_width;
+		    wysz = w->hit_height;
+				parentitem = w->parentitem;
+		    break;
+		}
+	}
 	
-    if(attack==wSword && attackclk>=14 && charging==0)
-        return false;
+	if(attack==wSword && attackclk>=14 && charging==0)
+		return false;
         
-    if(!found)
-        return false;
+	if(!found)
+		return false;
 	
 	if(attack == wFire)
 		return false;
@@ -3856,48 +3856,48 @@ bool HeroClass::checkstab()
 
 void HeroClass::check_slash_block_layer(int32_t bx, int32_t by, int32_t layer)
 {
-    if(!(get_qr(qr_BUSHESONLAYERS1AND2))) 
-    {
-	    //zprint("bit off\n");
-	    return;
-    }
-    //keep things inside the screen boundaries
-    bx=vbound(bx, 0, 255);
-    by=vbound(by, 0, 176);
-    int32_t fx=vbound(bx, 0, 255);
-    int32_t fy=vbound(by, 0, 176);
-    //first things first
-    if(attack!=wSword)
-        return;
+	if(!(get_qr(qr_BUSHESONLAYERS1AND2))) 
+	{
+		//zprint("bit off\n");
+		return;
+	}
+	//keep things inside the screen boundaries
+	bx=vbound(bx, 0, 255);
+	by=vbound(by, 0, 176);
+	int32_t fx=vbound(bx, 0, 255);
+	int32_t fy=vbound(by, 0, 176);
+	//first things first
+	if(attack!=wSword)
+		return;
         
-    if(z>8||fakez>8 || attackclk==SWORDCHARGEFRAME  // is not charging>0, as tapping a wall reduces attackclk but retains charging
+	if(z>8||fakez>8 || attackclk==SWORDCHARGEFRAME  // is not charging>0, as tapping a wall reduces attackclk but retains charging
             || (attackclk>SWORDTAPFRAME && tapping))
-        return;
+		return;
         
-    //find out which combo row/column the coordinates are in
-    bx &= 0xF0;
-    by &= 0xF0;
+	//find out which combo row/column the coordinates are in
+	bx &= 0xF0;
+	by &= 0xF0;
     
    
-    int32_t flag = MAPFLAGL(layer,bx,by);
-    int32_t flag2 = MAPCOMBOFLAGL(layer,bx,by);
-    int32_t cid = MAPCOMBOL(layer,bx,by);
-    int32_t type = combobuf[cid].type;
+	int32_t flag = MAPFLAGL(layer,bx,by);
+	int32_t flag2 = MAPCOMBOFLAGL(layer,bx,by);
+	int32_t cid = MAPCOMBOL(layer,bx,by);
+	int32_t type = combobuf[cid].type;
 	if(combobuf[cid].triggerflags[0] & combotriggerONLYGENTRIG)
 		type = cNONE;
-    //zprint("cid is: %d\n", cid);
-     //zprint("type is: %d\n", type);
-    int32_t i = (bx>>4) + by;
+	//zprint("cid is: %d\n", cid);
+	//zprint("type is: %d\n", type);
+	int32_t i = (bx>>4) + by;
     
-    if(i > 175)
-        return;
+	if(i > 175)
+		return;
         
-    bool ignorescreen=false;
+	bool ignorescreen=false;
     
-    if((get_bit(screengrid_layer[layer-1], i) != 0) || (!isCuttableType(type)))
+	if((get_bit(screengrid_layer[layer-1], i) != 0) || (!isCuttableType(type)))
 		return;
     
-    int32_t sworditem = (directWpn>-1 && itemsbuf[directWpn].family==itype_sword) ? itemsbuf[directWpn].fam_type : current_item(itype_sword);
+	int32_t sworditem = (directWpn>-1 && itemsbuf[directWpn].family==itype_sword) ? itemsbuf[directWpn].fam_type : current_item(itype_sword);
 	
 	if(!isTouchyType(type) && !get_qr(qr_CONT_SWORD_TRIGGERS)) set_bit(screengrid_layer[layer-1],i,1);
 	if(isCuttableNextType(type))
@@ -4401,45 +4401,44 @@ void HeroClass::check_wpn_triggers(int32_t bx, int32_t by, weapon *w)
 
 void HeroClass::check_slash_block_layer2(int32_t bx, int32_t by, weapon *w, int32_t layer)
 {
-	
-    if(!(get_qr(qr_BUSHESONLAYERS1AND2))) 
-    {
-	    //zprint("bit off\n");
-	    return;
-    }
-    //keep things inside the screen boundaries
-    bx=vbound(bx, 0, 255);
-    by=vbound(by, 0, 176);
-    int32_t fx=vbound(bx, 0, 255);
-    int32_t fy=vbound(by, 0, 176);
-    //first things first
-    if(w->useweapon != wSword)
-        return;
+	if(!(get_qr(qr_BUSHESONLAYERS1AND2))) 
+	{
+		//zprint("bit off\n");
+		return;
+	}
+	//keep things inside the screen boundaries
+	bx=vbound(bx, 0, 255);
+	by=vbound(by, 0, 176);
+	int32_t fx=vbound(bx, 0, 255);
+	int32_t fy=vbound(by, 0, 176);
+	//first things first
+	if(w->useweapon != wSword)
+		return;
         
-    //find out which combo row/column the coordinates are in
-    bx &= 0xF0;
-    by &= 0xF0;
-    
-   
-    int32_t flag = MAPFLAGL(layer,bx,by);
-    int32_t flag2 = MAPCOMBOFLAGL(layer,bx,by);
-    int32_t cid = MAPCOMBOL(layer,bx,by);
-    int32_t type = combobuf[cid].type;
+	//find out which combo row/column the coordinates are in
+	bx &= 0xF0;
+	by &= 0xF0;
+
+
+	int32_t flag = MAPFLAGL(layer,bx,by);
+	int32_t flag2 = MAPCOMBOFLAGL(layer,bx,by);
+	int32_t cid = MAPCOMBOL(layer,bx,by);
+	int32_t type = combobuf[cid].type;
 	if(combobuf[cid].triggerflags[0] & combotriggerONLYGENTRIG)
 		type = cNONE;
-    //zprint("cid is: %d\n", cid);
-     //zprint("type is: %d\n", type);
-    int32_t i = (bx>>4) + by;
+	//zprint("cid is: %d\n", cid);
+	//zprint("type is: %d\n", type);
+	int32_t i = (bx>>4) + by;
     
-    if(i > 175)
-        return;
+	if(i > 175)
+		return;
     
-    if((get_bit(w->wscreengrid_layer[layer-1], i) != 0) || (!isCuttableType(type)))
-    {
-	return; 
-        //ignorescreen = true;
-	//zprint("ignoring\n");
-    }
+	if((get_bit(w->wscreengrid_layer[layer-1], i) != 0) || (!isCuttableType(type)))
+	{
+		return; 
+		//ignorescreen = true;
+		//zprint("ignoring\n");
+	}
     
     int32_t sworditem = (directWpn>-1 && itemsbuf[directWpn].family==itype_sword) ? itemsbuf[directWpn].fam_type : current_item(itype_sword);
     

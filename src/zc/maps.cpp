@@ -660,7 +660,7 @@ void eventlog_mapflags()
 	std::ostringstream oss;
 	
 	int32_t mi = (currmap*MAPSCRSNORMAL)+homescr;
-    word g = game->maps[mi] &0x3FFF;
+	word g = game->maps[mi] &0x3FFF;
     
 	oss << fmt::format("Screen ({}, {:02X})", currmap+1, homescr);
 	if(g) // Main States
@@ -842,12 +842,12 @@ bool getmapflag(int32_t flag)
 void setxmapflag(int32_t mi2, uint32_t flag)
 {
 	if(game->xstates[mi2] & flag) return;
-    byte cscr = mi2&((1<<7)-1);
-    byte cmap = (mi2>>7);
-    char buf[20];
-    sprintf(buf,"Screen (%d, %02X)",cmap+1,cscr);
+	byte cscr = mi2&((1<<7)-1);
+	byte cmap = (mi2>>7);
+	char buf[20];
+	sprintf(buf,"Screen (%d, %02X)",cmap+1,cscr);
     
-    byte temp=(byte)log2((double)flag);
+	byte temp=(byte)log2((double)flag);
 	Z_eventlog("%s's ExtraState was set: %d\n",
 		mi2 != (currmap*MAPSCRSNORMAL)+homescr ? buf : "Current screen", temp);
 	
@@ -860,12 +860,12 @@ void setxmapflag(uint32_t flag)
 void unsetxmapflag(int32_t mi2, uint32_t flag)
 {
 	if(!(game->xstates[mi2] & flag)) return;
-    byte cscr = mi2&((1<<7)-1);
-    byte cmap = (mi2>>7);
-    char buf[20];
-    sprintf(buf,"Screen (%d, %02X)",cmap+1,cscr);
+	byte cscr = mi2&((1<<7)-1);
+	byte cmap = (mi2>>7);
+	char buf[20];
+	sprintf(buf,"Screen (%d, %02X)",cmap+1,cscr);
     
-    byte temp=(byte)log2((double)flag);
+	byte temp=(byte)log2((double)flag);
 	Z_eventlog("%s's ExtraState was unset: %d\n",
 		mi2 != (currmap*MAPSCRSNORMAL)+homescr ? buf : "Current screen", temp);
 	
@@ -891,8 +891,8 @@ void setxdoor(uint mi, uint dir, uint ind, bool state)
 	if(!(game->xdoors[mi][dir] & (1<<ind)) == !state)
 		return;
 	SETFLAG(game->xdoors[mi][dir], 1<<ind, state);
-    int cscr = mi % MAPSCRSNORMAL;
-    int cmap = mi / MAPSCRSNORMAL;
+	int cscr = mi % MAPSCRSNORMAL;
+	int cmap = mi / MAPSCRSNORMAL;
 	bool iscurrscr = mi == ((currmap*MAPSCRSNORMAL)+homescr);
 	Z_eventlog("%s's ExDoor[%s][%d] was %sset\n",
 		iscurrscr ? "Current screen" : fmt::format("Screen ({}, {:02X})",cmap+1,cscr).c_str(),
@@ -1178,7 +1178,7 @@ bool iswater_type(int32_t type)
 
 bool iswater(int32_t combo)
 {
-    return iswater_type(combobuf[combo].type) && !DRIEDLAKE;
+	return iswater_type(combobuf[combo].type) && !DRIEDLAKE;
 }
 int32_t iswaterexzq(int32_t combo, int32_t map, int32_t screen, int32_t layer, int32_t x, int32_t y, bool secrets, bool fullcheck, bool LayerCheck)
 {
@@ -1326,7 +1326,7 @@ bool ispitfall_type(int32_t type)
 
 bool ispitfall(int32_t combo)
 {
-    return ispitfall_type(combobuf[combo].type);
+	return ispitfall_type(combobuf[combo].type);
 }
 
 bool ispitfall(int32_t x, int32_t y)
@@ -1456,12 +1456,12 @@ bool isSVLadder(int32_t x, int32_t y)
 	if(x<0 || x>255 || y<0 || y>175)
         return false;
 	
-    mapscr *s1, *s2;
-    s1=(tmpscr2->valid)?tmpscr2:tmpscr;
-    s2=(tmpscr2[1].valid)?tmpscr2+1:tmpscr;
+	mapscr *s1, *s2;
+	s1=(tmpscr2->valid)?tmpscr2:tmpscr;
+	s2=(tmpscr2[1].valid)?tmpscr2+1:tmpscr;
 	
-    int32_t combo = COMBOPOS(x,y);
-    return (tmpscr->sflag[combo] == mfSIDEVIEWLADDER) || (combobuf[tmpscr->data[combo]].flag == mfSIDEVIEWLADDER) ||
+	int32_t combo = COMBOPOS(x,y);
+	return (tmpscr->sflag[combo] == mfSIDEVIEWLADDER) || (combobuf[tmpscr->data[combo]].flag == mfSIDEVIEWLADDER) ||
 		(s1->sflag[combo] == mfSIDEVIEWLADDER) || (combobuf[s1->data[combo]].flag == mfSIDEVIEWLADDER) ||
 		(s2->sflag[combo] == mfSIDEVIEWLADDER) || (combobuf[s2->data[combo]].flag == mfSIDEVIEWLADDER);
 }
@@ -1471,12 +1471,12 @@ bool isSVPlatform(int32_t x, int32_t y)
 	if(x<0 || x>255 || y<0 || y>175)
         return false;
 	
-    mapscr *s1, *s2;
-    s1=(tmpscr2->valid)?tmpscr2:tmpscr;
-    s2=(tmpscr2[1].valid)?tmpscr2+1:tmpscr;
+	mapscr *s1, *s2;
+	s1=(tmpscr2->valid)?tmpscr2:tmpscr;
+	s2=(tmpscr2[1].valid)?tmpscr2+1:tmpscr;
 	
-    int32_t combo = COMBOPOS(x,y);
-    return (tmpscr->sflag[combo] == mfSIDEVIEWPLATFORM) || (combobuf[tmpscr->data[combo]].flag == mfSIDEVIEWPLATFORM) ||
+	int32_t combo = COMBOPOS(x,y);
+	return (tmpscr->sflag[combo] == mfSIDEVIEWPLATFORM) || (combobuf[tmpscr->data[combo]].flag == mfSIDEVIEWPLATFORM) ||
 		(s1->sflag[combo] == mfSIDEVIEWPLATFORM) || (combobuf[s1->data[combo]].flag == mfSIDEVIEWPLATFORM) ||
 		(s2->sflag[combo] == mfSIDEVIEWPLATFORM) || (combobuf[s2->data[combo]].flag == mfSIDEVIEWPLATFORM);
 }
@@ -1488,7 +1488,7 @@ bool checkSVLadderPlatform(int32_t x, int32_t y)
 
 bool isstepable(int32_t combo)                                  //can use ladder on it
 {
-    if(combo_class_buf[combobuf[combo].type].ladder_pass) return true;
+	if(combo_class_buf[combobuf[combo].type].ladder_pass) return true;
 	if(combo_class_buf[combobuf[combo].type].pit)
 	{
 		if(combobuf[combo].usrflags&cflag4)
@@ -1617,12 +1617,11 @@ bool ishookshottable(int32_t map, int32_t screen, int32_t bx, int32_t by)
 
 bool hiddenstair(int32_t tmp,bool redraw)                       // tmp = index of tmpscr[]
 {
-    return hiddenstair2(tmpscr + tmp,redraw);
+	return hiddenstair2(tmpscr + tmp,redraw);
 }
 
 bool hiddenstair2(mapscr *s,bool redraw)                       // tmp = index of tmpscr[]
 {
-    
     if((s->stairx || s->stairy) && s->secretcombo[sSTAIRS])
     {
         int32_t di = COMBOPOS(s->stairx,s->stairy);
@@ -1693,8 +1692,6 @@ bool remove_screenstatecombos2(mapscr *s, mapscr *t, int32_t what1, int32_t what
 			}
 		}
 	}
-	
-	
 	
 	return didit;
 }
@@ -3653,11 +3650,11 @@ void put_walkflags(BITMAP *dest,int32_t x,int32_t y,int32_t xofs,int32_t yofs, w
 }
 void put_walkflags_a5(int32_t x,int32_t y,int32_t xofs,int32_t yofs, word cmbdat,int32_t lyr)
 {
-	ALLEGRO_COLOR col_solid = al_map_rgba(178,36,36,info_opacity);
-	ALLEGRO_COLOR col_water1 = al_map_rgba(85,85,255,info_opacity);
-	ALLEGRO_COLOR col_lhook = al_map_rgba(170,170,170,info_opacity);
+	ALLEGRO_COLOR col_solid    = al_map_rgba(178,36,36,info_opacity);
+	ALLEGRO_COLOR col_water1   = al_map_rgba(85,85,255,info_opacity);
+	ALLEGRO_COLOR col_lhook    = al_map_rgba(170,170,170,info_opacity);
 	ALLEGRO_COLOR col_stepable = al_map_rgba(165,105,8,info_opacity);
-	ALLEGRO_COLOR col_dmg = al_map_rgba(255,255,0,info_opacity);
+	ALLEGRO_COLOR col_dmg      = al_map_rgba(255,255,0,info_opacity);
 	newcombo const &c = combobuf[cmbdat];
 	
 	if (c.type == cBRIDGE && get_qr(qr_OLD_BRIDGE_COMBOS)) return;
@@ -5817,8 +5814,8 @@ bool _effectflag(int32_t x,int32_t y,int32_t cnt, int32_t layer, bool notLink)
 	}
 	
 	mapscr *s1, *s2;
-    s1=(tmpscr2->valid)?tmpscr2:tmpscr;
-    s2=(tmpscr2[1].valid)?tmpscr2+1:tmpscr;
+	s1=(tmpscr2->valid)?tmpscr2:tmpscr;
+	s2=(tmpscr2[1].valid)?tmpscr2+1:tmpscr;
 	//  s2=TheMaps+((*tmpscr).layermap[1]-1)MAPSCRS+((*tmpscr).layerscreen[1]);
 	
 	if (layer == 0 && (s1 == tmpscr)) return false;
