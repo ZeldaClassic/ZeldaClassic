@@ -7862,13 +7862,9 @@ void draw(bool justcset)
 						int32_t nx = x - startxint;
 						int32_t ny = y - startyint;
 						if (std::abs(nx - cx) < std::abs(ny - cy))
-						{
 							oldy = vbound(oldy + ((ny - cy) < 0 ? -1 : 1), 0, 11);
-						}
 						else
-						{
 							oldx = vbound(oldx + ((nx - cx) < 0 ? -1 : 1), 0, 15);
-						}
 						cstart = (oldy * 16) + oldx;
 					}
 				}
@@ -7969,18 +7965,14 @@ void draw(bool justcset)
 						cy2=cy+y2;
 						
 						if((cy2>11)||(cy2<0))
-						{
 							continue;
-						}
 						
 						for(int32_t x2=-1; x2<2; ++x2)
 						{
 							cx2=cx+x2;
 							
 							if((cx2>15)||(cx2<0))
-							{
 								continue;
-							}
 							
 							c2=cstart+(y2*16)+x2;
 							c3=((relational_tile_grid[((cy2-1)+rtgyo)][(cx2+1)+rtgxo]?1:0)<<0)+
@@ -8017,18 +8009,14 @@ void draw(bool justcset)
 							cy2=cy+y2;
 							
 							if((cy2>11)||(cy2<0))
-							{
 								continue;
-							}
 							
 							for(int32_t x2=-1; x2<2; ++x2)
 							{
 								cx2=cx+x2;
 								
 								if((cx2>15)||(cx2<0))
-								{
 									continue;
-								}
 								
 								if(relational_tile_grid[(cy2+rtgyo)][cx2+rtgxo]!=0)
 								{
@@ -8048,18 +8036,14 @@ void draw(bool justcset)
 							cy2=cy+y2;
 							
 							if((cy2>11)||(cy2<0))
-							{
 								continue;
-							}
 							
 							for(int32_t x2=-1; x2<2; ++x2)
 							{
 								cx2=cx+x2;
 								
 								if((cx2>15)||(cx2<0))
-								{
 									continue;
-								}
 								
 								if(relational_tile_grid[(cy2+rtgyo)][cx2+rtgxo]==0)
 								{
@@ -8492,51 +8476,51 @@ static void fill_flag(int32_t map, int32_t screen_index, mapscr* fillscr, int32_
 
 static void fill2(mapscr* fillscr, int32_t targetcombo, int32_t targetcset, int32_t sx, int32_t sy, int32_t dir, int32_t diagonal, bool only_cset)
 {
-    if(!only_cset)
-    {
-        if((fillscr->data[((sy<<4)+sx)])==targetcombo)
-            return;
-    }
+	if(!only_cset)
+	{
+		if((fillscr->data[((sy<<4)+sx)])==targetcombo)
+			return;
+	}
     
-    if((fillscr->cset[((sy<<4)+sx)])==targetcset)
-        return;
+	if((fillscr->cset[((sy<<4)+sx)])==targetcset)
+		return;
     
 	int32_t cid = Combo;
-    int8_t cs = CSet;
+	int8_t cs = CSet;
 	if(draw_mode == DM_CPOOL)
 	{
 		combo_pool const& pool = combo_pools[combo_pool_pos];
 		if(!pool.pick(cid,cs)) return;
 	}
 	
-    Map.DoSetComboCommand(Map.getCurrMap(), Map.getCurrScr(), (sy<<4)+sx, only_cset ? -1 : cid, cs);
+	Map.DoSetComboCommand(Map.getCurrMap(), Map.getCurrScr(), (sy<<4)+sx, only_cset ? -1 : cid, cs);
     
-    if((sy>0) && (dir!=down))                                 // && ((Map.CurrScr()->data[(((sy-1)<<4)+sx)]&0x7FF)!=target))
-        fill2(fillscr, targetcombo, targetcset, sx, sy-1, up, diagonal, only_cset);
+	if((sy>0) && (dir!=down))                                 // && ((Map.CurrScr()->data[(((sy-1)<<4)+sx)]&0x7FF)!=target))
+		fill2(fillscr, targetcombo, targetcset, sx, sy-1, up, diagonal, only_cset);
         
-    if((sy<10) && (dir!=up))                                  // && ((Map.CurrScr()->data[(((sy+1)<<4)+sx)]&0x7FF)!=target))
-        fill2(fillscr, targetcombo, targetcset, sx, sy+1, down, diagonal, only_cset);
+	if((sy<10) && (dir!=up))                                  // && ((Map.CurrScr()->data[(((sy+1)<<4)+sx)]&0x7FF)!=target))
+		fill2(fillscr, targetcombo, targetcset, sx, sy+1, down, diagonal, only_cset);
         
-    if((sx>0) && (dir!=right))                                // && ((Map.CurrScr()->data[((sy<<4)+sx-1)]&0x7FF)!=target))
-        fill2(fillscr, targetcombo, targetcset, sx-1, sy, left, diagonal, only_cset);
+	if((sx>0) && (dir!=right))                                // && ((Map.CurrScr()->data[((sy<<4)+sx-1)]&0x7FF)!=target))
+		fill2(fillscr, targetcombo, targetcset, sx-1, sy, left, diagonal, only_cset);
         
-    if((sx<15) && (dir!=left))                                // && ((Map.CurrScr()->data[((sy<<4)+sx+1)]&0x7FF)!=target))
-        fill2(fillscr, targetcombo, targetcset, sx+1, sy, right, diagonal, only_cset);
+	if((sx<15) && (dir!=left))                                // && ((Map.CurrScr()->data[((sy<<4)+sx+1)]&0x7FF)!=target))
+		fill2(fillscr, targetcombo, targetcset, sx+1, sy, right, diagonal, only_cset);
         
-    if(diagonal==1)
-    {
-        if((sy>0) && (sx>0) && (dir!=r_down))                   // && ((Map.CurrScr()->data[(((sy-1)<<4)+sx-1)]&0x7FF)!=target))
-            fill2(fillscr, targetcombo, targetcset, sx-1, sy-1, l_up, diagonal, only_cset);
-            
-        if((sy<10) && (sx<15) && (dir!=l_up))                   // && ((Map.CurrScr()->data[(((sy+1)<<4)+sx+1)]&0x7FF)!=target))
-            fill2(fillscr, targetcombo, targetcset, sx+1, sy+1, r_down, diagonal, only_cset);
-            
-        if((sx>0) && (sy<10) && (dir!=r_up))                    // && ((Map.CurrScr()->data[(((sy+1)<<4)+sx-1)]&0x7FF)!=target))
-            fill2(fillscr, targetcombo, targetcset, sx-1, sy+1, l_down, diagonal, only_cset);
-            
-        if((sx<15) && (sy>0) && (dir!=l_down))                  // && ((Map.CurrScr()->data[(((sy-1)<<4)+sx+1)]&0x7FF)!=target))
-            fill2(fillscr, targetcombo, targetcset, sx+1, sy-1, r_up, diagonal, only_cset);
-    }
+	if(diagonal==1)
+	{
+		if((sy>0) && (sx>0) && (dir!=r_down))                   // && ((Map.CurrScr()->data[(((sy-1)<<4)+sx-1)]&0x7FF)!=target))
+			fill2(fillscr, targetcombo, targetcset, sx-1, sy-1, l_up, diagonal, only_cset);
+		    
+		if((sy<10) && (sx<15) && (dir!=l_up))                   // && ((Map.CurrScr()->data[(((sy+1)<<4)+sx+1)]&0x7FF)!=target))
+			fill2(fillscr, targetcombo, targetcset, sx+1, sy+1, r_down, diagonal, only_cset);
+		    
+		if((sx>0) && (sy<10) && (dir!=r_up))                    // && ((Map.CurrScr()->data[(((sy+1)<<4)+sx-1)]&0x7FF)!=target))
+			fill2(fillscr, targetcombo, targetcset, sx-1, sy+1, l_down, diagonal, only_cset);
+		    
+		if((sx<15) && (sy>0) && (dir!=l_down))                  // && ((Map.CurrScr()->data[(((sy-1)<<4)+sx+1)]&0x7FF)!=target))
+			fill2(fillscr, targetcombo, targetcset, sx+1, sy-1, r_up, diagonal, only_cset);
+	}
 }
 
 
