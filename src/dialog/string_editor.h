@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_STRINGEDIT_H
-#define ZC_DIALOG_STRINGEDIT_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/label.h>
@@ -36,5 +35,3 @@ private:
 	std::shared_ptr<GUI::TextField> str_field;
 	std::shared_ptr<GUI::Window> window;
 };
-
-#endif

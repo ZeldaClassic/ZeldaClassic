@@ -1,5 +1,4 @@
-#ifndef _AUTOPATTERN_REPLACE_H_
-#define _AUTOPATTERN_REPLACE_H_
+#pragma once
 
 #include <functional>
 #include "base/autocombo.h"
@@ -20,5 +19,3 @@ namespace AutoPattern
 		int32_t convert_cid(int32_t cid, bool revert);
 	};
 }
-
-#endif

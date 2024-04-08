@@ -1,5 +1,4 @@
-#ifndef _AUTOPATTERN_TILING_H_
-#define _AUTOPATTERN_TILING_H_
+#pragma once
 
 #include <functional>
 #include "base/autocombo.h"
@@ -8,10 +7,10 @@
 namespace AutoPattern
 {
 
-	class autopattern_tiling : public autopattern_container
+	class tiling : public autopattern_container
 	{
 	public:
-		explicit autopattern_tiling(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource) :
+		explicit tiling(int32_t ntype, int32_t nlayer, int32_t nbasescreen, int32_t nbasepos, combo_auto* nsource) :
 			autopattern_container(ntype, nlayer, nbasescreen, nbasepos, nsource),
 			size(std::make_pair((nsource->getArg() & 0xF) + 1, ((nsource->getArg() >> 4) & 0xF) + 1)), offsets(nsource->getOffsets()) {}
 		virtual bool execute(int32_t exscreen, int32_t expos) override;
@@ -25,5 +24,3 @@ namespace AutoPattern
 	};
 
 }
-
-#endif

@@ -11,67 +11,67 @@ int32_t vc2(int32_t x)
 {
     switch(x)
     {
-    case 0:                                                 //black
+    case 0:                                        //black
         return makecol(0, 0, 0);
         break;
         
-    case 1:                                                 //blue
+    case 1:                                        //blue
         return makecol(0, 0, 170);
         break;
         
-    case 2:                                                 //green
+    case 2:                                        //green
         return makecol(0, 170, 0);
         break;
         
-    case 3:                                                 //cyan
+    case 3:                                        //cyan
         return makecol(0, 170, 170);
         break;
         
-    case 4:                                                 //red
+    case 4:                                        //red
         return makecol(170, 0, 0);
         break;
         
-    case 5:                                                 //magenta
+    case 5:                                        //magenta
         return makecol(170, 0, 170);
         break;
         
-    case 6:                                                 //brown
+    case 6:                                        //brown
         return makecol(170, 85, 170);
         break;
         
-    case 7:                                                 //light grey
+    case 7:                                        //light grey
         return makecol(170, 170, 170);
         break;
         
-    case 8:                                                 //dark grey
+    case 8:                                        //dark grey
         return makecol(85, 85, 85);
         break;
         
-    case 9:                                                 //light blue
+    case 9:                                        //light blue
         return makecol(85, 85, 255);
         break;
         
-    case 10:                                                //light green
+    case 10:                                       //light green
         return makecol(85, 255, 85);
         break;
         
-    case 11:                                                //light cyan
+    case 11:                                       //light cyan
         return makecol(85, 255, 255);
         break;
         
-    case 12:                                                //light red (pink)
+    case 12:                                       //light red (pink)
         return makecol(255, 85, 85);
         break;
         
-    case 13:                                                //light magenta (lavender)
+    case 13:                                       //light magenta (lavender)
         return makecol(255, 85, 255);
         break;
         
-    case 14:                                                //light brown (yellow)
+    case 14:                                       //light brown (yellow)
         return makecol(255, 255, 85);
         break;
         
-    case 15:                                                //white
+    case 15:                                       //white
         return makecol(255, 255, 255);
         break;
     }

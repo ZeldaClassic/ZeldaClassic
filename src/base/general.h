@@ -1,5 +1,4 @@
-#ifndef _GENERAL_H_
-#define _GENERAL_H_
+#pragma once
 
 #include "base/ints.h"
 #include "base/zfix.h"
@@ -336,6 +335,3 @@ direction GET_XDIR(zfix const& sign);
 direction GET_YDIR(zfix const& sign);
 direction GET_DIR(zfix const& dx, zfix const& dy);
 #define NORMAL_DIR(dir)    ((dir >= 0 && dir < 16) ? normalDir[dir] : dir_invalid)
-
-#endif
-

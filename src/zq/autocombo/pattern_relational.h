@@ -1,5 +1,4 @@
-#ifndef _AUTOPATTERN_RELATIONAL_H_
-#define _AUTOPATTERN_RELATIONAL_H_
+#pragma once
 
 #include <functional>
 #include "base/autocombo.h"
@@ -24,5 +23,3 @@ namespace AutoPattern
 	};
 
 }
-
-#endif

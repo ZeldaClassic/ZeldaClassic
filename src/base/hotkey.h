@@ -1,5 +1,4 @@
-#ifndef _HOTKEY_H_
-#define _HOTKEY_H_
+#pragma once
 
 #include "base/zc_alleg.h"
 #include <string>
@@ -22,6 +21,3 @@ struct Hotkey
 std::string get_keystr(int key);
 bool is_modkey(int c);
 int get_mods(int mask = HOTKEY_FLAG_FILTER);
-
-#endif
-

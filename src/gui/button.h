@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_BUTTON_H
-#define ZC_GUI_BUTTON_H
+#pragma once
 
 #include "base/hotkey.h"
 #include "gui/widget.h"
@@ -74,5 +73,3 @@ private:
 		{ \
 			InfoDialog(infotitle,infotext).show(); \
 		}),
-
-#endif

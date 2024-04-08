@@ -54,25 +54,25 @@ SubscrPropDialog::SubscrPropDialog(SubscrWidget* widg, int32_t obj_ind) :
 
 static const GUI::ListData two_three_rows
 {
-	{ "Two", 2 },
+	{ "Two",   2 },
 	{ "Three", 3 }
 };
 static const GUI::ListData special_tile_list
 {
-	{ "None", -1 },
-	{ "SS Vine", 0 },
+	{ "None",       -1 },
+	{ "SS Vine",     0 },
 	{ "Magic Meter", 1 }
 };
 static const GUI::ListData wrapping_type_list
 {
 	{ "Character", 0 },
-	{ "Word", 1 }
+	{ "Word",      1 }
 };
 static const GUI::ListData list_pgmode
 {
-	{ "None", PGGOTO_NONE },
-	{ "Next", PGGOTO_NEXT },
-	{ "Prev", PGGOTO_PREV },
+	{ "None",   PGGOTO_NONE },
+	{ "Next",   PGGOTO_NEXT },
+	{ "Prev",   PGGOTO_PREV },
 	{ "Target", PGGOTO_TRG },
 };
 
@@ -1847,4 +1847,3 @@ bool SubscrPropDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 	}
 	return false;
 }
-

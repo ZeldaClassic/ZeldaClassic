@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_LISTDATA_H
-#define ZC_GUI_LISTDATA_H
+#pragma once
 
 #include "gui/jwin.h"
 #include <functional>
@@ -206,5 +205,3 @@ private:
 };
 
 }
-
-#endif

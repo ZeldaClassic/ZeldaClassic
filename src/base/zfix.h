@@ -1,8 +1,7 @@
 /*
  * Custom ZFix: because Allegro's zfix is not precise
  */
-#ifndef ZFIX_H
-#define ZFIX_H
+#pragma once
 #include <cstdint>
 #include <math.h>
 #include <limits>
@@ -873,5 +872,3 @@ inline int32_t operator >=  (const double v, const zfix fx)
 {
 	return toZLong(v) >= fx.val;
 }
-
-#endif		  /* ifndef ZFIX_H */
