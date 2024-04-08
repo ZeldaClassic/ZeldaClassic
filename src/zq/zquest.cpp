@@ -24566,29 +24566,11 @@ int32_t d_misccolors_hexedit_proc(int32_t msg,DIALOG *d,int32_t c)
 }
 
 
-
-static int32_t misccolor1_list[] =
-{
-    // dialog control number
-    4, 5, 6, 7, 8, 20, 21, 22, 23, 24, 36, 37, 38, 39, 40, -1
-};
-
-static int32_t misccolor2_list[] =
-{
-    // dialog control number
-    9, 10, 11, 12, 13, 25, 26, 27, 28, 29, 41, 42, 43, 44, 45, -1
-};
-
-static int32_t misccolor3_list[] =
-{
-    // dialog control number
-    14, 15, 16, 17, 18, 30, 31, 32, 33, 34, 46, 47, 48, 49, 50, -1
-};
-
-static int32_t misccolor4_list[] =
-{
-    19, 35, 51, 54, 55, 56, -1
-};
+// dialog control number
+static int32_t misccolor1_list[] = { 4, 5, 6, 7, 8, 20, 21, 22, 23, 24, 36, 37, 38, 39, 40, -1 }; 
+static int32_t misccolor2_list[] = { 9, 10, 11, 12, 13, 25, 26, 27, 28, 29, 41, 42, 43, 44, 45, -1 }; 
+static int32_t misccolor3_list[] = { 14, 15, 16, 17, 18, 30, 31, 32, 33, 34, 46, 47, 48, 49, 50, -1 }; 
+static int32_t misccolor4_list[] = { 19, 35, 51, 54, 55, 56, -1 };
 
 static TABPANEL misccolor_tabs[] =
 {
@@ -24677,7 +24659,6 @@ static DIALOG misccolors_dlg[] =
 
 int32_t d_misccolors_tab_proc(int32_t msg,DIALOG *d,int32_t c)
 {
-
     switch(msg)
     {
     case MSG_WANTFOCUS:
