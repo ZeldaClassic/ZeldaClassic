@@ -79,7 +79,7 @@ void MessageDataSymbols::generateCode()
 		POPREF();
 	    addOpcode2 (code, new OMessageDataGetStringRegister(new VarArgument(EXP2))); 
 	    RETURN(); 
-        function->giveCode(code);
+            function->giveCode(code);
     }
     // Set("src_string[]")
     {
@@ -91,6 +91,6 @@ void MessageDataSymbols::generateCode()
 		POPREF();
 	    addOpcode2 (code, new OMessageDataSetStringRegister(new VarArgument(EXP2))); 
 	    RETURN(); 
-        function->giveCode(code);
+	    function->giveCode(code);
     }
 }

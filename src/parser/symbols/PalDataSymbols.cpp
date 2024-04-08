@@ -28,14 +28,14 @@ static AccessorTable PalDataTable[] =
 	{ "CopyCSet",                   0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_PALDATA, ZTID_PALDATA, ZTID_FLOAT, ZTID_FLOAT },{} },
 	{ "Free",                       0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_PALDATA },{} },
 	{ "Own",                        0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_PALDATA },{} },
-	{ "getColor[]",                 0,       ZTID_RGBDATA,   PALDATACOLOR,         FL_INL,  { ZTID_PALDATA, ZTID_FLOAT },{} },
-	{ "setColor[]",                 0,          ZTID_VOID,   PALDATACOLOR,         FL_INL,  { ZTID_PALDATA, ZTID_FLOAT, ZTID_RGBDATA },{} },
-	{ "getR[]",                     0,         ZTID_FLOAT,   PALDATAR,             FL_INL,  { ZTID_PALDATA, ZTID_FLOAT },{} },
-	{ "setR[]",                     0,          ZTID_VOID,   PALDATAR,             FL_INL,  { ZTID_PALDATA, ZTID_FLOAT, ZTID_FLOAT },{} },
-	{ "getG[]",                     0,         ZTID_FLOAT,   PALDATAG,             FL_INL,  { ZTID_PALDATA, ZTID_FLOAT },{} },
-	{ "setG[]",                     0,          ZTID_VOID,   PALDATAG,             FL_INL,  { ZTID_PALDATA, ZTID_FLOAT, ZTID_FLOAT },{} },
-	{ "getB[]",                     0,         ZTID_FLOAT,   PALDATAB,             FL_INL,  { ZTID_PALDATA, ZTID_FLOAT },{} },
-	{ "setB[]",                     0,          ZTID_VOID,   PALDATAB,             FL_INL,  { ZTID_PALDATA, ZTID_FLOAT, ZTID_FLOAT },{} },
+	{ "getColor[]",                 0,          ZTID_RGBDATA, PALDATACOLOR,        FL_INL,  { ZTID_PALDATA, ZTID_FLOAT },{} },
+	{ "setColor[]",                 0,          ZTID_VOID,    PALDATACOLOR,        FL_INL,  { ZTID_PALDATA, ZTID_FLOAT, ZTID_RGBDATA },{} },
+	{ "getR[]",                     0,          ZTID_FLOAT,   PALDATAR,            FL_INL,  { ZTID_PALDATA, ZTID_FLOAT },{} },
+	{ "setR[]",                     0,          ZTID_VOID,    PALDATAR,            FL_INL,  { ZTID_PALDATA, ZTID_FLOAT, ZTID_FLOAT },{} },
+	{ "getG[]",                     0,          ZTID_FLOAT,   PALDATAG,            FL_INL,  { ZTID_PALDATA, ZTID_FLOAT },{} },
+	{ "setG[]",                     0,          ZTID_VOID,    PALDATAG,            FL_INL,  { ZTID_PALDATA, ZTID_FLOAT, ZTID_FLOAT },{} },
+	{ "getB[]",                     0,          ZTID_FLOAT,   PALDATAB,            FL_INL,  { ZTID_PALDATA, ZTID_FLOAT },{} },
+	{ "setB[]",                     0,          ZTID_VOID,    PALDATAB,            FL_INL,  { ZTID_PALDATA, ZTID_FLOAT, ZTID_FLOAT },{} },
 
 	{ "",                           0,          ZTID_VOID,   -1,                        0,  {},{} }
 };
@@ -349,4 +349,3 @@ void PalDataSymbols::generateCode()
 		function->giveCode(code);
 	}
 }
-
