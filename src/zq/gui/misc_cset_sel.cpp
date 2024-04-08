@@ -28,13 +28,13 @@ static const ListData csTyList
 };
 static const ListData miscCSList
 {
-	{ "Triforce", 0 },
-	{ "Tri. Frame", 1 },
+	{ "Triforce",      0 },
+	{ "Tri. Frame",    1 },
 	{ "Overworld Map", 2 },
-	{ "Dungeon Map", 3 },
-	{ "Blue Frame", 4 },
-	{ "HC Piece", 5 },
-	{ "SS Vine", 6 }
+	{ "Dungeon Map",   3 },
+	{ "Blue Frame",    4 },
+	{ "HC Piece",      5 },
+	{ "SS Vine",       6 }
 };
 
 MiscCSetSel::MiscCSetSel(): onUpdate(NULL), c1(ssctMISC), c2(0)

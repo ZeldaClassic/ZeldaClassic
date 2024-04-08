@@ -1601,7 +1601,7 @@ void replay_stop()
             enter_sys_pal();
             jwin_alert("Assert", "Replay has stopped, and the assert failed.", NULL, NULL, "OK", NULL, 13, 27, get_zc_font(font_lfont));
             exit_sys_pal();
-			Paused = true;
+		Paused = true;
         }
     }
 
