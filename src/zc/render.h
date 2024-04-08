@@ -1,5 +1,4 @@
-#ifndef _ZC_RENDER_TREE_H_
-#define _ZC_RENDER_TREE_H_
+#pragma once
 
 #include "base/render.h"
 
@@ -13,5 +12,3 @@ extern LegacyBitmapRTI rti_screen;
 void start_info_bmp();
 void end_info_bmp();
 void render_zc();
-
-#endif

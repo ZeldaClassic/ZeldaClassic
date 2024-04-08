@@ -1,5 +1,4 @@
-#ifndef _ZCMIXER_H_
-#define _ZCMIXER_H_
+#pragma once
 
 #include <cstdint>
 #include "sound/zcmusic.h"
@@ -31,4 +30,3 @@ ZCM_EXTERN void zcmixer_update(ZCMIXER* mix, int32_t basevol, int32_t uservol, b
 ZCM_EXTERN void zcmixer_exit(ZCMIXER* &mix);
 
 #undef ZCM_EXTERN
-#endif

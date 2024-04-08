@@ -1,5 +1,4 @@
-#ifndef _DECORATIONS_H_
-#define _DECORATIONS_H_
+#pragma once
 
 #include "base/zfix.h"
 #include "sprite.h"
@@ -114,6 +113,3 @@ public:
 	virtual void realdraw(BITMAP *dest, int32_t draw_what);
 	void run_sprite(int32_t newSprite);
 };
-
-
-#endif

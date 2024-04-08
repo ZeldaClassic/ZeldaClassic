@@ -1,5 +1,4 @@
-#ifndef _FFSCRIPT_H_
-#define _FFSCRIPT_H_
+#pragma once
 
 #include "base/zdefs.h"
 #include "base/initdata.h"
@@ -5051,6 +5050,3 @@ const script_command& get_script_command(int command);
 int32_t get_combopos_ref(int32_t pos, int32_t layer);
 int32_t combopos_ref_to_pos(int32_t combopos_ref);
 int32_t combopos_ref_to_layer(int32_t combopos_ref);
-
-#endif
-

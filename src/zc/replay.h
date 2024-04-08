@@ -1,5 +1,4 @@
-#ifndef _REPLAY_H_
-#define _REPLAY_H_
+#pragma once
 
 #include "base/random.h"
 #include "zc/cheats.h"
@@ -91,5 +90,3 @@ enum ReplayStateType
 };
 
 int replay_get_state(ReplayStateType state_type, int fn());
-
-#endif

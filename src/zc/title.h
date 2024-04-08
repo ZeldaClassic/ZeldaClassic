@@ -1,5 +1,4 @@
-#ifndef _ZC_TITLE_H_
-#define _ZC_TITLE_H_
+#pragma once
 
 extern DIALOG gamemode_dlg[];
 
@@ -9,4 +8,3 @@ void titlescreen(int32_t lsave);
 void game_over(int32_t type);
 void save_game(bool savepoint);
 bool save_game(bool savepoint, int32_t type);
-#endif

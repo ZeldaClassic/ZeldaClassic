@@ -264,27 +264,27 @@ struct tile_move_data
 
 	void copy(tile_move_data const& other)
 	{
-		copies = other.copies;
-		dest_first = other.dest_first;
-		dest_last = other.dest_last;
-		src_first = other.src_first;
-		src_last = other.src_last;
-		dest_top = other.dest_top;
+		copies      = other.copies;
+		dest_first  = other.dest_first;
+		dest_last   = other.dest_last;
+		src_first   = other.src_first;
+		src_last    = other.src_last;
+		dest_top    = other.dest_top;
 		dest_bottom = other.dest_bottom;
-		src_top = other.src_top;
-		src_bottom = other.src_bottom;
-		src_left = other.src_left;
-		src_right = other.src_right;
-		src_width = other.src_width;
-		src_height = other.src_height;
-		dest_left = other.dest_left;
-		dest_right = other.dest_right;
-		dest_width = other.dest_width;
+		src_top     = other.src_top;
+		src_bottom  = other.src_bottom;
+		src_left    = other.src_left;
+		src_right   = other.src_right;
+		src_width   = other.src_width;
+		src_height  = other.src_height;
+		dest_left   = other.dest_left;
+		dest_right  = other.dest_right;
+		dest_width  = other.dest_width;
 		dest_height = other.dest_height;
-		rows = other.rows;
-		cols = other.cols;
-		rect = other.rect;
-		move = other.move;
+		rows        = other.rows;
+		cols        = other.cols;
+		rect        = other.rect;
+		move        = other.move;
 	}
 	
 	void flip()
@@ -318,9 +318,9 @@ struct combo_move_data
 	}
 	void copy(combo_move_data const& other)
 	{
-		tile = other.tile;
-		tile2 = other.tile2;
-		copy1 = other.copy1;
+		tile    = other.tile;
+		tile2   = other.tile2;
+		copy1   = other.copy1;
 		copycnt = other.copycnt;
 	}
 	
@@ -1233,15 +1233,15 @@ void tile_floodfill(int32_t tile,int32_t x,int32_t y,byte c)
 }
 
 //***************** tile editor  stuff *****************
-size_and_pos ok_button(302,562,71,21);
+size_and_pos ok_button    (302,562,71,21);
 size_and_pos cancel_button(376,562,71,21);
-size_and_pos edit_button(550,562,86,21);
-size_and_pos hlcbox(742,392,16,16);
-size_and_pos hov_prev(742,338,50,50);
-size_and_pos cpalette_4(648,416,4,4,64,64);
-size_and_pos cpalette_8(648,416,16,14,16,18);
-size_and_pos fg_prev(648,316,50,50);
-size_and_pos bg_prev(648+30,316+30,50,50);
+size_and_pos edit_button  (550,562,86,21);
+size_and_pos hlcbox       (742,392,16,16);
+size_and_pos hov_prev     (742,338,50,50);
+size_and_pos cpalette_4   (648,416,4,4,64,64);
+size_and_pos cpalette_8   (648,416,16,14,16,18);
+size_and_pos fg_prev      (648,316,50,50);
+size_and_pos bg_prev      (648+30,316+30,50,50);
 size_and_pos zoomtile(124,32,16,16,32,32);
 size_and_pos prev_til_1(648,31,96,96);
 size_and_pos prev_til_2(752,31,96,96);
@@ -1290,13 +1290,13 @@ void set_tool_sprite(int tool, int type)
 	int spr = ZQM_NORMAL;
 	switch(tool)
 	{
-		case t_pen: spr = ZQM_SWORD; break;
-		case t_fill: spr = ZQM_POTION; break;
-		case t_recolor: spr = ZQM_WAND; break;
-		case t_eyedropper: spr = ZQM_LENS; break;
-		case t_move: spr = ZQM_GLOVE_OPEN+type; break;
-		case t_select: spr = ZQM_HOOK_PLAIN+type; break;
-		case t_wand: spr = ZQM_SEL_WAND_PLAIN+type; break;
+		case t_pen:        spr = ZQM_SWORD;               break;
+		case t_fill:       spr = ZQM_POTION;              break;
+		case t_recolor:    spr = ZQM_WAND;                break;
+		case t_eyedropper: spr = ZQM_LENS;                break;
+		case t_move:       spr = ZQM_GLOVE_OPEN+type;     break;
+		case t_select:     spr = ZQM_HOOK_PLAIN+type;     break;
+		case t_wand:       spr = ZQM_SEL_WAND_PLAIN+type; break;
 	}
 	MouseSprite::set(spr);
 }

@@ -1,5 +1,4 @@
-#ifndef _ZC_SAVES_H_
-#define _ZC_SAVES_H_
+#pragma once
 
 #include "gamedata.h"
 #include <filesystem>
@@ -57,5 +56,3 @@ void saves_copy(int32_t from_index);
 int saves_do_first_time_stuff(int index);
 void saves_enable_save_current_replay();
 bool saves_test();
-
-#endif

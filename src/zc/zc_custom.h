@@ -1,5 +1,4 @@
-#ifndef _ZC_CUSTOM_H_
-#define _ZC_CUSTOM_H_
+#pragma once
 
 #include "base/zdefs.h"
 
@@ -78,4 +77,3 @@ void setupherotiles(int32_t style);
 void setherotile(int32_t tile, int32_t flip, int32_t extend, int32_t state, int32_t dir);
 void setupherodefenses();
 void setupherooffsets();
-#endif
