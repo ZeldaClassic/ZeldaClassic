@@ -24147,10 +24147,7 @@ void change_sfx(SAMPLE *sfx1, SAMPLE *sfx2)
     sfx1->loop_end = sfx2->loop_end;
     sfx1->param = sfx2->param;
     
-    if(sfx1->data != NULL)
-    {
-        free(sfx1->data);
-    }
+    free(sfx1->data);
     
     if(sfx2->data == NULL)
         sfx1->data = NULL;
