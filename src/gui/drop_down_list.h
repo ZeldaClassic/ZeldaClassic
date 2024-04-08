@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_DROPDOWNLIST_H
-#define ZC_GUI_DROPDOWNLIST_H
+#pragma once
 
 #include "gui/widget.h"
 #include "gui/dialog_ref.h"
@@ -63,5 +62,3 @@ private:
 };
 
 }
-
-#endif

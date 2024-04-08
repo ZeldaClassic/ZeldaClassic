@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_GRID_H
-#define ZC_GUI_GRID_H
+#pragma once
 
 #include "gui/widget.h"
 #include <functional>
@@ -75,5 +74,3 @@ private:
 };
 
 }
-
-#endif

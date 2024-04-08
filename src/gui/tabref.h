@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_TABREF_H
-#define ZC_GUI_TABREF_H
+#pragma once
 
 #include "gui/widget.h"
 #include <vector>
@@ -37,5 +36,3 @@ private:
 };
 
 }
-
-#endif

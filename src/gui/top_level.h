@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_TOPLEVEL_H
-#define ZC_GUI_TOPLEVEL_H
+#pragma once
 
 #include "gui/widget.h"
 #include "gui/key.h"
@@ -61,5 +60,3 @@ private:
 };
 
 }
-
-#endif

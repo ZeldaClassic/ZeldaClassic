@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_MENU_H
-#define ZC_GUI_MENU_H
+#pragma once
 
 #include "gui/widget.h"
 #include "base/new_menu.h"
@@ -26,5 +25,3 @@ private:
 };
 
 }
-
-#endif

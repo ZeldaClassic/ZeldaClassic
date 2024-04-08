@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_QRPANEL_H
-#define ZC_GUI_QRPANEL_H
+#pragma once
 
 #include "gui/widget.h"
 #include "gui/tabpanel.h"
@@ -50,5 +49,3 @@ private:
 };
 
 }
-
-#endif

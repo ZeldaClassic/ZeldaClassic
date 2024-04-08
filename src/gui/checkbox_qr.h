@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_QRCHECKBOX_H
-#define ZC_GUI_QRCHECKBOX_H
+#pragma once
 
 #include "gui/widget.h"
 #include "gui/checkbox.h"
@@ -22,5 +21,3 @@ private:
 };
 
 }
-
-#endif
