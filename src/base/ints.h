@@ -1,5 +1,4 @@
-#ifndef _INTS_H_
-#define _INTS_H_
+#pragma once
 
 #include <stdint.h>
 #include <cstring>
@@ -13,5 +12,3 @@ typedef unsigned int uint;
 typedef unsigned const char ucc;
 
 using std::size_t;
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef _JWIN_H_
-#define _JWIN_H_
+#pragma once
 
 #include "base/zdefs.h"
 #include "base/zc_alleg.h"
@@ -310,10 +309,8 @@ void jwin_draw_icon(BITMAP *dest, int x, int y, int col, int icon, int aw, int a
 int icon_proportion(int icon,int s1,int s2);
 
 void draw_dis_checkbox(BITMAP *dest,int x,int y,int wid,int hei,bool value);
-void draw_checkbox(BITMAP *dest,int x,int y,int wid,int hei,bool value);
-void draw_checkbox(BITMAP *dest,int x,int y,int sz,bool value);
-bool do_checkbox(BITMAP *dest,int x,int y,int wid,int hei,int &value, int xoffs = 0, int yoffs = 0);
-bool do_checkbox_tx(BITMAP *dest,int x,int y,int wid,int hei,int &value, int txtoffs, int xoffs = 0, int yoffs = 0);
-bool do_scheckbox(BITMAP *dest,int x,int y,int sz,int &value, int xoffs = 0, int yoffs = 0);
-
-#endif                                                      // _JWIN_H_
+void draw_checkbox    (BITMAP *dest,int x,int y,int wid,int hei,bool value);
+void draw_checkbox    (BITMAP *dest,int x,int y,int sz,bool value);
+bool do_checkbox      (BITMAP *dest,int x,int y,int wid,int hei,int &value, int xoffs = 0, int yoffs = 0);
+bool do_checkbox_tx   (BITMAP *dest,int x,int y,int wid,int hei,int &value, int txtoffs, int xoffs = 0, int yoffs = 0);
+bool do_scheckbox     (BITMAP *dest,int x,int y,int sz,int &value, int xoffs = 0, int yoffs = 0);

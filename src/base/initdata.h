@@ -1,5 +1,4 @@
-#ifndef _INITDATA_H_
-#define _INITDATA_H_
+#pragma once
 
 #include "base/headers.h"
 #include "base/containers.h"
@@ -97,6 +96,3 @@ struct zinitdata
 	zinitdata() = default;
 };
 extern zinitdata zinit;
-
-#endif
-

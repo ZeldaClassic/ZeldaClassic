@@ -1,5 +1,4 @@
-#ifndef _ZQUEST_H_
-#define _ZQUEST_H_
+#pragma once
 
 #include <string>
 #include <vector>
@@ -985,5 +984,4 @@ void questminrev_help();
 extern int32_t midi_strict;
 #endif
 
-#endif
 /* end */

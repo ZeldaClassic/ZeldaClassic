@@ -1,5 +1,4 @@
-#ifndef QUESTREPORT_H
-#define QUESTREPORT_H
+#pragma once
 
 #include "base/zc_alleg.h"
 
@@ -22,15 +21,13 @@ void BuggedNextComboLocationReport();
 int32_t onWhatWarpsReport();
 
 //Integrity booleans
-bool integrityBoolSpecialItem(mapscr* ts);
-bool integrityBoolEnemiesSecret(mapscr* ts);
-bool integrityBoolEnemiesItem(mapscr* ts);
-bool integrityBoolStringNoGuy(mapscr* ts);
-bool integrityBoolGuyNoString(mapscr* ts);
-bool integrityBoolRoomNoGuy(mapscr* ts);
-bool integrityBoolRoomNoString(mapscr* ts);
+bool integrityBoolSpecialItem      (mapscr* ts);
+bool integrityBoolEnemiesSecret    (mapscr* ts);
+bool integrityBoolEnemiesItem      (mapscr* ts);
+bool integrityBoolStringNoGuy      (mapscr* ts);
+bool integrityBoolGuyNoString      (mapscr* ts);
+bool integrityBoolRoomNoGuy        (mapscr* ts);
+bool integrityBoolRoomNoString     (mapscr* ts);
 bool integrityBoolRoomNoGuyNoString(mapscr* ts);
-bool integrityBoolSaveCombo(mapscr* ts, int32_t ctype);
-bool integrityBoolUnderCombo(mapscr* ts, int32_t ctype);
-
-#endif
+bool integrityBoolSaveCombo        (mapscr* ts, int32_t ctype);
+bool integrityBoolUnderCombo       (mapscr* ts, int32_t ctype);

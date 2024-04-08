@@ -15,42 +15,42 @@ void call_room_dlg(mapscr* scr)
 enum { argTEXT_FIELD, argITEM_LIST, argSHOP_LIST, argINFO_LIST, argBSHOP_LIST };
 
 static const GUI::ListData guyListData {
-	{ "(None)", 0 },
-	{ "Abei", 1 },
-	{ "Ama", 2 },
+	{ "(None)",   0 },
+	{ "Abei",     1 },
+	{ "Ama",      2 },
 	{ "Merchant", 3 },
-	{ "Moblin", 4 },
-	{ "Fire", 5 },
-	{ "Fairy", 6 },
-	{ "Goriya", 7 },
-	{ "Zelda", 8 },
-	{ "Abei 2", 9 },
-	{ "Empty", 10 }
+	{ "Moblin",   4 },
+	{ "Fire",     5 },
+	{ "Fairy",    6 },
+	{ "Goriya",   7 },
+	{ "Zelda",    8 },
+	{ "Abei 2",   9 },
+	{ "Empty",   10 }
 };
 
 static const GUI::ListData roomListData {
-	{ "(None)", rNONE },
-	{ "Special Item", rSP_ITEM },
-	{ "Pay for Info", rINFO },
-	{ "Secret Money", rMONEY },
-	{ "Gamble",rGAMBLE },
-	{ "Door Repair", rREPAIR },
+	{ "(None)",                        rNONE },
+	{ "Special Item",                  rSP_ITEM },
+	{ "Pay for Info",                  rINFO },
+	{ "Secret Money",                  rMONEY },
+	{ "Gamble",                        rGAMBLE },
+	{ "Door Repair",                   rREPAIR },
 	{ "Red Potion or Heart Container", rRP_HC },
-	{ "Feed the Goriya", rGRUMBLE },
-	{ "Triforce Check", rTRIFORCE },
-	{ "Letter Shop", rP_SHOP },
-	{ "Shop", rSHOP },
-	{ "More Bombs", rBOMBS },
-	{ "Leave Money or Life", rSWINDLE },
-	{ "10 Rupees", r10RUPIES },
-	{ "3-Stair Warp", rWARP },
-	{ "Ganon", rGANON },
-	{ "Zelda", rZELDA },
-	{ "1/2 Magic Upgrade", rMUPGRADE },
-	{ "Learn Slash", rLEARNSLASH },
-	{ "More Arrows", rARROWS },
-	{ "Take One Item", rTAKEONE },
-	{ "Bottle Shop", rBOTTLESHOP }
+	{ "Feed the Goriya",               rGRUMBLE },
+	{ "Triforce Check",                rTRIFORCE },
+	{ "Letter Shop",                   rP_SHOP },
+	{ "Shop",                          rSHOP },
+	{ "More Bombs",                    rBOMBS },
+	{ "Leave Money or Life",           rSWINDLE },
+	{ "10 Rupees",                     r10RUPIES },
+	{ "3-Stair Warp",                  rWARP },
+	{ "Ganon",                         rGANON },
+	{ "Zelda",                         rZELDA },
+	{ "1/2 Magic Upgrade",             rMUPGRADE },
+	{ "Learn Slash",                   rLEARNSLASH },
+	{ "More Arrows",                   rARROWS },
+	{ "Take One Item",                 rTAKEONE },
+	{ "Bottle Shop",                   rBOTTLESHOP }
 };
 
 static const auto specialItemDesc =

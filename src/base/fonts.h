@@ -1,5 +1,4 @@
-#ifndef _FONTS_H_
-#define _FONTS_H_
+#pragma once
 
 #include "base/zc_alleg.h"
 #include "base/ints.h"
@@ -148,5 +147,3 @@ enum
 };
 FONT* get_custom_font(int cfont);
 ALLEGRO_FONT* get_custom_font_a5(int cfont);
-#endif
-

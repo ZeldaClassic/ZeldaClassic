@@ -1,5 +1,4 @@
-#ifndef _QRS_H_
-#define _QRS_H_
+#pragma once 
 
 #include "base/ints.h"
 
@@ -249,6 +248,3 @@ void set_er(int index,bool state);
 //Want to move these here, but looks complicated...
 // void applyRuleset(int32_t ruleset, byte* qrptr = nullptr);
 // void applyRuleTemplate(int32_t ruleTemplate, byte* qrptr = nullptr);
-
-#endif
-

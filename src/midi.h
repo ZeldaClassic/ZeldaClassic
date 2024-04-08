@@ -1,5 +1,4 @@
-#ifndef _MIDI_H_
-#define _MIDI_H_
+#pragma once
 #include "base/zdefs.h"
 /*  Allegro MIDI struct
 
@@ -65,4 +64,3 @@ void get_midi_info(MIDI *midi, midi_info *mi);
 char *timestr(double sec);
 bool decode_text_event(char *s,byte type,byte *buf);
 void get_midi_text(MIDI *midi, midi_info *mi, char *text);
-#endif

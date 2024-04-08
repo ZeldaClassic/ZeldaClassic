@@ -1,5 +1,4 @@
-#ifndef ZC_GUI_DIALOGRUNNER_H
-#define ZC_GUI_DIALOGRUNNER_H
+#pragma once
 
 #include "dialog_message.h"
 #include "gui/dialog_ref.h"
@@ -112,5 +111,3 @@ inline void showDialog(T& dlg)
 }
 
 }
-
-#endif
