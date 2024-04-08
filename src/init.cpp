@@ -139,47 +139,15 @@ static int32_t init_scrcnt2_list[] =
 	-1
 };
 
-static int32_t init_dmap_items_list[] =
-{
-    // dialog control number
-    137, -1
-};
+// dialog control numbers
+static int32_t init_dmap_items_list[] = { 137, -1 };
 
-static int32_t init_dmap_items_000s_list[] =
-{
-    // dialog control number
-    138, -1
-};
-
-static int32_t init_dmap_items_100s_list[] =
-{
-    // dialog control number
-    139, -1
-};
-
-static int32_t init_dmap_items_200s_list[] =
-{
-    // dialog control number
-    140, -1
-};
-
-static int32_t init_dmap_items_300s_list[] =
-{
-    // dialog control number
-    1707, -1
-};
-
-static int32_t init_dmap_items_400s_list[] =
-{
-    // dialog control number
-    1708, -1
-};
-
-static int32_t init_dmap_items_500s_list[] =
-{
-    // dialog control number
-    1709, -1
-};
+static int32_t init_dmap_items_000s_list[] = { 138,  -1 }; 
+static int32_t init_dmap_items_100s_list[] = { 139,  -1 }; 
+static int32_t init_dmap_items_200s_list[] = { 140,  -1 }; 
+static int32_t init_dmap_items_300s_list[] = { 1707, -1 }; 
+static int32_t init_dmap_items_400s_list[] = { 1708, -1 }; 
+static int32_t init_dmap_items_500s_list[] = { 1709, -1 };
 
 static int32_t init_dmap_items_0_00s_list[] =
 {
