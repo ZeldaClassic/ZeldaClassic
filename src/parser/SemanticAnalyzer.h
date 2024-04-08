@@ -1,5 +1,4 @@
-#ifndef ZSCRIPT_SEMANTIC_ANALYZER_H
-#define ZSCRIPT_SEMANTIC_ANALYZER_H
+#pragma once
 
 #include "ASTVisitors.h"
 #include "DataStructs.h"
@@ -114,4 +113,3 @@ namespace ZScript
 
 	};
 }	
-#endif

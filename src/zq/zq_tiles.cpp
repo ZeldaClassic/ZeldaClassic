@@ -231,14 +231,10 @@ byte dungeon_carving_template[96][4]=
 struct tile_move_data
 {
 	int32_t copies;
-	int32_t dest_first;
-	int32_t dest_last;
-	int32_t src_first;
-	int32_t src_last;
-	int32_t dest_top;
-	int32_t dest_bottom;
-	int32_t src_top;
-	int32_t src_bottom;
+	int32_t dest_first, dest_last;
+	int32_t src_first, src_last;
+	int32_t dest_top, dest_bottom;
+	int32_t src_top, src_bottom;
 	int32_t src_left, src_right;
 	int32_t src_width, src_height;
 	int32_t dest_left, dest_right;

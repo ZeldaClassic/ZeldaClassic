@@ -1,5 +1,4 @@
-#ifndef _GUYS_H_
-#define _GUYS_H_
+#pragma once
 
 #include <list>
 #include "sprite.h"
@@ -910,4 +909,3 @@ void clear_script_one_frame_conditions();
 void dragging_item();
 void roaming_item();
 int32_t more_carried_items();
-#endif

@@ -1,5 +1,4 @@
-#ifndef ZSCRIPT_ASTVISITORS_H
-#define ZSCRIPT_ASTVISITORS_H
+#pragma once
 
 #include "AST.h"
 #include "CompileError.h"
@@ -391,6 +390,3 @@ namespace ZScript
 		bool failure_halt;
 	};
 }
-
-#endif
-

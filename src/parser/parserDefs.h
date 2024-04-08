@@ -1,5 +1,4 @@
-#ifndef _PARSERDEFS_H_
-#define _PARSERDEFS_H_
+#pragma once
 
 #include "base/zdefs.h"
 #undef TEXT
@@ -51,6 +50,3 @@ void zconsole_info(std::string const& str);
 
 bool zparser_errored_out();
 void zparser_error_out();
-
-#endif
-

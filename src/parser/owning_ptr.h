@@ -1,5 +1,4 @@
-#ifndef ZSCRIPT_OWNING_PTR_H
-#define ZSCRIPT_OWNING_PTR_H
+#pragma once
 
 ////////////////////////////////////////////////////////////////
 // owning_ptr - Owns its pointer, calls clone() on copy
@@ -100,5 +99,3 @@ bool operator!=(Type* lhs, owning_ptr<Type2> const& rhs)
 {
 	return lhs != rhs.get();
 }
-
-#endif

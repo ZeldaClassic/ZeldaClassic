@@ -1,5 +1,4 @@
-#ifndef ZSCRIPT_OWNING_VECTOR_H
-#define ZSCRIPT_OWNING_VECTOR_H
+#pragma once
 
 ////////////////////////////////////////////////////////////////
 // owning_vector - a quick replacement for vector<unique_ptr<T*> >.
@@ -151,5 +150,3 @@ inline bool operator>=(owning_vector<Element> const& lhs,
 template <class Element>
 inline void swap(owning_vector<Element>& x, owning_vector<Element>& y) {
 	swap(x.data(), y.data());}
-
-#endif

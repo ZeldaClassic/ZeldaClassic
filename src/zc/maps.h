@@ -1,5 +1,4 @@
-#ifndef _MAPS_H_
-#define _MAPS_H_
+#pragma once
 #include "base/zdefs.h"
 
 struct newcombo;
@@ -208,4 +207,3 @@ void init_ffpos();
 
 //
 bool is_push(mapscr* m, int32_t pos);
-#endif

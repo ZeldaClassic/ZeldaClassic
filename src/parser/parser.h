@@ -1,7 +1,3 @@
-#ifndef ZC_PARSER_H
-#define ZC_PARSER_H
+#pragma once
 
 extern FFScript FFCore;
-
-#endif
-

@@ -1,5 +1,4 @@
-#ifndef BUILDVISITORS_H //2.53 Updated to 16th Jan, 2017
-#define BUILDVISITORS_H
+#pragma once //2.53 Updated to 16th Jan, 2017
 
 #include "ASTVisitors.h"
 #include "ByteCode.h"
@@ -217,5 +216,3 @@ namespace ZScript
 		}
 	};
 }
-#endif
-

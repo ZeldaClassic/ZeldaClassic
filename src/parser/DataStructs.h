@@ -1,5 +1,4 @@
-#ifndef ZSCRIPT_DATASTRUCTS_H
-#define ZSCRIPT_DATASTRUCTS_H
+#pragma once
 
 #include <vector>
 #include "AST.h"
@@ -30,6 +29,3 @@ namespace ZScript
 		std::vector<std::shared_ptr<Opcode>> deallocCode;
 	};
 }
-
-#endif
-

@@ -4,8 +4,7 @@
  * Author: Emily
  */
 
-#ifndef REGISTRATIONVISITOR_H
-#define REGISTRATIONVISITOR_H
+#pragma once
 
 #include "ASTVisitors.h"
 #include "DataStructs.h"
@@ -120,6 +119,3 @@ namespace ZScript
 		bool hasChanged;
 	};
 }
-
-#endif
-

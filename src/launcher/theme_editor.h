@@ -1,5 +1,4 @@
-#ifndef ZC_THEME_EDIT_DIALOG_H
-#define ZC_THEME_EDIT_DIALOG_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/text_field.h>
@@ -32,6 +31,3 @@ private:
 	unsigned char work_colors[9][3];
 	WidgetSet<GUI::TextField> tf_red, tf_green, tf_blue, tf_jc;
 };
-
-#endif
-

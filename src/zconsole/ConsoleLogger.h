@@ -1,5 +1,4 @@
-#ifndef ZC_CONSOLE_LOGGER_H
-#define ZC_CONSOLE_LOGGER_H
+#pragma once
 
 #include "base/zdefs.h"
 #include "base/process_management.h"
@@ -386,6 +385,3 @@ protected:
 #endif
 
 #endif
-
-#endif
-

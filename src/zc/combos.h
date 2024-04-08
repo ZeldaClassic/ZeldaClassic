@@ -1,5 +1,4 @@
-#ifndef _COMBOS_H_
-#define _COMBOS_H_
+#pragma once
 
 #include "base/zdefs.h"
 #include "base/cpos_info.h"
@@ -75,7 +74,3 @@ int cpos_exists_spotlight();
 void cpos_clear_all();
 void cpos_force_update();
 void cpos_update();
-
-
-#endif
-

@@ -1,5 +1,4 @@
-#ifndef ZC_LAUNCHER_DIALOG_H
-#define ZC_LAUNCHER_DIALOG_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/text_field.h>
@@ -34,6 +33,3 @@ private:
 	std::shared_ptr<GUI::Label> lbl_theme_error;
 	std::shared_ptr<GUI::DropDownList> ddl_res;
 };
-
-#endif
-

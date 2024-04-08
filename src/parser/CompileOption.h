@@ -1,5 +1,4 @@
-#ifndef ZSCRIPT_COMPILE_OPTION_H
-#define ZSCRIPT_COMPILE_OPTION_H
+#pragma once
 
 #include <string>
 #include "CompilerUtils.h"
@@ -85,5 +84,3 @@ namespace ZScript
 		CompileOption(int32_t id) : id_(id) {}
 	};
 };
-
-#endif

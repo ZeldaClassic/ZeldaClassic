@@ -1,5 +1,4 @@
-#ifndef _ZSCRIPT_SYMBOLS_H
-#define _ZSCRIPT_SYMBOLS_H
+#pragma once
 
 #include <assert.h>
 #include "zsyssimple.h"
@@ -101,6 +100,3 @@ function->internal_flags |= IFUNCFLAG_REASSIGNPTR
 	addOpcode2 (code, new OPopRegister(new VarArgument(t)))
 
 //}
-
-#endif
-

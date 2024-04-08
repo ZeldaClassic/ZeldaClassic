@@ -1,5 +1,4 @@
-#ifndef GLOBALSYMBOLS_H //2.53 Updated to 16th Jan, 2017
-#define GLOBALSYMBOLS_H
+#pragma once //2.53 Updated to 16th Jan, 2017
 
 #include "DataStructs.h"
 #include <string>
@@ -609,7 +608,3 @@ private:
     SubscreenWidgetSymbols();
     void generateCode();
 };
-
-#endif
-
-

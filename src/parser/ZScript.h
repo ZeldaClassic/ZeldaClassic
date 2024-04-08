@@ -1,5 +1,4 @@
-#ifndef ZSCRIPT_ZSCRIPT_H
-#define ZSCRIPT_ZSCRIPT_H
+#pragma once
 
 #include <vector>
 #include <map>
@@ -502,5 +501,3 @@ namespace ZScript
 	// Get the function's parameter count, including "this" if present.
 	int32_t getParameterCount(Function const&);
 }
-
-#endif
