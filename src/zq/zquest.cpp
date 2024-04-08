@@ -9038,11 +9038,11 @@ enum
 };
 static NewMenu brush_menu
 {
-	{ "AutoBrush", toggle_autobrush, MENUID_BRUSH_AUTOBRUSH },
-	{ "Brush Width ", &brush_width_menu, MENUID_BRUSH_WIDTH },
+	{ "AutoBrush",     toggle_autobrush,   MENUID_BRUSH_AUTOBRUSH },
+	{ "Brush Width ",  &brush_width_menu,  MENUID_BRUSH_WIDTH },
 	{ "Brush Height ", &brush_height_menu, MENUID_BRUSH_HEIGHT },
-	{ "ComboBrush", toggle_combobrush, MENUID_BRUSH_COMBOBRUSH },
-	{ "FloatBrush", toggle_floatbrush, MENUID_BRUSH_FLOATBRUSH },
+	{ "ComboBrush",    toggle_combobrush,  MENUID_BRUSH_COMBOBRUSH },
+	{ "FloatBrush",    toggle_floatbrush,  MENUID_BRUSH_FLOATBRUSH },
 };
 int toggle_autobrush()
 {
@@ -9406,15 +9406,11 @@ void fill2_8()
     refresh(rMAP+rSCRMAP);
 }
 
-enum
-{
-	
-};
 static NewMenu fill_menu
 {
-	{ "Flood", set_flood, 0 },
-	{ "Fill (4-way)", set_fill_4, 1 },
-	{ "Fill (8-way)", set_fill_8, 2 },
+	{ "Flood",         set_flood,   0 },
+	{ "Fill (4-way)",  set_fill_4,  1 },
+	{ "Fill (8-way)",  set_fill_8,  2 },
 	{ "Fill2 (4-way)", set_fill2_4, 3 },
 	{ "Fill2 (8-way)", set_fill2_8, 4 },
 };
@@ -9427,19 +9423,19 @@ void set_filltype(int ty)
 int32_t set_flood()
 {
 	set_filltype(0);
-    return D_O_K;
+	return D_O_K;
 }
 
 int32_t set_fill_4()
 {
-    set_filltype(1);
-    return D_O_K;
+	set_filltype(1);
+	return D_O_K;
 }
 
 int32_t set_fill_8()
 {
-    set_filltype(2);
-    return D_O_K;
+	set_filltype(2);
+	return D_O_K;
 }
 
 int32_t set_fill2_4()
