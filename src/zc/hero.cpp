@@ -5562,8 +5562,7 @@ void HeroClass::check_pound_block_layer(int bx, int by, int lyr, weapon* w)
 
 void HeroClass::check_wand_block(weapon *w)
 {
-	
-    int32_t par_item = w->parentitem;
+	int32_t par_item = w->parentitem;
 	al_trace("check_wand_block(weapon *w): par_item is: %d\n", par_item);
 	int32_t usewpn = -1;
 	if ( par_item > -1 )
@@ -5575,21 +5574,20 @@ void HeroClass::check_wand_block(weapon *w)
 		usewpn = w->useweapon;
 	}
 	al_trace("check_wand_block(weapon *w): usewpn is: %d\n", usewpn);
-    if(usewpn != wWand) return;
+	if(usewpn != wWand) return;
 	
 	
-    int32_t bx = 0, by = 0;
-	bx = ((int32_t)w->x) + (((int32_t)w->hit_width)/2);
-	by = ((int32_t)w->y) + (((int32_t)w->hit_height)/2);
+	int32_t bx = ((int32_t)w->x) + (((int32_t)w->hit_width)/2);
+	int32_t by = ((int32_t)w->y) + (((int32_t)w->hit_height)/2);
 	
-    //keep things inside the screen boundaries
-    bx=vbound(bx, 0, 255);
-    by=vbound(by, 0, 176);
-    int32_t fx=vbound(bx, 0, 255);
-    int32_t fy=vbound(by, 0, 176);
-    int32_t cid = MAPCOMBO(bx,by);
-    //first things first
-    if(z>8||fakez>8) return;
+	//keep things inside the screen boundaries
+	bx=vbound(bx, 0, 255);
+	by=vbound(by, 0, 176);
+	int32_t fx=vbound(bx, 0, 255);
+	int32_t fy=vbound(by, 0, 176);
+	int32_t cid = MAPCOMBO(bx,by);
+	//first things first
+	if(z>8||fakez>8) return;
     
     //find out which combo row/column the coordinates are in
     bx &= 0xF0;
@@ -5603,34 +5601,34 @@ void HeroClass::check_wand_block(weapon *w)
     int32_t flag33 = MAPFFCOMBOFLAG(fx,fy);
     int32_t flag34 = MAPFFCOMBOFLAG(fx,fy);
     
-    if(flag31==mfWAND||flag32==mfWAND||flag33==mfWAND||flag34==mfWAND)
-        flag3=mfWAND;
+	if(flag31==mfWAND||flag32==mfWAND||flag33==mfWAND||flag34==mfWAND)
+		flag3=mfWAND;
         
-    if(flag31==mfSTRIKE||flag32==mfSTRIKE||flag33==mfSTRIKE||flag34==mfSTRIKE)
-        flag3=mfSTRIKE;
+	if(flag31==mfSTRIKE||flag32==mfSTRIKE||flag33==mfSTRIKE||flag34==mfSTRIKE)
+		flag3=mfSTRIKE;
         
-    int32_t i = (bx>>4) + by;
+	int32_t i = (bx>>4) + by;
     
-    if(flag!=mfWAND&&flag2!=mfWAND&&flag3!=mfWAND&&flag!=mfSTRIKE&&flag2!=mfSTRIKE&&flag3!=mfSTRIKE)
-        return;
+	if(flag!=mfWAND&&flag2!=mfWAND&&flag3!=mfWAND&&flag!=mfSTRIKE&&flag2!=mfSTRIKE&&flag3!=mfSTRIKE)
+		return;
         
-    if(i > 175)
-        return;
+	if(i > 175)
+		return;
         
-    //mapscr *s = tmpscr + ((currscr>=128) ? 1 : 0);
+	//mapscr *s = tmpscr + ((currscr>=128) ? 1 : 0);
     
-    //findentrance(bx,by,mfWAND,true);
-    //findentrance(bx,by,mfSTRIKE,true);
-    if((findentrance(bx,by,mfWAND,true)==false)&&(findentrance(bx,by,mfSTRIKE,true)==false))
-    {
+	//findentrance(bx,by,mfWAND,true);
+	//findentrance(bx,by,mfSTRIKE,true);
+	if((findentrance(bx,by,mfWAND,true)==false)&&(findentrance(bx,by,mfSTRIKE,true)==false))
+	{
         if(flag3==mfWAND||flag3==mfSTRIKE)
         {
-            findentrance(fx,fy,mfWAND,true);
-            findentrance(fx,fy,mfSTRIKE,true);
-        }
-    }
+		findentrance(fx,fy,mfWAND,true);
+		findentrance(fx,fy,mfSTRIKE,true);
+		}
+	}
     
-    //putcombo(scrollbuf,(i&15)<<4,i&0xF0,s->data[i],s->cset[i]);
+	//putcombo(scrollbuf,(i&15)<<4,i&0xF0,s->data[i],s->cset[i]);
 }
 
 //defend results should match defence types. 
