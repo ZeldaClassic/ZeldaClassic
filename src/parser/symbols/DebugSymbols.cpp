@@ -23,39 +23,39 @@ static AccessorTable DebugTable[] =
 	{ "setPC",                      0,         ZTID_FLOAT,   PC,                        0,  { ZTID_DEBUG },{} },
 	{ "setSP",                      0,         ZTID_FLOAT,   SP,                        0,  { ZTID_DEBUG },{} },
 	{ "getGDR[]",                   0,         ZTID_FLOAT,   DEBUGGDR,                  0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
-	{ "setGDR[]",                   0,          ZTID_VOID,   DEBUGGDR,                  0,  { ZTID_DEBUG, ZTID_FLOAT, ZTID_FLOAT },{} },
+	{ "setGDR[]",                   0,         ZTID_VOID,   DEBUGGDR,                  0,  { ZTID_DEBUG, ZTID_FLOAT, ZTID_FLOAT },{} },
 	
 //	These all work, but may not be permitted by the rest of the dev team. 
 //	At least they are now in a pointer class that denotes that they can be dangerous. 
 	{ "GetBoolPointer",             0,         ZTID_FLOAT,   -1,                        0,  { ZTID_DEBUG, ZTID_BOOL },{} },
-	{ "SetBoolPointer",             0,          ZTID_BOOL,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
+	{ "SetBoolPointer",             0,         ZTID_BOOL,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
 	{ "GetNPCPointer",              0,         ZTID_FLOAT,   -1,                        0,  { ZTID_DEBUG, ZTID_NPC },{} },
-	{ "SetNPCPointer",              0,           ZTID_NPC,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
+	{ "SetNPCPointer",              0,         ZTID_NPC,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
 	{ "GetLWeaponPointer",          0,         ZTID_FLOAT,   -1,                        0,  { ZTID_DEBUG, ZTID_LWPN },{} },
-	{ "SetLWeaponPointer",          0,          ZTID_LWPN,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
+	{ "SetLWeaponPointer",          0,         ZTID_LWPN,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
 	{ "GetEWeaponPointer",          0,         ZTID_FLOAT,   -1,                        0,  { ZTID_DEBUG, ZTID_EWPN },{} },
-	{ "SetEWeaponPointer",          0,          ZTID_EWPN,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
+	{ "SetEWeaponPointer",          0,         ZTID_EWPN,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
 	{ "GetFFCPointer",              0,         ZTID_FLOAT,   -1,                        0,  { ZTID_DEBUG, ZTID_FFC },{} },
-	{ "SetFFCPointer",              0,           ZTID_FFC,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
+	{ "SetFFCPointer",              0,         ZTID_FFC,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
 	{ "GetItemPointer",             0,         ZTID_FLOAT,   -1,                        0,  { ZTID_DEBUG, ZTID_ITEM },{} },
-	{ "SetItemPointer",             0,          ZTID_ITEM,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
+	{ "SetItemPointer",             0,         ZTID_ITEM,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
 	{ "GetItemdataPointer",         0,         ZTID_FLOAT,   -1,                        0,  { ZTID_DEBUG, ZTID_ITEMCLASS },{} },
-	{ "SetItemdataPointer",         0,     ZTID_ITEMCLASS,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
+	{ "SetItemdataPointer",         0,         ZTID_ITEMCLASS,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
 	
 	{ "getPlayfieldOffset",         0,         ZTID_FLOAT,   GAMEPLAYFIELDOFS,          0,  { ZTID_DEBUG },{} },
-	{ "TriggerSecret",              0,          ZTID_VOID,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
-	{ "ChangeFFCScript",            0,          ZTID_VOID,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
+	{ "TriggerSecret",              0,         ZTID_VOID,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
+	{ "ChangeFFCScript",            0,         ZTID_VOID,   -1,                        0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
 	
 	{ "getD[]",                     0,         ZTID_FLOAT,   DEBUGD,                    0,  { ZTID_DEBUG, ZTID_FLOAT },{} },
 	{ "setD[]",                     0,         ZTID_FLOAT,   DEBUGD,                    0,  { ZTID_DEBUG, ZTID_FLOAT, ZTID_FLOAT },{} },
-	{ "_getNULL",                   0,       ZTID_UNTYPED,   DONULL,                    0,  { ZTID_DEBUG },{} },
-	{ "_getNull",                   0,       ZTID_UNTYPED,   DONULL,                    0,  { ZTID_DEBUG },{} },
-	{ "getNULL",                    0,       ZTID_UNTYPED,   DONULL,                    0,  { ZTID_DEBUG },{} },
-	{ "getNull",                    0,       ZTID_UNTYPED,   DONULL,                    0,  { ZTID_DEBUG },{} },
-	{ "Breakpoint",                 0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_DEBUG, ZTID_CHAR },{ 0 } },
-	{ "getTesting",                 0,          ZTID_BOOL,   DEBUGTESTING,              0,  { ZTID_DEBUG },{} },
+	{ "_getNULL",                   0,         ZTID_UNTYPED,   DONULL,                    0,  { ZTID_DEBUG },{} },
+	{ "_getNull",                   0,         ZTID_UNTYPED,   DONULL,                    0,  { ZTID_DEBUG },{} },
+	{ "getNULL",                    0,         ZTID_UNTYPED,   DONULL,                    0,  { ZTID_DEBUG },{} },
+	{ "getNull",                    0,         ZTID_UNTYPED,   DONULL,                    0,  { ZTID_DEBUG },{} },
+	{ "Breakpoint",                 0,         ZTID_VOID,   -1,                   FL_INL,  { ZTID_DEBUG, ZTID_CHAR },{ 0 } },
+	{ "getTesting",                 0,         ZTID_BOOL,   DEBUGTESTING,              0,  { ZTID_DEBUG },{} },
 	
-	{ "",                           0,          ZTID_VOID,   -1,                        0,  {},{} }
+	{ "",                           0,         ZTID_VOID,   -1,                        0,  {},{} }
 };
 
 DebugSymbols::DebugSymbols()
@@ -285,4 +285,3 @@ void DebugSymbols::generateCode()
 		function->giveCode(code);
 	}
 }
-

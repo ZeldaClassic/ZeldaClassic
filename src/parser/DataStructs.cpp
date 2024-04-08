@@ -60,4 +60,3 @@ IntermediateData::IntermediateData(FunctionData const& functionData)
 OpcodeContext::OpcodeContext(ZScript::TypeStore* typeStore)
 	: typeStore(typeStore)
 {}
-

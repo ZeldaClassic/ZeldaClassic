@@ -4,14 +4,14 @@ DirectorySymbols DirectorySymbols::singleton = DirectorySymbols();
 
 static AccessorTable DirectoryTable[] =
 {
-	//name,                       tag,            rettype,   var,               funcFlags,  params,optparams
-	{ "getSize",                    0,         ZTID_FLOAT,   DIRECTORYSIZE,             0,  { ZTID_DIRECTORY },{} },
-	{ "GetFilename",                0,          ZTID_BOOL,   -1,                        0,  { ZTID_DIRECTORY, ZTID_FLOAT, ZTID_CHAR },{} },
-	{ "Reload",                     0,          ZTID_VOID,   -1,                        0,  { ZTID_DIRECTORY },{} },
-	{ "Free",                       0,          ZTID_VOID,   -1,                        0,  { ZTID_DIRECTORY },{} },
-	{ "Own",                        0,          ZTID_VOID,   -1,                        0,  { ZTID_DIRECTORY },{} },
+	//name,            tag,            rettype,   var,               funcFlags,  params,optparams
+	{ "getSize",         0,         ZTID_FLOAT,   DIRECTORYSIZE,             0,  { ZTID_DIRECTORY },{} },
+	{ "GetFilename",     0,          ZTID_BOOL,   -1,                        0,  { ZTID_DIRECTORY, ZTID_FLOAT, ZTID_CHAR },{} },
+	{ "Reload",          0,          ZTID_VOID,   -1,                        0,  { ZTID_DIRECTORY },{} },
+	{ "Free",            0,          ZTID_VOID,   -1,                        0,  { ZTID_DIRECTORY },{} },
+	{ "Own",             0,          ZTID_VOID,   -1,                        0,  { ZTID_DIRECTORY },{} },
 	
-	{ "",                           0,          ZTID_VOID,   -1,                        0,  {},{} }
+	{ "",                0,          ZTID_VOID,   -1,                        0,  {},{} }
 };
 
 DirectorySymbols::DirectorySymbols()
@@ -77,4 +77,3 @@ void DirectorySymbols::generateCode()
 		function->giveCode(code);
 	}
 }
-

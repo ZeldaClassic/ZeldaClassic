@@ -76,63 +76,63 @@ namespace GUI::Lists
 {
 	static const ListData snapshotFormatList
 	{
-		{ "BMP", 0 },
-		{ "GIF", 1 },
+		{ "BMP",  0 },
+		{ "GIF",  1 },
 		{ "JPEG", 2 },
-		{ "PNG", 3 },
-		{ "PCX", 4 },
-		{ "TGA", 5 }
+		{ "PNG",  3 },
+		{ "PCX",  4 },
+		{ "TGA",  5 }
 	};
 	static const ListData bottom8_list
 	{
-		{ "No Cover", 0 },
+		{ "No Cover",        0 },
 		{ "Pixelated Cover", 1 },
-		{ "Normal Cover", 2 }
+		{ "Normal Cover",    2 }
 	};
 	static const GUI::ListData invalidDataBGList
 	{
-		{ "X Out", 0 },
-		{ "Static", 1 },
+		{ "X Out",        0 },
+		{ "Static"  ,     1 },
 		{ "Checkerboard", 2 }
 	};
 	static const ListData autoBackupCopiesList = ListData::numbers(false, 0, 11);
-	static const ListData autoSaveCopiesList = ListData::numbers(false, 1, 10);
+	static const ListData autoSaveCopiesList   = ListData::numbers(false, 1, 10);
 	static const ListData frameRestSuggestList = ListData::numbers(false, 0, 3);
 
 	static const ListData gfxDriverList
 	{
-		{ "Default", 0 },
+		{ "Default",  0 },
 		{ "Direct3D", 1 },
-		{ "OpenGL", 2 }
+		{ "OpenGL",   2 }
 	};
 	
 	static const ListData nameEntryList
 	{
-		{ "Keyboard", 0 },
-		{ "Letter Grid", 1 },
+		{ "Keyboard",             0 },
+		{ "Letter Grid",          1 },
 		{ "Extended Letter Grid", 2 }
 	};
 	
 	static const ListData resPresetList
 	{
-		{ "640x480", 2 },
-		{ "960x720", 3 },
-		{ "1280x960", 4 },
+		{ "640x480",   2 },
+		{ "960x720",   3 },
+		{ "1280x960",  4 },
 		{ "1600x1200", 5 }
 	};
 
 	static const ListData quickSlotList
 	{
 		{ "Disabled", 0 },
-		{ "Slot 1", 1 },
-		{ "Slot 2", 2 },
-		{ "Slot 3", 3 },
-		{ "Slot 4", 4 },
-		{ "Slot 5", 5 },
-		{ "Slot 6", 6 },
-		{ "Slot 7", 7 },
-		{ "Slot 8", 8 },
-		{ "Slot 9", 9 },
+		{ "Slot 1",   1 },
+		{ "Slot 2",   2 },
+		{ "Slot 3",   3 },
+		{ "Slot 4",   4 },
+		{ "Slot 5",   5 },
+		{ "Slot 6",   6 },
+		{ "Slot 7",   7 },
+		{ "Slot 8",   8 },
+		{ "Slot 9",   9 },
 		{ "Slot 10", 10 },
 		{ "Slot 11", 11 },
 		{ "Slot 12", 12 },
@@ -147,12 +147,12 @@ namespace GUI::Lists
 		{ "1/2 Available", -2 },
 		{ "1/3 Available", -3 },
 		{ "1/4 Available", -4 },
-		{ "1", 1 },
-		{ "2", 2 },
-		{ "3", 3 },
-		{ "4", 4 },
-		{ "8", 8 },
-		{ "Disabled", 0 }
+		{ "1",              1 },
+		{ "2",              2 },
+		{ "3",              3 },
+		{ "4",              4 },
+		{ "8",              8 },
+		{ "Disabled",       0 }
 	};
 
 	static const GUI::ListData snapshotScaleList
@@ -368,9 +368,9 @@ case val: \
 
 int32_t getGFXDriverID(char const* configstr)
 {
-	CMP_GFX("Default", 0);
+	CMP_GFX("Default",  0);
 	CMP_GFX("Direct3D", 1);
-	CMP_GFX("OpenGL", 2);
+	CMP_GFX("OpenGL",   2);
 	return 0;
 }
 
@@ -379,9 +379,9 @@ char const* getGFXDriverStr(int32_t id)
 {
 	switch(id)
 	{
-		STR_GFX("Default", 0);
+		STR_GFX("Default",  0);
 		STR_GFX("Direct3D", 1);
-		STR_GFX("OpenGL", 2);
+		STR_GFX("OpenGL",   2);
 		default: gfx_card_buf[0]=0; break;
 	}
 	return gfx_card_buf;
@@ -522,41 +522,41 @@ std::shared_ptr<GUI::Widget> LauncherDialog::view()
 				},
 				TabRef(name = "ZC Player", Row(framed = true,
 					Rows<2>(fitParent = true,
-						CONFIG_CHECKBOX("Fullscreen",App::zelda,"zeldadx","fullscreen",0),
-						CONFIG_CHECKBOX("Disable Resizing",App::zelda,"gui","disable_window_resizing",0),
-						CONFIG_CHECKBOX("Cap FPS",App::zelda,"zeldadx","throttlefps",1),
-						CONFIG_CHECKBOX("Show FPS",App::zelda,"zeldadx","showfps",0),
-						CONFIG_CHECKBOX("Show Game Time",App::zelda,"zeldadx","showtime",0),
-						CONFIG_CHECKBOX("Cont. Heart Beep",App::zelda,"zeldadx","heart_beep",0),
-						CONFIG_CHECKBOX("Disable Sound",App::zelda,"zeldadx","nosound",0),
-						CONFIG_CHECKBOX_I("Replay New Saves",App::zelda,"zeldadx","replay_new_saves",0,"Starting a new game will prompt recording to a .zplay file"),
-						CONFIG_CHECKBOX_I("Replay Debug",App::zelda,"zeldadx","replay_debug",1,"Record debug information when making a .zplay file")
+						CONFIG_CHECKBOX("Fullscreen",         App::zelda,"zeldadx","fullscreen",0),
+						CONFIG_CHECKBOX("Disable Resizing",   App::zelda,"gui","disable_window_resizing",0),
+						CONFIG_CHECKBOX("Cap FPS",            App::zelda,"zeldadx","throttlefps",1),
+						CONFIG_CHECKBOX("Show FPS",           App::zelda,"zeldadx","showfps",0),
+						CONFIG_CHECKBOX("Show Game Time",     App::zelda,"zeldadx","showtime",0),
+						CONFIG_CHECKBOX("Cont. Heart Beep",   App::zelda,"zeldadx","heart_beep",0),
+						CONFIG_CHECKBOX("Disable Sound",      App::zelda,"zeldadx","nosound",0),
+						CONFIG_CHECKBOX_I("Replay New Saves", App::zelda,"zeldadx","replay_new_saves",0,"Starting a new game will prompt recording to a .zplay file"),
+						CONFIG_CHECKBOX_I("Replay Debug",     App::zelda,"zeldadx","replay_debug",1,"Record debug information when making a .zplay file")
 					),
 					Rows<2>(fitParent = true,
-						CONFIG_CHECKBOX("Force-reload Quest Icons",App::zelda,"zeldadx","reload_game_icons",0),
-						CONFIG_CHECKBOX_I("Allow Multiple Instances",App::zelda,"zeldadx","multiple_instances",0,"This can cause issues including but not limited to save file deletion."),
-						CONFIG_CHECKBOX("Click to Freeze",App::zelda,"zeldadx","clicktofreeze",1),
-						CONFIG_CHECKBOX_I("Quickload Last Quest",App::zelda,"zeldadx","quickload_last",0,"Unless 'Quickload Slot' is set, this will load the last quest played immediately upon launching."),
-						CONFIG_CHECKBOX_I("Autosave Window Size Changes",App::zelda,"zeldadx","save_drag_resize",0,"Makes any changes to the window size by dragging get saved for whenever you open the program next."),
-						CONFIG_CHECKBOX_I("Lock Aspect Ratio On Resize",App::zelda,"zeldadx","drag_aspect",1,"Makes any changes to the window size by dragging get snapped to ZC's default (4:3) aspect ratio."),
-						CONFIG_CHECKBOX_I("Save Window Position",App::zelda,"zeldadx","save_window_position",0,"Remembers the last position of the ZC Window."),
-						CONFIG_CHECKBOX_I("Force Integer Values for Scale",App::zelda,"zeldadx","scaling_force_integer",1,"Locks the screen to only scale by an integer value. Results in perfect pixel art scaling, at the expense of not using the entire availabe window space."),
-						CONFIG_CHECKBOX_I("Linear Scaling",App::zelda,"zeldadx","scaling_mode",0,"Use linear scaling when upscaling the window. If off, the default is nearest-neighbor scaling. If on, things will look a little blurry at most resolutions"),
-						CONFIG_CHECKBOX_I("Monochrome Debuggers",App::zelda,"CONSOLE","monochrome_debuggers",0,"Use non-colored debugger text."),
-						CONFIG_CHECKBOX_I("(EXPERIMENTAL) JIT script compilation",App::zelda,"ZSCRIPT","jit",0,"Compile scripts to machine code. Depending on the script, can be up to 10x faster. 64-bit only"),
-						CONFIG_CHECKBOX_I("(EXPERIMENTAL) JIT precompile",App::zelda,"ZSCRIPT","jit_precompile",0,"Do all JIT compilation upfront on quest load. Can take a couple minutes, but will avoid random pauses during play."),
-						CONFIG_CHECKBOX_I("Auto restart in Test Mode",App::zelda,"zeldadx","test_mode_auto_restart",0,"When a quest file is saved while in test mode, auto restarts zplayer.")
+						CONFIG_CHECKBOX("Force-reload Quest Icons",                App::zelda,"zeldadx","reload_game_icons",0),
+						CONFIG_CHECKBOX_I("Allow Multiple Instances",              App::zelda,"zeldadx","multiple_instances",0,"This can cause issues including but not limited to save file deletion."),
+						CONFIG_CHECKBOX("Click to Freeze",                         App::zelda,"zeldadx","clicktofreeze",1),
+						CONFIG_CHECKBOX_I("Quickload Last Quest",                  App::zelda,"zeldadx","quickload_last",0,"Unless 'Quickload Slot' is set, this will load the last quest played immediately upon launching."),
+						CONFIG_CHECKBOX_I("Autosave Window Size Changes",          App::zelda,"zeldadx","save_drag_resize",0,"Makes any changes to the window size by dragging get saved for whenever you open the program next."),
+						CONFIG_CHECKBOX_I("Lock Aspect Ratio On Resize",           App::zelda,"zeldadx","drag_aspect",1,"Makes any changes to the window size by dragging get snapped to ZC's default (4:3) aspect ratio."),
+						CONFIG_CHECKBOX_I("Save Window Position",                  App::zelda,"zeldadx","save_window_position",0,"Remembers the last position of the ZC Window."),
+						CONFIG_CHECKBOX_I("Force Integer Values for Scale",        App::zelda,"zeldadx","scaling_force_integer",1,"Locks the screen to only scale by an integer value. Results in perfect pixel art scaling, at the expense of not using the entire availabe window space."),
+						CONFIG_CHECKBOX_I("Linear Scaling",                        App::zelda,"zeldadx","scaling_mode",0,"Use linear scaling when upscaling the window. If off, the default is nearest-neighbor scaling. If on, things will look a little blurry at most resolutions"),
+						CONFIG_CHECKBOX_I("Monochrome Debuggers",                  App::zelda,"CONSOLE","monochrome_debuggers",0,"Use non-colored debugger text."),
+						CONFIG_CHECKBOX_I("(EXPERIMENTAL) JIT script compilation", App::zelda,"ZSCRIPT","jit",0,"Compile scripts to machine code. Depending on the script, can be up to 10x faster. 64-bit only"),
+						CONFIG_CHECKBOX_I("(EXPERIMENTAL) JIT precompile",         App::zelda,"ZSCRIPT","jit_precompile",0,"Do all JIT compilation upfront on quest load. Can take a couple minutes, but will avoid random pauses during play."),
+						CONFIG_CHECKBOX_I("Auto restart in Test Mode",             App::zelda,"zeldadx","test_mode_auto_restart",0,"When a quest file is saved while in test mode, auto restarts zplayer.")
 					),
 					Rows<3>(fitParent = true,
-						CONFIG_TEXTFIELD_FL("Cursor Scale:", App::zelda,"zeldadx","cursor_scale_large",1.5,1.0,5.0, 4),
+						CONFIG_TEXTFIELD_FL("Cursor Scale:",  App::zelda,"zeldadx","cursor_scale_large",1.5,1.0,5.0, 4),
 						CONFIG_DROPDOWN_I("Snapshot Format:", App::zelda,"zeldadx","snapshot_format",3,snapshotFormatList,"The format of snapshots"),
-						CONFIG_DROPDOWN_I("Snapshot Scale:", App::zelda,"zeldadx","snapshot_scale",2,snapshotScaleList,"The scale of snapshots"),
+						CONFIG_DROPDOWN_I("Snapshot Scale:",  App::zelda,"zeldadx","snapshot_scale",2,snapshotScaleList,"The scale of snapshots"),
 						CONFIG_DROPDOWN_I("Name Entry Mode:", App::zelda,"zeldadx","name_entry_mode",0,nameEntryList,"The entry method of save file names."),
-						CONFIG_TEXTFIELD_I("Window Width:",App::zelda,"zeldadx","window_width", -1, -1, 3000, "The width of the ZC window, for windowed mode. If -1 the largest possible window will be made without distorting the pixel content."),
-						CONFIG_TEXTFIELD_I("Window Height:",App::zelda,"zeldadx","window_height", -1, -1, 2250, "The height of the ZC window, for windowed mode. If -1 the largest possible window will be made without distorting the pixel content."),
-						CONFIG_TEXTFIELD_I("Saved Window X:",App::zelda,"zeldadx","window_x", 0, 0, rightmost, "The top-left corner of the ZQuest Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
-						CONFIG_TEXTFIELD_I("Saved Window Y:",App::zelda,"zeldadx","window_y", 0, 0, bottommost, "The top-left corner of the ZQuest Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
-						GFXCARD_DROPDOWN("Graphics Driver:", App::zelda, "graphics", "driver", 0, gfxDriverList),
+						CONFIG_TEXTFIELD_I("Window Width:",   App::zelda,"zeldadx","window_width", -1, -1, 3000, "The width of the ZC window, for windowed mode. If -1 the largest possible window will be made without distorting the pixel content."),
+						CONFIG_TEXTFIELD_I("Window Height:",  App::zelda,"zeldadx","window_height", -1, -1, 2250, "The height of the ZC window, for windowed mode. If -1 the largest possible window will be made without distorting the pixel content."),
+						CONFIG_TEXTFIELD_I("Saved Window X:", App::zelda,"zeldadx","window_x", 0, 0, rightmost, "The top-left corner of the ZQuest Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
+						CONFIG_TEXTFIELD_I("Saved Window Y:", App::zelda,"zeldadx","window_y", 0, 0, bottommost, "The top-left corner of the ZQuest Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
+						GFXCARD_DROPDOWN("Graphics Driver:",  App::zelda, "graphics", "driver", 0, gfxDriverList),
 						CONFIG_DROPDOWN_I("(EXPERIMENTAL) JIT threads:",App::zelda,"ZSCRIPT","jit_threads",-2,jitThreadsList,"Use background threads to speed up JIT compilation"),
 						//
 						Button(hAlign = 1.0, forceFitH = true,
@@ -588,50 +588,50 @@ std::shared_ptr<GUI::Widget> LauncherDialog::view()
 				)),
 				TabRef(name = "ZC Editor", Row(framed = true,
 					Rows<2>(fitParent = true,
-						CONFIG_CHECKBOX_I("Fullscreen",App::zquest,"zquest","fullscreen",0,"Exactly stable."),
-						CONFIG_CHECKBOX("Disable Resizing",App::zquest,"gui","disable_window_resizing",0),
-						CONFIG_CHECKBOX("Show FPS",App::zquest,"zquest","showfps",0),
-						CONFIG_CHECKBOX("Disable Sound",App::zquest,"zquest","nosound",0),
-						CONFIG_CHECKBOX("Animate Combos",App::zquest,"zquest","animation_on",1),
-						CONFIG_CHECKBOX("Combo Brush",App::zquest,"zquest","combo_brush",0),
-						CONFIG_CHECKBOX("Enable Tooltips",App::zquest,"zquest","enable_tooltips",1),
-						CONFIG_CHECKBOX("Tooltips Highlight Target",App::zquest,"zquest","ttip_highlight",1),
-						CONFIG_CHECKBOX("Floating Brush",App::zquest,"zquest","float_brush",0),
-						CONFIG_CHECKBOX("Mouse Scroll",App::zquest,"zquest","mouse_scroll",0),
-						CONFIG_CHECKBOX("Overwrite Protection",App::zquest,"zquest","overwrite_prevention",0),
-						CONFIG_CHECKBOX("Palette Cycle",App::zquest,"zquest","cycle_on",1),
-						CONFIG_CHECKBOX_I("Reload Last Quest",App::zquest,"zquest","open_last_quest",1,"On launching, immediately attempt to open the last file edited."),
-						CONFIG_CHECKBOX("Save Paths",App::zquest,"zquest","save_paths",1),
-						CONFIG_CHECKBOX_I("Show Misalignments",App::zquest,"zquest","show_misalignments",0,"Shows blinking arrows on the sides of the screen where the solidity does not match across the screen border."),
-						CONFIG_CHECKBOX("Tile Protection",App::zquest,"zquest","tile_protection",1)
+						CONFIG_CHECKBOX_I("Fullscreen",              App::zquest,"zquest","fullscreen",0,"Exactly stable."),
+						CONFIG_CHECKBOX("Disable Resizing",          App::zquest,"gui","disable_window_resizing",0),
+						CONFIG_CHECKBOX("Show FPS",                  App::zquest,"zquest","showfps",0),
+						CONFIG_CHECKBOX("Disable Sound",             App::zquest,"zquest","nosound",0),
+						CONFIG_CHECKBOX("Animate Combos",            App::zquest,"zquest","animation_on",1),
+						CONFIG_CHECKBOX("Combo Brush",               App::zquest,"zquest","combo_brush",0),
+						CONFIG_CHECKBOX("Enable Tooltips",           App::zquest,"zquest","enable_tooltips",1),
+						CONFIG_CHECKBOX("Tooltips Highlight Target", App::zquest,"zquest","ttip_highlight",1),
+						CONFIG_CHECKBOX("Floating Brush",            App::zquest,"zquest","float_brush",0),
+						CONFIG_CHECKBOX("Mouse Scroll",              App::zquest,"zquest","mouse_scroll",0),
+						CONFIG_CHECKBOX("Overwrite Protection",      App::zquest,"zquest","overwrite_prevention",0),
+						CONFIG_CHECKBOX("Palette Cycle",             App::zquest,"zquest","cycle_on",1),
+						CONFIG_CHECKBOX_I("Reload Last Quest",       App::zquest,"zquest","open_last_quest",1,"On launching, immediately attempt to open the last file edited."),
+						CONFIG_CHECKBOX("Save Paths",                App::zquest,"zquest","save_paths",1),
+						CONFIG_CHECKBOX_I("Show Misalignments",      App::zquest,"zquest","show_misalignments",0,"Shows blinking arrows on the sides of the screen where the solidity does not match across the screen border."),
+						CONFIG_CHECKBOX("Tile Protection",           App::zquest,"zquest","tile_protection",1)
 					),
 					Rows<2>(fitParent = true,
-						CONFIG_CHECKBOX("Uncompressed Autosaves",App::zquest,"zquest","uncompressed_auto_saves",1),
-						CONFIG_CHECKBOX_I("Warn on Init Script Change",App::zquest,"zquest","warn_initscript_changes",1,"When compiling ZScript, receive a warning when the global init script changes (which may break existing save files for the quest)"),
-						CONFIG_CHECKBOX_I("Show Ruleset Dialog on New Quest",App::zquest,"zquest","rulesetdialog",0,"On creating a 'New' quest, automatically pop up the 'Pick Ruleset' menu. (This can be found any time at 'Quest->Options->Pick Ruleset')"),
-						CONFIG_CHECKBOX_I("Monochrome Debuggers",App::zquest,"CONSOLE","monochrome_debuggers",0,"Use non-colored debugger text."),
-						CONFIG_CHECKBOX_I("Disable Level Palette Shortcuts",App::zquest,"zquest","dis_lpal_shortcut",1,"If enabled, keyboard shortcuts that change the screen's palette are disabled."),
-						CONFIG_CHECKBOX_I("Autosave Window Size Changes",App::zquest,"zquest","save_drag_resize",0,"Makes any changes to the window size by dragging get saved for whenever you open the program next."),
-						CONFIG_CHECKBOX_I("Lock Aspect Ratio On Resize",App::zquest,"zquest","drag_aspect",1,"Makes any changes to the window size by dragging get snapped to ZQuest's default (4:3) aspect ratio."),
-						CONFIG_CHECKBOX_I("Save Window Position",App::zquest,"zquest","save_window_position",0,"Remembers the last position of the ZQuest Window."),
-						CONFIG_CHECKBOX_I("Force Integer Values for Scale",App::zquest,"zquest","scaling_force_integer",0,"Locks the screen to only scale by an integer value. Results in perfect pixel art scaling, at the expense of not using the entire availabe window space."),
-						CONFIG_CHECKBOX_I("Linear Scaling",App::zquest,"zquest","scaling_mode",0,"Use linear scaling when upscaling the window. If off, the default is nearest-neighbor scaling. If on, things will look a little blurry at most resolutions"),
-						CONFIG_CHECKBOX_I("Custom Fonts",App::zquest,"ZQ_GUI","custom_fonts",1,"Use custom fonts from the 'customfonts' folder for UI elements.")
+						CONFIG_CHECKBOX("Uncompressed Autosaves",             App::zquest,"zquest","uncompressed_auto_saves",1),
+						CONFIG_CHECKBOX_I("Warn on Init Script Change",       App::zquest,"zquest","warn_initscript_changes",1,"When compiling ZScript, receive a warning when the global init script changes (which may break existing save files for the quest)"),
+						CONFIG_CHECKBOX_I("Show Ruleset Dialog on New Quest", App::zquest,"zquest","rulesetdialog",0,"On creating a 'New' quest, automatically pop up the 'Pick Ruleset' menu. (This can be found any time at 'Quest->Options->Pick Ruleset')"),
+						CONFIG_CHECKBOX_I("Monochrome Debuggers",             App::zquest,"CONSOLE","monochrome_debuggers",0,"Use non-colored debugger text."),
+						CONFIG_CHECKBOX_I("Disable Level Palette Shortcuts",  App::zquest,"zquest","dis_lpal_shortcut",1,"If enabled, keyboard shortcuts that change the screen's palette are disabled."),
+						CONFIG_CHECKBOX_I("Autosave Window Size Changes",     App::zquest,"zquest","save_drag_resize",0,"Makes any changes to the window size by dragging get saved for whenever you open the program next."),
+						CONFIG_CHECKBOX_I("Lock Aspect Ratio On Resize",      App::zquest,"zquest","drag_aspect",1,"Makes any changes to the window size by dragging get snapped to ZQuest's default (4:3) aspect ratio."),
+						CONFIG_CHECKBOX_I("Save Window Position",             App::zquest,"zquest","save_window_position",0,"Remembers the last position of the ZQuest Window."),
+						CONFIG_CHECKBOX_I("Force Integer Values for Scale",   App::zquest,"zquest","scaling_force_integer",0,"Locks the screen to only scale by an integer value. Results in perfect pixel art scaling, at the expense of not using the entire availabe window space."),
+						CONFIG_CHECKBOX_I("Linear Scaling",                   App::zquest,"zquest","scaling_mode",0,"Use linear scaling when upscaling the window. If off, the default is nearest-neighbor scaling. If on, things will look a little blurry at most resolutions"),
+						CONFIG_CHECKBOX_I("Custom Fonts",                     App::zquest,"ZQ_GUI","custom_fonts",1,"Use custom fonts from the 'customfonts' folder for UI elements.")
 					),
 					Rows<3>(fitParent = true,
-						CONFIG_TEXTFIELD_FL("Cursor Scale:", App::zquest,"zquest","cursor_scale_large",1.5,1.0,5.0, 4),
-						CONFIG_DROPDOWN_I("Invalid Data BG:",App::zquest,"zquest","invalid_bg",0,invalidDataBGList,"What effect to use for 'invalid' things (filtered out combos, nonexistant screens on the minimap, etc)"),
-						CONFIG_DROPDOWN_I("Bottom 8 pixels:", App::zquest,"ZQ_GUI","bottom_8_pixels",0,bottom8_list,"How to hide the bottom 8 screen pixels"),
-						CONFIG_DROPDOWN_I("Snapshot Output:", App::zquest,"zquest","snapshot_format",3,snapshotFormatList,"The format of map screen snapshots / window screenshots"),
-						CONFIG_DROPDOWN_I("Snapshot Scale:", App::zquest,"zquest","snapshot_scale",2,snapshotScaleList,"The scale of snapshots"),
+						CONFIG_TEXTFIELD_FL("Cursor Scale:",        App::zquest,"zquest","cursor_scale_large",1.5,1.0,5.0, 4),
+						CONFIG_DROPDOWN_I("Invalid Data BG:",       App::zquest,"zquest","invalid_bg",0,invalidDataBGList,"What effect to use for 'invalid' things (filtered out combos, nonexistant screens on the minimap, etc)"),
+						CONFIG_DROPDOWN_I("Bottom 8 pixels:",       App::zquest,"ZQ_GUI","bottom_8_pixels",0,bottom8_list,"How to hide the bottom 8 screen pixels"),
+						CONFIG_DROPDOWN_I("Snapshot Output:",       App::zquest,"zquest","snapshot_format",3,snapshotFormatList,"The format of map screen snapshots / window screenshots"),
+						CONFIG_DROPDOWN_I("Snapshot Scale:",        App::zquest,"zquest","snapshot_scale",2,snapshotScaleList,"The scale of snapshots"),
 						CONFIG_DROPDOWN_I("Auto-Backup Retention:", App::zquest,"zquest","auto_backup_retention",0,autoBackupCopiesList,"The number of auto-backups to keep"),
-						CONFIG_DROPDOWN_I("Auto-Save Retention:", App::zquest,"zquest","auto_save_retention",9,autoSaveCopiesList,"The number of auto-saves to keep"),
-						CONFIG_TEXTFIELD_I("Auto-Save Interval:", App::zquest, "zquest", "auto_save_interval", 5, 0, 300, "Frequency of auto saves, in minutes. Valid range is 0-300, where '0' disables autosaves alltogether."),
-						CONFIG_TEXTFIELD_I("Window Width:",App::zquest,"zquest","window_width", -1, -1, 3000, "The width of the ZQuest window. If -1 the largest possible window will be made without distorting the pixel content."),
-						CONFIG_TEXTFIELD_I("Window Height:",App::zquest,"zquest","window_height", -1, -1, 2250, "The height of the ZQuest window. If -1 the largest possible window will be made without distorting the pixel content."),
-						CONFIG_TEXTFIELD_I("Saved Window X:",App::zquest,"zquest","window_x", 0, 0, rightmost, "The top-left corner of the ZQuest Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
-						CONFIG_TEXTFIELD_I("Saved Window Y:",App::zquest,"zquest","window_y", 0, 0, bottommost, "The top-left corner of the ZQuest Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
-						GFXCARD_DROPDOWN("Graphics Driver:", App::zquest, "graphics", "driver", 0, gfxDriverList)
+						CONFIG_DROPDOWN_I("Auto-Save Retention:",   App::zquest,"zquest","auto_save_retention",9,autoSaveCopiesList,"The number of auto-saves to keep"),
+						CONFIG_TEXTFIELD_I("Auto-Save Interval:",   App::zquest, "zquest", "auto_save_interval", 5, 0, 300, "Frequency of auto saves, in minutes. Valid range is 0-300, where '0' disables autosaves alltogether."),
+						CONFIG_TEXTFIELD_I("Window Width:",         App::zquest,"zquest","window_width", -1, -1, 3000, "The width of the ZQuest window. If -1 the largest possible window will be made without distorting the pixel content."),
+						CONFIG_TEXTFIELD_I("Window Height:",        App::zquest,"zquest","window_height", -1, -1, 2250, "The height of the ZQuest window. If -1 the largest possible window will be made without distorting the pixel content."),
+						CONFIG_TEXTFIELD_I("Saved Window X:",       App::zquest,"zquest","window_x", 0, 0, rightmost, "The top-left corner of the ZQuest Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
+						CONFIG_TEXTFIELD_I("Saved Window Y:",       App::zquest,"zquest","window_y", 0, 0, bottommost, "The top-left corner of the ZQuest Window, for manual positioning and also used by 'Save Window Position'. If 0, uses the default position."),
+						GFXCARD_DROPDOWN("Graphics Driver:",        App::zquest, "graphics", "driver", 0, gfxDriverList)
 					))
 				),
 				// WARNING!

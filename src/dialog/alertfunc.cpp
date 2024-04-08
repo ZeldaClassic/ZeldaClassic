@@ -132,4 +132,3 @@ bool AlertFuncDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 	}
 	return false;
 }
-

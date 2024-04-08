@@ -4,30 +4,30 @@ GraphicsSymbols GraphicsSymbols::singleton = GraphicsSymbols();
 
 static AccessorTable GraphicsTable[] =
 {
-	//name,                       tag,            rettype,   var,               funcFlags,  params,optparams
-	{ "Wavy",                       0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_BOOL },{} },
-	{ "Zap",                        0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_BOOL },{} },
-	{ "Greyscale",                  0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_BOOL },{} },
-	{ "Monochrome",                 0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_FLOAT },{} },
-	{ "Tint",                       0,          ZTID_VOID,   -1,                        0,  { ZTID_GRAPHICS, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT },{} },
-	{ "MonochromeHue",              0,          ZTID_VOID,   -1,                        0,  { ZTID_GRAPHICS, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_BOOL },{ 10000 } },
-	{ "ClearTint",                  0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_GRAPHICS },{} },
-	{ "getIsBlankTile[]",           0,         ZTID_FLOAT,   ISBLANKTILE,               0,  { ZTID_GRAPHICS, ZTID_FLOAT },{} },
-	{ "_getNumDraws",               0,         ZTID_FLOAT,   NUMDRAWS,                  0,  { ZTID_GRAPHICS },{} },
-	{ "_getMaxDraws",               0,         ZTID_FLOAT,   MAXDRAWS,                  0,  { ZTID_GRAPHICS },{} },
-	{ "GetPixel",                   0,         ZTID_FLOAT,   -1,                        0,  { ZTID_GRAPHICS, ZTID_UNTYPED, ZTID_FLOAT, ZTID_FLOAT },{} },
+	//name,                       tag,         rettype,   var,                  funcFlags,  params,optparams
+	{ "Wavy",                       0,       ZTID_VOID,     -1,                    FL_INL,  { ZTID_GRAPHICS, ZTID_BOOL },{} },
+	{ "Zap",                        0,       ZTID_VOID,     -1,                    FL_INL,  { ZTID_GRAPHICS, ZTID_BOOL },{} },
+	{ "Greyscale",                  0,       ZTID_VOID,     -1,                    FL_INL,  { ZTID_GRAPHICS, ZTID_BOOL },{} },
+	{ "Monochrome",                 0,       ZTID_VOID,     -1,                    FL_INL,  { ZTID_GRAPHICS, ZTID_FLOAT },{} },
+	{ "Tint",                       0,       ZTID_VOID,     -1,                         0,  { ZTID_GRAPHICS, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT },{} },
+	{ "MonochromeHue",              0,       ZTID_VOID,     -1,                         0,  { ZTID_GRAPHICS, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_BOOL },{ 10000 } },
+	{ "ClearTint",                  0,       ZTID_VOID,     -1,                    FL_INL,  { ZTID_GRAPHICS },{} },
+	{ "getIsBlankTile[]",           0,       ZTID_FLOAT,     ISBLANKTILE,               0,  { ZTID_GRAPHICS, ZTID_FLOAT },{} },
+	{ "_getNumDraws",               0,       ZTID_FLOAT,     NUMDRAWS,                  0,  { ZTID_GRAPHICS },{} },
+	{ "_getMaxDraws",               0,       ZTID_FLOAT,     MAXDRAWS,                  0,  { ZTID_GRAPHICS },{} },
+	{ "GetPixel",                   0,       ZTID_FLOAT,     -1,                        0,  { ZTID_GRAPHICS, ZTID_UNTYPED, ZTID_FLOAT, ZTID_FLOAT },{} },
 	{ "CreatePalData",              0,       ZTID_PALDATA,   -1,                   FL_INL,  { ZTID_GRAPHICS },{} },
 	{ "CreatePalData",              1,       ZTID_PALDATA,   -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_RGBDATA },{} },
 	{ "MixColor",                   0,       ZTID_RGBDATA,   -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_RGBDATA, ZTID_RGBDATA, ZTID_FLOAT, ZTID_FLOAT },{ 0 } },
 	{ "CreateRGB",                  0,       ZTID_RGBDATA,   -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_LONG },{} },
 	{ "CreateRGB",                  1,       ZTID_RGBDATA,   -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT },{} },
-	{ "ConvertFromRGB",             0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_FLOAT, ZTID_RGBDATA, ZTID_FLOAT },{} },
+	{ "ConvertFromRGB",             0,       ZTID_VOID,      -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_FLOAT, ZTID_RGBDATA, ZTID_FLOAT },{} },
 	{ "ConvertToRGB",               0,       ZTID_RGBDATA,   -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_FLOAT, ZTID_FLOAT },{} },
-	{ "GetTilePixel",               0,         ZTID_FLOAT,   -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT },{ 0 } },
-	{ "SetTilePixel",               0,          ZTID_VOID,   -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT },{} },
-	{ "getIs8BitTile[]",           0,         ZTID_FLOAT,   IS8BITTILE,               0,  { ZTID_GRAPHICS, ZTID_FLOAT },{} },
+	{ "GetTilePixel",               0,       ZTID_FLOAT,     -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT },{ 0 } },
+	{ "SetTilePixel",               0,       ZTID_VOID,      -1,                   FL_INL,  { ZTID_GRAPHICS, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT },{} },
+	{ "getIs8BitTile[]",            0,       ZTID_FLOAT,     IS8BITTILE,                0,  { ZTID_GRAPHICS, ZTID_FLOAT },{} },
 
-	{ "",                           0,          ZTID_VOID,   -1,                        0,  {},{} }
+	{ "",                           0,       ZTID_VOID,      -1,                        0,  {},{} }
 };
 
 GraphicsSymbols::GraphicsSymbols()

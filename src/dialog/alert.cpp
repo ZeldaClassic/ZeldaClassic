@@ -10,9 +10,7 @@ void info_dsa(string const& title, string const& text, string const& dsastr)
 			[&](bool ret,bool dsa)
 			{
 				if(dsa)
-				{
 					zc_set_config("dsa",dsastr.c_str(),1);
-				}
 			},
 			"OK","",
 			0,false, //timeout - none

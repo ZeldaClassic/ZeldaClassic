@@ -35,7 +35,7 @@ static AccessorTable FileTable[] =
 	{ "WriteBytes",                 0,          ZTID_FLOAT,   -1,                        0,  { ZTID_FILE, ZTID_CHAR, ZTID_FLOAT, ZTID_FLOAT },{ -10000, 0 } },
 	{ "ReadBytes",                  0,          ZTID_FLOAT,   -1,                        0,  { ZTID_FILE, ZTID_CHAR, ZTID_FLOAT, ZTID_FLOAT },{ -10000, 0 } },
 	
-	{ "",                           0,           ZTID_VOID,   -1,                        0,  {},{} }
+	{ "",                           0,          ZTID_VOID,    -1,                        0,  {},{} }
 };
 
 FileSymbols::FileSymbols()
