@@ -149,13 +149,13 @@ void endingpal()
 {
 	byte pal[16*3] =
 	{
-		0, 0, 0,                                                // clear
-		63,63,63,                                               // white
-		31,31,31,                                               // gray
-		0, 0, 0,                                                // black
-		63,14, 0,                                               // red
-		26,34,63,                                               // blue
-		22,54,21                                                // green
+		0, 0, 0,           // clear
+		63,63,63,          // white
+		31,31,31,          // gray
+		0, 0, 0,           // black
+		63,14, 0,          // red
+		26,34,63,          // blue
+		22,54,21           // green
 	};
 	byte *hold = colordata;
 	colordata = pal;
