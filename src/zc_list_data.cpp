@@ -107,15 +107,15 @@ GUI::ListData GUI::ZCListData::fonts(bool ss_fonts, bool numbered, bool sorted)
 
 static const GUI::ListData combostrs
 {
-	{ "-17: Screen->D[7]", -17 },
-	{ "-16: Screen->D[6]", -16 },
-	{ "-15: Screen->D[5]", -15 },
-	{ "-14: Screen->D[4]", -14 },
-	{ "-13: Screen->D[3]", -13 },
-	{ "-12: Screen->D[2]", -12 },
-	{ "-11: Screen->D[1]", -11 },
-	{ "-10: Screen->D[0]", -10 },
-	{ " -2: Screen Catchall", -2 },
+	{ "-17: Screen->D[7]",          -17 },
+	{ "-16: Screen->D[6]",          -16 },
+	{ "-15: Screen->D[5]",          -15 },
+	{ "-14: Screen->D[4]",          -14 },
+	{ "-13: Screen->D[3]",          -13 },
+	{ "-12: Screen->D[2]",          -12 },
+	{ "-11: Screen->D[1]",          -11 },
+	{ "-10: Screen->D[0]",          -10 },
+	{ " -2: Screen Catchall",       -2 },
 	{ " -1: Screen Message String", -1 }
 };
 GUI::ListData GUI::ZCListData::strings(bool combostr, bool respect_order, bool numbered)

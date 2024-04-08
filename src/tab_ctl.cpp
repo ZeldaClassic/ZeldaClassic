@@ -86,14 +86,8 @@ INLINE int32_t is_in_rect(int32_t x,int32_t y,int32_t rx1,int32_t ry1,int32_t rx
 
 void draw_button(BITMAP *dest,int32_t x,int32_t y,int32_t w,int32_t h,const char *text,int32_t bg,int32_t fg,int32_t flags)
 {
-    int32_t temp;
-    
     if(flags&D_SELECTED)
-    {
-        temp=fg;
-        fg=bg;
-        bg=temp;
-    }
+            std::swap(fg, bg);
     
     rect(dest,x+1,y+1,x+w-1,y+h-1,fg);
     rectfill(dest,x+1,y+1,x+w-3,y+h-3,bg);
