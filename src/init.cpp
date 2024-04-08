@@ -683,7 +683,7 @@ static int32_t init_misc_list[] =
 
 static int32_t init_var_list[] =
 {
-    1700, 1701, 1702, 1703, 1704, 1705, 1706, 
+	1700, 1701, 1702, 1703, 1704, 1705, 1706, 
 	3264, 3265, 3266, 3267,
 	3268, 3269, 3270, 3271, 3272, 3273, 3274, 3275,
 	-1
@@ -923,7 +923,7 @@ const char *itype_new_names[itype_max] = { "Script 1","Script 2","Script 3","Scr
 int32_t doInit(zinitdata *local_zinit, bool isZC)
 {
 	call_init_dlg(*local_zinit, isZC);
-    return D_O_K;
+	return D_O_K;
 }
 
 // NOTE: This method has been severely hacked to fix an annoying problem at game start:
