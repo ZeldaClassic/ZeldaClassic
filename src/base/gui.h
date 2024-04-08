@@ -12,4 +12,3 @@ int do_zqdialog_custom   (DIALOG *dialog, int focus_obj, bool checkexit, std::fu
 void new_gui_popup_dialog(DIALOG* dialog, int focus_obj, bool& done, bool& running);
 
 #endif
-

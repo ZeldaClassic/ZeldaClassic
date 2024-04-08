@@ -1,6 +1,4 @@
-#ifndef _EDITBOX_H_
-#define _EDITBOX_H_
-
+#pragma once
 #include "base/zc_alleg.h"
 #include <string>
 //#ifdef __cplusplus
@@ -56,6 +54,5 @@ typedef struct editbox_data
 //#ifdef __cplusplus
 //}
 //#endif
-#endif
 
 /***  The End  ***/

@@ -52,38 +52,38 @@ int32_t rotate_value(int32_t flip);
 byte rotate_walk(byte v);
 byte rotate_cset(byte v);
 
-void puttile8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip);
-void oldputtile8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip);
-void overtile8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip);
-void puttile16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip);
-void oldputtile16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip);
-void overtile16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip);
+void puttile8        (BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip);
+void oldputtile8     (BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip);
+void overtile8       (BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip);
+void puttile16       (BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip);
+void oldputtile16    (BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip);
+void overtile16      (BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip);
 void overtile16_scale(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip,int dw, int dh);
-void drawtile16_cs2(BITMAP *dest,int32_t tile,int32_t x,int32_t y,int32_t cset[],int32_t flip,bool over);
-void overtileblock16(BITMAP* _Dest, int32_t tile, int32_t x, int32_t y, int32_t w, int32_t h, int32_t color, int32_t flip, byte skiprows=0);
+void drawtile16_cs2  (BITMAP *dest,int32_t tile,int32_t x,int32_t y,int32_t cset[],int32_t flip,bool over);
+void overtileblock16 (BITMAP* _Dest, int32_t tile, int32_t x, int32_t y, int32_t w, int32_t h, int32_t color, int32_t flip, byte skiprows=0);
 
 extern int combotile_override_x, combotile_override_y;
 extern int combotile_add_x, combotile_add_y;
 int32_t combo_tile(const newcombo &c, int32_t x, int32_t y);
 int32_t combo_tile(int32_t cmbdat, int32_t x, int32_t y);
 
-void putcombo(BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset);
-void overcombo(BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset);
+void putcombo      (BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset);
+void overcombo     (BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset);
 void overcomboblock(BITMAP *dest, int32_t x, int32_t y, int32_t cmbdat, int32_t cset, int32_t w, int32_t h);
-void overcombo2(BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset);
+void overcombo2    (BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset);
 
-void puttiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip,int32_t opacity);
-void overtiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip,int32_t opacity);
-void puttiletranslucent16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip,int32_t opacity);
+void puttiletranslucent8  (BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip,int32_t opacity);
+void overtiletranslucent8 (BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip,int32_t opacity);
+void puttiletranslucent16 (BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip,int32_t opacity);
 void overtiletranslucent16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t flip,int32_t opacity);
-void overtilecloaked16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t flip);
-void draw_cloaked_sprite(BITMAP* dest,BITMAP* src,int32_t x,int32_t y);
+void overtilecloaked16    (BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t flip);
+void draw_cloaked_sprite  (BITMAP* dest,BITMAP* src,int32_t x,int32_t y);
 
-void putblocktranslucent8(BITMAP *dest,int32_t tile,int32_t x,int32_t y,int32_t csets[],int32_t flip,int32_t mask,int32_t opacity);
-void overblocktranslucent8(BITMAP *dest,int32_t tile,int32_t x,int32_t y,int32_t csets[],int32_t flip,int32_t mask,int32_t opacity);
+void putblocktranslucent8  (BITMAP *dest,int32_t tile,int32_t x,int32_t y,int32_t csets[],int32_t flip,int32_t mask,int32_t opacity);
+void overblocktranslucent8 (BITMAP *dest,int32_t tile,int32_t x,int32_t y,int32_t csets[],int32_t flip,int32_t mask,int32_t opacity);
 
-void putcombotranslucent(BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset,int32_t opacity);
-void overcombotranslucent(BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset,int32_t opacity);
+void putcombotranslucent      (BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset,int32_t opacity);
+void overcombotranslucent     (BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset,int32_t opacity);
 void overcomboblocktranslucent(BITMAP *dest, int32_t x, int32_t y, int32_t cmbdat, int32_t cset, int32_t w, int32_t h, int32_t opacity);
 
 bool is_valid_format(byte format);

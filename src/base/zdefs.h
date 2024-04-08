@@ -1,6 +1,4 @@
-#ifndef _ZDEFS_H_
-#define _ZDEFS_H_
-
+#pragma once
 #define DEVLEVEL 0
 #define COLLECT_SCRIPT_ITEM_ZERO -32767
 
@@ -2675,5 +2673,3 @@ enum
 #undef rad14
 #undef rad15
 #undef rad16
-
-#endif                                                      //_ZDEFS_H_
