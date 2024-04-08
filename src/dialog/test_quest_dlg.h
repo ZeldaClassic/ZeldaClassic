@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_CHEATCODES_H
-#define ZC_DIALOG_CHEATCODES_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/checkbox.h>
@@ -25,5 +24,3 @@ public:
 private:
 	GUI::ListData dmap_list;
 };
-
-#endif

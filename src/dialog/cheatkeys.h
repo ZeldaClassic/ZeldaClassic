@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_CHEATKEYS_H
-#define ZC_DIALOG_CHEATKEYS_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/text_field.h>
@@ -26,6 +25,3 @@ private:
 	
 	void load_labels();
 };
-
-#endif
-

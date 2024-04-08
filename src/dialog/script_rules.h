@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_SCRIPTRULES_H
-#define ZC_DIALOG_SCRIPTRULES_H
+#pragma once
 
 #include "base/qrs.h"
 #include <gui/dialog.h>
@@ -25,6 +24,3 @@ private:
 	byte local_qrs[QR_SZ];
 	size_t qrs_per_tab;
 };
-
-#endif
-

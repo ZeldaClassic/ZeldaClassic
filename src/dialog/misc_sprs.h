@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_MISCSPRS_H
-#define ZC_DIALOG_MISCSPRS_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/text_field.h>
@@ -24,6 +23,3 @@ private:
 	int32_t local_sprs[sprMAX];
 	size_t vals_per_tab;
 };
-
-#endif
-

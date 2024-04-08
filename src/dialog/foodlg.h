@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_FOO_H
-#define ZC_DIALOG_FOO_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/text_field.h>
@@ -23,5 +22,3 @@ private:
 	std::function<void(int32_t,bool)> setVal;
 	int32_t v;
 };
-
-#endif

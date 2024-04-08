@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_FFCDLG_H
-#define ZC_DIALOG_FFCDLG_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/checkbox.h>
@@ -69,5 +68,3 @@ private:
 	int32_t ffind;
 	GUI::ListData list_link, list_ffcscript;
 };
-
-#endif

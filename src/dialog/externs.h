@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_EXTERNS_H
-#define ZC_DIALOG_EXTERNS_H
+#pragma once
 
 #include "base/headers.h"
 #include "base/containers.h"
@@ -17,6 +16,3 @@ void displayinfo(string const& title, string const& text, optional<string> subte
 void displayinfo(string const& title, vector<string> const& lines, optional<string> subtext = nullopt);
 
 bool call_checklist_dialog(string const& title, vector<string> const& flagnames, bitstring& flags);
-
-#endif
-

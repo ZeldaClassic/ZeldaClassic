@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_AUTOCOMBO_H
-#define ZC_DIALOG_AUTOCOMBO_H
+#pragma once
 
 #include "base/autocombo.h"
 #include <gui/dialog.h>
@@ -72,5 +71,3 @@ private:
 
 	GUI::ListData list_autocombotypes;
 };
-
-#endif

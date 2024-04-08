@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_COMBOPOOL_H
-#define ZC_DIALOG_COMBOPOOL_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/drop_down_list.h>
@@ -43,5 +42,3 @@ private:
 	std::shared_ptr<GUI::Window> window;
 	std::shared_ptr<GUI::Button> pastebtn;
 };
-
-#endif

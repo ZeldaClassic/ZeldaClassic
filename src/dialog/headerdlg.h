@@ -1,5 +1,4 @@
-#ifndef ZC_DIALOG_HEADERDLG_H
-#define ZC_DIALOG_HEADERDLG_H
+#pragma once
 
 #include <gui/dialog.h>
 #include <gui/checkbox.h>
@@ -27,5 +26,3 @@ private:
 	std::shared_ptr<GUI::Label> titleLabel, authorLabel;
 	std::function<void(std::string_view[5])> setVals;
 };
-
-#endif
