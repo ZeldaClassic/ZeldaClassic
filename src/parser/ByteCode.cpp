@@ -6931,4 +6931,3 @@ string OSetSubWidgLabel::toString() const
 {
 	return "SUBWIDG_SET_LABEL " + getArgument()->toString();
 }
-

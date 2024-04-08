@@ -2685,4 +2685,3 @@ void ASTDataType::replace(DataType const& newty)
 	becomeArray = false;
 	type.reset(newty.clone());
 }
-

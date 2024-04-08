@@ -3557,4 +3557,3 @@ void LValBOHelper::caseExprIndex(ASTExprIndex& host, void* param)
 	if(indxVal) addOpcode(new OWritePODArrayIR(new LiteralArgument(*indxVal), new VarArgument(EXP1)));
 	else addOpcode(new OWritePODArrayRR(new VarArgument(EXP2), new VarArgument(EXP1)));
 }
-

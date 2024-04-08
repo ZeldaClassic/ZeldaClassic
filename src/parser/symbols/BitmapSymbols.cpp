@@ -5,13 +5,13 @@ BitmapSymbols BitmapSymbols::singleton = BitmapSymbols();
 static AccessorTable BitmapTable[] =
 {
 //	  name,                    tag,            rettype,  var,          funcFlags,  params,optparams
-	{ "getWidth",                0,         ZTID_FLOAT,   BITMAPWIDTH,         0,  { ZTID_BITMAP },{} },
-	{ "setWidth",                0,          ZTID_VOID,   BITMAPWIDTH,         0,  { ZTID_BITMAP, ZTID_FLOAT },{} },
-	{ "getHeight",               0,         ZTID_FLOAT,   BITMAPHEIGHT,        0,  { ZTID_BITMAP },{} },
-	{ "setHeight",               0,          ZTID_VOID,   BITMAPHEIGHT,        0,  { ZTID_BITMAP, ZTID_FLOAT },{} },
+	{ "getWidth",                0,          ZTID_FLOAT,   BITMAPWIDTH,        0,  { ZTID_BITMAP },{} },
+	{ "setWidth",                0,          ZTID_VOID,    BITMAPWIDTH,        0,  { ZTID_BITMAP, ZTID_FLOAT },{} },
+	{ "getHeight",               0,          ZTID_FLOAT,   BITMAPHEIGHT,       0,  { ZTID_BITMAP },{} },
+	{ "setHeight",               0,          ZTID_VOID,    BITMAPHEIGHT,       0,  { ZTID_BITMAP, ZTID_FLOAT },{} },
 	
-	{ "GetPixel",                0,         ZTID_FLOAT,   -1,                  0,  { ZTID_BITMAP, ZTID_FLOAT, ZTID_FLOAT },{} },
-	{ "CountColor",              0,         ZTID_FLOAT,   -1,                  0,  { ZTID_BITMAP, ZTID_BITMAP, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT },{ -10000 } },
+	{ "GetPixel",                0,          ZTID_FLOAT,  -1,                  0,  { ZTID_BITMAP, ZTID_FLOAT, ZTID_FLOAT },{} },
+	{ "CountColor",              0,          ZTID_FLOAT,  -1,                  0,  { ZTID_BITMAP, ZTID_BITMAP, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT },{ -10000 } },
 	{ "Rectangle",               0,          ZTID_VOID,   -1,                  0,  { ZTID_BITMAP, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_BOOL, ZTID_FLOAT },{ 10000, 0, 0, 0, 10000, 1280000 } },
 	{ "Circle",                  0,          ZTID_VOID,   -1,                  0,  { ZTID_BITMAP, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_BOOL, ZTID_FLOAT },{ 10000, 0, 0, 0, 10000, 1280000 } },
 	{ "Arc",                     0,          ZTID_VOID,   -1,                  0,  { ZTID_BITMAP, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_FLOAT, ZTID_BOOL, ZTID_BOOL, ZTID_FLOAT },{ 10000, 0, 0, 0, 10000, 10000, 1280000 } },
@@ -964,4 +964,3 @@ void BitmapSymbols::generateCode()
 		function->giveCode(code);
 	}
 }
-
