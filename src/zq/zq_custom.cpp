@@ -4741,19 +4741,19 @@ void edit_enemydata(int32_t index)
 	for(int32_t i=0; i<16; i++)
 		enedata_dlg[399+i].flags = (guysbuf[index].flags2 & (1<<(i+16))) ? D_SELECTED : 0;
 	
-	enedata_dlg[371].flags = (guysbuf[index].moveflags & FLAG_OBEYS_GRAV) ? D_SELECTED : 0;
-	enedata_dlg[372].flags = (guysbuf[index].moveflags & FLAG_CAN_PITFALL) ? D_SELECTED : 0;
-	enedata_dlg[373].flags = (guysbuf[index].moveflags & FLAG_CAN_PITWALK) ? D_SELECTED : 0;
-	enedata_dlg[374].flags = (guysbuf[index].moveflags & FLAG_CAN_WATERDROWN) ? D_SELECTED : 0;
-	enedata_dlg[375].flags = (guysbuf[index].moveflags & FLAG_CAN_WATERWALK) ? D_SELECTED : 0;
-	enedata_dlg[417].flags = (guysbuf[index].moveflags & FLAG_ONLY_WATERWALK) ? D_SELECTED : 0;
+	enedata_dlg[371].flags = (guysbuf[index].moveflags & FLAG_OBEYS_GRAV)             ? D_SELECTED : 0;
+	enedata_dlg[372].flags = (guysbuf[index].moveflags & FLAG_CAN_PITFALL)            ? D_SELECTED : 0;
+	enedata_dlg[373].flags = (guysbuf[index].moveflags & FLAG_CAN_PITWALK)            ? D_SELECTED : 0;
+	enedata_dlg[374].flags = (guysbuf[index].moveflags & FLAG_CAN_WATERDROWN)         ? D_SELECTED : 0;
+	enedata_dlg[375].flags = (guysbuf[index].moveflags & FLAG_CAN_WATERWALK)          ? D_SELECTED : 0;
+	enedata_dlg[417].flags = (guysbuf[index].moveflags & FLAG_ONLY_WATERWALK)         ? D_SELECTED : 0;
 	enedata_dlg[418].flags = (guysbuf[index].moveflags & FLAG_ONLY_SHALLOW_WATERWALK) ? D_SELECTED : 0;
-	enedata_dlg[419].flags = (guysbuf[index].moveflags & FLAG_ONLY_PITWALK) ? D_SELECTED : 0;
-	enedata_dlg[420].flags = (guysbuf[index].moveflags & FLAG_IGNORE_SOLIDITY) ? D_SELECTED : 0;
-	enedata_dlg[421].flags = (guysbuf[index].moveflags & FLAG_IGNORE_BLOCKFLAGS) ? D_SELECTED : 0;
-	enedata_dlg[422].flags = (guysbuf[index].moveflags & FLAG_IGNORE_SCREENEDGE) ? D_SELECTED : 0;
-	enedata_dlg[423].flags = (guysbuf[index].moveflags & FLAG_USE_NEW_MOVEMENT) ? D_SELECTED : 0;
-	enedata_dlg[424].flags = (guysbuf[index].moveflags & FLAG_NOT_PUSHABLE) ? D_SELECTED : 0;
+	enedata_dlg[419].flags = (guysbuf[index].moveflags & FLAG_ONLY_PITWALK)           ? D_SELECTED : 0;
+	enedata_dlg[420].flags = (guysbuf[index].moveflags & FLAG_IGNORE_SOLIDITY)        ? D_SELECTED : 0;
+	enedata_dlg[421].flags = (guysbuf[index].moveflags & FLAG_IGNORE_BLOCKFLAGS)      ? D_SELECTED : 0;
+	enedata_dlg[422].flags = (guysbuf[index].moveflags & FLAG_IGNORE_SCREENEDGE)      ? D_SELECTED : 0;
+	enedata_dlg[423].flags = (guysbuf[index].moveflags & FLAG_USE_NEW_MOVEMENT)       ? D_SELECTED : 0;
+	enedata_dlg[424].flags = (guysbuf[index].moveflags & FLAG_NOT_PUSHABLE)           ? D_SELECTED : 0;
 	
 	int32_t ret;
 	guydata test;
@@ -4908,15 +4908,15 @@ void edit_enemydata(int32_t index)
 				test.spr_spawn = biw[j].i;
 		}
 		
-		test.misc1 = (enedata_dlg[64].proc==jwin_droplist_proc) ? enedata_dlg[64].d1 : atol(ms[0]);
-		test.misc2 = (enedata_dlg[65].proc==jwin_droplist_proc) ? enedata_dlg[65].d1 : atol(ms[1]);
-		test.misc3 = (enedata_dlg[66].proc==jwin_droplist_proc) ? enedata_dlg[66].d1 : atol(ms[2]);
-		test.misc4 = (enedata_dlg[67].proc==jwin_droplist_proc) ? enedata_dlg[67].d1 : atol(ms[3]);
-		test.misc5 = (enedata_dlg[68].proc==jwin_droplist_proc) ? enedata_dlg[68].d1 : atol(ms[4]);
-		test.misc6 = (enedata_dlg[69].proc==jwin_droplist_proc) ? enedata_dlg[69].d1 : atol(ms[5]);
-		test.misc7 = (enedata_dlg[70].proc==jwin_droplist_proc) ? enedata_dlg[70].d1 : atol(ms[6]);
-		test.misc8 = (enedata_dlg[71].proc==jwin_droplist_proc) ? enedata_dlg[71].d1 : atol(ms[7]);
-		test.misc9 = (enedata_dlg[72].proc==jwin_droplist_proc) ? enedata_dlg[72].d1 : atol(ms[8]);
+		test.misc1  = (enedata_dlg[64].proc==jwin_droplist_proc) ? enedata_dlg[64].d1 : atol(ms[0]);
+		test.misc2  = (enedata_dlg[65].proc==jwin_droplist_proc) ? enedata_dlg[65].d1 : atol(ms[1]);
+		test.misc3  = (enedata_dlg[66].proc==jwin_droplist_proc) ? enedata_dlg[66].d1 : atol(ms[2]);
+		test.misc4  = (enedata_dlg[67].proc==jwin_droplist_proc) ? enedata_dlg[67].d1 : atol(ms[3]);
+		test.misc5  = (enedata_dlg[68].proc==jwin_droplist_proc) ? enedata_dlg[68].d1 : atol(ms[4]);
+		test.misc6  = (enedata_dlg[69].proc==jwin_droplist_proc) ? enedata_dlg[69].d1 : atol(ms[5]);
+		test.misc7  = (enedata_dlg[70].proc==jwin_droplist_proc) ? enedata_dlg[70].d1 : atol(ms[6]);
+		test.misc8  = (enedata_dlg[71].proc==jwin_droplist_proc) ? enedata_dlg[71].d1 : atol(ms[7]);
+		test.misc9  = (enedata_dlg[72].proc==jwin_droplist_proc) ? enedata_dlg[72].d1 : atol(ms[8]);
 		test.misc10 = (enedata_dlg[73].proc==jwin_droplist_proc) ? enedata_dlg[73].d1 : atol(ms[9]);
 		test.misc11 = (enedata_dlg[296].proc==jwin_droplist_proc) ? enedata_dlg[296].d1 : atol(attribs[10]);
 		test.misc12 = (enedata_dlg[297].proc==jwin_droplist_proc) ? enedata_dlg[297].d1 : atol(attribs[11]); 
@@ -4940,8 +4940,6 @@ void edit_enemydata(int32_t index)
 		test.misc30 = (enedata_dlg[331].proc==jwin_droplist_proc) ? enedata_dlg[331].d1 : atol(attribs[29]); 
 		test.misc31 = (enedata_dlg[332].proc==jwin_droplist_proc) ? enedata_dlg[332].d1 : atol(attribs[30]); 
 		test.misc32 = (enedata_dlg[333].proc==jwin_droplist_proc) ? enedata_dlg[333].d1 : atol(attribs[31]); 
-		
-	
 	
 		for(int32_t j=0; j <= edefBYRNA; j++)
 		{
@@ -5169,7 +5167,6 @@ int32_t readonenpc(PACKFILE *f, int32_t index)
 	{
 		al_trace("Cannot read .znpc packfile made using V_GUYS (%d) subversion (%d)\n", section_version, section_cversion);
 		return 0;
-		
 	}
 	else
 	{
