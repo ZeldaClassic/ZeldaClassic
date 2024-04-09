@@ -1217,23 +1217,23 @@ int32_t onZInfo()
 
 static NewMenu quest_menu
 {
-	{ "&Options ", onRulesDlg },
-	{ "&Test", onTestQst },
-	{ "&Items", onCustomItems },
-	{ "Ene&mies", onCustomEnemies },
-	{ "&Player", onCustomHero },
-	{ "&Strings", onStrings },
-	{ "&DMaps", onDmaps },
-	{ "I&nit Data", onInit },
-	{ "Misc D&ata ", &misc_menu },
-	{ "&ZInfo", onZInfo },
+	{ "&Options",    onRulesDlg },
+	{ "&Test",       onTestQst },
+	{ "&Items",      onCustomItems },
+	{ "Ene&mies",    onCustomEnemies },
+	{ "&Player",     onCustomHero },
+	{ "&Strings",    onStrings },
+	{ "&DMaps",      onDmaps },
+	{ "I&nit Data",  onInit },
+	{ "Misc D&ata",  &misc_menu },
+	{ "&ZInfo",      onZInfo },
 	{},
-	{ "&Graphics ", &graphics_menu },
-	{ "A&udio ", &audio_menu },
+	{ "&Graphics",   &graphics_menu },
+	{ "A&udio",      &audio_menu },
 	{},
-	{ "De&faults ", &defs_menu },
+	{ "De&faults",   &defs_menu },
 	{},
-	{ "Misc[]", onQMiscValues },
+	{ "Misc[]",      onQMiscValues },
 };
 
 static NewMenu paste_menu
@@ -1271,43 +1271,43 @@ enum
 };
 static NewMenu edit_menu
 {
-	{ "&Undo", onUndo, MENUID_EDIT_UNDO },
-	{ "&Redo", onRedo, MENUID_EDIT_REDO },
-	{ "&Copy", onCopy, MENUID_EDIT_COPY },
-	{ "&Paste", onPaste, MENUID_EDIT_PASTE },
-	{ "Paste A&ll", onPasteAll, MENUID_EDIT_PASTEALL },
-	{ "&Adv. Paste ", &paste_menu, MENUID_EDIT_ADVPASTE },
+	{ "&Undo",         onUndo,           MENUID_EDIT_UNDO },
+	{ "&Redo",         onRedo,           MENUID_EDIT_REDO },
+	{ "&Copy",         onCopy,           MENUID_EDIT_COPY },
+	{ "&Paste",        onPaste,          MENUID_EDIT_PASTE },
+	{ "Paste A&ll",    onPasteAll,       MENUID_EDIT_PASTEALL },
+	{ "&Adv. Paste ",  &paste_menu,      MENUID_EDIT_ADVPASTE },
 	{ "Paste &Spec. ", &paste_item_menu, MENUID_EDIT_SPECPASTE },
-	{ "&Delete", onDelete, MENUID_EDIT_DELETE },
+	{ "&Delete",       onDelete,         MENUID_EDIT_DELETE },
 	{},
-	{ "&Maps ", &maps_menu },
+	{ "&Maps ",        &maps_menu },
 };
 
 static NewMenu drawing_mode_menu
 {
-	{ "&Normal", onDrawingModeNormal, DM_NORMAL },
-	{ "&Combo Alias", onDrawingModeAlias, DM_ALIAS },
-	{ "&Pool", onDrawingModePool, DM_CPOOL },
-	{ "&Auto Combo", onDrawingModeAuto, DM_AUTO },
+	{ "&Normal",      onDrawingModeNormal, DM_NORMAL },
+	{ "&Combo Alias", onDrawingModeAlias,  DM_ALIAS },
+	{ "&Pool",        onDrawingModePool,   DM_CPOOL },
+	{ "&Auto Combo",  onDrawingModeAuto,   DM_AUTO },
 };
 
 static NewMenu integrity_check_menu
 {
-	{ "&All ", onIntegrityCheckAll },
+	{ "&All ",     onIntegrityCheckAll },
 	{ "&Screens ", onIntegrityCheckRooms },
-	{ "&Warps ", onIntegrityCheckWarps },
+	{ "&Warps ",   onIntegrityCheckWarps },
 };
 
 static NewMenu quest_reports_menu
 {
 	{ "&Bugged Next-> Combo Locations", onBuggedNextComboLocationReport },
-	{ "&Combo Locations", onComboLocationReport },
-	{ "&Combo Type Locations", onComboTypeLocationReport },
-	{ "&Enemy Locations", onEnemyLocationReport },
-	{ "&Item Locations", onItemLocationReport },
-	{ "&Script Locations", onScriptLocationReport },
-	{ "&What Links Here", onWhatWarpsReport },
-	{ "In&tegrity Check ", &integrity_check_menu },
+	{ "&Combo Locations",               onComboLocationReport },
+	{ "&Combo Type Locations",          onComboTypeLocationReport },
+	{ "&Enemy Locations",               onEnemyLocationReport },
+	{ "&Item Locations",                onItemLocationReport },
+	{ "&Script Locations",              onScriptLocationReport },
+	{ "&What Links Here",               onWhatWarpsReport },
+	{ "In&tegrity Check ",              &integrity_check_menu },
 };
 
 int32_t onPalFix();
@@ -11529,7 +11529,7 @@ int32_t onEffectFix()
 		{ "All", "Blank Only", "Cancel" },
 		{ doAllEffectSquare, doBlankEffectSquare, nullptr }
 	).show();
-    return D_O_K;
+	return D_O_K;
 }
 
 byte* getPalPointer(int32_t pal, int32_t cset)
@@ -12043,35 +12043,12 @@ int32_t d_scombo_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
 
 int32_t onSecretF();
 
-static int32_t secret_burn_list[] =
-{
-    // dialog control number
-    4, 5, 6, 7, 48, 49, 50, 51, 92, 93, 94, 95, -1
-};
-
-static int32_t secret_arrow_list[] =
-{
-    // dialog control number
-    8, 9, 10, 52, 53, 54, 96, 97, 98, -1
-};
-
-static int32_t secret_bomb_list[] =
-{
-    // dialog control number
-    11, 12, 55, 56, 99, 100, -1
-};
-
-static int32_t secret_boomerang_list[] =
-{
-    // dialog control number
-    13, 14, 15, 57, 58, 59, 101, 102, 103, -1
-};
-
-static int32_t secret_magic_list[] =
-{
-    // dialog control number
-    16, 17, 60, 61, 104, 105, -1
-};
+// dialog control numbers
+static int32_t secret_burn_list     [] = { 4, 5, 6, 7, 48, 49, 50, 51, 92, 93, 94, 95, -1 }; 
+static int32_t secret_arrow_list    [] = { 8, 9, 10, 52, 53, 54, 96, 97, 98, -1 }; 
+static int32_t secret_bomb_list     [] = { 11, 12, 55, 56, 99, 100, -1 }; 
+static int32_t secret_boomerang_list[] = { 13, 14, 15, 57, 58, 59, 101, 102, 103, -1 }; 
+static int32_t secret_magic_list    [] = { 16, 17, 60, 61, 104, 105, -1 };
 
 static int32_t secret_sword_list[] =
 {
@@ -12278,7 +12255,6 @@ int32_t onSecretF()
     object_message(secret_dlg+1, MSG_DRAW, 0);
     return D_O_K;
 }
-
 
 int32_t onSecretCombo()
 {
