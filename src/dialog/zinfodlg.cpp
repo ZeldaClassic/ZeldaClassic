@@ -17,9 +17,9 @@ void call_zinf_dlg()
 ZInfoDialog::ZInfoDialog() : lzinfo(),
 	list_itemclass(GUI::ZCListData::itemclass(true)),
 	list_combotype(GUI::ZCListData::combotype(true, true)),
-	list_mapflag(GUI::ZCListData::mapflag(numericalFlags, true, true)),
-	list_counters(GUI::ZCListData::counters(true, true)),
-	list_weapon(GUI::ZCListData::weaptypes(true))
+	list_mapflag  (GUI::ZCListData::mapflag(numericalFlags, true, true)),
+	list_counters (GUI::ZCListData::counters(true, true)),
+	list_weapon   (GUI::ZCListData::weaptypes(true))
 {}
 
 static bool extzinf;
@@ -44,12 +44,12 @@ std::shared_ptr<GUI::Widget> ZInfoDialog::view()
 	            **cthelpptr = nullptr, **mfnameptr = nullptr, **mfhelpptr = nullptr,
 				**ctrnameptr = nullptr, **wpnptr = nullptr;
 	extzinf = header.external_zinfo;
-	icnameptr = &(lzinfo.ic_name[selic]);
-	ichelpptr = &(lzinfo.ic_help_string[selic]);
-	ctnameptr = &(lzinfo.ctype_name[selct]);
-	cthelpptr = &(lzinfo.ctype_help_string[selct]);
-	mfnameptr = &(lzinfo.mf_name[selmf]);
-	mfhelpptr = &(lzinfo.mf_help_string[selmf]);
+	icnameptr  = &(lzinfo.ic_name[selic]);
+	ichelpptr  = &(lzinfo.ic_help_string[selic]);
+	ctnameptr  = &(lzinfo.ctype_name[selct]);
+	cthelpptr  = &(lzinfo.ctype_help_string[selct]);
+	mfnameptr  = &(lzinfo.mf_name[selmf]);
+	mfhelpptr  = &(lzinfo.mf_help_string[selmf]);
 	ctrnameptr = &(lzinfo.ctr_name[selctr]);
 	wpnptr = &(lzinfo.weap_name[selwpn]);
 	std::shared_ptr<GUI::Window> window = Window(
@@ -70,12 +70,12 @@ std::shared_ptr<GUI::Widget> ZInfoDialog::view()
 							selic = val;
 							icnameptr = &(lzinfo.ic_name[selic]);
 							ichelpptr = &(lzinfo.ic_help_string[selic]);
-							fields[FLD_IC_NAME]->setText((*icnameptr) ? (*icnameptr) : "");
-							fields[FLD_IC_NAME]->setDisabled(!(*icnameptr));
+							fields  [FLD_IC_NAME]->setText((*icnameptr) ? (*icnameptr) : "");
+							fields  [FLD_IC_NAME]->setDisabled(!(*icnameptr));
 							defcheck[FLD_IC_NAME]->setChecked(!(*icnameptr));
-							helplbl[LBL_IC_HELP]->setText((*ichelpptr) ? (*ichelpptr) : "");
-							fields[FLD_IC_HELP]->setText((*ichelpptr) ? (*ichelpptr) : "");
-							fields[FLD_IC_HELP]->setDisabled(!(*ichelpptr));
+							helplbl [LBL_IC_HELP]->setText((*ichelpptr) ? (*ichelpptr) : "");
+							fields  [FLD_IC_HELP]->setText((*ichelpptr) ? (*ichelpptr) : "");
+							fields  [FLD_IC_HELP]->setDisabled(!(*ichelpptr));
 							defcheck[FLD_IC_HELP]->setChecked(!(*ichelpptr));
 						}
 					),
@@ -177,12 +177,12 @@ std::shared_ptr<GUI::Widget> ZInfoDialog::view()
 							selct = val;
 							ctnameptr = &(lzinfo.ctype_name[selct]);
 							cthelpptr = &(lzinfo.ctype_help_string[selct]);
-							fields[FLD_CT_NAME]->setText((*ctnameptr) ? (*ctnameptr) : "");
-							fields[FLD_CT_NAME]->setDisabled(!(*ctnameptr));
+							fields  [FLD_CT_NAME]->setText((*ctnameptr) ? (*ctnameptr) : "");
+							fields  [FLD_CT_NAME]->setDisabled(!(*ctnameptr));
 							defcheck[FLD_CT_NAME]->setChecked(!(*ctnameptr));
-							helplbl[LBL_CT_HELP]->setText((*cthelpptr) ? (*cthelpptr) : "");
-							fields[FLD_CT_HELP]->setText((*cthelpptr) ? (*cthelpptr) : "");
-							fields[FLD_CT_HELP]->setDisabled(!(*cthelpptr));
+							helplbl [LBL_CT_HELP]->setText((*cthelpptr) ? (*cthelpptr) : "");
+							fields  [FLD_CT_HELP]->setText((*cthelpptr) ? (*cthelpptr) : "");
+							fields  [FLD_CT_HELP]->setDisabled(!(*cthelpptr));
 							defcheck[FLD_CT_HELP]->setChecked(!(*cthelpptr));
 						}
 					),
@@ -529,32 +529,32 @@ std::shared_ptr<GUI::Widget> ZInfoDialog::view()
 		)
 	);
 	
-	fields[FLD_IC_NAME]->setText((*icnameptr) ? (*icnameptr) : "");
-	fields[FLD_IC_NAME]->setDisabled(!(*icnameptr));
+	fields  [FLD_IC_NAME]->setText((*icnameptr) ? (*icnameptr) : "");
+	fields  [FLD_IC_NAME]->setDisabled(!(*icnameptr));
 	defcheck[FLD_IC_NAME]->setChecked(!(*icnameptr));
-	helplbl[LBL_IC_HELP]->setText((*ichelpptr) ? (*ichelpptr) : "");
-	fields[FLD_IC_HELP]->setText((*ichelpptr) ? (*ichelpptr) : "");
-	fields[FLD_IC_HELP]->setDisabled(!(*ichelpptr));
+	helplbl [LBL_IC_HELP]->setText((*ichelpptr) ? (*ichelpptr) : "");
+	fields  [FLD_IC_HELP]->setText((*ichelpptr) ? (*ichelpptr) : "");
+	fields  [FLD_IC_HELP]->setDisabled(!(*ichelpptr));
 	defcheck[FLD_IC_HELP]->setChecked(!(*ichelpptr));
-	fields[FLD_CT_NAME]->setText((*ctnameptr) ? (*ctnameptr) : "");
-	fields[FLD_CT_NAME]->setDisabled(!(*ctnameptr));
+	fields  [FLD_CT_NAME]->setText((*ctnameptr) ? (*ctnameptr) : "");
+	fields  [FLD_CT_NAME]->setDisabled(!(*ctnameptr));
 	defcheck[FLD_CT_NAME]->setChecked(!(*ctnameptr));
-	helplbl[LBL_CT_HELP]->setText((*cthelpptr) ? (*cthelpptr) : "");
-	fields[FLD_CT_HELP]->setText((*cthelpptr) ? (*cthelpptr) : "");
-	fields[FLD_CT_HELP]->setDisabled(!(*cthelpptr));
+	helplbl [LBL_CT_HELP]->setText((*cthelpptr) ? (*cthelpptr) : "");
+	fields  [FLD_CT_HELP]->setText((*cthelpptr) ? (*cthelpptr) : "");
+	fields  [FLD_CT_HELP]->setDisabled(!(*cthelpptr));
 	defcheck[FLD_CT_HELP]->setChecked(!(*cthelpptr));
-	fields[FLD_MF_NAME]->setText((*mfnameptr) ? (*mfnameptr) : "");
-	fields[FLD_MF_NAME]->setDisabled(!(*mfnameptr));
+	fields  [FLD_MF_NAME]->setText((*mfnameptr) ? (*mfnameptr) : "");
+	fields  [FLD_MF_NAME]->setDisabled(!(*mfnameptr));
 	defcheck[FLD_MF_NAME]->setChecked(!(*mfnameptr));
-	helplbl[LBL_MF_HELP]->setText((*mfhelpptr) ? (*mfhelpptr) : "");
-	fields[FLD_MF_HELP]->setText((*mfhelpptr) ? (*mfhelpptr) : "");
-	fields[FLD_MF_HELP]->setDisabled(!(*mfhelpptr));
+	helplbl [LBL_MF_HELP]->setText((*mfhelpptr) ? (*mfhelpptr) : "");
+	fields  [FLD_MF_HELP]->setText((*mfhelpptr) ? (*mfhelpptr) : "");
+	fields  [FLD_MF_HELP]->setDisabled(!(*mfhelpptr));
 	defcheck[FLD_MF_HELP]->setChecked(!(*mfhelpptr));
-	fields[FLD_CTR_NAME]->setText((*ctrnameptr) ? (*ctrnameptr) : "");
-	fields[FLD_CTR_NAME]->setDisabled(!(*ctrnameptr));
+	fields  [FLD_CTR_NAME]->setText((*ctrnameptr) ? (*ctrnameptr) : "");
+	fields  [FLD_CTR_NAME]->setDisabled(!(*ctrnameptr));
 	defcheck[FLD_CTR_NAME]->setChecked(!(*ctrnameptr));
-	fields[FLD_WPN_NAME]->setText((*wpnptr) ? (*wpnptr) : "");
-	fields[FLD_WPN_NAME]->setDisabled(!(*wpnptr));
+	fields  [FLD_WPN_NAME]->setText((*wpnptr) ? (*wpnptr) : "");
+	fields  [FLD_WPN_NAME]->setDisabled(!(*wpnptr));
 	defcheck[FLD_WPN_NAME]->setChecked(!(*wpnptr));
 	return window;
 }
@@ -580,15 +580,13 @@ bool load_zi(zinfo& tzi)
 bool save_zi(zinfo const& tzi)
 {
 	if(!getname("Save ZInfo (.zinfo)","zinfo",NULL,filepath,true))
-        return false;
+		return false;
         
-    if(exists(temppath))
-    {
-        if(jwin_alert("Confirm Overwrite",temppath,"already exists.","Write over existing file?","&Yes","&No",'y','n',get_zc_font(font_lfont))==2)
-        {
-            return false;
-        }
-    }
+	if(exists(temppath))
+	{
+		if(jwin_alert("Confirm Overwrite",temppath,"already exists.","Write over existing file?","&Yes","&No",'y','n',get_zc_font(font_lfont))==2)
+			return false;
+	}
     
 	PACKFILE *inf = pack_fopen_password(temppath, F_WRITE, "");
 	if(!inf) return false;
@@ -606,18 +604,22 @@ bool ZInfoDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 	switch(msg.message)
 	{
 		case message::OK:
+
 			ZI.copyFrom(lzinfo);
 			header.external_zinfo = extzinf;
 			saved = false;
 			[[fallthrough]];
+
 		case message::CANCEL:
+
 			lzinfo.clear(); //ensure memory cleared
 			return true;
+
 		case message::SAVE:
-		{
+
 			save_zi(lzinfo);
 			return false;
-		}
+
 		case message::LOAD:
 		{
 			bool r = false;
@@ -641,4 +643,3 @@ bool ZInfoDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 	}
 	return false;
 }
-
