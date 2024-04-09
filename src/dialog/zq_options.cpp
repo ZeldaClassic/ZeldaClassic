@@ -48,7 +48,7 @@ void OptionsDialog::loadOptions()
 	opts[OPT_LYR_DITH_SZ]             = LayerDitherSz;
 	opts[OPT_INVALID_BG]              = InvalidBG;
 	opts[OPT_PATTERNSEARCH]           = !!abc_patternmatch;
-	opts[OPT_NEXTPREVIEW]             = !!NoScreenPreview;
+	opts[OPT_ADJPREVIEW]              = !!NoScreenPreview;
 	opts[OPT_INITSCR_WARN]            = !!WarnOnInitChanged;
 	opts[OPT_ABRETENTION]             = AutoBackupRetention;
 	opts[OPT_ASINTERVAL]              = AutoSaveInterval;
@@ -226,7 +226,7 @@ void OptionsDialog::saveOption(int ind)
 		case OPT_COMPILE_VOL:
 			zc_set_config("Compiler", "compile_audio_volume", v);
 			break;
-		case OPT_NEXTPREVIEW:
+		case OPT_ADJPREVIEW:
 			NoScreenPreview = v;
 			zc_set_config("zquest","no_preview",v);
 			break;
@@ -842,7 +842,7 @@ std::shared_ptr<GUI::Widget> OptionsDialog::view()
 					ROW_CHECK(OPT_CUSTOMFONT, "Custom Fonts"),
 					ROW_CHECK_I(OPT_TOOLTIPS, "Enable Tooltips", "Tooltips will appear after hovering over a control for the duration configured in Etc->Options->Settings->Tooltip Timer"),
 					ROW_CHECK_I(OPT_TOOLTIP_HIGHLIGHT, "Tooltips Highlight Target", "A purple square will appear outlining the tool the tip is describing"),
-					ROW_CHECK_I(OPT_NEXTPREVIEW, "No Next-Screen Preview", "Perimeter of the canvas will be black instead of displaying the contents of adjacent screens."),
+					ROW_CHECK_I(OPT_ADJPREVIEW, "No Adjacent-Screen Preview", "Perimeter of the canvas will be black instead of displaying the contents of adjacent screens."),
 					ROW_CHECK(OPT_INITSCR_WARN, "Warn on ~Init Script Update"),
 					ROW_CHECK(OPT_DISABLE_LPAL_SHORTCUT, "Disable Level Palette Shortcuts"),
 					ROW_CHECK_I(OPT_DISABLE_COMPILE_CONSOLE, "Internal Compile Window", "When disabled, the 'Compile Progress' window is skipped.") 
