@@ -473,17 +473,13 @@ int32_t readoneitem(PACKFILE *f, int32_t index)
 	for(int32_t j=0; j<8; j++)
 	{
 		if(!p_igetl(&tempitem.initiald[j],f))
-		{
 			return 0;
-		}
 	}
 	
 	for(int32_t j=0; j<2; j++)
 	{
 		if(!p_getc(&tempitem.initiala[j],f))
-		{
 			return 0;
-		}
 	}
 	
 	if(!p_getc(&tempitem.wpn,f))
@@ -529,9 +525,8 @@ int32_t readoneitem(PACKFILE *f, int32_t index)
 	{
 		byte tempbyte;
 		if(!p_getc(&tempbyte,f))
-		{
 			return 0;
-		}
+
 		tempitem.cost_amount[0] = tempbyte;
 		switch(tempitem.family)
 		{
@@ -549,61 +544,39 @@ int32_t readoneitem(PACKFILE *f, int32_t index)
 		for(int q = 0; q < 2; ++q)
 		{
 			if(!p_igetw(&tempitem.cost_amount[q],f))
-			{
 				return 0;
-			}
 		}
 	}
 	
 	if(!p_igetl(&tempitem.misc3,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetl(&tempitem.misc4,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetl(&tempitem.misc5,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetl(&tempitem.misc6,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetl(&tempitem.misc7,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetl(&tempitem.misc8,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetl(&tempitem.misc9,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetl(&tempitem.misc10,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.usesound,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.usesound2,f))
-	{
 		return 0;
-	}
 	
 	if ( zversion >= 0x255 )
 	{
@@ -613,21 +586,21 @@ int32_t readoneitem(PACKFILE *f, int32_t index)
 			//! version 27
 			
 		if(!p_getc(&tempitem.useweapon,f))
-			{
+		{
 			return 0;
-			}
-			if(!p_getc(&tempitem.usedefence,f))
-			{
+		}
+		if(!p_getc(&tempitem.usedefence,f))
+		{
 			return 0;
-			}
-			if(!p_igetl(&tempitem.weaprange,f))
-			{
+		}
+		if(!p_igetl(&tempitem.weaprange,f))
+		{
 			return 0;
-			}
-			if(!p_igetl(&tempitem.weapduration,f))
-			{
+		}
+		if(!p_igetl(&tempitem.weapduration,f))
+		{
 			return 0;
-			}
+		}
 			for ( int32_t q = 0; q < ITEM_MOVEMENT_PATTERNS; q++ ) {
 				if(!p_igetl(&tempitem.weap_pattern[q],f))
 				{
@@ -642,140 +615,80 @@ int32_t readoneitem(PACKFILE *f, int32_t index)
 			for ( int32_t q = 0; q < INITIAL_D; q++ )
 			{
 				if(!p_igetl(&tempitem.weap_initiald[q],f))
-				{
 					return 0;
-				}
 			}
 			for ( int32_t q = 0; q < INITIAL_A; q++ )
 			{
 				if(!p_getc(&tempitem.weap_initiala[q],f))
-				{
 					return 0;
-				}
 			}
 
 			if(!p_getc(&tempitem.drawlayer,f))
-			{
 				return 0;
-			}
-
 
 			if(!p_igetl(&tempitem.hxofs,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.hyofs,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.hxsz,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.hysz,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.hzsz,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.xofs,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.yofs,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.weap_hxofs,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.weap_hyofs,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.weap_hxsz,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.weap_hysz,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.weap_hzsz,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.weap_xofs,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.weap_yofs,f))
-			{
 				return 0;
-			}
 			if(!p_igetw(&tempitem.weaponscript,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.wpnsprite,f))
-			{
 				return 0;
-			}
+
 			size_t num_cost_tmr = (section_version > 52 ? 2 : 1);
 			for(size_t q = 0; q < num_cost_tmr; ++q)
 			{
 				if(!p_igetl(&tempitem.magiccosttimer[q],f))
-				{
 					return 0;
-				}
 			}
 			if(!p_igetl(&tempitem.overrideFLAGS,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.tilew,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.tileh,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.weapoverrideFLAGS,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.weap_tilew,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.weap_tileh,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempitem.pickup,f))
-			{
 				return 0;
-			}
 			if(!p_igetw(&tempitem.pstring,f))
-			{
 				return 0;
-			}
 			if(!p_igetw(&tempitem.pickup_string_flags,f))
-			{
 				return 0;
-			}
 			
 			size_t num_cost_ctr = (section_version > 52 ? 2 : 1);
 			for(size_t q = 0; q < num_cost_ctr; ++q)
 			{
 				if(!p_getc(&tempitem.cost_counter[q],f))
-				{
 					return 0;
-				}
 			}
 			
 			//InitD[] labels
@@ -784,48 +697,34 @@ int32_t readoneitem(PACKFILE *f, int32_t index)
 				for ( int32_t w = 0; w < 65; w++ )
 				{
 					if(!p_getc(&tempitem.initD_label[q][w],f))
-					{
 						return 0;
-					} 
 				}
 				for ( int32_t w = 0; w < 65; w++ )
 				{
 					if(!p_getc(&tempitem.weapon_initD_label[q][w],f))
-					{
 						return 0;
-					} 
 				}
 				for ( int32_t w = 0; w < 65; w++ )
 				{
 					if(!p_getc(&tempitem.sprite_initD_label[q][w],f))
-					{
 						return 0;
-					} 
 				}
 				if(!p_igetl(&tempitem.sprite_initiald[q],f))
-				{
 					return 0;
-				} 
 			}
 			for ( int32_t q = 0; q < 2; q++ )
 			{
 				if(!p_getc(&tempitem.sprite_initiala[q],f))
-				{
 					return 0;
-				} 
 				
 			}
 			if(!p_igetw(&tempitem.sprite_script,f))
-			{
 				return 0;
-			} 
 			
 			if  ( section_version >= 47 )
 			{
 				if(!p_getc(&tempitem.pickupflag,f))
-				{
 					return 0;
-				} 
 			}	
 			//read it into an item
 		}
@@ -1342,10 +1241,10 @@ static DIALOG wpndata_dlg[] =
 	{ jwin_edit_proc,    160,  124,  35,   16,   vc(12),  vc(1),  0,       0,          3,             0,       NULL, NULL, NULL },
 	{ jwin_edit_proc,    160,  142,  35,   16,   vc(12),  vc(1),  0,       0,          3,             0,       NULL, NULL, NULL },
 	{ jwin_check_proc,   198,  153,  65,   9,    vc(14),  vc(1),  0,       0,          1,             0, (void *) "Behind", NULL, NULL },
-	{ jwin_edit_proc,     92,  65,   155,  16,   vc(12),  vc(1),  0,       0,          64,             0,       NULL, NULL, NULL },
-	{ jwin_text_proc,     61,  69,   35,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Name:", NULL, NULL },
-	{ d_keyboard_proc,   0,    0,    0,    0,    0,    0,    0,       0,       KEY_F12,          0, (void *) onSnapshot, NULL, NULL },
-	{ NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+	{ jwin_edit_proc,     92,   65,   155,  16,   vc(12),  vc(1),  0,       0,          64,             0,       NULL, NULL, NULL },
+	{ jwin_text_proc,     61,   69,   35,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Name:", NULL, NULL },
+	{ d_keyboard_proc,     0,    0,    0,    0,    0,    0,    0,       0,       KEY_F12,          0, (void *) onSnapshot, NULL, NULL },
+	{ NULL,                0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 void edit_weapondata(int32_t index)
@@ -1588,8 +1487,7 @@ static TABPANEL enemy_graphics_tabs[] =
 	{ NULL,                   0,               NULL,                    0, NULL }
 };
 
-/*
-
+/* 
 static int32_t enemy_sounds_tabs_list  [] = { 250,-1 }; 
 static int32_t enemy_attacks_tabs_list [] = { 5,-1 };
 
@@ -1655,22 +1553,21 @@ static int32_t enedata_defense_reflected_list[] =
 
 static TABPANEL enemy_movement_tabs[] =
 {
-	{ (char *)"Move Flags",	     D_SELECTED,               enemy_moveflag_list,   0, NULL },
-	{ (char *)"Enemy Movement",	          0,               enemy_movement_list,   0, NULL },
-	{ NULL,                   0,               NULL,                  0, NULL }
+	{ (char *)"Move Flags",	     D_SELECTED,      enemy_moveflag_list,   0, NULL },
+	{ (char *)"Enemy Movement",  0,               enemy_movement_list,   0, NULL },
+	{ NULL,                      0,               NULL,                  0, NULL }
 };
 
 static TABPANEL enemy_script_tabs[] =
 {
-	{ (char *)"Action Script",	 D_SELECTED,               enemy_scripts_list,   0, NULL },
-	{ (char *)"Weapon Script",	 0,               enemy_weapon_scripts_list,   0, NULL },
-	{ NULL,                   0,               NULL,                  0, NULL }
+	{ (char *)"Action Script", D_SELECTED,      enemy_scripts_list,        0, NULL },
+	{ (char *)"Weapon Script", 0,               enemy_weapon_scripts_list, 0, NULL },
+	{ NULL,                    0,               NULL,                      0, NULL }
 };
 
 static TABPANEL enemy_defence_tabs[] =
 {
-	
-	{ (char *)"Defs 1",	 D_SELECTED,               enedata_defense_list,   0, NULL },
+	{ (char *)"Defs 1",	 D_SELECTED,      enedata_defense_list,    0, NULL },
 	{ (char *)"Defs 2",	 0,               enedata_defense2_list,   0, NULL },
 	{ (char *)"Script",	 0,               enedata_defense3_list,   0, NULL },
 	
@@ -1799,25 +1696,24 @@ void build_biea_list()
 	
 	for(int32_t i=start; i<aMAX; i++)
 	{
-		
-	if ( moduledata.enem_anim_type_names[1][0] != 0 )
-	{
-		if(eneanim_string[i][0]!='-')
+		if ( moduledata.enem_anim_type_names[1][0] != 0 )
 		{
-			biea[biea_cnt].s = (char *)moduledata.enem_anim_type_names[i];
-			biea[biea_cnt].i = i;
-			++biea_cnt;
+			if(eneanim_string[i][0]!='-')
+			{
+				biea[biea_cnt].s = (char *)moduledata.enem_anim_type_names[i];
+				biea[biea_cnt].i = i;
+				++biea_cnt;
+			}
 		}
-	}
-	else
-	{
-		if(eneanim_string[i][0]!='-')
+		else
 		{
-			biea[biea_cnt].s = (char *)eneanim_string[i];
-			biea[biea_cnt].i = i;
-			++biea_cnt;
+			if(eneanim_string[i][0]!='-')
+			{
+				biea[biea_cnt].s = (char *)eneanim_string[i];
+				biea[biea_cnt].i = i;
+				++biea_cnt;
+			}
 		}
-	}
 	}
 	
 	for(int32_t i=start; i<biea_cnt-1; i++)
@@ -5264,23 +5160,16 @@ int32_t readonenpc(PACKFILE *f, int32_t index)
 	char npcstring[64]={0}; //guy_string[]
 	//section version info
 	if(!p_igetl(&zversion,f))
-	{
 		return 0;
-	}
 	if(!p_igetl(&zbuild,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetw(&section_version,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetw(&section_cversion,f))
-	{
 		return 0;
-	}
+
 	al_trace("readonenpc section_version: %d\n", section_version);
 	al_trace("readonenpc section_cversion: %d\n", section_cversion);
 	
@@ -5301,9 +5190,7 @@ int32_t readonenpc(PACKFILE *f, int32_t index)
 	}
    
 	if(!pfread(&npcstring, 64, f))
-	{
 		return 0;
-	}
 	
 	//section data
 	if(!p_igetl(&tempguy.flags,f))
@@ -5429,9 +5316,7 @@ int32_t readonenpc(PACKFILE *f, int32_t index)
 	for(int32_t j=0; j < edefLAST; j++)
 	{
 		if(!p_getc(&tempguy.defense[j],f))
-		{
-		   return 0;
-		}
+			return 0;
 	}
 	
 	if(!p_getc(&tempguy.hitsfx,f))
@@ -5465,160 +5350,91 @@ int32_t readonenpc(PACKFILE *f, int32_t index)
 			
 			//tilewidth, tileheight, hitwidth, hitheight, hitzheight, hitxofs, hityofs, hitzofs
 			if(!p_igetl(&tempguy.txsz,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.tysz,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.hxsz,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.hysz,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.hzsz,f))
-			{
 				return 0;
-			}
+
 			// These are not fixed types, but ints, so they are safe to use here. 
 			if(!p_igetl(&tempguy.hxofs,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.hyofs,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.xofs,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.yofs,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.zofs,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.wpnsprite,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.SIZEflags,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.frozentile,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.frozencset,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.frozenclock,f))
-			{
 				return 0;
-			}
 			
 			for ( int32_t q = 0; q < 10; q++ ) 
 			{
 				if(!p_igetw(&tempguy.frozenmisc[q],f))
-				{
 					return 0;
-				}
 			}
 			if(!p_igetw(&tempguy.firesfx,f))
-			{
 				return 0;
-			}
+
 			//misc 16->31
 			if(!p_igetl(&tempguy.misc16,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc17,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc18,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc19,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc20,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc21,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc22,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc23,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc24,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc25,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc26,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc27,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc28,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc29,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc30,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc31,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc32,f))
-			{
 				return 0;
-			}
+
 			for ( int32_t q = 0; q < 32; q++ )
 			{
 				if(!p_igetl(&tempguy.movement[q],f))
-				{
 					return 0;
-				}
 			}
 			for ( int32_t q = 0; q < 32; q++ )
 			{
 				if(!p_igetl(&tempguy.new_weapon[q],f))
-				{
 					return 0;
-				}
 			}
 			if(!p_igetw(&tempguy.script,f))
 			{
@@ -5627,16 +5443,12 @@ int32_t readonenpc(PACKFILE *f, int32_t index)
 			for ( int32_t q = 0; q < 8; q++ )
 			{
 				if(!p_igetl(&tempguy.initD[q],f))
-				{
 					return 0;
-				}
 			}
 			for ( int32_t q = 0; q < 2; q++ )
 			{
 				if(!p_igetl(&tempguy.initA[q],f))
-				{
 					return 0;
-				}
 			}
 			if(!p_igetl(&tempguy.editorflags,f))
 			{
@@ -5644,17 +5456,11 @@ int32_t readonenpc(PACKFILE *f, int32_t index)
 			}
 			//somehow forgot these in the older builds -Z
 			if(!p_igetl(&tempguy.misc13,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc14,f))
-			{
 				return 0;
-			}
 			if(!p_igetl(&tempguy.misc15,f))
-			{
 				return 0;
-			}
 			
 			//Enemy Editor InitD[] labels
 			for ( int32_t q = 0; q < 8; q++ )
@@ -5662,29 +5468,22 @@ int32_t readonenpc(PACKFILE *f, int32_t index)
 				for ( int32_t w = 0; w < 65; w++ )
 				{
 					if(!p_getc(&tempguy.initD_label[q][w],f))
-					{
 						return 0;
-					}
 				}
 				for ( int32_t w = 0; w < 65; w++ )
 				{
 					if(!p_getc(&tempguy.weapon_initD_label[q][w],f))
-					{
 						return 0;
-					}
 				}
 			}
 			if(!p_igetw(&tempguy.weaponscript,f))
-			{
 				return 0;
-			}
+
 			//eweapon initD
 			for ( int32_t q = 0; q < 8; q++ )
 			{
 				if(!p_igetl(&tempguy.weap_initiald[q],f))
-				{
 					return 0;
-				}
 			}
 		}
 	}
@@ -6115,9 +5914,7 @@ int32_t onCustomEnemies()
 		else
 		{
 			if(index != 0)
-			{
 				edit_enemydata(index);
-			}
 		}
 		
 		index = select_enemy("Select Enemy",index,true,true,foo);
@@ -6212,41 +6009,13 @@ static TABPANEL herotile_land_tabs[] =
 	{ NULL,                    0,           NULL,                        0, NULL }
 };
 
-static int32_t herotile_water_float_list[] =
-{
-	// dialog control number
-	48, 49, 50, 51, 52, 53, 54, 55, -1
-};
-
-static int32_t herotile_water_swim_list[] =
-{
-	// dialog control number
-	56, 57, 58, 59, 60, 61, 62, 63, -1
-};
-
-static int32_t herotile_water_dive_list[] =
-{
-	// dialog control number
-	64, 65, 66, 67, 68, 69, 70, 71, -1
-};
-
-static int32_t herotile_water_hold_list[] =
-{
-	// dialog control number
-	72, 73, 74, 75, -1
-};
-
-static int32_t herotile_water_drown_list[] =
-{
-	// dialog control number
-	97, 98, 99, 100, 101, 102, 103, 104, -1
-};
-
-static int32_t herotile_lava_drown_list[] =
-{
-	// dialog control number
-	113, 114, 115, 116, 117, 118, 119, 120, -1
-};
+// dialog control numbers
+static int32_t herotile_water_float_list[] = { 48, 49, 50, 51, 52, 53, 54, 55, -1 }; 
+static int32_t herotile_water_swim_list [] = { 56, 57, 58, 59, 60, 61, 62, 63, -1 }; 
+static int32_t herotile_water_dive_list [] = { 64, 65, 66, 67, 68, 69, 70, 71, -1 }; 
+static int32_t herotile_water_hold_list [] = { 72, 73, 74, 75, -1 }; 
+static int32_t herotile_water_drown_list[] = { 97, 98, 99, 100, 101, 102, 103, 104, -1 }; 
+static int32_t herotile_lava_drown_list [] = { 113, 114, 115, 116, 117, 118, 119, 120, -1 };
 
 static TABPANEL herotile_water_tabs[] =
 {
@@ -6271,17 +6040,9 @@ static int32_t herotile_sidewater_pound_list[] =
 	220, 221, 222, 223, 224, 225, 226, 227, 236, 237, 238, 239, 240, 241, 242, 243,-1
 };
 
-static int32_t herotile_sidewater_charge_list[] =
-{
-	// dialog control number
-	228, 229, 230, 231, 232, 233, 234, 235, -1
-};
-
-static int32_t herotile_sidewater_hold_list[] =
-{
-	// dialog control number
-	244,245,246,247,248,249,250,251, -1
-};
+// dialog control numbers
+static int32_t herotile_sidewater_charge_list[] = { 228, 229, 230, 231, 232, 233, 234, 235, -1 }; 
+static int32_t herotile_sidewater_hold_list  [] = { 244, 245, 246, 247, 248, 249, 250, 251, -1 };
 
 static TABPANEL herotile_sidewater_tabs[] =
 {
@@ -6330,7 +6091,7 @@ static TABPANEL herotile_defense_tabs[] =
 };
 
 // dialog control numbers
-static int32_t herotile_land_list     [] = { 9,  -1 }; 
+static int32_t herotile_land_list     [] = { 9,   -1 }; 
 static int32_t herotile_water_list    [] = { 10,  -1 }; 
 static int32_t herotile_sidewater_list[] = { 195, -1 }; 
 static int32_t herotile_defense_list  [] = { 121, -1 }; 
@@ -6379,18 +6140,14 @@ int32_t jwin_as_droplist_proc(int32_t msg,DIALOG *d,int32_t c)
 	
 	switch(msg)
 	{
-	case MSG_CHAR:
-	case MSG_CLICK:
-		zinit.heroAnimationStyle=d->d1;
-		
-		if(zinit.heroAnimationStyle==las_zelda3slow)
-		{
-			hero_animation_speed=2;
-		}
-		else
-		{
-			hero_animation_speed=1;
-		}
+		case MSG_CHAR:
+		case MSG_CLICK:
+			zinit.heroAnimationStyle=d->d1;
+			
+			if(zinit.heroAnimationStyle==las_zelda3slow)
+				hero_animation_speed=2;
+			else
+				hero_animation_speed=1;
 	}
 	
 	return ret;
@@ -8483,31 +8240,31 @@ int32_t onCustomHero()
 		}
 		else
 		{
-			memcpy(walkspr, oldWalkSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(stabspr, oldStabSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(slashspr, oldSlashSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(revslashspr, oldRevSlashSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(floatspr, oldFloatSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(swimspr, oldSwimSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(divespr, oldDiveSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(poundspr, oldPoundSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(jumpspr, oldJumpSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(chargespr, oldChargeSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(castingspr, oldCastSpr, 3 * sizeof(int32_t));
-			memcpy(sideswimcastingspr, oldsideswimCastSpr, 3 * sizeof(int32_t));
-			memcpy(holdspr, oldHoldSpr, 2*3*3*sizeof(int32_t));
-			memcpy(drowningspr, oldDrownSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(sidedrowningspr, oldSideDrownSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(fallingspr, oldFallSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(drowning_lavaspr, oldLavaDrownSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(sideswimspr, oldSideSwimSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(sideswimslashspr, oldSideSwimSlashSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(sideswimstabspr, oldSideSwimStabSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(sideswimpoundspr, oldSideSwimPoundSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(sideswimchargespr, oldSideSwimChargeSpr, 4 * 3 * sizeof(int32_t));
-			memcpy(sideswimholdspr, oldSideSwimHoldSpr, 3* 3 * sizeof(int32_t));
-			memcpy(liftingspr, oldLiftingSpr, 4 * 4 * sizeof(int32_t));
-			memcpy(liftingwalkspr, oldLiftingWalkSpr, 4 * 3 * sizeof(int32_t));
+			memcpy(walkspr,            oldWalkSpr,           4 * 3 * sizeof(int32_t));
+			memcpy(stabspr,            oldStabSpr,           4 * 3 * sizeof(int32_t));
+			memcpy(slashspr,           oldSlashSpr,          4 * 3 * sizeof(int32_t));
+			memcpy(revslashspr,        oldRevSlashSpr,       4 * 3 * sizeof(int32_t));
+			memcpy(floatspr,           oldFloatSpr,          4 * 3 * sizeof(int32_t));
+			memcpy(swimspr,            oldSwimSpr,           4 * 3 * sizeof(int32_t));
+			memcpy(divespr,            oldDiveSpr,           4 * 3 * sizeof(int32_t));
+			memcpy(poundspr,           oldPoundSpr,          4 * 3 * sizeof(int32_t));
+			memcpy(jumpspr,            oldJumpSpr,           4 * 3 * sizeof(int32_t));
+			memcpy(chargespr,          oldChargeSpr,         4 * 3 * sizeof(int32_t));
+			memcpy(castingspr,         oldCastSpr,               3 * sizeof(int32_t));
+			memcpy(sideswimcastingspr, oldsideswimCastSpr,       3 * sizeof(int32_t));
+			memcpy(holdspr,            oldHoldSpr,       2 * 3 * 3 * sizeof(int32_t));
+			memcpy(drowningspr,        oldDrownSpr,          4 * 3 * sizeof(int32_t));
+			memcpy(sidedrowningspr,    oldSideDrownSpr,      4 * 3 * sizeof(int32_t));
+			memcpy(fallingspr,         oldFallSpr,           4 * 3 * sizeof(int32_t));
+			memcpy(drowning_lavaspr,   oldLavaDrownSpr,      4 * 3 * sizeof(int32_t));
+			memcpy(sideswimspr,        oldSideSwimSpr,       4 * 3 * sizeof(int32_t));
+			memcpy(sideswimslashspr,   oldSideSwimSlashSpr,  4 * 3 * sizeof(int32_t));
+			memcpy(sideswimstabspr,    oldSideSwimStabSpr,   4 * 3 * sizeof(int32_t));
+			memcpy(sideswimpoundspr,   oldSideSwimPoundSpr,  4 * 3 * sizeof(int32_t));
+			memcpy(sideswimchargespr,  oldSideSwimChargeSpr, 4 * 3 * sizeof(int32_t));
+			memcpy(sideswimholdspr,    oldSideSwimHoldSpr,   3 * 3 * sizeof(int32_t));
+			memcpy(liftingspr,         oldLiftingSpr,        4 * 4 * sizeof(int32_t));
+			memcpy(liftingwalkspr,     oldLiftingWalkSpr,    4 * 3 * sizeof(int32_t));
 		}
 	} while (ret == 168);
 	
