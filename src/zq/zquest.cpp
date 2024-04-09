@@ -12796,7 +12796,6 @@ int32_t writeoneweapon(PACKFILE *f, int32_t index)
     return 1;
 }
 
-
 int32_t readoneweapon(PACKFILE *f, int32_t index)
 {
 	dword section_version = 0;
@@ -12805,26 +12804,17 @@ int32_t readoneweapon(PACKFILE *f, int32_t index)
 	int32_t zbuild = 0;
 	wpndata tempwpnspr;
 	memset(&tempwpnspr, 0, sizeof(wpndata));
-     
    
 	//char dmapstring[64]={0};
 	//section version info
 	if(!p_igetl(&zversion,f))
-	{
 		return 0;
-	}
 	if(!p_igetl(&zbuild,f))
-	{
 		return 0;
-	}
 	if(!p_igetw(&section_version,f))
-	{
 		return 0;
-	}
 	if(!p_igetw(&section_cversion,f))
-	{
 		return 0;
-	}
 	al_trace("readoneweapon section_version: %d\n", section_version);
 	al_trace("readoneweapon section_cversion: %d\n", section_cversion);
 
@@ -12838,7 +12828,6 @@ int32_t readoneweapon(PACKFILE *f, int32_t index)
 	{
 		al_trace("Cannot read .zwpnspr packfile made using V_WEAPONS (%d) subversion (%d)\n", section_version, section_cversion);
 		return 0;
-		
 	}
 	else
 	{
@@ -12848,9 +12837,7 @@ int32_t readoneweapon(PACKFILE *f, int32_t index)
 	char tmp_wpn_name[64];
 	memset(tmp_wpn_name,0,64);
 	if(!pfread(&tmp_wpn_name, 64, f))
-	{
 		return 0;
-	}
 	
     word oldtile = 0;
     if(section_version < 8)
@@ -12858,34 +12845,22 @@ int32_t readoneweapon(PACKFILE *f, int32_t index)
             return 0;
             
     if(!p_getc(&tempwpnspr.misc,f))
-    {
         return 0;
-    }
             
     if(!p_getc(&tempwpnspr.csets,f))
-    {
         return 0;
-    }
             
     if(!p_getc(&tempwpnspr.frames,f))
-    {
         return 0;
-    }
             
     if(!p_getc(&tempwpnspr.speed,f))
-    {
         return 0;
-    }
     
     if(!p_getc(&tempwpnspr.type,f))
-    {
         return 0;
-    }
 	
-	if(!p_igetw(&tempwpnspr.script,f))
-    {
+    if(!p_igetw(&tempwpnspr.script,f))
         return 0;
-    }
 
 	//2.55 starts here
 	if ( zversion >= 0x255 )
@@ -12893,9 +12868,7 @@ int32_t readoneweapon(PACKFILE *f, int32_t index)
 		if  ( section_version >= 7 )
 		{
 			if(!p_igetl(&tempwpnspr.tile,f))
-			{
 				return 0;
-			}
 		}
 	}
 	if ( zversion < 0x255 ) 
@@ -12907,7 +12880,6 @@ int32_t readoneweapon(PACKFILE *f, int32_t index)
        
 	return 1;
 }
-
 
 static wpndata copiedSprite;
 static byte spritecopied = 0;
@@ -13289,7 +13261,6 @@ const char *enhancedmusiclist(int32_t index, int32_t *list_size)
     *list_size=number_list_size;*/
     return NULL;
 }
-
 
 const char *levelnumlist(int32_t index, int32_t *list_size)
 {
@@ -13901,7 +13872,6 @@ int32_t d_wlist_proc(int32_t msg,DIALOG *d,int32_t c)
 	return ret;
 }
 
-
 /**********************************/
 //        Triforce Pieces         //
 /**********************************/
@@ -14352,19 +14322,13 @@ int32_t writesomedmaps(PACKFILE *f, int32_t first, int32_t last, int32_t max)
 	int32_t zbuild = VERSION_BUILD;
 	
 	if(!p_iputl(V_ZDMAP,f))
-	{
 		return 0;
-	}
   
     //section version info
 	if(!p_iputl(zversion,f))
-	{
 		return 0;
-	}
 	if(!p_iputl(zbuild,f))
-	{
 		return 0;
-	}
 	if(!p_iputw(section_version,f))
 	{
 		new_return(2);
@@ -14696,9 +14660,6 @@ int32_t readsomedmaps(PACKFILE *f)
 		max = 255;
 	}
 	
-	
-	
-	
 	al_trace("readsomedmaps section_version: %d\n", section_version);
 	al_trace("readsomedmaps section_cversion: %d\n", section_cversion);
     
@@ -14720,8 +14681,6 @@ int32_t readsomedmaps(PACKFILE *f)
 	//{
 	//	return 0;
 	//}
-    
-    
    
 		for ( int32_t i = first; i <= last; ++i )
 		{
@@ -14824,28 +14783,21 @@ int32_t readsomedmaps(PACKFILE *f)
 		    
 		    
 		    if(!p_igetl(&tempdmap.flags,f))
-		    {
 			return 0;
-		    }
+
 			if ( zversion >= 0x255 )
 			{
 				if  ( section_version >= 14 )
 				{
 				    //2.55 starts here
 				    if(!p_getc(&tempdmap.sideview,f))
-				    {
 					return 0;
-				    }
 				    if(!p_igetw(&tempdmap.script,f))
-				    {
 					return 0;
-				    }
 				    for ( int32_t q = 0; q < 8; q++ )
 				    {
 					if(!p_igetl(&tempdmap.initD[q],f))
-					{
 						return 0;
-				    }
 					    
 				    }
 				    for ( int32_t q = 0; q < 8; q++ )
@@ -15182,7 +15134,6 @@ int32_t writeonedmap(PACKFILE *f, int32_t i)
 	return 1;
 }
 
-
 int32_t readonedmap(PACKFILE *f, int32_t index)
 {
 	dword section_version = 0;
@@ -15256,9 +15207,6 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
 	//	return 0;
 	//}
     
-    
-   
-        
             if(!p_getc(&tempdmap.map,f))
                 return 0;
             
