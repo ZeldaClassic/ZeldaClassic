@@ -14833,8 +14833,6 @@ int32_t readsomedmaps(PACKFILE *f)
 	return 1;
 }
 
-
-
 int32_t writeonedmap(PACKFILE *f, int32_t i)
 {
 	dword section_version=V_DMAPS;
@@ -17342,56 +17340,57 @@ int32_t d_itemdropedit_proc(int32_t msg,DIALOG *d,int32_t c)
 
 void EditItemDropSet(int32_t index)
 {
-    build_bii_list(true);
-    char chance[11][10];
-    char itemdropsetname[64];
-    char caption[40];
-    char percent_str[11][5];
+	build_bii_list(true);
+	char chance[11][10];
+	char itemdropsetname[64];
+	char caption[40];
+	char percent_str[11][5];
+
+	sprintf(caption,"Item Drop Set Data %d",index);
+	edititemdropset_dlg[0].dp = caption;
+	edititemdropset_dlg[0].dp2=get_zc_font(font_lfont);
+
+	sprintf(itemdropsetname,"%s",item_drop_sets[index].name);
+	edititemdropset_dlg[5].dp = itemdropsetname;
+
+	sprintf(chance[0],"%d",item_drop_sets[index].chance[0]);
+	edititemdropset_dlg[7].dp = chance[0];
+
+	ListData item_list(itemlist_num, &a4fonts[font_lfont_l]);
+	sprintf(percent_str[0],"    ");
+	edititemdropset_dlg[9].dp  = percent_str[0];
     
-    sprintf(caption,"Item Drop Set Data %d",index);
-    edititemdropset_dlg[0].dp = caption;
-    edititemdropset_dlg[0].dp2=get_zc_font(font_lfont);
+	for(int32_t i=0; i<10; ++i)
+	{
+		sprintf(chance[i+1],"%d",item_drop_sets[index].chance[i+1]);
+		edititemdropset_dlg[14+(i*3)].dp  = chance[i+1];
+		edititemdropset_dlg[15+(i*3)].dp  = (void *) &item_list;
+		sprintf(percent_str[i+1],"    ");
+		edititemdropset_dlg[16+(i*3)].dp  = percent_str[i+1];
+
+		if(item_drop_sets[index].chance[i+1]==0)
+		{
+		    edititemdropset_dlg[15+(i*3)].d1  = -2;
+		}
+		else
+		{
+		    for(int32_t j=0; j<bii_cnt; j++)
+		    {
+			if(bii[j].i == item_drop_sets[index].item[i])
+			{
+			    edititemdropset_dlg[15+(i*3)].d1  = j;
+			}
+		    }
+		}
+	}
     
-    sprintf(itemdropsetname,"%s",item_drop_sets[index].name);
-    edititemdropset_dlg[5].dp = itemdropsetname;
+	large_dialog(edititemdropset_dlg);
+
+	int32_t ret = do_zqdialog(edititemdropset_dlg,-1);
     
-    sprintf(chance[0],"%d",item_drop_sets[index].chance[0]);
-    edititemdropset_dlg[7].dp = chance[0];
-    
-    ListData item_list(itemlist_num, &a4fonts[font_lfont_l]);
-    sprintf(percent_str[0],"    ");
-    edititemdropset_dlg[9].dp  = percent_str[0];
-    
-    for(int32_t i=0; i<10; ++i)
-    {
-        sprintf(chance[i+1],"%d",item_drop_sets[index].chance[i+1]);
-        edititemdropset_dlg[14+(i*3)].dp  = chance[i+1];
-        edititemdropset_dlg[15+(i*3)].dp  = (void *) &item_list;
-        sprintf(percent_str[i+1],"    ");
-        edititemdropset_dlg[16+(i*3)].dp  = percent_str[i+1];
-        
-        if(item_drop_sets[index].chance[i+1]==0)
-        {
-            edititemdropset_dlg[15+(i*3)].d1  = -2;
-        }
-        else
-        {
-            for(int32_t j=0; j<bii_cnt; j++)
-            {
-                if(bii[j].i == item_drop_sets[index].item[i])
-                {
-                    edititemdropset_dlg[15+(i*3)].d1  = j;
-                }
-            }
-        }
-    }
-    
-    large_dialog(edititemdropset_dlg);
-        
-    int32_t ret = do_zqdialog(edititemdropset_dlg,-1);
-    
-    if(ret==2)
-    {
+	if (ret != 2)
+		return;
+
         saved=false;
         
         sprintf(item_drop_sets[index].name,"%s",itemdropsetname);
@@ -17416,7 +17415,6 @@ void EditItemDropSet(int32_t index)
                 item_drop_sets[index].item[i] = 0;
             }
         }
-    }
 }
 
 int32_t count_item_drop_sets()
