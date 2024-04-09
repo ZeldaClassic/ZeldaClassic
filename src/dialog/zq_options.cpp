@@ -548,21 +548,21 @@ TextField(type = GUI::TextField::type::INT_DECIMAL, \
 static const GUI::ListData abRetentionList
 {
 	{ "Disabled", 0 },
-	{ " 1", 1 },
-	{ " 2", 2 },
-	{ " 3", 3 },
-	{ " 4", 4 },
-	{ " 5", 5 },
-	{ " 6", 6 },
-	{ " 7", 7 },
-	{ " 8", 8 },
-	{ " 9", 9 },
-	{ "10", 10 }
+	{ " 1",       1 },
+	{ " 2",       2 },
+	{ " 3",       3 },
+	{ " 4",       4 },
+	{ " 5",       5 },
+	{ " 6",       6 },
+	{ " 7",       7 },
+	{ " 8",       8 },
+	{ " 9",       9 },
+	{ "10",      10 }
 };
 static const GUI::ListData asIntervalList
 {
-	{ "Disabled", 0 },
-	{ " 1 Minute", 1 },
+	{ "Disabled",   0 },
+	{ " 1 Minute",  1 },
 	{ " 2 Minutes", 2 },
 	{ " 3 Minutes", 3 },
 	{ " 4 Minutes", 4 },
@@ -588,65 +588,65 @@ static const GUI::ListData asRetentionList
 };
 static const GUI::ListData colorList
 {
-	{ "Black", 0 },
-	{ "Blue", 1 },
-	{ "Green", 2 },
-	{ "Cyan", 3 },
-	{ "Red", 4 },
-	{ "Magenta", 5 },
-	{ "Brown", 6 },
-	{ "Light Gray", 7 },
-	{ "Dark Gray", 8 },
-	{ "Light Blue", 9 },
-	{ "Light Green", 10 },
-	{ "Light Cyan", 11 },
-	{ "Light Red", 12 },
+	{ "Black",          0 },
+	{ "Blue",           1 },
+	{ "Green",          2 },
+	{ "Cyan",           3 },
+	{ "Red",            4 },
+	{ "Magenta",        5 },
+	{ "Brown",          6 },
+	{ "Light Gray",     7 },
+	{ "Dark Gray",      8 },
+	{ "Light Blue",     9 },
+	{ "Light Green",   10 },
+	{ "Light Cyan",    11 },
+	{ "Light Red",     12 },
 	{ "Light Magenta", 13 },
-	{ "Yellow", 14 },
-	{ "White", 15 }
+	{ "Yellow",        14 },
+	{ "White",         15 }
 };
 static const GUI::ListData mmapCursList
 {
-	{ "White", 0 },
+	{ "White",       0 },
 	{ "Black+White", 1 },
-	{ "Red+Blue", 2 }
+	{ "Red+Blue",    2 }
 };
 static const GUI::ListData bgColorList
 {
-	{ "Use Color 0", -1 },
-	{ "Black", 0 },
-	{ "Blue", 1 },
-	{ "Green", 2 },
-	{ "Cyan", 3 },
-	{ "Red", 4 },
-	{ "Magenta", 5 },
-	{ "Brown", 6 },
-	{ "Light Gray", 7 },
-	{ "Dark Gray", 8 },
-	{ "Light Blue", 9 },
-	{ "Light Green", 10 },
-	{ "Light Cyan", 11 },
-	{ "Light Red", 12 },
+	{ "Use Color 0",   -1 },
+	{ "Black",          0 },
+	{ "Blue",           1 },
+	{ "Green",          2 },
+	{ "Cyan",           3 },
+	{ "Red",            4 },
+	{ "Magenta",        5 },
+	{ "Brown",          6 },
+	{ "Light Gray",     7 },
+	{ "Dark Gray",      8 },
+	{ "Light Blue",     9 },
+	{ "Light Green",   10 },
+	{ "Light Cyan",    11 },
+	{ "Light Red",     12 },
 	{ "Light Magenta", 13 },
-	{ "Yellow", 14 },
-	{ "White", 15 }
+	{ "Yellow",        14 },
+	{ "White",         15 }
 };
 static const GUI::ListData ditherSzList
 {
 	{ "Hide Layer", 0 },
-	{ "1", 1 },
-	{ "2", 2 },
-	{ "3", 3 },
-	{ "4", 4 },
-	{ "5", 5 },
-	{ "6", 6 },
-	{ "7", 7 },
-	{ "8", 8 }
+	{ "1",          1 },
+	{ "2",          2 },
+	{ "3",          3 },
+	{ "4",          4 },
+	{ "5",          5 },
+	{ "6",          6 },
+	{ "7",          7 },
+	{ "8",          8 }
 };
 static const GUI::ListData invalidDataBGList
 {
-	{ "X Out", 0 },
-	{ "Static", 1 },
+	{ "X Out",        0 },
+	{ "Static",       1 },
 	{ "Checkerboard", 2 }
 };
 static const GUI::ListData snapFormatList
@@ -660,9 +660,9 @@ static const GUI::ListData snapFormatList
 };
 static const GUI::ListData bottom8_list
 {
-	{ "No Cover", 0 },
+	{ "No Cover",        0 },
 	{ "Pixelated Cover", 1 },
-	{ "Normal Cover", 2 }
+	{ "Normal Cover",    2 }
 };
 static const GUI::ListData snapshotScaleList
 {
@@ -935,7 +935,7 @@ std::shared_ptr<GUI::Widget> OptionsDialog::view()
 		)
 	);
 	
-	auto cur_font = opts[is_compact ? OPT_COMPACTFONT_DIALOG : OPT_LARGEFONT_DIALOG];
+	auto cur_font  = opts[is_compact ? OPT_COMPACTFONT_DIALOG       : OPT_LARGEFONT_DIALOG];
 	auto cur_scale = opts[is_compact ? OPT_COMPACTFONT_SCALE_DIALOG : OPT_LARGEFONT_SCALE_DIALOG];
 	preview_font(cur_font, cur_scale);
 	return window;
