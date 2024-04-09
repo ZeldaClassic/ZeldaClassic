@@ -12809,7 +12809,7 @@ int32_t readoneweapon(PACKFILE *f, int32_t index)
     word oldtile = 0;
     if(section_version < 8)
 	    if(!p_igetw(&oldtile,f))
-            return 0;
+		    return 0;
             
     if(!p_getc(&tempwpnspr.misc,f))
         return 0;
