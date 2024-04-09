@@ -17297,8 +17297,8 @@ int32_t d_itemdropedit_proc(int32_t msg,DIALOG *d,int32_t c)
 
 	int32_t t = atoi((char*)edititemdropset_dlg[7].dp);
 
-	for(int32_t i=0; i<10; ++i)
-		t += atoi((char*)edititemdropset_dlg[14+(i*3)].dp);
+	for (int32_t i = 0; i < 10; ++i)
+		t += abs(atoi((char*)edititemdropset_dlg[14 + (i * 3)].dp));
 
 	int32_t t2 = (int32_t)(100*atoi((char*)edititemdropset_dlg[7].dp) / zc_max(t,1));
 	sprintf((char*)edititemdropset_dlg[9].dp,"%d%%%s",t2, t2 <= 11 ? " ":"");
