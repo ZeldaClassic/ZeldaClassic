@@ -367,14 +367,14 @@ zinfo ZI;
 
 zinfo::zinfo()
 {
-	memset(ic_help_string, 0, sizeof(ic_help_string));
-	memset(ctype_name, 0, sizeof(ctype_name));
+	memset(ic_help_string,    0, sizeof(ic_help_string));
+	memset(ctype_name,        0, sizeof(ctype_name));
 	memset(ctype_help_string, 0, sizeof(ctype_help_string));
-	memset(mf_name, 0, sizeof(mf_name));
-	memset(mf_help_string, 0, sizeof(mf_help_string));
-	memset(ic_name, 0, sizeof(ic_name));
-	memset(ctr_name, 0, sizeof(ctr_name));
-	memset(weap_name, 0, sizeof(weap_name));
+	memset(mf_name,           0, sizeof(mf_name));
+	memset(mf_help_string,    0, sizeof(mf_help_string));
+	memset(ic_name,           0, sizeof(ic_name));
+	memset(ctr_name,          0, sizeof(ctr_name));
+	memset(weap_name,         0, sizeof(weap_name));
 }
 
 void zinfo::clear_ic_help()

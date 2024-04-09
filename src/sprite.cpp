@@ -194,10 +194,10 @@ sprite::sprite(sprite const & other):
     
 	for(int32_t i=0; i<10; ++i)
 	{
-		dummy_int[i]=other.dummy_int[i];
-		dummy_fix[i]=other.dummy_fix[i];
-		dummy_float[i]=other.dummy_float[i];
-		dummy_bool[i]=other.dummy_bool[i];
+		dummy_int  [i] = other.dummy_int  [i];
+		dummy_fix  [i] = other.dummy_fix  [i];
+		dummy_float[i] = other.dummy_float[i];
+		dummy_bool [i] = other.dummy_bool [i];
 	}
     
 	//for (int32_t i=0; i<8; ++i)
@@ -391,10 +391,10 @@ int32_t sprite::fake_z(zfix fz)
 
 int32_t sprite::get_pit() //Returns combo ID of pit that sprite WOULD fall into; no side-effects
 {
-	int32_t ispitul = getpitfall(x,y);
-	int32_t ispitbl = getpitfall(x,y+15);
-	int32_t ispitur = getpitfall(x+15,y);
-	int32_t ispitbr = getpitfall(x+15,y+15);
+	int32_t ispitul    = getpitfall(x,y);
+	int32_t ispitbl    = getpitfall(x,y+15);
+	int32_t ispitur    = getpitfall(x+15,y);
+	int32_t ispitbr    = getpitfall(x+15,y+15);
 	int32_t ispitul_50 = getpitfall(x+8,y+8);
 	int32_t ispitbl_50 = getpitfall(x+8,y+7);
 	int32_t ispitur_50 = getpitfall(x+7,y+8);
@@ -476,10 +476,10 @@ int32_t sprite::check_pits() //Returns combo ID of pit fallen into; 0 for not fa
 	int32_t ispitul, ispitbl, ispitur, ispitbr, ispitul_50, ispitbl_50, ispitur_50, ispitbr_50;
 	while(++safe_cnt < 16) //Prevent softlocks
 	{
-		ispitul = getpitfall(x,y);
-		ispitbl = getpitfall(x,y+15);
-		ispitur = getpitfall(x+15,y);
-		ispitbr = getpitfall(x+15,y+15);
+		ispitul    = getpitfall(x,y);
+		ispitbl    = getpitfall(x,y+15);
+		ispitur    = getpitfall(x+15,y);
+		ispitbr    = getpitfall(x+15,y+15);
 		ispitul_50 = getpitfall(x+7,y+7);
 		ispitbl_50 = getpitfall(x+7,y+8);
 		ispitur_50 = getpitfall(x+8,y+7);
@@ -649,10 +649,10 @@ int32_t sprite::check_pits() //Returns combo ID of pit fallen into; 0 for not fa
 
 int32_t sprite::get_water()  //Returns combo ID of water that sprite WOULD fall into; no side-effects
 {
-	int32_t ispitul = iswaterexzq(MAPCOMBOzq(x,y), get_currmap(), get_currscr(), -1, x, y, false, false, true);
-	int32_t ispitbl = iswaterexzq(MAPCOMBOzq(x,y+15), get_currmap(), get_currscr(), -1, x, y+15, false, false, true);
-	int32_t ispitur = iswaterexzq(MAPCOMBOzq(x+15,y), get_currmap(), get_currscr(), -1, x+15, y, false, false, true);
-	int32_t ispitbr = iswaterexzq(MAPCOMBOzq(x+15,y+15), get_currmap(), get_currscr(), -1, x+15, y+15, false, false, true);
+	int32_t ispitul    = iswaterexzq(MAPCOMBOzq(x,y), get_currmap(), get_currscr(), -1, x, y, false, false, true);
+	int32_t ispitbl    = iswaterexzq(MAPCOMBOzq(x,y+15), get_currmap(), get_currscr(), -1, x, y+15, false, false, true);
+	int32_t ispitur    = iswaterexzq(MAPCOMBOzq(x+15,y), get_currmap(), get_currscr(), -1, x+15, y, false, false, true);
+	int32_t ispitbr    = iswaterexzq(MAPCOMBOzq(x+15,y+15), get_currmap(), get_currscr(), -1, x+15, y+15, false, false, true);
 	int32_t ispitul_50 = iswaterexzq(MAPCOMBOzq(x+8,y+8), get_currmap(), get_currscr(), -1, x+8, y+8, false, false, true);
 	int32_t ispitbl_50 = iswaterexzq(MAPCOMBOzq(x+8,y+7), get_currmap(), get_currscr(), -1, x+8, y+7, false, false, true);
 	int32_t ispitur_50 = iswaterexzq(MAPCOMBOzq(x+7,y+8), get_currmap(), get_currscr(), -1, x+7, y+8, false, false, true);
@@ -734,10 +734,10 @@ int32_t sprite::check_water() //Returns combo ID of water fallen into; 0 for not
 	int32_t ispitul, ispitbl, ispitur, ispitbr, ispitul_50, ispitbl_50, ispitur_50, ispitbr_50;
 	while(++safe_cnt < 16) //Prevent softlocks
 	{
-		ispitul = iswaterexzq(MAPCOMBOzq(x,y), get_currmap(), get_currscr(), -1, x, y, false, false, true);
-		ispitbl = iswaterexzq(MAPCOMBOzq(x,y+15), get_currmap(), get_currscr(), -1, x, y+15, false, false, true);
-		ispitur = iswaterexzq(MAPCOMBOzq(x+15,y), get_currmap(), get_currscr(), -1, x+15, y, false, false, true);
-		ispitbr = iswaterexzq(MAPCOMBOzq(x+15,y+15), get_currmap(), get_currscr(), -1, x+15, y+15, false, false, true);
+		ispitul    = iswaterexzq(MAPCOMBOzq(x,y), get_currmap(), get_currscr(), -1, x, y, false, false, true);
+		ispitbl    = iswaterexzq(MAPCOMBOzq(x,y+15), get_currmap(), get_currscr(), -1, x, y+15, false, false, true);
+		ispitur    = iswaterexzq(MAPCOMBOzq(x+15,y), get_currmap(), get_currscr(), -1, x+15, y, false, false, true);
+		ispitbr    = iswaterexzq(MAPCOMBOzq(x+15,y+15), get_currmap(), get_currscr(), -1, x+15, y+15, false, false, true);
 		ispitul_50 = iswaterexzq(MAPCOMBOzq(x+8,y+8), get_currmap(), get_currscr(), -1, x+8, y+8, false, false, true);
 		ispitbl_50 = iswaterexzq(MAPCOMBOzq(x+8,y+7), get_currmap(), get_currscr(), -1, x+8, y+7, false, false, true);
 		ispitur_50 = iswaterexzq(MAPCOMBOzq(x+7,y+8), get_currmap(), get_currscr(), -1, x+7, y+8, false, false, true);
@@ -2081,10 +2081,10 @@ void sprite_list::clear(bool force)
 
 sprite *sprite_list::spr(int32_t index)
 {
-    if(index<0 || index>=count)
-        return NULL;
+	if(index<0 || index>=count)
+		return NULL;
         
-    return sprites[index];
+	return sprites[index];
 }
 
 int32_t sprite_list::find(sprite *spr)
@@ -2099,16 +2099,16 @@ int32_t sprite_list::find(sprite *spr)
 
 bool sprite_list::swap(int32_t a,int32_t b)
 {
-    if(a<0 || a>=count || b<0 || b>=count)
-        return false;
+	if(a<0 || a>=count || b<0 || b>=count)
+		return false;
         
-    sprite *c = sprites[a];
-    sprites[a] = sprites[b];
-    sprites[b] = c;
-    containedUIDs[sprites[a]->getUID()] = a;
-    containedUIDs[sprites[b]->getUID()] = b;
-// checkConsistency();
-    return true;
+	sprite *c = sprites[a];
+	sprites[a] = sprites[b];
+	sprites[b] = c;
+	containedUIDs[sprites[a]->getUID()] = a;
+	containedUIDs[sprites[b]->getUID()] = b;
+	// checkConsistency();
+	return true;
 }
 
 bool sprite_list::add(sprite *s)
@@ -2386,13 +2386,13 @@ void sprite_list::run_script(int32_t mode)
 
 void sprite_list::check_conveyor()
 {
-    for (int32_t i=0; i<count; ++i)
-        sprites[i]->check_conveyor();
+	for (int32_t i=0; i<count; ++i)
+		sprites[i]->check_conveyor();
 }
 
 int32_t sprite_list::Count()
 {
-    return count;
+	return count;
 }
 
 bool sprite_list::has_space(int32_t space)
@@ -2501,25 +2501,25 @@ int32_t sprite_list::idLast(int32_t id, int32_t mask)
 // returns the number of sprites with matching id
 int32_t sprite_list::idCount(int32_t id)
 {
-    return idCount(id,0xFFFF);
+	return idCount(id,0xFFFF);
 }
 
 // returns index of first sprite with matching id, -1 if none found
 int32_t sprite_list::idFirst(int32_t id)
 {
-    return idFirst(id,0xFFFF);
+	return idFirst(id,0xFFFF);
 }
 
 // returns index of first sprite with matching id, -1 if none found
 int32_t sprite_list::idNth(int32_t id, int32_t n)
 {
-    return idNth(id,n,0xFFFF);
+	return idNth(id,n,0xFFFF);
 }
 
 // returns index of last sprite with matching id, -1 if none found
 int32_t sprite_list::idLast(int32_t id)
 {
-    return idLast(id,0xFFFF);
+	return idLast(id,0xFFFF);
 }
 
 sprite * sprite_list::getByUID(int32_t uid)
@@ -2640,7 +2640,6 @@ void sprite::setCanFlicker(bool v)
 {
 	can_flicker = v;
 }
-
 
 /*
 void sprite::explode(int32_t type)
