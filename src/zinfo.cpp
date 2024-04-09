@@ -352,7 +352,7 @@ const char counter_default_names[MAX_COUNTERS][255] =
 
 void assignchar(char** p, char const* str)
 {
-	if(*p) free(*p);
+	free(*p);
 	if(!str)
 	{
 		*p = nullptr;
