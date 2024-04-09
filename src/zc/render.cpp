@@ -220,6 +220,7 @@ static void configure_render_tree()
 	
 	rti_screen.visible = false;
 
+	/*
 	if (rti_screen.visible)
 	{
 		int w = rti_screen.width;
@@ -241,6 +242,7 @@ static void configure_render_tree()
 		// TODO: don't recreate screen bitmap when alternating fullscreen mode.
 		rti_screen.a4_bitmap = zqdialog_bg_bmp ? zqdialog_bg_bmp : screen;
 	}
+	*/
 
 	rti_game.freeze = rti_menu.visible || rti_gui.visible || rti_dialogs.visible || is_sys_pal;
 	if (rti_game.freeze)
