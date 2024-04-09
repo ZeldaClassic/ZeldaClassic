@@ -17319,7 +17319,7 @@ int32_t d_itemdropedit_proc(int32_t msg,DIALOG *d,int32_t c)
 void EditItemDropSet(int32_t index)
 {
 	build_bii_list(true);
-	char chance[11][NUM_SC];
+	char chance[NUM_SC+1][10];
 	char itemdropsetname[64];
 	char caption[40];
 	char percent_str[11][5];
@@ -17331,6 +17331,7 @@ void EditItemDropSet(int32_t index)
 	sprintf(itemdropsetname,"%s",item_drop_sets[index].name);
 	edititemdropset_dlg[5].dp = itemdropsetname;
 
+	// nothing chance
 	sprintf(chance[0],"%d",item_drop_sets[index].chance[0]);
 	edititemdropset_dlg[7].dp = chance[0];
 
@@ -17373,6 +17374,7 @@ void EditItemDropSet(int32_t index)
         
         sprintf(item_drop_sets[index].name,"%s",itemdropsetname);
         
+	// nothing chance
         item_drop_sets[index].chance[0]=atoi(chance[0]);
         
         for(int32_t i=0; i<NUM_SC; ++i)
