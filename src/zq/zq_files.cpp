@@ -378,21 +378,21 @@ int32_t onNew()
 
 int32_t onSave()
 {
-    restore_mouse();
+	restore_mouse();
     
-    if(disable_saving)
-    {
-        jwin_alert("ZQuest","Saving is","disabled in this version.",NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
-        return D_O_K;
-    }
+	if(disable_saving)
+	{
+		jwin_alert("ZQuest","Saving is","disabled in this version.",NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+		return D_O_K;
+	}
     
-    if(!first_save)
-        return onSaveAs();
-    else if(OverwriteProtection)
-    {
-        jwin_alert("ZQuest","Overwriting quests is disabled.","Change this in the options dialog.",NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
-        return D_O_K;
-    }
+	if(!first_save)
+		return onSaveAs();
+	else if(OverwriteProtection)
+	{
+		jwin_alert("ZQuest","Overwriting quests is disabled.","Change this in the options dialog.",NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+		return D_O_K;
+	}
     
 	if(zc_get_config("zquest","quick_compile_on_save",0))
 	{
@@ -402,30 +402,30 @@ int32_t onSave()
 		}
 	}
 	
-    //bool compress = !UncompressedAutoSaves;
+	//bool compress = !UncompressedAutoSaves;
 	//Don't tie regular saves being uncompressed to the autosave option.
 	bool compress = true;
-    if (util::get_ext(temppath) == ".qsu") compress = false;
-    int32_t ret = save_unencoded_quest(filepath, compress, filepath);
-    char buf[256+20],name[256];
-    extract_name(filepath,name,FILENAMEALL);
+	if (util::get_ext(temppath) == ".qsu") compress = false;
+	int32_t ret = save_unencoded_quest(filepath, compress, filepath);
+	char buf[256+20],name[256];
+	extract_name(filepath,name,FILENAMEALL);
     
-    if(!ret)
-    {
-        sprintf(buf,"Saved %s",name);
-        jwin_alert("ZQuest",buf,NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
-        saved=true;
-        first_save=true;
-        header.dirty_password=false;
-    }
-    else
-    {
-        sprintf(buf,"Error saving %s",name);
-        jwin_alert("Error",buf,NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
-    }
+	if(!ret)
+	{
+		sprintf(buf,"Saved %s",name);
+		jwin_alert("ZQuest",buf,NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+		saved=true;
+		first_save=true;
+		header.dirty_password=false;
+	}
+	else
+	{
+		sprintf(buf,"Error saving %s",name);
+		jwin_alert("Error",buf,NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+	}
     
 	set_last_timed_save(nullptr);
-    return D_O_K;
+	return D_O_K;
 }
 
 void update_recent_quest(char const* path);
@@ -602,46 +602,46 @@ int32_t onTileset()
 
 int32_t onRevert()
 {
-    if(jwin_alert("Confirm Revert","Are you sure you want to lose","all changes since last save?",NULL,"Yes","No",'y','n',get_zc_font(font_lfont))==2)
-    {
-        return D_O_K;
-    }
-    
-    if(filepath[0]!=0)
-    {
-        int32_t ret = load_quest(filepath);
-        
-        if(!ret)
-        {
-            saved = true;
-        }
-        else
-        {
-            char buf[256+20],name[256];
-            extract_name(filepath,name,FILENAMEALL);
-            sprintf(buf,"Unable to load %s",name);
-            jwin_alert("Error",buf,qst_error[ret],NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
-            filepath[0]=0;
-        }
-        
-        setup_combo_animations();
-        setup_combo_animations2();
-        refresh(rALL);
-    }
-    else
-    {
-        NewQuestFile(0);
-        
-        if(RulesetDialog > 0)
+	if(jwin_alert("Confirm Revert","Are you sure you want to lose","all changes since last save?",NULL,"Yes","No",'y','n',get_zc_font(font_lfont))==2)
 	{
-		PickRuleset();
-		PickRuleTemplate();
+		return D_O_K;
 	}
-    }
     
-    onDrawingModeNormal();
+	if(filepath[0]!=0)
+	{
+		int32_t ret = load_quest(filepath);
+		
+		if(!ret)
+		{
+			saved = true;
+		}
+		else
+		{
+			char buf[256+20],name[256];
+			extract_name(filepath,name,FILENAMEALL);
+			sprintf(buf,"Unable to load %s",name);
+			jwin_alert("Error",buf,qst_error[ret],NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+			filepath[0]=0;
+		}
+		
+		setup_combo_animations();
+		setup_combo_animations2();
+		refresh(rALL);
+	}
+	else
+	{
+		NewQuestFile(0);
+		
+		if(RulesetDialog > 0)
+		{
+			PickRuleset();
+			PickRuleTemplate();
+		}
+	}
+    
+	onDrawingModeNormal();
 	set_last_timed_save(nullptr);
-    return D_O_K;
+	return D_O_K;
 }
 
 static DIALOG import_map_bias_dlg[] =
