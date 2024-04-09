@@ -25,9 +25,7 @@ int32_t msg_code_operands(byte cc);
 bool is_msgc(byte cc);
 std::string run_scc_dlg(MsgStr const* ref)
 {
-	if(ref)
-		refstr = ref;
-	else refstr = nullptr;
+	refstr = ref; // might be null
 	retstr = "";
 	SCCDialog().show();
 	return retstr;
@@ -36,9 +34,8 @@ std::string run_scc_dlg(MsgStr const* ref)
 std::string calc_retstr(byte scc, int32_t* args)
 {
 	if(!is_msgc(scc))
-	{
 		return "";
-	}
+
 	std::ostringstream oss;
 	oss << "\\" << word(scc);
 	auto count = msg_code_operands(scc);
