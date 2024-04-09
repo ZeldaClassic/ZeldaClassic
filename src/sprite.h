@@ -49,8 +49,6 @@ public:
 		return uid;
 	}
     
-   
-    
 	zfix z,fall,fakefall,fakez;
 	int32_t tile,shadowtile,cs,flip,c_clk,clk,misc;
 	int16_t flickercolor;
@@ -170,7 +168,6 @@ public:
 	
 	//Script helper funcs
 	virtual optional<ScriptType> get_scrtype() const {return nullopt;}
-	
 };
 
 enum //run_script modes

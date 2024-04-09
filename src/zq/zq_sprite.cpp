@@ -21,5 +21,5 @@ void movingblock::push(zfix,zfix,int32_t,int32_t)
 
 bool movingblock::animate(int32_t)
 {
-    return false;
+	return false;
 }
