@@ -18,10 +18,10 @@ int32_t newg_seltile_proc(int32_t msg,DIALOG *d,int32_t)
 	switch(msg)
 	{
 		case MSG_START:
-		{
+
 			ptr->calc_selcolor();
 			break;
-		}
+
 		case MSG_CLICK:
 		{
 			bool ctrl = CHECK_CTRL_CMD;

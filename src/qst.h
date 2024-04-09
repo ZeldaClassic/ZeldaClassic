@@ -11,8 +11,7 @@ extern FFScript ffengine;
 
 struct script_slot_data
 {
-	std::string slotname;
-	std::string scriptname;
+	std::string slotname, scriptname;
 	byte format;
 	std::string output;
 	
@@ -20,7 +19,7 @@ struct script_slot_data
 	void update()
 	{
 		char const* formatstr = getFormatStr()->c_str();
-		char const* slotstr = slotname.c_str();
+		char const* slotstr   = slotname.c_str();
 		char const* scriptstr = scriptname.c_str();
 		size_t len = strlen(formatstr) + strlen(slotstr) + strlen(scriptstr) - 4 + 1;
 		char* temp = (char*)malloc(len);
@@ -43,10 +42,10 @@ struct script_slot_data
 	
 	void clear()
 	{
-		slotname = "";
+		slotname   = "";
 		scriptname = "";
-		format = SCRIPT_FORMAT_DEFAULT;
-		output = "";
+		format     = SCRIPT_FORMAT_DEFAULT;
+		output     = "";
 	}
 	
 	bool hasScriptData()
@@ -237,29 +236,29 @@ void init_msgstrings(int32_t start, int32_t end);
 
 int32_t copyquest(PACKFILE *f);
 void print_quest_metadata(zquestheader const& tempheader, char const* path = NULL, byte qst_num = 0);
-int32_t readheader       (PACKFILE *f, zquestheader *Header, byte printmetadata = 0);
-int32_t readrules        (PACKFILE *f, zquestheader *Header);
-int32_t readstrings      (PACKFILE *f, zquestheader *Header);
-int32_t readdoorcombosets(PACKFILE *f, zquestheader *Header);
-int32_t readdmaps        (PACKFILE *f, zquestheader *Header, word version, word build, word start_dmap, word max_dmaps);
-int32_t readmisccolors   (PACKFILE *f, zquestheader *Header, miscQdata *Misc);
-int32_t readgameicons    (PACKFILE *f, zquestheader *Header, miscQdata *Misc);
-int32_t readmisc         (PACKFILE *f, zquestheader *Header, miscQdata *Misc);
+int32_t readheader       (PACKFILE *f, zquestheader*, byte printmetadata = 0);
+int32_t readrules        (PACKFILE *f, zquestheader*);
+int32_t readstrings      (PACKFILE *f, zquestheader*);
+int32_t readdoorcombosets(PACKFILE *f, zquestheader*);
+int32_t readdmaps        (PACKFILE *f, zquestheader*, word version, word build, word start_dmap, word max_dmaps);
+int32_t readmisccolors   (PACKFILE *f, zquestheader*, miscQdata *Misc);
+int32_t readgameicons    (PACKFILE *f, zquestheader*, miscQdata *Misc);
+int32_t readmisc         (PACKFILE *f, zquestheader*, miscQdata *Misc);
 int32_t readitems        (PACKFILE *f, word version, word build);
-int32_t readweapons      (PACKFILE *f, zquestheader *Header);
-int32_t readguys         (PACKFILE *f, zquestheader *Header);
-int32_t readmapscreen    (PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr, word version, int scrind = -1);
-int32_t readmaps         (PACKFILE *f, zquestheader *Header);
-int32_t readcombos       (PACKFILE *f, zquestheader *Header, word version, word build, word start_combo, word max_combos);
-int32_t readcomboaliases (PACKFILE *f, zquestheader *Header, word version, word build);
+int32_t readweapons      (PACKFILE *f, zquestheader*);
+int32_t readguys         (PACKFILE *f, zquestheader*);
+int32_t readmapscreen    (PACKFILE *f, zquestheader*, mapscr *temp_mapscr, word version, int scrind = -1);
+int32_t readmaps         (PACKFILE *f, zquestheader*);
+int32_t readcombos       (PACKFILE *f, zquestheader*, word version, word build, word start_combo, word max_combos);
+int32_t readcomboaliases (PACKFILE *f, zquestheader*, word version, word build);
 int32_t readcolordata    (PACKFILE *f, miscQdata *Misc, word version, word build, word start_cset, word max_csets);
 int32_t readtiles        (PACKFILE *f, tiledata *buf, zquestheader *Header, word version, word build, word start_tile, int32_t max_tiles, bool from_init);
-int32_t readtunes        (PACKFILE *f, zquestheader *Header, zctune *tunes);
-int32_t readcheatcodes   (PACKFILE *f, zquestheader *Header);
-int32_t readinitdata     (PACKFILE *f, zquestheader *Header);
-int32_t readffscript     (PACKFILE *f, zquestheader *Header);
-int32_t read_one_ffscript(PACKFILE *f, zquestheader *Header, int32_t i, word s_version, word s_cversion, script_data **script, word zmeta_version);
-int32_t readsfx          (PACKFILE *f, zquestheader *Header);
+int32_t readtunes        (PACKFILE *f, zquestheader*, zctune *tunes);
+int32_t readcheatcodes   (PACKFILE *f, zquestheader*);
+int32_t readinitdata     (PACKFILE *f, zquestheader*);
+int32_t readffscript     (PACKFILE *f, zquestheader*);
+int32_t read_one_ffscript(PACKFILE *f, zquestheader*, int32_t i, word s_version, word s_cversion, script_data **script, word zmeta_version);
+int32_t readsfx          (PACKFILE *f, zquestheader*);
 int32_t readitemdropsets (PACKFILE *f, word version, word build);
 int32_t readfavorites    (PACKFILE *f, int32_t, word);
 
@@ -308,8 +307,6 @@ void init_favorites();
 #define SCRHAS_SECRETS   0x00002000
 #define SCRHAS_COMBOFLAG 0x00004000
 #define SCRHAS_MISC      0x00008000
-
-
 
 #define TILESET_CLEARMAPS      0x01
 #define TILESET_CLEARSCRIPTS   0x02
