@@ -15115,20 +15115,18 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
 	//char dmapstring[64]={0};
 	//section version info
 	if(!p_igetl(&datatype_version,f))
-	{
 		return 0;
-	}
+
 	if ( datatype_version < 0 )
 	{
 		if(!p_igetl(&zversion,f))
-		{
 			return 0;
-		}
 	}
 	else
 	{
 		zversion = datatype_version;
 	}
+
 	if(!p_igetl(&zbuild,f))
 		return 0;
 	
@@ -15140,7 +15138,6 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
 
 	al_trace("readonedmap section_version: %d\n", section_version);
 	al_trace("readonedmap section_cversion: %d\n", section_cversion);
-    
 	
 	if ( datatype_version < 0 )
 	{
@@ -15153,6 +15150,7 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
 		if(!p_igetl(&count,f))
 			return 0;
 	}
+
 	if ( zversion > ZELDA_VERSION )
 	{
 		al_trace("Cannot read .zdmap packfile made in ZC version (%x) in this version of ZC (%x)\n", zversion, ZELDA_VERSION);
@@ -15172,150 +15170,134 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
 	//	return 0;
 	//}
     
-            if(!p_getc(&tempdmap.map,f))
+	if(!p_getc(&tempdmap.map,f))
+		return 0;
+            
+	if(!p_igetw(&tempdmap.level,f))
                 return 0;
             
-            if(!p_igetw(&tempdmap.level,f))
+	if(!p_getc(&tempdmap.xoff,f))
                 return 0;
             
-            if(!p_getc(&tempdmap.xoff,f))
+	if(!p_getc(&tempdmap.compass,f))
                 return 0;
             
-            if(!p_getc(&tempdmap.compass,f))
+	if(!p_igetw(&tempdmap.color,f))
                 return 0;
             
-            if(!p_igetw(&tempdmap.color,f))
+	if(!p_getc(&tempdmap.midi,f))
                 return 0;
             
-            if(!p_getc(&tempdmap.midi,f))
+	if(!p_getc(&tempdmap.cont,f))
                 return 0;
             
-            if(!p_getc(&tempdmap.cont,f))
+	if(!p_getc(&tempdmap.type,f))
                 return 0;
             
-            if(!p_getc(&tempdmap.type,f))
-                return 0;
+	for(int32_t j=0; j<8; j++)
+	{
+		if(!p_getc(&tempdmap.grid[j],f))
+			return 0;
+	}
             
-            for(int32_t j=0; j<8; j++)
-            {
-                if(!p_getc(&tempdmap.grid[j],f))
-                {
-                    return 0;
-		}
-            }
-            
-            //16
-            if(!pfread(&tempdmap.name,sizeof(DMaps[0].name),f))
-            {
-                return 0;
-            }
+	//16
+	if(!pfread(&tempdmap.name,sizeof(DMaps[0].name),f))
+		return 0;
 
-			if (section_version<20)
-			{
-				char title[22];
-				if (!p_getstr(title, sizeof(title) - 1, f))
-				{
-					return 0;
-				}
-				tempdmap.title.assign(title);
-			}
-			else
-			{
-				if (!p_getwstr(&tempdmap.title, f))
-				{
-					return 0;
-				}
-			}
+	if (section_version<20)
+	{
+		char title[22];
+		if (!p_getstr(title, sizeof(title) - 1, f))
+			return 0;
+		tempdmap.title.assign(title);
+	}
+	else
+	{
+		if (!p_getwstr(&tempdmap.title, f))
+			return 0;
+	}
 
-            if(!pfread(&tempdmap.title,sizeof(DMaps[0].title),f))
+	if(!pfread(&tempdmap.title,sizeof(DMaps[0].title),f))
+		return 0;
+            
+	if(!pfread(&tempdmap.intro,sizeof(DMaps[0].intro),f))
+		return 0;
+            
+	if(!p_igetl(&tempdmap.minimap_1_tile,f))
                 return 0;
             
-            if(!pfread(&tempdmap.intro,sizeof(DMaps[0].intro),f))
+	if(!p_getc(&tempdmap.minimap_1_cset,f))
                 return 0;
             
-            if(!p_igetl(&tempdmap.minimap_1_tile,f))
+	if(!p_igetl(&tempdmap.minimap_2_tile,f))
                 return 0;
             
-            if(!p_getc(&tempdmap.minimap_1_cset,f))
+	if(!p_getc(&tempdmap.minimap_2_cset,f))
                 return 0;
             
-            if(!p_igetl(&tempdmap.minimap_2_tile,f))
+	if(!p_igetl(&tempdmap.largemap_1_tile,f))
                 return 0;
             
-            if(!p_getc(&tempdmap.minimap_2_cset,f))
+	if(!p_getc(&tempdmap.largemap_1_cset,f))
                 return 0;
             
-            if(!p_igetl(&tempdmap.largemap_1_tile,f))
+	if(!p_igetl(&tempdmap.largemap_2_tile,f))
                 return 0;
             
-            if(!p_getc(&tempdmap.largemap_1_cset,f))
+	if(!p_getc(&tempdmap.largemap_2_cset,f))
                 return 0;
             
-            if(!p_igetl(&tempdmap.largemap_2_tile,f))
+	if(!pfread(&tempdmap.tmusic,sizeof(DMaps[0].tmusic),f))
                 return 0;
             
-            if(!p_getc(&tempdmap.largemap_2_cset,f))
+	if(!p_getc(&tempdmap.tmusictrack,f))
                 return 0;
             
-            if(!pfread(&tempdmap.tmusic,sizeof(DMaps[0].tmusic),f))
+	if(!p_getc(&tempdmap.active_subscreen,f))
                 return 0;
             
-            if(!p_getc(&tempdmap.tmusictrack,f))
+	if(!p_getc(&tempdmap.passive_subscreen,f))
                 return 0;
             
-            if(!p_getc(&tempdmap.active_subscreen,f))
-                return 0;
+	byte disabled[32];
+	memset(disabled,0,32);
             
-            if(!p_getc(&tempdmap.passive_subscreen,f))
-                return 0;
+	if(!pfread(&disabled, 32, f))
+		return 0;
             
-            byte disabled[32];
-	    memset(disabled,0,32);
-            
-            if(!pfread(&disabled, 32, f)) return 0;
-            
-            for(int32_t j=0; j<MAXITEMS; j++)
-            {
+	for(int32_t j=0; j<MAXITEMS; j++)
+	{
                 if(disabled[j/8] & (1 << (j%8))) tempdmap.disableditems[j]=1;
-                else tempdmap.disableditems[j]=0;
-            }
-	    
+		else tempdmap.disableditems[j]=0;
+	}
             
-            if(!p_igetl(&tempdmap.flags,f))
-            {
-                return 0;
-            }
-		if ( zversion >= 0x255 )
+	if(!p_igetl(&tempdmap.flags,f))
+		return 0;
+
+	if ( zversion >= 0x255 )
+	{
+		if  ( section_version >= 14 )
 		{
-			if  ( section_version >= 14 )
+			//2.55 starts here
+			if(!p_getc(&tempdmap.sideview,f))
+				return 0;
+			if(!p_igetw(&tempdmap.script,f))
+				return 0;
+
+			for ( int32_t q = 0; q < 8; q++ )
 			{
-			    //2.55 starts here
-			    if(!p_getc(&tempdmap.sideview,f))
-			    {
-				return 0;
-			    }
-			    if(!p_igetw(&tempdmap.script,f))
-			    {
-				return 0;
-			    }
-			    for ( int32_t q = 0; q < 8; q++ )
-			    {
 				if(!p_igetl(&tempdmap.initD[q],f))
-				{
 					return 0;
-			    }
 				    
-			    }
-			    for ( int32_t q = 0; q < 8; q++ )
-			    {
-				    for ( int32_t w = 0; w < 65; w++ )
-				    {
+			}
+			for ( int32_t q = 0; q < 8; q++ )
+			{
+				for ( int32_t w = 0; w < 65; w++ )
+				{
 					if (!p_getc(&tempdmap.initD_label[q][w],f))
-					{
 						return 0;
-					}
 				}
-			    }
+			}
 				if(!p_igetw(&tempdmap.active_sub_script,f))
 					return 0;
 				if(!p_igetw(&tempdmap.passive_sub_script,f))
@@ -15334,24 +15316,19 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
 					}
 				}
 				if(!p_igetw(&tempdmap.onmap_script,f))
-				{
 					return 0;
-				}
+
 				for(int32_t q = 0; q < 8; ++q)
 				{
 					if(!p_igetl(&tempdmap.onmap_initD[q],f))
-					{
 						return 0;
-					}
 				}	
 				for(int32_t q = 0; q < 8; ++q)
 				{
 					for(int32_t w = 0; w < 65; ++w)
 					{
 						if(!p_getc(&tempdmap.onmap_initD_label[q][w],f))
-						{
 							return 0;
-						}
 					}
 				}
 				if (!p_igetw(&tempdmap.mirrorDMap, f))
@@ -15364,9 +15341,9 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
 					return 0;
 				if (!p_igetl(&tempdmap.tmusic_xfade_out, f))
 					return 0;
-			}
 		}
-		DMaps[index] = tempdmap;
+	}
+	DMaps[index] = tempdmap;
        
 	return 1;
 }
@@ -16290,8 +16267,8 @@ static DIALOG warpring_warp_dlg[] =
 int32_t d_wflag_proc(int32_t msg,DIALOG *d,int32_t)
 {
 	int32_t ret = D_O_K;
-    switch(msg)
-    {
+	switch(msg)
+	{
 		case MSG_DRAW:
 		{
 			int32_t c2=(d->flags&D_SELECTED)?d->fg:d->bg;
@@ -16385,9 +16362,9 @@ int32_t d_wflag_proc(int32_t msg,DIALOG *d,int32_t)
 			ret = D_REDRAWME;
 		}
 		break;
-    }
+	}
     
-    return ret;
+	return ret;
 }
 
 int32_t d_dmapscrsel_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
@@ -16561,6 +16538,7 @@ struct tw_data
 		load(ind);
 	}
 };
+
 int32_t onTileWarp()
 {
 	restore_mouse();
@@ -16803,8 +16781,6 @@ int32_t onSideWarp()
     
     return D_O_K;
 }
-
-
 
 const char *dirlist(int32_t index, int32_t *list_size)
 {
@@ -18744,7 +18720,6 @@ bool swapComboAlias(int32_t source, int32_t dest)
 	return true;
 }
 
-
 bool copyComboAlias(int32_t source, int32_t dest)
 {
 	if(source == dest)
@@ -20077,7 +20052,6 @@ void build_biitems_list()
             biitems_cnt = i+1;
 }
 
-
 //dmap scripts
 void build_bidcomboscripts_list()
 {
@@ -20120,7 +20094,6 @@ void build_bidcomboscripts_list()
         if(bidcomboscripts[i].first.length() > 0)
             bidcomboscripts_cnt = i+1;
 }
-
 
 const char *globalscriptlist(int32_t index, int32_t *list_size)
 {
