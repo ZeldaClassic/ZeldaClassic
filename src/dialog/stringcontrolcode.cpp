@@ -150,18 +150,18 @@ Label(text = txt, hAlign = 1.0)
 
 GUI::ListData createShadowTypesListData();
 SCCDialog::SCCDialog() :
-	list_sccs(SCCListData()),
-	list_shtype(createShadowTypesListData()),
-	list_items(GUI::ZCListData::items(true)),
-	list_counters(GUI::ZCListData::counters(true, true)),
-	list_dmaps(dmap_list),
-	list_weffect(GUI::ZCListData::warpeffects()),
-	list_sfx(GUI::ZCListData::sfxnames(true)),
-	list_midi(GUI::ZCListData::midinames(true)),
+	list_sccs       (SCCListData()),
+	list_shtype     (createShadowTypesListData()),
+	list_items      (GUI::ZCListData::items(true)),
+	list_counters   (GUI::ZCListData::counters(true, true)),
+	list_dmaps      (dmap_list),
+	list_weffect    (GUI::ZCListData::warpeffects()),
+	list_sfx        (GUI::ZCListData::sfxnames(true)),
+	list_midi       (GUI::ZCListData::midinames(true)),
 	list_screenstate(GUI::ZCListData::screenstate()),
-	list_font(GUI::ZCListData::fonts(false,true,true)),
-	list_font_order(GUI::ZCListData::fonts(false,true,false)),
-	list_genscr(GUI::ZCListData::generic_script())
+	list_font       (GUI::ZCListData::fonts(false,true,true)),
+	list_font_order (GUI::ZCListData::fonts(false,true,false)),
+	list_genscr     (GUI::ZCListData::generic_script())
 {
 	memset(args, 0, sizeof(args));
 	default_args();
@@ -1139,4 +1139,3 @@ bool SCCDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 	}
 	return false;
 }
-

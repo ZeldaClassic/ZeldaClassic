@@ -240,7 +240,6 @@ const char *defenselist(int32_t index, int32_t *list_size)
 			case edQUARTDAMAGE:
 				return "1/4 Damage";
 
-
 			case edSTUNONLY:
 				return "Stun";
 
@@ -265,8 +264,6 @@ const char *defenselist(int32_t index, int32_t *list_size)
 			case edCHINKL8:
 				return "Block If < 8";
 
-
-
 			case edCHINK:
 				return "Block";
 
@@ -275,9 +272,6 @@ const char *defenselist(int32_t index, int32_t *list_size)
 
 			case edIGNORE:
 				return "Ignore";
-
-
-
 
 			case ed1HKO:
 				return "One-Hit-Kill";
@@ -389,23 +383,17 @@ int32_t readoneitem(PACKFILE *f, int32_t index)
 	char istring[64]={0};
 	//section version info
 	if(!p_igetl(&zversion,f))
-	{
 		return 0;
-	}
+
 	if(!p_igetl(&zbuild,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetw(&section_version,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetw(&section_cversion,f))
-	{
 		return 0;
-	}
+
 	al_trace("readoneitem section_version: %d\n", section_version);
 	al_trace("readoneitem section_cversion: %d\n", section_cversion);
 	
@@ -426,99 +414,61 @@ int32_t readoneitem(PACKFILE *f, int32_t index)
 	}
    
 	if(!pfread(&istring, 64, f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetl(&tempitem.tile,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.misc_flags,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.csets,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.frames,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.speed,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.delay,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetl(&tempitem.ltm,f))
-	{	
 		return 0;
-	}
 	
 	if(!p_igetl(&tempitem.family,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.fam_type,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetl(&tempitem.power,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetl(&tempitem.flags,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetw(&tempitem.script,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.count,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetw(&tempitem.amount,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetw(&tempitem.collect_script,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetw(&tempitem.setmax,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetw(&tempitem.max,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.playsound,f))
-	{
 		return 0;
-	}
 	
 	for(int32_t j=0; j<8; j++)
 	{
@@ -537,69 +487,43 @@ int32_t readoneitem(PACKFILE *f, int32_t index)
 	}
 	
 	if(!p_getc(&tempitem.wpn,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.wpn2,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.wpn3,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.wpn4,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.wpn5,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.wpn6,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.wpn7,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.wpn8,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.wpn9,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.wpn10,f))
-	{
 		return 0;
-	}
 	
 	if(!p_getc(&tempitem.pickup_hearts,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetl(&tempitem.misc1,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetl(&tempitem.misc2,f))
-	{
 		return 0;
-	}
 	
 	if(section_version < 53)
 	{

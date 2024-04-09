@@ -104,17 +104,17 @@ int32_t jwin_hsl_proc(int32_t msg, DIALOG *d, int32_t c)
 	}
 	if(c_hei == 64)
 	{
-		hue_x_offs *= 1.5;
-		hue_y_offs *= 1.5;
+		hue_x_offs   *= 1.5;
+		hue_y_offs   *= 1.5;
 		light_x_offs *= 1.5;
 		light_y_offs *= 1.5;
-		sat_x_offs *= 1.5;
-		sat_y_offs *= 1.5;
-		c_x_offs *= 1.5;
-		c_y_offs *= 1.5;
-		c_wid *= 1.5;
-		c_hei *= 1.5;
-		misc_wh *= 1.5;
+		sat_x_offs   *= 1.5;
+		sat_y_offs   *= 1.5;
+		c_x_offs     *= 1.5;
+		c_y_offs     *= 1.5;
+		c_wid        *= 1.5;
+		c_hei        *= 1.5;
+		misc_wh      *= 1.5;
 	}
 	int32_t clr = color, gr = gray, rat = ratio;
 	int32_t x=gui_mouse_x();
@@ -601,7 +601,6 @@ void onJumpHex()
 
 void onJumpHSL()
 {
-	
 }
 
 void init_gfxpal()
@@ -665,11 +664,11 @@ bool edit_dataset(int32_t dataset)
 
 int32_t pal_index(RGB *pal,RGB c)
 {
-    for(int32_t i=0; i<256; i++)
-        if(pal[i].r==c.r && pal[i].g==c.g && pal[i].b==c.b)
-            return i;
+	for(int32_t i=0; i<256; i++)
+		if(pal[i].r==c.r && pal[i].g==c.g && pal[i].b==c.b)
+			return i;
             
-    return -1;
+	return -1;
 }
 
 bool grab_dataset(int32_t dataset)
@@ -932,15 +931,15 @@ static DIALOG cycle_dlg[] =
 {
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
     { jwin_win_proc,        64,   48,   192+1,  152+1,  0,  0,  0,       D_EXIT,          0,             0, (void *) "Palette Cycles", NULL, NULL },
-    { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { jwin_button_proc,     90,   176,  61,   21,   jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
-    { jwin_button_proc,     170,  176,  61,   21,   jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-    { jwin_text_proc,       152,  72,   96,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "1   2   3", NULL, NULL },
-    { jwin_text_proc,       88,   88,   56,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "CSet:", NULL, NULL },
-    { jwin_text_proc,       88,   104,  56,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "First:", NULL, NULL },
-    { jwin_text_proc,       88,   120,  56,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "Last:", NULL, NULL },
-    { jwin_text_proc,       88,   136,  56,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "Count:", NULL, NULL },
-    { jwin_text_proc,       88,   152,  56,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "Speed:", NULL, NULL },
+    { d_timer_proc,         0,    0,    0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+    { jwin_button_proc,     90,   176,  61,   21,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
+    { jwin_button_proc,     170,  176,  61,   21,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
+    { jwin_text_proc,       152,  72,   96,   8,     jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "1   2   3", NULL, NULL },
+    { jwin_text_proc,       88,   88,   56,   8,     jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "CSet:", NULL, NULL },
+    { jwin_text_proc,       88,   104,  56,   8,     jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "First:", NULL, NULL },
+    { jwin_text_proc,       88,   120,  56,   8,     jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "Last:", NULL, NULL },
+    { jwin_text_proc,       88,   136,  56,   8,     jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "Count:", NULL, NULL },
+    { jwin_text_proc,       88,   152,  56,   8,     jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "Speed:", NULL, NULL },
     // 10
     { jwin_edit_proc,       152,  88,   24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
     { d_hexedit_proc,       152,  104,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          1,             0,       NULL, NULL, NULL },
@@ -960,45 +959,45 @@ static DIALOG cycle_dlg[] =
     { jwin_edit_proc,       216,  136,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          3,             0,       NULL, NULL, NULL },
     { jwin_edit_proc,       216,  152,  24,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          3,             0,       NULL, NULL, NULL },
     
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    { NULL,                 0,    0,    0,    0,     0,                   0,               0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 void edit_cycles(int32_t level)
 {
-    char buf[15][8];
-    palcycle cycle_none[1][3];  //create a null palette cycle here. -Z
+	char buf[15][8];
+	palcycle cycle_none[1][3];  //create a null palette cycle here. -Z
 	memset(cycle_none, 0, sizeof(cycle_none)); 
-    for(int32_t i=0; i<3; i++)
-    {
-        palcycle c = ( level < NUM_PAL_CYCLES ) ? QMisc.cycles[level][i] : cycle_none[0][i]; //Only level palettes 0 through 255 have valid data in 2.50.x. -Z
-        sprintf(buf[i*5  ],"%d",c.first>>4);
-        sprintf(buf[i*5+1],"%X",c.first&15);
-        sprintf(buf[i*5+2],"%X",c.count&15);
-        sprintf(buf[i*5+3],"%d",c.count>>4);
-        sprintf(buf[i*5+4],"%d",c.speed);
-    }
+	for(int32_t i=0; i<3; i++)
+	{
+		palcycle c = ( level < NUM_PAL_CYCLES ) ? QMisc.cycles[level][i] : cycle_none[0][i]; //Only level palettes 0 through 255 have valid data in 2.50.x. -Z
+		sprintf(buf[i*5  ],"%d",c.first>>4);
+		sprintf(buf[i*5+1],"%X",c.first&15);
+		sprintf(buf[i*5+2],"%X",c.count&15);
+		sprintf(buf[i*5+3],"%d",c.count>>4);
+		sprintf(buf[i*5+4],"%d",c.speed);
+	}
     
-    for(int32_t i=0; i<15; i++)
-        cycle_dlg[i+10].dp = buf[i];
+	for(int32_t i=0; i<15; i++)
+		cycle_dlg[i+10].dp = buf[i];
         
-    large_dialog(cycle_dlg);
+	large_dialog(cycle_dlg);
         
-    if(do_zqdialog(cycle_dlg,3,true)==2)
-    {
-        saved=false;
-        reset_pal_cycling();
-        
-        for(int32_t i=0; i<3; i++)
-        {
-            palcycle c;
-            c.first = (atoi(buf[i*5])&7)<<4;
-            c.first += zc_xtoi(buf[i*5+1])&15;
-            c.count =  zc_xtoi(buf[i*5+2])&15;
-            c.count += (atoi(buf[i*5+3])&15)<<4;
-            c.speed =  atoi(buf[i*5+4]);
-            QMisc.cycles[level][i] = c;
-        }
-    }
+	if(do_zqdialog(cycle_dlg,3,true)==2)
+	{
+		saved=false;
+		reset_pal_cycling();
+		
+		for(int32_t i=0; i<3; i++)
+		{
+			palcycle c;
+			c.first = (atoi(buf[i*5])&7)<<4;
+			c.first += zc_xtoi(buf[i*5+1])&15;
+			c.count =  zc_xtoi(buf[i*5+2])&15;
+			c.count += (atoi(buf[i*5+3])&15)<<4;
+			c.speed =  atoi(buf[i*5+4]);
+			QMisc.cycles[level][i] = c;
+		}
+	}
 }
 
 void draw_cset_proc(DIALOG *d)
@@ -1222,8 +1221,8 @@ static DIALOG colors_dlg[] =
     // (dialog proc)        (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
     { jwin_win_proc,        40,   16,   240+1,  216+1,  jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       D_EXIT,          0,             0,       NULL, NULL, NULL },
     
-    { jwin_frame_proc,      103,  48,   96,  256,   jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          FR_DEEP,             0,       NULL, NULL, NULL },
-    { d_cset_proc,          106,  51,   256,  96,   jwin_pal[jcBOXFG],  jwin_pal[jcLIGHT],  0,       0,          0,             0,       NULL, NULL, NULL },
+    { jwin_frame_proc,      103,  48,   96,  256,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          FR_DEEP,             0,       NULL, NULL, NULL },
+    { d_cset_proc,          106,  51,   256,  96,    jwin_pal[jcBOXFG],  jwin_pal[jcLIGHT],  0,       0,          0,             0,       NULL, NULL, NULL },
     
     { jwin_rtext_proc,      102,   0,    16,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0,       NULL, NULL, NULL },
     { jwin_rtext_proc,      102,   0,    16,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0,       NULL, NULL, NULL },
@@ -1241,13 +1240,13 @@ static DIALOG colors_dlg[] =
     { jwin_rtext_proc,      102,   0,    16,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0,       NULL, NULL, NULL },
     { jwin_rtext_proc,      102,   0,    16,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0,       NULL, NULL, NULL },
     
-    { d_dummy_proc,         104,  39,   128,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "0123456789ABCDEF", NULL, NULL },
+    { d_dummy_proc,         104,  39,   128,  8,     jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "0123456789ABCDEF", NULL, NULL },
     // 19
     
-    { jwin_button_proc,     60,   178,  61,   21,   jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  'e',     D_EXIT,     0,             0, (void *) "&Edit", NULL, NULL },
-    { jwin_button_proc,     130,  178,  61,   21,   jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  'g',     D_EXIT,     0,             0, (void *) "&Grab", NULL, NULL },
-    { jwin_button_proc,     200,  178,  61,   21,   jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       D_EXIT,     0,             0, (void *) "Cycle", NULL, NULL },
-    { jwin_button_proc,     244,  152,  25,   21,   jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  'u',     D_EXIT,     0,             0, (void *) "&U", NULL, NULL },
+    { jwin_button_proc,     60,   178,  61,   21,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  'e',     D_EXIT,     0,             0, (void *) "&Edit", NULL, NULL },
+    { jwin_button_proc,     130,  178,  61,   21,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  'g',     D_EXIT,     0,             0, (void *) "&Grab", NULL, NULL },
+    { jwin_button_proc,     200,  178,  61,   21,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       D_EXIT,     0,             0, (void *) "Cycle", NULL, NULL },
+    { jwin_button_proc,     244,  152,  25,   21,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  'u',     D_EXIT,     0,             0, (void *) "&U", NULL, NULL },
     // 23
     
     { jwin_button_proc,     60,   204,  131,  21,   jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  'l',     D_EXIT,     0,             0, (void *) "&Load to CS 9", NULL, NULL },
@@ -1255,27 +1254,27 @@ static DIALOG colors_dlg[] =
     { jwin_button_proc,     200,  204,  61,   21,   jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  27,      D_EXIT,     0,             0, (void *) "Done", NULL, NULL },
     { jwin_rtext_proc,      60,   164,  48,   8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "Name: ", NULL, NULL },
     { jwin_edit_proc,       88,  160, 136,   16,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          16,            0,       NULL, NULL, NULL },
-    { jwin_ctext_proc,      110,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "0", NULL, NULL },
-    { jwin_ctext_proc,      118,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "1", NULL, NULL },
-    { jwin_ctext_proc,      126,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "2", NULL, NULL },
-    { jwin_ctext_proc,      134,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "3", NULL, NULL },
-    { jwin_ctext_proc,      142,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "4", NULL, NULL },
-    { jwin_ctext_proc,      150,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "5", NULL, NULL },
-    { jwin_ctext_proc,      158,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "6", NULL, NULL },
-    { jwin_ctext_proc,      166,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "7", NULL, NULL },
-    { jwin_ctext_proc,      174,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "8", NULL, NULL },
-    { jwin_ctext_proc,      182,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "9", NULL, NULL },
-    { jwin_ctext_proc,      190,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "A", NULL, NULL },
-    { jwin_ctext_proc,      198,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "B", NULL, NULL },
-    { jwin_ctext_proc,      206,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "C", NULL, NULL },
-    { jwin_ctext_proc,      214,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "D", NULL, NULL },
-    { jwin_ctext_proc,      222,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "E", NULL, NULL },
-    { jwin_ctext_proc,      230,  39,   0,  8,    jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "F", NULL, NULL },
+    { jwin_ctext_proc,      110,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "0", NULL, NULL },
+    { jwin_ctext_proc,      118,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "1", NULL, NULL },
+    { jwin_ctext_proc,      126,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "2", NULL, NULL },
+    { jwin_ctext_proc,      134,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "3", NULL, NULL },
+    { jwin_ctext_proc,      142,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "4", NULL, NULL },
+    { jwin_ctext_proc,      150,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "5", NULL, NULL },
+    { jwin_ctext_proc,      158,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "6", NULL, NULL },
+    { jwin_ctext_proc,      166,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "7", NULL, NULL },
+    { jwin_ctext_proc,      174,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "8", NULL, NULL },
+    { jwin_ctext_proc,      182,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "9", NULL, NULL },
+    { jwin_ctext_proc,      190,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "A", NULL, NULL },
+    { jwin_ctext_proc,      198,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "B", NULL, NULL },
+    { jwin_ctext_proc,      206,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "C", NULL, NULL },
+    { jwin_ctext_proc,      214,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "D", NULL, NULL },
+    { jwin_ctext_proc,      222,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "E", NULL, NULL },
+    { jwin_ctext_proc,      230,  39,   0,  8,      jwin_pal[jcBOXFG],   jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "F", NULL, NULL },
     //43
     { jwin_button_proc,     244,  125,  25,   21,   jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  's',     D_EXIT,     0,             0, (void *) "Save", NULL, NULL },
     
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    { NULL,                 0,    0,     0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 int32_t EditColors(const char *caption,int32_t first,int32_t count,byte *label)
@@ -1590,13 +1589,13 @@ int32_t onColors_Sprites()
 		{ "&1", "&2", "Done" },
 		{ edit_spr_colors_1, edit_spr_colors_2, nullptr }
 	).show();
-    return D_O_K;
+	return D_O_K;
 }
 
 
 void center_zq_cset_dialogs()
 {
-    jwin_center_dialog(cycle_dlg);
-    jwin_center_dialog(colors_dlg);
+	jwin_center_dialog(cycle_dlg);
+	jwin_center_dialog(colors_dlg);
 	jwin_center_dialog(edit_cset_dlg);
 }
