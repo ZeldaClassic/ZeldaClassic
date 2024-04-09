@@ -2340,14 +2340,11 @@ static DIALOG save_dmaps_dlg[] =
 
 void savesomedmaps(const char *prompt,int32_t initialval)
 {
-	
 	char firstdmap[8], lastdmap[8];
 	int32_t first_dmap_id = 0; int32_t last_dmap_id = 0;
 	sprintf(firstdmap,"%d",0);
 	sprintf(lastdmap,"%d",1);
 	//int32_t ret;
-	
-	
 	
 	save_dmaps_dlg[0].dp2 = get_zc_font(font_lfont);
 	
@@ -2404,9 +2401,7 @@ void savesomedmaps(const char *prompt,int32_t initialval)
 static DIALOG save_comboaliasfiles_dlg[] =
 {
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
-
-
-	{ jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Save Combo Alias Pack", NULL, NULL },
+    { jwin_win_proc,      0,   0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Save Combo Alias Pack", NULL, NULL },
     { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
     //for future tabs
     { d_dummy_proc,         120,  128,  80+1,   8+1,    vc(14),  vc(1),  0,       0,          1,             0,       NULL, NULL, NULL },
@@ -2426,14 +2421,11 @@ static DIALOG save_comboaliasfiles_dlg[] =
 
 void savesomecomboaliases(const char *prompt,int32_t initialval)
 {
-	
 	char firsttile[8], tilecount[8];
 	int32_t first_tile_id = 0; int32_t the_tile_count = 1;
 	sprintf(firsttile,"%d",0);
 	sprintf(tilecount,"%d",1);
 	//int32_t ret;
-	
-	
 	
 	save_comboaliasfiles_dlg[0].dp2 = get_zc_font(font_lfont);
 	
@@ -2469,11 +2461,9 @@ void savesomecomboaliases(const char *prompt,int32_t initialval)
 	}
 }
 
-
 static DIALOG read_comboaliaspack_dlg[] =
 {
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
-
     { jwin_win_proc,       0,    0,   120,  100,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Load Combo Pack To:", NULL, NULL },
     { d_timer_proc,        0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
     //for future tabs
@@ -2491,16 +2481,12 @@ static DIALOG read_comboaliaspack_dlg[] =
     { NULL,                0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
-
 void writesomecomboaliases_to(const char *prompt,int32_t initialval)
 {
-	
 	char firsttile[8];;
 	int32_t first_tile_id = 0; int32_t the_tile_count = 1;
 	sprintf(firsttile,"%d",0);
 		//int32_t ret;
-	
-	
 	
 	read_comboaliaspack_dlg[0].dp2 = get_zc_font(font_lfont);
 	
@@ -2542,11 +2528,7 @@ void writesomecomboaliases_to(const char *prompt,int32_t initialval)
 	}
 }
 
-
-
-
-//Doorsets
-
+//Doorsets 
 static DIALOG save_doorset_dlg[] =
 {
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
@@ -2566,7 +2548,6 @@ static DIALOG save_doorset_dlg[] =
     { jwin_button_proc,   69,  72,  36,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
     { NULL,               0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
-
 
 void do_exportdoorset(const char *prompt,int32_t initialval)
 {
@@ -2640,7 +2621,6 @@ static DIALOG load_doorset_dlg[] =
 
 void do_importdoorset(const char *prompt,int32_t initialval)
 {
-	
 	char firstdoor[8], doorct[8], destid[8];
 	int32_t first_doorset_id = 0; int32_t the_doorset_count = 1;
 	int32_t the_dest_id = 0;
@@ -2721,36 +2701,34 @@ int32_t gettilepagenumber(const char *prompt, int32_t initialval)
 
 int32_t gethexnumber(const char *prompt,int32_t initialval)
 {
-    cancelgetnum=true;
-    char buf[20];
-    sprintf(buf,"%X",initialval);
-    getnum_dlg[0].dp=(void *)prompt;
-    getnum_dlg[0].dp2=get_zc_font(font_lfont);
-    getnum_dlg[2].dp=(void *)buf;
+	cancelgetnum=true;
+	char buf[20];
+	sprintf(buf,"%X",initialval);
+	getnum_dlg[0].dp=(void *)prompt;
+	getnum_dlg[0].dp2=get_zc_font(font_lfont);
+	getnum_dlg[2].dp=(void *)buf;
+
+	large_dialog(getnum_dlg);
+
+	int32_t ret=do_zqdialog(getnum_dlg,2);
     
-    large_dialog(getnum_dlg);
+	if(ret!=0&&ret!=4)
+		cancelgetnum=false;
+    
+	if(ret==3)
+		return zc_xtoi(buf);
         
-    int32_t ret=do_zqdialog(getnum_dlg,2);
-    
-    if(ret!=0&&ret!=4)
-    {
-        cancelgetnum=false;
-    }
-    
-    if(ret==3)
-        return zc_xtoi(buf);
-        
-    return initialval;
+	return initialval;
 }
 
 void update_combo_cycling()
 {
-    Map.update_combo_cycling();
+	Map.update_combo_cycling();
 }
 
 void update_freeform_combos()
 {
-    Map.update_freeform_combos();
+	Map.update_freeform_combos();
 }
 
 bool layers_valid(mapscr *tempscr)
@@ -2803,13 +2781,9 @@ const char *autobackuplist(int32_t index, int32_t *list_size)
         bound(index,0,10);
         
         if(index==0)
-        {
             sprintf(autobackup_str_buf,"Disabled");
-        }
         else
-        {
             sprintf(autobackup_str_buf,"%2d",index);
-        }
         
         return autobackup_str_buf;
     }
@@ -2826,13 +2800,9 @@ const char *autosavelist(int32_t index, int32_t *list_size)
         bound(index,0,10);
         
         if(index==0)
-        {
             sprintf(autosave_str_buf,"Disabled");
-        }
         else
-        {
             sprintf(autosave_str_buf,"%2d Minute%c",index,index>1?'s':0);
-        }
         
         return autosave_str_buf;
     }
@@ -2926,36 +2896,34 @@ void reset_relational_tile_grid()
 
 int32_t onDrawingMode()
 {
-    draw_mode=(draw_mode+1)%DM_MAX;
+	draw_mode=(draw_mode+1)%DM_MAX;
 	if (draw_mode == DM_RELATIONAL)
 		draw_mode += 2;
-    reset_relational_tile_grid();
-    fix_drawing_mode_menu();
-    restore_mouse();
-    return D_O_K;
+	reset_relational_tile_grid();
+	fix_drawing_mode_menu();
+	restore_mouse();
+	return D_O_K;
 }
 
 int32_t onDrawingModeNormal()
 {
-    draw_mode=DM_NORMAL;
-    reset_relational_tile_grid();
-    fix_drawing_mode_menu();
-    restore_mouse();
-    return D_O_K;
+	draw_mode=DM_NORMAL;
+	reset_relational_tile_grid();
+	fix_drawing_mode_menu();
+	restore_mouse();
+	return D_O_K;
 }
 
 int32_t onDrawingModeRelational()
 {
-    if(draw_mode==DM_RELATIONAL)
-    {
-        return onDrawingModeNormal();
-    }
+	if(draw_mode==DM_RELATIONAL)
+		return onDrawingModeNormal();
     
-    draw_mode=DM_RELATIONAL;
-    reset_relational_tile_grid();
-    fix_drawing_mode_menu();
-    restore_mouse();
-    return D_O_K;
+	draw_mode=DM_RELATIONAL;
+	reset_relational_tile_grid();
+	fix_drawing_mode_menu();
+	restore_mouse();
+	return D_O_K;
 }
 
 int32_t onDrawingModeDungeon()
@@ -3098,50 +3066,50 @@ int32_t onPasteAllToAll()
 
 int32_t onPasteUnderCombo()
 {
-    Map.DoPasteScreenCommand(PasteCommandType::ScreenUnderCombo);
-    return D_O_K;
+	Map.DoPasteScreenCommand(PasteCommandType::ScreenUnderCombo);
+	return D_O_K;
 }
 
 int32_t onPasteSecretCombos()
 {
-    Map.DoPasteScreenCommand(PasteCommandType::ScreenSecretCombos);
-    return D_O_K;
+	Map.DoPasteScreenCommand(PasteCommandType::ScreenSecretCombos);
+	return D_O_K;
 }
 
 int32_t onPasteFFCombos()
 {
-    Map.DoPasteScreenCommand(PasteCommandType::ScreenFFCombos);
-    return D_O_K;
+	Map.DoPasteScreenCommand(PasteCommandType::ScreenFFCombos);
+	return D_O_K;
 }
 
 int32_t onPasteWarps()
 {
-    Map.DoPasteScreenCommand(PasteCommandType::ScreenWarps);
-    return D_O_K;
+	Map.DoPasteScreenCommand(PasteCommandType::ScreenWarps);
+	return D_O_K;
 }
 
 int32_t onPasteScreenData()
 {
-    Map.DoPasteScreenCommand(PasteCommandType::ScreenData);
-    return D_O_K;
+	Map.DoPasteScreenCommand(PasteCommandType::ScreenData);
+	return D_O_K;
 }
 
 int32_t onPasteWarpLocations()
 {
-    Map.DoPasteScreenCommand(PasteCommandType::ScreenWarpLocations);
-    return D_O_K;
+	Map.DoPasteScreenCommand(PasteCommandType::ScreenWarpLocations);
+	return D_O_K;
 }
 
 int32_t onPasteDoors()
 {
-    Map.DoPasteScreenCommand(PasteCommandType::ScreenDoors);
-    return D_O_K;
+	Map.DoPasteScreenCommand(PasteCommandType::ScreenDoors);
+	return D_O_K;
 }
 
 int32_t onPasteLayers()
 {
-    Map.DoPasteScreenCommand(PasteCommandType::ScreenLayers);
-    return D_O_K;
+	Map.DoPasteScreenCommand(PasteCommandType::ScreenLayers);
+	return D_O_K;
 }
 
 int32_t onPastePalette()
@@ -3357,7 +3325,6 @@ int32_t onDefault_SFX()
 	
 	return D_O_K;
 }
-
 
 int32_t onDefault_MapStyles()
 {
@@ -4405,9 +4372,7 @@ int32_t load_the_pic(BITMAP **dst, PALETTE dstpal)
     strcpy(imagepath,temppath);
     
     if(*dst)
-    {
         destroy_bitmap(*dst);
-    }
     
     for(int32_t i=0; i<256; i++)
     {
@@ -4521,16 +4486,13 @@ int32_t saveMapAsImage(ALLEGRO_BITMAP* bitmap)
 
 int32_t onViewPic()
 {
-    return launchPicViewer(&pic,picpal,&picx,&picy,&picscale,false);
+	return launchPicViewer(&pic,picpal,&picx,&picy,&picscale,false);
 }
-
 
 class MapViewRTI : public RenderTreeItem
 {
 public:
-	MapViewRTI(): RenderTreeItem("map_view")
-	{
-	}
+	MapViewRTI(): RenderTreeItem("map_view") {}
 
 	int bw, bh, sw, sh, flags;
 
@@ -4979,13 +4941,9 @@ char *ticksstr(int32_t tics)
     tics=tics*100/60;
     
     if(mins>0)
-    {
         sprintf(_ticksstr,"%d:%02d.%02d",mins, secs, tics);
-    }
     else
-    {
         sprintf(_ticksstr,"%d.%02d seconds",secs, tics);
-    }
     
     return _ticksstr;
 }
@@ -14684,7 +14642,6 @@ int32_t writesomedmaps(PACKFILE *f, int32_t first, int32_t last, int32_t max)
 	return 1;
 }
 
-
 int32_t readsomedmaps(PACKFILE *f)
 {
 	dword section_version = 0;
@@ -14705,46 +14662,31 @@ int32_t readsomedmaps(PACKFILE *f)
 	if ( datatype_version < 0 )
 	{
 		if(!p_igetl(&zversion,f))
-		{
 			return 0;
-		}
 	}
 	else
 	{
 		zversion = datatype_version;
 	}
 	if(!p_igetl(&zbuild,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetw(&section_version,f))
-	{
 		return 0;
-	}
     
 	if(!p_igetw(&section_cversion,f))
-	{
 		return 0;
-	}
+
 	if ( datatype_version < 0 )
 	{
 		if(!p_igetl(&max,f))
-		{
 			return 0;
-		}
 		if(!p_igetl(&first,f))
-		{
 			return 0;
-		}
 		if(!p_igetl(&last,f))
-		{
 			return 0;
-		}
 		if(!p_igetl(&count,f))
-		{
 			return 0;
-		} 
 	}
 	else
 	{
@@ -14784,140 +14726,90 @@ int32_t readsomedmaps(PACKFILE *f)
 		for ( int32_t i = first; i <= last; ++i )
 		{
 		    if(!p_getc(&tempdmap.map,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_igetw(&tempdmap.level,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_getc(&tempdmap.xoff,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_getc(&tempdmap.compass,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_igetw(&tempdmap.color,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_getc(&tempdmap.midi,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_getc(&tempdmap.cont,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_getc(&tempdmap.type,f))
-		    {
 			return 0;
-		    }
 		    
 		    for(int32_t j=0; j<8; j++)
 		    {
 			if(!p_getc(&tempdmap.grid[j],f))
-			{
 			    return 0;
-			}
 		    }
 		    
 		    //16
 		    if(!pfread(&tempdmap.name,sizeof(DMaps[0].name),f))
-		    {
 			return 0;
-		    }
 
 			if (section_version<20)
 			{
 				char title[22];
 				if (!p_getstr(title, sizeof(title) - 1, f))
-				{
 					return 0;
-				}
 				tempdmap.title.assign(title);
 			}
 			else
 			{
 				if (!p_getwstr(&tempdmap.title, f))
-				{
 					return 0;
-				}
 			}
 		    
 		    if(!pfread(&tempdmap.intro,sizeof(DMaps[0].intro),f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_igetl(&tempdmap.minimap_1_tile,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_getc(&tempdmap.minimap_1_cset,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_igetl(&tempdmap.minimap_2_tile,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_getc(&tempdmap.minimap_2_cset,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_igetl(&tempdmap.largemap_1_tile,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_getc(&tempdmap.largemap_1_cset,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_igetl(&tempdmap.largemap_2_tile,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_getc(&tempdmap.largemap_2_cset,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!pfread(&tempdmap.tmusic,sizeof(DMaps[0].tmusic),f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_getc(&tempdmap.tmusictrack,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_getc(&tempdmap.active_subscreen,f))
-		    {
 			return 0;
-		    }
 		    
 		    if(!p_getc(&tempdmap.passive_subscreen,f))
-		    {
 			return 0;
-		    }
 		    
 		    byte disabled[32];
 		    memset(disabled,0,32);
@@ -14967,28 +14859,21 @@ int32_t readsomedmaps(PACKFILE *f)
 					}
 				    }
 					if(!p_igetw(&tempdmap.active_sub_script,f))
-					{
 						return 0;
-					}
 					if(!p_igetw(&tempdmap.passive_sub_script,f))
-					{
 						return 0;
-					}
+
 					for(int32_t q = 0; q < 8; ++q)
 					{
 						if(!p_igetl(&tempdmap.sub_initD[q],f))
-						{
 							return 0;
-						}
 					}	
 					for(int32_t q = 0; q < 8; ++q)
 					{
 						for(int32_t w = 0; w < 65; ++w)
 						{
 							if(!p_getc(&tempdmap.sub_initD_label[q][w],f))
-							{
 								return 0;
-							}
 						}
 					}
 					if(!p_igetw(&tempdmap.onmap_script,f))
@@ -14998,9 +14883,7 @@ int32_t readsomedmaps(PACKFILE *f)
 					for(int32_t q = 0; q < 8; ++q)
 					{
 						if(!p_igetl(&tempdmap.onmap_initD[q],f))
-						{
 							return 0;
-						}
 					}	
 					for(int32_t q = 0; q < 8; ++q)
 					{
@@ -15013,25 +14896,15 @@ int32_t readsomedmaps(PACKFILE *f)
 						}
 					}
 					if (!p_igetw(&tempdmap.mirrorDMap, f))
-					{
 						return 0;
-					}
 					if (!p_igetl(&tempdmap.tmusic_loop_start, f))
-					{
 						return 0;
-					}
 					if (!p_igetl(&tempdmap.tmusic_loop_end, f))
-					{
 						return 0;
-					}
 					if (!p_igetl(&tempdmap.tmusic_xfade_in, f))
-					{
 						return 0;
-					}
 					if (!p_igetl(&tempdmap.tmusic_xfade_out, f))
-					{
 						return 0;
-					}
 				}
 			}
 			DMaps[i].clear();
@@ -15053,17 +14926,11 @@ int32_t writeonedmap(PACKFILE *f, int32_t i)
   
     //section version info
 	if(!p_iputl(V_ZDMAP,f))
-	{
 		return 0;
-	}
 	if(!p_iputl(zversion,f))
-	{
 		return 0;
-	}
 	if(!p_iputl(zbuild,f))
-	{
 		return 0;
-	}
 	if(!p_iputw(section_version,f))
 	{
 		new_return(2);
@@ -15347,19 +15214,14 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
 		zversion = datatype_version;
 	}
 	if(!p_igetl(&zbuild,f))
-	{
 		return 0;
-	}
 	
 	if(!p_igetw(&section_version,f))
-	{
 		return 0;
-	}
     
 	if(!p_igetw(&section_cversion,f))
-	{
 		return 0;
-	}
+
 	al_trace("readonedmap section_version: %d\n", section_version);
 	al_trace("readonedmap section_cversion: %d\n", section_cversion);
     
@@ -15542,28 +15404,20 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
 				}
 			    }
 				if(!p_igetw(&tempdmap.active_sub_script,f))
-				{
 					return 0;
-				}
 				if(!p_igetw(&tempdmap.passive_sub_script,f))
-				{
 					return 0;
-				}
 				for(int32_t q = 0; q < 8; ++q)
 				{
 					if(!p_igetl(&tempdmap.sub_initD[q],f))
-					{
 						return 0;
-					}
 				}	
 				for(int32_t q = 0; q < 8; ++q)
 				{
 					for(int32_t w = 0; w < 65; ++w)
 					{
 						if(!p_getc(&tempdmap.sub_initD_label[q][w],f))
-						{
 							return 0;
-						}
 					}
 				}
 				if(!p_igetw(&tempdmap.onmap_script,f))
@@ -15588,25 +15442,15 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
 					}
 				}
 				if (!p_igetw(&tempdmap.mirrorDMap, f))
-				{
 					return 0;
-				}
 				if (!p_igetl(&tempdmap.tmusic_loop_start, f))
-				{
 					return 0;
-				}
 				if (!p_igetl(&tempdmap.tmusic_loop_end, f))
-				{
 					return 0;
-				}
 				if (!p_igetl(&tempdmap.tmusic_xfade_in, f))
-				{
 					return 0;
-				}
 				if (!p_igetl(&tempdmap.tmusic_xfade_out, f))
-				{
 					return 0;
-				}
 			}
 		}
 		DMaps[index] = tempdmap;
@@ -15616,8 +15460,8 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
 
 void dmap_rclick_func(int32_t index, int32_t x, int32_t y)
 {
-    if(((unsigned)index)>MAXDMAPS)
-        return;
+	if(((unsigned)index)>MAXDMAPS)
+		return;
     
 	NewMenu rcmenu {
 		{ "&Copy", [&]()
@@ -15675,12 +15519,8 @@ int32_t onDmaps()
     
     large_dialog(selectdmap_dlg);
     
-    
-    
     ret=do_zqdialog(selectdmap_dlg,2);
     dmap* pSelectedDmap = 0;
-    
-    
     
     while(ret!=4&&ret!=0)
     {
@@ -15764,7 +15604,6 @@ static DIALOG editmidi_dlg[] =
     { d_keyboard_proc,   0,    0,    0,    0,    0,    0,    0,       0,       KEY_F1,   0, (void *) onHelp, NULL, NULL },
     { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
-
 
 void edit_tune(int32_t i)
 {
@@ -15943,8 +15782,7 @@ void edit_tune(int32_t i)
                 if(midi_loop_end<0)
                 {
                     pos = zc_min(pos+64,Midi_Info.len_beats);
-                }
-                
+                } 
                 else
                 {
                     pos = zc_min(pos+64,midi_loop_end);
@@ -17143,8 +16981,6 @@ int32_t onPath()
     return D_O_K;
 }
 
-
-
 static DIALOG editinfo_dlg[] =
 {
     // (dialog proc)     (x)   (y)   (w)   (h)   (fg)                 (bg)                  (key)    (flags)     (d1)           (d2)     (dp)
@@ -17278,8 +17114,6 @@ int32_t onInfoTypes()
     
     return D_O_K;
 }
-
-
 
 //This dialogie is self-contained, and does not use dialogue control numbers in a separate array to generate its fields.
 static DIALOG editshop_dlg[] =
@@ -25463,9 +25297,8 @@ void switch_in()
 	zc_midi_resume();
 }
 
-void Z_eventlog(const char *format,...)
+void Z_eventlog([[maybe_unused]] const char *format,...)
 {
-    format=format; //to prevent a compiler warning
 }
 
 int32_t get_currdmap()
@@ -26030,19 +25863,13 @@ int32_t main(int32_t argc,char **argv)
 	render_set_debug(zc_get_config("graphics","render_debug",0));
 
 	if(install_timer() < 0)
-	{
 		Z_error_fatal(allegro_error);
-	}
 	
 	if(install_keyboard() < 0)
-	{
 		Z_error_fatal(allegro_error);
-	}
 	
 	if(install_mouse() < 0)
-	{
 		Z_error_fatal(allegro_error);
-	}
 	
 	LOCK_VARIABLE(lastfps);
 	
@@ -26253,7 +26080,7 @@ int32_t main(int32_t argc,char **argv)
 	DuplicateAction[1]			 = zc_get_config("zquest","horizontal_duplicate_action",0);
 	DuplicateAction[2]			 = zc_get_config("zquest","vertical_duplicate_action",0);
 	DuplicateAction[3]			 = zc_get_config("zquest","both_duplicate_action",0);
-	LeechUpdate				= zc_get_config("zquest","leech_update",500);
+	LeechUpdate                              = zc_get_config("zquest","leech_update",500);
 	LeechUpdateTiles			   = zc_get_config("zquest","leech_update_tiles",1);
 	OnlyCheckNewTilesForDuplicates = zc_get_config("zquest","only_check_new_tiles_for_duplicates",0);
 	//gui_colorset				   = zc_get_config("zquest","gui_colorset",0);
@@ -27449,24 +27276,20 @@ void load_size_poses()
 
 void remove_locked_params_on_exit()
 {
-    al_trace("Removing timers. \n");
-    remove_int(fps_callback);
-    remove_int(myvsync_callback);
-    remove_int(dclick_check);
+	al_trace("Removing timers. \n");
+	remove_int(fps_callback);
+	remove_int(myvsync_callback);
+	remove_int(dclick_check);
 }
-
 
 void cleanup_datafiles_on_exit()
 {
     al_trace("Cleaning datafiles. \n");
     
-    if(zcdata) unload_datafile(zcdata);
-    
-    if(fontsdata) unload_datafile(fontsdata);
-    
-    if(sfxdata) unload_datafile(sfxdata);
+    if(zcdata)    unload_datafile(zcdata); 
+    if(fontsdata) unload_datafile(fontsdata); 
+    if(sfxdata)   unload_datafile(sfxdata);
 }
-
 
 void destroy_bitmaps_on_exit()
 {
@@ -27524,78 +27347,51 @@ void quit_game()
     }
     
     for(int32_t i=0; i<MAXWPNS; i++)
-    {
         delete [] weapon_string[i];
-    }
     
     for(int32_t i=0; i<MAXITEMS; i++)
-    {
         delete [] item_string[i];
-    }
     
     for(int32_t i=0; i<eMAXGUYS; i++)
-    {
         delete [] guy_string[i];
-    }
     
     al_trace("Cleaning script buffer. \n");
     
     for(int32_t i=0; i<NUMSCRIPTFFC; i++)
-    {
         delete ffscripts[i];
-    }
     
     for(int32_t i=0; i<NUMSCRIPTITEM; i++)
-    {
         delete itemscripts[i];
-    }
     
     for(int32_t i=0; i<NUMSCRIPTGUYS; i++)
-    {
         delete guyscripts[i];
-    }
     
     for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
-    {
         delete lwpnscripts[i];
-    }
     
     for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
-    {
         delete ewpnscripts[i];
-    }
     
     for(int32_t i=0; i<NUMSCRIPTSCREEN; i++)
-    {
         delete screenscripts[i];
-    }
     
     for(int32_t i=0; i<3; i++) //should this be NUMSCRIPTGLOBAL or NUMSCRIPTGLOBALOLD? -Z
-    {
         delete globalscripts[i];
-    }
     
     for(int32_t i=0; i<NUMSCRIPTPLAYER; i++)
-    {
         delete playerscripts[i];
-    }
     
     for(int32_t i=0; i<NUMSCRIPTSDMAP; i++)
-    {
         delete dmapscripts[i];
-    }
+
     for(int32_t i=0; i<NUMSCRIPTSITEMSPRITE; i++)
-    {
         delete itemspritescripts[i];
-    }
+
     for(int32_t i=0; i<NUMSCRIPTSCOMBODATA; i++)
-    {
         delete comboscripts[i];
-    }
+
     for(int32_t i=0; i<NUMSCRIPTSSUBSCREEN; i++)
-    {
         delete subscreenscripts[i];
-    }
     
     al_trace("Cleaning qst buffers. \n");
     del_qst_buffers();
@@ -27655,78 +27451,51 @@ void quit_game2()
     }
     
     for(int32_t i=0; i<MAXWPNS; i++)
-    {
         delete [] weapon_string[i];
-    }
     
     for(int32_t i=0; i<MAXITEMS; i++)
-    {
         delete [] item_string[i];
-    }
     
     for(int32_t i=0; i<eMAXGUYS; i++)
-    {
         delete [] guy_string[i];
-    }
     
     al_trace("Cleaning script buffer. \n");
     
     for(int32_t i=0; i<NUMSCRIPTFFC; i++)
-    {
         delete ffscripts[i];
-    }
     
     for(int32_t i=0; i<NUMSCRIPTITEM; i++)
-    {
         delete itemscripts[i];
-    }
     
     for(int32_t i=0; i<NUMSCRIPTGUYS; i++)
-    {
         delete guyscripts[i];
-    }
     
     for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
-    {
         delete lwpnscripts[i];
-    }
     
     for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
-    {
         delete ewpnscripts[i];
-    }
     
     for(int32_t i=0; i<NUMSCRIPTSCREEN; i++)
-    {
         delete screenscripts[i];
-    }
     
     for(int32_t i=0; i<3; i++) //should this be NUMSCRIPTGLOBAL or NUMSCRIPTGLOBALOLD? -Z
-    {
         delete globalscripts[i];
-    }
     
     for(int32_t i=0; i<NUMSCRIPTPLAYER; i++)
-    {
         delete playerscripts[i];
-    }
     
     for(int32_t i=0; i<NUMSCRIPTSDMAP; i++)
-    {
         delete dmapscripts[i];
-    }
+
     for(int32_t i=0; i<NUMSCRIPTSITEMSPRITE; i++)
-    {
         delete itemspritescripts[i];
-    }
+
     for(int32_t i=0; i<NUMSCRIPTSCOMBODATA; i++)
-    {
         delete comboscripts[i];
-    }
+
     for(int32_t i=0; i<NUMSCRIPTSSUBSCREEN; i++)
-    {
         delete subscreenscripts[i];
-    }
     
     al_trace("Cleaning qst buffers. \n");
     del_qst_buffers();
