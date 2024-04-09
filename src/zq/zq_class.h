@@ -160,8 +160,8 @@ public:
 	byte tile_grid[15][20];
 	byte prev_tile_grid[15][20];
 
-    void execute();
-    void undo();
+	void execute();
+	void undo();
 };
 
 void reset_dmap(int32_t index);
@@ -170,11 +170,11 @@ void truncate_dmap_title(std::string& title);
 bool setMapCount2(int32_t c);
 class zmap
 {
-    mapscr *screens;
-    int32_t currmap,copymap;
-    int32_t currscr,copyscr;
-    int32_t copyffc;
-    int32_t scrpos[MAXMAPS+1];
+	mapscr *screens;
+	int32_t currmap,copymap;
+	int32_t currscr,copyscr;
+	int32_t copyffc;
+	int32_t scrpos[MAXMAPS+1];
 	
 	bounded_map<dword,int32_t> copyscrdata;
 	
@@ -207,7 +207,7 @@ public:
     void StartListCommand();
     void FinishListCommand();
     void RevokeListCommand();
-	bool InListCommand() const;
+    bool InListCommand() const;
     void ExecuteCommand(std::shared_ptr<user_input_command> command, bool skip_execute = false);
     void UndoCommand();
     void RedoCommand();
@@ -225,22 +225,22 @@ public:
 
     void Copy();
     void CopyFFC(int32_t n);
-    void Paste(const mapscr& copymapscr);
-    void PasteAll(const mapscr& copymapscr);
-    void PasteToAll(const mapscr& copymapscr);
-    void PasteAllToAll(const mapscr& copymapscr);
-    void PasteUnderCombo(const mapscr& copymapscr);
-    void PasteSecretCombos(const mapscr& copymapscr);
-    void PasteFFCombos(mapscr& copymapscr);
-    void PasteWarps(const mapscr& copymapscr);
-    void PasteScreenData(const mapscr& copymapscr);
+    void Paste             (const mapscr& copymapscr);
+    void PasteAll          (const mapscr& copymapscr);
+    void PasteToAll        (const mapscr& copymapscr);
+    void PasteAllToAll     (const mapscr& copymapscr);
+    void PasteUnderCombo   (const mapscr& copymapscr);
+    void PasteSecretCombos (const mapscr& copymapscr);
+    void PasteFFCombos     (      mapscr& copymapscr);
+    void PasteWarps        (const mapscr& copymapscr);
+    void PasteScreenData   (const mapscr& copymapscr);
     void PasteWarpLocations(const mapscr& copymapscr);
-    void PasteDoors(const mapscr& copymapscr);
-    void PasteLayers(const mapscr& copymapscr);
-    void PasteRoom(const mapscr& copymapscr);
-    void PasteGuy(const mapscr& copymapscr);
-    void PastePalette(const mapscr& copymapscr);
-    void PasteEnemies(const mapscr& copymapscr);
+    void PasteDoors        (const mapscr& copymapscr);
+    void PasteLayers       (const mapscr& copymapscr);
+    void PasteRoom         (const mapscr& copymapscr);
+    void PasteGuy          (const mapscr& copymapscr);
+    void PastePalette      (const mapscr& copymapscr);
+    void PasteEnemies      (const mapscr& copymapscr);
     void update_combo_cycling();
     void update_freeform_combos();
     int32_t getMapCount();
@@ -361,11 +361,11 @@ extern zmap Map;
 //bool read_old_mapfile(mapscr *scr, FILE *f);
 extern const char *loaderror[];
 
-void put_walkflags(BITMAP *dest,int32_t x,int32_t y,word cmbdat,int32_t layer);
-void put_flags(BITMAP *dest,int32_t x,int32_t y,word cmbdat,int32_t cset,int32_t flags,int32_t sflag);
-void put_flag(BITMAP* dest, int32_t x, int32_t y, int32_t flag);
-void put_combo(BITMAP *dest,int32_t x,int32_t y,word cmbdat,int32_t cset,int32_t flags,int32_t sflag,int32_t scale);
-void put_combo(BITMAP *dest,int32_t x,int32_t y,word cmbdat,int32_t cset,int32_t flags,int32_t sflag);
+void put_walkflags(BITMAP* dest, int32_t x, int32_t y, word cmbdat,int32_t layer);
+void put_flags    (BITMAP* dest, int32_t x, int32_t y, word cmbdat,int32_t cset,int32_t flags,int32_t sflag);
+void put_flag     (BITMAP* dest, int32_t x, int32_t y, int32_t flag);
+void put_combo    (BITMAP* dest, int32_t x, int32_t y, word cmbdat,int32_t cset,int32_t flags,int32_t sflag,int32_t scale);
+void put_combo    (BITMAP* dest, int32_t x, int32_t y, word cmbdat,int32_t cset,int32_t flags,int32_t sflag);
 void put_engraving(BITMAP* dest, int32_t x, int32_t y, int32_t slot, int32_t scale);
 void copy_mapscr(mapscr *dest, const mapscr *src);
 void delete_mapscr(mapscr *dest);
@@ -431,13 +431,13 @@ bool save_zqt(const char *path);
 
 void center_zq_class_dialogs();
 
-int32_t writeitems(PACKFILE *f, zquestheader *Header);
-int32_t writeweapons(PACKFILE *f, zquestheader *Header);
-int32_t writemisccolors(PACKFILE *f, zquestheader *Header);
-int32_t writegameicons(PACKFILE *f, zquestheader *Header);
-int32_t writedoorcombosets(PACKFILE *f, zquestheader *Header);
+int32_t writeitems         (PACKFILE *f, zquestheader *Header);
+int32_t writeweapons       (PACKFILE *f, zquestheader *Header);
+int32_t writemisccolors    (PACKFILE *f, zquestheader *Header);
+int32_t writegameicons     (PACKFILE *f, zquestheader *Header);
+int32_t writedoorcombosets (PACKFILE *f, zquestheader *Header);
 int32_t write_one_subscreen(PACKFILE *f, zquestheader *Header, int32_t i);
-int32_t writeffscript(PACKFILE *f, zquestheader *Header);
-int32_t write_one_ffscript(PACKFILE *f, zquestheader *Header, int32_t i, script_data **script);
-int32_t writeitemdropsets(PACKFILE *f, zquestheader *Header);
-int32_t writefavorites(PACKFILE *f, zquestheader *Header);
+int32_t writeffscript      (PACKFILE *f, zquestheader *Header);
+int32_t write_one_ffscript (PACKFILE *f, zquestheader *Header, int32_t i, script_data **script);
+int32_t writeitemdropsets  (PACKFILE *f, zquestheader *Header);
+int32_t writefavorites     (PACKFILE *f, zquestheader *Header);
