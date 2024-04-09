@@ -17223,10 +17223,10 @@ static int32_t edititemdropset_2_list[] = { 12, 13, 29, 30, 31, 32, 33, 34, 35, 
 
 static TABPANEL edititemdropset_tabs[] =
 {
-    // (text)
-    { (char *)" Page 1 ",       D_SELECTED,   edititemdropset_1_list,  0, NULL },
-    { (char *)" Page 2 ",       0,            edititemdropset_2_list,  0, NULL },
-    { NULL,                     0,            NULL,                    0, NULL }
+	// (text)
+	{ (char *)" Page 1 ",   D_SELECTED,   edititemdropset_1_list,  0, NULL },
+	{ (char *)" Page 2 ",   0,            edititemdropset_2_list,  0, NULL },
+	{ NULL,                 0,            NULL,                    0, NULL }
 };
 
 static DIALOG edititemdropset_dlg[] =
@@ -17288,6 +17288,8 @@ static DIALOG edititemdropset_dlg[] =
     { NULL,                 0,       0,    0,    0,  0,                   0,                  0,           0,     0,      0,       NULL, NULL, NULL }
 };
 
+#define NUM_SC 10 // number of "something" chances
+
 int32_t d_itemdropedit_proc(int32_t msg,DIALOG *d,int32_t c)
 {
 	int32_t ret = jwin_edit_proc(msg,d,c);
@@ -17297,14 +17299,14 @@ int32_t d_itemdropedit_proc(int32_t msg,DIALOG *d,int32_t c)
 
 	int32_t t = atoi((char*)edititemdropset_dlg[7].dp);
 
-	for (int32_t i = 0; i < 10; ++i)
+	for (int32_t i = 0; i < NUM_SC; ++i)
 		t += abs(atoi((char*)edititemdropset_dlg[14 + (i * 3)].dp));
 
 	int32_t t2 = (int32_t)(100*atoi((char*)edititemdropset_dlg[7].dp) / zc_max(t,1));
 	sprintf((char*)edititemdropset_dlg[9].dp,"%d%%%s",t2, t2 <= 11 ? " ":"");
 	object_message(&edititemdropset_dlg[9],MSG_DRAW,c);
 
-	for(int32_t i=0; i<10; ++i)
+	for(int32_t i=0; i<NUM_SC; ++i)
 	{
 		int32_t t3 = (int32_t)(100*atoi((char*)edititemdropset_dlg[14+(i*3)].dp) / zc_max(t,1));
 		sprintf((char*)edititemdropset_dlg[16+(i*3)].dp,"%d%%%s",t3, t3 <= 11 ? " ":"");
@@ -17317,7 +17319,7 @@ int32_t d_itemdropedit_proc(int32_t msg,DIALOG *d,int32_t c)
 void EditItemDropSet(int32_t index)
 {
 	build_bii_list(true);
-	char chance[11][10];
+	char chance[11][NUM_SC];
 	char itemdropsetname[64];
 	char caption[40];
 	char percent_str[11][5];
@@ -17336,7 +17338,7 @@ void EditItemDropSet(int32_t index)
 	sprintf(percent_str[0],"    ");
 	edititemdropset_dlg[9].dp  = percent_str[0];
     
-	for(int32_t i=0; i<10; ++i)
+	for(int32_t i=0; i<NUM_SC; ++i)
 	{
 		sprintf(chance[i+1],"%d",item_drop_sets[index].chance[i+1]);
 		edititemdropset_dlg[14+(i*3)].dp  = chance[i+1];
@@ -17373,7 +17375,7 @@ void EditItemDropSet(int32_t index)
         
         item_drop_sets[index].chance[0]=atoi(chance[0]);
         
-        for(int32_t i=0; i<10; ++i)
+        for(int32_t i=0; i<NUM_SC; ++i)
         {
             item_drop_sets[index].chance[i+1]=atoi(chance[i+1]);
             
@@ -17399,7 +17401,7 @@ int32_t count_item_drop_sets()
 
 	for (count = 255; (count > 0); --count)
 	{
-		for (int32_t i = 0; (i < 11); ++i) // 5 chances on both pages + Nothing Chance == 11
+		for (int32_t i = 0; (i < NUM_SC+1); ++i) // 5 chances on both pages + Nothing Chance == 11
 		{
 			if (item_drop_sets[count].chance[i] != 0)
 			{
