@@ -751,111 +751,102 @@ bool bad_version(int32_t ver)
 zfix HeroModifiedX()
 {
     if(resize_mouse_pos)
-    {
         return (zfix)((gui_mouse_x()/mapscreensize)-((8*mapscreensize)-1)+(showedges?8:0));
-    }
     else
-    {
         return (zfix)(gui_mouse_x()-7);
-    }
 }
 
 zfix HeroModifiedY()
 {
     if(resize_mouse_pos)
-    {
         return (zfix)((gui_mouse_y()/mapscreensize)-((8*mapscreensize)-1)-16+(showedges?16:0));
-    }
     else
-    {
         return (zfix)(gui_mouse_y()-7);
-    }
 }
 
 static NewMenu import_250_menu
 {
-	{ "&DMaps", onImport_DMaps },
+	{ "&DMaps",       onImport_DMaps },
 	{ "&Combo Table", onImport_Combos },
 	{ "&Combo Alias", onImport_ComboAlias },
 };
 
 static NewMenu import_graphics
 {
-	{ "&Palettes", onImport_Pals },
+	{ "&Palettes",               onImport_Pals },
 	{},
-	{ "Tileset (&Full)", onImport_Tiles },
-	{ "&Tile Pack", onImport_Tilepack },
-	{ "T&ile Pack to...", onImport_Tilepack_To },
+	{ "Tileset (&Full)",         onImport_Tiles },
+	{ "&Tile Pack",              onImport_Tilepack },
+	{ "T&ile Pack to...",        onImport_Tilepack_To },
 	{},
-	{ "&Combo Set (Range)", onImport_Combos },
-	{ "Combo Pack (Full, 1:1)", onImport_Combopack },
+	{ "&Combo Set (Range)",      onImport_Combos },
+	{ "Combo Pack (Full, 1:1)",  onImport_Combopack },
 	{ "Combo Pack to... (Dest)", onImport_Combopack_To },
 	{},
-	{ "Combo &Alias Pack", onImport_Comboaliaspack },
+	{ "Combo &Alias Pack",       onImport_Comboaliaspack },
 	{ "Combo A&lias Pack to...", onImport_Comboaliaspack_To },
 	{},
-	{ "&Doorsets", onImport_Doorset },
+	{ "&Doorsets",               onImport_Doorset },
 };
 
 static NewMenu import_menu
 {
-	{ "&Enemies", onImport_Guys },
-	{ "&Map", onImport_Map },
-	{ "&DMaps", onImport_DMaps },
-	{ "&Strings (.tsv)", onImport_StringsTSV },
+	{ "&Enemies",                  onImport_Guys },
+	{ "&Map",                      onImport_Map },
+	{ "&DMaps",                    onImport_DMaps },
+	{ "&Strings (.tsv)",           onImport_StringsTSV },
 	{ "String Table (deprecated)", onImport_Msgs },
 	{},
-	{ "&Graphics", &import_graphics },
+	{ "&Graphics",                 &import_graphics },
 	{},
-	{ "2.50 (Broken)", &import_250_menu },
+	{ "2.50 (Broken)",             &import_250_menu },
 };
 
 static NewMenu export_250_menu
 {
-	{ "&DMaps", onExport_DMaps },
-	{ "&Combo Table", onExport_Combos },
-	{ "&Combo Alias", onExport_ComboAlias },
+	{ "&DMaps",         onExport_DMaps },
+	{ "&Combo Table",   onExport_Combos },
+	{ "&Combo Alias",   onExport_ComboAlias },
 	{ "&Graphics Pack", onExport_ZGP },
 };
 
 static NewMenu zq_help_menu
 {
-	{ "&Editor Help", onHelp },
+	{ "&Editor Help",   onHelp },
 	{ "&Strings Help", onZstringshelp },
 };
 
 static NewMenu export_graphics
 {
-	{ "&Palettes", onExport_Pals },
+	{ "&Palettes",         onExport_Pals },
 	{},
-	{ "Tileset (&Full)", onExport_Tiles },
-	{ "&Tile Pack", onExport_Tilepack },
+	{ "Tileset (&Full)",   onExport_Tiles },
+	{ "&Tile Pack",        onExport_Tilepack },
 	{},
-	{ "&Combo Set", onExport_Combos },
-	{ "Combo Pack", onExport_Combopack },
+	{ "&Combo Set",        onExport_Combos },
+	{ "Combo Pack",        onExport_Combopack },
 	{},
 	{ "Combo &Alias Pack", onExport_Comboaliaspack },
 	{},
-	{ "&Doorsets", onExport_Doorset },
+	{ "&Doorsets",         onExport_Doorset },
 };
 
 static NewMenu export_menu
 {
 #ifdef _WIN32
-	{ "&Package", onExport_Package },
+	{ "&Package",                  onExport_Package },
 #endif
-	{ "&Enemies", onExport_Guys },
-	{ "&Map", onExport_Map },
-	{ "&DMaps", onExport_DMaps },
+	{ "&Enemies",                  onExport_Guys },
+	{ "&Map",                      onExport_Map },
+	{ "&DMaps",                    onExport_DMaps },
 	{},
-	{ "&Strings (.tsv)", onExport_StringsTSV },
+	{ "&Strings (.tsv)",           onExport_StringsTSV },
 	{ "String Table (deprecated)", onExport_Msgs },
 	{},
-	{ "&Graphics", &export_graphics },
+	{ "&Graphics",                 &export_graphics },
 	{},
-	{ "2.50 (Broken)", &export_250_menu },
+	{ "2.50 (Broken)",             &export_250_menu },
 };
-
 
 static NewMenu recent_menu
 {
@@ -1082,20 +1073,20 @@ enum
 
 static NewMenu file_menu
 {
-	{ "&New", do_NewQuest },
-	{ "&Open", do_OpenQuest },
+	{ "&New",          do_NewQuest },
+	{ "&Open",         do_OpenQuest },
 	{ "&Load Tileset", onTileset },
-	{ "Recent", &recent_menu },
+	{ "Recent",        &recent_menu },
 	{},
-	{ "&Save", onSave, MENUID_FILE_SAVE },
-	{ "Save &as...", onSaveAs, MENUID_FILE_SAVEAS },
-	{ "&Revert", onRevert, MENUID_FILE_REVERT },
+	{ "&Save",         onSave,   MENUID_FILE_SAVE },
+	{ "Save &as...",   onSaveAs, MENUID_FILE_SAVEAS },
+	{ "&Revert",       onRevert, MENUID_FILE_REVERT },
 	{},
-	{ "&Import", &import_menu },
-	{ "&Export", &export_menu },
+	{ "&Import",       &import_menu },
+	{ "&Export",       &export_menu },
 #ifndef __EMSCRIPTEN__
 	{},
-	{ "E&xit", handle_quit },
+	{ "E&xit",         handle_quit },
 #endif
 };
 
@@ -1107,49 +1098,49 @@ enum
 static NewMenu maps_menu
 {
 	{ "&Goto Map...", onGotoMap },
-	{ "Next Map", onIncMap, MENUID_MAPS_NEXT },
+	{ "Next Map",     onIncMap, MENUID_MAPS_NEXT },
 	{ "Previous Map", onDecMap, MENUID_MAPS_PREV },
 	{},
-	{ "D&elete Map", onDeleteMap },
+	{ "D&elete Map",  onDeleteMap },
 };
 
 static NewMenu misc_menu
 {
-	{ "S&ubscreens", onEditSubscreens },
-	{ "&Shop Types", onShopTypes },
-	{ "&Bottle Types", onBottleTypes },
+	{ "S&ubscreens",        onEditSubscreens },
+	{ "&Shop Types",        onShopTypes },
+	{ "&Bottle Types",      onBottleTypes },
 	{ "Bottle S&hop Types", onBottleShopTypes },
-	{ "&Info Types", onInfoTypes },
-	{ "&Warp Rings", onWarpRings },
-	{ "&Triforce Pieces", onTriPieces },
-	{ "&End String", onEndString },
-	{ "Item &Drop Sets", onItemDropSets },
+	{ "&Info Types",        onInfoTypes },
+	{ "&Warp Rings",        onWarpRings },
+	{ "&Triforce Pieces",   onTriPieces },
+	{ "&End String",        onEndString },
+	{ "Item &Drop Sets",    onItemDropSets },
 };
 
 static NewMenu spr_menu
 {
-	{ "&Sprite Data", onCustomWpns },
-	{ "&Player", onCustomHero },
+	{ "&Sprite Data",  onCustomWpns },
+	{ "&Player",       onCustomHero },
 	{ "&Misc Sprites", onMiscSprites },
 };
 
 NewMenu colors_menu
 {
-	{ "&Main ", onColors_Main },
-	{ "&Levels ", onColors_Levels },
+	{ "&Main ",    onColors_Main },
+	{ "&Levels ",  onColors_Levels },
 	{ "&Sprites ", onColors_Sprites },
 };
 
 static NewMenu defs_menu
 {
-	{ "&Palettes", onDefault_Pals },
-	{ "&Tiles", onDefault_Tiles },
-	{ "&Combos", onDefault_Combos },
-	{ "&Items", onDefault_Items },
-	{ "&Enemies", onDefault_Guys },
+	{ "&Palettes",    onDefault_Pals },
+	{ "&Tiles",       onDefault_Tiles },
+	{ "&Combos",      onDefault_Combos },
+	{ "&Items",       onDefault_Items },
+	{ "&Enemies",     onDefault_Guys },
 	{ "&Sprite Data", onDefault_Weapons },
-	{ "&Map Styles", onDefault_MapStyles },
-	{ "SF&X Data", onDefault_SFX },
+	{ "&Map Styles",  onDefault_MapStyles },
+	{ "SF&X Data",    onDefault_SFX },
 };
 
 int32_t onEditComboAlias();
@@ -1158,21 +1149,21 @@ int32_t onEditAutoCombo();
 
 static NewMenu graphics_menu
 {
-	{ "&Palettes ", &colors_menu },
-	{ "&Sprites ", &spr_menu },
-	{ "&Combos", onCombos },
-	{ "&Tiles", onTiles },
-	{ "&Game icons", onIcons },
-	{ "Misc co&lors", onMiscColors },
-	{ "&Map styles", onMapStyles },
+	{ "&Palettes ",       &colors_menu },
+	{ "&Sprites ",        &spr_menu },
+	{ "&Combos",          onCombos },
+	{ "&Tiles",           onTiles },
+	{ "&Game icons",      onIcons },
+	{ "Misc co&lors",     onMiscColors },
+	{ "&Map styles",      onMapStyles },
 	{ "&Door Combo Sets", onDoorCombos },
-	{ "Combo &Aliases", onEditComboAlias },
+	{ "Combo &Aliases",   onEditComboAlias },
 };
 
 static NewMenu audio_menu
 {
 	{ "SF&X Data", onSelectSFX },
-	{ "&MIDIs", onMidis },
+	{ "&MIDIs",    onMidis },
 	{ "Mis&c SFX", onMiscSFX },
 };
 
