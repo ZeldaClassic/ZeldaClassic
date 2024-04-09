@@ -1035,17 +1035,17 @@ void default_hotkeys()
 	
 	zq_hotkeys[ZQKEY_IMPORT_COMBOS].setval(0, 0, 0, 0);
 	zq_hotkeys[ZQKEY_EXPORT_COMBOS].setval(0, 0, 0, 0);
-    zq_hotkeys[ZQKEY_IMPORT_DMAPS].setval(0, 0, 0, 0);
+	zq_hotkeys[ZQKEY_IMPORT_DMAPS].setval(0, 0, 0, 0);
 	zq_hotkeys[ZQKEY_EXPORT_DMAPS].setval(0, 0, 0, 0);
-    zq_hotkeys[ZQKEY_IMPORT_ZGP].setval(0, 0, 0, 0);
+	zq_hotkeys[ZQKEY_IMPORT_ZGP].setval(0, 0, 0, 0);
 	zq_hotkeys[ZQKEY_EXPORT_ZGP].setval(0, 0, 0, 0);
-    zq_hotkeys[ZQKEY_IMPORT_MAP].setval(0, 0, 0, 0);
+	zq_hotkeys[ZQKEY_IMPORT_MAP].setval(0, 0, 0, 0);
 	zq_hotkeys[ZQKEY_EXPORT_MAP].setval(0, 0, 0, 0);
-    zq_hotkeys[ZQKEY_IMPORT_PALS].setval(0, 0, 0, 0);
+	zq_hotkeys[ZQKEY_IMPORT_PALS].setval(0, 0, 0, 0);
 	zq_hotkeys[ZQKEY_EXPORT_PALS].setval(0, 0, 0, 0);
-    zq_hotkeys[ZQKEY_IMPORT_STRINGS].setval(0, 0, 0, 0);
+	zq_hotkeys[ZQKEY_IMPORT_STRINGS].setval(0, 0, 0, 0);
 	zq_hotkeys[ZQKEY_EXPORT_STRINGS].setval(0, 0, 0, 0);
-    zq_hotkeys[ZQKEY_IMPORT_TILES].setval(0, 0, 0, 0);
+	zq_hotkeys[ZQKEY_IMPORT_TILES].setval(0, 0, 0, 0);
 	zq_hotkeys[ZQKEY_EXPORT_TILES].setval(0, 0, 0, 0);
 	
 	zq_hotkeys[ZQKEY_CHANGE_TRACK].setval(0, 0, 0, 0);
@@ -1830,4 +1830,3 @@ optional<uint> select_fav_command()
 	ZQHotkeyDialog(ret).show();
 	return ret;
 }
-

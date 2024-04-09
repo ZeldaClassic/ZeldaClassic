@@ -31,20 +31,20 @@
 
 int32_t NewQuestFile(int32_t template_slot)
 {
-    memset(filepath,0,255);
-    memset(temppath,0,255);
-    first_save=false;
-    box_start(1, "Initializing Quest", get_zc_font(font_lfont), get_zc_font(font_pfont), false);
-    box_out("Please wait.");
-    box_eol();
-    box_out("This may take a few moments.");
-    box_eol();
-    
-    init_quest();
-    saved=true;
-    box_end(false);
-    refresh(rALL);
-    return D_O_K;
+	memset(filepath,0,255);
+	memset(temppath,0,255);
+	first_save=false;
+	box_start(1, "Initializing Quest", get_zc_font(font_lfont), get_zc_font(font_pfont), false);
+	box_out("Please wait.");
+	box_eol();
+	box_out("This may take a few moments.");
+	box_eol();
+
+	init_quest();
+	saved=true;
+	box_end(false);
+	refresh(rALL);
+	return D_O_K;
 }
 
 static int32_t ruleset=0;
@@ -557,12 +557,12 @@ char* get_qst_name(char const* def_path)
 {
 	static EXT_LIST list[] =
 	{
-		{ (char *)"Quest Files (*.qst)", (char *)"qst"                                     },
-		{ (char *)"Quest Auto-backups (*.qb?)", (char *)"qb0,qb1,qb2,qb3,qb4,qb5,qb6,qb7,qb8,qb9" },
-		{ (char *)"Quest Timed Auto-saves (*.qt?)", (char *)"qt0,qt1,qt2,qt3,qt4,qt5,qt6,qt7,qt8,qt9" },
+		{ (char *)"Quest Files (*.qst)",                         (char *)"qst"                                     },
+		{ (char *)"Quest Auto-backups (*.qb?)",                  (char *)"qb0,qb1,qb2,qb3,qb4,qb5,qb6,qb7,qb8,qb9" },
+		{ (char *)"Quest Timed Auto-saves (*.qt?)",              (char *)"qt0,qt1,qt2,qt3,qt4,qt5,qt6,qt7,qt8,qt9" },
 		{ (char *)"Uncompressed Quest Timed Auto-saves (*.qu?)", (char *)"qu0,qu1,qu2,qu3,qu4,qu5,qu6,qu7,qu8,qu9" },
-		{ (char *)"Unencrypted Quest Files (*.qsu)", (char *)"qsu"                                     },
-		{ (char *)"Quest Template Files (*.zqt)", (char *)"zqt"                                     },
+		{ (char *)"Unencrypted Quest Files (*.qsu)",             (char *)"qsu"                                     },
+		{ (char *)"Quest Template Files (*.zqt)",                (char *)"zqt"                                     },
 		{ (char *)"All Files (*.*)",                             NULL                                              },
 		{ NULL,                                                  NULL                                              }
 	};
@@ -633,10 +633,10 @@ int32_t onRevert()
         NewQuestFile(0);
         
         if(RulesetDialog > 0)
-		{
-            PickRuleset();
-			PickRuleTemplate();
-		}
+	{
+		PickRuleset();
+		PickRuleTemplate();
+	}
     }
     
     onDrawingModeNormal();
@@ -819,7 +819,6 @@ int32_t onImport_DMaps_old()
     return D_O_K;
 }
 
-
 int32_t onExport_Tilepack()
 {
 	savesometiles("Save Tile Package", 0);
@@ -838,13 +837,12 @@ int32_t onExport_DMaps()
 	return D_O_K;
 }
 
-
 int32_t onImport_DMaps()
 {
-    if(!getname("Import DMaps (.zdmap)","zdmap",NULL,datapath,false))
-        return D_O_K;
+	if(!getname("Import DMaps (.zdmap)","zdmap",NULL,datapath,false))
+		return D_O_K;
     
-    PACKFILE *f=pack_fopen_password(temppath,F_READ, "");
+	PACKFILE *f=pack_fopen_password(temppath,F_READ, "");
 	if(f)
 	{
 		if(!readsomedmaps(f))
@@ -897,32 +895,31 @@ int32_t onImport_DMaps()
    
 	saved=false;
 
-    
 	return D_O_K;
 }
 
 int32_t onImport_Tilepack()
 {
-		if(getname("Load ZTILE(.ztile)", "ztile", NULL,datapath,false))
-		{  
-			char name[256];
-			extract_name(temppath,name,FILENAMEALL);
-			PACKFILE *f=pack_fopen_password(temppath,F_READ, "");
-			if(f)
+	if(getname("Load ZTILE(.ztile)", "ztile", NULL,datapath,false))
+	{  
+		char name[256];
+		extract_name(temppath,name,FILENAMEALL);
+		PACKFILE *f=pack_fopen_password(temppath,F_READ, "");
+		if(f)
+		{
+			if (!readtilefile(f))
 			{
-				if (!readtilefile(f))
-				{
-					al_trace("Could not read from .ztile packfile %s\n", name);
-					jwin_alert("ZTILE File: Error","Could not load the specified Tile.",NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
-				}
-				else
-				{
-					jwin_alert("ZTILE File: Success!","Loaded the source tiles to your tile sheets!",NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
-				}
+				al_trace("Could not read from .ztile packfile %s\n", name);
+				jwin_alert("ZTILE File: Error","Could not load the specified Tile.",NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
 			}
-	
-			pack_fclose(f);
+			else
+			{
+				jwin_alert("ZTILE File: Success!","Loaded the source tiles to your tile sheets!",NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+			}
 		}
+
+		pack_fclose(f);
+	}
 		return D_O_K;
 }
 
@@ -944,45 +941,42 @@ int32_t onImport_Combopack()
 	return D_O_K;
 }
 
-
 int32_t onExport_Comboaliaspack()
 {
 	savesomecomboaliases("Save Combo Alias Package", 0);
 	return D_O_K;
-	
 }
 
 int32_t onImport_Comboaliaspack_To()
 {
 	writesomecomboaliases_to("Load Combo Alias Package to:", 0);
 	return D_O_K;
-	
 }
 
 int32_t onImport_Comboaliaspack()
 {
-		if(getname("Load ZALIAS(.zalias)", "zalias", NULL,datapath,false))
-		{  
-			char name[256];
-			extract_name(temppath,name,FILENAMEALL);
-			PACKFILE *f=pack_fopen_password(temppath,F_READ, "");
-			if(f)
+	if(getname("Load ZALIAS(.zalias)", "zalias", NULL,datapath,false))
+	{  
+		char name[256];
+		extract_name(temppath,name,FILENAMEALL);
+		PACKFILE *f=pack_fopen_password(temppath,F_READ, "");
+		if(f)
+		{
+			if (!readcomboaliasfile(f))
 			{
-				if (!readcomboaliasfile(f))
-				{
-					al_trace("Could not read from .zalias packfile %s\n", name);
-					jwin_alert("ZALIAS File: Error","Could not load the specified combo aliases.",NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
-				}
-				else
-				{
-					jwin_alert("ZALIAS File: Success!","Loaded the source combo aliases to your combo alias tables!",NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
-					saved=false;
-				}
+				al_trace("Could not read from .zalias packfile %s\n", name);
+				jwin_alert("ZALIAS File: Error","Could not load the specified combo aliases.",NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
 			}
-	
-			pack_fclose(f);
+			else
+			{
+				jwin_alert("ZALIAS File: Success!","Loaded the source combo aliases to your combo alias tables!",NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+				saved=false;
+			}
 		}
-		return D_O_K;
+
+		pack_fclose(f);
+	}
+	return D_O_K;
 }
 
 int32_t onExport_DMaps_old()
@@ -1159,7 +1153,6 @@ int32_t onImport_Combos()
 {
 	writesomecombos("Load Combo Set", 0);
 	return D_O_K;
-	
 }
 
 int32_t onImport_Combos_old()
@@ -1167,9 +1160,7 @@ int32_t onImport_Combos_old()
     int32_t ret=getnumber("Import Start Page",0);
     
     if(cancelgetnum)
-    {
         return D_O_K;
-    }
     
     bound(ret,0,COMBO_PAGES-1);
     
@@ -1191,16 +1182,15 @@ int32_t onImport_Combos_old()
     return D_O_K;
 }
 
-
 int32_t onExport_Combos()
 {
-    if(!getname("Export Combos (.zcombo)","zcombo",NULL,datapath,false))
-        return D_O_K;
+	if(!getname("Export Combos (.zcombo)","zcombo",NULL,datapath,false))
+		return D_O_K;
         
-    char buf[256+20],buf2[256+20],name[256];
-    extract_name(temppath,name,FILENAMEALL);
-    
-    //writetilefile(f,first_tile_id,the_tile_count);
+	char buf[256+20],buf2[256+20],name[256];
+	extract_name(temppath,name,FILENAMEALL);
+
+	//writetilefile(f,first_tile_id,the_tile_count);
     
 	PACKFILE *f=pack_fopen_password(temppath,F_WRITE, "");
 	if(f)
@@ -1218,7 +1208,7 @@ int32_t onExport_Combos()
 		sprintf(buf2,"Error saving %s",name);
 	}
     
-    return D_O_K;
+	return D_O_K;
 }
 
 int32_t onExport_Combos_old()
@@ -1249,9 +1239,7 @@ int32_t onImport_Tiles()
     int32_t ret=getnumber("Import Start Page",0);
     
     if(cancelgetnum)
-    {
         return D_O_K;
-    }
     
     bound(ret,0,TILE_PAGES-1);
     
@@ -1313,7 +1301,7 @@ int32_t onExport_Tiles()
 		sprintf(buf2,"Error saving %s",name);
 	}
     
-    return D_O_K;
+	return D_O_K;
 }
 
 int32_t onImport_Guys()
@@ -1355,10 +1343,6 @@ int32_t onExport_Guys()
     jwin_alert(buf,buf2,NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
     return D_O_K;
 }
-
-
-
-
 
 bool save_combo_alias(const char *path);
 bool load_combo_alias(const char *path);
@@ -1461,34 +1445,23 @@ int32_t readzdoorsets(PACKFILE *f, int32_t first, int32_t count, int32_t deststa
 	int32_t ret = 1;
 	
 	if(!p_igetl(&zversion,f))
-	{
 		return 0;
-	}
 	if(!p_igetl(&zbuild,f))
-	{
 		return 0;
-	}
 	if(!p_igetw(&section_version,f))
-	{
 		return 0;
-	}
 	if(!p_igetw(&section_cversion,f))
-	{
 		return 0;
-	}
 	if(!p_igetl(&doorscount,f))
-	{
 		return 0;
-	}
+
 	al_trace("doorscount is: %d\n", doorscount);
+
 	if(!p_igetl(&firstset,f))
-	{
 		return 0;
-	}
 	if(!p_igetl(&last,f))
-	{
 		return 0;
-	}
+
 	//if the params passed would be invalid:
 	if ( first < firstset || first >= door_combo_set_count ) 
 	{
@@ -1502,6 +1475,7 @@ int32_t readzdoorsets(PACKFILE *f, int32_t first, int32_t count, int32_t deststa
 	{
 		lastset = firstset + count;
 	}
+
 	//end params sanity guard
 	if ( zversion > ZELDA_VERSION )
 	{
@@ -1542,9 +1516,7 @@ int32_t readzdoorsets(PACKFILE *f, int32_t first, int32_t count, int32_t deststa
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_igetw(&tempDoorComboSet.doorcombo_u[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -1552,9 +1524,7 @@ int32_t readzdoorsets(PACKFILE *f, int32_t first, int32_t count, int32_t deststa
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_getc(&tempDoorComboSet.doorcset_u[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//down door
@@ -1563,9 +1533,7 @@ int32_t readzdoorsets(PACKFILE *f, int32_t first, int32_t count, int32_t deststa
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_igetw(&tempDoorComboSet.doorcombo_d[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -1573,9 +1541,7 @@ int32_t readzdoorsets(PACKFILE *f, int32_t first, int32_t count, int32_t deststa
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_getc(&tempDoorComboSet.doorcset_d[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//left door
@@ -1584,9 +1550,7 @@ int32_t readzdoorsets(PACKFILE *f, int32_t first, int32_t count, int32_t deststa
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_igetw(&tempDoorComboSet.doorcombo_l[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -1594,9 +1558,7 @@ int32_t readzdoorsets(PACKFILE *f, int32_t first, int32_t count, int32_t deststa
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_getc(&tempDoorComboSet.doorcset_l[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//right door
@@ -1605,9 +1567,7 @@ int32_t readzdoorsets(PACKFILE *f, int32_t first, int32_t count, int32_t deststa
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_igetw(&tempDoorComboSet.doorcombo_r[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -1615,99 +1575,74 @@ int32_t readzdoorsets(PACKFILE *f, int32_t first, int32_t count, int32_t deststa
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_getc(&tempDoorComboSet.doorcset_r[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//up bomb rubble
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_igetw(&tempDoorComboSet.bombdoorcombo_u[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_getc(&tempDoorComboSet.bombdoorcset_u[j],f))
-			{
 				return 0;
-			}
 		}
 		//down bomb rubble
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_igetw(&tempDoorComboSet.bombdoorcombo_d[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_getc(&tempDoorComboSet.bombdoorcset_d[j],f))
-			{
 				return 0;
-			}
 		}
 		//left bomb rubble
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_igetw(&tempDoorComboSet.bombdoorcombo_l[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_getc(&tempDoorComboSet.bombdoorcset_l[j],f))
-			{
 				return 0;
-			}
 		}
 		//right bomb rubble
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_igetw(&tempDoorComboSet.bombdoorcombo_r[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_getc(&tempDoorComboSet.bombdoorcset_r[j],f))
-			{
 				return 0;
-			}
 		}
 		//walkthrough stuff
 		for(int32_t j=0; j<4; j++)
 		{
 			if(!p_igetw(&tempDoorComboSet.walkthroughcombo[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<4; j++)
 		{
 			if(!p_getc(&tempDoorComboSet.walkthroughcset[j],f))
-			{
 				return 0;
-			}
 		}
 		//flags
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_getc(&tempDoorComboSet.flags[j],f))
-			{
 				return 0;
-			}
 		}
 		memcpy(&DoorComboSets[i], &tempDoorComboSet, sizeof(tempDoorComboSet));
 	}
 	return ret;
 }
-
 
 int32_t writezdoorsets(PACKFILE *f, int32_t first = 0, int32_t count = door_combo_set_count)
 {
@@ -1720,33 +1655,20 @@ int32_t writezdoorsets(PACKFILE *f, int32_t first = 0, int32_t count = door_comb
 	int32_t lastset = count;
 	
 	if(!p_iputl(zversion,f))
-	{
 		return 0;
-	}
 	if(!p_iputl(zbuild,f))
-	{
 		return 0;
-	}
 	if(!p_iputw(section_version,f))
-	{
 		return 0;
-	}
 	if(!p_iputw(section_cversion,f))
-	{
 		return 0;
-	}
 	if(!p_iputl(doorscount,f))
-	{
 		return 0;
-	}
 	if(!p_iputl(firstset,f))
-	{
 		return 0;
-	}
 	if(!p_iputl(lastset,f))
-	{
 		return 0;
-	}
+
 	//if the params passed would be invalid:
 	if ( firstset < 0 || firstset >= doorscount )
 	{
@@ -1768,18 +1690,15 @@ int32_t writezdoorsets(PACKFILE *f, int32_t first = 0, int32_t count = door_comb
 		al_trace("Door writecycle %d\n", i);
 		//name
 		if(!pfwrite(&DoorComboSets[i].name,sizeof(DoorComboSets[0].name),f))
-		{
 			return 0;
-		}
+
 		//up door
 		for(int32_t j=0; j<9; j++)
 		{
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_iputw(DoorComboSets[i].doorcombo_u[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -1787,9 +1706,7 @@ int32_t writezdoorsets(PACKFILE *f, int32_t first = 0, int32_t count = door_comb
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_putc(DoorComboSets[i].doorcset_u[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//down door
@@ -1798,9 +1715,7 @@ int32_t writezdoorsets(PACKFILE *f, int32_t first = 0, int32_t count = door_comb
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_iputw(DoorComboSets[i].doorcombo_d[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -1808,9 +1723,7 @@ int32_t writezdoorsets(PACKFILE *f, int32_t first = 0, int32_t count = door_comb
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_putc(DoorComboSets[i].doorcset_d[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//left door
@@ -1819,9 +1732,7 @@ int32_t writezdoorsets(PACKFILE *f, int32_t first = 0, int32_t count = door_comb
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_iputw(DoorComboSets[i].doorcombo_l[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -1829,9 +1740,7 @@ int32_t writezdoorsets(PACKFILE *f, int32_t first = 0, int32_t count = door_comb
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_putc(DoorComboSets[i].doorcset_l[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//right door
@@ -1840,9 +1749,7 @@ int32_t writezdoorsets(PACKFILE *f, int32_t first = 0, int32_t count = door_comb
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_iputw(DoorComboSets[i].doorcombo_r[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -1850,100 +1757,73 @@ int32_t writezdoorsets(PACKFILE *f, int32_t first = 0, int32_t count = door_comb
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_putc(DoorComboSets[i].doorcset_r[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//up bomb rubble
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_iputw(DoorComboSets[i].bombdoorcombo_u[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_putc(DoorComboSets[i].bombdoorcset_u[j],f))
-			{
 				return 0;
-			}
 		}
 		//down bomb rubble
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_iputw(DoorComboSets[i].bombdoorcombo_d[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_putc(DoorComboSets[i].bombdoorcset_d[j],f))
-			{
 				return 0;
-			}
 		}
 		//left bomb rubble
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_iputw(DoorComboSets[i].bombdoorcombo_l[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_putc(DoorComboSets[i].bombdoorcset_l[j],f))
-			{
 				return 0;
-			}
 		}
 		//right bomb rubble
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_iputw(DoorComboSets[i].bombdoorcombo_r[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_putc(DoorComboSets[i].bombdoorcset_r[j],f))
-			{
 				return 0;
-			}
 		}
 		//walkthrough stuff
 		for(int32_t j=0; j<4; j++)
 		{
 			if(!p_iputw(DoorComboSets[i].walkthroughcombo[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<4; j++)
 		{
 			if(!p_putc(DoorComboSets[i].walkthroughcset[j],f))
-			{
 				return 0;
-			}
 		}
 		//flags
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_putc(DoorComboSets[i].flags[j],f))
-			{
 				return 0;
-			}
 		}
         }
 	return 1;
 }
-
-
-
 
 int32_t writeonezdoorset(PACKFILE *f, int32_t index)
 {
@@ -1956,50 +1836,32 @@ int32_t writeonezdoorset(PACKFILE *f, int32_t index)
 	int32_t lastset = 1;
 	
 	if(!p_iputl(zversion,f))
-	{
 		return 0;
-	}
 	if(!p_iputl(zbuild,f))
-	{
 		return 0;
-	}
 	if(!p_iputw(section_version,f))
-	{
 		return 0;
-	}
 	if(!p_iputw(section_cversion,f))
-	{
 		return 0;
-	}
 	if(!p_iputl(doorscount,f))
-	{
 		return 0;
-	}
 	if(!p_iputl(firstset,f))
-	{
 		return 0;
-	}
 	if(!p_iputl(lastset,f))
-	{
 		return 0;
-	}
 	//doorset data
 	
         {
 		//name
 		if(!pfwrite(&DoorComboSets[index].name,sizeof(DoorComboSets[0].name),f))
-		{
 			return 0;
-		}
 		//up door
 		for(int32_t j=0; j<9; j++)
 		{
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_iputw(DoorComboSets[index].doorcombo_u[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -2007,9 +1869,7 @@ int32_t writeonezdoorset(PACKFILE *f, int32_t index)
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_putc(DoorComboSets[index].doorcset_u[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//down door
@@ -2018,9 +1878,7 @@ int32_t writeonezdoorset(PACKFILE *f, int32_t index)
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_iputw(DoorComboSets[index].doorcombo_d[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -2028,9 +1886,7 @@ int32_t writeonezdoorset(PACKFILE *f, int32_t index)
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_putc(DoorComboSets[index].doorcset_d[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//left door
@@ -2039,9 +1895,7 @@ int32_t writeonezdoorset(PACKFILE *f, int32_t index)
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_iputw(DoorComboSets[index].doorcombo_l[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -2049,9 +1903,7 @@ int32_t writeonezdoorset(PACKFILE *f, int32_t index)
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_putc(DoorComboSets[index].doorcset_l[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//right door
@@ -2060,9 +1912,7 @@ int32_t writeonezdoorset(PACKFILE *f, int32_t index)
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_iputw(DoorComboSets[index].doorcombo_r[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -2070,100 +1920,73 @@ int32_t writeonezdoorset(PACKFILE *f, int32_t index)
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_putc(DoorComboSets[index].doorcset_r[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//up bomb rubble
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_iputw(DoorComboSets[index].bombdoorcombo_u[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_putc(DoorComboSets[index].bombdoorcset_u[j],f))
-			{
 				return 0;
-			}
 		}
 		//down bomb rubble
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_iputw(DoorComboSets[index].bombdoorcombo_d[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_putc(DoorComboSets[index].bombdoorcset_d[j],f))
-			{
 				return 0;
-			}
 		}
 		//left bomb rubble
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_iputw(DoorComboSets[index].bombdoorcombo_l[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_putc(DoorComboSets[index].bombdoorcset_l[j],f))
-			{
 				return 0;
-			}
 		}
 		//right bomb rubble
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_iputw(DoorComboSets[index].bombdoorcombo_r[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_putc(DoorComboSets[index].bombdoorcset_r[j],f))
-			{
 				return 0;
-			}
 		}
 		//walkthrough stuff
 		for(int32_t j=0; j<4; j++)
 		{
 			if(!p_iputw(DoorComboSets[index].walkthroughcombo[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<4; j++)
 		{
 			if(!p_putc(DoorComboSets[index].walkthroughcset[j],f))
-			{
 				return 0;
-			}
 		}
 		//flags
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_putc(DoorComboSets[index].flags[j],f))
-			{
 				return 0;
-			}
 		}
         }
 	return 1;
 }
-
-
-
 
 int32_t readonezdoorset(PACKFILE *f, int32_t index)
 {
@@ -2179,34 +2002,21 @@ int32_t readonezdoorset(PACKFILE *f, int32_t index)
 	int32_t ret = 1;
 	
 	if(!p_igetl(&zversion,f))
-	{
 		return 0;
-	}
 	if(!p_igetl(&zbuild,f))
-	{
 		return 0;
-	}
 	if(!p_igetw(&section_version,f))
-	{
 		return 0;
-	}
 	if(!p_igetw(&section_cversion,f))
-	{
 		return 0;
-	}
 	if(!p_igetl(&doorscount,f))
-	{
 		return 0;
-	}
+
 	al_trace("doorscount is: %d\n", doorscount);
 	if(!p_igetl(&firstset,f))
-	{
 		return 0;
-	}
 	if(!p_igetl(&last,f))
-	{
 		return 0;
-	}
 	
 	if ( zversion > ZELDA_VERSION )
 	{
@@ -2218,7 +2028,6 @@ int32_t readonezdoorset(PACKFILE *f, int32_t index)
 	{
 		al_trace("Cannot read .zdoors packfile made using V_DOORS (%d) subversion (%d)\n", section_version, section_cversion);
 		return 0;
-		
 	}
 	else
 	{
@@ -2237,18 +2046,14 @@ int32_t readonezdoorset(PACKFILE *f, int32_t index)
 		memset(&tempDoorComboSet, 0, sizeof(DoorComboSet));
 		//name
 		if(!pfread(&tempDoorComboSet.name,sizeof(tempDoorComboSet.name),f))
-		{
 			return 0;
-		}
 		//up door
 		for(int32_t j=0; j<9; j++)
 		{
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_igetw(&tempDoorComboSet.doorcombo_u[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -2256,9 +2061,7 @@ int32_t readonezdoorset(PACKFILE *f, int32_t index)
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_getc(&tempDoorComboSet.doorcset_u[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//down door
@@ -2267,9 +2070,7 @@ int32_t readonezdoorset(PACKFILE *f, int32_t index)
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_igetw(&tempDoorComboSet.doorcombo_d[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -2277,9 +2078,7 @@ int32_t readonezdoorset(PACKFILE *f, int32_t index)
 			for(int32_t k=0; k<4; k++)
 			{
 				if(!p_getc(&tempDoorComboSet.doorcset_d[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//left door
@@ -2288,9 +2087,7 @@ int32_t readonezdoorset(PACKFILE *f, int32_t index)
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_igetw(&tempDoorComboSet.doorcombo_l[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -2298,9 +2095,7 @@ int32_t readonezdoorset(PACKFILE *f, int32_t index)
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_getc(&tempDoorComboSet.doorcset_l[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//right door
@@ -2309,9 +2104,7 @@ int32_t readonezdoorset(PACKFILE *f, int32_t index)
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_igetw(&tempDoorComboSet.doorcombo_r[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		for(int32_t j=0; j<9; j++)
@@ -2319,93 +2112,69 @@ int32_t readonezdoorset(PACKFILE *f, int32_t index)
 			for(int32_t k=0; k<6; k++)
 			{
 				if(!p_getc(&tempDoorComboSet.doorcset_r[j][k],f))
-				{
 					return 0;
-				}
 			}
 		}
 		//up bomb rubble
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_igetw(&tempDoorComboSet.bombdoorcombo_u[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_getc(&tempDoorComboSet.bombdoorcset_u[j],f))
-			{
 				return 0;
-			}
 		}
 		//down bomb rubble
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_igetw(&tempDoorComboSet.bombdoorcombo_d[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_getc(&tempDoorComboSet.bombdoorcset_d[j],f))
-			{
 				return 0;
-			}
 		}
 		//left bomb rubble
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_igetw(&tempDoorComboSet.bombdoorcombo_l[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_getc(&tempDoorComboSet.bombdoorcset_l[j],f))
-			{
 				return 0;
-			}
 		}
 		//right bomb rubble
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_igetw(&tempDoorComboSet.bombdoorcombo_r[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<3; j++)
 		{
 			if(!p_getc(&tempDoorComboSet.bombdoorcset_r[j],f))
-			{
 				return 0;
-			}
 		}
 		//walkthrough stuff
 		for(int32_t j=0; j<4; j++)
 		{
 			if(!p_igetw(&tempDoorComboSet.walkthroughcombo[j],f))
-			{
 				return 0;
-			}
 		}
 		for(int32_t j=0; j<4; j++)
 		{
 			if(!p_getc(&tempDoorComboSet.walkthroughcset[j],f))
-			{
 				return 0;
-			}
 		}
 		//flags
 		for(int32_t j=0; j<2; j++)
 		{
 			if(!p_getc(&tempDoorComboSet.flags[j],f))
-			{
 				return 0;
-			}
 		}
 		memcpy(&DoorComboSets[index], &tempDoorComboSet, sizeof(tempDoorComboSet));
 	}
@@ -2425,6 +2194,6 @@ int32_t onImport_Doorset()
 
 void center_zq_files_dialogs()
 {
-    jwin_center_dialog(ruleset_dlg);
-    jwin_center_dialog(import_map_bias_dlg);
+	jwin_center_dialog(ruleset_dlg);
+	jwin_center_dialog(import_map_bias_dlg);
 }
