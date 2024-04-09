@@ -502,4 +502,3 @@ int32_t solid_object::push_dir() const
 	else if(ody < 0) xdir = up;
 	return XY_DIR(xdir, ydir);
 }
-

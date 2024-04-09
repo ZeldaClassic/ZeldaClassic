@@ -585,22 +585,15 @@ int32_t readoneitem(PACKFILE *f, int32_t index)
 			//New itemdata vars -Z
 			//! version 27
 			
-		if(!p_getc(&tempitem.useweapon,f))
-		{
-			return 0;
-		}
-		if(!p_getc(&tempitem.usedefence,f))
-		{
-			return 0;
-		}
-		if(!p_igetl(&tempitem.weaprange,f))
-		{
-			return 0;
-		}
-		if(!p_igetl(&tempitem.weapduration,f))
-		{
-			return 0;
-		}
+			if(!p_getc(&tempitem.useweapon,f))
+				return 0;
+			if(!p_getc(&tempitem.usedefence,f))
+				return 0;
+			if(!p_igetl(&tempitem.weaprange,f))
+				return 0;
+			if(!p_igetl(&tempitem.weapduration,f))
+				return 0;
+
 			for ( int32_t q = 0; q < ITEM_MOVEMENT_PATTERNS; q++ ) {
 				if(!p_igetl(&tempitem.weap_pattern[q],f))
 				{
@@ -1448,7 +1441,6 @@ static int32_t enemy_script_tabs_list    [] = { 251, -1 };
 
 static int32_t enemy_scripts_list[] =
 {
-	
 	334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,
 	377,378,379,380,381,382,383,384,
 	426,427,428,429,430,431,432,433,
@@ -1505,7 +1497,6 @@ static TABPANEL enemy_sounds_tabs[] =
    // { (char *)"Background Sounds",	 D_SELECTED,               enemy_sfx_bgsounds_list,   0, NULL },
 	{ NULL,                   0,               NULL,                  0, NULL }
 };
- 
 
 static TABPANEL enemy_attacks_tabs[] =
 {
@@ -1513,8 +1504,6 @@ static TABPANEL enemy_attacks_tabs[] =
   //  { (char *)"Weapon Movement",	 D_SELECTED,               enemy_attacks_Wmove_list,   0, NULL },
 	{ NULL,                   0,               NULL,                  0, NULL }
 };
-
-
 */ 
 
 static int32_t enedata_defense_ranged_list[] =
@@ -1622,7 +1611,6 @@ static TABPANEL enedata_tabs[] =
 	{ (char *)"Scripts",	 0,               enemy_script_tabs_list,   0, NULL },
 	{ NULL,                   0,               NULL,                  0, NULL }
 };
-
 
 list_data_struct bief[eeMAX];
 int32_t bief_cnt=-1;
@@ -1816,7 +1804,6 @@ const char *eweaponlist(int32_t index, int32_t *list_size)
 	*list_size=biew_cnt;
 	return NULL;
 }
-
 
 //
 // Enemy Misc. Attribute label swapping device

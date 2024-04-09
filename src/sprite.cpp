@@ -649,14 +649,14 @@ int32_t sprite::check_pits() //Returns combo ID of pit fallen into; 0 for not fa
 
 int32_t sprite::get_water()  //Returns combo ID of water that sprite WOULD fall into; no side-effects
 {
-	int32_t ispitul    = iswaterexzq(MAPCOMBOzq(x,y), get_currmap(), get_currscr(), -1, x, y, false, false, true);
-	int32_t ispitbl    = iswaterexzq(MAPCOMBOzq(x,y+15), get_currmap(), get_currscr(), -1, x, y+15, false, false, true);
-	int32_t ispitur    = iswaterexzq(MAPCOMBOzq(x+15,y), get_currmap(), get_currscr(), -1, x+15, y, false, false, true);
+	int32_t ispitul    = iswaterexzq(MAPCOMBOzq(x,y),       get_currmap(), get_currscr(), -1, x, y, false, false, true);
+	int32_t ispitbl    = iswaterexzq(MAPCOMBOzq(x,y+15),    get_currmap(), get_currscr(), -1, x, y+15, false, false, true);
+	int32_t ispitur    = iswaterexzq(MAPCOMBOzq(x+15,y),    get_currmap(), get_currscr(), -1, x+15, y, false, false, true);
 	int32_t ispitbr    = iswaterexzq(MAPCOMBOzq(x+15,y+15), get_currmap(), get_currscr(), -1, x+15, y+15, false, false, true);
-	int32_t ispitul_50 = iswaterexzq(MAPCOMBOzq(x+8,y+8), get_currmap(), get_currscr(), -1, x+8, y+8, false, false, true);
-	int32_t ispitbl_50 = iswaterexzq(MAPCOMBOzq(x+8,y+7), get_currmap(), get_currscr(), -1, x+8, y+7, false, false, true);
-	int32_t ispitur_50 = iswaterexzq(MAPCOMBOzq(x+7,y+8), get_currmap(), get_currscr(), -1, x+7, y+8, false, false, true);
-	int32_t ispitbr_50 = iswaterexzq(MAPCOMBOzq(x+7,y+7), get_currmap(), get_currscr(), -1, x+7, y+7, false, false, true);
+	int32_t ispitul_50 = iswaterexzq(MAPCOMBOzq(x+8,y+8),   get_currmap(), get_currscr(), -1, x+8, y+8, false, false, true);
+	int32_t ispitbl_50 = iswaterexzq(MAPCOMBOzq(x+8,y+7),   get_currmap(), get_currscr(), -1, x+8, y+7, false, false, true);
+	int32_t ispitur_50 = iswaterexzq(MAPCOMBOzq(x+7,y+8),   get_currmap(), get_currscr(), -1, x+7, y+8, false, false, true);
+	int32_t ispitbr_50 = iswaterexzq(MAPCOMBOzq(x+7,y+7),   get_currmap(), get_currscr(), -1, x+7, y+7, false, false, true);
 	switch((ispitul?1:0) + (ispitur?1:0) + (ispitbl?1:0) + (ispitbr?1:0))
 	{
 		case 4:
@@ -706,21 +706,13 @@ int32_t sprite::get_water()  //Returns combo ID of water that sprite WOULD fall 
 		case 1:
 		{
 			if(ispitul) //UL_1
-			{
 				return ispitul_50;
-			}
 			if(ispitur) //UR_1
-			{
 				return ispitur_50;
-			}
 			if(ispitbl) //BL_1
-			{
 				return ispitbl_50;
-			}
 			if(ispitbr) //BR_1
-			{
 				return ispitbr_50;
-			}
 			break;
 		}
 	}
@@ -958,8 +950,8 @@ int32_t sprite::hitdir(int32_t tx,int32_t ty,int32_t txsz2,int32_t tysz2,int32_t
 
 void sprite::move(zfix dx,zfix dy)
 {
-    x+=dx;
-    y+=dy;
+	x+=dx;
+	y+=dy;
 }
 
 void sprite::move(zfix s)
