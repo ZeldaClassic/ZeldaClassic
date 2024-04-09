@@ -79,18 +79,18 @@ bool call_combo_editor(int32_t index)
 
 ComboEditorDialog::ComboEditorDialog(newcombo const& ref, int32_t index):
 	index(index), local_comboref(ref),
-	list_ctype(GUI::ZCListData::combotype(true)),
-	list_flag(GUI::ZCListData::mapflag(numericalFlags, true)),
-	list_combscript(GUI::ZCListData::combodata_script()),
-	list_sfx(GUI::ZCListData::sfxnames(true)),
-	list_genscr(GUI::ZCListData::generic_script()),
-	list_counters_nn(GUI::ZCListData::counters(true, true)),
-	list_sprites(GUI::ZCListData::miscsprites()),
-	list_sprites_spec(GUI::ZCListData::miscsprites(false,true)),
-	list_weaptype(GUI::ZCListData::weaptypes(true)),
-	list_deftypes(GUI::ZCListData::deftypes()),
-	list_dirs4n(GUI::ZCListData::dirs(4,true)),
-	list_0_7(GUI::ListData::numbers(false,0,8)),
+	list_ctype            (GUI::ZCListData::combotype(true)),
+	list_flag             (GUI::ZCListData::mapflag(numericalFlags, true)),
+	list_combscript       (GUI::ZCListData::combodata_script()),
+	list_sfx              (GUI::ZCListData::sfxnames(true)),
+	list_genscr           (GUI::ZCListData::generic_script()),
+	list_counters_nn      (GUI::ZCListData::counters(true, true)),
+	list_sprites          (GUI::ZCListData::miscsprites()),
+	list_sprites_spec     (GUI::ZCListData::miscsprites(false,true)),
+	list_weaptype         (GUI::ZCListData::weaptypes(true)),
+	list_deftypes         (GUI::ZCListData::deftypes()),
+	list_dirs4n           (GUI::ZCListData::dirs(4,true)),
+	list_0_7              (GUI::ListData::numbers(false,0,8)),
 	list_lift_parent_items(GUI::ZCListData::items(true).filter(
 		[&](GUI::ListItem& itm)
 		{
