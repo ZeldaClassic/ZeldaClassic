@@ -192,9 +192,9 @@ class zmap
 public:
 
     zmap();
-    ~zmap();
-	void clear();
-	void force_refr_pointer();
+    ~zmap() = default;
+    void clear();
+    void force_refr_pointer();
     bool CanUndo();
     bool CanRedo();
     bool CanPaste();

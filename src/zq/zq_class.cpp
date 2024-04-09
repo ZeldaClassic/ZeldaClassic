@@ -155,10 +155,6 @@ zmap::zmap()
     layer_target_map = 0;
     layer_target_scr = 0;
     layer_target_multiple = 0;
-    
-}
-zmap::~zmap()
-{
 }
 
 void zmap::clear()
@@ -213,218 +209,196 @@ int32_t zmap::getLayerTargetMultiple()
 }
 bool zmap::isDungeon(int32_t scr)
 {
-    for(int32_t i=0; i<4; i++)
-    {
-        if(screens[scr].data[i]!=screens[TEMPLATE].data[i])
-        {
-            return false;
-        }
-    }
+	for(int32_t i=0; i<4; i++)
+		if(screens[scr].data[i]!=screens[TEMPLATE].data[i])
+			return false;
     
-    return true;
+	return true;
 }
 
 bool zmap::clearall(bool validate)
 {
-    Color=0;
-    char tbuf[10];
+	Color=0;
+	char tbuf[10];
     
-    if((header.templatepath[0]!=0)&&validate)
-    {
-        if(!valid_zqt(header.templatepath))
-        {
-            jwin_alert("Error","Invalid Quest Template",NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
-            return false;
-        }
-    }
+	if((header.templatepath[0]!=0)&&validate)
+	{
+		if(!valid_zqt(header.templatepath))
+		{
+		    jwin_alert("Error","Invalid Quest Template",NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
+		    return false;
+		}
+	}
     
-    for(int32_t i=0; i<map_count; i++)
-    {
-        setCurrMap(i);
-        sprintf(tbuf, "%d", i);
-        clearmap(true);
-    }
+	for(int32_t i=0; i<map_count; i++)
+	{
+		setCurrMap(i);
+		sprintf(tbuf, "%d", i);
+		clearmap(true);
+	}
     
-    setCurrMap(0);
-    return true;
+	setCurrMap(0);
+	return true;
 }
 
 bool zmap::reset_templates(bool validate)
 {
-    //why are we doing this?
-    if(colordata==NULL)
-    {
-        return false;
-    }
+	//why are we doing this?
+	if(colordata==NULL)
+		return false;
     
-    char deletefilename[1];
-    deletefilename[0]=0;
+	char deletefilename[1];
+	deletefilename[0]=0;
     
-    //int32_t ret;
-    word version, build, dummy, sversion=0;
+	//int32_t ret;
+	word version, build, dummy, sversion=0;
 	byte dummyc;
 	word dummyw;
-    //int32_t section_size;
-    word temp_map_count;
-    mapscr temp_mapscr;
-    PACKFILE *f=NULL;
+	//int32_t section_size;
+	word temp_map_count;
+	mapscr temp_mapscr;
+	PACKFILE *f=NULL;
     
-//  setPackfilePassword(datapwd);
-    f=open_quest_template(&header, deletefilename, validate);
-    get_version_and_build(f, &version, &build);
+	//  setPackfilePassword(datapwd);
+	f=open_quest_template(&header, deletefilename, validate);
+	get_version_and_build(f, &version, &build);
     
-    if(!find_section(f, ID_MAPS))
-    {
-//	  setPackfilePassword(NULL);
-        return false;
-    }
+	if(!find_section(f, ID_MAPS))
+	{
+		//setPackfilePassword(NULL);
+		return false;
+	}
     
-    //section version info
-    if(!p_igetw(&sversion,f))
-    {
-        return false;
-    }
+	//section version info
+	if(!p_igetw(&sversion,f))
+		return false;
     
-    if(!p_igetw(&dummy,f))
-    {
-        return false;
-    }
+	if(!p_igetw(&dummy,f))
+		return false;
     
-    //section size
-    dword dummy_size;
-    if(!p_igetl(&dummy_size,f))
-    {
-        return false;
-    }
+	//section size
+	dword dummy_size;
+	if(!p_igetl(&dummy_size,f))
+		return false;
     
-    //finally...  section data
-    if(!p_igetw(&temp_map_count,f))
-    {
-        return false;
-    }
+	//finally...  section data
+	if(!p_igetw(&temp_map_count,f))
+		return false;
     
-    if(version>12)
-    {
-        if(!p_getc(&dummyc,f))
-            return qe_invalid;
-        
-        if(!p_getc(&dummyc,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_getc(&dummyc,f))
-            return qe_invalid;
-        
-        if(!p_getc(&dummyc,f))
-            return qe_invalid;
-    }
+	if(version>12)
+	{
+		if(!p_getc(&dummyc,f))
+		    return qe_invalid;
+		
+		if(!p_getc(&dummyc,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_getc(&dummyc,f))
+		    return qe_invalid;
+		
+		if(!p_getc(&dummyc,f))
+		    return qe_invalid;
+	}
     
-    for(int32_t i=0; i<MAPSCRSNORMAL; ++i)
-    {
-        readmapscreen(f, &header, &temp_mapscr, sversion);
-    }
+	for(int32_t i=0; i<MAPSCRSNORMAL; ++i)
+		readmapscreen(f, &header, &temp_mapscr, sversion);
     
-    readmapscreen(f, &header, &TheMaps[128], sversion);
-    readmapscreen(f, &header, &TheMaps[129], sversion);
+	readmapscreen(f, &header, &TheMaps[128], sversion);
+	readmapscreen(f, &header, &TheMaps[129], sversion);
     
-    for(int32_t i=0; i<(MAPSCRS-(MAPSCRSNORMAL+2)); ++i)
-    {
-        readmapscreen(f, &header, &temp_mapscr, sversion);
-    }
+	for(int32_t i=0; i<(MAPSCRS-(MAPSCRSNORMAL+2)); ++i)
+		readmapscreen(f, &header, &temp_mapscr, sversion);
     
-    if(version>12)
-    {
-        if(!p_getc(&dummyc,f))
-            return qe_invalid;
-        
-        if(!p_getc(&dummyc,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_igetw(&dummyw,f))
-            return qe_invalid;
-        
-        if(!p_getc(&dummyc,f))
-            return qe_invalid;
-        
-        if(!p_getc(&dummyc,f))
-            return qe_invalid;
-    }
+	if(version>12)
+	{
+		if(!p_getc(&dummyc,f))
+			return qe_invalid;
+		
+		if(!p_getc(&dummyc,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_igetw(&dummyw,f))
+		    return qe_invalid;
+		
+		if(!p_getc(&dummyc,f))
+		    return qe_invalid;
+		
+		if(!p_getc(&dummyc,f))
+		    return qe_invalid;
+	}
     
-    for(int32_t i=0; i<MAPSCRSNORMAL; ++i)
-    {
-        readmapscreen(f, &header, &temp_mapscr, sversion);
-    }
+	for(int32_t i=0; i<MAPSCRSNORMAL; ++i)
+		readmapscreen(f, &header, &temp_mapscr, sversion);
     
-    readmapscreen(f, &header, &TheMaps[MAPSCRS+128], sversion);
-    readmapscreen(f, &header, &TheMaps[MAPSCRS+129], sversion);
+	readmapscreen(f, &header, &TheMaps[MAPSCRS+128], sversion);
+	readmapscreen(f, &header, &TheMaps[MAPSCRS+129], sversion);
     
-    pack_fclose(f);
+	pack_fclose(f);
 	clear_quest_tmpfile();
     
-    if(deletefilename[0]==0)
-    {
-        delete_file(deletefilename);
-    }
+	if(deletefilename[0]==0)
+		delete_file(deletefilename);
     
-//  setPackfilePassword(NULL);
+	//setPackfilePassword(NULL);
 
-    return true;
+	return true;
 }
 
 bool zmap::clearmap(bool newquest)

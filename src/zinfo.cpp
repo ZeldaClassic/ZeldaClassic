@@ -327,12 +327,12 @@ const char default_itype_strings[itype_max][255] =
 const char counter_default_names[MAX_COUNTERS][255] =
 {
 	"Life","Rupees","Bombs","Arrows","Magic",
-	"Keys","Super Bombs","Custom 1","Custom 2","Custom 3",
-	"Custom 4","Custom 5","Custom 6","Custom 7","Custom 8",
-	"Custom 9","Custom 10","Custom 11","Custom 12","Custom 13",
-	"Custom 14","Custom 15","Custom 16","Custom 17","Custom 18",
-	"Custom 19","Custom 20","Custom 21","Custom 22","Custom 23",
-	"Custom 24","Custom 25", "Custom 26", "Custom 27", "Custom 28",
+	"Keys","Super Bombs",     "Custom 1",  "Custom 2",  "Custom 3",
+	"Custom 4",  "Custom 5",  "Custom 6",  "Custom 7",  "Custom 8",
+	"Custom 9",  "Custom 10", "Custom 11", "Custom 12", "Custom 13",
+	"Custom 14", "Custom 15", "Custom 16", "Custom 17", "Custom 18",
+	"Custom 19", "Custom 20", "Custom 21", "Custom 22", "Custom 23",
+	"Custom 24", "Custom 25", "Custom 26", "Custom 27", "Custom 28",
 	"Custom 29", "Custom 30", "Custom 31", "Custom 32", "Custom 33",
 	"Custom 34", "Custom 35", "Custom 36", "Custom 37", "Custom 38",
 	"Custom 39", "Custom 40", "Custom 41", "Custom 42", "Custom 43",
