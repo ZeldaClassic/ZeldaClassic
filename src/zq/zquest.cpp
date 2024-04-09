@@ -15027,7 +15027,7 @@ int32_t writeonedmap(PACKFILE *f, int32_t i)
 			{
 				new_return(33);
 			}
-		}
+		    }
 	    }
 		if(!p_iputw(DMaps[i].active_sub_script,f))
 		{
@@ -15298,49 +15298,49 @@ int32_t readonedmap(PACKFILE *f, int32_t index)
 						return 0;
 				}
 			}
-				if(!p_igetw(&tempdmap.active_sub_script,f))
+			if(!p_igetw(&tempdmap.active_sub_script,f))
+				return 0;
+			if(!p_igetw(&tempdmap.passive_sub_script,f))
+				return 0;
+			for(int32_t q = 0; q < 8; ++q)
+			{
+				if(!p_igetl(&tempdmap.sub_initD[q],f))
 					return 0;
-				if(!p_igetw(&tempdmap.passive_sub_script,f))
-					return 0;
-				for(int32_t q = 0; q < 8; ++q)
+			}	
+			for(int32_t q = 0; q < 8; ++q)
+			{
+				for(int32_t w = 0; w < 65; ++w)
 				{
-					if(!p_igetl(&tempdmap.sub_initD[q],f))
+					if(!p_getc(&tempdmap.sub_initD_label[q][w],f))
 						return 0;
-				}	
-				for(int32_t q = 0; q < 8; ++q)
-				{
-					for(int32_t w = 0; w < 65; ++w)
-					{
-						if(!p_getc(&tempdmap.sub_initD_label[q][w],f))
-							return 0;
-					}
 				}
-				if(!p_igetw(&tempdmap.onmap_script,f))
-					return 0;
+			}
+			if(!p_igetw(&tempdmap.onmap_script,f))
+				return 0;
 
-				for(int32_t q = 0; q < 8; ++q)
+			for(int32_t q = 0; q < 8; ++q)
+			{
+				if(!p_igetl(&tempdmap.onmap_initD[q],f))
+					return 0;
+			}	
+			for(int32_t q = 0; q < 8; ++q)
+			{
+				for(int32_t w = 0; w < 65; ++w)
 				{
-					if(!p_igetl(&tempdmap.onmap_initD[q],f))
+					if(!p_getc(&tempdmap.onmap_initD_label[q][w],f))
 						return 0;
-				}	
-				for(int32_t q = 0; q < 8; ++q)
-				{
-					for(int32_t w = 0; w < 65; ++w)
-					{
-						if(!p_getc(&tempdmap.onmap_initD_label[q][w],f))
-							return 0;
-					}
 				}
-				if (!p_igetw(&tempdmap.mirrorDMap, f))
-					return 0;
-				if (!p_igetl(&tempdmap.tmusic_loop_start, f))
-					return 0;
-				if (!p_igetl(&tempdmap.tmusic_loop_end, f))
-					return 0;
-				if (!p_igetl(&tempdmap.tmusic_xfade_in, f))
-					return 0;
-				if (!p_igetl(&tempdmap.tmusic_xfade_out, f))
-					return 0;
+			}
+			if (!p_igetw(&tempdmap.mirrorDMap, f))
+				return 0;
+			if (!p_igetl(&tempdmap.tmusic_loop_start, f))
+				return 0;
+			if (!p_igetl(&tempdmap.tmusic_loop_end, f))
+				return 0;
+			if (!p_igetl(&tempdmap.tmusic_xfade_in, f))
+				return 0;
+			if (!p_igetl(&tempdmap.tmusic_xfade_out, f))
+				return 0;
 		}
 	}
 	DMaps[index] = tempdmap;
