@@ -24152,7 +24152,6 @@ int32_t onEditSFX(int32_t index)
 	return D_O_K;
 }
 
-
 static DIALOG mapstyles_dlg[] =
 {
     /* (dialog proc)     (x)   (y)    (w)   (h)   (fg)      (bg)     (key)    (flags)       (d1)           (d2)      (dp) */
@@ -24458,7 +24457,6 @@ int32_t d_misccolors_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
     return D_O_K;
 }
 
-
 int32_t onMiscColors()
 {
     char buf[17][3];
@@ -24566,18 +24564,18 @@ static DIALOG help_dlg[] =
 
 void doHelp(int32_t bg,int32_t fg)
 {
-    help_dlg[0].dp2= get_custom_font(CFONT_TITLE);
-    help_dlg[2].dp = new EditboxModel(helpstr, new EditboxWordWrapView(&help_dlg[2],get_custom_font(CFONT_TEXTBOX),fg,bg,BasicEditboxView::HSTYLE_EOTEXT),true);
-    help_dlg[2].bg = bg;
-    do_zqdialog(help_dlg,2);
-    delete(EditboxModel*)(help_dlg[2].dp);
+	help_dlg[0].dp2= get_custom_font(CFONT_TITLE);
+	help_dlg[2].dp = new EditboxModel(helpstr, new EditboxWordWrapView(&help_dlg[2],get_custom_font(CFONT_TEXTBOX),fg,bg,BasicEditboxView::HSTYLE_EOTEXT),true);
+	help_dlg[2].bg = bg;
+	do_zqdialog(help_dlg,2);
+	delete(EditboxModel*)(help_dlg[2].dp);
 }
 
 int32_t onHelp()
 {
-    restore_mouse();
-    doHelp(vc(15),vc(0));
-    return D_O_K;
+	restore_mouse();
+	doHelp(vc(15),vc(0));
+	return D_O_K;
 }
 
 static DIALOG Zstringshelp_dlg[] =
@@ -24595,18 +24593,18 @@ static DIALOG Zstringshelp_dlg[] =
 
 void doZstringshelp(int32_t bg,int32_t fg)
 {
-    Zstringshelp_dlg[0].dp2= get_custom_font(CFONT_TITLE);
-    Zstringshelp_dlg[2].dp = new EditboxModel(zstringshelpstr, new EditboxWordWrapView(&Zstringshelp_dlg[2],get_custom_font(CFONT_TEXTBOX),fg,bg,BasicEditboxView::HSTYLE_EOTEXT),true);
-    Zstringshelp_dlg[2].bg = bg;
-    do_zqdialog(Zstringshelp_dlg,2);
-    delete(EditboxModel*)(Zstringshelp_dlg[2].dp);
+	Zstringshelp_dlg[0].dp2= get_custom_font(CFONT_TITLE);
+	Zstringshelp_dlg[2].dp = new EditboxModel(zstringshelpstr, new EditboxWordWrapView(&Zstringshelp_dlg[2],get_custom_font(CFONT_TEXTBOX),fg,bg,BasicEditboxView::HSTYLE_EOTEXT),true);
+	Zstringshelp_dlg[2].bg = bg;
+	do_zqdialog(Zstringshelp_dlg,2);
+	delete(EditboxModel*)(Zstringshelp_dlg[2].dp);
 }
 
 int32_t onZstringshelp()
 {
-    restore_mouse();
-    doZstringshelp(vc(15),vc(0));
-    return D_O_K;
+	restore_mouse();
+	doZstringshelp(vc(15),vc(0));
+	return D_O_K;
 }
 
 static DIALOG layerdata_dlg[] =
@@ -25285,25 +25283,24 @@ int32_t current_item_id(int32_t itemtype, bool, bool, bool)
 	return -1;
 }
 
-
 bool can_use_item([[maybe_unused]] int32_t item_type, [[maybe_unused]] int32_t item)
 {
-    return true;
+	return true;
 }
 
 bool has_item(int32_t [[maybe_unused]] item_type, [[maybe_unused]] int32_t it)
 {
-    return true;
+	return true;
 }
 
 int32_t get_bmaps([[maybe_unused]] int32_t si)
 {
-    return 255;
+	return 255;
 }
 
 bool no_subscreen()
 {
-    return false;
+	return false;
 }
 
 static void allocate_crap()
@@ -25320,7 +25317,6 @@ static void allocate_crap()
 	{
 		Z_error_fatal("Error: no memory for file paths!");
 	}
-	
 
 	customtunes = (zctune*)malloc(sizeof(class zctune)*MAXCUSTOMMIDIS_ZQ);
 	memset(customtunes, 0, sizeof(class zctune)*MAXCUSTOMMIDIS_ZQ);
@@ -25989,7 +25985,7 @@ int32_t main(int32_t argc,char **argv)
 	DuplicateAction[2]			 = zc_get_config("zquest","vertical_duplicate_action",0);
 	DuplicateAction[3]			 = zc_get_config("zquest","both_duplicate_action",0);
 	LeechUpdate                              = zc_get_config("zquest","leech_update",500);
-	LeechUpdateTiles			   = zc_get_config("zquest","leech_update_tiles",1);
+	LeechUpdateTiles		   = zc_get_config("zquest","leech_update_tiles",1);
 	OnlyCheckNewTilesForDuplicates = zc_get_config("zquest","only_check_new_tiles_for_duplicates",0);
 	//gui_colorset				   = zc_get_config("zquest","gui_colorset",0);
 	
@@ -27234,7 +27230,6 @@ void destroy_bitmaps_on_exit()
 	al_trace(" OK. \n");
 }
 
-
 void quit_game()
 {
     set_last_timed_save(nullptr);
@@ -27445,53 +27440,52 @@ void quit_game2()
 
 void center_zquest_dialogs()
 {
-    jwin_center_dialog(assignscript_dlg);
-    jwin_center_dialog(autolayer_dlg);
-    jwin_center_dialog(cpage_dlg);
-    center_zq_cset_dialogs();
-    jwin_center_dialog(change_track_dlg);
-    jwin_center_dialog(csetfix_dlg);
-    jwin_center_dialog(dmapmaps_dlg);
-    center_zq_door_dialogs();
-    jwin_center_dialog(editcomboa_dlg);
-    jwin_center_dialog(editinfo_dlg);
-    jwin_center_dialog(editmidi_dlg);
-    jwin_center_dialog(editmusic_dlg);
-    jwin_center_dialog(editshop_dlg);
-    jwin_center_dialog(elist_dlg);
-    jwin_center_dialog(enemy_dlg);
-    jwin_center_dialog(ffcombo_sel_dlg);
-    jwin_center_dialog(getnum_dlg);
-    jwin_center_dialog(glist_dlg);
-    jwin_center_dialog(help_dlg);
-    jwin_center_dialog(layerdata_dlg);
-    jwin_center_dialog(list_dlg);
-    jwin_center_dialog(loadmap_dlg);
-    jwin_center_dialog(mapstyles_dlg);
-    jwin_center_dialog(misccolors_dlg);
-    jwin_center_dialog(newcomboa_dlg);
-    jwin_center_dialog(orgcomboa_dlg);
-    jwin_center_dialog(path_dlg);
-    jwin_center_dialog(pattern_dlg);
-    jwin_center_dialog(screen_pal_dlg);
-    jwin_center_dialog(secret_dlg);
-    jwin_center_dialog(selectdmap_dlg);
-    jwin_center_dialog(selectmidi_dlg);
-    jwin_center_dialog(selectmusic_dlg);
-    jwin_center_dialog(sfxlist_dlg);
-    jwin_center_dialog(sfx_edit_dlg);
-    jwin_center_dialog(showpal_dlg);
-    jwin_center_dialog(strlist_dlg);
-    jwin_center_dialog(template_dlg);
-    jwin_center_dialog(tp_dlg);
-    jwin_center_dialog(under_dlg);
-    jwin_center_dialog(tilewarp_dlg);
-    jwin_center_dialog(sidewarp_dlg);
-    jwin_center_dialog(warpring_dlg);
-    jwin_center_dialog(wlist_dlg);
-    center_zscript_dialogs();
+	jwin_center_dialog(assignscript_dlg);
+	jwin_center_dialog(autolayer_dlg);
+	jwin_center_dialog(cpage_dlg);
+	center_zq_cset_dialogs();
+	jwin_center_dialog(change_track_dlg);
+	jwin_center_dialog(csetfix_dlg);
+	jwin_center_dialog(dmapmaps_dlg);
+	center_zq_door_dialogs();
+	jwin_center_dialog(editcomboa_dlg);
+	jwin_center_dialog(editinfo_dlg);
+	jwin_center_dialog(editmidi_dlg);
+	jwin_center_dialog(editmusic_dlg);
+	jwin_center_dialog(editshop_dlg);
+	jwin_center_dialog(elist_dlg);
+	jwin_center_dialog(enemy_dlg);
+	jwin_center_dialog(ffcombo_sel_dlg);
+	jwin_center_dialog(getnum_dlg);
+	jwin_center_dialog(glist_dlg);
+	jwin_center_dialog(help_dlg);
+	jwin_center_dialog(layerdata_dlg);
+	jwin_center_dialog(list_dlg);
+	jwin_center_dialog(loadmap_dlg);
+	jwin_center_dialog(mapstyles_dlg);
+	jwin_center_dialog(misccolors_dlg);
+	jwin_center_dialog(newcomboa_dlg);
+	jwin_center_dialog(orgcomboa_dlg);
+	jwin_center_dialog(path_dlg);
+	jwin_center_dialog(pattern_dlg);
+	jwin_center_dialog(screen_pal_dlg);
+	jwin_center_dialog(secret_dlg);
+	jwin_center_dialog(selectdmap_dlg);
+	jwin_center_dialog(selectmidi_dlg);
+	jwin_center_dialog(selectmusic_dlg);
+	jwin_center_dialog(sfxlist_dlg);
+	jwin_center_dialog(sfx_edit_dlg);
+	jwin_center_dialog(showpal_dlg);
+	jwin_center_dialog(strlist_dlg);
+	jwin_center_dialog(template_dlg);
+	jwin_center_dialog(tp_dlg);
+	jwin_center_dialog(under_dlg);
+	jwin_center_dialog(tilewarp_dlg);
+	jwin_center_dialog(sidewarp_dlg);
+	jwin_center_dialog(warpring_dlg);
+	jwin_center_dialog(wlist_dlg);
+	center_zscript_dialogs();
 }
-
 
 void animate_coords()
 {
@@ -27547,7 +27541,6 @@ void do_previewtext()
 	
 	font = oldfont;
 }
-
 
 bool reload_fonts = false;
 void run_zq_frame()
@@ -28441,7 +28434,6 @@ int32_t FFScript::getTime(int32_t type)
 			//year format starts at 1900, so we add it to the return
 			//al_trace("The current year is: %d\n",year);
 			return year;
-			
 		}
 		case curmonth:
 		{
@@ -28493,22 +28485,18 @@ int32_t FFScript::getTime(int32_t type)
 			return isDST;
 		}
 		default: return -1;
-		
 	}
 }
 
 extern const char *itemclass_help_string_defaults[itype_max];
 //ZModule Functions
 
-
-
 /* end */
 
 int32_t FFScript::getQuestHeaderInfo(int32_t type)
 {
-    return quest_format[type];
+	return quest_format[type];
 }
-
 
 script_bitmaps scb;
 
@@ -28567,17 +28555,14 @@ void FFScript::ZASMPrint(bool open)
 		coloured_console.cprintf( CConsoleLoggerEx::COLOR_GREEN | CConsoleLoggerEx::COLOR_INTENSITY |
 		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"ZASM Stack Trace:\n");
 		//coloured_console.SetAsDefaultOutput();
-		
 	}
 	else
 	{
 		//close
 		coloured_console.Close();
-	
 	}
 	#endif	
 }
-
 
 void FFScript::ZASMPrintCommand(const word scommand)
 {
