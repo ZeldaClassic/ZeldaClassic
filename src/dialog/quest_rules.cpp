@@ -1615,10 +1615,10 @@ GUI::ListData scriptRulesList
 
 GUI::ListData instructionRulesList
 {
-	{ "No Item Script Waitdraw()",                        qr_NOITEMWAITDRAW },
-	{ "No FFC Waitdraw()",                                qr_NOFFCWAITDRAW },
-	{ "Old eweapon->Parent",                              qr_OLDEWPNPARENT },
-	{ "Old Args for CreateBitmap() and bitmap->Create()", qr_OLDCREATEBITMAP_ARGS },
+	{ "No Item Script Waitdraw()",                                            qr_NOITEMWAITDRAW },
+	{ "No FFC Waitdraw()",                                                    qr_NOFFCWAITDRAW },
+	{ "Old eweapon->Parent",                                                  qr_OLDEWPNPARENT },
+	{ "Old Args for CreateBitmap() and bitmap->Create()",                     qr_OLDCREATEBITMAP_ARGS },
 	{ "Print Script Metadata on Traces",                                      qr_TRACESCRIPTIDS },
 	{ "Writing to INPUT Overrides Drunk State",                               qr_FIXDRUNKINPUTS },
 	{ "Don't Allow Setting Action to Rafting",                                qr_DISALLOW_SETTING_RAFTING },
@@ -1627,22 +1627,22 @@ GUI::ListData instructionRulesList
 	{ "Broken DrawInteger and DrawCharacter Scaling",                         qr_BROKENCHARINTDRAWING },
 	{ "npc->Weapon Uses Sprite 246-255 for EW_CUSTOM*",                       qr_WRITING_NPC_WEAPON_UNIQUE_SPRITES },
 	{ "All bitmap-> and FileSystem-> paths relative to quest 'Files' folder", qr_BITMAP_AND_FILESYSTEM_PATHS_ALWAYS_RELATIVE },
-	{ "Don't allow overwriting hopping action", qr_NO_OVERWRITING_HOPPING },
-	{ "Sprite->Step uses new, precise values", qr_STEP_IS_FLOAT },
-	{ "Old printf() args", qr_OLD_PRINTF_ARGS,
+	{ "Don't allow overwriting hopping action",                               qr_NO_OVERWRITING_HOPPING },
+	{ "Sprite->Step uses new, precise values",                                qr_STEP_IS_FLOAT },
+	{ "Old printf() args",                                                    qr_OLD_PRINTF_ARGS,
 		"Compat, turns off new printf features." },
-	{ "No printf() 0-fill", qr_PRINTF_NO_0FILL,
+	{ "No printf() 0-fill",                                                   qr_PRINTF_NO_0FILL,
 		"Instead of filling all extra arguments with '0',"
 		" just leave them unchanged." },
-	{ "Writing Screen->EntryX, EntryY Resets Spawn Points", qr_WRITE_ENTRYPOINTS_AFFECTS_HEROCLASS },
-	{ "Log on Loading Invalid UID", qr_LOG_INVALID_UID_LOAD },
-	{ "Broken Combodata->InitD[]", qr_COMBODATA_INITD_MULT_TENK },
-	{ "Script writes to Hero->Step don't carry over", qr_SCRIPT_WRITING_HEROSTEP_DOESNT_CARRY_OVER },
-	{ "Disable accessing negative array indexes", qr_ZS_NO_NEG_ARRAY, "If enabled,"
+	{ "Writing Screen->EntryX, EntryY Resets Spawn Points",                   qr_WRITE_ENTRYPOINTS_AFFECTS_HEROCLASS },
+	{ "Log on Loading Invalid UID",                                           qr_LOG_INVALID_UID_LOAD },
+	{ "Broken Combodata->InitD[]",                                            qr_COMBODATA_INITD_MULT_TENK },
+	{ "Script writes to Hero->Step don't carry over",                         qr_SCRIPT_WRITING_HEROSTEP_DOESNT_CARRY_OVER },
+	{ "Disable accessing negative array indexes",                             qr_ZS_NO_NEG_ARRAY, "If enabled,"
 		" the new feature allowing accessing negative indexes of an array to backwards-index them"
 		" (i.e. 'arr[-1]' is the LAST element in the array) will be DISABLED if this is on."
 		"\nUseful for debugging if you're using this feature *by mistake*." },
-	{ "Game->Generic[GEN_CONTINUEHEARTS] is in 'Hearts'", qr_SCRIPT_CONTHP_IS_HEARTS,
+	{ "Game->Generic[GEN_CONTINUEHEARTS] is in 'Hearts'",                     qr_SCRIPT_CONTHP_IS_HEARTS,
 		"If checked, read/write to 'Game->Generic[GEN_CONTINUEHEARTS]' is in 'Hearts'. Otherwise,"
 		" it will be in 'HP'. (Has no effect if 'Game->Generic[GEN_CONTINUEISPERCENT]' is true)"}
 };
@@ -1667,12 +1667,12 @@ GUI::ListData drawingRulesList
 
 GUI::ListData bugfixRulesList
 {
-	{ "Fix Scripts Running During Scrolling", qr_FIXSCRIPTSDURINGSCROLLING },
-	{ "Game->Misc[] is / 10000", qr_OLDQUESTMISC },
-	{ "GetPixel returns color / 10000", qr_BROKEN_GETPIXEL_VALUE },
-	{ "Always Deallocate Arrays", qr_ALWAYS_DEALLOCATE_ARRAYS },
+	{ "Fix Scripts Running During Scrolling",        qr_FIXSCRIPTSDURINGSCROLLING },
+	{ "Game->Misc[] is / 10000",                     qr_OLDQUESTMISC },
+	{ "GetPixel returns color / 10000",              qr_BROKEN_GETPIXEL_VALUE },
+	{ "Always Deallocate Arrays",                    qr_ALWAYS_DEALLOCATE_ARRAYS },
 	{ "Don't Deallocate Init/SaveLoad Local Arrays", qr_DO_NOT_DEALLOCATE_INIT_AND_SAVELOAD_ARRAYS },
-	{ "Broken WarpEx Music", qr_OLD_BROKEN_WARPEX_MUSIC,
+	{ "Broken WarpEx Music",                         qr_OLD_BROKEN_WARPEX_MUSIC,
 		"If enabled, script WarpEx music will use the old behavior for the 'WARP_FLAG_PLAYMUSIC'."
 		" This means the features of 'WARP_FLAG_FORCE_RESET_MUSIC' and 'WARP_FLAG_FORCE_CONTINUE_MUSIC'"
 		" will not work properly, and instead a mixture of the two settings will occur (Always resetting if it's off,"
