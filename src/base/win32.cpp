@@ -1,5 +1,3 @@
-
-
 #ifdef _WIN32
 
 #include <stdio.h>
@@ -69,7 +67,6 @@ int32_t Win32Data::zqSetDefaultThreadPriority(HANDLE _thread)
     return 0;
 }
 
-
 int32_t Win32Data::zqSetCustomCallbackProc(HWND hWnd)
 {
     Win32Mutex mutex;
@@ -115,43 +112,32 @@ int32_t Win32Data::zqSetCustomCallbackProc(HWND hWnd)
     return 0;
 }
 
-
-
 LRESULT CALLBACK Win32Data::zqWindowsProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    assert(win32data.isValid && "ZQuest-Windows Fatal Error: Set \"zq_win_proc_fix = 0\" in config file.");
+	assert(win32data.isValid && "ZQuest-Windows Fatal Error: Set \"zq_win_proc_fix = 0\" in config file.");
     
-    static bool initPriority = false;
+	static bool initPriority = false;
     
-    if(!initPriority)
-    {
-        //sets the allegro worker threads' priority
-        zqSetDefaultThreadPriority(0);
-    }
+	if(!initPriority)
+	{
+		//sets the allegro worker threads' priority
+		zqSetDefaultThreadPriority(0);
+	}
     
-    switch(uMsg)
-    {
-    case WM_SETFOCUS:
-    {
-        win32data.hasFocus = true;
-    }
-    break;
+	switch(uMsg)
+	{
+		case WM_SETFOCUS:
+			win32data.hasFocus = true;
+			break;
+		    
+		case WM_KILLFOCUS:
+			win32data.hasFocus = false;
+			break;
+	}
     
-    case WM_KILLFOCUS:
-    {
-        win32data.hasFocus = false;
-    }
-    break;
-    }
-    
-    //ship the rest for allegro to handle
-    return hAllegroProc(hwnd, uMsg, wParam, lParam);
+	//ship the rest for allegro to handle
+	return hAllegroProc(hwnd, uMsg, wParam, lParam);
 }
-
-
-
-
-
 
 int32_t Win32Data::zcSetCustomCallbackProc(HWND hWnd)
 {
@@ -245,9 +231,7 @@ LRESULT CALLBACK Win32Data::zcWindowsProc(HWND hwnd, UINT uMsg, WPARAM wParam, L
     }
     
     //ship the rest for allegro to handle
-    LRESULT result = hAllegroProc(hwnd, uMsg, wParam, lParam);
-    
-    return result;
+    return hAllegroProc(hwnd, uMsg, wParam, lParam); // returns an LRESULT
 }
 
 
