@@ -17316,33 +17316,28 @@ static DIALOG edititemdropset_dlg[] =
 
 int32_t d_itemdropedit_proc(int32_t msg,DIALOG *d,int32_t c)
 {
-    int32_t ret = jwin_edit_proc(msg,d,c);
+	int32_t ret = jwin_edit_proc(msg,d,c);
     
-    if(msg==MSG_DRAW)
-    {
-        int32_t t = atoi((char*)edititemdropset_dlg[7].dp);
+	if (msg != MSG_DRAW)
+		return ret;
+
+	int32_t t = atoi((char*)edititemdropset_dlg[7].dp);
+
+	for(int32_t i=0; i<10; ++i)
+		t += atoi((char*)edititemdropset_dlg[14+(i*3)].dp);
+
+	int32_t t2 = (int32_t)(100*atoi((char*)edititemdropset_dlg[7].dp) / zc_max(t,1));
+	sprintf((char*)edititemdropset_dlg[9].dp,"%d%%%s",t2, t2 <= 11 ? " ":"");
+	object_message(&edititemdropset_dlg[9],MSG_DRAW,c);
+
+	for(int32_t i=0; i<10; ++i)
+	{
+		int32_t t3 = (int32_t)(100*atoi((char*)edititemdropset_dlg[14+(i*3)].dp) / zc_max(t,1));
+		sprintf((char*)edititemdropset_dlg[16+(i*3)].dp,"%d%%%s",t3, t3 <= 11 ? " ":"");
+		object_message(&edititemdropset_dlg[16+(i*3)],MSG_DRAW,c);
+	}
         
-        for(int32_t i=0; i<10; ++i)
-        {
-            t += atoi((char*)edititemdropset_dlg[14+(i*3)].dp);
-        }
-        
-        {
-            int32_t t2 = (int32_t)(100*atoi((char*)edititemdropset_dlg[7].dp) / zc_max(t,1));
-            sprintf((char*)edititemdropset_dlg[9].dp,"%d%%%s",t2, t2 <= 11 ? " ":"");
-            object_message(&edititemdropset_dlg[9],MSG_DRAW,c);
-        }
-        
-        for(int32_t i=0; i<10; ++i)
-        {
-            int32_t t2 = (int32_t)(100*atoi((char*)edititemdropset_dlg[14+(i*3)].dp) / zc_max(t,1));
-            sprintf((char*)edititemdropset_dlg[16+(i*3)].dp,"%d%%%s",t2, t2 <= 11 ? " ":"");
-            object_message(&edititemdropset_dlg[16+(i*3)],MSG_DRAW,c);
-        }
-        
-    }
-    
-    return ret;
+	return ret;
 }
 
 void EditItemDropSet(int32_t index)
