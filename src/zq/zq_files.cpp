@@ -859,9 +859,6 @@ int32_t onImport_DMaps()
 			char tmpbuf[256+20]={0};
 			sprintf(tmpbuf,"Loaded %s",name);
 			
-			
-			
-			
 			int32_t maxMap=0;
 			for(int32_t i=0; i<MAXDMAPS; i++)
 			{
