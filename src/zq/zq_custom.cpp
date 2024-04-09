@@ -838,7 +838,6 @@ int32_t readoneitem(PACKFILE *f, int32_t index)
 
 int32_t writeoneitem(PACKFILE *f, int32_t i)
 {
-	
 	dword section_version=V_ITEMS;
 	dword section_cversion=CV_ITEMS;
 	int32_t zversion = ZELDA_VERSION;
@@ -864,7 +863,6 @@ int32_t writeoneitem(PACKFILE *f, int32_t i)
 		new_return(3);
 	}
 	
-   
 		
 	   //section data        
 		
@@ -1124,7 +1122,7 @@ int32_t writeoneitem(PACKFILE *f, int32_t i)
 		for ( int32_t q = 0; q < ITEM_MOVEMENT_PATTERNS; q++ ) {
 			if(!p_iputl(itemsbuf[i].weap_pattern[q],f))
 			{
-			new_return(53);
+				new_return(53);
 			}
 		}
 		//version 28
@@ -1549,41 +1547,13 @@ static int32_t enedata_spritesize_list[] =
 	213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,237,238,239,240,241,242,243,244,245,246,-1
 };
 
-static int32_t enemy_defence_tabs_list[] =
-{
-	2,-1
-};
-
-static int32_t enemy_basic_tabs_list[] =
-{
-	3,-1
-};
-
-static int32_t enemy_flags_tabs_list[] =
-{
-	4,-1
-};
-
-
-static int32_t enemy_attributes_tabs_list[] =
-{
-	5,-1
-};
-
-static int32_t enemy_graphics_tabs_list[] =
-{
-	6,-1
-};
-
-static int32_t enemy_movement_tabs_list[] =
-{
-	250,-1
-};
-
-static int32_t enemy_script_tabs_list[] =
-{
-	251,-1
-};
+static int32_t enemy_defence_tabs_list   [] = { 2,   -1 }; 
+static int32_t enemy_basic_tabs_list     [] = { 3,   -1 }; 
+static int32_t enemy_flags_tabs_list     [] = { 4,   -1 }; 
+static int32_t enemy_attributes_tabs_list[] = { 5,   -1 }; 
+static int32_t enemy_graphics_tabs_list  [] = { 6,   -1 }; 
+static int32_t enemy_movement_tabs_list  [] = { 250, -1 }; 
+static int32_t enemy_script_tabs_list    [] = { 251, -1 };
 
 
 static int32_t enemy_scripts_list[] =
@@ -1621,14 +1591,11 @@ static int32_t enemy_gfx_sprites_list[] =
 	-1
 };
 
-
 static TABPANEL enemy_graphics_tabs[] =
 {
 	{ (char *)"Sprites",      D_SELECTED,      enemy_gfx_sprites_list,  0, NULL },
 	{ NULL,                   0,               NULL,                    0, NULL }
 };
-
-
 
 /*
 
@@ -1940,7 +1907,6 @@ static int32_t enemy_weapon_types[]=
 	ewWind,ewFlame2,ewFlame2Trail,
 	//145
 	ewIce,ewFireball2
-	
 };
 
 static int32_t enemy_script_weapon_types[]=
@@ -1950,7 +1916,6 @@ static int32_t enemy_script_weapon_types[]=
 	wScript5, wScript6, wScript7, wScript8,
 	//39
 	wScript9, wScript10
-	
 };
 
 void build_biew_list()
@@ -1973,16 +1938,14 @@ void build_biew_list()
 	for(int32_t i = 0; i < 10; i++)
 	{
 		biew[biew_cnt].s = (char *)moduledata.enemy_scriptweaponweapon_names[i];
-	biew[biew_cnt].i = enemy_script_weapon_types[i];
-	++biew_cnt;
+		biew[biew_cnt].i = enemy_script_weapon_types[i];
+		++biew_cnt;
 	}
 	al_trace("biew_cnt is: %d\n", biew_cnt);
 	for ( int32_t i = 0; i < biew_cnt; i++ )
 	{
-	al_trace("biew[%d] id is (%d) and string is (%s)\n", i, biew[i].i, biew[i].s);
-		
+		al_trace("biew[%d] id is (%d) and string is (%s)\n", i, biew[i].i, biew[i].s);
 	}
-	
 }
 
 const char *eweaponlist(int32_t index, int32_t *list_size)
@@ -2011,7 +1974,6 @@ struct EnemyNameInfo
 	void* list[32];
 	char *flags[16];
 	char *attributes[32];
-  
 };
 
 const char *walkmisc1list(int32_t index, int32_t *list_size)
@@ -6633,31 +6595,18 @@ static TABPANEL herotile_water_tabs[] =
 {
 	// (text)
 	{ (char *)"Float",      D_SELECTED,  herotile_water_float_list, 0, NULL },
-	{ (char *)"Swim",       0,           herotile_water_swim_list, 0, NULL },
-	{ (char *)"Dive",       0,           herotile_water_dive_list, 0, NULL },
+	{ (char *)"Swim",       0,           herotile_water_swim_list,  0, NULL },
+	{ (char *)"Dive",       0,           herotile_water_dive_list,  0, NULL },
 	{ (char *)"Drown",      0,           herotile_water_drown_list, 0, NULL },
-	{ (char *)"Hold",       0,           herotile_water_hold_list, 0, NULL },
-	{ (char *)"Lava Drown", 0,           herotile_lava_drown_list, 0, NULL },
-	{ NULL,                 0,           NULL,                     0, NULL }
+	{ (char *)"Hold",       0,           herotile_water_hold_list,  0, NULL },
+	{ (char *)"Lava Drown", 0,           herotile_lava_drown_list,  0, NULL },
+	{ NULL,                 0,           NULL,                      0, NULL }
 };
 
-static int32_t herotile_sidewater_swim_list[] =
-{
-	// dialog control number
-	196, 197, 198, 199, 200, 201, 202, 203, -1
-};
-
-static int32_t herotile_sidewater_slash_list[] =
-{
-	// dialog control number
-	204, 205, 206, 207, 208, 209, 210, 211, -1
-};
-
-static int32_t herotile_sidewater_stab_list[] =
-{
-	// dialog control number
-	212, 213, 214, 215, 216, 217, 218, 219, -1
-};
+// dialog control numbers
+static int32_t herotile_sidewater_swim_list [] = { 196, 197, 198, 199, 200, 201, 202, 203, -1 }; 
+static int32_t herotile_sidewater_slash_list[] = { 204, 205, 206, 207, 208, 209, 210, 211, -1 }; 
+static int32_t herotile_sidewater_stab_list [] = { 212, 213, 214, 215, 216, 217, 218, 219, -1 };
 
 static int32_t herotile_sidewater_pound_list[] =
 {
@@ -8862,12 +8811,12 @@ int32_t onCustomHero()
 			{
 				hero_defence[wEnemyWeapons + i] = herotile_dlg[137 + 7 + i].d1;
 			}
-			hero_defence[wFire] = herotile_dlg[154+8].d1;
-			hero_defence[wBomb] = herotile_dlg[155+8].d1;
-			hero_defence[wRefMagic] = herotile_dlg[156+8].d1;
+			hero_defence[wFire]        = herotile_dlg[154+8].d1;
+			hero_defence[wBomb]        = herotile_dlg[155+8].d1;
+			hero_defence[wRefMagic]    = herotile_dlg[156+8].d1;
 			hero_defence[wRefFireball] = herotile_dlg[157+8].d1;
-			hero_defence[wRefRock] = herotile_dlg[158+8].d1;
-			hero_defence[wRefBeam] = herotile_dlg[159+8].d1;
+			hero_defence[wRefRock]     = herotile_dlg[158+8].d1;
+			hero_defence[wRefBeam]     = herotile_dlg[159+8].d1;
 
 			hero_defence[wScript1] = herotile_dlg[171+8].d1;
 			hero_defence[wScript2] = herotile_dlg[172+8].d1;
