@@ -122,8 +122,7 @@ std::shared_ptr<GUI::Widget> InfoDialog::view()
 {
 	using namespace GUI::Builder;
 	using namespace GUI::Props;
-	std::shared_ptr<GUI::Grid> gr;
-	std::shared_ptr<GUI::Grid> closeRow;
+	std::shared_ptr<GUI::Grid> gr, closeRow;
 	bool add_grid = false, addok = false;
 	#ifdef IS_EDITOR
 	add_grid = addok = qrs.size() || ruleTemplates.size();

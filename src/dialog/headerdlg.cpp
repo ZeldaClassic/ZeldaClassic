@@ -17,14 +17,10 @@ void call_header_dlg()
 		{
 			saved = false;
 
-			vals[0].copy(header.version, 16);
-			header.version[vals[0].size()] = 0;
-			vals[1].copy(header.minver, 16);
-			header.minver[vals[1].size()] = 0;
-			vals[2].copy(header.title, 64);
-			header.title[vals[2].size()] = 0;
-			vals[3].copy(header.author, 64);
-			header.author[vals[3].size()] = 0;
+			vals[0].copy(header.version, 16); header.version[vals[0].size()] = 0;
+			vals[1].copy(header.minver,  16); header.minver [vals[1].size()] = 0;
+			vals[2].copy(header.title,   64); header.title  [vals[2].size()] = 0;
+			vals[3].copy(header.author,  64); header.author [vals[3].size()] = 0;
 			char tmp[8] = {0};
 			vals[4].copy(tmp, 7);
 			header.quest_number=atoi(tmp);

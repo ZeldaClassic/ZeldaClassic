@@ -1035,13 +1035,13 @@ void resetItems(gamedata *game2, zinitdata *zinit2, bool freshquest)
 	
 	if(freshquest)
 	{
-		game2->gen_doscript = zinit2->gen_doscript;
-		game2->gen_exitState = zinit2->gen_exitState;
+		game2->gen_doscript    = zinit2->gen_doscript;
+		game2->gen_exitState   = zinit2->gen_exitState;
 		game2->gen_reloadState = zinit2->gen_reloadState;
-		game2->gen_initd = zinit2->gen_initd;
-		game2->gen_data = zinit2->gen_data;
-		game2->gen_eventstate = zinit2->gen_eventstate;
-		game2->screen_data = zinit2->screen_data;
+		game2->gen_initd       = zinit2->gen_initd;
+		game2->gen_data        = zinit2->gen_data;
+		game2->gen_eventstate  = zinit2->gen_eventstate;
+		game2->screen_data     = zinit2->screen_data;
 	}
 	
 	game2->swim_mult = zinit2->hero_swim_mult;
@@ -1358,4 +1358,3 @@ zinitdata *apply_init_data_delta(zinitdata *base, string delta, string& out_erro
 
 	return result;
 }
-
