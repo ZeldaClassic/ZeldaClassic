@@ -1573,16 +1573,16 @@ GUI::ListData const& combinedQRList()
 {
 	if(!inited_combined_rules)
 	{
-		animRulesList.tag(rules_anim);
-		comboRulesList.tag(rules_combo);
-		compatRulesList.tag(rules_compat);
-		enemiesRulesList.tag(rules_enemies);
-		itemRulesList.tag(rules_item);
-		miscRulesList.tag(rules_misc);
+		animRulesList    .tag(rules_anim);
+		comboRulesList   .tag(rules_combo);
+		compatRulesList  .tag(rules_compat);
+		enemiesRulesList .tag(rules_enemies);
+		itemRulesList    .tag(rules_item);
+		miscRulesList    .tag(rules_misc);
 		nesfixesRulesList.tag(rules_nesfix);
-		playerRulesList.tag(rules_player);
-		subscrRulesList.tag(rules_subscr);
-		weaponsRulesList.tag(rules_weapon);
+		playerRulesList  .tag(rules_player);
+		subscrRulesList  .tag(rules_subscr);
+		weaponsRulesList .tag(rules_weapon);
 		
 		combinedRulesList = animRulesList + comboRulesList + compatRulesList
 			+ enemiesRulesList + itemRulesList + miscRulesList + nesfixesRulesList
@@ -1597,35 +1597,35 @@ GUI::ListData const& combinedQRList()
 
 GUI::ListData scriptRulesList
 {
-	{ "Item Scripts Continue To Run", qr_ITEMSCRIPTSKEEPRUNNING },
-	{ "Clear InitD[] on Script Change", qr_CLEARINITDONSCRIPTCHANGE },
-	{ "Hero OnDeath script runs AFTER engine death animation", qr_ONDEATH_RUNS_AFTER_DEATH_ANIM },
+	{ "Item Scripts Continue To Run",                                 qr_ITEMSCRIPTSKEEPRUNNING },
+	{ "Clear InitD[] on Script Change",                               qr_CLEARINITDONSCRIPTCHANGE },
+	{ "Hero OnDeath script runs AFTER engine death animation",        qr_ONDEATH_RUNS_AFTER_DEATH_ANIM },
 	{ "Passive Subscreen Script runs during Active Subscreen Script", qr_PASSIVE_SUBSCRIPT_RUNS_DURING_ACTIVE_SUBSCRIPT },
-	{ "DMap Active Script runs during Active Subscreen Script", qr_DMAP_ACTIVE_RUNS_DURING_ACTIVE_SUBSCRIPT },
-	{ "Combos Run Scripts on Layer 0", qr_COMBOSCRIPTS_LAYER_0 },
-	{ "Combos Run Scripts on Layer 1", qr_COMBOSCRIPTS_LAYER_1 },
-	{ "Combos Run Scripts on Layer 2", qr_COMBOSCRIPTS_LAYER_2 },
-	{ "Combos Run Scripts on Layer 3", qr_COMBOSCRIPTS_LAYER_3 },
-	{ "Combos Run Scripts on Layer 4", qr_COMBOSCRIPTS_LAYER_4 },
-	{ "Combos Run Scripts on Layer 5", qr_COMBOSCRIPTS_LAYER_5 },
-	{ "Combos Run Scripts on Layer 6", qr_COMBOSCRIPTS_LAYER_6 },
-	{ "Use Old Global Init and SaveLoad Timing", qr_OLD_INIT_SCRIPT_TIMING },
-	{ "Passive Subscreen Script runs during wipes/refills", qr_PASSIVE_SUBSCRIPT_RUNS_WHEN_GAME_IS_FROZEN }
+	{ "DMap Active Script runs during Active Subscreen Script",       qr_DMAP_ACTIVE_RUNS_DURING_ACTIVE_SUBSCRIPT },
+	{ "Combos Run Scripts on Layer 0",                                qr_COMBOSCRIPTS_LAYER_0 },
+	{ "Combos Run Scripts on Layer 1",                                qr_COMBOSCRIPTS_LAYER_1 },
+	{ "Combos Run Scripts on Layer 2",                                qr_COMBOSCRIPTS_LAYER_2 },
+	{ "Combos Run Scripts on Layer 3",                                qr_COMBOSCRIPTS_LAYER_3 },
+	{ "Combos Run Scripts on Layer 4",                                qr_COMBOSCRIPTS_LAYER_4 },
+	{ "Combos Run Scripts on Layer 5",                                qr_COMBOSCRIPTS_LAYER_5 },
+	{ "Combos Run Scripts on Layer 6",                                qr_COMBOSCRIPTS_LAYER_6 },
+	{ "Use Old Global Init and SaveLoad Timing",                      qr_OLD_INIT_SCRIPT_TIMING },
+	{ "Passive Subscreen Script runs during wipes/refills",           qr_PASSIVE_SUBSCRIPT_RUNS_WHEN_GAME_IS_FROZEN }
 };
 
 GUI::ListData instructionRulesList
 {
-	{ "No Item Script Waitdraw()", qr_NOITEMWAITDRAW },
-	{ "No FFC Waitdraw()", qr_NOFFCWAITDRAW },
-	{ "Old eweapon->Parent", qr_OLDEWPNPARENT },
+	{ "No Item Script Waitdraw()",                        qr_NOITEMWAITDRAW },
+	{ "No FFC Waitdraw()",                                qr_NOFFCWAITDRAW },
+	{ "Old eweapon->Parent",                              qr_OLDEWPNPARENT },
 	{ "Old Args for CreateBitmap() and bitmap->Create()", qr_OLDCREATEBITMAP_ARGS },
-	{ "Print Script Metadata on Traces", qr_TRACESCRIPTIDS },
-	{ "Writing to INPUT Overrides Drunk State", qr_FIXDRUNKINPUTS },
-	{ "Don't Allow Setting Action to Rafting", qr_DISALLOW_SETTING_RAFTING },
-	{ "Writing npc->Defense[NPCD_SCRIPT] Sets All Script Defences", qr_250WRITEEDEFSCRIPT },
-	{ "Writing npc->Weapon Sets its Weapon Sprite", qr_SETENEMYWEAPONSPRITESONWPNCHANGE },
-	{ "Broken DrawInteger and DrawCharacter Scaling", qr_BROKENCHARINTDRAWING },
-	{ "npc->Weapon Uses Sprite 246-255 for EW_CUSTOM*", qr_WRITING_NPC_WEAPON_UNIQUE_SPRITES },
+	{ "Print Script Metadata on Traces",                                      qr_TRACESCRIPTIDS },
+	{ "Writing to INPUT Overrides Drunk State",                               qr_FIXDRUNKINPUTS },
+	{ "Don't Allow Setting Action to Rafting",                                qr_DISALLOW_SETTING_RAFTING },
+	{ "Writing npc->Defense[NPCD_SCRIPT] Sets All Script Defences",           qr_250WRITEEDEFSCRIPT },
+	{ "Writing npc->Weapon Sets its Weapon Sprite",                           qr_SETENEMYWEAPONSPRITESONWPNCHANGE },
+	{ "Broken DrawInteger and DrawCharacter Scaling",                         qr_BROKENCHARINTDRAWING },
+	{ "npc->Weapon Uses Sprite 246-255 for EW_CUSTOM*",                       qr_WRITING_NPC_WEAPON_UNIQUE_SPRITES },
 	{ "All bitmap-> and FileSystem-> paths relative to quest 'Files' folder", qr_BITMAP_AND_FILESYSTEM_PATHS_ALWAYS_RELATIVE },
 	{ "Don't allow overwriting hopping action", qr_NO_OVERWRITING_HOPPING },
 	{ "Sprite->Step uses new, precise values", qr_STEP_IS_FLOAT },
@@ -1649,17 +1649,17 @@ GUI::ListData instructionRulesList
 
 GUI::ListData objectRulesList
 {
-	{ "Sprite Coordinates are Float", qr_SPRITEXY_IS_FLOAT },
-	{ "Weapons Have Shadows", qr_WEAPONSHADOWS },
-	{ "Items Have Shadows", qr_ITEMSHADOWS },
+	{ "Sprite Coordinates are Float",               qr_SPRITEXY_IS_FLOAT },
+	{ "Weapons Have Shadows",                       qr_WEAPONSHADOWS },
+	{ "Items Have Shadows",                         qr_ITEMSHADOWS },
 	{ "Weapons Live One Extra Frame With WDS_DEAD", qr_WEAPONS_EXTRA_FRAME }
 };
 
 GUI::ListData drawingRulesList
 {
 	{ "Scripts Draw When Stepping Forward In Dungeons", qr_SCRIPTSRUNINHEROSTEPFORWARD },
-	{ "Scripts Draw During Warps", qr_SCRIPTDRAWSINWARPS },
-	{ "Scripts Draw During Frozen Messages", qr_SCRIPTDRAWSFROZENMSG,
+	{ "Scripts Draw During Warps",                      qr_SCRIPTDRAWSINWARPS },
+	{ "Scripts Draw During Frozen Messages",            qr_SCRIPTDRAWSFROZENMSG,
 		"If checked, script draws will continue to clear during frozen messages. "
 		"Otherwise, they will not clear until the message has closed and all draws during "
 		"the message will be ignored." + QRHINT({qr_MSGFREEZE})}
