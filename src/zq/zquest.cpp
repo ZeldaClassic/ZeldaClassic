@@ -17071,7 +17071,7 @@ void EditShopType(int32_t index)
 {
     build_bii_list(true);
     char ps1[6],ps2[6],ps3[6];
-	char info1[6],info2[6],info3[6];
+    char info1[6],info2[6],info3[6];
     char shopname[32];
     char caption[40];
     
@@ -17275,9 +17275,9 @@ static DIALOG edititemdropset_dlg[] =
     { jwin_text_proc,      114,   43+4,   26,    16, vc(14),              vc(1),                  0,           0,     0,             0,       NULL, NULL, NULL },
     // 10
     { jwin_text_proc,       10,     87,   88,    8,  vc(14),              vc(1),                  0,           0,     0,             0, (void *) "Chance:", NULL, NULL },
-    { jwin_text_proc,       56,     87,   88,    8,  vc(14),              vc(1),                  0,           0,     0,             0, (void *) "Item:", NULL, NULL },
+    { jwin_text_proc,       56,     87,   88,    8,  vc(14),              vc(1),                  0,           0,     0,             0, (void *) "Item:",   NULL, NULL },
     { jwin_text_proc,       10,     87,   88,    8,  vc(14),              vc(1),                  0,           0,     0,             0, (void *) "Chance:", NULL, NULL },
-    { jwin_text_proc,       56,     87,   88,    8,  vc(14),              vc(1),                  0,           0,     0,             0, (void *) "Item:", NULL, NULL },
+    { jwin_text_proc,       56,     87,   88,    8,  vc(14),              vc(1),                  0,           0,     0,             0, (void *) "Item:",   NULL, NULL },
     
     // 14
     { d_itemdropedit_proc,   9,     96,   26,   16,  vc(12),              vc(1),                  0,           0,     5,             0,       NULL, NULL, NULL },
