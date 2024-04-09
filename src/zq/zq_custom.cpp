@@ -1348,8 +1348,6 @@ static DIALOG wpndata_dlg[] =
 	{ NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
-
-
 void edit_weapondata(int32_t index)
 {
 	call_sprite_dlg(index); return;
@@ -1592,56 +1590,24 @@ static TABPANEL enemy_graphics_tabs[] =
 
 /*
 
+static int32_t enemy_sounds_tabs_list  [] = { 250,-1 }; 
+static int32_t enemy_attacks_tabs_list [] = { 5,-1 };
 
+static int32_t enemy_sfx_sounds_list   [] = { -1 }; 
+static int32_t enemy_sfx_bgsounds_list [] = { -1 };
 
-static int32_t enemy_sounds_tabs_list[] =
-{
-	250,-1
-};
+static int32_t enemy_attacks_list      [] = { -1 };
+static int32_t enemy_attacks_Wmove_list[] = { -1 }; 
+*/ 
 
-
-static int32_t enemy_attacks_tabs_list[] =
-{
-	5,-1
-};
-
-static int32_t enemy_sfx_sounds_list[] =
-{
-	-1
-};
-
-static int32_t enemy_sfx_bgsounds_list[] =
-{
-	-1
-};
-
-static int32_t enemy_attacks_list[] =
-{
-	-1
-};
-static int32_t enemy_attacks_Wmove_list[] =
-{
-	-1
-};
-
-
-
-*/
-
-
-
-
-
-/*
-
+/* 
 static TABPANEL enemy_sounds_tabs[] =
 {
    // { (char *)"Sound Efects",	 D_SELECTED,               enemy_sfx_sounds_list,   0, NULL },
    // { (char *)"Background Sounds",	 D_SELECTED,               enemy_sfx_bgsounds_list,   0, NULL },
 	{ NULL,                   0,               NULL,                  0, NULL }
 };
-
-
+ 
 
 static TABPANEL enemy_attacks_tabs[] =
 {
@@ -1651,8 +1617,7 @@ static TABPANEL enemy_attacks_tabs[] =
 };
 
 
-*/
-
+*/ 
 
 static int32_t enedata_defense_ranged_list[] =
 {
