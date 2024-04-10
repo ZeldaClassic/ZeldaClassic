@@ -545,7 +545,7 @@ bool getname_nogo(const char *prompt,const char *ext,EXT_LIST *list,const char *
     }
     
     //  int32_t ret = file_select_ex(prompt,temppath,ext,255,-1,-1);
-    int32_t ret=0;
+    int32_t ret;
     int32_t sel=0;
     
     if(list==NULL)
