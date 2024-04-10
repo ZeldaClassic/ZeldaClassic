@@ -412,10 +412,8 @@ int32_t mouse_scroll_h;
 int32_t readsize, writesize;
 bool fake_pack_writing=false;
 
-int32_t showxypos_x;
-int32_t showxypos_y;
-int32_t showxypos_w;
-int32_t showxypos_h;
+int32_t showxypos_x, showxypos_y;
+int32_t showxypos_w, showxypos_h;
 int32_t showxypos_color;
 int32_t showxypos_ffc=-1000;
 bool showxypos_icon=false;
@@ -455,31 +453,31 @@ bool is_compact = false;
 
 int pixeldb = 1;
 int infobg = 1;
-bool large_merged_combopane = false;
+bool large_merged_combopane   = false;
 bool compact_merged_combopane = true;
-bool large_zoomed_fav = false;
-bool compact_zoomed_fav = true;
-bool large_zoomed_cmd = false;
-bool compact_zoomed_cmd = true;
+bool large_zoomed_fav         = false;
+bool compact_zoomed_fav       = true;
+bool large_zoomed_cmd         = false;
+bool compact_zoomed_cmd       = true;
 
 bool compact_square_panels = false;
 int compact_active_panel = 0;
 
 int combo_col_scale = 1;
 
-script_data *ffscripts[NUMSCRIPTFFC];
-script_data *itemscripts[NUMSCRIPTITEM];
-script_data *guyscripts[NUMSCRIPTGUYS];
-script_data *lwpnscripts[NUMSCRIPTWEAPONS];
-script_data *ewpnscripts[NUMSCRIPTWEAPONS];
-script_data *globalscripts[NUMSCRIPTGLOBAL];
-script_data *genericscripts[NUMSCRIPTSGENERIC];
-script_data *playerscripts[NUMSCRIPTPLAYER];
-script_data *screenscripts[NUMSCRIPTSCREEN];
-script_data *dmapscripts[NUMSCRIPTSDMAP];
+script_data *ffscripts        [NUMSCRIPTFFC];
+script_data *itemscripts      [NUMSCRIPTITEM];
+script_data *guyscripts       [NUMSCRIPTGUYS];
+script_data *lwpnscripts      [NUMSCRIPTWEAPONS];
+script_data *ewpnscripts      [NUMSCRIPTWEAPONS];
+script_data *globalscripts    [NUMSCRIPTGLOBAL];
+script_data *genericscripts   [NUMSCRIPTSGENERIC];
+script_data *playerscripts    [NUMSCRIPTPLAYER];
+script_data *screenscripts    [NUMSCRIPTSCREEN];
+script_data *dmapscripts      [NUMSCRIPTSDMAP];
 script_data *itemspritescripts[NUMSCRIPTSITEMSPRITE];
-script_data *comboscripts[NUMSCRIPTSCOMBODATA];
-script_data *subscreenscripts[NUMSCRIPTSSUBSCREEN];
+script_data *comboscripts     [NUMSCRIPTSCOMBODATA];
+script_data *subscreenscripts [NUMSCRIPTSSUBSCREEN];
 
 extern string zScript;
 char zScriptBytes[512];
@@ -535,9 +533,9 @@ int showHotkeys()
 typedef int32_t (*intF)();
 typedef struct command_pair
 {
-    char name[80];
-    int32_t flags;
-    intF command;
+	char name[80];
+	int32_t flags;
+	intF command;
 } command_pair;
 
 extern map_and_screen map_page[MAX_MAPPAGE_BTNS];
@@ -813,7 +811,7 @@ static NewMenu export_250_menu
 static NewMenu zq_help_menu
 {
 	{ "&Editor Help",   onHelp },
-	{ "&Strings Help", onZstringshelp },
+	{ "&Strings Help",  onZstringshelp },
 };
 
 static NewMenu export_graphics
