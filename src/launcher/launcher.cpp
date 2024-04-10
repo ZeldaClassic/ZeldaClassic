@@ -562,20 +562,18 @@ bool getname_nogo(const char *prompt,const char *ext,EXT_LIST *list,const char *
 
 bool getname(const char *prompt,const char *ext,EXT_LIST *list,const char *def,bool usefilename)
 {
-    go();
-    int32_t ret=0;
-    ret = getname_nogo(prompt,ext,list,def,usefilename);
-    comeback();
-    return ret != 0;
+	go();
+	int32_t ret = getname_nogo(prompt,ext,list,def,usefilename);
+	comeback();
+	return ret != 0;
 }
 
 void clear_tooltip()
 {
-	
 }
+
 void ttip_uninstall_all()
 {
-	
 }
 
 // TODO: I experimented with making zcbase/zcgui shared/object libraries, and the followed was needed to compile zlauncher:
