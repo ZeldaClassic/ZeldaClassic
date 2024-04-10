@@ -329,7 +329,7 @@ bool Datum::tryAddToScope(CompileErrorHandler* errorHandler)
 bool ZScript::isGlobal(Datum const& datum)
 {
 	return (datum.scope.isGlobal() || datum.scope.isScript())
-		&& datum.getName();
+		&& !datum.getName().empty();
 }
 
 std::optional<int32_t> ZScript::getStackOffset(Datum const& datum)
@@ -464,7 +464,7 @@ Constant::Constant(
 	node.manager = this;
 }
 
-std::optional<string> Constant::getName() const {return node.name;}
+string Constant::getName() const {return node.name;}
 
 // ZScript::BuiltinConstant
 

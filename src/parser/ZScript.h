@@ -247,7 +247,7 @@ namespace ZScript
 		int32_t const id;
 
 		// Get the data's name.
-		virtual std::optional<std::string> getName() const {return std::nullopt;}
+		virtual std::string getName() const {return ""; }
 		
 		// Get the value at compile time.
 		virtual std::optional<int32_t> getCompileTimeValue(bool getinitvalue = false) const {return std::nullopt;}
@@ -299,7 +299,7 @@ namespace ZScript
 				Scope&, ASTDataDecl&, DataType const&,
 				CompileErrorHandler* = NULL);
 
-		std::optional<std::string> getName() const {return node.name;}
+		std::string getName() const {return node.name;}
 		ASTDataDecl* getNode() const {return &node;}
 		std::optional<int32_t> getGlobalId() const {return globalId;}
 		virtual std::optional<int32_t> getCompileTimeValue(bool getinitvalue = false) const;
@@ -318,7 +318,7 @@ namespace ZScript
 				Scope&, ASTDataDecl&, DataType const&,
 				CompileErrorHandler* = NULL);
 
-		std::optional<std::string> getName() const {return node.name;}
+		std::string getName() const {return node.name;}
 		ASTDataDecl* getNode() const {return &node;}
 		UserClass* getClass() const {return &(scope.getClass()->user_class);}
 		int32_t getIndex() const {return _index;}
@@ -343,7 +343,7 @@ namespace ZScript
 				Scope&, DataType const&, std::string const& name,
 				CompileErrorHandler* = NULL);
 
-		std::optional<std::string> getName() const {return name;}
+		std::string getName() const {return name;}
 		std::optional<int32_t> getGlobalId() const {return globalId;}
 
 		virtual bool isBuiltIn() const {return true;}
@@ -363,7 +363,7 @@ namespace ZScript
 				Scope&, ASTDataDecl&, DataType const&, int32_t value,
 				CompileErrorHandler* = NULL);
 
-		std::optional<std::string> getName() const;
+		std::string getName() const;
 
 		virtual std::optional<int32_t> getCompileTimeValue(bool getinitvalue = false) const {return value;}
 
@@ -384,7 +384,7 @@ namespace ZScript
 				Scope&, DataType const&, std::string const& name, int32_t value,
 				CompileErrorHandler* = NULL);
 
-		std::optional<std::string> getName() const {return name;}
+		std::string getName() const {return name;}
 		virtual std::optional<int32_t> getCompileTimeValue(bool getinitvalue = false) const {return value;}
 
 		virtual bool isBuiltIn() const {return true;}
