@@ -467,4 +467,3 @@ void MapDataSymbols::generateCode()
 		function->giveCode(code);
 	}
 }
-

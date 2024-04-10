@@ -22,8 +22,8 @@
 using giri::json::JSON;
 
 struct MemoryStruct {
-  char *memory;
-  size_t size;
+	char *memory;
+	size_t size;
 };
  
 static size_t
@@ -171,7 +171,7 @@ static std::tuple<std::string, std::string> get_next_release()
 		fatal("Could not find next version: " + next_release_output);
 	}
 	std::string new_version = next_release_map["tag_name"];
-	std::string asset_url = next_release_map["asset_url"];
+	std::string asset_url   = next_release_map["asset_url"];
 	return {new_version, asset_url};
 #else
 	std::string json_url = fmt::format("https://zquestclassic.com/releases/{}.json", channel);
@@ -223,9 +223,9 @@ static std::tuple<std::string, std::string> get_next_release()
 static bool download_file(std::string url, fs::path dest, std::string& error)
 {
 	CURL *curl;
-    FILE *fp;
-    CURLcode res;
-    curl = curl_easy_init();
+	FILE *fp;
+	CURLcode res;
+	curl = curl_easy_init();
 	if (!curl)
 	{
 		error = "Failed to init curl";
@@ -414,8 +414,8 @@ int32_t main(int32_t argc, char* argv[])
 #ifdef __APPLE__
 	if (!is_in_osx_application_bundle() && argc > 0)
 	{
-        chdir(fs::path(argv[0]).parent_path().c_str());
-    }
+		chdir(fs::path(argv[0]).parent_path().c_str());
+	}
 #endif
 
 #ifdef UPDATER_USES_PYTHON

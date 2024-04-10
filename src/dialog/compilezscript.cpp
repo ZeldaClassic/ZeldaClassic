@@ -36,9 +36,9 @@ extern std::vector<string> asffcscripts, asglobalscripts, asitemscripts,
 extern std::map<int32_t, script_slot_data > globalmap;
 
 byte compile_success_sample = 0;
-byte compile_error_sample = 0;
-byte compile_finish_sample = 0;
-byte compile_audio_volume = 0;
+byte compile_error_sample   = 0;
+byte compile_finish_sample  = 0;
+byte compile_audio_volume   = 0;
 
 static void compile_sfx(bool success)
 {

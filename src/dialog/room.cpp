@@ -402,28 +402,28 @@ const char* RoomDialog::getRoomInfo() const
 {
 	switch(local_mapref.room)
 	{
-		case rSP_ITEM: return specialItemDesc;
-		case rINFO: return infoDesc;
-		case rMONEY: return moneyDesc;
-		case rGAMBLE: return gambleDesc;
-		case rREPAIR: return repairDesc;
-		case rRP_HC: return potionOrHCDesc;
-		case rGRUMBLE: return grumbleDesc;
-		case rTRIFORCE: return triforceDesc;
-		case rP_SHOP: return potionShopDesc;
-		case rSHOP: return shopDesc;
-		case rBOMBS: return moreBombsDesc;
-		case rSWINDLE: return swindleDesc;
-		case r10RUPIES: return tenRupiesDesc;
-		case rWARP: return warpDesc;
-		case rGANON: return ganonDesc;
-		case rZELDA: return zeldaDesc;
-		case rMUPGRADE: return magicUpgradeDesc;
+		case rSP_ITEM:    return specialItemDesc;
+		case rINFO:       return infoDesc;
+		case rMONEY:      return moneyDesc;
+		case rGAMBLE:     return gambleDesc;
+		case rREPAIR:     return repairDesc;
+		case rRP_HC:      return potionOrHCDesc;
+		case rGRUMBLE:    return grumbleDesc;
+		case rTRIFORCE:   return triforceDesc;
+		case rP_SHOP:     return potionShopDesc;
+		case rSHOP:       return shopDesc;
+		case rBOMBS:      return moreBombsDesc;
+		case rSWINDLE:    return swindleDesc;
+		case r10RUPIES:   return tenRupiesDesc;
+		case rWARP:       return warpDesc;
+		case rGANON:      return ganonDesc;
+		case rZELDA:      return zeldaDesc;
+		case rMUPGRADE:   return magicUpgradeDesc;
 		case rLEARNSLASH: return learnSlashDesc;
-		case rARROWS: return moreArrowsDesc;
-		case rTAKEONE: return takeOneDesc;
+		case rARROWS:     return moreArrowsDesc;
+		case rTAKEONE:    return takeOneDesc;
 		case rBOTTLESHOP: return bshopDesc;
-		default: return defaultDesc;
+		default:          return defaultDesc;
 	}
 }
 
@@ -433,5 +433,3 @@ void RoomDialog::setOldGuy()
 	local_mapref.guytile = get_qr(qr_NEWENEMYTILES) ? ref.e_tile : ref.tile;
 	local_mapref.guycs = ref.cset;
 }
-
-
