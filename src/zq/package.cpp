@@ -91,7 +91,8 @@ static bool set_icon(std::wstring exe_path, std::wstring icon_path)
 }
 #endif
 
-std::optional<std::string> package_create(std::string quest_path_, std::string package_name)
+// returns "" on success
+std::string package_create(std::string quest_path_, std::string package_name)
 {
 #ifdef _WIN32
 	auto root_dir = fs::path("");
@@ -173,7 +174,7 @@ std::optional<std::string> package_create(std::string quest_path_, std::string p
 	if (fs::exists(icon_path))
 		set_icon(exe_path.wstring(), icon_path.wstring());
 
-	return std::nullopt;
+	return "";
 #else
 	return "Not implemented";
 #endif

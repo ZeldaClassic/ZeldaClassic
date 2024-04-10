@@ -1207,9 +1207,10 @@ int32_t onExport_Package()
 	if (package_name.empty())
 		package_name = "Quest";
 
-	if (auto error = package_create(filepath, package_name))
+	string error = package_create(filepath, package_name);
+	if ( !error.empty() )
 	{
-		std::string line1 = *error;
+		std::string line1 = error;
 		std::string line2;
 		InfoDialog("Packaging Failed", { line1, line2 }).show();
 		return D_O_K;
