@@ -18,17 +18,17 @@ class InfoDialog: public GUI::Dialog<InfoDialog>
 public:
 	enum class message { REFR_INFO, OK, CANCEL, TOGGLE_QR, BTN };
 
-	InfoDialog(string const& title, string const& text, optional<string> subtext = nullopt);
-	InfoDialog(string const& title, vector<string> const& lines, optional<string> subtext = nullopt);
+	InfoDialog(string const& title, string const& text,          string subtext = "");
+	InfoDialog(string const& title, vector<string> const& lines, string subtext = "");
 	
 	std::shared_ptr<GUI::Widget> view() override;
 	virtual bool handleMessage(const GUI::DialogMessage<message>& msg);
 	
-	void setSubtext(optional<string> subtext) {d_subtext = subtext;}
+	void setSubtext(string subtext) {d_subtext = subtext;}
 protected:
 	std::shared_ptr<GUI::Window> window;
 	string d_title, d_text;
-	optional<string> d_subtext;
+	string d_subtext;
 	
 	
 	std::set<int> qrs; //related qrs

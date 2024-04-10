@@ -10,16 +10,16 @@
 extern const GUI::ListData ruletemplatesList;
 #endif
 
-void displayinfo(string const& title, string const& text, optional<string> subtext)
+void displayinfo(string const& title, string const& text, string subtext)
 {
 	InfoDialog(title,text,subtext).show();
 }
-void displayinfo(string const& title, vector<string> const& lines, optional<string> subtext)
+void displayinfo(string const& title, vector<string> const& lines, string subtext)
 {
 	InfoDialog(title,lines,subtext).show();
 }
 
-InfoDialog::InfoDialog(string const& title, string const& text, optional<string> subtext):
+InfoDialog::InfoDialog(string const& title, string const& text, string subtext):
 	d_title(title),
 	d_text(text), d_subtext(subtext),
 	dest_qrs(nullptr)
@@ -27,7 +27,7 @@ InfoDialog::InfoDialog(string const& title, string const& text, optional<string>
 	postinit();
 }
 
-InfoDialog::InfoDialog(string const& title, vector<string> const& lines, optional<string> subtext):
+InfoDialog::InfoDialog(string const& title, vector<string> const& lines, string subtext):
 	d_title(title),
 	d_text(), d_subtext(subtext),
 	dest_qrs(nullptr)
@@ -225,9 +225,9 @@ std::shared_ptr<GUI::Grid> InfoDialog::build_text()
 	std::shared_ptr<GUI::Grid> col = Column(padding = 0_px);
 	Size maxw = Size::pixels(zq_screen_w)-12_px-5_em;
 	Size maxh = (DEFAULT_PADDING*20)+20_em;
-	if(d_subtext)
+	if( !d_subtext.empty())
 		col->add(Label(noHLine = true, hPadding = 2_em,
-			maxwidth = maxw, textAlign = 1, text = *d_subtext));
+			maxwidth = maxw, textAlign = 1, text = d_subtext));
 	std::shared_ptr<GUI::Label> main_label =
 		Label(noHLine = true, hPadding = 2_em,
 			maxwidth = maxw, textAlign = 1, text = d_text);
