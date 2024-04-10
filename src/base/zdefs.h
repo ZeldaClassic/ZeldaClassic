@@ -2034,19 +2034,19 @@ struct script_data
 
 struct script_command
 {
-    char name[64];
-    byte args;
-    byte arg1_type; //0=reg, 1=val;
-    byte arg2_type; //0=reg, 1=val;
-    byte arr_type; //0x1 = string, 0x2 = array
+	char name[64];
+	byte args;
+	byte arg1_type; //0=reg, 1=val;
+	byte arg2_type; //0=reg, 1=val;
+	byte arr_type; //0x1 = string, 0x2 = array
 };
 
 struct script_variable
 {
-    char name[64];
-    int32_t id;
-    word maxcount;
-    byte multiple;
+	char name[64];
+	int32_t id;
+	word maxcount;
+	byte multiple;
 };
 
 //Sprite boundary array indices
@@ -2058,13 +2058,13 @@ enum
 
 enum
 {
-    sBCANDLE, sARROW, sBOMB, sSTAIRS, sSECRET01, sSECRET02, sSECRET03,
-    sSECRET04, sSECRET05, sSECRET06, sSECRET07, sSECRET08, sSECRET09,
-    sSECRET10, sSECRET11, sSECRET12, sSECRET13, sSECRET14, sSECRET15,
-    sSECRET16, sRCANDLE, sWANDFIRE, sDIVINEFIRE, sSARROW, sGARROW,
-    sSBOMB, sBRANG, sMBRANG, sFBRANG, sWANDMAGIC, sREFMAGIC, sREFFIREBALL,
-    sSWORD, sWSWORD, sMSWORD, sXSWORD, sSWORDBEAM, sWSWORDBEAM,
-    sMSWORDBEAM, sXSWORDBEAM, sHOOKSHOT, sWAND, sHAMMER, sSTRIKE, sSECNEXT
+	sBCANDLE, sARROW, sBOMB, sSTAIRS, sSECRET01, sSECRET02, sSECRET03,
+	sSECRET04, sSECRET05, sSECRET06, sSECRET07, sSECRET08, sSECRET09,
+	sSECRET10, sSECRET11, sSECRET12, sSECRET13, sSECRET14, sSECRET15,
+	sSECRET16, sRCANDLE, sWANDFIRE, sDIVINEFIRE, sSARROW, sGARROW,
+	sSBOMB, sBRANG, sMBRANG, sFBRANG, sWANDMAGIC, sREFMAGIC, sREFFIREBALL,
+	sSWORD, sWSWORD, sMSWORD, sXSWORD, sSWORDBEAM, sWSWORDBEAM,
+	sMSWORDBEAM, sXSWORDBEAM, sHOOKSHOT, sWAND, sHAMMER, sSTRIKE, sSECNEXT
 };
 
 struct comboclass
@@ -2285,12 +2285,12 @@ public:
     
     void copyfrom(zctune z)
     {
-        start = z.start;
+        start      = z.start;
         loop_start = z.loop_start;
-        loop_end = z.loop_end;
-        loop = z.loop;
-        flags = z.flags;
-        volume = z.volume;
+        loop_end   = z.loop_end;
+        loop       = z.loop;
+        flags      = z.flags;
+        volume     = z.volume;
         //memcpy(title, z.title,20); //NOT SAFE for int16_t title strings
         strncpy(title, z.title, 36);
         data = z.data;
