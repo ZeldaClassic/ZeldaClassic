@@ -1184,14 +1184,16 @@ void BasicScope::setOption(CompileOption option, CompileOptionSetting value)
 
 bool BasicScope::can_add(Datum& datum, CompileErrorHandler* errorHandler)
 {
-	if (std::optional<string> name = datum.getName())
+	string name = datum.getName();
+
+	if ( !name.empty() )
 	{
-		if (find<Datum*>(namedData_, *name))
+		if (find<Datum*>(namedData_, name))
 		{
 			if (errorHandler)
 				errorHandler->handleError(
 					CompileError::VarRedef(datum.getNode(),
-						name->c_str()));
+						name.c_str()));
 			return false;
 		}
 	}
@@ -1200,17 +1202,19 @@ bool BasicScope::can_add(Datum& datum, CompileErrorHandler* errorHandler)
 
 bool BasicScope::add(Datum& datum, CompileErrorHandler* errorHandler)
 {
-	if (std::optional<string> name = datum.getName())
+	string name = datum.getName();
+
+	if ( !name.empty() )
 	{
-		if (find<Datum*>(namedData_, *name))
+		if (find<Datum*>(namedData_, name))
 		{
 			if (errorHandler)
 				errorHandler->handleError(
 						CompileError::VarRedef(datum.getNode(),
-						                       name->c_str()));
+						                       name.c_str()));
 			return false;
 		}
-		namedData_[*name] = &datum;
+		namedData_[name] = &datum;
 	}
 	else anonymousData_.push_back(&datum);
 
@@ -1361,14 +1365,17 @@ bool FileScope::can_add(Datum& datum, CompileErrorHandler* errorHandler)
 {
 	if (!BasicScope::can_add(datum, errorHandler))
 		return false;
-	// Check in root scope if it's named.
-	if (std::optional<string> name = datum.getName())
-		if (getRoot(*this)->getLocalDatum(*name))
+
+	// Check in root scope if it's named.  
+	string name = datum.getName();
+
+	if ( !name.empty() )
+		if (getRoot(*this)->getLocalDatum(name))
 		{
 			if (errorHandler)
 				errorHandler->handleError(
 					CompileError::VarRedef(datum.getNode(),
-						name->c_str()));
+						name.c_str()));
 			return false;
 		}
 	return true;
@@ -1380,8 +1387,10 @@ bool FileScope::add(Datum& datum, CompileErrorHandler* errorHandler)
 
 	BasicScope::add(datum, errorHandler);
 	// Register in root scope if it's named.
-	if (std::optional<string> name = datum.getName())
-		getRoot(*this)->registerDatum(*name, &datum);
+
+	string name = datum.getName();
+	if ( !name.empty() )
+		getRoot(*this)->registerDatum(name, &datum);
 
 	return true;
 }
