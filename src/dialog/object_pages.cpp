@@ -863,10 +863,10 @@ bool ComboPoolPageObj::do_rclick(int indx)
 	bool ret = false;
 	NewMenu rcmenu
 	{
-		{ "&Copy", [&](){try_copy();} },
+		{ "&Copy",       [&](){try_copy();} },
 		{ "Paste", "&v", [&](){ret = try_paste();}, nullopt, !copyind },
-		{ "&Edit", [&](){try_edit(); ret = true;} },
-		{ "&Delete", [&](){ret = try_delete();} },
+		{ "&Edit",       [&](){try_edit(); ret = true;} },
+		{ "&Delete",     [&](){ret = try_delete();} },
 	};
 	rcmenu.pop(window_mouse_x(),window_mouse_y());
 	return ret;
@@ -1010,10 +1010,10 @@ bool AutoComboPageObj::do_rclick(int indx)
 	bool ret = false;
 	NewMenu rcmenu
 	{
-		{ "&Copy", [&](){try_copy();} },
+		{ "&Copy",       [&](){try_copy();} },
 		{ "Paste", "&v", [&](){ret = try_paste();}, nullopt, !copyind },
-		{ "&Edit", [&](){try_edit(); ret = true;} },
-		{ "&Delete", [&](){ret = try_delete();} },
+		{ "&Edit",       [&](){try_edit(); ret = true;} },
+		{ "&Delete",     [&](){ret = try_delete();} },
 	};
 	rcmenu.pop(window_mouse_x(),window_mouse_y());
 	return ret;
@@ -1097,10 +1097,10 @@ bool AliasPageObj::do_rclick(int indx)
 	bool ret = false;
 	NewMenu rcmenu
 	{
-		{ "&Copy", [&](){try_copy();} },
+		{ "&Copy",       [&](){try_copy();} },
 		{ "Paste", "&v", [&](){ret = try_paste();}, nullopt, !copyind },
-		{ "&Edit", [&](){try_edit(); ret = true;} },
-		{ "&Delete", [&](){ret = try_delete();} },
+		{ "&Edit",       [&](){try_edit(); ret = true;} },
+		{ "&Delete",     [&](){ret = try_delete();} },
 	};
 	rcmenu.pop(window_mouse_x(),window_mouse_y());
 	return ret;
@@ -1139,7 +1139,6 @@ void AliasPageObj::restore_backup() const
 }
 
 
-
 //
 // Callers
 //
@@ -1157,4 +1156,3 @@ void call_alias_pages(optional<int> val)
 {
 	AliasPageObj::get().call_dlg(val);
 }
-
