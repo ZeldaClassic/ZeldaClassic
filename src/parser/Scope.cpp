@@ -1610,8 +1610,6 @@ bool RootScope::registerChild(string const& name, Scope* child)
 	return true;
 }
 
-
-
 bool RootScope::registerDataType(string const& name, DataType const* type)
 {
 	if (getLocalDataType(name)) return false;
@@ -1758,17 +1756,18 @@ bool ClassScope::add(Datum& datum, CompileErrorHandler* errorHandler)
 {
 	if(UserClassVar* ucv = dynamic_cast<UserClassVar*>(&datum))
 	{
-		if (std::optional<string> name = ucv->getName())
+		string name = ucv->getName();
+		if ( !name.empty() )
 		{
-			if (find<UserClassVar*>(classData_, *name))
+			if (find<UserClassVar*>(classData_, name))
 			{
 				if (errorHandler)
 					errorHandler->handleError(
 							CompileError::VarRedef(ucv->getNode(),
-												   name->c_str()));
+												   name.c_str()));
 				return false;
 			}
-			classData_[*name] = ucv;
+			classData_[name] = ucv;
 			ucv->setOrder(classData_.size());
 			if (!ZScript::isGlobal(datum))
 			{
