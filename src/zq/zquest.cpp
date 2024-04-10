@@ -1345,26 +1345,26 @@ enum
 };
 static NewMenu fixtools_menu
 {
-	{ "&Color Set Fix", onCSetFix },
-	{ "&Liquid Solidity Fix", onWaterSolidity },
-	{ "&Effect Square Fix", onEffectFix },
-	{ "&Level Palette Fix", onPalFix },
+	{ "&Color Set Fix",             onCSetFix },
+	{ "&Liquid Solidity Fix",       onWaterSolidity },
+	{ "&Effect Square Fix",         onEffectFix },
+	{ "&Level Palette Fix",         onPalFix },
 	{ "&Pit and Liquid Damage Fix", onPitFix },
-	{ "&Old Strings Fix", onStrFix, MENUID_FIXTOOL_OLDSTRING },
+	{ "&Old Strings Fix",           onStrFix, MENUID_FIXTOOL_OLDSTRING },
 };
 
 static NewMenu tool_menu
 {
-	{ "Combo &Flags", onFlags, nullopt, MFL_EXIT_PRE_PROC },
-	{ "Fix &Tools ", &fixtools_menu },
-	{ "&NES Dungeon Template", onTemplate },
+	{ "Combo &Flags",           onFlags, nullopt, MFL_EXIT_PRE_PROC },
+	{ "Fix &Tools ",            &fixtools_menu },
+	{ "&NES Dungeon Template",  onTemplate },
 	{ "&Apply Template to All", onReTemplate },
 	{},
-	{ "&Preview Mode", onPreviewMode },
-	{ "Drawing &Mode ", &drawing_mode_menu },
+	{ "&Preview Mode",          onPreviewMode },
+	{ "Drawing &Mode ",         &drawing_mode_menu },
 	{},
-	{ "&List Combos Used", onUsedCombos },
-	{ "&Quest Reports ", &quest_reports_menu },
+	{ "&List Combos Used",      onUsedCombos },
+	{ "&Quest Reports ",        &quest_reports_menu },
 };
 
 int32_t onLayer3BG()
@@ -1398,22 +1398,22 @@ enum
 };
 NewMenu view_menu
 {
-	{ "View &Map...", onViewMap },
+	{ "View &Map...",  onViewMap },
 	{ "View &Palette", onShowPal },
 	{},
 	{ "Show &Walkability", onShowWalkability, MENUID_VIEW_WALKABILITY },
-	{ "Show &Flags", onShowFlags, MENUID_VIEW_FLAGS },
-	{ "Show &CSets", onShowCSet, MENUID_VIEW_CSET },
-	{ "Show &Types", onShowCType, MENUID_VIEW_TYPES },
+	{ "Show &Flags",       onShowFlags,       MENUID_VIEW_FLAGS },
+	{ "Show &CSets",       onShowCSet,        MENUID_VIEW_CSET },
+	{ "Show &Types",       onShowCType,       MENUID_VIEW_TYPES },
 	{},
-	{ "Show Screen &Info", onToggleShowInfo, MENUID_VIEW_INFO },
-	{ "Show &Squares", onToggleShowSquares, MENUID_VIEW_SQUARES },
-	{ "Show FFCs", onToggleShowFFCs, MENUID_VIEW_FFCS },
-	{ "Show Script &Names", onToggleShowScripts, MENUID_VIEW_SCRIPTNAMES },
-	{ "Show &Grid", onGridToggle, MENUID_VIEW_GRID },
-	{ "Show &Darkness", onShowDarkness, MENUID_VIEW_DARKNESS },
-	{ "Layer 2 is Background", onLayer2BG, MENUID_VIEW_L2BG },
-	{ "Layer 3 is Background", onLayer3BG, MENUID_VIEW_L3BG },
+	{ "Show Screen &Info",       onToggleShowInfo,       MENUID_VIEW_INFO },
+	{ "Show &Squares",           onToggleShowSquares,    MENUID_VIEW_SQUARES },
+	{ "Show FFCs",               onToggleShowFFCs,       MENUID_VIEW_FFCS },
+	{ "Show Script &Names",      onToggleShowScripts,    MENUID_VIEW_SCRIPTNAMES },
+	{ "Show &Grid",              onGridToggle,           MENUID_VIEW_GRID },
+	{ "Show &Darkness",          onShowDarkness,         MENUID_VIEW_DARKNESS },
+	{ "Layer 2 is Background",   onLayer2BG,             MENUID_VIEW_L2BG },
+	{ "Layer 3 is Background",   onLayer3BG,             MENUID_VIEW_L3BG },
 	{ "Highlight Current Layer", onToggleHighlightLayer, MENUID_VIEW_LAYERHIGHLIGHT },
 };
 
@@ -1439,19 +1439,19 @@ int32_t onSelectFFCombo();
 
 static NewMenu data_menu
 {
-	{ "&Screen Data", onScrData },
+	{ "&Screen Data",     onScrData },
 	{ "&Freeform Combos", onSelectFFCombo },
-	{ "La&yers", onLayers },
-	{ "&Tile Warp", onTileWarp },
-	{ "Side &Warp", onSideWarp },
-	{ "Secret &Combos", onSecretCombo },
-	{ "&Under Combo", onUnderCombo },
-	{ "&Doors", onDoors },
-	{ "&Maze Path", onPath },
+	{ "La&yers",          onLayers },
+	{ "&Tile Warp",       onTileWarp },
+	{ "Side &Warp",       onSideWarp },
+	{ "Secret &Combos",   onSecretCombo },
+	{ "&Under Combo",     onUnderCombo },
+	{ "&Doors",           onDoors },
+	{ "&Maze Path",       onPath },
 	{},
 	{ "&Room Data", onRoom },
 	{},
-	{ "&Item", onItem },
+	{ "&Item",    onItem },
 	{ "&Enemies", onEnemies },
 	{ "&Palette", onScreenPalette },
 };
@@ -1768,13 +1768,11 @@ int32_t onDecColour()
 	if ( CHECK_CTRL_CMD )
 	{
 		return onDecScrPal16();
-	}
-	
+	} 
 	else if ( key[KEY_LSHIFT] || key[KEY_RSHIFT] )
 	{
 		return onDecScrPal();
-	}
-	
+	} 
 	else
 	{
 		return onDecreaseCSet();
@@ -1783,17 +1781,14 @@ int32_t onDecColour()
 
 int32_t onIncColour()
 {
-	
 	if ( CHECK_CTRL_CMD )
 	{
 		return onIncScrPal16();
-	}
-	
+	} 
 	else if ( key[KEY_LSHIFT] || key[KEY_RSHIFT] )
 	{
 		return onIncScrPal();
-	}
-	
+	} 
 	else
 	{
 		return onIncreaseCSet();
@@ -1802,14 +1797,14 @@ int32_t onIncColour()
 
 static DIALOG getnum_dlg[] =
 {
-    // (dialog proc)       (x)   (y)    (w)     (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
+    // (dialog proc)       (x)   (y)     (w)     (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp)
     { jwin_win_proc,        80,   80,     160,    72,   vc(0),              vc(11),           0,       D_EXIT,     0,             0,       NULL, NULL, NULL },
     { jwin_rtext_proc,      114,  104+4,  48,     8,    jwin_pal[jcBOXFG],  jwin_pal[jcBOX],  0,       0,          0,             0, (void *) "Value:", NULL, NULL },
     { jwin_edit_proc,       168,  104,    48,     16,    0,                 0,                0,       0,          6,             0,       NULL, NULL, NULL },
     { jwin_button_proc,     90,   126,    61,     21,   vc(0),              vc(11),           13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
     { jwin_button_proc,     170,  126,    61,     21,   vc(0),              vc(11),           27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
-    { d_timer_proc,         0,    0,     0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
-    { NULL,                 0,    0,    0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    { d_timer_proc,         0,    0,      0,      0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
+    { NULL,                 0,    0,      0,      0,    0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 int32_t getnumber(const char *prompt,int32_t initialval)
@@ -1866,7 +1861,6 @@ void savesometiles(const char *prompt,int32_t initialval)
 	sprintf(firsttile,"%d",0);
 	sprintf(tilecount,"%d",1);
 	//int32_t ret;
-	
 	
 	
 	save_tiles_dlg[0].dp2 = get_zc_font(font_lfont);
@@ -1933,8 +1927,7 @@ void writesometiles_to(const char *prompt,int32_t initialval)
 	sprintf(firsttile,"%d",0);
 		//int32_t ret;
 	
-	
-	
+
 	read_tiles_dlg[0].dp2 = get_zc_font(font_lfont);
 	
 	sprintf(firsttile,"%d",0);
