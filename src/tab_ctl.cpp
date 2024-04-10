@@ -81,7 +81,7 @@ int32_t vc2(int32_t x)
 
 INLINE int32_t is_in_rect(int32_t x,int32_t y,int32_t rx1,int32_t ry1,int32_t rx2,int32_t ry2)
 {
-    return x>=rx1 && x<=rx2 && y>=ry1 && y<=ry2;
+	return x>=rx1 && x<=rx2 && y>=ry1 && y<=ry2;
 }
 
 void draw_button(BITMAP *dest,int32_t x,int32_t y,int32_t w,int32_t h,const char *text,int32_t bg,int32_t fg,int32_t flags)
@@ -289,22 +289,18 @@ int32_t discern_tab(TABPANEL *panel, int32_t first_tab, int32_t x)
 
 int32_t d_tab_proc(int32_t msg, DIALOG *d, int32_t c)
 {
-    int32_t fg;
-    int32_t i;
-    int32_t tx;
-    int32_t sd=2; //selected delta
-    TABPANEL *panel=(TABPANEL *)d->dp;
-    DIALOG   *panel_dialog=NULL, *current_object=NULL;
-    int32_t selected=0;
-    int32_t counter=0;
-    ASSERT(d);
-    (void) c;
-    int32_t temp_d, temp_d2;
+	int32_t fg, i, tx;
+	int32_t sd=2; //selected delta
+	TABPANEL *panel=(TABPANEL *)d->dp;
+	DIALOG   *panel_dialog=NULL, *current_object=NULL;
+	int32_t selected=0;
+	int32_t counter=0;
+	ASSERT(d);
+	(void) c;
+	int32_t temp_d, temp_d2;
     
-    if(d->dp==NULL)
-    {
-        return 0;
-    }
+	if(d->dp==NULL)
+		return 0;
     
     //d->d1&(0xFF00)>>8 is the first visible tab
     //d->d1&0x00FF is the currently? selected tab
