@@ -99,9 +99,9 @@ public:
 	virtual void backup(int index) const = 0;
 	virtual void restore_backup() const = 0;
 	
-	virtual string name() const = 0;
-	virtual string cfgname() const = 0;
-	virtual string custom_info() const {return "";}
+	virtual const char* name() const = 0;
+	virtual const char* cfgname() const = 0;
+	virtual const char* custom_info() const {return "";}
 };
 
 #define CPOOLPG_CB_CYCLE OBJPG_CB_NUM_GLOBAL
@@ -134,8 +134,8 @@ public:
 	virtual void backup(int index) const override;
 	virtual void restore_backup() const override;
 	
-	virtual string name() const override {return "Combo Pool";}
-	virtual string cfgname() const override {return "cpool";}
+	virtual const char* name() const override {return "Combo Pool";}
+	virtual const char* cfgname() const override {return "cpool";}
 	// virtual string custom_info() const {return "";}
 };
 
@@ -165,8 +165,8 @@ public:
 	virtual void backup(int index) const override;
 	virtual void restore_backup() const override;
 	
-	virtual string name() const override {return "Auto Combo";}
-	virtual string cfgname() const override {return "autocmb";}
+	virtual const char* name() const override {return "Auto Combo";}
+	virtual const char* cfgname() const override {return "autocmb";}
 	// virtual string custom_info() const {return "";}
 };
 
@@ -196,7 +196,7 @@ public:
 	virtual void backup(int index) const override;
 	virtual void restore_backup() const override;
 	
-	virtual string name() const override {return "Combo Aliases";}
-	virtual string cfgname() const override {return "aliases";}
+	virtual const char* name() const override {return "Combo Aliases";}
+	virtual const char* cfgname() const override {return "aliases";}
 	// virtual string custom_info() const {return "";}
 };
