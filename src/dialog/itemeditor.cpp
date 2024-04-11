@@ -59,21 +59,21 @@ static const GUI::ListData ScriptDataList
 
 static const GUI::ListData PFlagTypeList
 {
-	{ "Disabled", 0 },
-	{ "Set To These", 1 },
-	{ "Add These", 2 },
+	{ "Disabled",       0 },
+	{ "Set To These",   1 },
+	{ "Add These",      2 },
 	{ "Subtract These", 3 },
 	{ "Limit To These", 4 }
 };
 
 static const GUI::ListData WeapMoveTypeList
 {
-	{ "None", 0 },
-	{ "Line", 1 },
+	{ "None",      0 },
+	{ "Line",      1 },
 	{ "Sine Wave", 2 },
-	{ "Cosine", 3 },
-	{ "Circular", 4 },
-	{ "Arc", 5 },
+	{ "Cosine",    3 },
+	{ "Circular",  4 },
+	{ "Arc",       5 },
 	{ "Pattern A", 6 },
 	{ "Pattern B", 7 },
 	{ "Pattern C", 8 },

@@ -95,12 +95,12 @@ static bool set_icon(std::wstring exe_path, std::wstring icon_path)
 std::string package_create(std::string quest_path_, std::string package_name)
 {
 #ifdef _WIN32
-	auto root_dir = fs::path("");
-	auto quest_path = fs::path(quest_path_);
-	auto quest_dir = quest_path.parent_path();
+	auto root_dir    = fs::path("");
+	auto quest_path  = fs::path(quest_path_);
+	auto quest_dir   = quest_path.parent_path();
 	auto package_dir = root_dir / "packages" / package_name;
-	auto extra_dir = root_dir / "packages" / (package_name + "_extra");
-	auto data_dir = package_dir / "data";
+	auto extra_dir   = root_dir / "packages" / (package_name + "_extra");
+	auto data_dir    = package_dir / "data";
 
 	std::error_code ec;
 	fs::remove_all(package_dir, ec);
