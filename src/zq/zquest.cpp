@@ -3861,82 +3861,25 @@ int32_t playMusic()
 }
 
 // It took awhile to get these values right, so no meddlin'!
-int32_t playTune1()
-{
-    return playTune(0);
-}
-int32_t playTune2()
-{
-    return playTune(81);
-}
-int32_t playTune3()
-{
-    return playTune(233);
-}
-int32_t playTune4()
-{
-    return playTune(553);
-}
-int32_t playTune5()
-{
-    return playTune(814);
-}
-int32_t playTune6()
-{
-    return playTune(985);
-}
-int32_t playTune7()
-{
-    return playTune(1153);
-}
-int32_t playTune8()
-{
-    return playTune(1333);
-}
-int32_t playTune9()
-{
-    return playTune(1556);
-}
-int32_t playTune10()
-{
-    return playTune(1801);
-}
-int32_t playTune11()
-{
-    return playTune(2069);
-}
-int32_t playTune12()
-{
-    return playTune(2189);
-}
-int32_t playTune13()
-{
-    return playTune(2569);
-}
-int32_t playTune14()
-{
-    return playTune(2753);
-}
-int32_t playTune15()
-{
-    return playTune(2856);
-}
-int32_t playTune16()
-{
-    return playTune(3042);
-}
-int32_t playTune17()
-{
-    return playTune(3125);
-}
-int32_t playTune18()
-{
-    return playTune(3217);
-}
-int32_t playTune19()
-{
-    return playTune(3296);
-}
+int32_t playTune1 () { return playTune(0);    }
+int32_t playTune2 () { return playTune(81);   }
+int32_t playTune3 () { return playTune(233);  }
+int32_t playTune4 () { return playTune(553);  }
+int32_t playTune5 () { return playTune(814);  }
+int32_t playTune6 () { return playTune(985);  }
+int32_t playTune7 () { return playTune(1153); }
+int32_t playTune8 () { return playTune(1333); }
+int32_t playTune9 () { return playTune(1556); }
+int32_t playTune10() { return playTune(1801); }
+int32_t playTune11() { return playTune(2069); }
+int32_t playTune12() { return playTune(2189); }
+int32_t playTune13() { return playTune(2569); }
+int32_t playTune14() { return playTune(2753); }
+int32_t playTune15() { return playTune(2856); }
+int32_t playTune16() { return playTune(3042); }
+int32_t playTune17() { return playTune(3125); }
+int32_t playTune18() { return playTune(3217); }
+int32_t playTune19() { return playTune(3296); }
 
 int32_t playTune(int32_t pos)
 {
