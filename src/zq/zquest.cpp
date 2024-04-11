@@ -2910,53 +2910,45 @@ int32_t onDrawingModeRelational()
 
 int32_t onDrawingModeDungeon()
 {
-    if(draw_mode==DM_DUNGEON)
-    {
-        return onDrawingModeNormal();
-    }
+	if(draw_mode==DM_DUNGEON)
+		return onDrawingModeNormal();
     
-    draw_mode=DM_DUNGEON;
-    reset_relational_tile_grid();
-    fix_drawing_mode_menu();
-    restore_mouse();
-    return D_O_K;
+	draw_mode=DM_DUNGEON;
+	reset_relational_tile_grid();
+	fix_drawing_mode_menu();
+	restore_mouse();
+	return D_O_K;
 }
 
 int32_t onDrawingModeAlias()
 {
-    if(draw_mode==DM_ALIAS)
-    {
-        return onDrawingModeNormal();
-    }
+	if(draw_mode==DM_ALIAS)
+		return onDrawingModeNormal();
     
-    draw_mode=DM_ALIAS;
-    alias_cset_mod=0;
-    reset_relational_tile_grid();
-    fix_drawing_mode_menu();
-    restore_mouse();
-    return D_O_K;
+	draw_mode=DM_ALIAS;
+	alias_cset_mod=0;
+	reset_relational_tile_grid();
+	fix_drawing_mode_menu();
+	restore_mouse();
+	return D_O_K;
 }
 
 int32_t onDrawingModePool()
 {
-    if(draw_mode==DM_CPOOL)
-    {
-        return onDrawingModeNormal();
-    }
+	if(draw_mode==DM_CPOOL)
+		return onDrawingModeNormal();
     
-    draw_mode=DM_CPOOL;
-    reset_relational_tile_grid();
-    fix_drawing_mode_menu();
-    restore_mouse();
-    return D_O_K;
+	draw_mode=DM_CPOOL;
+	reset_relational_tile_grid();
+	fix_drawing_mode_menu();
+	restore_mouse();
+	return D_O_K;
 }
 
 int32_t onDrawingModeAuto()
 {
 	if (draw_mode == DM_AUTO)
-	{
 		return onDrawingModeNormal();
-	}
 
 	draw_mode = DM_AUTO;
 	reset_relational_tile_grid();
@@ -2978,16 +2970,16 @@ int32_t onReTemplate()
 
 int32_t onUndo()
 {
-    Map.UndoCommand();
-    refresh(rALL);
-    return D_O_K;
+	Map.UndoCommand();
+	refresh(rALL);
+	return D_O_K;
 }
 
 int32_t onRedo()
 {
-    Map.RedoCommand();
-    refresh(rALL);
-    return D_O_K;
+	Map.RedoCommand();
+	refresh(rALL);
+	return D_O_K;
 }
 
 int32_t onCopy()
@@ -3096,26 +3088,26 @@ int32_t onPasteLayers()
 
 int32_t onPastePalette()
 {
-    Map.DoPasteScreenCommand(PasteCommandType::ScreenPalette);
-    return D_O_K;
+	Map.DoPasteScreenCommand(PasteCommandType::ScreenPalette);
+	return D_O_K;
 }
 
 int32_t onPasteRoom()
 {
-    Map.DoPasteScreenCommand(PasteCommandType::ScreenRoom);
-    return D_O_K;
+	Map.DoPasteScreenCommand(PasteCommandType::ScreenRoom);
+	return D_O_K;
 }
 
 int32_t onPasteGuy()
 {
-    Map.DoPasteScreenCommand(PasteCommandType::ScreenGuy);
-    return D_O_K;
+	Map.DoPasteScreenCommand(PasteCommandType::ScreenGuy);
+	return D_O_K;
 }
 
 int32_t onPasteEnemies()
 {
-    Map.DoPasteScreenCommand(PasteCommandType::ScreenEnemies);
-    return D_O_K;
+	Map.DoPasteScreenCommand(PasteCommandType::ScreenEnemies);
+	return D_O_K;
 }
 
 int32_t onDelete()
@@ -3146,10 +3138,10 @@ int32_t onDeleteMap()
 
 int32_t onToggleDarkness()
 {
-    Map.CurrScr()->flags^=4;
-    refresh(rMAP+rMENU);
-    saved=false;
-    return D_O_K;
+	Map.CurrScr()->flags^=4;
+	refresh(rMAP+rMENU);
+	saved=false;
+	return D_O_K;
 }
 
 int32_t onIncMap()

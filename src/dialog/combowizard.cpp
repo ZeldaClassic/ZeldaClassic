@@ -4221,11 +4221,11 @@ bool ComboWizardDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 			return true;
 
 		case message::DEFAULT:
-		{
+
 			if(do_combo_default(local_ref))
 				rerun_dlg = true;
 			return rerun_dlg;
-		}
+
 		case message::CANCEL:
 			return true;
 		
