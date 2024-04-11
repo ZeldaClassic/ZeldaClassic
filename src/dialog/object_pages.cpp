@@ -155,7 +155,7 @@ void ObjectTemplate::draw_info()
 		uint cb_x = cbox_x, cb_y = cbox_y;
 		const uint wid = 30, hei = cbox_h+2;
 		uint indx = 0;
-		while(auto name = cb_get_name(indx++))
+		while(const char* name = cb_get_name(indx++))
 		{
 			if(disabled_cb(indx-1))
 			{
@@ -486,7 +486,7 @@ void ObjectTemplate::call_dlg(optional<int> start_val)
 					const uint wid = 30, hei = cbox_h+2;
 					uint indx = 0;
 					bool _selrect = get_cb(OBJPG_CB_RECTSEL), _selcols = get_cb(OBJPG_CB_COLMODE);
-					while(auto name = cb_get_name(indx++))
+					while(const char* name = cb_get_name(indx++))
 					{
 						if(!disabled_cb(indx-1))
 						{
