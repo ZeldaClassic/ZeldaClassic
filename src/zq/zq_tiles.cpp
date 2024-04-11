@@ -2115,8 +2115,8 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 		oldtile[i]=undotile[i]=newtilebuf[tile].data[i];
 	}
 	byte undoselgrid[16][16];
-	for(auto x = 0; x < 16; ++x)
-		for(auto y = 0; y < 16; ++y)
+	for(int x = 0; x < 16; ++x)
+		for(int y = 0; y < 16; ++y)
 			undoselgrid[x][y] = selection_grid[x+1][y+1];
 	for(int q = 0; q < 256; ++q)
 	{
