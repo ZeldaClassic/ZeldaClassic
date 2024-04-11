@@ -2149,17 +2149,12 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 	draw_edit_scr(tile,flip,cs,oldtile, true);
 	
 	while(gui_mouse_b())
-	{
-		/* do nothing */
-		rest(1);
-	}
+		rest(1); /* do nothing */
 	
 	move_origin_x=-1;
 	move_origin_y=-1;
 	prev_x=-1;
 	prev_y=-1;
-	
-	
 	
 	byte selection_pattern_source[8][8]=
 	{
@@ -2780,14 +2775,10 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 				if(has_selection())
 				{
 					if(shift)
-					{
 						type+=1;
-					}
 					
 					if(alt)
-					{
 						type+=2;
-					}
 				}
 				
 				if(type!=select_mode)
@@ -3190,10 +3181,7 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 	clear_selection_grid();
 	
 	while(gui_mouse_b())
-	{
-		/* do nothing */
-		rest(1);
-	}
+		rest(1); /* do nothing */
 	
 	if(done==1)
 	{
