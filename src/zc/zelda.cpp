@@ -5672,9 +5672,8 @@ bool checkCost(int32_t ctr, int32_t amnt)
 bool checkmagiccost(int32_t itemid, bool checkTime)
 {
 	if(itemid < 0)
-	{
 		return false;
-	}
+
 	itemdata const& id = itemsbuf[itemid];
 	bool ret = true;
 	if(!checkTime || !id.magiccosttimer[0] || !(frame%id.magiccosttimer[0]))
@@ -5740,9 +5739,8 @@ void payCost(int32_t ctr, int32_t amnt, int32_t tmr, bool ignoreTimer)
 void paymagiccost(int32_t itemid, bool ignoreTimer, bool onlyTimer)
 {
 	if(itemid < 0)
-	{
 		return;
-	}
+
 	itemdata const& id = itemsbuf[itemid];
 	if(!(id.flags&ITEM_VALIDATEONLY) && (!onlyTimer || id.magiccosttimer[0]))
 		payCost(id.cost_counter[0], id.cost_amount[0], id.magiccosttimer[0], ignoreTimer);
@@ -5751,4 +5749,4 @@ void paymagiccost(int32_t itemid, bool ignoreTimer, bool onlyTimer)
 }
 
 std::string getComboTypeHelpText(int32_t id) { return ""; }
-std::string getMapFlagHelpText(int32_t id) { return ""; }
+std::string getMapFlagHelpText  (int32_t id) { return ""; }
