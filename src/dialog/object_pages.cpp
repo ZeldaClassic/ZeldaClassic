@@ -786,7 +786,7 @@ const char* ObjectTemplate::cb_get_name(uint indx) const
 		case OBJPG_CB_COLMODE:
 			return "4-Columns";
 	}
-	return "";
+	return NULL;
 }
 string ObjectTemplate::cb_get_cfg(uint indx) const
 {
