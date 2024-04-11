@@ -39,9 +39,9 @@ extern zcmodule moduledata;
 #define stricmp _stricmp
 #endif
 
-#define HIDE_USED (show_only_unused_tiles&1)
-#define HIDE_UNUSED (show_only_unused_tiles&2)
-#define HIDE_BLANK (show_only_unused_tiles&4)
+#define HIDE_USED        (show_only_unused_tiles&1)
+#define HIDE_UNUSED      (show_only_unused_tiles&2)
+#define HIDE_BLANK       (show_only_unused_tiles&4)
 #define HIDE_8BIT_MARKER (show_only_unused_tiles&8)
 
 extern void large_dialog(DIALOG *d);
