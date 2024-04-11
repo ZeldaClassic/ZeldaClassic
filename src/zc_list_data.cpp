@@ -98,9 +98,9 @@ GUI::ListData GUI::ZCListData::fonts(bool ss_fonts, bool numbered, bool sorted)
 		return GUI::ListData(strings);
 	
 	GUI::ListData ls;
-	for(auto it = names.begin(); it != names.end(); ++it)
+	for( auto const& name : names)
 	{
-		ls.add(*it, ids[*it]);
+		ls.add(name, ids[name]);
 	}
 	return ls;
 }
@@ -212,9 +212,9 @@ GUI::ListData GUI::ZCListData::enemies(bool numbered, bool defaultFilter)
 	
 	GUI::ListData ls;
 	ls.add("(None)", 0);
-	for(auto it = names.begin(); it != names.end(); ++it)
+	for( auto const& name : names)
 	{
-		ls.add(*it, ids[*it]);
+		ls.add(name, ids[name]);
 	}
 	return ls;
 }
@@ -308,9 +308,9 @@ GUI::ListData GUI::ZCListData::itemclass(bool numbered, bool zero_none)
 	GUI::ListData ls;
 	if(zero_none)
 		ls.add("(None)", 0);
-	for(auto it = famnames.begin(); it != famnames.end(); ++it)
+	for( auto const& name : famnames )
 	{
-		ls.add(*it, fams[*it]);
+		ls.add(name, fams[name]);
 	}
 	return ls;
 }
@@ -349,9 +349,9 @@ GUI::ListData GUI::ZCListData::combotype(bool numbered, bool skipNone)
 		}
 	}
 
-	for(auto it = typenames.begin(); it != typenames.end(); ++it)
+	for(auto const& tn : typenames)
 	{
-		ls.add(*it, types[*it]);
+		ls.add(tn, types[tn]);
 	}
 	return ls;
 }
@@ -383,9 +383,9 @@ GUI::ListData GUI::ZCListData::mapflag(int32_t numericalFlags, bool numbered, bo
 	}
 	if (!numericalFlags)
 	{
-		for(auto it = names.begin(); it != names.end(); ++it)
+		for( auto const& name : names)
 		{
-			ls.add(*it, vals[*it]);
+			ls.add(name, vals[name]);
 		}
 	}
 	
@@ -471,9 +471,9 @@ GUI::ListData GUI::ZCListData::miscsprites(bool skipNone, bool inclNegSpecialVal
 	}
 	if(!skipNone)
 		ls.add("(None)", -1);
-	for(auto it = sprnames.begin(); it != sprnames.end(); ++it)
+	for( auto const& name : sprnames)
 	{
-		ls.add(*it, ids[*it]);
+		ls.add(name, ids[name]);
 	}
 	return ls;
 }
