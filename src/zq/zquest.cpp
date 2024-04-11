@@ -3649,29 +3649,29 @@ int32_t onDecreaseCSet()
 
 int32_t onGotoPage()
 {
-	if (draw_mode==DM_ALIAS)
+	static const int PER_PAGE         = 260;
+	static const int DEFAULT_PER_PAGE = 256;
+
+	switch (draw_mode)
 	{
-		static const int PER_PAGE = 260;
-		if(optional<int> v = call_get_num("Scroll to Alias Page", 0, MAXCOMBOALIASES/PER_PAGE-1, 0))
-			combo_alistpos[current_comboalist] = *v*PER_PAGE;
-	}
-	else if (draw_mode==DM_CPOOL)
-	{
-		static const int PER_PAGE = 260;
-		if(optional<int> v = call_get_num("Scroll to Combo Pool Page", 0, MAXCOMBOPOOLS/PER_PAGE-1, 0))
-			combo_pool_listpos[current_cpoollist] = *v*PER_PAGE;
-	}
-	else if (draw_mode == DM_AUTO)
-	{
-		static const int PER_PAGE = 260;
-		if(optional<int> v = call_get_num("Scroll to Auto Combo Page", 0, MAXAUTOCOMBOS/PER_PAGE-1, 0))
-			combo_auto_listpos[current_cautolist] = *v*PER_PAGE;
-	}
-	else
-	{
-		static const int PER_PAGE = 256;
-		if(optional<int> v = call_get_num("Scroll to Combo Page", 0, MAXCOMBOS/PER_PAGE-1, 0))
-			First[current_combolist] = *v*PER_PAGE;
+		case DM_ALIAS:
+			if (optional<int> v = call_get_num("Scroll to Alias Page", 0, MAXCOMBOALIASES / PER_PAGE - 1, 0))
+				combo_alistpos[current_comboalist] = *v * PER_PAGE;
+
+			break;
+		case DM_CPOOL:
+			if (optional<int> v = call_get_num("Scroll to Combo Pool Page", 0, MAXCOMBOPOOLS / PER_PAGE - 1, 0))
+				combo_pool_listpos[current_cpoollist] = *v * PER_PAGE;
+
+			break;
+		case DM_AUTO:
+			if (optional<int> v = call_get_num("Scroll to Auto Combo Page", 0, MAXAUTOCOMBOS / PER_PAGE - 1, 0))
+				combo_auto_listpos[current_cautolist] = *v * PER_PAGE;
+
+			break;
+		default:
+			if (optional<int> v = call_get_num("Scroll to Combo Page", 0, MAXCOMBOS / DEFAULT_PER_PAGE - 1, 0))
+				First[current_combolist] = *v * DEFAULT_PER_PAGE;
 	}
     
 	return D_O_K;
