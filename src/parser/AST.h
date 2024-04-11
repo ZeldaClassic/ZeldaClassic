@@ -250,14 +250,14 @@ namespace ZScript
 	
 	
 		// Subclass Predicates (replacing typeof and such).
-		virtual bool isTypeArrow() const {return false;}
+		virtual bool isTypeArrow        () const {return false;}
 		virtual bool isTypeArrowUsrClass() const {return false;}
-		virtual bool isTypeIndex() const {return false;}
-		virtual bool isTypeIdentifier() const {return false;}
-		virtual bool isTypeVarDecl() const {return false;}
-		virtual bool isTypeArrayDecl() const {return false;}
-		virtual bool isStringLiteral() const {return false;}
-		virtual bool isArrayLiteral() const {return false;}
+		virtual bool isTypeIndex        () const {return false;}
+		virtual bool isTypeIdentifier   () const {return false;}
+		virtual bool isTypeVarDecl      () const {return false;}
+		virtual bool isTypeArrayDecl    () const {return false;}
+		virtual bool isStringLiteral    () const {return false;}
+		virtual bool isArrayLiteral     () const {return false;}
 		
 	private:
 		//If this node has been disabled, for some reason or other. This will prevent any visitor from visiting the node (instant return, without error)
