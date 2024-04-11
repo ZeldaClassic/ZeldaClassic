@@ -239,9 +239,9 @@ GUI::ListData GUI::ZCListData::items(bool numbered, bool none)
 	GUI::ListData ls;
 	if(none)
 		ls.add("(None)", -1);
-	for(auto it = names.begin(); it != names.end(); ++it)
+	for(auto const& name : names)
 	{
-		ls.add(*it, ids[*it]);
+		ls.add(name, ids[name]);
 	}
 	return ls;
 }
@@ -266,9 +266,9 @@ GUI::ListData GUI::ZCListData::dropsets(bool numbered, bool none)
 	GUI::ListData ls;
 	if(none)
 		ls.add("(None)", -1);
-	for(auto it = names.begin(); it != names.end(); ++it)
+	for(auto const& name : names)
 	{
-		ls.add(*it, ids[*it]);
+		ls.add(name, ids[name]);
 	}
 	return ls;
 }
