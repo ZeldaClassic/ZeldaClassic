@@ -2527,10 +2527,10 @@ std::shared_ptr<GUI::Widget> ComboWizardDialog::view()
 		}
 		case cTALLGRASS: case cTALLGRASSTOUCHY: case cTALLGRASSNEXT:
 		{
-			byte& decospr = local_ref.attribytes[0];
-			byte& dropitem = local_ref.attribytes[1];
-			byte& cutsfx = local_ref.attribytes[2];
-			byte& walksfx = local_ref.attribytes[3];
+			byte& decospr   = local_ref.attribytes[0];
+			byte& dropitem  = local_ref.attribytes[1];
+			byte& cutsfx    = local_ref.attribytes[2];
+			byte& walksfx   = local_ref.attribytes[3];
 			byte& grass_spr = local_ref.attribytes[6];
 			auto radmode = 0;
 			if(local_ref.usrflags&cflag1)
