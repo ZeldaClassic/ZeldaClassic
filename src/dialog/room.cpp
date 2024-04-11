@@ -53,96 +53,96 @@ static const GUI::ListData roomListData {
 	{ "Bottle Shop",                   rBOTTLESHOP }
 };
 
-static const auto specialItemDesc =
+static const char* specialItemDesc =
 	"If a Guy is set, he will offer an item to the Player. "
 	"This room type is also used for Item Cellar warps, "
 	"and 'Armos/Chest->Item' and 'Dive For Item' combo flags.";
 
-static const auto infoDesc =
+static const char* infoDesc =
 	"Pay rupees to make one of three strings appear. "
 	"Strings and prices are set in Misc. Data -> Info Types.";
 
-static const auto moneyDesc =
+static const char* moneyDesc =
 	"If a Guy is set, he will offer rupees to the Player.";
 
-static const auto gambleDesc =
+static const char* gambleDesc =
 	"The 'Money-Making Game' from The Legend of Zelda. "
 	"Risk losing up to 40 rupees for a chance to win up to 50 rupees.";
 
-static const auto repairDesc =
+static const char* repairDesc =
 	"When the Guy's String finishes, the player loses a given amount of money.";
 
-static const auto potionOrHCDesc =
+static const char* potionOrHCDesc =
 	"The Guy offers item 28 and item 30 to the Player. "
 	"Taking one makes the other vanish forever.";
 
-static const auto grumbleDesc =
+static const char* grumbleDesc =
 	"Until the player uses a Bait item, the Guy and "
 	"his invisible wall won't vanish and shutters won't open. "
 	"The Bait item will be removed from the player's inventory.";
 
-static const auto triforceDesc =
+static const char* triforceDesc =
 	"The Guy and his invisible wall won't vanish "
 	"unless the Player has Triforces from levels 1-8. "
 	"(Shutters won't open until the Guy vanishes, too.)";
 
-static const auto potionShopDesc =
+static const char* potionShopDesc =
 	"Similar to a Shop, but the items and String "
 	"won't appear until the Player uses a Letter item. "
 	"(Or, if the Player already has a Level 2 Letter item.)";
 
-static const auto shopDesc =
+static const char* shopDesc =
 	"The Guy offers three items for a fee. "
 	"You can use the Shop as often as you want. "
 	"Items and prices are set in Misc. Data -> Shop Types.";
 
-static const auto bshopDesc =
+static const char* bshopDesc =
 	"The Guy offers three bottle fills for a fee. "
 	"You must have an empty bottle to make a purchase. "
 	"You can use the Shop as often as you want. "
 	"Fills and prices are set in Misc. Data -> Bottle Shop Types.";
 
-static const auto moreBombsDesc =
+static const char* moreBombsDesc =
 	"The Guy offers to increase the Player's Bombs "
 	"and Max. Bombs by 4, for a fee. You can only buy it once.";
 
-static const auto swindleDesc =
+static const char* swindleDesc =
 	"The Guy and his invisible wall won't vanish until "
 	"the Player pays the fee or forfeits a Heart Container. "
 	"(Shutters won't open until the Guy vanishes, too.)";
 
-static const auto tenRupiesDesc =
+static const char* tenRupiesDesc =
 	"10 instances of item 0 appear in a  diamond formation in "
 	"the center of the screen. No Guy or String needs to be set for this.";
 
-static const auto warpDesc =
+static const char* warpDesc =
 	"All 'Stair [A]' type combos send the Player to "
 	"a destination in a given Warp Ring, based "
 	"on the combo's X position (<112, >136, or between).";
 
-static const auto ganonDesc =
+static const char* ganonDesc =
 	"The Player holds up the Triforce, and Ganon appears. "
 	"(Unless the current DMap's Dungeon Boss was beaten.)";
 
-static const auto zeldaDesc =
+static const char* zeldaDesc =
 	"Four instances of enemy 85 appear on the screen in front of the Guy. "
 	"(That's all it does.)";
 
-static const auto magicUpgradeDesc =
+static const char* magicUpgradeDesc =
 	"When the Guy's String finishes, the Player gains the 1/2 Magic Usage attribute.";
 
-static const auto learnSlashDesc =
+static const char* learnSlashDesc =
 	"When the Guy's String finishes, the Player gains the Slash attribute.";
 
-static const auto moreArrowsDesc =
+static const char* moreArrowsDesc =
 	"The Guy offers to increase the Player's Arrows and Max. Arrows by 10, "
 	"for a fee. You can only buy it once.";
 
-static const auto takeOneDesc =
+static const char* takeOneDesc =
 	"The Guy offers three items. Taking one makes the others vanish forever. "
 	"Item choices are set in Misc. Data -> Shop Types.";
 
-static const auto defaultDesc =
+static const char* defaultDesc =
 	"Select a Room Type, then click the \"Info\" button "
 	"to find out what it does.";
 
