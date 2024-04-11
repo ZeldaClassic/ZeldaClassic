@@ -10036,93 +10036,91 @@ void domouse()
 		}
 	}
 	
-	if(draw_mode==DM_ALIAS)
+	switch (draw_mode)
 	{
-		for(int32_t j=0; j<num_combo_cols; ++j)
-		{
-			auto& sqr = comboaliaslist[j];
-			auto ind = sqr.rectind(x,y);
-			if(ind > -1)
+		case DM_ALIAS:
+			for (int32_t j = 0; j < num_combo_cols; ++j)
 			{
-				auto c2=ind+combo_alistpos[j];
-				char msg[80];
-				sprintf(msg, "Combo alias %d", c2);
-				update_tooltip(x,y,sqr.subsquare(ind), msg);
+				auto& sqr = comboaliaslist[j];
+				auto ind = sqr.rectind(x, y);
+				if (ind > -1)
+				{
+					auto c2 = ind + combo_alistpos[j];
+					char msg[80];
+					sprintf(msg, "Combo alias %d", c2);
+					update_tooltip(x, y, sqr.subsquare(ind), msg);
+				}
 			}
-		}
-	}
-	else if(draw_mode==DM_CPOOL)
-	{
-		for(int32_t j=0; j<num_combo_cols; ++j)
-		{
-			auto& sqr = comboaliaslist[j];
-			auto ind = sqr.rectind(x,y);
-			if(ind > -1)
+			break;
+		case DM_CPOOL:
+			for (int32_t j = 0; j < num_combo_cols; ++j)
 			{
-				auto c2=ind+combo_pool_listpos[j];
-				char msg[80];
-				sprintf(msg, "Combo Pool %d", c2);
-				update_tooltip(x,y,sqr.subsquare(ind), msg);
+				auto& sqr = comboaliaslist[j];
+				auto ind = sqr.rectind(x, y);
+				if (ind > -1)
+				{
+					auto c2 = ind + combo_pool_listpos[j];
+					char msg[80];
+					sprintf(msg, "Combo Pool %d", c2);
+					update_tooltip(x, y, sqr.subsquare(ind), msg);
+				}
 			}
-		}
-		if(cpool_prev_visible && combopool_prevbtn.rect(x,y))
-		{
-			if(do_layer_button_reset(combopool_prevbtn.x,combopool_prevbtn.y,
-				combopool_prevbtn.w,combopool_prevbtn.h,
-				weighted_cpool ? "Weighted" : "Unweighted",0,true))
+			if (cpool_prev_visible && combopool_prevbtn.rect(x, y))
 			{
-				weighted_cpool = !weighted_cpool;
+				if (do_layer_button_reset(combopool_prevbtn.x, combopool_prevbtn.y,
+					combopool_prevbtn.w, combopool_prevbtn.h,
+					weighted_cpool ? "Weighted" : "Unweighted", 0, true))
+				{
+					weighted_cpool = !weighted_cpool;
+				}
 			}
-		}
-	}
-	else if (draw_mode == DM_AUTO)
-	{
-		for (int32_t j = 0; j < num_combo_cols; ++j)
-		{
-			auto& sqr = comboaliaslist[j];
-			auto ind = sqr.rectind(x, y);
-			if (ind > -1)
+			break;
+		case DM_AUTO:
+			for (int32_t j = 0; j < num_combo_cols; ++j)
 			{
-				auto c2 = ind + combo_auto_listpos[j];
-				char msg[80];
-				sprintf(msg, "Auto Combo %d", c2);
-				update_tooltip(x, y, sqr.subsquare(ind), msg);
+				auto& sqr = comboaliaslist[j];
+				auto ind = sqr.rectind(x, y);
+				if (ind > -1)
+				{
+					auto c2 = ind + combo_auto_listpos[j];
+					char msg[80];
+					sprintf(msg, "Auto Combo %d", c2);
+					update_tooltip(x, y, sqr.subsquare(ind), msg);
+				}
 			}
-		}
-	}
-	else
-	{
-		if(combo_preview.rect(x,y))
-		{
-			auto str = "Combo Colors:\n"+get_combo_colornames(Combo,CSet);
-			update_tooltip(x,y,combo_preview,str.c_str());
-		}
-		else if(comboprev_buf[0] && combo_preview_text1.rect(x,y))
-		{
-			update_tooltip(x,y,combo_preview_text1,comboprev_buf);
-		}
-		else if(comboprev_buf2[0] && combo_preview_text2.rect(x,y))
-		{
-			update_tooltip(x,y,combo_preview_text2,comboprev_buf2);
-		}
-		else for(int32_t j=0; j<num_combo_cols; ++j)
-		{
-			auto& sqr = combolist[j];
-			auto ind = sqr.rectind(x,y);
-			if(ind > -1)
+			break;
+		default:
+			if (combo_preview.rect(x, y))
 			{
-				int32_t c2=ind+First[j];
-				std::ostringstream oss;
-				newcombo const& cmb = combobuf[c2];
-				oss << "Combo " << c2 << ": " << combo_class_buf[cmb.type].name;
-				if(cmb.flag != 0)
-					oss << "\nInherent flag: " << ZI.getMapFlagName(cmb.flag);
-				if(!cmb.label.empty())
-					oss << "\nLabel: " << cmb.label;
-					
-				update_tooltip(x,y,sqr.subsquare(ind), oss.str().c_str());
+				auto str = "Combo Colors:\n" + get_combo_colornames(Combo, CSet);
+				update_tooltip(x, y, combo_preview, str.c_str());
 			}
-		}
+			else if (comboprev_buf[0] && combo_preview_text1.rect(x, y))
+			{
+				update_tooltip(x, y, combo_preview_text1, comboprev_buf);
+			}
+			else if (comboprev_buf2[0] && combo_preview_text2.rect(x, y))
+			{
+				update_tooltip(x, y, combo_preview_text2, comboprev_buf2);
+			}
+			else for (int32_t j = 0; j < num_combo_cols; ++j)
+			{
+				auto& sqr = combolist[j];
+				auto ind = sqr.rectind(x, y);
+				if (ind > -1)
+				{
+					int32_t c2 = ind + First[j];
+					std::ostringstream oss;
+					newcombo const& cmb = combobuf[c2];
+					oss << "Combo " << c2 << ": " << combo_class_buf[cmb.type].name;
+					if (cmb.flag != 0)
+						oss << "\nInherent flag: " << ZI.getMapFlagName(cmb.flag);
+					if (!cmb.label.empty())
+						oss << "\nLabel: " << cmb.label;
+
+					update_tooltip(x, y, sqr.subsquare(ind), oss.str().c_str());
+				}
+			}
 	}
 	
 	if (favorites_list.rect(x, y))
