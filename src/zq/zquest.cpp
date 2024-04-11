@@ -3594,7 +3594,6 @@ int32_t onPgUp()
 			break;
 		default:
 			scrollup(current_combolist);
-			break;
 	}
 	return D_O_K;
 }
@@ -3614,7 +3613,6 @@ int32_t onPgDn()
 			break;
 		default:
 			scrolldown(current_combolist);
-			break;
 	}
 	return D_O_K;
 }
@@ -3679,13 +3677,11 @@ int32_t onGotoPage()
 
 bool getname(const char *prompt,const char *ext,EXT_LIST *list,const char *def,bool usefilename)
 {
-    go();
-    int32_t ret=0;
-    ret = getname_nogo(prompt,ext,list,def,usefilename);
-    comeback();
-    return ret != 0;
+	go();
+	int32_t ret = getname_nogo(prompt,ext,list,def,usefilename);
+	comeback();
+	return ret != 0;
 }
-
 
 bool getname_nogo(const char *prompt,const char *ext,EXT_LIST *list,const char *def,bool usefilename)
 {
