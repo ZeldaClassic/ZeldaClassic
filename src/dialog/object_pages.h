@@ -91,7 +91,7 @@ public:
 	
 	virtual bool disabled_cb(uint indx) const;
 	virtual const char* cb_get_name(uint indx) const;
-	virtual optional<string> cb_get_cfg(uint indx) const;
+	virtual string cb_get_cfg(uint indx) const;
 	virtual optional<bool> cb_get_default(uint indx) const;
 	virtual void cb_do_rclick(uint indx);
 	
@@ -126,7 +126,7 @@ public:
 	
 	virtual bool disabled_cb(uint indx) const override;
 	virtual const char* cb_get_name(uint indx) const override;
-	virtual optional<string> cb_get_cfg(uint indx) const override;
+	virtual string cb_get_cfg(uint indx) const override;
 	virtual optional<bool> cb_get_default(uint indx) const override;
 	virtual void cb_do_rclick(uint indx) override;
 	
@@ -157,7 +157,7 @@ public:
 	
 	// virtual bool disabled_cb(uint indx) const override;
 	// virtual optional<string> cb_get_name(uint indx) const override;
-	// virtual optional<string> cb_get_cfg(uint indx) const override;
+	// virtual string cb_get_cfg(uint indx) const override;
 	// virtual optional<bool> cb_get_default(uint indx) const override;
 	// virtual void cb_do_rclick(uint indx) override;
 	
@@ -188,7 +188,7 @@ public:
 	
 	// virtual bool disabled_cb(uint indx) const override;
 	// virtual optional<string> cb_get_name(uint indx) const override;
-	// virtual optional<string> cb_get_cfg(uint indx) const override;
+	// virtual string cb_get_cfg(uint indx) const override;
 	// virtual optional<bool> cb_get_default(uint indx) const override;
 	// virtual void cb_do_rclick(uint indx) override;
 	

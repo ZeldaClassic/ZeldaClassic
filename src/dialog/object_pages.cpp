@@ -193,19 +193,23 @@ void ObjectTemplate::draw_info()
 }
 void ObjectTemplate::init(optional<int> start_val)
 {
-	if(start_val)
+	if (start_val)
 		sel = *start_val;
 	sel = bound(sel);
 	sel2.reset();
-	title = fmt::format("Select {}",name());
-	for(uint q = 0; q < OBJPG_CB_TOTAL; ++q)
-		if(auto name = cb_get_cfg(q))
+	title = fmt::format("Select {}", name());
+	for (uint q = 0; q < OBJPG_CB_TOTAL; ++q)
+	{
+		string name = cb_get_cfg(q);
+
+		if ( !name.empty() )
 		{
 			int dv = 0;
-			if(auto d = cb_get_default(q))
+			if (auto d = cb_get_default(q))
 				dv = *d ? 1 : 0;
-			cb[q] = zc_get_config("misc",name->c_str(),dv);
+			cb[q] = zc_get_config("misc", name.c_str(), dv);
 		}
+	}
 	copyind.reset();
 	clk = 0;
 	buttons.clear();
@@ -655,8 +659,10 @@ void ObjectTemplate::write_cb(uint indx)
 {
 	if(indx >= OBJPG_CB_TOTAL)
 		return;
-	if(auto name = cb_get_cfg(indx))
-		zc_set_config("misc",name->c_str(),cb[indx]);
+
+	string name = cb_get_cfg(indx);
+	if( !name.empty() )
+		zc_set_config("misc",name.c_str(),cb[indx]);
 }
 
 void ObjectTemplate::for_area(int s1, optional<int> opts2, std::function<void(int)> callback)
@@ -782,7 +788,7 @@ const char* ObjectTemplate::cb_get_name(uint indx) const
 	}
 	return "";
 }
-optional<string> ObjectTemplate::cb_get_cfg(uint indx) const
+string ObjectTemplate::cb_get_cfg(uint indx) const
 {
 	switch(indx)
 	{
@@ -791,7 +797,7 @@ optional<string> ObjectTemplate::cb_get_cfg(uint indx) const
 		case OBJPG_CB_COLMODE:
 			return fmt::format("column_mode_{}_pages",cfgname());
 	}
-	return nullopt;
+	return "";
 }
 optional<bool> ObjectTemplate::cb_get_default(uint indx) const
 {
@@ -901,7 +907,7 @@ const char* ComboPoolPageObj::cb_get_name(uint indx) const
 	}
 	return ObjectTemplate::cb_get_name(indx);
 }
-optional<string> ComboPoolPageObj::cb_get_cfg(uint indx) const
+string ComboPoolPageObj::cb_get_cfg(uint indx) const
 {
 	switch(indx)
 	{
