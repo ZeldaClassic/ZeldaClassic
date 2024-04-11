@@ -26,17 +26,17 @@ bool call_subscrprop_dialog(SubscrWidget* widg, int32_t obj_ind)
 static const int btn_flags[4] = {INT_BTN_A,INT_BTN_B,INT_BTN_X,INT_BTN_Y};
 SubscrPropDialog::SubscrPropDialog(SubscrWidget* widg, int32_t obj_ind) :
 	subref(widg), local_subref(widg->clone()), index(obj_ind),
-	list_font(GUI::ZCListData::fonts(false,true,true)),
-	list_shadtype(GUI::ZCListData::shadow_types()),
-	list_aligns(GUI::ZCListData::alignments()),
-	list_buttons(GUI::ZCListData::buttons()),
-	list_items(GUI::ZCListData::items(true)),
-	list_counters(GUI::ZCListData::ss_counters(true)), //All counters
+	list_font     (GUI::ZCListData::fonts(false,true,true)),
+	list_shadtype (GUI::ZCListData::shadow_types()),
+	list_aligns   (GUI::ZCListData::alignments()),
+	list_buttons  (GUI::ZCListData::buttons()),
+	list_items    (GUI::ZCListData::items(true)),
+	list_counters (GUI::ZCListData::ss_counters(true)), //All counters
 	list_counters2(GUI::ZCListData::ss_counters(true,true)), //All counters, no (None)
 	list_itemclass(GUI::ZCListData::itemclass(true)),
-	list_genscr(GUI::ZCListData::generic_script()),
-	list_sfx(GUI::ZCListData::sfxnames(true)),
-	list_costinds(GUI::ListData::numbers(false, 0, 2))
+	list_genscr   (GUI::ZCListData::generic_script()),
+	list_sfx      (GUI::ZCListData::sfxnames(true)),
+	list_costinds (GUI::ListData::numbers(false, 0, 2))
 {
 	byte pg = subscr_edit.curpage, ind = index;
 	start_default_btnslot = 0;
