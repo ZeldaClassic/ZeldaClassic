@@ -13,7 +13,7 @@ namespace fs = std::filesystem;
 
 #pragma pack( push )
 #pragma pack( 2 )
-typedef struct GRPICONDIRENTRY
+struct GRPICONDIRENTRY
 {
     BYTE  bWidth;
     BYTE  bHeight;
@@ -23,14 +23,14 @@ typedef struct GRPICONDIRENTRY
     WORD  wBitCount;
     DWORD dwBytesInRes;
     WORD  nId;
-} GRPICONDIRENTRY;
-typedef struct GRPICONDIR
+};
+struct GRPICONDIR
 {
     WORD idReserved;
     WORD idType;
     WORD idCount;
     GRPICONDIRENTRY idEntries[];
-} GRPICONDIR;
+};
 
 #pragma pack( pop )
 
