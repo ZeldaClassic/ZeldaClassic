@@ -27842,12 +27842,8 @@ int32_t onSmartCompile()
 int32_t strchrnum(char const* str, char c)
 {
 	for(int32_t i=0; str[i]; ++i)
-	{
 		if(str[i]==c)
-		{
 			return i;
-		}
-	}
 	
 	return -1;
 }
@@ -28009,14 +28005,14 @@ void textbox_out(BITMAP* dest, FONT* font, int x, int y, int fg, int bg, char co
 void highlight_sqr(BITMAP* dest, int color, int x, int y, int w, int h, int thick)
 {
 	for(int q = 0; q < thick; ++q)
-	{
 		safe_rect(dest, x+q, y+q, x+w-1-q, y+h-1-q, color);
-	}
 }
+
 void highlight_sqr(BITMAP* dest, int color, size_and_pos const& rec, int thick)
 {
 	highlight_sqr(dest, color, rec.x, rec.y, rec.tw(), rec.th(), thick);
 }
+
 void highlight_frag(BITMAP* dest, int color, int x1, int y1, int w, int h, int fw, int fh, int thick)
 {
 	int xc = x1+fw-1;
@@ -28167,9 +28163,7 @@ void update_tooltip(int32_t x, int32_t y, size_and_pos const& sqr, char const* t
 void update_tooltip(int32_t x, int32_t y, int32_t tx, int32_t ty, int32_t tw, int32_t th, char const* tipmsg, int fw, int fh, double scale)
 {
 	if(!EnableTooltips)
-	{
 		return;
-	}
 
 	ttip_install(ttip_global_id, tipmsg, tx, ty, tw, th, x, y, fw, fh);
 }
