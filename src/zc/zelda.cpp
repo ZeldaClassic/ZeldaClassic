@@ -1054,103 +1054,96 @@ HeroClass   Hero;
 // Wait... this is only used by ffscript.cpp!?
 void addLwpn(int32_t x,int32_t y,int32_t z,int32_t id,int32_t type,int32_t power,int32_t dir, int32_t parentid)
 {
-    Lwpns.add(new weapon((zfix)x,(zfix)y,(zfix)z,id,type,power,dir,-1,parentid));
+	Lwpns.add(new weapon((zfix)x,(zfix)y,(zfix)z,id,type,power,dir,-1,parentid));
 }
 
 
 void addLwpnEx(int32_t x,int32_t y,int32_t z,int32_t id,int32_t type,int32_t power,int32_t dir, int32_t parentitem, int32_t parentid, byte script_gen)
 {
 	//weapon::weapon(zfix X,zfix Y,zfix Z,int32_t Id,int32_t Type,int32_t pow,int32_t Dir, int32_t Parentitem, int32_t prntid, byte script_gen, bool isDummy)
-    Lwpns.add(new weapon((zfix)x,(zfix)y,(zfix)z,id,type,power,dir,parentitem,parentid,false,1));
-	
+	Lwpns.add(new weapon((zfix)x,(zfix)y,(zfix)z,id,type,power,dir,parentitem,parentid,false,1));
 }
 
 void ALLOFF(bool messagesToo, bool decorationsToo, bool force)
 {
-    if(messagesToo)
-    {
-        clear_bitmap(msg_bg_display_buf);
-        set_clip_state(msg_bg_display_buf, 1);
-        clear_bitmap(msg_txt_display_buf);
-        set_clip_state(msg_txt_display_buf, 1);
-        clear_bitmap(msg_portrait_display_buf);
-        set_clip_state(msg_portrait_display_buf, 1);
-    }
+	if(messagesToo)
+	{
+		clear_bitmap(msg_bg_display_buf);
+		set_clip_state(msg_bg_display_buf, 1);
+		clear_bitmap(msg_txt_display_buf);
+		set_clip_state(msg_txt_display_buf, 1);
+		clear_bitmap(msg_portrait_display_buf);
+		set_clip_state(msg_portrait_display_buf, 1);
+	}
     
-    clear_bitmap(pricesdisplaybuf);
-    set_clip_state(pricesdisplaybuf, 1);
+	clear_bitmap(pricesdisplaybuf);
+	set_clip_state(pricesdisplaybuf, 1);
     
-    if(items.idCount(iPile))
-    {
-        loadlvlpal(DMaps[currdmap].color);
-    }
+	if(items.idCount(iPile))
+		loadlvlpal(DMaps[currdmap].color);
     
-    items.clear(force);
-    guys.clear(force);
-    Lwpns.clear(force);
-    Ewpns.clear(force);
-    chainlinks.clear(force);
+	items.clear(force);
+	guys.clear(force);
+	Lwpns.clear(force);
+	Ewpns.clear(force);
+	chainlinks.clear(force);
 	mirror_portal.clear();
 	portals.clear(force);
-    clearScriptHelperData();
+	clearScriptHelperData();
     
-    if(decorationsToo)
-        decorations.clear(force);
+	if(decorationsToo)
+		decorations.clear(force);
         
-    particles.clear();
+	particles.clear();
     
-    if(Hero.getDivineProtectionShieldClk())
-    {
-        Hero.setDivineProtectionShieldClk(Hero.getDivineProtectionShieldClk());
-    }
+	if(Hero.getDivineProtectionShieldClk())
+		Hero.setDivineProtectionShieldClk(Hero.getDivineProtectionShieldClk());
     
-    Hero.resetflags(false);
-    Hero.reset_hookshot();
-    linkedmsgclk=0;
-    add_asparkle=0;
-    add_bsparkle=0;
-    add_df1asparkle=false;
-    add_df1bsparkle=false;
-    add_nl1asparkle=false;
-    add_nl1bsparkle=false;
-    add_nl2asparkle=false;
-    add_nl2bsparkle=false;
-    //  for(int32_t i=0; i<1; i++)
-    mblock2.clk=0;
-    dismissmsg();
-    fadeclk=-1;
-    introclk=intropos=72;
-    
-    lensclk = 0;
-    lensid=-1;
-    drawguys=true;
-    
-    if(watch && !cheat_superman)
-    {
-        Hero.setClock(false);
-    }
-    
-    //  if(watch)
-    //    Hero.setClock(false);
-    watch=freeze_guys=loaded_guys=loaded_enemies=blockpath=false;
-    stop_sfx(WAV_BRANG);
-    
-    for(int32_t i=0; i<176; i++)
-        guygrid[i]=0;
+	Hero.resetflags(false);
+	Hero.reset_hookshot();
+	linkedmsgclk=0;
+	add_asparkle=0;
+	add_bsparkle=0;
+	add_df1asparkle=false;
+	add_df1bsparkle=false;
+	add_nl1asparkle=false;
+	add_nl1bsparkle=false;
+	add_nl2asparkle=false;
+	add_nl2bsparkle=false;
+	//  for(int32_t i=0; i<1; i++)
+	mblock2.clk=0;
+	dismissmsg();
+	fadeclk=-1;
+	introclk=intropos=72;
 
-    for(int32_t i=0; i<MAXFFCS; i++)
-        guygridffc[i]=0;
-        
-    sle_clk=0;
-	mblock2.clear();
-    fairy_cnt=0;
+	lensclk = 0;
+	lensid=-1;
+	drawguys=true;
     
-    if(usebombpal)
-    {
-        memcpy(RAMpal, tempbombpal, PAL_SIZE*sizeof(RGB));
-        refreshpal=true;
-        usebombpal=false;
-    }
+	if(watch && !cheat_superman)
+		Hero.setClock(false);
+    
+	//  if(watch)
+	//    Hero.setClock(false);
+	watch=freeze_guys=loaded_guys=loaded_enemies=blockpath=false;
+	stop_sfx(WAV_BRANG);
+    
+	for(int32_t i=0; i<176; i++)
+		guygrid[i]=0;
+
+	for(int32_t i=0; i<MAXFFCS; i++)
+		guygridffc[i]=0;
+        
+	sle_clk=0;
+	mblock2.clear();
+	fairy_cnt=0;
+    
+	if(usebombpal)
+	{
+		memcpy(RAMpal, tempbombpal, PAL_SIZE*sizeof(RGB));
+		refreshpal=true;
+		usebombpal=false;
+	}
 }
 void centerHero()
 {
