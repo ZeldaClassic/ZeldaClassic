@@ -346,9 +346,9 @@ enum
 };
 const char *reflbtn_names[] =
 {
-	"90 CW", "HFlip",
-	"90 CCW", "VFlip",
-	"180 Rot", "Diag Flip"
+	"90° CW", "HFlip",
+	"90° CCW", "VFlip",
+	"180° Rot", "Diag Flip"
 };
 int bgmode = 0, xmode = 0;
 const char *bgmodebtn_names[] =
