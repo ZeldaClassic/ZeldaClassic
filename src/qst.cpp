@@ -686,8 +686,11 @@ PACKFILE *open_quest_file(int32_t *open_error, const char *filename, bool show_p
 	{
 		if( strcmp(filename, "modules/classic/default.qst") == 0)
 			box_start(1, "New Quest", get_zc_font(font_lfont), font, true);
-		else
-			box_start(1, "Loading Quest", get_zc_font(font_lfont), font, true);
+		else {
+			std::string loading_str = "Loading Quest - ";
+			loading_str += filename;
+			box_start(1, loading_str.c_str(), get_zc_font(font_lfont), font, true);
+		}
 	}
 
 	auto unencrypted_result = try_open_maybe_legacy_encoded_file(filename, ENC_STR, nullptr, QH_NEWIDSTR, QH_IDSTR);
