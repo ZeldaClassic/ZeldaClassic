@@ -8442,11 +8442,8 @@ bool overlay_tiles_united(int32_t &tile,int32_t &tile2,int32_t &copy,int32_t &co
 	delete[] move_combo_list;
 	delete[] move_items_list;
 	delete[] move_weapons_list;
-	
-	if(done)
-		return false;
-		
-	return true;
+
+	return !done;
 }
 //
 
