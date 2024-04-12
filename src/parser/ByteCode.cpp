@@ -2495,34 +2495,26 @@ string GlobalArgument::toString() const
 
 string LabelArgument::toString() const
 {
-    if(!haslineno)
-    {
-        char temp[40];
-        sprintf(temp, "l%d", ID);
-        return string(temp);
-    }
-    else
-    {
-        char temp[40];
-        sprintf(temp, "%d", lineno);
-        return string(temp);
-    }
+	char temp[40];
+
+	if(!haslineno)
+		sprintf(temp, "l%d", ID);
+	else
+		sprintf(temp, "%d", lineno);
+
+	return string(temp);
 }
 
 string LabelArgument::toStringSetV() const
 {
-    if(!haslineno)
-    {
-        char temp[40];
-        sprintf(temp, "l%d", ID);
-        return string(temp);
-    }
-    else
-    {
-        char temp[40];
-        sprintf(temp, "%.4f", lineno * 0.0001f);
-        return string(temp);
-    }
+	char temp[40];
+
+	if(!haslineno)
+		sprintf(temp, "l%d", ID);
+	else
+		sprintf(temp, "%.4f", lineno * 0.0001f);
+
+	return string(temp);
 }
 
 string StringArgument::toString() const
