@@ -12907,11 +12907,8 @@ bool copy_tiles_united_floodfill(int32_t &tile,int32_t &tile2,int32_t &copy,int3
 	delete[] move_combo_list;
 	delete[] move_items_list;
 	delete[] move_weapons_list;
-	
-	if(done)
-		return false;
-		
-	return true;
+
+	return !done;
 }
 //
 
