@@ -1244,7 +1244,7 @@ void SemanticAnalyzer::caseExprIdentifier(
 
 void SemanticAnalyzer::caseExprArrow(ASTExprArrow& host, void* param)
 {
-    // Recurse on left.
+	// Recurse on left.
 	visit(host.left.get());
 	if (breakRecursion(host)) return;
 
@@ -1267,7 +1267,7 @@ void SemanticAnalyzer::caseExprArrow(ASTExprArrow& host, void* param)
 				user_class->getName().c_str()));
 		return;
 	}
-    DataTypeClass const* leftType =
+	DataTypeClass const* leftType =
 		dynamic_cast<DataTypeClass const*>(&getNaiveType(base_ltype, scope));
 	if (!leftType)
 	{
