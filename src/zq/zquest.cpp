@@ -15953,8 +15953,8 @@ int32_t d_warpdestscrsel_proc(int32_t msg,DIALOG *d,int32_t c)
 	int scrw = is_overworld ? 16 : 8, scrh = 9;
 	const int max = 0x87;
 	int bufval = zc_xtoi(buf);
-	int val = vbound(bufval,0,max); // cursor location on the screen selection grid
-	bool force_16 = (!is_overworld && (val&0xF) > 0x7) || d->fg;
+	int curloc = vbound(bufval,0,max); // cursor location on the screen selection grid
+	bool force_16 = (!is_overworld && (curloc&0xF) > 0x7) || d->fg;
 	if(force_16) //can't bound, some quests need to warp out of bounds... -Em
 		scrw = 16; //just force show the larger grid instead
 	
@@ -15963,15 +15963,15 @@ int32_t d_warpdestscrsel_proc(int32_t msg,DIALOG *d,int32_t c)
 	
 	int ret = D_O_K;
 	bool redraw = false;
-	if(d->d1 != val)
+	if(d->d1 != curloc)
 	{
 		redraw = true;
-		d->d1 = val;
+		d->d1 = curloc;
 	}
-	if(bufval != val)
+	if(bufval != curloc)
 	{
 		redraw = true;
-		sprintf(buf, "%X", val);
+		sprintf(buf, "%X", curloc);
 	}
 	if(d->d2 != *dmap_ptr)
 	{
@@ -16011,11 +16011,11 @@ int32_t d_warpdestscrsel_proc(int32_t msg,DIALOG *d,int32_t c)
 				auto val2 = (y*16)+x;
 				if(val2 > max) //out of bounds in the bottom-right
 					continue;
-				val = val2;
-				if(d->d1 != val)
+				curloc = val2;
+				if(d->d1 != curloc)
 				{
-					d->d1 = val;
-					sprintf(buf, "%02X", val);
+					d->d1 = curloc;
+					sprintf(buf, "%02X", curloc);
 					redraw2 = true;
 				}
 			}
@@ -16052,40 +16052,40 @@ int32_t d_warpdestscrsel_proc(int32_t msg,DIALOG *d,int32_t c)
 			switch(c>>8)
 			{
 				case KEY_UP:
-					if(val&0xF0)
+					if(curloc&0xF0)
 					{
-						val -= 0x10;
+						curloc -= 0x10;
 						redraw = true;
 					}
 					ret |= D_USED_CHAR;
 					break;
 				case KEY_DOWN:
-					if((val&0xF0) < ((val&0xF) < 0x8 ? 0x80 : 0x70))
+					if((curloc&0xF0) < ((curloc&0xF) < 0x8 ? 0x80 : 0x70))
 					{
-						val += 0x10;
+						curloc += 0x10;
 						redraw = true;
 					}
 					ret |= D_USED_CHAR;
 					break;
 				case KEY_LEFT:
-					if(val&0xF)
+					if(curloc&0xF)
 					{
-						--val;
+						--curloc;
 						redraw = true;
 					}
 					ret |= D_USED_CHAR;
 					break;
 				case KEY_RIGHT:
-					if((val&0xF) < 0xF && val < 0x87)
+					if((curloc&0xF) < 0xF && curloc < 0x87)
 					{
-						++val;
+						++curloc;
 						redraw = true;
 					}
 					ret |= D_USED_CHAR;
 					break;
 			}
 			if(redraw)
-				sprintf(buf, "%02X", val);
+				sprintf(buf, "%02X", curloc);
 			break;
 		}
 	}
