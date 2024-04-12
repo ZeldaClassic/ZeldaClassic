@@ -3691,23 +3691,19 @@ void zmap::drawstaticrow(BITMAP* dest,int32_t x,int32_t y)
 		for (int32_t q = 0; q < 16; ++q)
 			draw_checkerboard(dest, x + q * 16, y, 16);
 	}
-    else if(InvalidBG == 1)
-    {
-        for(int32_t dy=0; dy<16; dy++)
-        {
-            for(int32_t dx=0; dx<256; dx++)
-            {
-                dest->line[y+dy][x+dx]=vc((((zc_oldrand()%100)/50)?0:8)+(((zc_oldrand()%100)/50)?0:7));
-            }
-        }
-    }
-    else
-    {
-        rectfill(dest, x, y, x+255, y+15, vc(0));
-        rect(dest, x, y, x+255, y+15, vc(15));
-        line(dest, x, y, x+255, y+15, vc(15));
-        line(dest, x, y+15, x+255, y, vc(15));
-    }
+	else if(InvalidBG == 1)
+	{
+		for(int32_t dy=0; dy<16; dy++)
+			for(int32_t dx=0; dx<256; dx++)
+				dest->line[y+dy][x+dx]=vc((((zc_oldrand()%100)/50)?0:8)+(((zc_oldrand()%100)/50)?0:7));
+	}
+	else
+	{
+		rectfill(dest, x, y, x+255, y+15, vc(0));
+		rect(dest, x, y, x+255, y+15, vc(15));
+		line(dest, x, y, x+255, y+15, vc(15));
+		line(dest, x, y+15, x+255, y, vc(15));
+	}
 }
 
 void zmap::draw_template(BITMAP* dest,int32_t x,int32_t y)
