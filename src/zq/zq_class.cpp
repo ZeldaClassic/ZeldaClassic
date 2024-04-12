@@ -4927,8 +4927,9 @@ void zmap::PasteToAll(const mapscr& copymapscr)
 
 void zmap::PasteAllToAll(const mapscr& copymapscr)
 {
-    if(can_paste)
-    {
+	if (!can_paste)
+		return;
+
         int32_t oldcolor=getcolor();
         
         for(int32_t x=0; x<128; x++)
@@ -4942,17 +4943,12 @@ void zmap::PasteAllToAll(const mapscr& copymapscr)
         loadlvlpal(newcolor);
         
         if(!(screens[currscr].valid&mVALID))
-        {
             newcolor=-1;
-        }
         
         if(newcolor!=oldcolor)
-        {
             rebuild_trans_table();
-        }
         
         saved=false;
-    }
 }
 
 void zmap::PasteEnemies(const mapscr& copymapscr)
