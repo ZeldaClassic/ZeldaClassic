@@ -7005,14 +7005,14 @@ int32_t writeheader(PACKFILE *f, zquestheader *Header)
 		
 		
 		if(!pfwrite(&tempcompilerversion,256,f))
-        {
-            new_return(36);
-        }
+		{
+		    new_return(36);
+		}
 		
 		if(!pfwrite("ZQuest Classic",1024,f))
-        {
-            new_return(37);
-        }
+		{
+		    new_return(37);
+		}
 		
 		if(!p_putc(V_ZC_COMPILERSIG,f))
 		{
