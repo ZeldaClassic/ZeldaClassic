@@ -3245,13 +3245,9 @@ void zmap::drawrow(BITMAP* dest,int32_t x,int32_t y,int32_t flags,int32_t c,int3
 	if(ShowMisalignments)
 	{
 		if(c<16)
-		{
 			check_alignments(dest,x,y,scr);
-		}
 		else if(c>159)
-		{
 			check_alignments(dest,x,y-160,scr);
-		}
 	}
 	
 	resize_mouse_pos=false;
@@ -3282,9 +3278,7 @@ void zmap::drawcolumn(BITMAP* dest,int32_t x,int32_t y,int32_t flags,int32_t c,i
 	
 	
 	if(LayerMaskInt[0]==0)
-	{
 		rectfill(dest,x,y,x+15,y+175,0);
-	}
 	
 	// int32_t cs=2;
 	
@@ -3527,13 +3521,9 @@ void zmap::drawcolumn(BITMAP* dest,int32_t x,int32_t y,int32_t flags,int32_t c,i
 	if(ShowMisalignments)
 	{
 		if((c&0x0F)==0)
-		{
 			check_alignments(dest,x,y,scr);
-		}
 		else if((c&0x0F)==15)
-		{
 			check_alignments(dest,x-240,y,scr);
-		}
 	}
 	
 	resize_mouse_pos=false;
@@ -3562,9 +3552,7 @@ void zmap::drawblock(BITMAP* dest,int32_t x,int32_t y,int32_t flags,int32_t c,in
 	resize_mouse_pos=true;
 	
 	if(LayerMaskInt[0]!=0)
-	{
 		rectfill(dest,x,y,x+15,y+15,0);
-	}
 	
 	for(int32_t k=1; k<3; k++)
 	{
@@ -3678,16 +3666,12 @@ void zmap::drawblock(BITMAP* dest,int32_t x,int32_t y,int32_t flags,int32_t c,in
 	if(flags&cWALK)
 	{
 		if(LayerMaskInt[0]!=0)
-		{
 			put_walkflags_layered_external(dest,x,y,c,-1, map,scr);
-		}
 		
 		for(int32_t k=0; k<2; k++)
 		{
 			if(LayerMaskInt[k+1]!=0)
-			{
 				put_walkflags_layered_external(dest,x,y,c,k, map,scr);
-			}
 		}
 	}
 	
