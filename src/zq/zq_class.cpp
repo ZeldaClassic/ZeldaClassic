@@ -4153,10 +4153,10 @@ set_ffc_command::data_t set_ffc_command::create_data(const ffcdata& ffc)
 
 void set_ffc_command::execute()
 {
-    mapscr* mapscr_ptr = Map.AbsoluteScr(map, scr);
+	mapscr* mapscr_ptr = Map.AbsoluteScr(map, scr);
 	if(!mapscr_ptr) return;
 
-    mapscr_ptr->ffcs[i].x = data.x;
+	mapscr_ptr->ffcs[i].x = data.x;
 	mapscr_ptr->ffcs[i].y = data.y;
 	mapscr_ptr->ffcs[i].vx = data.vx;
 	mapscr_ptr->ffcs[i].vy = data.vy;
@@ -4180,10 +4180,10 @@ void set_ffc_command::execute()
 
 void set_ffc_command::undo()
 {
-    mapscr* mapscr_ptr = Map.AbsoluteScr(map, scr);
+	mapscr* mapscr_ptr = Map.AbsoluteScr(map, scr);
 	if(!mapscr_ptr) return;
 
-    mapscr_ptr->ffcs[i].x = prev_data.x;
+	mapscr_ptr->ffcs[i].x = prev_data.x;
 	mapscr_ptr->ffcs[i].y = prev_data.y;
 	mapscr_ptr->ffcs[i].vx = prev_data.vx;
 	mapscr_ptr->ffcs[i].vy = prev_data.vy;
@@ -4207,16 +4207,16 @@ void set_ffc_command::undo()
 
 void set_flag_command::execute()
 {
-    mapscr* mapscr_ptr = Map.AbsoluteScr(map, scr);
+	mapscr* mapscr_ptr = Map.AbsoluteScr(map, scr);
 	if(!mapscr_ptr) return;
-    mapscr_ptr->sflag[pos] = flag;
+	mapscr_ptr->sflag[pos] = flag;
 }
 
 void set_flag_command::undo()
 {
 	mapscr* mapscr_ptr = Map.AbsoluteScr(map, scr);
 	if(!mapscr_ptr) return;
-    mapscr_ptr->sflag[pos] = prev_flag;
+	mapscr_ptr->sflag[pos] = prev_flag;
 }
 
 void set_door_command::execute()
