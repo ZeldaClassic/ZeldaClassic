@@ -10217,64 +10217,40 @@ int32_t writestrings(PACKFILE *f, [[maybe_unused]] word version, [[maybe_unused]
             }
             
             if(!p_iputw(MsgStrings[i].nextstring,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_iputl(MsgStrings[i].tile,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_putc(MsgStrings[i].cset,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_putc(MsgStrings[i].trans?1:0,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_putc(MsgStrings[i].font,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_iputw(MsgStrings[i].x,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_iputw(MsgStrings[i].y,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_iputw(MsgStrings[i].w,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_iputw(MsgStrings[i].h,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_putc(MsgStrings[i].hspace,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_putc(MsgStrings[i].vspace,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_putc(MsgStrings[i].stringflags,f))
-            {
                 return qe_invalid;
-            }
 			
 			for(int32_t q = 0; q < 4; ++q)
 			{
@@ -10285,65 +10261,41 @@ int32_t writestrings(PACKFILE *f, [[maybe_unused]] word version, [[maybe_unused]
 			}
 			
 			if(!p_iputl(MsgStrings[i].portrait_tile,f))
-			{
 				return qe_invalid;
-			}
 			
 			if(!p_putc(MsgStrings[i].portrait_cset,f))
-			{
 				return qe_invalid;
-			}
 			
 			if(!p_putc(MsgStrings[i].portrait_x,f))
-			{
 				return qe_invalid;
-			}
 			
 			if(!p_putc(MsgStrings[i].portrait_y,f))
-			{
 				return qe_invalid;
-			}
 			
 			if(!p_putc(MsgStrings[i].portrait_tw,f))
-			{
 				return qe_invalid;
-			}
 			
 			if(!p_putc(MsgStrings[i].portrait_th,f))
-			{
 				return qe_invalid;
-			}
 			
 			if(!p_putc(MsgStrings[i].shadow_type,f))
-			{
 				return qe_invalid;
-			}
 			
 			if(!p_putc(MsgStrings[i].shadow_color,f))
-			{
 				return qe_invalid;
-			}
 			
 			if(!p_putc(MsgStrings[i].drawlayer,f))
-			{
 				return qe_invalid;
-			}
             
             if(!p_putc(MsgStrings[i].sfx,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_iputw(MsgStrings[i].listpos,f))
-            {
                 return qe_invalid;
-            }
         }
         
         if(writecycle==0)
-        {
             section_size=writesize;
-        }
     }
     
     if(writesize!=int32_t(section_size) && save_warn)
@@ -10380,9 +10332,7 @@ int32_t writestrings_text(PACKFILE *f)
         sprintf(ebuf,"Total strings: %d\n", msg_count-1);
         
         if(!pfwrite(&ebuf,(int32_t)strlen(ebuf),f))
-        {
             return qe_invalid;
-        }
         
         for(int32_t i=1; i<msg_count; i++)
         {
@@ -10397,16 +10347,12 @@ int32_t writestrings_text(PACKFILE *f)
                 sprintf(ebuf,"\n\n___%d___\n", str);
                 
             if(!pfwrite(&ebuf,(int32_t)strlen(ebuf),f))
-            {
                 return qe_invalid;
-            }
             
             encode_msg_str(str);
             
             if(!pfwrite(&msgbuf,(int32_t)strlen(msgbuf),f))
-            {
                 return qe_invalid;
-            }
         }
     }
     
@@ -10676,9 +10622,7 @@ int32_t writetiles(PACKFILE *f, [[maybe_unused]] word version, [[maybe_unused]] 
         }
         
         if(writecycle==0)
-        {
             section_size=writesize;
-        }
     }
     
     if(writesize!=int32_t(section_size) && save_warn)
@@ -10811,9 +10755,7 @@ int32_t writemidis(PACKFILE *f)
         }
         
         if(writecycle==0)
-        {
             section_size=writesize;
-        }
     }
     
     if(writesize!=int32_t(section_size) && save_warn)
@@ -10882,9 +10824,7 @@ int32_t writecheats(PACKFILE *f, zquestheader *Header)
         }
         
         if(writecycle==0)
-        {
             section_size=writesize;
-        }
     }
     
     if(writesize!=int32_t(section_size) && save_warn)
@@ -11423,9 +11363,7 @@ int32_t writeguys(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 		}
 		
 		if(writecycle==0)
-		{
 			section_size=writesize;
-		}
 	}
 	
 	if(writesize!=int32_t(section_size) && save_warn)
@@ -12009,9 +11947,7 @@ int32_t writeherosprites(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
 		//}
 		
         if(writecycle==0)
-        {
             section_size=writesize;
-        }
     }
     
     //More data will come here
@@ -12099,9 +12035,7 @@ int32_t writesubscreens(PACKFILE *f, zquestheader *Header)
 		}
 		
 		if(writecycle==0)
-		{
 			section_size=writesize;
-		}
 	}
 	
 	if(writesize!=int32_t(section_size) && save_warn)
@@ -12826,9 +12760,7 @@ int32_t writeffscript(PACKFILE *f, zquestheader *Header)
         }
         
         if(writecycle==0)
-        {
             section_size=writesize;
-        }
     }
     
         
@@ -13142,9 +13074,7 @@ int32_t writesfx(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
         }
         
         if(writecycle==0)
-        {
             section_size=writesize;
-        }
     }
     
     if(writesize!=int32_t(section_size) && save_warn)
@@ -13339,9 +13269,7 @@ int32_t writeinitdata(PACKFILE *f, zquestheader *)
 			new_return(71);
 		
 		if(writecycle==0)
-		{
 			section_size=writesize;
-		}
 	}
 	
 	if(writesize!=int32_t(section_size) && save_warn)
@@ -13423,9 +13351,7 @@ int32_t writeitemdropsets(PACKFILE *f, [[maybe_unused]] zquestheader *Header)
         }
         
         if(writecycle==0)
-        {
             section_size=writesize;
-        }
     }
     
     if(writesize!=int32_t(section_size) && save_warn)
@@ -13917,7 +13843,7 @@ int32_t save_quest(const char *filename, bool timed_save)
 
 void center_zq_class_dialogs()
 {
-    jwin_center_dialog(pwd_dlg);
+	jwin_center_dialog(pwd_dlg);
 }
 
 void zmap::prv_secrets(bool high16only)
