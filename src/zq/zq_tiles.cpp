@@ -15883,15 +15883,13 @@ int32_t select_tile(int32_t &tile,int32_t &flip,int32_t type,int32_t &cs,bool ed
 				x=zc_min(zc_max(x,0),(320*mul)-1);
 				int32_t t = (y>>(5))*TILES_PER_ROW + (x>>(5)) + first;
 				
+
 				if(type==0 && (key[KEY_LSHIFT] || key[KEY_RSHIFT]))
-				{
 					tile2=t;
-				}
 				else
-				{
 					tile=tile2=t;
-				}
 				
+
 				if(tile_clicked!=t)
 				{
 					dclick_status=DCLICK_NOT;
@@ -16077,9 +16075,8 @@ REDRAW:
 		}
 			
 		if(redraw)
-		{
 			draw_tiles(first,cs,f);
-		}
+
 		if(f&8)
 		{
 			if(rect_sel)
@@ -16129,10 +16126,10 @@ REDRAW:
 		
 		if(r_click)
 		{
-			select_tile_view_menu.select_uid(MENUID_SELTILE_VIEW_HIDE_USED, HIDE_USED);
+			select_tile_view_menu.select_uid(MENUID_SELTILE_VIEW_HIDE_USED,   HIDE_USED);
 			select_tile_view_menu.select_uid(MENUID_SELTILE_VIEW_HIDE_UNUSED, HIDE_UNUSED);
-			select_tile_view_menu.select_uid(MENUID_SELTILE_VIEW_HIDE_BLANK, HIDE_BLANK);
-			select_tile_view_menu.select_uid(MENUID_SELTILE_VIEW_HIDE_8BIT, HIDE_8BIT_MARKER);
+			select_tile_view_menu.select_uid(MENUID_SELTILE_VIEW_HIDE_BLANK,  HIDE_BLANK);
+			select_tile_view_menu.select_uid(MENUID_SELTILE_VIEW_HIDE_8BIT,   HIDE_8BIT_MARKER);
 			NewMenu rcmenu
 			{
 				{ "Copy", [&]()
