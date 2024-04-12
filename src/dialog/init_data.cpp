@@ -54,12 +54,12 @@ void InitDataDialog::setOfs(size_t ofs)
 	bool vis = levelsOffset!=510;
 	for(int32_t q = 2; q < 10; ++q)
 	{
-		l_lab[q]->setVisible(vis);
-		l_maps[q]->setVisible(vis);
-		l_comp[q]->setVisible(vis);
-		l_bkey[q]->setVisible(vis);
+		l_lab   [q]->setVisible(vis);
+		l_maps  [q]->setVisible(vis);
+		l_comp  [q]->setVisible(vis);
+		l_bkey  [q]->setVisible(vis);
 		l_mcguff[q]->setVisible(vis);
-		l_keys[q]->setVisible(vis);
+		l_keys  [q]->setVisible(vis);
 	}
 }
 
