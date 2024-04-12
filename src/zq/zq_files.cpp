@@ -603,9 +603,7 @@ int32_t onTileset()
 int32_t onRevert()
 {
 	if(jwin_alert("Confirm Revert","Are you sure you want to lose","all changes since last save?",NULL,"Yes","No",'y','n',get_zc_font(font_lfont))==2)
-	{
 		return D_O_K;
-	}
     
 	if(filepath[0]!=0)
 	{
@@ -677,7 +675,7 @@ int32_t get_import_map_bias()
             if(import_map_bias_dlg[i+4].flags&D_SELECTED)
             {
                 ImportMapBias=i;
-				zc_set_config("zquest","import_map_bias",ImportMapBias);
+		zc_set_config("zquest","import_map_bias",ImportMapBias);
                 break;
             }
         }
@@ -694,9 +692,7 @@ int32_t onImport_Map()
         return D_O_K;
         
     if(get_import_map_bias()==-1)
-    {
         return D_O_K;
-    }
     
     if(!getname("Import Map (.map)","map",NULL,datapath,false))
         return D_O_K;
