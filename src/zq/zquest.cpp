@@ -15907,27 +15907,27 @@ static TABPANEL warp_tabs[] =
 
 int32_t onTileWarpIndex(int32_t index)
 {
-    int32_t i=-1;
+	int32_t i=-1;
     
-    while(warp_tabs[++i].text != NULL)
-        warp_tabs[i].flags = (i==index ? D_SELECTED : 0);
+	while(warp_tabs[++i].text != NULL)
+		warp_tabs[i].flags = (i==index ? D_SELECTED : 0);
         
-    onTileWarp();
-    return D_O_K;
+	onTileWarp();
+	return D_O_K;
 }
 
 static char warpr_buf[10];
 const char *warprlist(int32_t index, int32_t *list_size)
 {
-    if(index>=0)
-    {
-        bound(index,0,3);
-        sprintf(warpr_buf,"%c",index+0x41);
-        return warpr_buf;
-    }
+	if(index>=0)
+	{
+		bound(index,0,3);
+		sprintf(warpr_buf,"%c",index+0x41);
+		return warpr_buf;
+	}
     
-    *list_size=4;
-    return NULL;
+	*list_size=4;
+	return NULL;
 }
 
 int32_t d_wflag_proc(int32_t msg,DIALOG *d,int32_t c);
