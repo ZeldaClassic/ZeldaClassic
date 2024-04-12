@@ -19173,36 +19173,25 @@ int32_t readcomboaliasfile_to_location(PACKFILE *f, int32_t start)
 	{
 		memset(&temp_alias, 0, sizeof(temp_alias));
 		if(!p_igetw(&temp_alias.combo,f))
-		{
 			return 0;
-		}
 			
 		if(!p_getc(&temp_alias.cset,f))
-		{
 			return 0;
-		}
 			
 		int32_t count2 = 0;
 		
 		if(!p_igetl(&count2,f))
-		{
 			return 0;
-		}
 		
 		if(!p_getc(&temp_alias.width,f))
-		{
 			return 0;
-		}
 			
 		if(!p_getc(&temp_alias.height,f))
-		{
 			return 0;
-		}
 			
 		if(!p_getc(&temp_alias.layermask,f))
-		{
 			return 0;
-		}
+
 		//These values are flexible, and may differ in size, so we delete them 
 		//and recreate them at the correct size on the pointer.
 		temp_alias.combos.clear();
