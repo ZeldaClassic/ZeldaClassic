@@ -104,12 +104,11 @@ vector<Function*> ZScript::getClassFunctions(TypeStore const& store)
 {
 	vector<Function*> functions;
 	vector<ZClass*> classes = store.getClasses();
-	for (vector<ZClass*>::const_iterator it = classes.begin();
-	     it != classes.end(); ++it)
+	for (ZClass const* zclass : classes)
 	{
-		appendElements(functions, (*it)->getLocalFunctions());
-		appendElements(functions, (*it)->getLocalGetters());
-		appendElements(functions, (*it)->getLocalSetters());
+		appendElements(functions, zclass->getLocalFunctions());
+		appendElements(functions, zclass->getLocalGetters());
+		appendElements(functions, zclass->getLocalSetters());
 	}
 	return functions;
 }
