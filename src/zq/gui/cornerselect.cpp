@@ -18,10 +18,8 @@ int32_t newg_cornersel_proc(int32_t msg,DIALOG *d,int32_t)
 			bool shift = (key_shifts & KB_SHIFT_FLAG);
 			bool ctrl = (key_shifts & KB_CTRL_FLAG);
 			while(gui_mouse_b())
-			{
-				/*Do nothing*/
-				rest(1);
-			}
+				rest(1); // Do nothing
+
 			int32_t bit = 0;
 			if(mouse_in_rect(d->x+2,d->y+2,bw,bh))
 				bit = 0b0001;
