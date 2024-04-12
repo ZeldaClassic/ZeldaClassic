@@ -13,21 +13,21 @@ using std::string;
 
 string la_toString(int32_t value)
 {
-    char temp[128];
-    string sign = value < 0 ? "-" : "";
-    sprintf(temp,"%d", abs(value/10000));
-    string first = string(temp);
+	char temp[128];
+	string sign = value < 0 ? "-" : "";
+	sprintf(temp,"%d", abs(value/10000));
+	string first = string(temp);
     
-    if(value % 10000 == 0)
-        return sign + first;
+	if(value % 10000 == 0)
+		return sign + first;
         
-    sprintf(temp,"%d", abs(value%10000));
-    string second = string(temp);
+	sprintf(temp,"%d", abs(value%10000));
+	string second = string(temp);
     
-    while(second.length() < 4)
-        second = "0" + second;
+	while(second.length() < 4)
+		second = "0" + second;
         
-    return sign + first + "." + second;
+	return sign + first + "." + second;
 }
 
 string LiteralArgument::toString() const
@@ -2589,7 +2589,7 @@ string OSetImmediate::toString() const
 
 string OSetRegister::toString() const
 {
-    return "SETR " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
+	return "SETR " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
 }
 
 string OReadPODArrayR::toString() const
