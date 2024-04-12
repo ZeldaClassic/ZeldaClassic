@@ -3984,26 +3984,22 @@ void zmap::putdoor(int32_t scr,int32_t side,int32_t door)
 void list_command::execute()
 {
     for (auto command : commands)
-    {
         command->execute();
-    }
 }
 
 void list_command::undo()
 {
     for (int i = commands.size() - 1; i >= 0; i--)
-    {
         commands[i]->undo();
-    }
 }
 
 int list_command::size()
 {
     int s = 0;
+
     for (auto command : commands)
-    {
         s += command->size();
-    }
+
     return s;
 }
 
