@@ -223,9 +223,8 @@ void SemanticAnalyzer::caseBlock(ASTBlock& host, void*)
 {
 	// Switch to block scope.
 	if(!host.getScope())
-	{
 		host.setScope(scope->makeChild());
-	}
+
 	scope = host.getScope();
 
 	// Recurse.
@@ -239,9 +238,8 @@ void SemanticAnalyzer::caseStmtIf(ASTStmtIf& host, void*)
 {
 	// Switch to block scope.
 	if(!host.getScope())
-	{
 		host.setScope(scope->makeChild());
-	}
+
 	Scope* oldscope = scope;
 	scope = host.getScope();
 
@@ -330,9 +328,8 @@ void SemanticAnalyzer::caseStmtForEach(ASTStmtForEach& host, void* param)
 {
 	//Use sub-scope
 	if(!host.getScope())
-	{
 		host.setScope(scope->makeChild());
-	}
+
 	scope = host.getScope();
 	
 	visit(host.arrExpr.get(), param);
@@ -477,7 +474,9 @@ void SemanticAnalyzer::caseDataTypeDef(ASTDataTypeDef& host, void*)
 
 void SemanticAnalyzer::caseCustomDataTypeDef(ASTCustomDataTypeDef& host, void*)
 {
-	if(host.registered()) return; //Skip if already handled
+	if(host.registered())
+		return; //Skip if already handled
+
 	if(!host.type)
 	{
 		//Don't allow use of a name that already exists
@@ -513,7 +512,9 @@ void SemanticAnalyzer::caseCustomDataTypeDef(ASTCustomDataTypeDef& host, void*)
 
 void SemanticAnalyzer::caseScriptTypeDef(ASTScriptTypeDef& host, void*)
 {
-	if(host.registered()) return; //Skip if already handled
+	if(host.registered())
+		return; //Skip if already handled
+
 	// Resolve the base type under current scope.
 	ParserScriptType type = resolveScriptType(*host.oldType, *scope);
 	if (!type.isValid())
