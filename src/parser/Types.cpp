@@ -375,35 +375,12 @@ void DataType::addCustom(DataTypeCustom* custom)
 int32_t DataType::nextCustomId_;
 std::map<int32_t, DataTypeCustom*> DataType::customTypes;
 
-bool ZScript::operator==(DataType const& lhs, DataType const& rhs)
-{
-	return lhs.compare(rhs) == 0;
-}
-
-bool ZScript::operator!=(DataType const& lhs, DataType const& rhs)
-{
-	return lhs.compare(rhs) != 0;
-}
-
-bool ZScript::operator<(DataType const& lhs, DataType const& rhs)
-{
-	return lhs.compare(rhs) < 0;
-}
-
-bool ZScript::operator<=(DataType const& lhs, DataType const& rhs)
-{
-	return lhs.compare(rhs) <= 0;
-}
-
-bool ZScript::operator>(DataType const& lhs, DataType const& rhs)
-{
-	return lhs.compare(rhs) > 0;
-}
-
-bool ZScript::operator>=(DataType const& lhs, DataType const& rhs)
-{
-	return lhs.compare(rhs) >= 0;
-}
+bool ZScript::operator==(DataType const& lhs, DataType const& rhs) { return lhs.compare(rhs) == 0; } 
+bool ZScript::operator!=(DataType const& lhs, DataType const& rhs) { return lhs.compare(rhs) != 0; } 
+bool ZScript::operator< (DataType const& lhs, DataType const& rhs) { return lhs.compare(rhs) < 0;  } 
+bool ZScript::operator<=(DataType const& lhs, DataType const& rhs) { return lhs.compare(rhs) <= 0; } 
+bool ZScript::operator> (DataType const& lhs, DataType const& rhs) { return lhs.compare(rhs) > 0;  } 
+bool ZScript::operator>=(DataType const& lhs, DataType const& rhs) { return lhs.compare(rhs) >= 0; }
 
 DataType const& ZScript::getNaiveType(DataType const& type, Scope* scope)
 {
