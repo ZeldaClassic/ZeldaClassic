@@ -604,35 +604,12 @@ void zmap::resetflags()
     }
 }
 
-word zmap::tcmbdat(int32_t pos)
-{
-    return screens[TEMPLATE].data[pos];
-}
-
-word zmap::tcmbcset(int32_t pos)
-{
-    return screens[TEMPLATE].cset[pos];
-}
-
-int32_t zmap::tcmbflag(int32_t pos)
-{
-    return screens[TEMPLATE].sflag[pos];
-}
-
-word zmap::tcmbdat2(int32_t pos)
-{
-    return screens[TEMPLATE2].data[pos];
-}
-
-word zmap::tcmbcset2(int32_t pos)
-{
-    return screens[TEMPLATE2].cset[pos];
-}
-
-int32_t zmap::tcmbflag2(int32_t pos)
-{
-    return screens[TEMPLATE2].sflag[pos];
-}
+word    zmap::tcmbdat  (int32_t pos) { return screens[TEMPLATE].data[pos]; } 
+word    zmap::tcmbcset (int32_t pos) { return screens[TEMPLATE].cset[pos]; } 
+int32_t zmap::tcmbflag (int32_t pos) { return screens[TEMPLATE].sflag[pos]; } 
+word    zmap::tcmbdat2 (int32_t pos) { return screens[TEMPLATE2].data[pos]; } 
+word    zmap::tcmbcset2(int32_t pos) { return screens[TEMPLATE2].cset[pos]; } 
+int32_t zmap::tcmbflag2(int32_t pos) { return screens[TEMPLATE2].sflag[pos]; }
 
 void zmap::TemplateAll()
 {
@@ -723,10 +700,8 @@ void zmap::clearscr(int32_t scr)
 
 const char *loaderror[] =
 {
-
     "OK","File not found","Incomplete data",
     "Invalid version","Invalid file"
-    
 };
 
 int32_t zmap::load(const char *path)
