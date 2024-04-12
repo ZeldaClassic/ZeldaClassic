@@ -2488,9 +2488,9 @@ string VarArgument::toString() const
 
 string GlobalArgument::toString() const
 {
-    char temp[40];
-    sprintf(temp, "gd%d", ID);
-    return string(temp);
+	char temp[40];
+	sprintf(temp, "gd%d", ID);
+	return string(temp);
 }
 
 string LabelArgument::toString() const
