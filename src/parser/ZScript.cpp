@@ -505,15 +505,8 @@ int32_t FunctionSignature::compare(FunctionSignature const& other) const
 	return 0;
 }
 
-bool FunctionSignature::operator==(FunctionSignature const& other) const
-{
-	return compare(other) == 0;
-}
-
-bool FunctionSignature::operator<(FunctionSignature const& other) const
-{
-	return compare(other) < 0;
-}
+bool FunctionSignature::operator==(FunctionSignature const& other) const { return compare(other) == 0; } 
+bool FunctionSignature::operator< (FunctionSignature const& other) const { return compare(other) < 0;  }
 
 string FunctionSignature::asString() const
 {
