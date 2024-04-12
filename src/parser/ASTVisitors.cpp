@@ -144,29 +144,18 @@ void RecursiveVisitor::checkCast(
 
 void RecursiveVisitor::caseFile(ASTFile& host, void* param)
 {
-	block_visit(host, host.options, param);
-	if (breakRecursion(host, param)) return;
-	block_visit(host, host.use, param);
-	if (breakRecursion(host, param)) return;
-	block_visit(host, host.dataTypes, param);
-	if (breakRecursion(host, param)) return;
-	block_visit(host, host.scriptTypes, param);
-	if (breakRecursion(host, param)) return;
-	block_visit(host, host.imports, param);
-	if (breakRecursion(host, param)) return;
-	block_visit(host, host.condimports, param);
-	if (breakRecursion(host, param)) return;
-	block_visit(host, host.variables, param);
-	if (breakRecursion(host, param)) return;
-	block_visit(host, host.functions, param);
-	if (breakRecursion(host, param)) return;
-	block_visit(host, host.namespaces, param);
-	if (breakRecursion(host, param)) return;
-	block_visit(host, host.scripts, param);
-	if (breakRecursion(host, param)) return;
-	block_visit(host, host.classes, param);
-	if (breakRecursion(host, param)) return;
-	block_visit(host, host.asserts, param);
+	block_visit(host, host.options,     param); if (breakRecursion(host, param)) return;
+	block_visit(host, host.use,         param); if (breakRecursion(host, param)) return;
+	block_visit(host, host.dataTypes,   param); if (breakRecursion(host, param)) return;
+	block_visit(host, host.scriptTypes, param); if (breakRecursion(host, param)) return;
+	block_visit(host, host.imports,     param); if (breakRecursion(host, param)) return;
+	block_visit(host, host.condimports, param); if (breakRecursion(host, param)) return;
+	block_visit(host, host.variables,   param); if (breakRecursion(host, param)) return;
+	block_visit(host, host.functions,   param); if (breakRecursion(host, param)) return;
+	block_visit(host, host.namespaces,  param); if (breakRecursion(host, param)) return;
+	block_visit(host, host.scripts,     param); if (breakRecursion(host, param)) return;
+	block_visit(host, host.classes,     param); if (breakRecursion(host, param)) return;
+	block_visit(host, host.asserts,     param);
 }
 
 void RecursiveVisitor::caseSetOption(ASTSetOption& host, void* param)
