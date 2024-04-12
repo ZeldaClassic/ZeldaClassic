@@ -2,7 +2,6 @@
 #include "tab_ctl.h"
 #include "gui/jwin.h"
 
-extern volatile int32_t myvsync;
 void update_hw_screen(bool force);
 
 int32_t vc2(int32_t x)
@@ -216,10 +215,9 @@ int32_t tab_count(TABPANEL *panel)
 
 int32_t tabs_width(TABPANEL *panel)
 {
-	int32_t i=0;
 	int32_t w=0;
     
-	for(i=0; panel[i].text; ++i)
+	for(int32_t i=0; panel[i].text; ++i)
 		w+=text_length(font, (char *)panel[i].text)+15;
     
 	return w+1;
@@ -227,8 +225,8 @@ int32_t tabs_width(TABPANEL *panel)
 
 bool uses_tab_arrows(TABPANEL *panel, int32_t maxwidth)
 {
-//  return (((d->d1&0xFF00)>>8)!=0||last_visible_tab(panel,((d->d1&0xFF00)>>8),d->w)+1<tab_count(panel));
-    return (tabs_width(panel)>maxwidth);
+	//return (((d->d1&0xFF00)>>8)!=0||last_visible_tab(panel,((d->d1&0xFF00)>>8),d->w)+1<tab_count(panel));
+	return (tabs_width(panel)>maxwidth);
 }
 
 int32_t last_visible_tab(TABPANEL *panel, int32_t first_tab, int32_t maxwidth)
@@ -250,10 +248,9 @@ int32_t last_visible_tab(TABPANEL *panel, int32_t first_tab, int32_t maxwidth)
 
 int32_t displayed_tabs_width(TABPANEL *panel, int32_t first_tab, int32_t maxwidth)
 {
-	int32_t i=0;
 	int32_t w=0;
     
-	for(i=first_tab; panel[i].text&&i<=last_visible_tab(panel, first_tab, maxwidth); ++i)
+	for(int32_t i=first_tab; panel[i].text&&i<=last_visible_tab(panel, first_tab, maxwidth); ++i)
 		w+=text_length(font, (char *)panel[i].text)+15;
     
 	return w+1;
@@ -261,10 +258,9 @@ int32_t displayed_tabs_width(TABPANEL *panel, int32_t first_tab, int32_t maxwidt
 
 int32_t discern_tab(TABPANEL *panel, int32_t first_tab, int32_t x)
 {
-	int32_t i=0;
 	int32_t w=0;
     
-	for(i=first_tab; panel[i].text; i++)
+	for(int32_t i=first_tab; panel[i].text; i++)
 	{
 		w+=text_length(font, (char *)panel[i].text)+15;
         
