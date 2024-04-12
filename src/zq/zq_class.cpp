@@ -2259,13 +2259,9 @@ int32_t zmap::MAPCOMBO(int32_t x,int32_t y, int32_t map, int32_t scr) //map=-1,s
     mapscr *screen1;
     
     if(prv_mode)
-    {
         screen1=get_prvscr();
-    }
     else
-    {
         screen1=AbsoluteScr(currmap,currscr);
-    }
     
     x = vbound(x, 0, 16*16);
     y = vbound(y, 0, 11*16);
@@ -2317,16 +2313,11 @@ int32_t zmap::MAPFLAG2(int32_t lyr,int32_t x,int32_t y, int32_t map, int32_t scr
     mapscr *screen1;
     
     if(prv_mode)
-    {
         screen1=get_prvscr();
-    }
     else
-    {
         screen1=AbsoluteScr(currmap,currscr);
-    }
     
-    int32_t layermap;
-    layermap=screen1->layermap[lyr]-1;
+    int32_t layermap=screen1->layermap[lyr]-1;
     
     if(layermap<0 || layermap >= map_count) return 0;
     
@@ -2356,13 +2347,9 @@ int32_t zmap::MAPFLAG(int32_t x,int32_t y, int32_t map, int32_t scr) //map=-1,sc
     mapscr *screen1;
     
     if(prv_mode)
-    {
         screen1=get_prvscr();
-    }
     else
-    {
         screen1=AbsoluteScr(currmap,currscr);
-    }
     
     x = vbound(x, 0, 16*16);
     y = vbound(y, 0, 11*16);
@@ -2533,9 +2520,7 @@ void zmap::draw(BITMAP* dest,int32_t x,int32_t y,int32_t flags,int32_t map,int32
 		rectfill(dest,x,y,x+255,y+175,vc(1));
 		
 		if(ShowMisalignments)
-		{
 			check_alignments(dest,x,y,scr);
-		}
 		
 		return;
 	}
@@ -2909,9 +2894,7 @@ void zmap::drawrow(BITMAP* dest,int32_t x,int32_t y,int32_t flags,int32_t c,int3
 	resize_mouse_pos=true;
 	
 	if(LayerMaskInt[0]==0)
-	{
 		rectfill(dest,x,y,x+255,y+15,0);
-	}
 	
 	// int32_t cs=2;
 	
