@@ -11410,11 +11410,8 @@ bool do_movetile_united(tile_move_data const& tmd)
 	delete[] move_items_list;
 	delete[] move_weapons_list;
 	delete[] move_enemy_list;
-	
-	if(done)
-		return false;
-		
-	return true;
+
+	return !done;
 }
 
 bool copy_tiles_united(int32_t &tile,int32_t &tile2,int32_t &copy,int32_t &copycnt, bool rect, bool move)
