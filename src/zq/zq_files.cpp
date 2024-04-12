@@ -1233,20 +1233,20 @@ int32_t onExport_Combos_old()
 
 int32_t onImport_Tiles()
 {
-    int32_t ret=getnumber("Import Start Page",0);
+	int32_t ret=getnumber("Import Start Page",0);
     
-    if(cancelgetnum)
-        return D_O_K;
+	if(cancelgetnum)
+		return D_O_K;
     
-    bound(ret,0,TILE_PAGES-1);
+	bound(ret,0,TILE_PAGES-1);
     
-    if(!getname("Import Tiles (.ztileset)","ztileset",NULL,datapath,false))
-        return D_O_K;
+	if(!getname("Import Tiles (.ztileset)","ztileset",NULL,datapath,false))
+		return D_O_K;
         
-    saved=false;
-    char name[256];
-    extract_name(temppath,name,FILENAMEALL);
-    PACKFILE *f=pack_fopen_password(temppath,F_READ, "");
+	saved=false;
+	char name[256];
+	extract_name(temppath,name,FILENAMEALL);
+	PACKFILE *f=pack_fopen_password(temppath,F_READ, "");
 	if(f)
 	{
 		if(!readtilefile_to_location(f,0,ret))
@@ -1257,17 +1257,15 @@ int32_t onImport_Tiles()
 		}
 		else
 		{
-			char tmpbuf[256+20]={0};
-			
+			char tmpbuf[256+20]={0}; 
 			sprintf(tmpbuf,"Saved %s",name);
 			jwin_alert("Success!",tmpbuf,NULL,NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
 		}
 	}
 	pack_fclose(f);
     
-    
-    refresh(rALL);
-    return D_O_K;
+	refresh(rALL);
+	return D_O_K;
 }
 
 int32_t onExport_Tiles()
