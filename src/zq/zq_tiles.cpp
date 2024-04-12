@@ -13961,7 +13961,6 @@ void copy_combos(int32_t &tile,int32_t &tile2,int32_t &copy,int32_t &copycnt, bo
 	
 	setup_combo_animations();
 	setup_combo_animations2();
-	return;
 }
 
 void do_movecombo(combo_move_data const& cmd)
