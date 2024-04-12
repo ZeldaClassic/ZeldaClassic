@@ -167,14 +167,10 @@ void zmap::force_refr_pointer()
 		screens = &TheMaps[currmap*MAPSCRS];
 	else screens = nullptr;
 }
-bool zmap::CanUndo()
-{
-    return undo_stack.size() > 0;
-}
-bool zmap::CanRedo()
-{
-    return redo_stack.size() > 0;
-}
+
+bool zmap::CanUndo() { return undo_stack.size() > 0; }
+bool zmap::CanRedo() { return redo_stack.size() > 0; }
+
 bool zmap::CanPaste()
 {
     return can_paste;
