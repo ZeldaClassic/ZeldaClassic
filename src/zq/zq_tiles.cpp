@@ -14487,7 +14487,6 @@ void draw_tile_list_window()
 	font = get_zc_font(font_lfont);
 	jwin_draw_titlebar(screen, window_xofs+3, window_yofs+3, w+6, 18, "Select Tile", true);
 	font=oldfont;
-	return;
 }
 
 void show_blank_tile(int32_t t)
