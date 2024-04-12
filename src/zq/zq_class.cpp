@@ -1643,10 +1643,10 @@ bool zmap::misaligned(int32_t map, int32_t scr, int32_t i, int32_t dir)
 	{
 		case up:
 		{
-			if(i>15)											  //not top row of combos
+			if(i>15)		//not top row of combos
 				return false;
 			
-			if(scr<16)											//top row of screens
+			if(scr<16)		//top row of screens
 				return false; 
 			
 			//check main screen
@@ -1735,18 +1735,16 @@ bool zmap::misaligned(int32_t map, int32_t scr, int32_t i, int32_t dir)
 			}
 			
 			if(((combocheck1.walk&5)*2)!=(combocheck2.walk&10))
-			{
 				return true;
-			}
 			
 			break;
 		}
 		case down:
 		{
-			if(i<160)											 //not bottom row of combos
+			if(i<160)		//not bottom row of combos
 				return false;
 			
-			if(scr>111)										   //bottom row of screens
+			if(scr>111)		//bottom row of screens
 				return false;
 			
 			//check main screen
@@ -1841,10 +1839,10 @@ bool zmap::misaligned(int32_t map, int32_t scr, int32_t i, int32_t dir)
 		}
 		case left:
 		{
-			if((i&0xF)!=0)										//not left column of combos
+			if((i&0xF)!=0)		//not left column of combos
 				return false;
 			
-			if((scr&0xF)==0)									  //left column of screens
+			if((scr&0xF)==0)	//left column of screens
 				return false;
 			
 			//check main screen
@@ -1938,10 +1936,10 @@ bool zmap::misaligned(int32_t map, int32_t scr, int32_t i, int32_t dir)
 		}
 		case right:
 		{
-			if((i&0xF)!=15)									   //not right column of combos
+			if((i&0xF)!=15)		//not right column of combos
 				return false;
 			
-			if((scr&0xF)==15)									 //right column of screens
+			if((scr&0xF)==15)	//right column of screens
 				return false;
 			
 			//check main screen
