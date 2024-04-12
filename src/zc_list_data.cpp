@@ -658,10 +658,10 @@ static void load_scriptnames(std::set<std::string> &names, std::map<std::string,
 
 // Global and player slot names only used by the editor
 #ifdef IS_EDITOR
-extern std::string global_slotnames[NUMSCRIPTGLOBAL];
-extern std::string player_slotnames[NUMSCRIPTPLAYER - 1];
+extern const char* global_slotnames[NUMSCRIPTGLOBAL];
+extern const char* player_slotnames[NUMSCRIPTPLAYER - 1];
 
-static GUI::ListData load_scriptnames_slots(std::map<int32_t, script_slot_data> scrmap, int32_t count, std::string* slotnames, bool alphabetize, bool skipempty)
+static GUI::ListData load_scriptnames_slots(std::map<int32_t, script_slot_data> scrmap, int32_t count, const char* slotnames[], bool alphabetize, bool skipempty)
 {
 	std::map<std::string, int32_t> vals;
 	std::set<std::string> names;
@@ -890,7 +890,7 @@ GUI::ListData GUI::ZCListData::slots_eweapon_script(bool alphabetize, bool skipe
 
 GUI::ListData GUI::ZCListData::slots_hero_script(bool alphabetize, bool skipempty)
 {
-	return load_scriptnames_slots(playermap, NUMSCRIPTPLAYER - 1, player_slotnames, alphabetize, skipempty);
+	return load_scriptnames_slots(playermap, NUMSCRIPTPLAYER - 1, &player_slotnames[0], alphabetize, skipempty);
 }
 
 GUI::ListData GUI::ZCListData::slots_dmap_script(bool alphabetize, bool skipempty)

@@ -21924,7 +21924,7 @@ void setup_scriptslot_dlg(char* buf, byte flags)
 	//}
 }
 
-std::string global_slotnames[NUMSCRIPTGLOBAL] = {
+const char* global_slotnames[NUMSCRIPTGLOBAL] = {
 	"Init",
 	"Active",
 	"onExit",
@@ -21934,7 +21934,7 @@ std::string global_slotnames[NUMSCRIPTGLOBAL] = {
 	"onF6Menu",
 	"onSave",
 };
-std::string player_slotnames[NUMSCRIPTPLAYER-1] = {
+const char* player_slotnames[NUMSCRIPTPLAYER-1] = {
 	"Init",
 	"Active",
 	"onDeath",
@@ -22255,7 +22255,7 @@ bool handle_slot_map(map<int32_t, script_slot_data>& mp, int offs, script_data**
 
 void smart_slot_named(map<string, disassembled_script_data> &scripts,
 	vector<string> const& scriptnames, map<int32_t, script_slot_data>& mp,
-	std::string* slotnames, int slotstart, int slotend)
+	const char* slotnames[], int slotstart, int slotend)
 {
 	for(int q = slotstart; q < slotend; ++q)
 	{
@@ -22888,8 +22888,8 @@ bool do_slots(map<string, disassembled_script_data> &scripts, int assign_mode)
 	if(assign_mode == 2) //Smart Assign
 	{
 		//For global/hero scripts, match slot names if unoccupied
-		smart_slot_named(scripts, asglobalscripts, globalmap, global_slotnames, 1, NUMSCRIPTGLOBAL);
-		smart_slot_named(scripts, asplayerscripts, playermap, player_slotnames, 0, NUMSCRIPTPLAYER-1);
+		smart_slot_named(scripts, asglobalscripts, globalmap, &global_slotnames[0], 1, NUMSCRIPTGLOBAL);
+		smart_slot_named(scripts, asplayerscripts, playermap, &player_slotnames[0], 0, NUMSCRIPTPLAYER - 1);
 		//For other scripts, assign all un-assigned scripts
 		smart_slot_type(scripts, asffcscripts, ffcmap, NUMSCRIPTFFC-1);
 		smart_slot_type(scripts, asitemscripts, itemmap, NUMSCRIPTITEM-1);
