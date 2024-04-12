@@ -3213,10 +3213,7 @@ void edit_tile(int32_t tile,int32_t flip,int32_t &cs)
 		//   usetiles=true;
 		saved=false;
 		
-		if(buf!=NULL)
-		{
-			delete[] buf;
-		}
+		delete[] buf;
 	}
 	
 	MouseSprite::set(ZQM_NORMAL);
