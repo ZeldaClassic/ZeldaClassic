@@ -4452,9 +4452,8 @@ void zmap::CapCommandHistory()
     {
         size = 0;
         for (auto command : undo_stack)
-        {
             size += command->size();
-        }
+
         if (size > max_command_size) undo_stack.pop_front();
     } while (size > max_command_size);
 }
@@ -4474,10 +4473,7 @@ void zmap::DoSetComboCommand(int map, int scr, int pos, int combo, int cset)
     command->prev_combo = mapscr_ptr->data[pos];
     command->prev_cset = mapscr_ptr->cset[pos];
     if ((command->combo != -1 && command->prev_combo == command->combo) && command->cset == command->prev_cset)
-    {
-        // nothing to do...
-        return;
-    }
+        return; // nothing to do...
 
     ExecuteCommand(command);
 }
@@ -4504,10 +4500,7 @@ void zmap::DoSetFFCCommand(int map, int scr, int i, set_ffc_command::data_t data
     command->data = data;
     command->prev_data = prev_data;
     if (data == prev_data)
-    {
-        // nothing to do...
-        return;
-    }
+        return; // nothing to do...
 
     ExecuteCommand(command);
 }
@@ -4525,10 +4518,7 @@ void zmap::DoSetFlagCommand(int map, int scr, int pos, int flag)
     command->flag = flag;
     command->prev_flag = mapscr_ptr->sflag[pos];
     if (command->flag == command->prev_flag)
-    {
-        // nothing to do...
-        return;
-    }
+        return; // nothing to do...
 
     ExecuteCommand(command);
 }
@@ -4571,9 +4561,7 @@ void zmap::DoPasteScreenCommand(PasteCommandType type, int data)
     if (type == PasteCommandType::ScreenPartialToEveryScreen || type == PasteCommandType::ScreenAllToEveryScreen)
     {
         for (int i=0; i < 128; i++)
-        {
             command->prev_screens.push_back(std::shared_ptr<mapscr>(new mapscr(screens[i])));
-        }
     }
     else
     {
@@ -4648,9 +4636,7 @@ void zmap::Paste(const mapscr& copymapscr)
         screens[currscr].door_combo_set = copymapscr.door_combo_set;
         
         for(int32_t i=0; i<4; i++)
-        {
             screens[currscr].door[i]=copymapscr.door[i];
-        }
         
         for(int32_t i=0; i<176; i++)
         {
@@ -4663,9 +4649,7 @@ void zmap::Paste(const mapscr& copymapscr)
         loadlvlpal(newcolor);
         
         if(newcolor!=oldcolor)
-        {
             rebuild_trans_table();
-        }
         
         saved=false;
     }
@@ -4855,9 +4839,7 @@ void zmap::PastePalette(const mapscr& copymapscr)
         screens[currscr].valid|=mVALID;
         
         if(newcolor!=oldcolor)
-        {
             rebuild_trans_table();
-        }
         
         saved=false;
     }
@@ -4877,9 +4859,7 @@ void zmap::PasteAll(const mapscr& copymapscr)
         screens[currscr].valid|=mVALID;
         
         if(newcolor!=oldcolor)
-        {
             rebuild_trans_table();
-        }
         
         saved=false;
     }
@@ -4912,14 +4892,10 @@ void zmap::PasteToAll(const mapscr& copymapscr)
         loadlvlpal(newcolor);
         
         if(!(screens[currscr].valid&mVALID))
-        {
             newcolor=-1;
-        }
         
         if(newcolor!=oldcolor)
-        {
             rebuild_trans_table();
-        }
         
         saved=false;
     }
