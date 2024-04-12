@@ -214,9 +214,9 @@ void BasicEditboxView::enforceHardLimits()
 
 BasicEditboxView::~BasicEditboxView()
 {
-	for(list<LineData>::iterator it = model->getLines().begin(); it != model->getLines().end(); it++)
+	for( LineData& ld : model->getLines() )
 	{
-		destroy_bitmap(it->strip);
+		destroy_bitmap(ld.strip);
 	}
 	
 	model->getLines().clear();
