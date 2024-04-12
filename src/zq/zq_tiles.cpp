@@ -4834,10 +4834,7 @@ void grab_tile(int32_t tile,int32_t &cs)
 	grab(newtile,newtilebuf[tile].data, selwidth, selheight, newtilebuf[tile].format, newformat);
 	
 	while(gui_mouse_b())
-	{
-		/* do nothing */
-		rest(1);
-	}
+		rest(1); /* do nothing */
 	
 	do
 	{
@@ -5265,8 +5262,7 @@ void grab_tile(int32_t tile,int32_t &cs)
 			while(key[KEY_ESC])
 			{
 				poll_keyboard();
-				/* do nothing */
-				rest(1);
+				rest(1); /* do nothing */
 			}
 			
 			clear_keybuf();
@@ -5285,8 +5281,7 @@ void grab_tile(int32_t tile,int32_t &cs)
 				while(key[KEY_ESC])
 				{
 					poll_keyboard();
-					/* do nothing */
-					rest(1);
+					rest(1); /* do nothing */
 				}
 				
 				clear_keybuf();
