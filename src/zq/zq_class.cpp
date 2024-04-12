@@ -2229,8 +2229,7 @@ int32_t zmap::MAPCOMBO2(int32_t lyr,int32_t x,int32_t y, int32_t map, int32_t sc
     else
         screen1=AbsoluteScr(currmap,currscr);
     
-    int32_t layermap;
-    layermap=screen1->layermap[lyr]-1;
+    int32_t layermap=screen1->layermap[lyr]-1;
     
     if(layermap<0 || layermap >= map_count) return 0;
     
