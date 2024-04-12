@@ -15,7 +15,7 @@ class CompileZScriptDialog: public GUI::Dialog<CompileZScriptDialog>
 public:
 	enum class message { REFR_INFO, LOAD, EXPORT, EDIT, DOCS, STD_ZH, COMPILE, CANCEL, SETTINGS, SLOTS };
 
-	CompileZScriptDialog();
+	CompileZScriptDialog() = default;
 
 	std::shared_ptr<GUI::Widget> view() override;
 	bool handleMessage(const GUI::DialogMessage<message>& msg);
