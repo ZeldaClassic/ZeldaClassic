@@ -4792,17 +4792,17 @@ void grab_tile(int32_t tile,int32_t &cs)
 	static EXT_LIST list[] =
 	{
 		{ (char *)"All Files (*.*)",                   NULL },
-		{ (char *)"Bitmap Image (*.bmp)", (char *)"bmp" },
-		{ (char *)"GIF Image (*.gif)", (char *)"gif" },
-		{ (char *)"JPEG Image (*.jpg, *.jpeg)", (char *)"jpg,jpeg" },
-		{ (char *)"ZC Tile Export (*.til)", (char *)"til" },
-		{ (char *)"ZC Quest Template (*.zqt)", (char *)"zqt" },
-		{ (char *)"ZC Quest (*.qst)", (char *)"qst" },
-		{ (char *)"ZC Graphics Pack (*.zgp)", (char *)"zgp" },
-		{ (char *)"ZC Unencoded Quest (*.qsu)", (char *)"qsu" },
-		{ (char *)"NES ROM Image (*.nes)", (char *)"nes" },
-		{ (char *)"SNES ROM Image (*.smc)", (char *)"smc" },
-		{ (char *)"Gameboy ROM Image (*.gb)", (char *)"gb" },
+		{ (char *)"Bitmap Image (*.bmp)",              (char *)"bmp" },
+		{ (char *)"GIF Image (*.gif)",                 (char *)"gif" },
+		{ (char *)"JPEG Image (*.jpg, *.jpeg)",        (char *)"jpg,jpeg" },
+		{ (char *)"ZC Tile Export (*.til)",            (char *)"til" },
+		{ (char *)"ZC Quest Template (*.zqt)",         (char *)"zqt" },
+		{ (char *)"ZC Quest (*.qst)",                  (char *)"qst" },
+		{ (char *)"ZC Graphics Pack (*.zgp)",          (char *)"zgp" },
+		{ (char *)"ZC Unencoded Quest (*.qsu)",        (char *)"qsu" },
+		{ (char *)"NES ROM Image (*.nes)",             (char *)"nes" },
+		{ (char *)"SNES ROM Image (*.smc)",            (char *)"smc" },
+		{ (char *)"Gameboy ROM Image (*.gb)",          (char *)"gb" },
 		{ (char *)"Gameboy Advance ROM Image (*.gba)", (char *)"gba" },
 		{ NULL,                                        NULL }
 	};
