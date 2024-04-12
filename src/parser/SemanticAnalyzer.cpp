@@ -351,15 +351,10 @@ void SemanticAnalyzer::caseStmtForEach(ASTStmtForEach& host, void* param)
 	decl->baseType = new ASTDataType(ty, host.location);
 	host.decl = decl;
 	
-	visit(host.indxdecl.get(), param);
-	if (breakRecursion(host)) {scope = scope->getParent(); return;}
-	visit(host.arrdecl.get(), param);
-	if (breakRecursion(host)) {scope = scope->getParent(); return;}
-	visit(host.decl.get(), param);
-	if (breakRecursion(host)) {scope = scope->getParent(); return;}
-	
-	visit(host.body.get(), param);
-	if (breakRecursion(host)) {scope = scope->getParent(); return;}
+	visit(host.indxdecl.get(), param); if (breakRecursion(host)) {scope = scope->getParent(); return;}
+	visit(host.arrdecl.get(),  param); if (breakRecursion(host)) {scope = scope->getParent(); return;}
+	visit(host.decl.get(),     param); if (breakRecursion(host)) {scope = scope->getParent(); return;} 
+	visit(host.body.get(),     param); if (breakRecursion(host)) {scope = scope->getParent(); return;}
 	
 	scope = scope->getParent();
 	if (breakRecursion(host)) return;
