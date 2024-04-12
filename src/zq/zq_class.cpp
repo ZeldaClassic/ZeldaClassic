@@ -402,18 +402,14 @@ bool zmap::clearmap(bool newquest)
     if(currmap<map_count)
     {
         for(int32_t i=0; i<MAPSCRS-(newquest?0:TEMPLATES); i++)
-        {
             clearscr(i);
-        }
         
         setCurrScr(0);
         
         if(newquest)
         {
             if(!reset_templates(false))
-            {
                 jwin_alert("Error","Error resetting","template screens.",NULL,"O&K",NULL,'k',0,get_zc_font(font_lfont));
-            }
         }
     }
     
@@ -422,11 +418,11 @@ bool zmap::clearmap(bool newquest)
 
 mapscr* zmap::CurrScr()
 {
-    return screens+currscr;
+	return screens+currscr;
 }
 mapscr* zmap::Scr(int32_t scr)
 {
-    return screens+scr;
+	return screens+scr;
 }
 mapscr* zmap::AbsoluteScr(int32_t scr)
 {
@@ -520,14 +516,10 @@ void zmap::setCurrScr(int32_t scr)
     
     //setcolor(newcolor);
     if(!(screens[currscr].valid&mVALID))
-    {
         newcolor=-1;
-    }
     
     if(newcolor!=oldcolor)
-    {
         rebuild_trans_table();
-    }
     
     reset_combo_animations2();
     setlayertarget();
@@ -583,9 +575,7 @@ void zmap::setcolor(int32_t c)
 int32_t zmap::getcolor()
 {
     if(prv_mode)
-    {
         return prvscr.color;
-    }
     
     return screens[currscr].color;
 }
@@ -595,9 +585,7 @@ void zmap::resetflags()
     byte *di=&(screens[currscr].valid);
     
     for(int32_t i=1; i<48; i++)
-    {
         *(di+i)=0;
-    }
 }
 
 word    zmap::tcmbdat  (int32_t pos) { return screens[TEMPLATE].data[pos]; } 
@@ -713,15 +701,11 @@ int32_t zmap::load(const char *path)
 	
 	//get the version
 	if(!p_igetw(&version,f))
-	{
 		goto file_error;
-	}
 	
 	//get the build
 	if(!p_getc(&build,f))
-	{
 		goto file_error;
-	}
 	
 	for(int32_t i=0; i<MAPSCRS; i++)
 	{
@@ -818,9 +802,7 @@ bool zmap::ishookshottable(int32_t bx, int32_t by, int32_t i)
 		c = &combobuf[MAPCOMBO2(k+1,bx,by)];
 		
 		if(c->type != cHOOKSHOTONLY && c->type != cLADDERHOOKSHOT && c->walk&(1<<i))
-		{
 			return false;
-		}
 	}
 	
 	return true;
@@ -841,9 +823,7 @@ bool zmap::ishookshottable(int32_t map, int32_t screen, int32_t bx, int32_t by, 
 		c = &combobuf[MAPCOMBO3(map, screen, k+1,bx,by)];
 		
 		if(c->type != cHOOKSHOTONLY && c->type != cLADDERHOOKSHOT && c->walk&(1<<i))
-		{
 			return false;
-		}
 	}
 	
 	return true;
@@ -943,16 +923,12 @@ void zmap::put_walkflags_layered(BITMAP *dest,int32_t x,int32_t y,int32_t pos,in
 			if (get_qr(qr_OLD_BRIDGE_COMBOS))
 			{
 				if (combobuf[MAPCOMBO2(m,tx2,ty2)].type == cBRIDGE && !(combobuf[MAPCOMBO2(m,tx2,ty2)].walk&(1<<i))) 
-				{
 					bridgedetected |= (1<<i);
-				}
 			}
 			else
 			{
 				if (combobuf[MAPCOMBO2(m,tx2,ty2)].type == cBRIDGE && (combobuf[MAPCOMBO2(m,tx2,ty2)].walk&(0x10<<i))) 
-				{
 					bridgedetected |= (1<<i);
-				}
 			}
 		}
 		if (bridgedetected & (1<<i))
@@ -1001,16 +977,12 @@ void zmap::put_walkflags_layered(BITMAP *dest,int32_t x,int32_t y,int32_t pos,in
 			if (get_qr(qr_OLD_BRIDGE_COMBOS))
 			{
 				if (combobuf[MAPCOMBO2(m,tx2,ty2)].type == cBRIDGE && !(combobuf[MAPCOMBO2(m,tx2,ty2)].walk&(1<<i))) 
-				{
 					bridgedetected |= (1<<i);
-				}
 			}
 			else
 			{
 				if (combobuf[MAPCOMBO2(m,tx2,ty2)].type == cBRIDGE && (combobuf[MAPCOMBO2(m,tx2,ty2)].walk&(0x10<<i))) 
-				{
 					bridgedetected |= (1<<i);
-				}
 			}
 		}
 	}
@@ -1110,22 +1082,18 @@ void zmap::put_walkflags_layered_external(BITMAP *dest,int32_t x,int32_t y,int32
 			if (get_qr(qr_OLD_BRIDGE_COMBOS))
 			{
 				if (cmb.type == cBRIDGE && !(cmb.walk&(1<<i))) 
-				{
 					bridgedetected |= (1<<i);
-				}
 			}
 			else
 			{
 				if (cmb.type == cBRIDGE && (cmb.walk&(0x10<<i))) 
-				{
 					bridgedetected |= (1<<i);
-				}
 			}
 		}
+
 		if (bridgedetected & (1<<i))
-		{
 			continue;
-		}
+
 		if(!(c.walk&(1<<i) && ((c.usrflags&cflag3) || (c.usrflags&cflag4))) && (layer==-1 || (get_qr(qr_WATER_ON_LAYER_1) && layer == 0) || (get_qr(qr_WATER_ON_LAYER_2) && layer == 1)) && combo_class_buf[c.type].water!=0 && get_qr(qr_DROWN))
 			rectfill(dest,tx,ty,tx+7,ty+7,vc(11));
 		
@@ -1169,16 +1137,12 @@ void zmap::put_walkflags_layered_external(BITMAP *dest,int32_t x,int32_t y,int32
 			if (get_qr(qr_OLD_BRIDGE_COMBOS))
 			{
 				if (cmb.type == cBRIDGE && !(cmb.walk&(1<<i))) 
-				{
 					bridgedetected |= (1<<i);
-				}
 			}
 			else
 			{
 				if (cmb.type == cBRIDGE && (cmb.walk&(0x10<<i))) 
-				{
 					bridgedetected |= (1<<i);
-				}
 			}
 		}
 	}
@@ -1680,15 +1644,10 @@ bool zmap::misaligned(int32_t map, int32_t scr, int32_t i, int32_t dir)
 		case up:
 		{
 			if(i>15)											  //not top row of combos
-			{
 				return false;
-			}
 			
 			if(scr<16)											//top row of screens
-			{
-				return false;
-				
-			}
+				return false; 
 			
 			//check main screen
 			cmbcheck1 = vbound(AbsoluteScr(map, scr)->data[i], 0, MAXCOMBOS-1);
@@ -1785,14 +1744,10 @@ bool zmap::misaligned(int32_t map, int32_t scr, int32_t i, int32_t dir)
 		case down:
 		{
 			if(i<160)											 //not bottom row of combos
-			{
 				return false;
-			}
 			
 			if(scr>111)										   //bottom row of screens
-			{
 				return false;
-			}
 			
 			//check main screen
 			cmbcheck1 = vbound(AbsoluteScr(map, scr)->data[i], 0, MAXCOMBOS-1);
@@ -1880,23 +1835,17 @@ bool zmap::misaligned(int32_t map, int32_t scr, int32_t i, int32_t dir)
 			}
 			
 			if((combocheck1.walk&10)!=((combocheck2.walk&5)*2))
-			{
 				return true;
-			}
 			
 			break;
 		}
 		case left:
 		{
 			if((i&0xF)!=0)										//not left column of combos
-			{
 				return false;
-			}
 			
 			if((scr&0xF)==0)									  //left column of screens
-			{
 				return false;
-			}
 			
 			//check main screen
 			cmbcheck1 = AbsoluteScr(map, scr)->data[i];
@@ -1983,23 +1932,17 @@ bool zmap::misaligned(int32_t map, int32_t scr, int32_t i, int32_t dir)
 			}
 			
 			if(((combocheck1.walk&3)*4)!=(combocheck2.walk&12))
-			{
 				return true;
-			}
 			
 			break;
 		}
 		case right:
 		{
 			if((i&0xF)!=15)									   //not right column of combos
-			{
 				return false;
-			}
 			
 			if((scr&0xF)==15)									 //right column of screens
-			{
 				return false;
-			}
 			
 			//check main screen
 			cmbcheck1 = AbsoluteScr(map, scr)->data[i];
@@ -2087,9 +2030,7 @@ bool zmap::misaligned(int32_t map, int32_t scr, int32_t i, int32_t dir)
 			}
 			
 			if((combocheck1.walk&12)!=((combocheck2.walk&3)*4))
-			{
 				return true;
-			}
 			
 			break;
 		}
@@ -2105,9 +2046,7 @@ void zmap::check_alignments(BITMAP* dest,int32_t x,int32_t y,int32_t scr)
     if(alignment_arrow_timer>31)
     {
         if(scr<0)
-        {
             scr=currscr;
-        }
         
         if((scr<128))                                           //do the misalignment arrows
         {
@@ -2286,13 +2225,9 @@ int32_t zmap::MAPCOMBO2(int32_t lyr,int32_t x,int32_t y, int32_t map, int32_t sc
     mapscr *screen1;
     
     if(prv_mode)
-    {
         screen1=get_prvscr();
-    }
     else
-    {
         screen1=AbsoluteScr(currmap,currscr);
-    }
     
     int32_t layermap;
     layermap=screen1->layermap[lyr]-1;
