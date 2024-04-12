@@ -17076,17 +17076,17 @@ void EditShopType(int32_t index)
 
 int32_t onShopTypes()
 {
-    shop_list_size = 256;
+	shop_list_size = 256;
     
-    int32_t index = select_data("Shop Types",0,shoplist,"Edit","Done",get_zc_font(font_lfont));
+	int32_t index = select_data("Shop Types",0,shoplist,"Edit","Done",get_zc_font(font_lfont));
     
-    while(index!=-1)
-    {
-        EditShopType(index);
-        index = select_data("Shop Types",index,shoplist,"Edit","Done",get_zc_font(font_lfont));
-    }
+	while(index!=-1)
+	{
+		EditShopType(index);
+		index = select_data("Shop Types",index,shoplist,"Edit","Done",get_zc_font(font_lfont));
+	}
     
-    return D_O_K;
+	return D_O_K;
 }
 
 void call_bottle_dlg(int32_t index);

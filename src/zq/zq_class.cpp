@@ -1347,7 +1347,6 @@ void put_flag(BITMAP* dest, int32_t x, int32_t y, int32_t flag)
 }
 void put_flags(BITMAP *dest,int32_t x,int32_t y,word cmbdat,int32_t cset,int32_t flags,int32_t sflag)
 {
-
 	newcombo const& c = combobuf[cmbdat];
 	
 	if((flags&cFLAGS)&&(sflag||combobuf[cmbdat].flag))
