@@ -185,7 +185,7 @@ namespace ZScript
 		friend UserClass* createClass(
 			Program&, Scope&, ASTClass&, CompileErrorHandler*);
 	public:
-		~UserClass();
+		~UserClass() = default;
 
 		std::string const& getName() const {return node.name;}
 		ASTClass* getNode() const {return &node;}

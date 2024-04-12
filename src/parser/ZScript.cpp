@@ -169,9 +169,6 @@ UserClass::UserClass(Program& program, ASTClass& user_class)
 	members.push_back(0);
 }
 
-UserClass::~UserClass()
-{}
-
 UserClass* ZScript::createClass(
 		Program& program, Scope& parentScope, ASTClass& node,
 		CompileErrorHandler* errorHandler)
