@@ -129,10 +129,9 @@ vector<Scope*> ZScript::lookupUsingScopes(Scope const& scope, vector<string> con
 {
 	vector<Scope*> scopes;
 	vector<NamespaceScope*> namespaces = lookupUsingNamespaces(scope);
-	for(vector<NamespaceScope*>::iterator it = namespaces.begin();
-		it != namespaces.end(); ++it)
+	for (NamespaceScope* nss : namespaces)
 	{
-		if (Scope* descendant = getDescendant(**it, names, delimiters))
+		if (Scope* descendant = getDescendant(*nss, names, delimiters))
 			scopes.push_back(descendant);
 	}
 	return scopes;
