@@ -15953,7 +15953,7 @@ int32_t d_warpdestscrsel_proc(int32_t msg,DIALOG *d,int32_t c)
 	int scrw = is_overworld ? 16 : 8, scrh = 9;
 	const int max = 0x87;
 	int bufval = zc_xtoi(buf);
-	int val = vbound(bufval,0,max);
+	int val = vbound(bufval,0,max); // cursor location on the screen selection grid
 	bool force_16 = (!is_overworld && (val&0xF) > 0x7) || d->fg;
 	if(force_16) //can't bound, some quests need to warp out of bounds... -Em
 		scrw = 16; //just force show the larger grid instead
@@ -16287,17 +16287,17 @@ int32_t d_wflag_proc(int32_t msg,DIALOG *d,int32_t)
 
 int32_t d_dmapscrsel_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
 {
-    int32_t ret = D_O_K;
+	int32_t ret = D_O_K;
     
-    switch(msg)
-    {
-    case MSG_CLICK:
-        sprintf((char*)((d+2)->dp),"%X%X",vbound((gui_mouse_y()-d->y)/4,0,7),vbound((gui_mouse_x()-d->x)/(((DMaps[(d-1)->d1].type&dmfTYPE)==1)?4:8),0,(((DMaps[(d-1)->d1].type&dmfTYPE)==1)?15:7)));
-        object_message(d+2, MSG_DRAW, 0);
-        break;
-    }
+	switch(msg)
+	{
+		case MSG_CLICK:
+			sprintf((char*)((d+2)->dp),"%X%X",vbound((gui_mouse_y()-d->y)/4,0,7),vbound((gui_mouse_x()-d->x)/(((DMaps[(d-1)->d1].type&dmfTYPE)==1)?4:8),0,(((DMaps[(d-1)->d1].type&dmfTYPE)==1)?15:7)));
+			object_message(d+2, MSG_DRAW, 0);
+			break;
+	}
     
-    return ret;
+	return ret;
 }
 
 int32_t warpdestsel_x=-1;
