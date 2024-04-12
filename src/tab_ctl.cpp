@@ -261,18 +261,18 @@ int32_t displayed_tabs_width(TABPANEL *panel, int32_t first_tab, int32_t maxwidt
 
 int32_t discern_tab(TABPANEL *panel, int32_t first_tab, int32_t x)
 {
-    int32_t i=0;
-    int32_t w=0;
+	int32_t i=0;
+	int32_t w=0;
     
-    for(i=first_tab; panel[i].text; i++)
-    {
-        w+=text_length(font, (char *)panel[i].text)+15;
+	for(i=first_tab; panel[i].text; i++)
+	{
+		w+=text_length(font, (char *)panel[i].text)+15;
         
-        if(w>x)
-            return i;
-    }
+		if(w>x)
+			return i;
+	}
     
-    return -1;
+	return -1;
 }
 
 int32_t d_tab_proc(int32_t msg, DIALOG *d, int32_t c)
@@ -555,9 +555,7 @@ int32_t d_tab_proc(int32_t msg, DIALOG *d, int32_t c)
                     temp_d2=(d->d1&0x00FF);
                     
                     if(temp_d>0)
-                    {
                         --temp_d;
-                    }
                     
                     d->d1=(temp_d<<8)|temp_d2;
                     d->flags|=D_DIRTY;
@@ -571,9 +569,7 @@ int32_t d_tab_proc(int32_t msg, DIALOG *d, int32_t c)
                     temp_d2=(d->d1&0x00FF);
                     
                     if(last_visible_tab(panel, temp_d, d->w)<(tab_count(panel)-1))
-                    {
                         ++temp_d;
-                    }
                     
                     d->d1=(temp_d<<8)|temp_d2;
                     d->flags|=D_DIRTY;
@@ -599,9 +595,7 @@ int32_t d_tab_proc(int32_t msg, DIALOG *d, int32_t c)
             if(selected!=-1&&selected!=(d->d1&0x00FF))
             {
                 for(i=0; panel[i].text; i++)
-                {
                     panel[i].flags &= ~D_SELECTED;
-                }
                 
                 panel[selected].flags |= D_SELECTED;
                 d->flags |= D_DIRTY;
