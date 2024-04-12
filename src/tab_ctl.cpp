@@ -5,8 +5,6 @@
 extern volatile int32_t myvsync;
 void update_hw_screen(bool force);
 
-extern bool is_editor();
-
 int32_t vc2(int32_t x)
 {
     switch(x)
@@ -86,13 +84,13 @@ INLINE int32_t is_in_rect(int32_t x,int32_t y,int32_t rx1,int32_t ry1,int32_t rx
 
 void draw_button(BITMAP *dest,int32_t x,int32_t y,int32_t w,int32_t h,const char *text,int32_t bg,int32_t fg,int32_t flags)
 {
-    if(flags&D_SELECTED)
-            std::swap(fg, bg);
+	if(flags&D_SELECTED)
+		std::swap(fg, bg);
     
-    rect(dest,x+1,y+1,x+w-1,y+h-1,fg);
-    rectfill(dest,x+1,y+1,x+w-3,y+h-3,bg);
-    rect(dest,x,y,x+w-2,y+h-2,fg);
-    textout_centre_ex(dest,font,text,(x+x+w)>>1,((y+y+h)>>1)-4,fg,-1);
+	rect(dest,x+1,y+1,x+w-1,y+h-1,fg);
+	rectfill(dest,x+1,y+1,x+w-3,y+h-3,bg);
+	rect(dest,x,y,x+w-2,y+h-2,fg);
+	textout_centre_ex(dest,font,text,(x+x+w)>>1,((y+y+h)>>1)-4,fg,-1);
 }
 
 bool do_text_button(int32_t x,int32_t y,int32_t w,int32_t h,const char *text,int32_t bg,int32_t fg)
@@ -208,25 +206,23 @@ bool do_icon_button_reset(int32_t x,int32_t y,int32_t w,int32_t h,int icon,int32
 
 int32_t tab_count(TABPANEL *panel)
 {
-    int32_t i=0;
+	int32_t i=0;
     
-    while (panel[i].text)
-            ++i;
+	while (panel[i].text)
+		++i;
     
-    return i;
+	return i;
 }
 
 int32_t tabs_width(TABPANEL *panel)
 {
-    int32_t i=0;
-    int32_t w=0;
+	int32_t i=0;
+	int32_t w=0;
     
-    for(i=0; panel[i].text; ++i)
-    {
-        w+=text_length(font, (char *)panel[i].text)+15;
-    }
+	for(i=0; panel[i].text; ++i)
+		w+=text_length(font, (char *)panel[i].text)+15;
     
-    return w+1;
+	return w+1;
 }
 
 bool uses_tab_arrows(TABPANEL *panel, int32_t maxwidth)
@@ -241,32 +237,26 @@ int32_t last_visible_tab(TABPANEL *panel, int32_t first_tab, int32_t maxwidth)
 	int32_t w=0;
 	
 	if(uses_tab_arrows(panel, maxwidth))
-	{
 		maxwidth-=28;
-	}
 	
 	for(i=first_tab; panel[i].text; ++i)
 	{
 		w+=text_length(font, (char *)panel[i].text)+15;
 		if(w>maxwidth)
-		{
 			return i-1;
-		}
 	}
 	return i-1;
 }
 
 int32_t displayed_tabs_width(TABPANEL *panel, int32_t first_tab, int32_t maxwidth)
 {
-    int32_t i=0;
-    int32_t w=0;
+	int32_t i=0;
+	int32_t w=0;
     
-    for(i=first_tab; panel[i].text&&i<=last_visible_tab(panel, first_tab, maxwidth); ++i)
-    {
-        w+=text_length(font, (char *)panel[i].text)+15;
-    }
+	for(i=first_tab; panel[i].text&&i<=last_visible_tab(panel, first_tab, maxwidth); ++i)
+		w+=text_length(font, (char *)panel[i].text)+15;
     
-    return w+1;
+	return w+1;
 }
 
 int32_t discern_tab(TABPANEL *panel, int32_t first_tab, int32_t x)
@@ -279,9 +269,7 @@ int32_t discern_tab(TABPANEL *panel, int32_t first_tab, int32_t x)
         w+=text_length(font, (char *)panel[i].text)+15;
         
         if(w>x)
-        {
             return i;
-        }
     }
     
     return -1;
@@ -317,10 +305,8 @@ int32_t d_tab_proc(int32_t msg, DIALOG *d, int32_t c)
             panel[i].objects=0;
             
             //see how many controls (i) are handled by this tab
-            while(panel[i].dialog[(panel[i].objects)++]!=-1)
-            {
-                /* do nothing */
-            }
+            while (panel[i].dialog[(panel[i].objects)++] != -1)
+                    ; // do nothing
             
             //because the -1 is counted, drop back one
             (panel[i].objects)--;
@@ -423,9 +409,7 @@ int32_t d_tab_proc(int32_t msg, DIALOG *d, int32_t c)
         {
             //do the tabs have a custom font?
             if(d->dp2)
-            {
                 font = (FONT *)d->dp2;
-            }
             
             panel_dialog=(DIALOG *)d->dp3;
             rectfill(screen, d->x, d->y, d->x+d->w-1, d->y+8+text_height(font), d->bg); //tab area
@@ -454,9 +438,7 @@ int32_t d_tab_proc(int32_t msg, DIALOG *d, int32_t c)
                 for(i=0; panel[i].text; ++i)
                 {
                     if(panel[i].flags&D_SELECTED)
-                    {
                         selected=i;
-                    }
                 }
                 
                 for(i=((d->d1&0xFF00)>>8); panel[i].text&&i<=last_visible_tab(panel,((d->d1&0xFF00)>>8),d->w); ++i)
@@ -557,9 +539,7 @@ int32_t d_tab_proc(int32_t msg, DIALOG *d, int32_t c)
         
         //do the tabs have a custom font?
         if(d->dp2)
-        {
             font = (FONT *)d->dp2;
-        }
         
         d->d1&=0xFF00;
         d->d1|=0x00FF;
