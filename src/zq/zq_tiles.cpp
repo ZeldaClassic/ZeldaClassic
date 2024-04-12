@@ -5714,10 +5714,8 @@ void tile_info_1(int32_t oldtile,int32_t oldflip,int32_t oldcs,int32_t tile,int3
 void reset_tile(tiledata *buf, int32_t t, int32_t format=1)
 {
   buf[t].format=format;
-  if (buf[t].data!=NULL)
-  {
-	free(buf[t].data);
-  }
+  free(buf[t].data);
+
   buf[t].data=(byte *)malloc(tilesize(buf[t].format));
   if (buf[t].data==NULL)
   {
