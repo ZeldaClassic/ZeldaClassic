@@ -4972,9 +4972,7 @@ void zmap::setCopyFFC(int32_t n)
 void zmap::update_combo_cycling()
 {
     if(!prv_mode||!prv_cmbcycle)
-    {
         return;
-    }
     
     int32_t x;
     int32_t newdata[176];
@@ -5137,9 +5135,7 @@ void zmap::update_combo_cycling()
 void zmap::update_freeform_combos()
 {
     if(!prv_mode||!prv_cmbcycle)
-    {
         return;
-    }
     
 	// TODO: this changer code is a duplicated here and for zplayer. Should fix that.
 	word maxffc = prvscr.numFFC();
@@ -5411,9 +5407,7 @@ void zmap::prv_dowarp(int32_t type, int32_t index)
     }
     
     if(prv_twon)
-    {
         prv_time=get_prvscr()->timedwarptics;
-    }
     
     //also reset FFC information (so that changers will work correctly) -DD
     memset(ffposx,0xFF,sizeof(int16_t)*32);
@@ -5439,9 +5433,7 @@ bool save_msgstrs(const char *path)
     PACKFILE *f = pack_fopen_password(path,F_WRITE, "");
     
     if(!f)
-    {
         return false;
-    }
     
     if(writestrings(f, ZELDA_VERSION, VERSION_BUILD, 0, MAXMSGS)==0)
     {
@@ -5458,9 +5450,7 @@ bool save_strings_tsv(const char *path)
 	PACKFILE *f = pack_fopen_password(path,F_WRITE, "");
     
     if(!f)
-    {
         return false;
-    }
     
     if(writestrings_tsv(f)==0)
     {
@@ -5477,9 +5467,7 @@ bool save_msgstrs_text(const char *path)
     PACKFILE *f = pack_fopen_password(path,F_WRITE, "");
     
     if(!f)
-    {
         return false;
-    }
     
     if(writestrings_text(f)==0)
     {
@@ -5497,14 +5485,10 @@ bool load_msgstrs(const char *path, [[maybe_unused]] int32_t startstring)
     PACKFILE *f = pack_fopen_password(path,F_READ, "");
     
     if(!f)
-    {
         return false;
-    }
     
     if(!p_mgetl(&section_id,f))
-    {
         return false;
-    }
     
     if(section_id==ID_STRINGS)
     {
@@ -5543,9 +5527,7 @@ bool save_pals(const char *path)
     PACKFILE *f = pack_fopen_password(path,F_WRITE, "");
     
     if(!f)
-    {
         return false;
-    }
     
     if(writecolordata(f, ZELDA_VERSION, VERSION_BUILD, 0, newerpdTOTAL)==0)
     {
@@ -5563,14 +5545,10 @@ bool load_pals(const char *path, int32_t startcset)
     PACKFILE *f = pack_fopen_password(path,F_READ, "");
     
     if(!f)
-    {
         return false;
-    }
     
     if(!p_mgetl(&section_id,f))
-    {
         return false;
-    }
     
     if(section_id==ID_CSETS)
     {
@@ -5595,9 +5573,7 @@ bool save_dmaps(const char *path)
     PACKFILE *f = pack_fopen_password(path,F_WRITE, "");
     
     if(!f)
-    {
         return false;
-    }
     
     if(writedmaps(f, ZELDA_VERSION, VERSION_BUILD, 0, MAXDMAPS)==0)
     {
@@ -5615,14 +5591,10 @@ bool load_dmaps(const char *path, int32_t startdmap)
     PACKFILE *f = pack_fopen_password(path,F_READ, "");
     
     if(!f)
-    {
         return false;
-    }
     
     if(!p_mgetl(&section_id,f))
-    {
         return false;
-    }
     
     if(section_id==ID_DMAPS)
     {
@@ -5645,9 +5617,7 @@ bool save_combos(const char *path)
     PACKFILE *f = pack_fopen_password(path,F_WRITE, "");
     
     if(!f)
-    {
         return false;
-    }
     
     reset_combo_animations();
     reset_combo_animations2();
@@ -5668,14 +5638,10 @@ bool load_combos(const char *path, int32_t startcombo)
     PACKFILE *f = pack_fopen_password(path,F_READ, "");
     
     if(!f)
-    {
         return false;
-    }
     
     if(!p_mgetl(&section_id,f))
-    {
         return false;
-    }
     
     if(section_id==ID_COMBOS)
     {
@@ -5700,9 +5666,7 @@ bool save_tiles(const char *path)
     PACKFILE *f = pack_fopen_password(path,F_WRITE, "");
     
     if(!f)
-    {
         return false;
-    }
     
     //  reset_combo_animations();
     if(writetiles(f, ZELDA_VERSION, VERSION_BUILD, 0, NEWMAXTILES)==0)
@@ -5721,14 +5685,10 @@ bool load_tiles(const char *path, int32_t starttile)
     PACKFILE *f = pack_fopen_password(path,F_READ, "");
     
     if(!f)
-    {
         return false;
-    }
     
     if(!p_mgetl(&section_id,f))
-    {
         return false;
-    }
     
     if(section_id==ID_TILES)
     {
@@ -5754,9 +5714,7 @@ bool save_guys(const char *path)
     PACKFILE *f = pack_fopen_password(path,F_WRITE, "");
     
     if(!f)
-    {
         return false;
-    }
     
     /*
     int32_t id = ID_GUYS;
@@ -5786,9 +5744,7 @@ bool load_guys(const char *path)
     PACKFILE *f = pack_fopen_password(path,F_READ, "");
     
     if(!f)
-    {
         return false;
-    }
     
     if(!p_mgetl(&section_id,f))
     {
@@ -5820,9 +5776,7 @@ bool save_combo_alias(const char *path)
     PACKFILE *f = pack_fopen_password(path,F_WRITE, "");
     
     if(!f)
-    {
         return false;
-    }
     
     zquestheader h;
     h.zelda_version = 0x250;
@@ -5844,9 +5798,7 @@ bool load_combo_alias(const char *path)
     PACKFILE *f = pack_fopen_password(path,F_READ, "");
     
     if(!f)
-    {
         return false;
-    }
     
     if(!p_mgetl(&section_id,f))
     {
