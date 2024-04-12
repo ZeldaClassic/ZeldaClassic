@@ -87,9 +87,8 @@ Namespace* Program::addNamespace(ASTNamespace& node, Scope& parentScope, Compile
 	Namespace* namesp = createNamespace(*this, parentScope, node, handler);
 	if(!namesp) return NULL;
 	
-	for(vector<Namespace*>::iterator it = namespaces.begin();
-		it != namespaces.end(); ++it)
-		if(namesp == *it) return namesp; //Already registered, don't re-register.
+	for( Namespace* this_ns : namespaces)
+		if(namesp == this_ns) return namesp; //Already registered, don't re-register.
 	namespaces.push_back(namesp);
 	return namesp;
 }
