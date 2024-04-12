@@ -5728,26 +5728,10 @@ void reset_tile(tiledata *buf, int32_t t, int32_t format=1)
 }
 */
 
-int32_t hide_used()
-{
-	show_only_unused_tiles ^= 1;
-	return D_O_K;
-}
-int32_t hide_unused()
-{
-	show_only_unused_tiles ^= 2;
-	return D_O_K;
-}
-int32_t hide_blank()
-{
-	show_only_unused_tiles ^= 4;
-	return D_O_K;
-}
-int32_t hide_8bit_marker()
-{
-	show_only_unused_tiles ^= 8;
-	return D_O_K;
-}
+int32_t hide_used()        { show_only_unused_tiles ^= 1; return D_O_K; }
+int32_t hide_unused()      { show_only_unused_tiles ^= 2; return D_O_K; }
+int32_t hide_blank()       { show_only_unused_tiles ^= 4; return D_O_K; }
+int32_t hide_8bit_marker() { show_only_unused_tiles ^= 8; return D_O_K; }
 
 enum
 {
@@ -5758,9 +5742,9 @@ enum
 };
 static NewMenu select_tile_view_menu
 {
-	{ "Hide Used", hide_used, MENUID_SELTILE_VIEW_HIDE_USED },
-	{ "Hide Unused", hide_unused, MENUID_SELTILE_VIEW_HIDE_UNUSED },
-	{ "Hide Blank", hide_blank, MENUID_SELTILE_VIEW_HIDE_BLANK },
+	{ "Hide Used",         hide_used,        MENUID_SELTILE_VIEW_HIDE_USED },
+	{ "Hide Unused",       hide_unused,      MENUID_SELTILE_VIEW_HIDE_UNUSED },
+	{ "Hide Blank",        hide_blank,       MENUID_SELTILE_VIEW_HIDE_BLANK },
 	{ "Hide 8-bit marker", hide_8bit_marker, MENUID_SELTILE_VIEW_HIDE_8BIT },
 };
 
