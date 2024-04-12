@@ -609,7 +609,8 @@ std::string const& get_color_name(int r, int g, int b)
 }
 std::string const& get_color_name(int c, bool is8b)
 {
-	static std::string tmp = get_color_name(RAMpal[c].r, RAMpal[c].g, RAMpal[c].b);
+	static std::string tmp; 
+	tmp = get_color_name(RAMpal[c].r, RAMpal[c].g, RAMpal[c].b);
 	if(!(is8b ? c : c%16))
 		tmp += " (Trans)";
 	return tmp;
