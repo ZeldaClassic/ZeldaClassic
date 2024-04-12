@@ -13876,13 +13876,9 @@ int32_t save_quest(const char *filename, bool timed_save)
 	ext1[0]=0;
 	
 	if(timed_save)
-	{
 		sprintf(ext1, "qt");
-	}
 	else
-	{
 		sprintf(ext1, "qb");
-	}
 	
 	if(retention)
 	{
@@ -13901,9 +13897,7 @@ int32_t save_quest(const char *filename, bool timed_save)
 				replace_extension(backupname2, filepath, ext, 2047);
 				
 				if(exists(backupname2))
-				{
 					remove(backupname2);
-				}
 				
 				rename(backupname, backupname2);
 			}
@@ -13918,10 +13912,7 @@ int32_t save_quest(const char *filename, bool timed_save)
 		}
 	}
 	
-	int32_t ret;
-	ret  = save_unencoded_quest(filename, compress, filename);
-
-	return ret;
+	return save_unencoded_quest(filename, compress, filename);
 }
 
 void center_zq_class_dialogs()
