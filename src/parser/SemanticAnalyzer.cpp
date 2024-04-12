@@ -25,9 +25,8 @@ SemanticAnalyzer::SemanticAnalyzer(Program& program)
 	// Analyze function internals.
 	vector<Function*> functions = program.getUserGlobalFunctions();
 
-	for (vector<Function*>::iterator it = functions.begin();
-	     it != functions.end(); ++it)
-		analyzeFunctionInternals(**it);
+	for (Function* func : functions )
+		analyzeFunctionInternals(*func);
 	
 	for (vector<Script*>::iterator it = program.scripts.begin();
 		 it != program.scripts.end(); ++it)
