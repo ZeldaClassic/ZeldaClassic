@@ -119,10 +119,9 @@ void SemanticAnalyzer::analyzeFunctionInternals(Function& function)
 
 	// Add the parameters to the scope.
 	vector<ASTDataDecl*>& parameters = functionDecl->parameters.data();
-	for (vector<ASTDataDecl*>::iterator it = parameters.begin();
-	     it != parameters.end(); ++it)
+	for( ASTDataDecl* parameter_p : parameters )
 	{
-		ASTDataDecl& parameter = **it;
+		ASTDataDecl& parameter = *parameter_p;
 		string const& name = parameter.name;
 		DataType const& type = parameter.resolveType(&functionScope, this);
 		if (breakRecursion(parameter)) continue;
