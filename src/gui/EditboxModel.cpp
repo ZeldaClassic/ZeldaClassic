@@ -267,9 +267,7 @@ void EditboxCursor::deleteChar()
 	
 	//DO NOT let you delete the last char of the buffer
 	if(index == int32_t(host.getBuffer().size())-1)
-	{
 		return;
-	}
 	
 	Unicode::removeRange(host.getBuffer(),index,index+1);
 	//check if newline was deleted
@@ -630,9 +628,7 @@ void EditboxModel::doHelp()
 	FILE *hb = fopen(helpfile, "r");
 	
 	if(!hb)
-	{
 		return;
-	}
 	
 	char c = fgetc(hb);
 	
@@ -658,4 +654,3 @@ void EditboxModel::doHelp()
 	do_zqdialog(help_dlg,2);
 	delete(EditboxModel*)(help_dlg[2].dp);
 }
-
