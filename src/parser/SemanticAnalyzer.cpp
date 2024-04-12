@@ -250,18 +250,19 @@ void SemanticAnalyzer::caseStmtIf(ASTStmtIf& host, void*)
 		host.condition = new ASTExprIdentifier(host.declaration->name, host.location);
 		
 	// Recurse.
-    RecursiveVisitor::caseStmtIf(host);
+	RecursiveVisitor::caseStmtIf(host);
 	
 	// Restore scope.
 	scope = oldscope;
-    if (breakRecursion(host)) return;
+	if (breakRecursion(host))
+		return;
 
 	checkCast(*host.condition->getReadType(scope, this), DataType::UNTYPED, &host);
 }
 
 void SemanticAnalyzer::caseStmtIfElse(ASTStmtIfElse& host, void*)
 {
-    RecursiveVisitor::caseStmtIfElse(host);
+	RecursiveVisitor::caseStmtIfElse(host);
 }
 
 void SemanticAnalyzer::caseStmtSwitch(ASTStmtSwitch& host, void* param)
