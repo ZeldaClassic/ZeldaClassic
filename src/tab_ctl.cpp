@@ -4,7 +4,7 @@
 
 void update_hw_screen(bool force);
 
-int32_t vc2(int32_t x)
+/*int32_t vc2(int32_t x)
 {
     switch(x)
     {
@@ -74,7 +74,7 @@ int32_t vc2(int32_t x)
     }
     
     return -1;
-}
+}*/
 
 INLINE int32_t is_in_rect(int32_t x,int32_t y,int32_t rx1,int32_t ry1,int32_t rx2,int32_t ry2)
 {

@@ -7,7 +7,7 @@
 extern "C"
 {
 #endif
-int32_t vc2(int32_t x);
+//int32_t vc2(int32_t x);
 /* a tab panel */
 typedef struct TABPANEL
 {
