@@ -15935,6 +15935,46 @@ int32_t d_wflag_proc(int32_t msg,DIALOG *d,int32_t c);
 static ListData warp_dlg_list(warptypelist, &font);
 static ListData warp_ret_list(warprlist, &font);
 
+// navigate the side warp screen selection grid
+void navigate_sw_grid(int32_t& c, int& ret, int& curloc, bool& redraw)
+{
+	switch (c >> 8)
+	{
+	case KEY_UP:
+		if (curloc & 0xF0)
+		{
+			curloc -= 0x10;
+			redraw = true;
+		}
+		ret |= D_USED_CHAR;
+		break;
+	case KEY_DOWN:
+		if ((curloc & 0xF0) < ((curloc & 0xF) < 0x8 ? 0x80 : 0x70))
+		{
+			curloc += 0x10;
+			redraw = true;
+		}
+		ret |= D_USED_CHAR;
+		break;
+	case KEY_LEFT:
+		if (curloc & 0xF)
+		{
+			--curloc;
+			redraw = true;
+		}
+		ret |= D_USED_CHAR;
+		break;
+	case KEY_RIGHT:
+		if ((curloc & 0xF) < 0xF && curloc < 0x87)
+		{
+			++curloc;
+			redraw = true;
+		}
+		ret |= D_USED_CHAR;
+		break;
+	}
+}
+
 // handle grid on the Side Warp window
 int32_t d_warpdestscrsel_proc(int32_t msg,DIALOG *d,int32_t c)
 {
@@ -16049,41 +16089,7 @@ int32_t d_warpdestscrsel_proc(int32_t msg,DIALOG *d,int32_t c)
 		}
 		case MSG_XCHAR:
 		{
-			switch(c>>8)
-			{
-				case KEY_UP:
-					if(curloc&0xF0)
-					{
-						curloc -= 0x10;
-						redraw = true;
-					}
-					ret |= D_USED_CHAR;
-					break;
-				case KEY_DOWN:
-					if((curloc&0xF0) < ((curloc&0xF) < 0x8 ? 0x80 : 0x70))
-					{
-						curloc += 0x10;
-						redraw = true;
-					}
-					ret |= D_USED_CHAR;
-					break;
-				case KEY_LEFT:
-					if(curloc&0xF)
-					{
-						--curloc;
-						redraw = true;
-					}
-					ret |= D_USED_CHAR;
-					break;
-				case KEY_RIGHT:
-					if((curloc&0xF) < 0xF && curloc < 0x87)
-					{
-						++curloc;
-						redraw = true;
-					}
-					ret |= D_USED_CHAR;
-					break;
-			}
+			navigate_sw_grid(c, ret, curloc, redraw);
 			if(redraw)
 				sprintf(buf, "%02X", curloc);
 			break;
