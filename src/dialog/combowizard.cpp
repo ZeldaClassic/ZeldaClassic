@@ -79,12 +79,12 @@ ComboWizardDialog::ComboWizardDialog(ComboEditorDialog& parent) : local_ref(pare
 	parent(parent), flags(0),
 	list_lwscript(GUI::ZCListData::lweapon_script()),
 	list_ewscript(GUI::ZCListData::eweapon_script()),
-	list_sprites(GUI::ZCListData::miscsprites()),
+	list_sprites (GUI::ZCListData::miscsprites()),
 	list_dropsets(GUI::ZCListData::dropsets(true)),
-	list_items(GUI::ZCListData::items(true)),
-	list_sfx(GUI::ZCListData::sfxnames(true)),
+	list_items   (GUI::ZCListData::items(true)),
+	list_sfx     (GUI::ZCListData::sfxnames(true)),
 	list_counters(GUI::ZCListData::counters(true,true)),
-	list_dirs(GUI::ZCListData::dirs(8,false))
+	list_dirs    (GUI::ZCListData::dirs(8,false))
 {
 	memset(rs_sz, 0, sizeof(rs_sz));
 }
