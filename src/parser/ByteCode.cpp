@@ -2922,22 +2922,22 @@ string OWaitframe::toString() const
 
 string OWaitframes::toString() const
 {
-    return "WAITFRAMESR " + getArgument()->toString();
+	return "WAITFRAMESR " + getArgument()->toString();
 }
 
 string OWaitdraw::toString() const
 {
-    return "WAITDRAW";
+	return "WAITDRAW";
 }
 
 string OWaitTo::toString() const
 {
-    return "WAITTO " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
+	return "WAITTO " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
 }
 
 string OWaitEvent::toString() const
 {
-    return "WAITEVENT";
+	return "WAITEVENT";
 }
 
 string ONoOp::toString() const
@@ -2996,7 +2996,7 @@ string OPushImmediate::toString() const
 	else
 		oss << arg->toString();
 	return oss.str();
-    return "PUSHV " + getArgument()->toString();
+	return "PUSHV " + getArgument()->toString();
 }
 
 string OPopRegister::toString() const
