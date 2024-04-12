@@ -15935,6 +15935,7 @@ int32_t d_wflag_proc(int32_t msg,DIALOG *d,int32_t c);
 static ListData warp_dlg_list(warptypelist, &font);
 static ListData warp_ret_list(warprlist, &font);
 
+// handle grid on the Side Warp window
 int32_t d_warpdestscrsel_proc(int32_t msg,DIALOG *d,int32_t c)
 {
 	if(msg == MSG_START)
