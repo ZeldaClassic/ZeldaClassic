@@ -683,8 +683,7 @@ bool get_debug()
 
 void set_debug(bool d)
 {
-    __debug=d;
-    return;
+	__debug=d;
 }
 
 bool handle_quit()
