@@ -99,9 +99,7 @@ int32_t d_ruleset_radio_proc(int32_t msg,DIALOG *d,int32_t c)
     else if(ruleset_dlg[20].flags & D_SELECTED) ruleset = rulesetModern;
     
     if(temp != ruleset)
-    {
         return D_REDRAW;
-    }
     
     return ret;
 }
@@ -288,48 +286,35 @@ void applyRuleset(int32_t newRuleset, byte *qrptr)
 	{
 		case rulesetNES: // Authentic NES
 		{
-			for(auto qr : rNES)
-				set_qr(qr, 1, qrptr);
+			for(auto qr : rNES) set_qr(qr, 1, qrptr);
 			break;
 		}
 		case rulesetFixedNES: // Fixed NES
 		{
-			for(auto qr : r_FIXES)
-				set_qr(qr, 1, qrptr);
+			for(auto qr : r_FIXES) set_qr(qr, 1, qrptr);
 			break;
 		}
 		case rulesetBSZ: // BS Zelda
 		{
-			for(auto qr : r_FIXES)
-				set_qr(qr, 1, qrptr);
-			for(auto qr : rBSZ)
-				set_qr(qr, 1, qrptr);
+			for(auto qr : r_FIXES) set_qr(qr, 1, qrptr);
+			for(auto qr : rBSZ   ) set_qr(qr, 1, qrptr);
 			break;
 		}
 		case rulesetZ3: // Zelda 3-esque
 		{
-			for(auto qr : r_FIXES)
-				set_qr(qr, 1, qrptr);
-			for(auto qr : rBSZ)
-				set_qr(qr, 1, qrptr);
-			for(auto qr : rZ3)
-				set_qr(qr, 1, qrptr);
+			for(auto qr : r_FIXES) set_qr(qr, 1, qrptr);
+			for(auto qr : rBSZ   ) set_qr(qr, 1, qrptr);
+			for(auto qr : rZ3    ) set_qr(qr, 1, qrptr);
 			break;
 		}
 		case rulesetModern: // Modern-style
 		{
-			for(auto qr : r_FIXES)
-				set_qr(qr, 1, qrptr);
-			for(auto qr : rBSZ)
-				set_qr(qr, 1, qrptr);
-			for(auto qr : rZ3)
-				set_qr(qr, 1, qrptr);
-			for(auto qr : rMODERN_O)
-				set_qr(qr, 0, qrptr);
-			for(auto qr : rMODERN)
-				set_qr(qr, 1, qrptr);
-			for(auto tmpl : rMODERN_TMPL)
-				applyRuleTemplate(tmpl, qrptr);
+			for(auto qr : r_FIXES       ) set_qr(qr, 1, qrptr);
+			for(auto qr : rBSZ          ) set_qr(qr, 1, qrptr);
+			for(auto qr : rZ3           ) set_qr(qr, 1, qrptr);
+			for(auto qr : rMODERN_O     ) set_qr(qr, 0, qrptr);
+			for(auto qr : rMODERN       ) set_qr(qr, 1, qrptr);
+			for(auto tmpl : rMODERN_TMPL) applyRuleTemplate(tmpl, qrptr);
 			break;
 		}
 	}
