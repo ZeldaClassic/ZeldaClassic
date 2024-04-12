@@ -275,10 +275,8 @@ void SemanticAnalyzer::caseStmtSwitch(ASTStmtSwitch& host, void* param)
 	else if(found_str)
 	{
 		host.isString = true;
-		for (vector<ASTSwitchCases*>::iterator it = host.cases.begin(); it != host.cases.end(); ++it)
-		{
-			visit(host, (*it)->str_cases, param);
-		}
+		for (ASTSwitchCases* host_case : host.cases)
+			visit(host, host_case->str_cases, param);
 	}
 	
 	RecursiveVisitor::caseStmtSwitch(host);
