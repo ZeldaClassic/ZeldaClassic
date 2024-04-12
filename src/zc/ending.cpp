@@ -103,8 +103,6 @@ namespace
 	};
 }
 
-void noproc() {}
-
 void put_triforce()
 {
 	if(get_qr(qr_HOLDITEMANIMATION))
@@ -119,7 +117,7 @@ void put_triforce()
 	}
 }
 
-void putendmsg(const char *s,int32_t x,int32_t y,int32_t speed,void(proc)())
+void putendmsg(const char *s,int32_t x,int32_t y,int32_t speed,void(proc)() = nullptr)
 {
 	int32_t i=0;
 	int32_t c=(int32_t)strlen(s)*speed;
@@ -135,7 +133,7 @@ void putendmsg(const char *s,int32_t x,int32_t y,int32_t speed,void(proc)())
 			++i;
 		}
 		
-		proc();
+		if (proc != nullptr) proc();
 		advanceframe(true);
 	}
 }
@@ -287,14 +285,14 @@ void ending()
 	
 	if(QMisc.endstring==0)
 	{
-		putendmsg("THANKS HERO,YOU'RE",32,96,6,noproc);
-		putendmsg("THE HERO OF HYRULE.",32,112,6,noproc);
+		putendmsg("THANKS HERO,YOU'RE",32,96,6);
+		putendmsg("THE HERO OF HYRULE.",32,112,6);
 	}
 	else
 	{
-		putendmsg(tmpmsg[0],32,80,6,noproc);
-		putendmsg(tmpmsg[1],32,96,6,noproc);
-		putendmsg(tmpmsg[2],32,112,6,noproc);
+		putendmsg(tmpmsg[0],32,80,6);
+		putendmsg(tmpmsg[1],32,96,6);
+		putendmsg(tmpmsg[2],32,112,6);
 	}
 	
 	for(int32_t f=408; f<927; f++)
@@ -388,9 +386,9 @@ void ending()
 	}
 	else
 	{
-		putendmsg(tmpmsg[3],32,160,6,noproc);
-		putendmsg(tmpmsg[4],32,176,6,noproc);
-		putendmsg(tmpmsg[5],32,200,6,noproc);
+		putendmsg(tmpmsg[3],32,160,6);
+		putendmsg(tmpmsg[4],32,176,6);
+		putendmsg(tmpmsg[5],32,200,6);
 	}
 	
 	for(int32_t f=1336; f<1492; f++)
