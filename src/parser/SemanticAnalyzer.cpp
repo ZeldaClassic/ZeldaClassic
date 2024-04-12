@@ -1540,18 +1540,17 @@ void SemanticAnalyzer::caseExprCall(ASTExprCall& host, void* param)
 		{
 			if(current->isScript())
 			{
-				for (vector<Function*>::const_iterator it = bestFunctions.begin();
-				     it != bestFunctions.end(); ++it)
+				for (Function* best_func : bestFunctions)
 				{
-					if(current == bestScripts[*it])
+					if(current == bestScripts[best_func])
 					{
-						if(bestFound)
+						if (bestFound)
 						{
 							bestFound = NULL;
 							current = NULL;
 							break;
 						}
-						else bestFound = *it;
+						else bestFound = best_func;
 					}
 				}
 			}
