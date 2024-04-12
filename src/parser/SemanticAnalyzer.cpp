@@ -64,10 +64,8 @@ SemanticAnalyzer::SemanticAnalyzer(Program& program)
 
 		functions = cscope->getConstructors();
 		parsing_user_class = puc_construct;
-		for (vector<Function*>::iterator it = functions.begin();
-		     it != functions.end(); ++it)
+		for (Function* func : functions )
 		{
-			Function* func = *it;
 			BuiltinVariable::create(*func->internalScope, *constType, "this", this);
 			func->internalScope->stackDepth_--;
 			analyzeFunctionInternals(*func);
