@@ -72,10 +72,8 @@ SemanticAnalyzer::SemanticAnalyzer(Program& program)
 		}
 		
 		functions = scope->getLocalFunctions();
-		for (vector<Function*>::iterator it = functions.begin();
-		     it != functions.end(); ++it)
+		for (Function* func : functions )
 		{
-			Function* func = *it;
 			if(func->getFlag(FUNCFLAG_STATIC))
 				parsing_user_class = puc_none;
 			else
@@ -89,10 +87,8 @@ SemanticAnalyzer::SemanticAnalyzer(Program& program)
 		
 		functions = cscope->getDestructor();
 		parsing_user_class = puc_destruct;
-		for (vector<Function*>::iterator it = functions.begin();
-		     it != functions.end(); ++it)
+		for (Function* func : functions )
 		{
-			Function* func = *it;
 			BuiltinVariable::create(*func->internalScope, *constType, "this", this);
 			func->internalScope->stackDepth_--;
 			analyzeFunctionInternals(*func);
