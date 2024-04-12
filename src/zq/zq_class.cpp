@@ -12160,13 +12160,13 @@ extern script_data *subscreenscripts[NUMSCRIPTSSUBSCREEN];
 
 int32_t writeffscript(PACKFILE *f, zquestheader *Header)
 {
-    dword section_id       = ID_FFSCRIPT;
-    dword section_version  = V_FFSCRIPT;
-    dword section_cversion = CV_FFSCRIPT;
-    dword section_size     = 0;
+	dword section_id       = ID_FFSCRIPT;
+	dword section_version  = V_FFSCRIPT;
+	dword section_cversion = CV_FFSCRIPT;
+	dword section_size     = 0;
 	dword zasmmeta_version = METADATA_V;
-    byte numscripts        = 0;
-    numscripts = numscripts; //to avoid unused variables warnings
+	byte numscripts        = 0;
+	numscripts = numscripts; //to avoid unused variables warnings
     
     //section id
     if(!p_mputl(section_id,f))
