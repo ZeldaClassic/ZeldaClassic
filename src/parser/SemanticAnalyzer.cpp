@@ -1046,12 +1046,8 @@ void SemanticAnalyzer::caseClass(ASTClass& host, void* param)
 		scope->addDataType(host.name, newBaseType, &host);
 		if (breakRecursion(*host.type.get())) return;
 		
-		for (auto it = host.constructors.begin();
-			 it != host.constructors.end(); ++it)
-		{
-			ASTFuncDecl* func = *it;
+		for( ASTFuncDecl* func : host.constructors )
 			func->returnType.reset(new ASTDataType(newBaseType, func->location));
-		}
 	}
 	
 
