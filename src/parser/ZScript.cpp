@@ -144,9 +144,8 @@ vector<Function*> Program::getUserClassConstructors() const
 vector<Function*> Program::getUserClassDestructors() const
 {
 	vector<Function*> functions;
-	for(auto it = classes.begin(); it != classes.end(); ++it)
+	for( UserClass* user_class : classes )
 	{
-		UserClass* user_class = *it;
 		appendElements(functions, user_class->getScope().getDestructor());
 	}
 	return functions;
