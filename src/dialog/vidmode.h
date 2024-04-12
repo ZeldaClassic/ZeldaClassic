@@ -15,7 +15,7 @@ class VidModeDialog: public GUI::Dialog<VidModeDialog>
 public:
 	enum class message { REFR_INFO, OK, CANCEL };
 
-	VidModeDialog();
+	VidModeDialog() = default;
 
 	std::shared_ptr<GUI::Widget> view() override;
 	virtual bool handleMessage(const GUI::DialogMessage<message>& msg);

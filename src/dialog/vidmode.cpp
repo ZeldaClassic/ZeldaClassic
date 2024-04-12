@@ -10,8 +10,6 @@ void call_vidmode_dlg()
 	VidModeDialog().show();
 }
 
-VidModeDialog::VidModeDialog(){}
-
 static int32_t resx, resy;
 std::shared_ptr<GUI::Widget> VidModeDialog::view()
 {
