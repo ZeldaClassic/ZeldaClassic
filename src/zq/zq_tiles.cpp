@@ -14931,21 +14931,14 @@ int32_t select_tile(int32_t &tile,int32_t &flip,int32_t type,int32_t &cs,bool ed
 	draw_tiles(first,cs,f);
 	
 	if(type==0)
-	{
 		tile_info_0(tile,tile2,cs,copy,copycnt,first/TILES_PER_PAGE,rect_sel);
-	}
 	else
-	{
 		tile_info_1(otile,oflip,ocs,tile,flip,cs,copy,first/TILES_PER_PAGE, always_use_flip);
-	}
 	
 	go_tiles();
 	
 	while(gui_mouse_b())
-	{
-		/* do nothing */
-		rest(1);
-	}
+		rest(1); // do nothing
 	
 	bool bdown=false;
 	
@@ -15262,13 +15255,9 @@ int32_t select_tile(int32_t &tile,int32_t &flip,int32_t type,int32_t &cs,bool ed
 									for(int32_t b=0; b<bitcheck; b++)
 									{
 										if((CHECK_CTRL_CMD))
-										{
 											*dest_pixelrow=0;
-										}
 										else
-										{
 											*dest_pixelrow=*src_pixelrow;
-										}
 										
 										dest_pixelrow++;
 										src_pixelrow++;
@@ -15783,13 +15772,9 @@ int32_t select_tile(int32_t &tile,int32_t &flip,int32_t type,int32_t &cs,bool ed
 							// I don't know what this was supposed to be doing before.
 							// It didn't work in anything like a sensible way.
 							if(rect_sel)
-							{
 								make_combos_rect(top, left, rows, columns, cs);
-							}
 							else
-							{
 								make_combos(zc_min(tile, tile2), zc_max(tile, tile2), cs);
-							}
 						}
 						
 						redraw=true;
@@ -15887,9 +15872,7 @@ int32_t select_tile(int32_t &tile,int32_t &flip,int32_t type,int32_t &cs,bool ed
 			if(isinRect(gui_mouse_x(),gui_mouse_y(),window_xofs + w + 12 - 21, window_yofs + 5, window_xofs + w +12 - 21 + 15, window_yofs + 5 + 13))
 			{
 				if(do_x_button(screen, w+12+window_xofs - 21, 5+window_yofs))
-				{
 					done=1;
-				}
 			}
 			
 			int32_t x=gui_mouse_x()-screen_xofs;
@@ -15916,10 +15899,7 @@ int32_t select_tile(int32_t &tile,int32_t &flip,int32_t type,int32_t &cs,bool ed
 				else if(dclick_status == DCLICK_AGAIN)
 				{
 					while(gui_mouse_b())
-					{
-						/* do nothing */
-						rest(1);
-					}
+						rest(1); // do nothing
 					
 					if(((y>>(5))*TILES_PER_ROW + (x>>(5)) + first)!=t)
 					{
@@ -16052,9 +16032,7 @@ int32_t select_tile(int32_t &tile,int32_t &flip,int32_t type,int32_t &cs,bool ed
 				font = tfont;
 				
 				if(do_text_button((150+28*4)*mul+screen_xofs,213*mul+screen_yofs+panel_yofs,28*mul,21*mul,"Done"))
-				{
 					done=1;
-				}
 				
 				font = tf;
 			}
@@ -16324,10 +16302,7 @@ REDRAW:
 	while(!done);
 	
 	while(gui_mouse_b())
-	{
-		/* do nothing */
-		rest(1);
-	}
+		rest(1); // do nothing
 	
 	comeback();
 	register_blank_tiles();
