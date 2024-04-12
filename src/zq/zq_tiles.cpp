@@ -18961,21 +18961,13 @@ int32_t readcomboaliasfile(PACKFILE *f)
 	word tempword = 0;
 	
 	if(!p_igetl(&zversion,f))
-	{
 		return 0;
-	}
 	if(!p_igetl(&zbuild,f))
-	{
 		return 0;
-	}
 	if(!p_igetw(&section_version,f))
-	{
 		return 0;
-	}
 	if(!p_igetw(&section_cversion,f))
-	{
 		return 0;
-	}
 	al_trace("readoneweapon section_version: %d\n", section_version);
 	al_trace("readoneweapon section_cversion: %d\n", section_cversion);
 
@@ -19095,11 +19087,9 @@ int32_t readcomboaliasfile(PACKFILE *f)
 		memcpy(&combo_aliases[index+(tilect)],&temp_alias,sizeof(combo_alias));
 	}
 	
-	//::memcpy(&(newtilebuf[tile_index]),&temptile,sizeof(tiledata));
-	
+	//::memcpy(&(newtilebuf[tile_index]),&temptile,sizeof(tiledata)); 
 			
 	return 1;
-	
 }
 
 int32_t readcomboaliasfile_to_location(PACKFILE *f, int32_t start)
