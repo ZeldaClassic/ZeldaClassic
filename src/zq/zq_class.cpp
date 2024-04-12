@@ -4789,14 +4789,10 @@ void zmap::PasteScreenData(const mapscr& copymapscr)
         screens[currscr].flags = copymapscr.flags;
         screens[currscr].flags2 &= (wfUP|wfDOWN|wfLEFT|wfRIGHT);
         screens[currscr].flags2 |= copymapscr.flags2 & ~(wfUP|wfDOWN|wfLEFT|wfRIGHT);
-        screens[currscr].flags3 = copymapscr.flags3;
-        screens[currscr].flags4 = copymapscr.flags4;
-        screens[currscr].flags5 = copymapscr.flags5;
-        screens[currscr].flags6 = copymapscr.flags6;
-        screens[currscr].flags7 = copymapscr.flags7;
-        screens[currscr].flags8 = copymapscr.flags8;
-        screens[currscr].flags9 = copymapscr.flags9;
-        screens[currscr].flags10 = copymapscr.flags10;
+
+	for (int i = 2; i < 10; ++i)
+		screens[currscr].flags_arr[i] = copymapscr.flags_arr[i]; 
+
         screens[currscr].item = copymapscr.item;
         screens[currscr].hasitem = copymapscr.hasitem;
         screens[currscr].itemx = copymapscr.itemx;

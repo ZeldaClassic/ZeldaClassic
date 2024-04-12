@@ -62,16 +62,22 @@ struct mapscr
 	word undercombo;
 	byte undercset;
 	word catchall;
-	byte flags;
-	byte flags2;
-	byte flags3;
-	byte flags4;
-	byte flags5;
-	byte flags6;
-	byte flags7;
-	byte flags8;
-	byte flags9;
-	byte flags10;
+
+	union {
+		struct {
+			byte flags;
+			byte flags2;
+			byte flags3;
+			byte flags4;
+			byte flags5;
+			byte flags6;
+			byte flags7;
+			byte flags8;
+			byte flags9;
+			byte flags10;
+		};
+		byte flags_arr[10];
+	};
 	byte csensitive = 1;
 	word noreset;
 	word nocarry;
