@@ -19585,7 +19585,7 @@ void build_biglobal_list()
         biglobal[i].second=-1;
     }
     
-    //Bubble sort! (doesn't account for gaps between scripts)
+    //variation on Selection sort! (doesn't account for gaps between scripts)
     for(int32_t i = 0; i < biglobal_cnt - 1; i++)
     {
         for(int32_t j = i + 1; j < biglobal_cnt; j++)
@@ -19627,7 +19627,7 @@ void build_biffs_list()
         biffs[i].second=-1;
     }
     
-    //Bubble sort! (doesn't account for gaps between scripts)
+    //variation on Selection sort! (doesn't account for gaps between scripts)
     for(int32_t i = 0; i < biffs_cnt - 1; i++)
     {
         for(int32_t j = i + 1; j < biffs_cnt; j++)
@@ -19670,7 +19670,7 @@ void build_binpcs_list()
         binpcs[i].second=-1;
     }
     
-    //Bubble sort! (doesn't account for gaps between scripts)
+    //variation on Selection sort! (doesn't account for gaps between scripts)
     for(int32_t i = 0; i < binpcs_cnt - 1; i++)
     {
         for(int32_t j = i + 1; j < binpcs_cnt; j++)
@@ -19714,7 +19714,7 @@ void build_bilweapons_list()
         bilweapons[i].second=-1;
     }
     
-    //Bubble sort! (doesn't account for gaps between scripts)
+    //variation on Selection sort! (doesn't account for gaps between scripts)
     for(int32_t i = 0; i < bilweapons_cnt - 1; i++)
     {
         for(int32_t j = i + 1; j < bilweapons_cnt; j++)
@@ -19757,7 +19757,7 @@ void build_bieweapons_list()
         bieweapons[i].second=-1;
     }
     
-    //Bubble sort! (doesn't account for gaps between scripts)
+    //variation on Selection sort! (doesn't account for gaps between scripts)
     for(int32_t i = 0; i < bieweapons_cnt - 1; i++)
     {
         for(int32_t j = i + 1; j < bieweapons_cnt; j++)
@@ -19800,7 +19800,7 @@ void build_bihero_list()
         bihero[i].second=-1;
     }
     
-    //Bubble sort! (doesn't account for gaps between scripts)
+    //variation on Selection sort! (doesn't account for gaps between scripts)
     for(int32_t i = 0; i < bihero_cnt - 1; i++)
     {
         for(int32_t j = i + 1; j < bihero_cnt; j++)
@@ -19843,7 +19843,7 @@ void build_bidmaps_list()
         bidmaps[i].second=-1;
     }
     
-    //Bubble sort! (doesn't account for gaps between scripts)
+    //variation on Selection sort! (doesn't account for gaps between scripts)
     for(int32_t i = 0; i < bidmaps_cnt - 1; i++)
     {
         for(int32_t j = i + 1; j < bidmaps_cnt; j++)
@@ -19886,7 +19886,7 @@ void build_biscreens_list()
         biscreens[i].second=-1;
     }
     
-    //Bubble sort! (doesn't account for gaps between scripts)
+    //variation on Selection sort! (doesn't account for gaps between scripts)
     for(int32_t i = 0; i < biscreens_cnt - 1; i++)
     {
         for(int32_t j = i + 1; j < biscreens_cnt; j++)
@@ -19929,7 +19929,7 @@ void build_biitemsprites_list()
         biditemsprites[i].second=-1;
     }
     
-    //Bubble sort! (doesn't account for gaps between scripts)
+    //variation on Selection sort! (doesn't account for gaps between scripts)
     for(int32_t i = 0; i < biitemsprites_cnt - 1; i++)
     {
         for(int32_t j = i + 1; j < biitemsprites_cnt; j++)
@@ -20005,7 +20005,7 @@ void build_bidcomboscripts_list()
         bidcomboscripts[i].second=-1;
     }
     
-    //Bubble sort! (doesn't account for gaps between scripts)
+    //variation on Selection sort! (doesn't account for gaps between scripts)
     for(int32_t i = 0; i < bidcomboscripts_cnt - 1; i++)
     {
         for(int32_t j = i + 1; j < bidcomboscripts_cnt; j++)
