@@ -16273,12 +16273,9 @@ int32_t d_wflag_proc(int32_t msg,DIALOG *d,int32_t)
 				rectfill(screen,d->x, d->y, d->x+d->w-1, d->y+d->h-1,c2);
 			}
 			
-			
 			while(gui_mouse_b())
-			{
-				/* do nothing */
-				rest(1);
-			}
+				rest(1); /* do nothing */
+
 			ret = D_REDRAWME;
 		}
 		break;
@@ -16720,25 +16717,25 @@ static ListData path_dlg_list(dirlist, &font);
 
 static DIALOG path_dlg[] =
 {
-    /* (dialog proc)       (x)     (y)     (w)   (h)   (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
-    { jwin_win_proc,        80,     57,    161,  164,  vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Maze Path", NULL, NULL },
+    /* (dialog proc)       (x)     (y)     (w)   (h)     (fg)     (bg)    (key)    (flags)     (d1)           (d2)     (dp) */
+    { jwin_win_proc,        80,     57,    161,  164,    vc(14),  vc(1),  0,       D_EXIT,          0,             0, (void *) "Maze Path", NULL, NULL },
     { d_timer_proc,          0,      0,      0,    0,    0,       0,       0,       0,          0,          0,         NULL, NULL, NULL },
     { jwin_text_proc,       94,    106,    192,    8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "1st", NULL, NULL },
     { jwin_text_proc,       94,    124,    192,    8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "2nd", NULL, NULL },
     { jwin_text_proc,       94,    142,    192,    8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "3rd", NULL, NULL },
     { jwin_text_proc,       94,    160,    192,    8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Secret Exit", NULL, NULL },
     { jwin_text_proc,       94,    178,    192,    8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Normal Exit", NULL, NULL },
-    { jwin_droplist_proc,   140,   102,   80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
-    { jwin_droplist_proc,   140,   120,   80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
-    { jwin_droplist_proc,   140,   138,   80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
-    { jwin_droplist_proc,   140,   156,   80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
-    { jwin_droplist_proc,   140,   174,   80+1,   16,   jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
-    { jwin_button_proc,      90,   194,     61,   21,   vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
-    { jwin_button_proc,     170,   194,     61,   21,   vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
+    { jwin_droplist_proc,   140,   102,   80+1,   16,    jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
+    { jwin_droplist_proc,   140,   120,   80+1,   16,    jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
+    { jwin_droplist_proc,   140,   138,   80+1,   16,    jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
+    { jwin_droplist_proc,   140,   156,   80+1,   16,    jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
+    { jwin_droplist_proc,   140,   174,   80+1,   16,    jwin_pal[jcTEXTFG], jwin_pal[jcTEXTBG],  0,       0,          0,             0, (void *) &path_dlg_list, NULL, NULL },
+    { jwin_button_proc,      90,   194,     61,   21,    vc(14),  vc(1),  13,      D_EXIT,     0,             0, (void *) "OK", NULL, NULL },
+    { jwin_button_proc,     170,   194,     61,   21,    vc(14),  vc(1),  27,      D_EXIT,     0,             0, (void *) "Cancel", NULL, NULL },
     { d_keyboard_proc,        0,     0,      0,    0,    0,    0,    0,       0,       KEY_F1,   0, (void *) onHelp, NULL, NULL },
     { jwin_text_proc,        87,    82,    192,    8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "A Lost Woods-style maze screen", NULL, NULL },
     { jwin_text_proc,        87,    92,    192,    8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "with a normal and secret exit.", NULL, NULL },
-    { NULL,                   0,     0,      0,    0,   0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
+    { NULL,                   0,     0,      0,    0,    0,       0,       0,       0,          0,             0,       NULL,                           NULL,  NULL }
 };
 
 int32_t onPath()
