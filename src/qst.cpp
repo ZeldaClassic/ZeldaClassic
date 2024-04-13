@@ -1237,14 +1237,14 @@ int32_t get_qst_buffers()
 
 void free_newtilebuf()
 {
-	if(newtilebuf)
-	{
-		for(int32_t i=0; i<NEWMAXTILES; i++)
-			free(newtilebuf[i].data);
+	if (!newtilebuf)
+		return;
 
-		free(newtilebuf);
-		newtilebuf = 0;
-	}
+	for(int32_t i=0; i<NEWMAXTILES; i++)
+		free(newtilebuf[i].data);
+
+	free(newtilebuf);
+	newtilebuf = 0;
 }
 
 void free_grabtilebuf()
@@ -15093,29 +15093,19 @@ int32_t readmapscreen_old(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr
 	if(version>5)
 	{
 		if(!p_getc(&(temp_mapscr->flags7),f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&(temp_mapscr->flags8),f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&(temp_mapscr->flags9),f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&(temp_mapscr->flags10),f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&(temp_mapscr->csensitive),f))
-		{
 			return qe_invalid;
-		}
 	}
 	else
 	{
@@ -15147,19 +15137,13 @@ int32_t readmapscreen_old(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr
 	else
 	{
 		if(!p_getc(&(temp_mapscr->oceansfx),f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&(temp_mapscr->bosssfx),f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&(temp_mapscr->secretsfx),f))
-		{
 			return qe_invalid;
-		}
 	}
 	
 	if(version<15) // October 2007: another SFX
@@ -15169,9 +15153,7 @@ int32_t readmapscreen_old(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr
 	else
 	{
 		if(!p_getc(&(temp_mapscr->holdupsfx),f))
-		{
 			return qe_invalid;
-		}
 	}
 	
 	
@@ -15180,41 +15162,28 @@ int32_t readmapscreen_old(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr
 		for(int32_t k=0; k<6; k++)
 		{
 			if(!p_getc(&(temp_mapscr->layermap[k]),f))
-			{
 				return qe_invalid;
-			}
 		}
 		
 		for(int32_t k=0; k<6; k++)
 		{
 			if(!p_getc(&(temp_mapscr->layerscreen[k]),f))
-			{
 				return qe_invalid;
-			}
 		}
 	}
 	else if((Header->zelda_version == 0x192)&&(Header->build>23)&&(Header->build<98))
 	{
 		if(!p_getc(&(temp_mapscr->layermap[2]),f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&(temp_mapscr->layerscreen[2]),f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&(temp_mapscr->layermap[4]),f))
-		{
 			return qe_invalid;
-		}
 		
-		if(!p_getc(&(temp_mapscr->layerscreen[4]),f))
-		
-		{
+		if(!p_getc(&(temp_mapscr->layerscreen[4]),f)) 
 			return qe_invalid;
-		}
 	}
 	
 	if((Header->zelda_version == 0x192)&&(Header->build>149))
@@ -15222,49 +15191,37 @@ int32_t readmapscreen_old(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr
 		for(int32_t k=0; k<6; k++)
 		{
 			if(!p_getc(&tempbyte,f))                          //layerxsize
-			{
 				return qe_invalid;
-			}
 		}
 		
 		for(int32_t k=0; k<6; k++)
 		{
 			if(!p_getc(&tempbyte,f))                          //layerxspeed
-			{
 				return qe_invalid;
-			}
 		}
 		
 		for(int32_t k=0; k<6; k++)
 		{
 			if(!p_getc(&tempbyte,f))                          //layerxdelay
-			{
 				return qe_invalid;
-			}
 		}
 		
 		for(int32_t k=0; k<6; k++)
 		{
 			if(!p_getc(&tempbyte,f))                          //layerysize
-			{
 				return qe_invalid;
-			}
 		}
 		
 		for(int32_t k=0; k<6; k++)
 		{
 			if(!p_getc(&tempbyte,f))                          //layeryspeed
-			{
 				return qe_invalid;
-			}
 		}
 		
 		for(int32_t k=0; k<6; k++)
 		{
 			if(!p_getc(&tempbyte,f))                          //layerydelay
-			{
 				return qe_invalid;
-			}
 		}
 	}
 	
@@ -15273,9 +15230,7 @@ int32_t readmapscreen_old(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr
 		for(int32_t k=0; k<6; k++)
 		{
 			if(!p_getc(&(temp_mapscr->layeropacity[k]),f))
-			{
 				return qe_invalid;
-			}
 		}
 	}
 	
@@ -15284,15 +15239,11 @@ int32_t readmapscreen_old(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr
 		if((Header->zelda_version == 0x192)&&(Header->build>153))
 		{
 			if(!p_getc(&padding,f))
-			{
 				return qe_invalid;
-			}
 		}
 		
 		if(!p_igetw(&(temp_mapscr->timedwarptics),f))
-		{
 			return qe_invalid;
-		}
 	}
 	
 	if((Header->zelda_version < 0x192)||((Header->zelda_version == 0x192)&&(Header->build<24)))
@@ -15315,8 +15266,7 @@ int32_t readmapscreen_old(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr
 	{
 		extras=62;
 	}
-	else
-	
+	else 
 	{
 		extras=0;
 	}
@@ -15324,23 +15274,17 @@ int32_t readmapscreen_old(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr
 	for(int32_t k=0; k<extras; k++)
 	{
 		if(!p_getc(&tempbyte,f))                            //extra[k]
-		{
 			return qe_invalid;
-		}
 	}
 	
 	if((Header->zelda_version > 0x211)||((Header->zelda_version == 0x211)&&(Header->build>2)))
 		//if (version>3)
 	{
 		if(!p_getc(&(temp_mapscr->nextmap),f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&(temp_mapscr->nextscr),f))
-		{
 			return qe_invalid;
-		}
 	}
 	else
 	{
@@ -15366,14 +15310,10 @@ int32_t readmapscreen_old(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr
 		for(int32_t k=0; k<secretcombos; k++)
 		{
 			if(!p_getc(&tempbyte,f))
-			{
 				return qe_invalid;
-			}
 			
 			if(k<128)
-			{
 				temp_mapscr->secretcombo[k]=tempbyte;
-			}
 		}
 	}
 	else
@@ -15381,9 +15321,7 @@ int32_t readmapscreen_old(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr
 		for(int32_t k=0; k<128; k++)
 		{
 			if(!p_igetw(&(temp_mapscr->secretcombo[k]),f))
-			{
 				return qe_invalid;
-			}
 			
 		}
 	}
@@ -15393,47 +15331,35 @@ int32_t readmapscreen_old(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr
 		for(int32_t k=0; k<128; k++)
 		{
 			if(!p_getc(&(temp_mapscr->secretcset[k]),f))
-			{
 				return qe_invalid;
-			}
 		}
 		
 		for(int32_t k=0; k<128; k++)
 		{
 			if(!p_getc(&(temp_mapscr->secretflag[k]),f))
-			{
 				return qe_invalid;
-			}
 		}
 	}
 	
 	if((Header->zelda_version == 0x192)&&(Header->build>97)&&(Header->build<154))
 	{
 		if(!p_getc(&padding,f))
-		{
 			return qe_invalid;
-		}
 	}
 	
 	for(int32_t k=0; k<176; k++)
 	{
 		if(!p_igetw(&(temp_mapscr->data[k]),f))
-		{
 			return qe_invalid;
-		}
 	}
 	
 	if((Header->zelda_version == 0x192)&&(Header->build>20)&&(Header->build<24))
 	{
 		if(!p_getc(&padding,f))
-		{
 			return qe_invalid;
-		}
 		
 		if(!p_getc(&padding,f))
-		{
 			return qe_invalid;
-		}
 	}
 	
 	if((Header->zelda_version > 0x192)||((Header->zelda_version == 0x192)&&(Header->build>20)))
@@ -15441,26 +15367,18 @@ int32_t readmapscreen_old(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr
 		for(int32_t k=0; k<176; k++)
 		{
 			if(!p_getc(&(temp_mapscr->sflag[k]),f))
-			{
 				return qe_invalid;
-			}
 			
 			if((Header->zelda_version == 0x192)&&(Header->build<24))
 			{
 				if(!p_getc(&tempbyte,f))
-				{
 					return qe_invalid;
-				}
 				
 				if(!p_getc(&tempbyte,f))
-				{
 					return qe_invalid;
-				}
 				
 				if(!p_getc(&tempbyte,f))
-				{
 					return qe_invalid;
-				}
 			}
 		}
 	}
@@ -15471,9 +15389,7 @@ int32_t readmapscreen_old(PACKFILE *f, zquestheader *Header, mapscr *temp_mapscr
 		{
 		
 			if(!p_getc(&(temp_mapscr->cset[k]),f))
-			{
 				return qe_invalid;
-			}
 		}
 	}
 	
@@ -21466,15 +21382,13 @@ invalid:
     pack_fclose(f);
     
     if(!oldquest && exists(tmpfilename))
-    {
 	delete_file(tmpfilename);
-    }
     
     return qe_invalid;
 }
 
-static bool _is_loading_quest;
 
+static bool _is_loading_quest;
 bool is_loading_quest()
 {
 	return _is_loading_quest;
