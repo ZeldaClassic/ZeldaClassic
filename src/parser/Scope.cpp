@@ -457,12 +457,9 @@ UserClass* ZScript::lookupClass(Scope& scope, vector<string> const& names,
 	bool foundFile = false;
 	ClassScope* cscope = nullptr;
 	Scope* tscope = nullptr;
-	for (vector<Scope*>::const_iterator it = scopes.begin();
-	     it != scopes.end(); ++it)
+	for (Scope* current_scope : scopes)
 	{
-		Scope& current = **it;
-		
-		tscope = current.getChild(name);
+		tscope = current_scope->getChild(name);
 		if(tscope && tscope->isClass())
 		{
 			cscope = static_cast<ClassScope*>(tscope);
