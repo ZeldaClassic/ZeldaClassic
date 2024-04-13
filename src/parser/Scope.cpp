@@ -254,10 +254,8 @@ Datum* ZScript::lookupDatum(Scope& scope, std::string const& name, ASTExprIdenti
 	}
 	if(host.noUsing || forceSkipUsing) return datum; //End early
 	vector<NamespaceScope*> namespaces = lookupUsingNamespaces(scope);
-	for(vector<NamespaceScope*>::iterator it = namespaces.begin();
-		it != namespaces.end(); ++it)
+	for(NamespaceScope* nsscope : namespaces)
 	{
-		NamespaceScope* nsscope = *it;
 		Datum* temp = nsscope->getLocalDatum(name);
 		if(!datum)
 			datum = temp;
