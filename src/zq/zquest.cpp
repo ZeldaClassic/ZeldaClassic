@@ -12604,26 +12604,26 @@ void build_biw_list()
 
 const char *weaponlist(int32_t index, int32_t *list_size)
 {
-    if(index<0)
-    {
-        *list_size = biw_cnt;
-        return NULL;
-    }
+	if(index<0)
+	{
+		*list_size = biw_cnt;
+		return NULL;
+	}
     
-    return biw[index].s;
+	return biw[index].s;
 }
 const char *weaponlist_num(int32_t index, int32_t *list_size)
 {
-    if(index<0)
-    {
-        *list_size = biw_cnt;
-        return NULL;
-    }
+	if(index<0)
+	{
+		*list_size = biw_cnt;
+		return NULL;
+	}
 	static char biwn_buf[64+6];
 	if(biw[index].i < 0)
 		return biw[index].s;
-    sprintf(biwn_buf, "%s (%03d)", biw[index].s, biw[index].i);
-    return biwn_buf;
+	sprintf(biwn_buf, "%s (%03d)", biw[index].s, biw[index].i);
+	return biwn_buf;
 }
 int32_t writeoneweapon(PACKFILE *f, int32_t index)
 {
