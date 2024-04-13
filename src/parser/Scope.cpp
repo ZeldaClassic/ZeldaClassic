@@ -1072,9 +1072,7 @@ Function* BasicScope::addFunction(
 	{
 		prototype = node->prototype;
 		if(prototype)
-		{
 			defRet = node->defaultReturn.get();
-		}
 	}
 	FunctionSignature signature(name, paramTypes);
 	Function* foundFunc = NULL;
@@ -1128,9 +1126,7 @@ Function* BasicScope::addFunction(
 	if(node)
 	{
 		for(auto it = node->optvals.begin(); it != node->optvals.end(); ++it)
-		{
 			fun->opt_vals.push_back(*it);
-		}
 	}
 
 	functionsByName_[name].push_back(fun);
