@@ -467,12 +467,9 @@ UserClass* ZScript::lookupClass(Scope& scope, vector<string> const& names,
 	if(!noUsing)
 	{
 		//Check using functions
-		for (vector<Scope*>::const_iterator it = usingScopes.begin();
-			 it != usingScopes.end(); ++it)
+		for(Scope* current_scope : usingScopes)
 		{
-			Scope& current = **it;
-			
-			tscope = current.getChild(name);
+			tscope = current_scope->getChild(name);
 			if(tscope && tscope->isClass())
 			{
 				cscope = static_cast<ClassScope*>(tscope);
