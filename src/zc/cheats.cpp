@@ -517,5 +517,3 @@ void cheats_hit_bind(Cheat cheat)
 			break;
 	}
 }
-
-
