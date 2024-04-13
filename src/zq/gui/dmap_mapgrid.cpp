@@ -57,14 +57,10 @@ namespace GUI
 
 			FONT* nf = get_zc_font(font_nfont);
 			for (j = 0; j < 8; ++j)
-			{
 				textprintf_ex(tempbmp, nf, x, y + header_height + frame_thickness + 1 + (j * l), jwin_pal[jcBOXFG], jwin_pal[jcBOX], "%d", j);
-			}
 
 			for (j = 0; j < cols; ++j)
-			{
 				textprintf_ex(tempbmp, nf, x + header_width + frame_thickness + ((col_width + 1) / 2) - (header_width / 2) + (j * col_width), y, jwin_pal[jcBOXFG], jwin_pal[jcBOX], "%X", j);
-			}
 
 			jwin_draw_frame(tempbmp, x + header_width + 1, y + header_height + 1, 180, 84, FR_DEEP);
 
