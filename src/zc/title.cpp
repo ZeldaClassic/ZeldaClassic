@@ -491,9 +491,7 @@ static bool register_name()
 					--grid_y;
 					
 					if(grid_y<0)
-					{
 						grid_y=letter_grid_height-1;
-					}
 				}
 				
 				sfx(WAV_CHIME);
@@ -508,9 +506,7 @@ static bool register_name()
 					++grid_y;
 					
 					if(grid_y>=letter_grid_height)
-					{
 						grid_y=0;
-					}
 				}
 				
 				sfx(WAV_CHIME);
@@ -520,9 +516,7 @@ static bool register_name()
 				--grid_y;
 				
 				if(grid_y<0)
-				{
 					grid_y=letter_grid_height-1;
-				}
 				
 				sfx(WAV_CHIME);
 			}
@@ -531,9 +525,7 @@ static bool register_name()
 				++grid_y;
 				
 				if(grid_y>=letter_grid_height)
-				{
 					grid_y=0;
-				}
 				
 				sfx(WAV_CHIME);
 			}
@@ -546,9 +538,7 @@ static bool register_name()
 				}
 				
 				if(x>=8)
-				{
 					x=0;
-				}
 			}
 			else if(rAbtn())
 			{
@@ -556,9 +546,7 @@ static bool register_name()
 				++x;
 				
 				if(x>=8)
-				{
 					x=0;
-				}
 				
 				sfx(WAV_PLACE);
 			}
@@ -570,15 +558,11 @@ static bool register_name()
 				for(int32_t i=0; i<8; i++)
 				{
 					if(name[i]!=' ' && name[i]!=0)
-					{
 						++ltrs;
-					}
 				}
 				
 				if(!ltrs)
-				{
 					cancel=true;
-				}
 			}
 			
 		}
@@ -604,9 +588,7 @@ static bool register_name()
 					name[zc_min(x,7)]=k&0xFF;
 					
 					if(x<8)
-					{
 						++x;
-					}
 					
 					sfx(WAV_PLACE);
 				}
@@ -618,13 +600,9 @@ static bool register_name()
 						if(x>0)
 						{
 							if(x==8)
-							{
 								x=6;
-							}
 							else
-							{
 								--x;
-							}
 							
 							sfx(WAV_CHIME);
 						}
@@ -649,15 +627,11 @@ static bool register_name()
 						for(int32_t i=0; i<8; i++)
 						{
 							if(name[i]!=' ' && name[i]!=0)
-							{
 								++ltrs;
-							}
 						}
 						
 						if(!ltrs)
-						{
 							cancel=true;
-						}
 					}
 					break;
 					
@@ -667,9 +641,7 @@ static bool register_name()
 							--x;
 							
 							for(int32_t i=zc_min(x,7); i<8; i++)
-							{
 								name[i]=name[i+1];
-							}
 							
 							sfx(WAV_OUCH);
 						}
@@ -678,9 +650,7 @@ static bool register_name()
 						
 					case KEY_DEL:
 						for(int32_t i=zc_min(x,7); i<8; i++)
-						{
 							name[i]=name[i+1];
-						}
 						
 						sfx(WAV_OUCH);
 						break;
@@ -692,8 +662,7 @@ static bool register_name()
 						while(key[KEY_ESC])
 						{
 							poll_keyboard();
-							/* do nothing */
-							rest(1);
+							rest(1); // do nothing
 						}
 						
 						break;
@@ -718,16 +687,12 @@ static bool register_name()
 				for(int32_t dx=0; dx<8; dx++)
 				{
 					if(framebuf->line[y+dy][tx+dx]==0)
-					{
 						framebuf->line[y+dy][tx+dx]=CSET(9)+1;
-					}
 					
 					if(NameEntryMode2>0)
 					{
 						if(framebuf->line[y2+dy][x2+dx]==0)
-						{
 							framebuf->line[y2+dy][x2+dx]=CSET(9)+1;
-						}
 					}
 				}
 			}
@@ -746,9 +711,7 @@ static bool register_name()
 	while(!done && !Quit);
 	
 	if(x<0 || cancel)
-	{
 		done=false;
-	}
 	
 	if(done)
 	{
@@ -1157,9 +1120,7 @@ static int32_t game_details(int32_t file)
 
 		// TODO: consider allowing qst file to be reconfigured, in case it is moved.
 		if(rAbtn() && !header->has_played)
-		{
 			(void)custom_game(file);
-		}
 		
 		if(chosecustomquest && load_custom_game(file))
 		{
@@ -1179,9 +1140,8 @@ int32_t getsaveslot()
 	{
 		const auto header = saves_get_slot(saveslot)->header;
 		if (!header->quest || header->has_played)
-		{
 			return -1;
-		}
+
 		return saveslot;
 	}
 	
@@ -1482,21 +1442,15 @@ void titlescreen(int32_t lsave)
 		{
 			int slot = lsave - 1;
 			if (!saves_is_valid_slot(slot))
-			{
 				Z_error_fatal("Cannot load slot %d, does not exist", lsave);
-			}
 
 			if (saves_get_slot(slot)->header->quest)
-			{
 				saves_select(slot);
-			}
 		}
 	}
 	
 	if(!Quit)
-	{
 		init_game();
-	}
 }
 
 void game_over(int32_t type)
@@ -1669,13 +1623,9 @@ void game_over(int32_t type)
 		replay_step_comment("game_over");
 
 		if(pos)
-		{
 			Quit=qQUIT;
-		}
 		else
-		{
 			Quit=qCONT;
-		}
 		
 		if(pos==1&&(!type))
 		{
@@ -1937,13 +1887,9 @@ bool save_game(bool savepoint, int32_t type)
 	if(darkroom)
 	{
 		if(get_qr(qr_FADE))
-		{
 			interpolatedfade();
-		}
 		else
-		{
 			loadfadepal((DMaps[currdmap].color)*pdLEVEL+poFADE3);
-		}
 	}
 	
 	return didsaved;
