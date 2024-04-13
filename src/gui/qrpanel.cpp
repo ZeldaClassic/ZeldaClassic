@@ -39,14 +39,8 @@ void QRPanel::setIndexed(bool v)
 	indexed = v;
 }
 
-void QRPanel::setScrollWidth(Size sz)
-{
-	scrollWidth = sz;
-}
-void QRPanel::setScrollHeight(Size sz)
-{
-	scrollHeight = sz;
-}
+void QRPanel::setScrollWidth (Size sz) { scrollWidth  = sz; }
+void QRPanel::setScrollHeight(Size sz) { scrollHeight = sz; }
 
 void QRPanel::loadList(GUI::ListData qrlist)
 {
@@ -190,9 +184,8 @@ void QRPanel::loadList(GUI::ListData qrlist)
 ScrollingPane* QRPanel::getScrollPane()
 {
 	if (scrolling)
-	{
 		return scrollpane.get();
-	}
+
 	return nullptr;
 }
 
