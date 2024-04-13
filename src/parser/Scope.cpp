@@ -1125,8 +1125,8 @@ Function* BasicScope::addFunction(
 	fun->internalScope = makeFunctionChild(*fun);
 	if(node)
 	{
-		for(auto it = node->optvals.begin(); it != node->optvals.end(); ++it)
-			fun->opt_vals.push_back(*it);
+		for (int32_t ov : node->optvals)
+			fun->opt_vals.push_back(ov);
 	}
 
 	functionsByName_[name].push_back(fun);
@@ -1894,9 +1894,7 @@ Function* ClassScope::addFunction(
 	if(node)
 	{
 		for(auto it = node->optvals.begin(); it != node->optvals.end(); ++it)
-		{
 			fun->opt_vals.push_back(*it);
-		}
 	}
 	
 	if(constructor)
