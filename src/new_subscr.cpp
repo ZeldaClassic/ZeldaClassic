@@ -4111,7 +4111,13 @@ void SW_GaugePiece::draw_piece(BITMAP* dest, int dx, int dy, int container, int 
 	
 	if(fulltile)
 		overtile16(dest,tile+offs,dx,dy,cset,0);
-	else overtile8(dest,mtile+offs,dx,dy,cset,0);
+	else 
+	{
+		if( mtile + offs == 103368 ) // draw half-hearts that are empty on their right side, not left
+			overtile8(dest, 103388, dx, dy, cset, 0);
+		else
+			overtile8(dest, mtile + offs, dx, dy, cset, 0);
+	}
 }
 void SW_GaugePiece::draw(BITMAP* dest, int xofs, int yofs, SubscrPage& page) const
 {
