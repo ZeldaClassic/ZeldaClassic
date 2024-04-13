@@ -799,11 +799,9 @@ int32_t BasicScope::useNamespace(vector<std::string> names, vector<std::string> 
 
 	vector<string> ancestry(names.begin(), --names.end());
 	vector<Scope*> scopes = lookupScopes(*this, ancestry, delimiters, noUsing); //lookupScopes handles usingNamespaces!
-	for (vector<Scope*>::const_iterator it = scopes.begin();
-	     it != scopes.end(); ++it)
+	for (Scope* current_scope : scopes)
 	{
-		Scope& current = **it;
-		Scope* tmp = current.getChild(name);
+		Scope* tmp = current_scope->getChild(name);
 		if(!tmp || !tmp->isNamespace()) continue;
 		namesp = static_cast<NamespaceScope*>(tmp);
 		++numMatches;
