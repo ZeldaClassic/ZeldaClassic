@@ -11139,20 +11139,20 @@ void reset_subscreens()
 
 int32_t setupsubscreens()
 {
-    reset_subscreens();
+	reset_subscreens();
 	//return 0;
 	for(int q = 0; q < 2; ++q)
 	{
 		subscreens_active.emplace_back();
 		subscreens_passive.emplace_back();
 	}
-    int32_t tempsubscreen=subscr_mode;
+	int32_t tempsubscreen=subscr_mode;
     
-    if(tempsubscreen>=ssdtMAX)
-        tempsubscreen=0;
+	if(tempsubscreen>=ssdtMAX)
+		tempsubscreen=0;
     
-    switch(tempsubscreen)
-    {
+	switch(tempsubscreen)
+	{
 		case ssdtOLD:
 		case ssdtNEWSUBSCR:
 		case ssdtREV2:
@@ -11188,9 +11188,9 @@ int32_t setupsubscreens()
 			subscreens_passive[1].sub_type=sstPASSIVE;
 			break;
 		}
-    }
-    subscr_mode = ssdtMAX;
-    return 0;
+	}
+	subscr_mode = ssdtMAX;
+	return 0;
 }
 
 extern script_data *ffscripts[NUMSCRIPTFFC];
