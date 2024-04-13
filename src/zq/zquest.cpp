@@ -11809,15 +11809,10 @@ int32_t d_scombo_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
         if(d->bg==1 || (CHECK_CTRL_CMD))
         {
             while(gui_mouse_b())
-            {
-                /* do nothing */
-                rest(1);
-            }
+                rest(1); // do nothing
             
             if(select_flag(f))
-            {
                 d->d2=f;
-            }
         }
         else if(key[KEY_LSHIFT])
         {
@@ -11881,10 +11876,10 @@ int32_t d_scombo_proc(int32_t msg,DIALOG *d, [[maybe_unused]] int32_t c)
         {
             clear_bitmap(buf);
             
-			if(d->bg) //flags only
-			{
-				put_flag(buf,0,0,d->d2);
-			}
+		if(d->bg) //flags only
+		{
+			put_flag(buf,0,0,d->d2);
+		}
             else if(d->d1)
             {
                 putcombo(buf,0,0,d->d1,d->fg);
