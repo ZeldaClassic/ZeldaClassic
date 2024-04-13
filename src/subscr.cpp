@@ -2525,17 +2525,15 @@ void draw_block_flip(BITMAP *dest,int32_t x,int32_t y,int32_t tile,int32_t cset,
     }
 }
 
+// this function is for the lifemeter in the load save slot menu, not in-game
 void lifemeter(BITMAP *dest,int32_t x,int32_t y,int32_t cs,bool bs_style)
 {
 	if(!show_subscreen_life)
-	{
 		return;
-	}
 	
 	if(!bs_style)
-	{
 		y+=24;
-	}
+
 	int32_t tile = 0;
 	const int32_t basetile = wpnsbuf[iwQuarterHearts].tile;
 	const int32_t max_iter = (game != NULL ? zc_min(game->get_maxlife(),game->get_hp_per_heart()*24) : 1);
