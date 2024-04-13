@@ -18114,55 +18114,43 @@ int32_t readtunes(PACKFILE *f, zquestheader *Header, zctune *tunes /*zcmidi_ *mi
 
 	static byte fake_midi_flags[32];
 
-    byte *mf=should_skip ? fake_midi_flags : midi_flags;
-    int32_t dummy;
-    word dummy2;
-    // zcmidi_ temp_midi;
-    int32_t tunes_to_read;
-    int32_t tune_count=0;
-    word section_version=0;
-    zctune temp;
+	byte *mf=should_skip ? fake_midi_flags : midi_flags;
+	int32_t dummy;
+	word dummy2;
+	// zcmidi_ temp_midi;
+	int32_t tunes_to_read;
+	int32_t tune_count=0;
+	word section_version=0;
+	zctune temp;
     
     if(Header->zelda_version < 0x193)
     {
         //    mf=Header->data_flags+ZQ_MIDIS2;
         if((Header->zelda_version < 0x192)||((Header->zelda_version == 0x192)&&(Header->build<178)))
-        {
             tunes_to_read=MAXCUSTOMMIDIS192b177;
-        }
         else
-        {
             tunes_to_read=MAXCUSTOMTUNES;
-        }
     }
     else
     {
         //section version info
         if(!p_igetw(&section_version,f))
-        {
             return qe_invalid;
-        }
 	
-		if (!should_skip)
-			FFCore.quest_format[vMIDIs] = section_version;
+	if (!should_skip)
+		FFCore.quest_format[vMIDIs] = section_version;
         
         //al_trace("Tunes version %d\n", section_version);
         if(!p_igetw(&dummy2,f))
-        {
             return qe_invalid;
-        }
         
         //section size
         if(!p_igetl(&dummy,f))
-        {
             return qe_invalid;
-        }
         
         //finally...  section data
         if(!pfread(midi_flags,sizeof(midi_flags),f))
-        {
             return qe_invalid;
-        }
         
         tunes_to_read=MAXCUSTOMTUNES;
     }
@@ -18170,9 +18158,7 @@ int32_t readtunes(PACKFILE *f, zquestheader *Header, zctune *tunes /*zcmidi_ *mi
     for(int32_t i=0; i<MAXCUSTOMTUNES; ++i)
     {
         if(get_bit(mf, i))
-        {
             ++tune_count;
-        }
     }
     
 	if (!should_skip)
@@ -18190,57 +18176,39 @@ int32_t readtunes(PACKFILE *f, zquestheader *Header, zctune *tunes /*zcmidi_ *mi
             if(section_version < 4)
             {
                 if(!p_getstr(temp.title,20,f))
-                {
                     return qe_invalid;
-                }
             }
             else
             {
                 if(!p_getstr(temp.title,sizeof(temp.title)-1,f))
-                {
                     return qe_invalid;
-                }
             }
             
             if(!p_igetl(&temp.start,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_igetl(&temp.loop_start,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_igetl(&temp.loop_end,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_igetw(&temp.loop,f))
-            {
                 return qe_invalid;
-            }
             
             if(!p_igetw(&temp.volume,f))
-            {
                 return qe_invalid;
-            }
             
             if(Header->zelda_version < 0x193)
             {
                 if(!p_igetl(&dummy,f))
-                {
                     return qe_invalid;
-                }
             }
             
             if(section_version >= 3)
             {
                 if(!pfread(&temp.flags,sizeof(temp.flags),f))
-                {
                     return qe_invalid;
-                }
             }
             
 			if (!should_skip)
@@ -18251,18 +18219,14 @@ int32_t readtunes(PACKFILE *f, zquestheader *Header, zctune *tunes /*zcmidi_ *mi
 				if (should_skip)
 				{
 					if (read_midi(f)==NULL)
-					{
 						return qe_invalid;
-					}
 
 					continue;
 				}
 
                 // old format - a midi is a midi
                 if((tunes[i].data=read_midi(f))==NULL)
-                {
                     return qe_invalid;
-                }
                 
                 //yes you can do this. Isn't the ? operator awesome? :)
                 tunes[i].format = MFORMAT_MIDI;
@@ -18271,9 +18235,7 @@ int32_t readtunes(PACKFILE *f, zquestheader *Header, zctune *tunes /*zcmidi_ *mi
             {
                 // 'midi' could be midi or nes, gb, ... music
                 if(!pfread(&tunes[i].format,sizeof(tunes[i].format),f))
-                {
                     return qe_invalid;
-                }
                 
                 zctune *ptr = &tunes[i];
                 
@@ -18281,9 +18243,7 @@ int32_t readtunes(PACKFILE *f, zquestheader *Header, zctune *tunes /*zcmidi_ *mi
                 {
                 case MFORMAT_MIDI:
                     if((ptr->data=read_midi(f))==NULL)
-                    {
                         return qe_invalid;
-                    }
                     
                     break;
                     
