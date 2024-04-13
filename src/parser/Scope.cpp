@@ -178,11 +178,9 @@ DataType const* ZScript::lookupDataType(
 	}
 	if(host.noUsing || forceSkipUsing || isTypedefCheck) return type; //End early
 	vector<NamespaceScope*> namespaces = lookupUsingNamespaces(scope);
-	for(vector<NamespaceScope*>::iterator it = namespaces.begin();
-		it != namespaces.end(); ++it)
+	for(NamespaceScope* nssp : namespaces)
 	{
-		NamespaceScope* nsscope = *it;
-		DataType const* temp = nsscope->getLocalDataType(name);
+		DataType const* temp = nssp->getLocalDataType(name);
 		if(!type)
 			type = temp;
 		else if(temp)
