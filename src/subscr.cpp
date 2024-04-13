@@ -2686,40 +2686,26 @@ void magicmeter(BITMAP *dest,int32_t x,int32_t y)
 void putxnum(BITMAP *dest,int32_t x,int32_t y,int32_t num,FONT *tempfont,int32_t color,int32_t shadowcolor,int32_t bgcolor,int32_t textstyle,bool usex,int32_t digits,bool infinite,char idigit)
 {
     if(!show_subscreen_numbers)
-    {
         return;
-    }
     
     int32_t found_digits=5;
     
     if(num<10000)
-    {
         found_digits=4;
-    }
     
     if(num<1000)
-    {
         found_digits=3;
-    }
     
     if(num<100)
-    {
         found_digits=2;
-    }
     
     if(num<10)
-    {
         found_digits=1;
-    }
     
     if(infinite)
-    {
         textprintf_styled_aligned_ex(dest,tempfont,x,y,textstyle,sstaLEFT,color,shadowcolor,bgcolor,"%s%c",usex?"X":"",idigit);
-    }
     else
-    {
         textprintf_styled_aligned_ex(dest,tempfont,x,y,textstyle,sstaLEFT,color,shadowcolor,bgcolor,"%s%d",(usex && found_digits<digits)?"X":"",num);
-    }
 }
 
 /*
@@ -2740,9 +2726,7 @@ int32_t stripspaces(char *source, char *target, int32_t stop)
     }
     
     if(begin==stop)
-    {
         return 0;
-    }
     
     for(end=stop-1; source[end]==' '; --end)
     {
