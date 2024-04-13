@@ -150,19 +150,13 @@ char *byte_conversion(int32_t number, int32_t format)
         format=1;                                               //bytes
         
         if(number>1024)
-        {
             format=2;                                             //kilobytes
-        }
         
         if(number>1024*1024)
-        {
             format=3;                                             //megabytes
-        }
         
         if(number>1024*1024*1024)
-        {
             format=4;                                             //gigabytes (dude, what are you doing?)
-        }
     }
     
     switch(format)
@@ -202,19 +196,13 @@ char *byte_conversion2(int32_t number1, int32_t number2, int32_t format1, int32_
         format1=1;                                              //bytes
         
         if(number1>1024)
-        {
             format1=2;                                            //kilobytes
-        }
         
         if(number1>1024*1024)
-        {
             format1=3;                                            //megabytes
-        }
         
         if(number1>1024*1024*1024)
-        {
             format1=4;                                            //gigabytes (dude, what are you doing?)
-        }
     }
     
     if(format2==-1)                                           //auto
@@ -222,19 +210,13 @@ char *byte_conversion2(int32_t number1, int32_t number2, int32_t format1, int32_
         format2=1;                                              //bytes
         
         if(number2>1024)
-        {
             format2=2;                                            //kilobytes
-        }
         
         if(number2>1024*1024)
-        {
             format2=3;                                            //megabytes
-        }
         
         if(number2>1024*1024*1024)
-        {
             format2=4;                                            //gigabytes (dude, what are you doing?)
-        }
     }
     
     switch(format1)
@@ -317,16 +299,12 @@ int32_t get_version_and_build(PACKFILE *f, word *version, word *build)
     zquestheader tempheader;
     
     if(!f)
-    {
         return qe_invalid;
-    }
     
     ret=readheader(f, &tempheader);
     
     if(ret)
-    {
         return ret;
-    }
     
     map_count=temp_map_count;
     memcpy(midi_flags, temp_midi_flags, MIDIFLAGS_SIZE);
@@ -339,9 +317,7 @@ int32_t get_version_and_build(PACKFILE *f, word *version, word *build)
 bool find_section(PACKFILE *f, int32_t section_id_requested)
 {
     if(!f)
-    {
         return false;
-    }
     
     int32_t section_id_read;
     bool catchup=false;
@@ -381,9 +357,7 @@ bool find_section(PACKFILE *f, int32_t section_id_requested)
     
     //section id
     if(!p_mgetl(&section_id_read,f))
-    {
         return false;
-    }
     
     while(!pack_feof(f))
     {
@@ -420,9 +394,7 @@ bool find_section(PACKFILE *f, int32_t section_id_requested)
             section_id_read=(section_id_read<<8);
             
             if(!p_getc(&tempbyte,f))
-            {
                 return false;
-            }
             
             section_id_read+=tempbyte;
         }
@@ -435,20 +407,14 @@ bool find_section(PACKFILE *f, int32_t section_id_requested)
         {
             //section version info
             if(!p_igetw(&dummy,f))
-            {
                 return false;
-            }
             
             if(!p_igetw(&dummy,f))
-            {
                 return false;
-            }
             
             //section size
             if(!p_igetl(&section_size,f))
-            {
                 return false;
-            }
             
             //pack_fseek(f, section_size);
             while(section_size>65535)
@@ -467,9 +433,7 @@ bool find_section(PACKFILE *f, int32_t section_id_requested)
         
         //section id
         if(!p_mgetl(&section_id_read,f))
-        {
             return false;
-        }
     }
     
     return false;
@@ -726,13 +690,10 @@ PACKFILE *open_quest_file(int32_t *open_error, const char *filename, bool show_p
 	int32_t ret;
 
 	if(strcmp(filename, "default.qst")!=0)
-	{
 		box_out(filename);
-	}
 	else
-	{
 		box_out("new quest"); // Or whatever
-	}
+
 	box_out("...");
 	box_eol();
 	box_eol();
@@ -826,9 +787,8 @@ PACKFILE *open_quest_file(int32_t *open_error, const char *filename, bool show_p
 		if(!f)
 		{
 			if(!oldquest)
-			{
 				delete_file(tmpfilename);
-			}
+
 			box_out("error.");
 			box_eol();
 			box_end(true);
@@ -838,9 +798,7 @@ PACKFILE *open_quest_file(int32_t *open_error, const char *filename, bool show_p
 	}
     
 	if(!oldquest)
-	{
 		delete_file(tmpfilename);
-	}
     
 	box_out("okay.");
 	box_eol();
@@ -869,14 +827,10 @@ PACKFILE *open_quest_template(zquestheader *Header, char *deletefilename, bool v
 	f=open_quest_file(&open_error, filename, false);
     
 	if(Header->templatepath[0]==0)
-	{
 		free(filename);
-	}
     
 	if(!f)
-	{
 		return NULL;
-	}
     
 	if(validate)
 	{
@@ -960,9 +914,7 @@ bool init_section(zquestheader *Header, int32_t section_id, miscQdata *Misc, zct
 		clear_quest_tmpfile();
         
         if(deletefilename[0])
-        {
             delete_file(deletefilename);
-        }
         
 //	setPackfilePassword(NULL);
         return false;
@@ -975,9 +927,7 @@ bool init_section(zquestheader *Header, int32_t section_id, miscQdata *Misc, zct
         clear_quest_tmpfile();
 		
         if(deletefilename[0])
-        {
             delete_file(deletefilename);
-        }
         
         //setPackfilePassword(NULL);
         return false;
@@ -1098,9 +1048,7 @@ bool init_section(zquestheader *Header, int32_t section_id, miscQdata *Misc, zct
     clear_quest_tmpfile();
 	
     if(deletefilename[0])
-    {
         delete_file(deletefilename);
-    }
     
     //setPackfilePassword(NULL);
 
@@ -1218,9 +1166,7 @@ int32_t get_qst_buffers()
         
     //memset(MsgStrings, 0, sizeof(MsgStr)*msg_strings_size);
 	for(int q = 0; q < msg_strings_size; ++q)
-	{
 		MsgStrings[q].clear();
-	}
     
     
     if((DoorComboSets=(DoorComboSet*)malloc(sizeof(DoorComboSet)*MAXDOORCOMBOSETS))==NULL)
@@ -1377,14 +1323,10 @@ bool init_palnames()
 
 static void *read_block(PACKFILE *f, int32_t size, int32_t alloc_size)
 {
-    void *p;
-    
-    p = _AL_MALLOC(MAX(size, alloc_size));
+    void *p = _AL_MALLOC(MAX(size, alloc_size));
     
     if(!p)
-    {
         return NULL;
-    }
     
     if(!pfread(p,size,f))
     {
@@ -1411,17 +1353,13 @@ static const byte* legacy_skip_flags;
 
 static MIDI *read_midi(PACKFILE *f)
 {
-    MIDI *m;
     int32_t c;
     int16_t divisions=0;
     int32_t len=0;
-    
-    m = (MIDI*)_AL_MALLOC(sizeof(MIDI));
+    MIDI *m = (MIDI*)_AL_MALLOC(sizeof(MIDI));
     
     if(!m)
-    {
         return NULL;
-    }
     
     for(c=0; c<MIDI_TRACKS; c++)
     {
@@ -1454,9 +1392,7 @@ static MIDI *read_midi(PACKFILE *f)
     for(c=0; c<MIDI_TRACKS; c++)
     {
         if(m->track[c].data)
-        {
             LOCK_DATA(m->track[c].data, m->track[c].len);
-        }
     }
     
     return m;
@@ -1487,9 +1423,7 @@ void pack_combos()
 void reset_tunes(zctune *tune)
 {
     for(int32_t i=0; i<MAXCUSTOMTUNES; i++)
-    {
         tune[i].reset();
-    }
 }
 
 
@@ -1557,107 +1491,69 @@ int32_t operator ==(DoorComboSet a, DoorComboSet b)
             if(j<4)
             {
                 if(a.doorcombo_u[i][j]!=b.doorcombo_u[i][j])
-                {
                     return false;
-                }
                 
                 if(a.doorcset_u[i][j]!=b.doorcset_u[i][j])
-                {
                     return false;
-                }
                 
                 if(a.doorcombo_d[i][j]!=b.doorcombo_d[i][j])
-                {
                     return false;
-                }
                 
                 if(a.doorcset_d[i][j]!=b.doorcset_d[i][j])
-                {
                     return false;
-                }
             }
             
             if(a.doorcombo_l[i][j]!=b.doorcombo_l[i][j])
-            {
                 return false;
-            }
             
             if(a.doorcset_l[i][j]!=b.doorcset_l[i][j])
-            {
                 return false;
-            }
             
             if(a.doorcombo_r[i][j]!=b.doorcombo_r[i][j])
-            {
                 return false;
-            }
             
             if(a.doorcset_r[i][j]!=b.doorcset_r[i][j])
-            {
                 return false;
-            }
         }
         
         if(i<2)
         {
             if(a.flags[i]!=b.flags[i])
-            {
                 return false;
-            }
             
             if(a.bombdoorcombo_u[i]!=b.bombdoorcombo_u[i])
-            {
                 return false;
-            }
             
             if(a.bombdoorcset_u[i]!=b.bombdoorcset_u[i])
-            {
                 return false;
-            }
             
             if(a.bombdoorcombo_d[i]!=b.bombdoorcombo_d[i])
-            {
                 return false;
-            }
             
             if(a.bombdoorcset_d[i]!=b.bombdoorcset_d[i])
-            {
                 return false;
-            }
         }
         
         if(i<3)
         {
             if(a.bombdoorcombo_l[i]!=b.bombdoorcombo_l[i])
-            {
                 return false;
-            }
             
             if(a.bombdoorcset_l[i]!=b.bombdoorcset_l[i])
-            {
                 return false;
-            }
             
             if(a.bombdoorcombo_r[i]!=b.bombdoorcombo_r[i])
-            {
                 return false;
-            }
             
             if(a.bombdoorcset_r[i]!=b.bombdoorcset_r[i])
-            {
                 return false;
-            }
         }
         
         if(a.walkthroughcombo[i]!=b.walkthroughcombo[i])
-        {
             return false;
-        }
         
         if(a.walkthroughcset[i]!=b.walkthroughcset[i])
-        {
             return false;
-        }
     }
     
     return true;
@@ -1732,9 +1628,7 @@ int32_t tdcmbcset([[maybe_unused]] int32_t map, [[maybe_unused]] int32_t scr, [[
 int32_t MakeDoors(int32_t map, int32_t scr)
 {
     if(!(TheMaps[map*MAPSCRS+scr].valid&mVALID))
-    {
         return 0;
-    }
     
     DoorComboSet tempdcs;
     memset(&tempdcs, 0, sizeof(DoorComboSet));
@@ -1836,9 +1730,7 @@ int32_t MakeDoors(int32_t map, int32_t scr)
     for(k=0; k<door_combo_set_count; k++)
     {
         if(DoorComboSets[k]==tempdcs)
-        {
             break;
-        }
     }
     
     if(k==door_combo_set_count)
@@ -2237,9 +2129,8 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		tempheader.title[sizeof(tempheader.title)-1] = 0;
 		
 		if(!pfread(tempheader.author,sizeof(tempheader.author),f))
-		{
 			return qe_invalid;
-		}
+
 		tempheader.author[sizeof(tempheader.author)-1] = 0;
 		
 		if(!p_getc(&padding,f))
@@ -2292,9 +2183,7 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 				return qe_invalid;                                  // starting at rules3
 			
 			if(tempheader.zelda_version <= 0x190)
-			{
 				set_qr(qr_MEANPLACEDTRAPS,0);
-			}
 		}
 		unpack_qrs();
 		
@@ -2311,9 +2200,7 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 			byte *mf=temp_midi_flags;
 			
 			if((tempheader.zelda_version == 0x192)&&(tempheader.build<178))
-			{
 				mf=(byte*)dummybuf;
-			}
 			
 			if(!pfread(mf,32,f))                  // read new header additions
 				return qe_invalid;                                  // starting at foo2
@@ -2448,9 +2335,7 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		templatepath_len=sizeof(tempheader.templatepath);
 		
 		if(version==1)
-		{
 			templatepath_len=280;
-		}
 		
 		if(!pfread(tempheader.templatepath,templatepath_len,f))
 			return qe_invalid;
@@ -2461,113 +2346,61 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		if(version>=4)
 		{
 			if(!p_igetl(&tempheader.new_version_id_main,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_igetl(&tempheader.new_version_id_second,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_igetl(&tempheader.new_version_id_third,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_igetl(&tempheader.new_version_id_fourth,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_igetl(&tempheader.new_version_id_alpha,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_igetl(&tempheader.new_version_id_beta,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_igetl(&tempheader.new_version_id_gamma,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_igetl(&tempheader.new_version_id_release,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_igetw(&tempheader.new_version_id_date_year,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_getc(&tempheader.new_version_id_date_month,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_getc(&tempheader.new_version_id_date_day,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_getc(&tempheader.new_version_id_date_hour,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_getc(&tempheader.new_version_id_date_minute,f))
-			{
 				return qe_invalid;
-			}
 					
 			if(!pfread(tempheader.new_version_devsig,256,f))
-			{
 				return qe_invalid;
-			}
 			if(!strcmp(tempheader.new_version_devsig, "Venrob"))
 				strcpy(tempheader.new_version_devsig, "EmilyV99");
 			if(!pfread(tempheader.new_version_compilername,256,f))
-			{
 				return qe_invalid;
-			}
 			if(!pfread(tempheader.new_version_compilerversion,256,f))
-			{
 				return qe_invalid;
-			}
 			if(!pfread(tempheader.product_name,1024,f))
-			{
 				return qe_invalid;
-			}
 			
 			if(!p_getc(&tempheader.compilerid,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_igetl(&tempheader.compilerversionnumber_first,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_igetl(&tempheader.compilerversionnumber_second,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_igetl(&tempheader.compilerversionnumber_third,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_igetl(&tempheader.compilerversionnumber_fourth,f))
-			{
 				return qe_invalid;
-			}
 			if(!p_igetw(&tempheader.developerid,f))
-			{
 				return qe_invalid;
-			}
 			if(!pfread(tempheader.made_in_module_name,1024,f))
-			{
 				return qe_invalid;
-			}
 			if(!pfread(tempheader.build_datestamp,256,f))
-			{
 				return qe_invalid;
-			}
 			if(!pfread(tempheader.build_timestamp,256,f))
-			{
 				return qe_invalid;
-			}
 		}
 		else // <4
 		{
@@ -2606,9 +2439,7 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		if ( version >= 5 )
 		{
 			if(!pfread(tempheader.build_timezone,6,f))
-			{
 				return qe_invalid;
-			}
 		}
 		else // < 5
 		{
@@ -2618,9 +2449,7 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		{
 			byte b;
 			if(!p_getc(&b,f))
-			{
 				return qe_invalid;
-			}
 			tempheader.external_zinfo = b?true:false;
 			read_zinfo = true;
 		}
@@ -2628,9 +2457,7 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 		if(version >= 7)
 		{
 			if(!p_getc(&(tempheader.new_version_is_nightly),f))
-			{
 				return qe_invalid;
-			}
 		}
 		else
 		{
