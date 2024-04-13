@@ -13421,9 +13421,9 @@ int32_t onUsedCombos()
 
 int32_t onItem()
 {
-    restore_mouse();
-    int32_t exit_status;
-    int32_t current_item=Map.CurrScr()->hasitem != 0 ? Map.CurrScr()->item : -1;
+	restore_mouse();
+	int32_t exit_status;
+	int32_t current_item=Map.CurrScr()->hasitem != 0 ? Map.CurrScr()->item : -1;
     
 	ItemListerDialog(current_item,true).show();
 	if(current_item != lister_sel_val)
@@ -13441,8 +13441,8 @@ int32_t onItem()
 		}
 	}
 
-    refresh(rMAP+rMENU);
-    return D_O_K;
+	refresh(rMAP+rMENU);
+	return D_O_K;
 }
 
 void call_room_dlg(mapscr* scr);
