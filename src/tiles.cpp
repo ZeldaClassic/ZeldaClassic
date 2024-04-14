@@ -267,18 +267,21 @@ bool combocheck(const newcombo& cdata)
 		//This is the old calculation for this, which is just wrong.
 		return (cdata.tile-(cdata.frames+((cdata.frames-1)*cdata.skipanim)+(cdata.skipanimy*TILES_PER_ROW)) >=cdata.o_tile-1);
 	}
+
 	//New calculation, which actually works properly
-    int32_t temp = cdata.o_tile;
-    for(int32_t q = 1; q < cdata.frames; ++q)
-    {
-        int32_t temp2 = temp;
-        temp += 1+cdata.skipanim;
-        
-        if((temp/TILES_PER_ROW)!=(temp2/TILES_PER_ROW))
-            temp+=cdata.skipanimy*TILES_PER_ROW;
-        if(cdata.tile<temp) return false;
-    }
-    return true;
+	int32_t temp = cdata.o_tile;
+	for(int32_t q = 1; q < cdata.frames; ++q)
+	{
+		int32_t temp2 = temp;
+		temp += 1+cdata.skipanim;
+		
+		if((temp/TILES_PER_ROW)!=(temp2/TILES_PER_ROW))
+			temp+=cdata.skipanimy*TILES_PER_ROW;
+
+		if(cdata.tile<temp)
+			return false;
+	}
+	return true;
 }
 
 void animate(newcombo& cdata, bool forceNextFrame)
