@@ -3431,12 +3431,8 @@ void draw_grab_window()
 	font=oldfont;
 }
 
-void draw_grab_scr(int32_t tile,int32_t cs,byte *newtile,int32_t black,int32_t white, int32_t width, int32_t height, byte *newformat)
-{
-	width=width;
-	height=height;
-	white=white; // happy birthday compiler
-	
+void draw_grab_scr(int32_t tile,int32_t cs,byte *newtile,int32_t black, [[maybe_unused]] int32_t white, [[maybe_unused]] int32_t width, [[maybe_unused]] int32_t height, byte *newformat)
+{	
 	int32_t yofs=0;
 	//clear_to_color(screen2,bg);
 	rectfill(screen2, 0, 0, 319, 159, black);
