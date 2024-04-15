@@ -258,7 +258,7 @@ char *MsgString(int32_t index, bool show_number, bool pad_number)
 	sprintf(u, pad_number?"%s%3d":"%s%d",indent?"--> ":"",index);
 	char *s=strcat(u,": ");
 	
-	char *t = new char[71];
+	char t[71];
 	memset(t, 0, 71);
 	uint32_t i=0;
 	uint32_t length = MsgStrings[index].s.size();
@@ -314,7 +314,6 @@ char *MsgString(int32_t index, bool show_number, bool pad_number)
 	else
 		strcpy(s, t);
 	
-	delete[] t;
 	return s;
 }
 
