@@ -96,7 +96,7 @@ void combo_pool::erase(size_t ind) //Remove a combo
 // "Tidy" button
 void combo_pool::trim() //Trim any invalid entries or unneeded space
 {
-	for(auto it = combos.begin(); it != combos.end(); ++it)
+	for(auto it = combos.begin(); it != combos.end();)
 	{
 		if (!it->valid()) //0 quant or bad cid, remove
 		{
@@ -112,6 +112,7 @@ void combo_pool::trim() //Trim any invalid entries or unneeded space
 			it = combos.erase(it);
 			continue;
 		}
+		++it;
 	}
 	recalc();
 }
