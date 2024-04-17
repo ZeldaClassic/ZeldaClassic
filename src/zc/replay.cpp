@@ -34,16 +34,16 @@ static const int ASSERT_FAILED_EXIT_CODE = 120;
 static const int VERSION = 32;
 
 static const std::string ANNOTATION_MARKER = "«";
-static const char TypeMeta = 'M';
+static const char TypeMeta    = 'M';
 static const char TypeKeyDown = 'D';
-static const char TypeKeyUp = 'U';
+static const char TypeKeyUp   = 'U';
 static const char TypeComment = 'C';
-static const char TypeQuit = 'Q';
-static const char TypeCheat = 'X';
-static const char TypeRng = 'R';
-static const char TypeKeyMap = 'K';
-static const char TypeMouse = 'V';
-static const char TypeState = 'S';
+static const char TypeQuit    = 'Q';
+static const char TypeCheat   = 'X';
+static const char TypeRng     = 'R';
+static const char TypeKeyMap  = 'K';
+static const char TypeMouse   = 'V';
+static const char TypeState   = 'S';
 
 static ReplayMode mode = ReplayMode::Off;
 static int version;
