@@ -179,9 +179,9 @@ void MiscColorSel::doUpdate1(int32_t val, bool func)
 {
 	switch(val)
 	{
-		case ssctMISC: sw->switchTo(0); break;
+		case ssctMISC:   sw->switchTo(0); break;
 		case ssctSYSTEM: sw->switchTo(1); break;
-		default: sw->switchTo(2); break;
+		default:         sw->switchTo(2); break;
 	}
 	if(val != c1)
 	{
