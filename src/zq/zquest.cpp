@@ -644,7 +644,8 @@ bool trip=false;
 int32_t fill_type=1;
 
 bool first_save=false;
-char *filepath,*temppath,*midipath,*datapath,*imagepath,*tmusicpath,*last_timed_save;
+char* filepath, * temppath, * midipath, * datapath, * imagepath, * tmusicpath;
+char last_timed_save[2048];
 string helpstr, zstringshelpstr;
 
 ZCMUSIC *zcmusic = NULL;
@@ -25206,9 +25207,8 @@ static void allocate_crap()
 	midipath       =(char*)malloc(2048);
 	imagepath      =(char*)malloc(2048);
 	tmusicpath     =(char*)malloc(2048);
-	last_timed_save=(char*)malloc(2048);
 	
-	if(!filepath || !datapath || !temppath || !imagepath || !midipath || !tmusicpath || !last_timed_save)
+	if(!filepath || !datapath || !temppath || !imagepath || !midipath || !tmusicpath )
 	{
 		Z_error_fatal("Error: no memory for file paths!");
 	}
@@ -27227,7 +27227,6 @@ void quit_game()
     free(midipath); 
     free(imagepath); 
     free(tmusicpath); 
-    free(last_timed_save);
     
     cleanup_datafiles_on_exit();
     destroy_bitmaps_on_exit();
@@ -27331,7 +27330,6 @@ void quit_game2()
     free(midipath); 
     free(imagepath); 
     free(tmusicpath); 
-    free(last_timed_save);
     
     cleanup_datafiles_on_exit();
     //destroy_bitmaps_on_exit();
