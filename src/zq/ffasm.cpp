@@ -3448,12 +3448,11 @@ int32_t parse_script_string(script_data *script, std::string const& scriptstr, b
 {
 	ASSERT(script);
 	saved=false;
-	std::string buffer;
+	std::string buffer, arr_str;
 	char combuf[SUBBUFSZ] = {0};
 	char arg1buf[SUBBUFSZ] = {0};
 	char arg2buf[SUBBUFSZ] = {0};
 	std::vector<int32_t> arr_vec;
-	std::string arr_str;
 	bool has_vec = false;
 	bool has_str = false;
 	bool stop=false;
