@@ -1,16 +1,11 @@
-#ifndef __zc_math_h_
-#define __zc_math_h_
+#pragma once
 
 #include <math.h>
 #include "base/sin1.h"
 #include "zc/replay.h"
 #include <fmt/format.h>
 
-namespace zc
-{
-
-
-namespace math
+namespace zc::math
 {
 
 
@@ -147,11 +142,4 @@ double Tan(double x)
 		return std::tan(x);
 }
 
-
-
-} //namespace math
-
-
-} //namespace zc
-
-#endif
+} //namespace zc::math
