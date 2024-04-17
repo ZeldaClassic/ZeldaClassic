@@ -4346,7 +4346,7 @@ void zmap::CapCommandHistory()
     do
     {
         size = 0;
-        for (auto command : undo_stack)
+        for (auto const& command : undo_stack)
             size += command->size();
 
         if (size > max_command_size) undo_stack.pop_front();
