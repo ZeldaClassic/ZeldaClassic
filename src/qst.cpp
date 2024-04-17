@@ -289,7 +289,6 @@ char *ordinal(int32_t num)
 
 int32_t get_version_and_build(PACKFILE *f, word *version, word *build)
 {
-    int32_t ret;
     *version=0;
     *build=0;
     byte temp_map_count=map_count;
@@ -301,7 +300,8 @@ int32_t get_version_and_build(PACKFILE *f, word *version, word *build)
     if(!f)
         return qe_invalid;
     
-    ret=readheader(f, &tempheader);
+
+    int32_t ret=readheader(f, &tempheader);
     
     if(ret)
         return ret;
