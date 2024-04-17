@@ -1020,15 +1020,9 @@ void EditDMapDialog::refreshScripts()
 	int32_t ty_map_initds[8];
 	for (int q = 0; q < 8; ++q)
 	{
-		ac_initds[q] = "InitD[" + std::to_string(q) + "]";
-		h_ac_initds[q].clear();
-		ty_ac_initds[q] = -1;
-		ss_initds[q] = "InitD[" + std::to_string(q) + "]";
-		h_ss_initds[q].clear();
-		ty_ss_initds[q] = -1;
-		map_initds[q] = "InitD[" + std::to_string(q) + "]";
-		h_map_initds[q].clear();
-		ty_map_initds[q] = -1;
+		ac_initds [q] = "InitD[" + std::to_string(q) + "]"; h_ac_initds[q].clear();  ty_ac_initds [q] = -1;
+		ss_initds [q] = "InitD[" + std::to_string(q) + "]"; h_ss_initds[q].clear();  ty_ss_initds [q] = -1;
+		map_initds[q] = "InitD[" + std::to_string(q) + "]"; h_map_initds[q].clear(); ty_map_initds[q] = -1;
 	}
 	bool did_dmap_scr = false;
 	auto iscd = dmap_use_script_data;
