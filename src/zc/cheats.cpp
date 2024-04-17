@@ -17,7 +17,7 @@ int32_t cheatkeys[Cheat::Last][2];
 
 static std::queue<std::tuple<Cheat, int, int, std::string>> cheats;
 
-static const std::vector<std::string> CheatStrings = {
+static const char* CheatStrings[] = {
 	"None",
 	"Life",
 	"Magic",
