@@ -4518,36 +4518,36 @@ void zmap::CopyFFC(int32_t n)
 
 void zmap::Paste(const mapscr& copymapscr)
 {
-    if(can_paste)
-    {
-        int32_t oldcolor=getcolor();
-        
-        if(!(screens[currscr].valid&mVALID))
-        {
-            screens[currscr].valid |= mVALID;
-            screens[currscr].color = copymapscr.color;
-        }
-        
-        screens[currscr].door_combo_set = copymapscr.door_combo_set;
-        
-        for(int32_t i=0; i<4; i++)
-            screens[currscr].door[i]=copymapscr.door[i];
-        
-        for(int32_t i=0; i<176; i++)
-        {
-            screens[currscr].data[i] = copymapscr.data[i];
-            screens[currscr].cset[i] = copymapscr.cset[i];
-            screens[currscr].sflag[i] = copymapscr.sflag[i];
-        }
-        
-        int32_t newcolor=getcolor();
-        loadlvlpal(newcolor);
-        
-        if(newcolor!=oldcolor)
-            rebuild_trans_table();
-        
-        saved=false;
-    }
+	if (!can_paste)
+		return;
+
+	int32_t oldcolor=getcolor();
+
+	if(!(screens[currscr].valid&mVALID))
+	{
+		screens[currscr].valid |= mVALID;
+		screens[currscr].color = copymapscr.color;
+	}
+
+	screens[currscr].door_combo_set = copymapscr.door_combo_set;
+
+	for(int32_t i=0; i<4; i++)
+		screens[currscr].door[i]=copymapscr.door[i];
+
+	for(int32_t i=0; i<176; i++)
+	{
+		screens[currscr].data[i] = copymapscr.data[i];
+		screens[currscr].cset[i] = copymapscr.cset[i];
+		screens[currscr].sflag[i] = copymapscr.sflag[i];
+	}
+
+	int32_t newcolor=getcolor();
+	loadlvlpal(newcolor);
+
+	if(newcolor!=oldcolor)
+		rebuild_trans_table();
+
+	saved=false;
 }
 
 void zmap::PasteUnderCombo(const mapscr& copymapscr)
