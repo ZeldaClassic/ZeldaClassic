@@ -13,9 +13,6 @@ void call_setcheat_dialog()
 	SetCheatDialog().show();
 }
 
-SetCheatDialog::SetCheatDialog()
-{}
-
 #define CHEATRADIO(ind) \
 radios[ind] = Radio( \
 	checked = (ind==cheat),	\
