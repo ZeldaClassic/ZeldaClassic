@@ -994,17 +994,17 @@ char const* get_ic_help(size_t q)
 
 ItemEditorDialog::ItemEditorDialog(itemdata const& ref, char const* str, int32_t index):
 	itemname(str), index(index), local_itemref(ref),
-	list_items(GUI::ZCListData::itemclass(true)),
-	list_counters(GUI::ZCListData::counters(true)),
-	list_sprites(GUI::ZCListData::miscsprites()),
+	list_items        (GUI::ZCListData::itemclass(true)),
+	list_counters     (GUI::ZCListData::counters(true)),
+	list_sprites      (GUI::ZCListData::miscsprites()),
 	list_itemdatscript(GUI::ZCListData::itemdata_script()),
 	list_itemsprscript(GUI::ZCListData::itemsprite_script()),
-	list_weaponscript(GUI::ZCListData::lweapon_script()),
-	list_weaptype(GUI::ZCListData::lweaptypes()),
-	list_deftypes(GUI::ZCListData::deftypes()),
-	list_bottletypes(GUI::ZCListData::bottletype()),
-	list_sfx(GUI::ZCListData::sfxnames(true)),
-	list_strings(GUI::ZCListData::strings())
+	list_weaponscript (GUI::ZCListData::lweapon_script()),
+	list_weaptype     (GUI::ZCListData::lweaptypes()),
+	list_deftypes     (GUI::ZCListData::deftypes()),
+	list_bottletypes  (GUI::ZCListData::bottletype()),
+	list_sfx          (GUI::ZCListData::sfxnames(true)),
+	list_strings      (GUI::ZCListData::strings())
 {}
 
 ItemEditorDialog::ItemEditorDialog(int32_t index):
