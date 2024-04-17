@@ -70,26 +70,26 @@ zinitdata *copyIntoZinit(gamedata *gdata)
 	zinit2->bomb_ratio = zinit.bomb_ratio;
 	zinit2->hcp = gdata->get_HCpieces();
 	
-	zinit2->hp_per_heart = gdata->get_hp_per_heart();
-	zinit2->magic_per_block = gdata->get_mp_per_block();
+	zinit2->hp_per_heart           = gdata->get_hp_per_heart();
+	zinit2->magic_per_block        = gdata->get_mp_per_block();
 	zinit2->hero_damage_multiplier = gdata->get_hero_dmgmult();
-	zinit2->ene_damage_multiplier = gdata->get_ene_dmgmult();
-	zinit2->dither_type = gdata->get_dither_type();
-	zinit2->dither_arg = gdata->get_dither_arg();
-	zinit2->dither_percent = gdata->get_dither_perc();
-	zinit2->def_lightrad = gdata->get_light_rad();
-	zinit2->transdark_percent = gdata->get_transdark_perc();
-	zinit2->darkcol = gdata->get_darkscr_color();
-	zinit2->swimgravity = gdata->get_watergrav();
-	zinit2->heroSideswimUpStep = gdata->get_sideswim_up();
-	zinit2->heroSideswimSideStep = gdata->get_sideswim_side();
-	zinit2->heroSideswimDownStep = gdata->get_sideswim_down();
-	zinit2->exitWaterJump = gdata->get_sideswim_jump();
-	zinit2->bunny_ltm = gdata->get_bunny_ltm();
-	zinit2->switchhookstyle = gdata->get_switchhookstyle();
-	zinit2->spriteflickerspeed = gdata->get_spriteflickerspeed();
-	zinit2->spriteflickercolor = gdata->get_spriteflickercolor();
-	zinit2->spriteflickertransp = gdata->get_spriteflickertransp();
+	zinit2->ene_damage_multiplier  = gdata->get_ene_dmgmult();
+	zinit2->dither_type            = gdata->get_dither_type();
+	zinit2->dither_arg             = gdata->get_dither_arg();
+	zinit2->dither_percent         = gdata->get_dither_perc();
+	zinit2->def_lightrad           = gdata->get_light_rad();
+	zinit2->transdark_percent      = gdata->get_transdark_perc();
+	zinit2->darkcol                = gdata->get_darkscr_color();
+	zinit2->swimgravity            = gdata->get_watergrav();
+	zinit2->heroSideswimUpStep     = gdata->get_sideswim_up();
+	zinit2->heroSideswimSideStep   = gdata->get_sideswim_side();
+	zinit2->heroSideswimDownStep   = gdata->get_sideswim_down();
+	zinit2->exitWaterJump          = gdata->get_sideswim_jump();
+	zinit2->bunny_ltm              = gdata->get_bunny_ltm();
+	zinit2->switchhookstyle        = gdata->get_switchhookstyle();
+	zinit2->spriteflickerspeed     = gdata->get_spriteflickerspeed();
+	zinit2->spriteflickercolor     = gdata->get_spriteflickercolor();
+	zinit2->spriteflickertransp    = gdata->get_spriteflickertransp();
 	
 	for(int32_t q = 0; q < MAX_COUNTERS; ++q)
 	{
