@@ -442,8 +442,8 @@ extern int32_t maxcheat;
 
 extern int32_t  mouse_down;                                     // used to hold the last reading of 'gui_mouse_b()' status
 extern int32_t idle_count, active_count;
-extern char *qstpath;
-extern char *qstdir;
+extern char qstpath[2048];
+extern char qstdir[2048];
 
 extern std::string load_qstpath;
 extern std::string only_qstpath;

@@ -527,8 +527,8 @@ int32_t					msg_strings_size=0;
 byte                *quest_file;
 dword               quest_map_pos[MAPSCRS*MAXMAPS]={0};
 
-char     *qstpath=NULL;
-char     *qstdir=NULL;
+char     qstpath[2048];
+char     qstdir[2048];
 
 // if set, the titlescreen will automatically create a new save with this quest.
 std::string load_qstpath;
@@ -4166,8 +4166,6 @@ void do_load_and_quit_command(const char* quest_path)
 
 int main(int argc, char **argv)
 {
-	qstdir = (char*)malloc(2048);
-	qstpath = (char*)malloc(2048);
 	qstdir[0] = 0;
 	qstpath[0] = 0;
 
@@ -5593,9 +5591,6 @@ void quit_game()
 	al_trace("Deleting quest buffers... \n");
 	del_qst_buffers();
 	
-	free(qstdir); 
-	free(qstpath);
-
 	FFCore.shutdown();
 }
 
