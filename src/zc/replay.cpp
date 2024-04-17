@@ -108,8 +108,7 @@ struct ReplayStep
 struct KeyMapReplayStep : ReplayStep
 {
 	static const int NumButtons = 14;
-	static KeyMapReplayStep current;
-	static KeyMapReplayStep stored;
+	static KeyMapReplayStep current, stored;
 
 	static KeyMapReplayStep make(int frame)
 	{
@@ -134,7 +133,8 @@ struct KeyMapReplayStep : ReplayStep
 
 	std::array<int, KeyMapReplayStep::NumButtons> button_keys;
 
-	KeyMapReplayStep(int frame, std::array<int, KeyMapReplayStep::NumButtons> button_keys) : ReplayStep(frame, TypeKeyMap), button_keys(button_keys)
+	KeyMapReplayStep(int frame, std::array<int, KeyMapReplayStep::NumButtons> button_keys)
+		: ReplayStep(frame, TypeKeyMap), button_keys(button_keys)
 	{
 	}
 
@@ -217,8 +217,7 @@ struct KeyReplayStep : public ReplayStep
         return -1;
     }
 
-    int button_index;
-    int key_index;
+    int button_index, key_index;
 
     KeyReplayStep(int frame, int type, int button_index, int key_index) : ReplayStep(frame, type), button_index(button_index), key_index(key_index)
     {
@@ -258,7 +257,7 @@ struct CommentReplayStep : ReplayStep
 {
     std::string comment;
 
-    CommentReplayStep(int frame, std::string comment) : ReplayStep(frame, TypeComment), comment(comment)
+    CommentReplayStep(int frame, std::string const& comment) : ReplayStep(frame, TypeComment), comment(comment)
     {
     }
 
@@ -323,23 +322,22 @@ struct CheatReplayStep : ReplayStep
 
 struct RngReplayStep : ReplayStep
 {
-    int start_index;
-    int end_index;
-    int seed;
+	int start_index, end_index, seed;
 
-    RngReplayStep(int frame, int start_index, int end_index, int seed) : ReplayStep(frame, TypeRng), start_index(start_index), end_index(end_index), seed(seed)
-    {
-    }
+	RngReplayStep(int frame, int start_index, int end_index, int seed)
+		: ReplayStep(frame, TypeRng), start_index(start_index), end_index(end_index), seed(seed)
+	{
+	}
 
-    void run()
-    {
-        // During replay, calls to replay_set_rng_seed handle seeding the rng based on RngReplayStep.
-    }
+	void run()
+	{
+		// During replay, calls to replay_set_rng_seed handle seeding the rng based on RngReplayStep.
+	}
 
-    std::string print()
-    {
-        return fmt::format("{} {} {} {} {}", type, frame, start_index, end_index, seed);
-    }
+	std::string print()
+	{
+		return fmt::format("{} {} {} {} {}", type, frame, start_index, end_index, seed);
+	}
 };
 
 struct MouseReplayStep : ReplayStep
