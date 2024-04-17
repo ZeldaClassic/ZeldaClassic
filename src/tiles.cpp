@@ -684,22 +684,14 @@ void unpack_tile(tiledata *buf, int32_t tile, int32_t flip, bool force)
                 
                 for(j=1; j>=0; --j)
                 {
-                    di-=16;
-                    *di = (*(--si));
-                    di-=16;
-                    *di = (*(--si));
-                    di-=16;
-                    *di = (*(--si));
-                    di-=16;
-                    *di = (*(--si));
-                    di-=16;
-                    *di = (*(--si));
-                    di-=16;
-                    *di = (*(--si));
-                    di-=16;
-                    *di = (*(--si));
-                    di-=16;
-                    *di = (*(--si));
+                    di-=16; *di = *(--si);
+                    di-=16; *di = *(--si);
+                    di-=16; *di = *(--si);
+                    di-=16; *di = *(--si);
+                    di-=16; *di = *(--si);
+                    di-=16; *di = *(--si);
+                    di-=16; *di = *(--si);
+                    di-=16; *di = *(--si);
                 }
                 
                 break;
@@ -718,14 +710,14 @@ void unpack_tile(tiledata *buf, int32_t tile, int32_t flip, bool force)
             
             for(i=31; i>=0; --i)
             {
-                (*(--di)) = (*(--si));
-                (*(--di)) = (*(--si));
-                (*(--di)) = (*(--si));
-                (*(--di)) = (*(--si));
-                (*(--di)) = (*(--si));
-                (*(--di)) = (*(--si));
-                (*(--di)) = (*(--si));
-                (*(--di)) = (*(--si));
+                *(--di) = *(--si);
+                *(--di) = *(--si);
+                *(--di) = *(--si);
+                *(--di) = *(--si);
+                *(--di) = *(--si);
+                *(--di) = *(--si);
+                *(--di) = *(--si);
+                *(--di) = *(--si);
             }
             
             break;
@@ -759,22 +751,14 @@ void pack_tiledata(byte *dest, byte *src, byte format)
         // TODO: Could this just be a memcpy ...
         for(int32_t si=0; si<32; si++)
         {
-            *di = src[si*8];
-            ++di;
-            *di = src[si*8+1];
-            ++di;
-            *di = src[si*8+2];
-            ++di;
-            *di = src[si*8+3];
-            ++di;
-            *di = src[si*8+4];
-            ++di;
-            *di = src[si*8+5];
-            ++di;
-            *di = src[si*8+6];
-            ++di;
-            *di = src[si*8+7];
-            ++di;
+            *di = src[si*8];   ++di;
+            *di = src[si*8+1]; ++di;
+            *di = src[si*8+2]; ++di;
+            *di = src[si*8+3]; ++di;
+            *di = src[si*8+4]; ++di;
+            *di = src[si*8+5]; ++di;
+            *di = src[si*8+6]; ++di;
+            *di = src[si*8+7]; ++di;
         }
         
         break;
