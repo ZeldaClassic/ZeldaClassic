@@ -106,10 +106,10 @@ bool mapsread=false;
 bool fixffcs=false;
 bool fixpolsvoice=false;
 
-const char* script_slot_data::DEFAULT_FORMAT = "%s %s";
-const char* script_slot_data::INVALID_FORMAT = "%s --%s";
+const char* script_slot_data::DEFAULT_FORMAT      = "%s %s";
+const char* script_slot_data::INVALID_FORMAT      = "%s --%s";
 const char* script_slot_data::DISASSEMBLED_FORMAT = "%s ++%s";
-const char* script_slot_data::ZASM_FORMAT = "%s ==%s";
+const char* script_slot_data::ZASM_FORMAT         = "%s ==%s";
 
 char qstdat_string[2048] = { 0 };
 
