@@ -434,16 +434,16 @@ char *shorten_string(char *dest, char const* src, FONT *usefont, int32_t maxchar
 
 void jwin_draw_titlebar(BITMAP *dest, int32_t x, int32_t y, int32_t w, int32_t h, const char *str, bool draw_button, bool helpbtn)
 {
-    char buf[512];
-    int32_t len = (int32_t)strlen(str);
-    int32_t length = text_length(font,str);
-    int32_t height = text_height(font);
+	char buf[512];
+	int32_t len = (int32_t)strlen(str);
+	int32_t length = text_length(font,str);
+	int32_t height = text_height(font);
     
-    int32_t tx = x + 2;
-    int32_t ty = y + (h-height)/2;
-    PALETTE temp_pal;
-    get_palette(temp_pal);
-    dither_rect(dest, &temp_pal, x, y, x+w-1, y+h-1,
+	int32_t tx = x + 2;
+	int32_t ty = y + (h-height)/2;
+	PALETTE temp_pal;
+	get_palette(temp_pal);
+	dither_rect(dest, &temp_pal, x, y, x+w-1, y+h-1,
                 makecol15(temp_pal[scheme[jcTITLEL]].r*255/63,
                           temp_pal[scheme[jcTITLEL]].g*255/63,
                           temp_pal[scheme[jcTITLEL]].b*255/63),
@@ -453,39 +453,34 @@ void jwin_draw_titlebar(BITMAP *dest, int32_t x, int32_t y, int32_t w, int32_t h
                 scheme[jcTITLEL], scheme[jcTITLER]);
                 
                 
-    if(len>509)
-        len=509;
+	if(len>509)
+		len=509;
         
-    strncpy(buf,str,len);
-    buf[len]=0;
+	strncpy(buf,str,len);
+	buf[len]=0;
     
-    // this part needs work
+	// this part needs work
     
-    if(length>w-20)
-    {
-        while(length>w-20 && len>1)
-        {
-            buf[len-4] = '.';
-            buf[len-3] = '.';
-            buf[len-2] = '.';
-            buf[len-1] = 0;
-            len--;
-            length = text_length(font,buf);
-        }
-    }
-    
-    textout_ex(dest,font,buf,tx,ty,scheme[jcTITLEFG],-1);
-    
-    if(draw_button)
-    {
-        draw_x_button(dest, x + w - 18, y+2, 0);
-    }
-	
-	if(helpbtn)
+	if(length>w-20)
 	{
-		draw_question_button(dest, x + w - (draw_button ? 36 : 18), y+2, 0);
+		while(length>w-20 && len>1)
+		{
+			buf[len-4] = '.';
+			buf[len-3] = '.';
+			buf[len-2] = '.';
+			buf[len-1] = 0;
+			len--;
+			length = text_length(font,buf);
+		}
 	}
     
+	textout_ex(dest,font,buf,tx,ty,scheme[jcTITLEFG],-1);
+    
+	if(draw_button)
+		draw_x_button(dest, x + w - 18, y+2, 0);
+	
+	if(helpbtn)
+		draw_question_button(dest, x + w - (draw_button ? 36 : 18), y+2, 0); 
 }
 
 void draw_question_button(BITMAP* dest, int32_t x, int32_t y, int32_t state)
