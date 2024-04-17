@@ -1557,7 +1557,7 @@ void grid_snap_objects(bool *selection, int32_t snap_type)
 	}
 }
 
-typedef struct dist_obj
+struct dist_obj
 {
 	int32_t index;
 	int32_t l;
@@ -1568,7 +1568,7 @@ typedef struct dist_obj
 	int32_t b;
 	int32_t c;
 	int32_t m;
-} dist_obj;
+};
 
 void distribute_objects(bool *, int32_t distribute_type)
 {
