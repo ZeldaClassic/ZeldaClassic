@@ -1560,14 +1560,7 @@ void grid_snap_objects(bool *selection, int32_t snap_type)
 struct dist_obj
 {
 	int32_t index;
-	int32_t l;
-	int32_t t;
-	int32_t w;
-	int32_t h;
-	int32_t r;
-	int32_t b;
-	int32_t c;
-	int32_t m;
+	int32_t l, t, w, h, r, b, c, m;
 };
 
 void distribute_objects(bool *, int32_t distribute_type)
