@@ -624,10 +624,9 @@ int32_t onStrings()
 				
 			case 5: // Delete
 			{
-				std::string buf;
 				char shortbuf[73];
 				memset(shortbuf, 0, 73);
-				buf = MsgString(index, true, false);
+				std::string buf = MsgString(index, true, false);
 				strip_extra_spaces(buf);
 				shorten_string(shortbuf, buf.c_str(), font, 72, 288);
 
