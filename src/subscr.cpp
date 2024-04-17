@@ -2718,23 +2718,19 @@ void putxnum(BITMAP *dest,int32_t x,int32_t y,int32_t num,FONT *tempfont,int32_t
 /****/
 int32_t stripspaces(char *source, char *target, int32_t stop)
 {
-    int32_t begin, end;
+	int32_t begin, end;
     
-    for(begin=0; ((begin<stop)&&(source[begin]==' ')); ++begin)
-    {
-        /* do nothing */
-    }
+	for (begin = 0; ((begin < stop) && (source[begin] == ' ')); ++begin)
+		; // do nothing
     
-    if(begin==stop)
-        return 0;
+	if(begin==stop)
+		return 0;
     
-    for(end=stop-1; source[end]==' '; --end)
-    {
-        /* do nothing */
-    }
+	for (end = stop - 1; source[end] == ' '; --end)
+		; // do nothing
     
-    sprintf(target, "%.*s", (end-begin+1), source+begin);
-    return (end-begin+1);
+	sprintf(target, "%.*s", (end-begin+1), source+begin);
+	return (end-begin+1);
 }
 
 bool findWeaponWithParent(int32_t id, int32_t type)
