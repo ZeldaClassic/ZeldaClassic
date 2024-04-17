@@ -47,18 +47,18 @@ void zc_ffc_changer(ffcdata& ffc, ffcdata& other, int32_t i, int32_t j)
 	if(other.flags&ffCHANGEPREV)
 		zc_ffc_modify(ffc, -1);
 	
-	ffc.delay=other.delay;
-	ffc.x=other.x;
-	ffc.y=other.y;
-	ffc.vx=other.vx;
-	ffc.vy=other.vy;
-	ffc.ax=other.ax;
-	ffc.ay=other.ay;
-	ffc.link=other.link;
-	ffc.hit_width=other.hit_width;
-	ffc.hit_height=other.hit_height;
-	ffc.txsz=other.txsz;
-	ffc.tysz=other.tysz;
+	ffc.delay      = other.delay;
+	ffc.x          = other.x;
+	ffc.y          = other.y;
+	ffc.vx         = other.vx;
+	ffc.vy         = other.vy;
+	ffc.ax         = other.ax;
+	ffc.ay         = other.ay;
+	ffc.link       = other.link;
+	ffc.hit_width  = other.hit_width;
+	ffc.hit_height = other.hit_height;
+	ffc.txsz       = other.txsz;
+	ffc.tysz       = other.tysz;
 	
 	if(ffc.flags&ffCARRYOVER)
 		ffc.flags=other.flags|ffCARRYOVER;
