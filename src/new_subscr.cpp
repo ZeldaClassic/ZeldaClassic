@@ -60,7 +60,7 @@ const char* subwidg_internal_names[widgMAX] =
 	"SUBWIDG_SELECTOR", "SUBWIDG_LGAUGE", "SUBWIDG_MGAUGE", "SUBWIDG_TEXTBOX", "SUBWIDG_SELECTEDTEXT",
 	"SUBWIDG_MISCGAUGE", "SUBWIDG_BTNCOUNTER",
 };
-const std::string subscr_names[sstMAX] = {"Active","Passive","Overlay"};
+const char* subscr_names[sstMAX] = {"Active","Passive","Overlay"};
 const char* subscr_infos[sstMAX] = {
 	"The subscreen that actively opens when you press 'Start'",
 	"The subscreen visible at the top of the screen normally, which moves down when the active opens.",
