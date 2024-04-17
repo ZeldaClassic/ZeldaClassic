@@ -1505,20 +1505,20 @@ enum
 };
 static NewMenu etc_menu
 {
-	{ "Help", &zq_help_menu },
-	{ "&About", onAbout },
-	{ "&Video Resolution", onZQVidMode, MENUID_ETC_VIDMODE },
-	{ "&Options...", onOptions },
-	{ "&Hotkeys...", do_zq_hotkey_dialog },
-	{ "&List Hotkeys...", do_zq_list_hotkeys_dialog },
-	{ "&Fullscreen", onFullScreen, MENUID_ETC_FULLSCREEN },
+	{ "Help",                  &zq_help_menu },
+	{ "&About",                onAbout },
+	{ "&Video Resolution",     onZQVidMode, MENUID_ETC_VIDMODE },
+	{ "&Options...",           onOptions },
+	{ "&Hotkeys...",           do_zq_hotkey_dialog },
+	{ "&List Hotkeys...",      do_zq_list_hotkeys_dialog },
+	{ "&Fullscreen",           onFullScreen, MENUID_ETC_FULLSCREEN },
 	{},
-	{ "&View Pic...", onViewPic },
-	{ "Media", &media_menu },
+	{ "&View Pic...",          onViewPic },
+	{ "Media",                 &media_menu },
 	{},
-	{ "&Debug Console", toggleConsole, MENUID_ETC_DEBUG_CONSOLE },
-	{ "Clear Quest Filepath", onClearQuestFilepath },
-	{ "&Take ZQ Snapshot", onSnapshot },
+	{ "&Debug Console",        toggleConsole, MENUID_ETC_DEBUG_CONSOLE },
+	{ "Clear Quest Filepath",  onClearQuestFilepath },
+	{ "&Take ZQ Snapshot",     onSnapshot },
 	{ "Take &Screen Snapshot", onMapscrSnapshot },
 };
 
