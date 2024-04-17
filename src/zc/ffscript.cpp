@@ -3056,7 +3056,7 @@ user_bitmap *checkBitmap(int32_t ref, const char *what, bool req_valid = false, 
 	return NULL;
 }
 
-extern const std::string subscr_names[sstMAX];
+extern const char* subscr_names[sstMAX];
 ZCSubscreen *checkSubData(int32_t ref, const char *what, int req_ty = -1)
 {
 	auto [ptr,ty] = load_subdata(ref);
@@ -3067,7 +3067,7 @@ ZCSubscreen *checkSubData(int32_t ref, const char *what, int req_ty = -1)
 		else
 		{
 			Z_scripterrlog("Wrong type of SubscreenData accessed! Expecting type '%s', but found '%s'\n",
-				subscr_names[req_ty].c_str(), subscr_names[ty].c_str());
+				subscr_names[req_ty], subscr_names[ty]);
 		}
 	}
 	else Z_scripterrlog("Script attempted to reference a nonexistent SubscreenData!\n");
@@ -3085,7 +3085,7 @@ SubscrPage *checkSubPage(int32_t ref, const char *what, int req_ty = -1)
 		else
 		{
 			Z_scripterrlog("Wrong type of Subscreen accessed! Expecting type '%s', but found '%s'\n",
-				subscr_names[req_ty].c_str(), subscr_names[ty].c_str());
+				subscr_names[req_ty], subscr_names[ty]);
 		}
 	}
 	else Z_scripterrlog("Script attempted to reference a nonexistent SubscreenPage!\n");
@@ -3112,7 +3112,7 @@ SubscrWidget *checkSubWidg(int32_t ref, const char *what, int req_widg_ty = -1, 
 		else
 		{
 			Z_scripterrlog("Wrong type of Subscreen accessed! Expecting subscreen type '%s', but found '%s'\n",
-				subscr_names[req_sub_ty].c_str(), subscr_names[ty].c_str());
+				subscr_names[req_sub_ty], subscr_names[ty]);
 		}
 	}
 	else Z_scripterrlog("Script attempted to reference a nonexistent SubscreenWidget!\n");
