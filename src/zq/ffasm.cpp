@@ -18,7 +18,8 @@ using namespace util;
 using std::string;
 using std::ostringstream;
 
-extern char *datapath, *temppath;
+extern char *temppath;
+extern char datapath[2048];
 
 script_command command_list[NUMCOMMANDS+1]=
 {
