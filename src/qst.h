@@ -18,7 +18,7 @@ struct script_slot_data
 	script_slot_data() : slotname(""), scriptname(""), format(SCRIPT_FORMAT_DEFAULT), output("") {}
 	void update()
 	{
-		char const* formatstr = getFormatStr()->c_str();
+		char const* formatstr = getFormatStr();
 		char const* slotstr   = slotname.c_str();
 		char const* scriptstr = scriptname.c_str();
 		size_t len = strlen(formatstr) + strlen(slotstr) + strlen(scriptstr) - 4 + 1;
@@ -73,26 +73,26 @@ struct script_slot_data
 		return (isDisassembled() || isImportedZASM());
 	}
 	
-	std::string const* getFormatStr()
+	const char* getFormatStr()
 	{
 		switch(format)
 		{
 			case SCRIPT_FORMAT_DEFAULT:
-				return &DEFAULT_FORMAT;
+				return DEFAULT_FORMAT;
 			case SCRIPT_FORMAT_INVALID:
-				return &INVALID_FORMAT;
+				return INVALID_FORMAT;
 			case SCRIPT_FORMAT_DISASSEMBLED:
-				return &DISASSEMBLED_FORMAT;
+				return DISASSEMBLED_FORMAT;
 			case SCRIPT_FORMAT_ZASM:
-				return &ZASM_FORMAT;
+				return ZASM_FORMAT;
 		}
-		return &DEFAULT_FORMAT;
+		return DEFAULT_FORMAT;
 	}
 	
-	static const std::string DEFAULT_FORMAT;
-	static const std::string INVALID_FORMAT;
-	static const std::string ZASM_FORMAT;
-	static const std::string DISASSEMBLED_FORMAT;
+	static const char* DEFAULT_FORMAT;
+	static const char* INVALID_FORMAT;
+	static const char* ZASM_FORMAT;
+	static const char* DISASSEMBLED_FORMAT;
 };
 
 extern std::map<int32_t, script_slot_data > ffcmap;
