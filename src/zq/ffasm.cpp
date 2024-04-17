@@ -3444,7 +3444,7 @@ int32_t parse_script_file(script_data **script, FILE* fscript, bool report_succe
 zasmfile_fail:
 	return success?D_O_K:D_CLOSE;
 }
-int32_t parse_script_string(script_data *script, std::string const& scriptstr, bool report_success)
+int32_t parse_script_string(script_data *script, const char* scriptstr, bool report_success)
 {
 	ASSERT(script);
 	saved=false;
@@ -3459,7 +3459,7 @@ int32_t parse_script_string(script_data *script, std::string const& scriptstr, b
 	bool success=true;
 	bool meta_done=false;
 	int32_t num_commands;
-	char const* scrptr = scriptstr.c_str();
+	char const* scrptr = scriptstr;
 	
 	for(int32_t i=0;; i++)
 	{
@@ -3615,7 +3615,7 @@ int32_t parse_script_string(script_data *script, std::string const& scriptstr, b
 		}
 	}
 	
-	scrptr = scriptstr.c_str(); //reset to start
+	scrptr = scriptstr; //reset to start
 	stop = false;
 	meta_done = false;
 	
