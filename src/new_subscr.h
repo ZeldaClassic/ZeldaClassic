@@ -177,7 +177,7 @@ enum //new subscreen object types
 extern const char* subwidg_internal_names[widgMAX];
 enum { sstACTIVE, sstPASSIVE, sstOVERLAY, sstMAX };
 extern const std::string subscr_names[sstMAX];
-extern const std::string subscr_infos[sstMAX];
+extern const char* subscr_infos[sstMAX];
 
 //Misc constants
 enum //text styles
