@@ -88,15 +88,11 @@ void dosubscr()
 	{
 		new_subscreen_active->curpage = 0;
 		auto& pg = new_subscreen_active->pages[0];
-		if((game->bwpn&0xFF) == 0)
-			pg.cursor_pos = game->bwpn>>8;
-		else if((game->awpn&0xFF) == 0)
-			pg.cursor_pos = game->awpn>>8;
-		else if((game->xwpn&0xFF) == 0)
-			pg.cursor_pos = game->xwpn>>8;
-		else if((game->ywpn&0xFF) == 0)
-			pg.cursor_pos = game->ywpn>>8;
-		else pg.cursor_pos = 0;
+		if(     (game->bwpn&0xFF) == 0) pg.cursor_pos = game->bwpn>>8;
+		else if((game->awpn&0xFF) == 0) pg.cursor_pos = game->awpn>>8;
+		else if((game->xwpn&0xFF) == 0) pg.cursor_pos = game->xwpn>>8;
+		else if((game->ywpn&0xFF) == 0) pg.cursor_pos = game->ywpn>>8;
+		else                            pg.cursor_pos = 0;
 	}
 	
 	FFCore.initZScriptSubscreenScript();
