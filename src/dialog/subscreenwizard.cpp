@@ -43,7 +43,7 @@ void group_select_widget(SubscrWidget* widg)
 
 SubscreenWizardDialog::SubscreenWizardDialog(subwizardtype stype, int32_t x, int32_t y) : wizard_type(stype),
 basex(x), basey(y), flags(0),
-list_font(GUI::ZCListData::fonts(false, true, true)),
+list_font    (GUI::ZCListData::fonts(false, true, true)),
 list_shadtype(GUI::ZCListData::shadow_types())
 {
 	memset(rs_sz, 0, sizeof(rs_sz));
@@ -101,23 +101,23 @@ void SubscreenWizardDialog::endUpdate()
 						widg->pos = tfs[0]->getVal() + w * y + x;
 						if (rset[0][1]->getChecked()) // Loop L/R
 						{
-							widg->pos_up = widg->pos + (y == 0 ? (w * (h - 1)) : -w);
-							widg->pos_down = widg->pos + (y == h - 1 ? -(w * (h - 1)) : w);
-							widg->pos_left = widg->pos + ((x == 0 && y == 0) ? (w * h - 1) : -1);
+							widg->pos_up    = widg->pos + (y == 0 ? (w * (h - 1)) : -w);
+							widg->pos_down  = widg->pos + (y == h - 1 ? -(w * (h - 1)) : w);
+							widg->pos_left  = widg->pos + ((x == 0 && y == 0) ? (w * h - 1) : -1);
 							widg->pos_right = widg->pos + ((x == w - 1 && y == h - 1) ? -(w * h - 1) : 1);
 						}
 						else if (rset[0][2]->getChecked()) // Wrap Sides
 						{
-							widg->pos_up = widg->pos + (y == 0 ? (w * (h - 1)) : -w);
-							widg->pos_down = widg->pos + (y == h - 1 ? -(w * (h - 1)) : w);
-							widg->pos_left = widg->pos + (x == 0 ? w - 1 : -1);
+							widg->pos_up    = widg->pos + (y == 0 ? (w * (h - 1)) : -w);
+							widg->pos_down  = widg->pos + (y == h - 1 ? -(w * (h - 1)) : w);
+							widg->pos_left  = widg->pos + (x == 0 ? w - 1 : -1);
 							widg->pos_right = widg->pos + (x == w - 1 ? -(w - 1) : 1);
 						}
 						else if (rset[0][3]->getChecked()) // No Wrap
 						{
-							widg->pos_up = y == 0 ? 255 : widg->pos - w;
-							widg->pos_down = y == h - 1 ? 255 : widg->pos + w;
-							widg->pos_left = x == 0 ? 255 : widg->pos - 1;
+							widg->pos_up    = y == 0 ? 255 : widg->pos - w;
+							widg->pos_down  = y == h - 1 ? 255 : widg->pos + w;
+							widg->pos_left  = x == 0 ? 255 : widg->pos - 1;
 							widg->pos_right = x == w - 1 ? 255 : widg->pos + 1;
 						}
 					}
@@ -151,12 +151,12 @@ void SubscreenWizardDialog::endUpdate()
 				txt->shadtype = shadtype;
 				txt->align = sstaRIGHT;
 				txt->text = tfs[4]->getText();
-				txt->c_text.type = misccolors[0][0];
-				txt->c_text.color = misccolors[0][1];
-				txt->c_shadow.type = misccolors[1][0];
+				txt->c_text.type    = misccolors[0][0];
+				txt->c_text.color   = misccolors[0][1];
+				txt->c_shadow.type  = misccolors[1][0];
 				txt->c_shadow.color = misccolors[1][1];
-				txt->c_bg.type = misccolors[2][0];
-				txt->c_bg.color = misccolors[2][1];
+				txt->c_bg.type      = misccolors[2][0];
+				txt->c_bg.color     = misccolors[2][1];
 
 				SW_Counter* ctr = (SW_Counter*)create_new_widget_of(widgCOUNTER, x + 8 + dividerw, y + yoff, false);
 				group_select_widget(ctr);
