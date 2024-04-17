@@ -4067,84 +4067,55 @@ static void allocate_crap()
 	}
 	
 	for(int32_t i=0; i<WAV_COUNT>>3; i++)
-	{
 		customsfxflag[i] = 0;
-	}
 	
 	for(int32_t i=0; i<MAXWPNS; i++)
-	{
 		weapon_string[i] = new char[64];
-	}
 	
 	for(int32_t i=0; i<MAXITEMS; i++)
-	{
 		item_string[i] = new char[64];
-	}
 	
 	for(int32_t i=0; i<eMAXGUYS; i++)
-	{
 		guy_string[i] = new char[64];
-	}
 	
 	for(int32_t i=0; i<NUMSCRIPTFFC; i++)
-	{
 		ffscripts[i] = new script_data(ScriptType::FFC, i);
-	}
 	
 	for(int32_t i=0; i<NUMSCRIPTITEM; i++)
-	{
 		itemscripts[i] = new script_data(ScriptType::Item, i);
-	}
 	
 	for(int32_t i=0; i<NUMSCRIPTGUYS; i++)
-	{
 		guyscripts[i] = new script_data(ScriptType::NPC, i);
-	}
 	
 	for(int32_t i=0; i<NUMSCRIPTSCREEN; i++)
-	{
 		screenscripts[i] = new script_data(ScriptType::Screen, i);
-	}
 	
 	for(int32_t i=0; i<NUMSCRIPTGLOBAL; i++)
-	{
 		globalscripts[i] = new script_data(ScriptType::Global, i);
-	}
 	
 	for(int32_t i=0; i<NUMSCRIPTPLAYER; i++)
-	{
 		playerscripts[i] = new script_data(ScriptType::Player, i);
-	}
 	
 	for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
-	{
 		lwpnscripts[i] = new script_data(ScriptType::Lwpn, i);
-	}
-	 for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
-	{
+
+	for(int32_t i=0; i<NUMSCRIPTWEAPONS; i++)
 		ewpnscripts[i] = new script_data(ScriptType::Ewpn, i);
-	}
 	
 	for(int32_t i=0; i<NUMSCRIPTSDMAP; i++)
-	{
 		dmapscripts[i] = new script_data(ScriptType::DMap, i);
-	}
+
 	for(int32_t i=0; i<NUMSCRIPTSITEMSPRITE; i++)
-	{
 		itemspritescripts[i] = new script_data(ScriptType::ItemSprite, i);
-	}
+
 	for(int32_t i=0; i<NUMSCRIPTSCOMBODATA; i++)
-	{
 		comboscripts[i] = new script_data(ScriptType::Combo, i);
-	}
+
 	for(int32_t i=0; i<NUMSCRIPTSGENERIC; i++)
-	{
 		genericscripts[i] = new script_data(ScriptType::Generic, i);
-	}
+
 	for(int32_t i=0; i<NUMSCRIPTSSUBSCREEN; i++)
-	{
 		subscreenscripts[i] = new script_data(ScriptType::EngineSubscreen, i);
-	}
 }
 
 void do_load_and_quit_command(const char* quest_path)
