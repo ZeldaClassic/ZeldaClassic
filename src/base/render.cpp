@@ -347,7 +347,7 @@ void render_text(ALLEGRO_BITMAP* bitmap, ALLEGRO_FONT* font, std::string text, i
 	al_restore_state(&oldstate);
 }
 
-void render_text_lines(ALLEGRO_BITMAP* bitmap, ALLEGRO_FONT* font, std::vector<std::string> lines, TextJustify justify, TextAlign align, int scale)
+void render_text_lines(ALLEGRO_BITMAP* bitmap, ALLEGRO_FONT* font, std::vector<std::string> const& lines, TextJustify justify, TextAlign align, int scale)
 {
 	int resx = al_get_bitmap_width(bitmap);
 	int resy = al_get_bitmap_height(bitmap);
@@ -356,7 +356,7 @@ void render_text_lines(ALLEGRO_BITMAP* bitmap, ALLEGRO_FONT* font, std::vector<s
 		resy - scale*font_height - 5 :
 		// Offset just a bit so it doesn't obscure the title bar.
 		resy*0.04;
-	for (std::string line : lines)
+	for (std::string const& line : lines)
 	{
 		int x = justify == TextJustify::left ?
 			5 :
