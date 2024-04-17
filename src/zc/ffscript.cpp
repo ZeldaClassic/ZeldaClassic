@@ -3123,7 +3123,7 @@ SubscrWidget *checkSubWidg(int32_t ref, const char *what, int req_widg_ty = -1, 
 
 void bad_subwidg_type(string const& name, bool func, byte type)
 {
-	auto tyname = type < widgMAX ? subwidg_internal_names[type].c_str() : "";
+	auto tyname = type < widgMAX ? subwidg_internal_names[type] : "";
 	Z_scripterrlog("Widget type %d '%s' does not have a '%s' %s!\n",
 		type, tyname, name.c_str(),
 		func ? "function" : "value");

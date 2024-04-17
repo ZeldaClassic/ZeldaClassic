@@ -51,7 +51,7 @@ void draw_textbox(BITMAP *dest, int32_t x, int32_t y, int32_t w, int32_t h, FONT
 void magicgauge(BITMAP *dest,int32_t x,int32_t y, int32_t container, int32_t notlast_tile, int32_t notlast_cset, bool notlast_mod, int32_t last_tile, int32_t last_cset, bool last_mod,
 				int32_t cap_tile, int32_t cap_cset, bool cap_mod, int32_t aftercap_tile, int32_t aftercap_cset, bool aftercap_mod, int32_t frames, int32_t speed, int32_t delay, bool unique_last, int32_t show);
 
-const std::string subwidg_internal_names[widgMAX] =
+const char* subwidg_internal_names[widgMAX] =
 {
 	"SUBWIDG_NULL", "SUBWIDG_FRAME", "SUBWIDG_TEXT", "SUBWIDG_LINE", "SUBWIDG_RECT",
 	"SUBWIDG_TIME", "SUBWIDG_MMETER", "SUBWIDG_LMETER", "SUBWIDG_BTNITM", "SUBWIDG_COUNTER",
