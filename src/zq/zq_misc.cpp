@@ -839,9 +839,9 @@ int32_t onClearQuestFilepath()
 	{
 		ZQ_ClearQuestPath();
 		save_config_file();
-		return D_O_K;
 	}
-	else return D_O_K;
+
+	return D_O_K;
 
 }
 
