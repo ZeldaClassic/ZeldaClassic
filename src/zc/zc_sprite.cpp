@@ -141,20 +141,20 @@ void sprite::check_conveyor()
 		{
 			if(deltay<0&&!_walkflag(x,y+8-2,2))
 			{
-				y=y-abs(deltay);
+				y -= abs(deltay);
 			}
 			else if(deltay>0&&!_walkflag(x,y+15+2,2))
 			{
-				y=y+abs(deltay);
+				y += abs(deltay);
 			}
 
 			if(deltax<0&&!_walkflag(x-2,y+8,1))
 			{
-				x=x-abs(deltax);
+				x -= abs(deltax);
 			}
 			else if(deltax>0&&!_walkflag(x+15+2,y+8,1))
 			{
-				x=x+abs(deltax);
+				x += abs(deltax);
 			}
 		}
 	}
