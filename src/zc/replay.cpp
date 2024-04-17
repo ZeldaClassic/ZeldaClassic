@@ -152,16 +152,16 @@ struct KeyMapReplayStep : ReplayStep
 
 	void run()
 	{
-		DUkey = button_keys[0];
-		DDkey = button_keys[1];
-		DLkey = button_keys[2];
-		DRkey = button_keys[3];
-		Akey = button_keys[4];
-		Bkey = button_keys[5];
-		Skey = button_keys[6];
-		Lkey = button_keys[7];
-		Rkey = button_keys[8];
-		Pkey = button_keys[9];
+		DUkey  = button_keys[0];
+		DDkey  = button_keys[1];
+		DLkey  = button_keys[2];
+		DRkey  = button_keys[3];
+		Akey   = button_keys[4];
+		Bkey   = button_keys[5];
+		Skey   = button_keys[6];
+		Lkey   = button_keys[7];
+		Rkey   = button_keys[8];
+		Pkey   = button_keys[9];
 		Exkey1 = button_keys[10];
 		Exkey2 = button_keys[11];
 		Exkey3 = button_keys[12];
