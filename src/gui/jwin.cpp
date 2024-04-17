@@ -1509,15 +1509,15 @@ int32_t jwin_iconbutton_proc(int32_t msg, DIALOG *d, int32_t)
 }
 int32_t jwin_infobtn_proc(int32_t msg, DIALOG *d, int32_t)
 {
-    int32_t down=0;
-    int32_t selected=(d->flags&D_SELECTED)?1:0;
-    int32_t last_draw;
+	int32_t down=0;
+	int32_t selected=(d->flags&D_SELECTED)?1:0;
+	int32_t last_draw;
 	std::string* str = (std::string*)d->dp;
 	bool dis = (d->flags & D_DISABLED) || !str || !((*str)[0]) || str->find_first_not_of(" \t")==std::string::npos;
-    int flags = d->flags | (dis?D_DISABLED:0);
+	int flags = d->flags | (dis?D_DISABLED:0);
 	bool show = false;
-    switch(msg)
-    {
+	switch(msg)
+	{
 		case MSG_DRAW:
 		{
 			FONT *oldfont = font;
@@ -1578,9 +1578,7 @@ int32_t jwin_infobtn_proc(int32_t msg, DIALOG *d, int32_t)
 					if (r & D_REDRAWME) should_redraw = true;
 
 					if (should_redraw)
-					{
 						update_hw_screen();
-					}
 				}
 				
 				/* redraw in normal state */
