@@ -203,7 +203,8 @@ extern volatile int32_t myvsync;
 extern int32_t fill_type;
 
 extern bool first_save;
-extern char* filepath, * temppath, * midipath;
+extern char* filepath, * temppath;
+extern char midipath[2048];
 extern char datapath[2048];
 extern char imagepath[2048];
 extern char tmusicpath[2048];
