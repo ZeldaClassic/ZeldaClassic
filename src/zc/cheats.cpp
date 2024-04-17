@@ -57,7 +57,7 @@ static const char* CheatStrings[] = {
 	"Last",
 };
 
-Cheat cheat_from_string(std::string name)
+Cheat cheat_from_string(std::string const& name)
 {
     auto it = std::find(std::begin(CheatStrings), std::end(CheatStrings), name.c_str());
     ASSERT(it != std::end(CheatStrings));
