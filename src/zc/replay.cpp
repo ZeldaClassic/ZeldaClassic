@@ -46,39 +46,37 @@ static const char TypeMouse   = 'V';
 static const char TypeState   = 'S';
 
 static ReplayMode mode = ReplayMode::Off;
-static int version;
-static bool version_use_latest;
-static bool debug;
-static bool snapshot_all_frames;
-static bool exit_when_done;
-static bool sync_rng;
-static int frame_arg;
+static int version, frame_arg;
+static bool version_use_latest, debug, snapshot_all_frames, exit_when_done, sync_rng;
 static std::filesystem::path replay_path, output_dir;
 static std::vector<std::shared_ptr<ReplayStep>> replay_log, record_log;
 static std::map<std::string, std::string> meta_map;
 static std::vector<int> snapshot_frames, expected_loadscr_frame_count;
-static int loadscr_count;
-static int failed_loadscr_count_frame;
+static int loadscr_count, failed_loadscr_count_frame;
+
 static size_t replay_log_current_index;
 static size_t replay_log_current_quit_index;
 static size_t replay_log_current_state_index;
 static size_t assert_current_index;
 static size_t manual_takeover_start_index;
+
 static bool has_assert_failed;
 static int failing_frame;
 static int last_failing_gfx_frame;
 static int current_failing_gfx_segment_start_frame;
+
 static std::vector<int> unexpected_gfx_frames;
 static std::vector<std::pair<int, int>> unexpected_gfx_segments, unexpected_gfx_segments_limited;
-static bool has_rng_desynced;
-static bool did_attempt_input_during_replay;
+static bool has_rng_desynced, did_attempt_input_during_replay;
 static int frame_count;
 static bool previous_control_state[ZC_CONTROL_STATES];
 static char previous_keys[KEY_MAX];
 static std::vector<zc_randgen *> rngs;
 static std::map<int, int> rng_seed_count_this_frame;
+
 static uint32_t prev_gfx_hash;
 static bool prev_gfx_hash_was_same;
+
 static int prev_debug_x;
 static int prev_debug_y;
 static bool gfx_got_mismatch;
