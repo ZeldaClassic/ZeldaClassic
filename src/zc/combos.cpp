@@ -131,12 +131,9 @@ void do_generic_combo2(int32_t bx, int32_t by, int32_t cid, int32_t flag, int32_
 		if((combobuf[cid].usrflags&cflag4))
 		{
 			do
-			{
-				
-				
+			{ 
 				if (layer) 
-				{
-					
+				{ 
 					//screen_combo_modify_preroutine(tmpscr,scombo);
 					screen_combo_modify_preroutine(FFCore.tempScreens[layer],scombo);
 					
