@@ -298,7 +298,7 @@ private:
 		}
 
 		// Vector of (group name, hotkeys).
-		std::vector<std::pair<std::string, const std::set<int>&>> groups = {
+		std::vector<std::pair<const char*, const std::set<int>&>> groups = {
 			{"Actions",          group_action_ids},
 			{"Toggles",          group_toggle_ids},
 			{"Map Navigation",   group_map_navigation_ids},
