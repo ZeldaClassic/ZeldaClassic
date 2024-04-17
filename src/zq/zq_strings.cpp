@@ -182,13 +182,13 @@ char *strip_extra_spaces(char *string)
 	memcpy(src,string,len+1);
 	memset(src,0,len+1);
 	
-	for(size_t i=0; string[i]&&i<strlen(string); i++)
+	for(size_t i=0; string[i]&&i<len; i++)
 	{
 		*tmpsrc=string[i];
 		
 		if(*tmpsrc==' ')
 		{
-			while(string[i+1]==' '&&i<strlen(string))
+			while(string[i+1]==' '&&i<len)
 				i++;
 		}
 		else if(*tmpsrc && (*tmpsrc < 32 || *tmpsrc > 126))
