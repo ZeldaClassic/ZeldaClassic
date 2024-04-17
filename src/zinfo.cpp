@@ -429,7 +429,7 @@ void zinfo::clear()
 	clear_ctr_name();
 }
 
-static char const* nilptr = "";
+static char const* emptystr = "";
 static char zinfbuf[2048] = {0};
 bool zinfo::isUsableItemclass(size_t q)
 {
@@ -467,7 +467,7 @@ char const* zinfo::getItemClassHelp(size_t q)
 		return ic_help_string[q];
 	if(valid_str(itemclass_help_string_defaults[q]))
 		return itemclass_help_string_defaults[q];
-	return nilptr;
+	return emptystr;
 }
 char const* zinfo::getComboTypeName(size_t q)
 {
@@ -475,7 +475,7 @@ char const* zinfo::getComboTypeName(size_t q)
 		return ctype_name[q];
 	if(valid_str(default_ctype_strings[q]))
 		return default_ctype_strings[q];
-	return nilptr;
+	return emptystr;
 }
 static std::string ctype_help_buff;
 char const* zinfo::getComboTypeHelp(size_t q)
@@ -485,7 +485,7 @@ char const* zinfo::getComboTypeHelp(size_t q)
 	ctype_help_buff = getComboTypeHelpText(q);
 	if(ctype_help_buff.size())
 		return ctype_help_buff.c_str();
-	return nilptr;
+	return emptystr;
 }
 char const* zinfo::getMapFlagName(size_t q)
 {
@@ -493,7 +493,7 @@ char const* zinfo::getMapFlagName(size_t q)
 		return mf_name[q];
 	if(valid_str(map_flag_default_string[q]))
 		return map_flag_default_string[q];
-	return nilptr;
+	return emptystr;
 }
 static std::string mf_help_buff;
 char const* zinfo::getMapFlagHelp(size_t q)
@@ -503,7 +503,7 @@ char const* zinfo::getMapFlagHelp(size_t q)
 	mf_help_buff = getMapFlagHelpText(q);
 	if(mf_help_buff.size())
 		return mf_help_buff.c_str();
-	return nilptr;
+	return emptystr;
 }
 char const* zinfo::getWeapName(size_t q)
 {
@@ -511,7 +511,7 @@ char const* zinfo::getWeapName(size_t q)
 		return weap_name[q];
 	if(valid_str(weap_name_default_string[q]))
 		return weap_name_default_string[q];
-	return nilptr;
+	return emptystr;
 }
 char const* zinfo::getCtrName(int32_t q)
 {
@@ -523,7 +523,7 @@ char const* zinfo::getCtrName(int32_t q)
 		return ctr_name[q];
 	if(valid_str(counter_default_names[q]))
 		return counter_default_names[q];
-	return nilptr;
+	return emptystr;
 }
 
 void zinfo::copyFrom(zinfo const& other)
