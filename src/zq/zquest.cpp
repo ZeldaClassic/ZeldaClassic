@@ -27675,10 +27675,10 @@ int32_t save_config_file()
 {
 	char qtnametitle[20];
 	char qtpathtitle[20];
-	char *datapath2=(char *)malloc(2048);
-	char *midipath2=(char *)malloc(2048);
-	char *imagepath2=(char *)malloc(2048);
-	char *tmusicpath2=(char *)malloc(2048);
+	char datapath2[2048];
+	char midipath2[2048];
+	char imagepath2[2048];
+	char tmusicpath2[2048];
 	strcpy(datapath2, datapath);
 	strcpy(midipath2, midipath);
 	strcpy(imagepath2, imagepath);
@@ -27724,10 +27724,6 @@ int32_t save_config_file()
 #ifdef __EMSCRIPTEN__
 	em_sync_fs();
 #endif
-	free(datapath2);
-	free(midipath2);
-	free(imagepath2);
-	free(tmusicpath2);
 	return 0;
 }
 
