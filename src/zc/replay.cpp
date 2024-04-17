@@ -1197,8 +1197,7 @@ void replay_start(ReplayMode mode_, std::filesystem::path path, int frame)
     prev_gfx_hash = 0;
     prev_gfx_hash_was_same = false;
     prev_debug_x = prev_debug_y = -1;
-    prev_mouse_state = {0, 0, 0, 0};
-    current_mouse_state = {0, 0, 0, 0};
+    prev_mouse_state = current_mouse_state = {0, 0, 0, 0};
     replay_log.clear();
     record_log.clear();
     snapshot_frames.clear();
@@ -1254,8 +1253,7 @@ void replay_continue(std::filesystem::path path)
 	ASSERT(mode == ReplayMode::Off);
 	mode = ReplayMode::Record;
 	frame_arg = -1;
-	prev_mouse_state = {0, 0, 0, 0};
-	current_mouse_state = {0, 0, 0, 0};
+	prev_mouse_state = current_mouse_state = {0, 0, 0, 0};
 	replay_forget_input();
 	replay_path = path;
 	load_replay(replay_path);
