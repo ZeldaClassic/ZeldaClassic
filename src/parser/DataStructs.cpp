@@ -20,12 +20,10 @@ FunctionData::FunctionData(Program& program)
 	: program(program),
 	  globalData(program.getScope().getLocalData())
 {
-	for (vector<Datum*>::const_iterator it = globalData.begin();
-	     it != globalData.end(); ++it)
+	for (Datum* datum : globalData)
 	{
-		Datum& datum = **it;
-		if (!datum.getCompileTimeValue())
-			globalVariables.push_back(&datum);
+		if (!datum->getCompileTimeValue())
+			globalVariables.push_back(datum);
 	}
 
 	for (vector<Script*>::const_iterator it = program.scripts.begin();
