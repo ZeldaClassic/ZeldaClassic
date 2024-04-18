@@ -5186,8 +5186,7 @@ void bmp_do_drawcharr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffs
 	}
 	
 	else //2.53.0 fixed version and later.
-	{
-	
+	{ 
 		//sdci[1]=layer
 		    //sdci[2]=x
 		    //sdci[3]=y
@@ -5265,10 +5264,8 @@ void bmp_do_drawcharr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffs
 			{
 			    textprintf_ex(refbmp, get_zc_font(font_index), x+xoffset, y+yoffset, color, bg_color, "%c", glyph);
 			}
-		    }		
-		
-	}
-    
+		    }
+	} 
 }
 
 
@@ -5522,7 +5519,6 @@ void bmp_do_drawintr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffse
 	}
 }
 
-
 void bmp_do_drawstringr(BITMAP *bmp, int32_t i, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 {
     //sdci[1]=layer
@@ -5582,17 +5578,11 @@ void bmp_do_drawstringr(BITMAP *bmp, int32_t i, int32_t *sdci, int32_t xoffset, 
     else // no opacity
     {
         if(format_type == 2)   // right-sided text
-        {
             textout_right_ex(refbmp, font, str->c_str(), x+xoffset, y+yoffset, color, bg_color);
-        }
         else if(format_type == 1)   // centered text
-        {
             textout_centre_ex(refbmp, font, str->c_str(), x+xoffset, y+yoffset, color, bg_color);
-        }
         else // standard left-sided text
-        {
             textout_ex(refbmp, font, str->c_str(), x+xoffset, y+yoffset, color, bg_color);
-        }
     }
 }
 
@@ -5720,9 +5710,6 @@ void bmp_do_regenr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 	
 	scb.script_created_bitmaps[bitid].width = w;
 	scb.script_created_bitmaps[bitid].height = h;
-	
-	
-    
 }
 
 void bmp_do_readr(BITMAP *bmp, int32_t i, int32_t *sdci, int32_t xoffset, int32_t yoffset)
@@ -5785,8 +5772,6 @@ void bmp_do_readr(BITMAP *bmp, int32_t i, int32_t *sdci, int32_t xoffset, int32_
 	    clear_bitmap(scb.script_created_bitmaps[bitid].u_bmp);
     }
 }
-
-
 
 void bmp_do_writer(BITMAP *bmp, int32_t i, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 {
@@ -5858,7 +5843,6 @@ void bmp_do_writer(BITMAP *bmp, int32_t i, int32_t *sdci, int32_t xoffset, int32
 	}
 	else Z_scripterrlog("Cannot write file '%s' because the file already exists in the specified path.\n", str->c_str());
 }
-
 
 void bmp_do_drawquadr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 {
@@ -5982,9 +5966,6 @@ void bmp_do_drawquadr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffs
 		
 	}
    
-    
-    
-    
     //todo: finish palette shading
     /*
     POLYTYPE_FLAT
@@ -6006,9 +5987,7 @@ void bmp_do_drawquadr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffs
     
     if(mustDestroyBmp)
         destroy_bitmap(tex);
-        
 }
-
 
 void bmp_do_getpixelr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 {
@@ -6035,9 +6014,6 @@ void bmp_do_getpixelr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffs
     Z_scripterrlog("bitmap->GetPixel bitmap ptr is is %d\n",(sdci[17]-10));
     FFCore.set_sarg1(col);
 }
-
-
-
 
 void bmp_do_drawtriangler(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 {
@@ -6151,7 +6127,6 @@ void bmp_do_drawtriangler(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t y
     
     
 	triangle3d_f(refbmp, polytype, tex, &V1, &V2, &V3);
-    
     }
     
     else
@@ -6173,7 +6148,6 @@ void bmp_do_drawtriangler(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t y
     if(mustDestroyBmp)
         destroy_bitmap(tex);
 }
-
 
 void bmp_do_mode7r(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 {
@@ -6418,7 +6392,6 @@ void bmp_do_mode7r(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 		}
 	}
 }
-
 
 //Draw]()
 void bmp_do_drawbitmapexr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
@@ -10034,8 +10007,6 @@ void do_drawlayerr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset,
     //putscr
 }
 
-
-
 void do_drawscreenr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset, bool isOffScreen)
 {
     //sdci[1]=layer
@@ -10177,8 +10148,6 @@ void do_bmpdrawlayerr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffs
     
     //putscr
 }
-
-
 
 void do_bmpdrawscreenr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset, bool isOffScreen)
 {
@@ -10637,8 +10606,6 @@ void do_bmpdrawlayerciflagr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t
     
     //putscr
 }
-
-
 
 /////////////////////////////////////////////////////////
 // do primitives
