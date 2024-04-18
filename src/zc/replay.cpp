@@ -506,7 +506,7 @@ static bool steps_are_equal(const ReplayStep* step1, const ReplayStep* step2)
 	return are_equal;
 }
 
-static std::filesystem::path get_file_path(std::string suffix)
+static std::filesystem::path get_file_path(std::string const& suffix)
 {
 	return output_dir / (replay_path.filename().string() + suffix);
 }
