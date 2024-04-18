@@ -6048,9 +6048,9 @@ static int32_t handle_on_load_replay(ReplayMode mode)
 	std::string mode_string = replay_mode_to_string(mode);
 	mode_string[0] = std::toupper(mode_string[0]);
 
-	std::string line_1 = "Select a replay file to play back.";
-	std::string line_2 = "You won't be able to save, and it won't effect existing saves.";
-	std::string line_3 = "You can stop the replay and take over manually any time.";
+	const char* line_1 = "Select a replay file to play back.";
+	const char* line_2 = "You won't be able to save, and it won't effect existing saves.";
+	const char* line_3 = "You can stop the replay and take over manually any time.";
 	if (mode == ReplayMode::Update)
 	{
 		line_1 = "Select a replay file to update.";
@@ -6059,9 +6059,9 @@ static int32_t handle_on_load_replay(ReplayMode mode)
 	}
 
 	if (jwin_alert(mode_string.c_str(),
-		line_1.c_str(),
-		line_2.c_str(),
-		line_3.c_str(),
+		line_1,
+		line_2,
+		line_3,
 		"OK","Nevermind",13,27,get_zc_font(font_lfont)) == 1)
 	{
 		char replay_path[2048];
