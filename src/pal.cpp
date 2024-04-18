@@ -438,14 +438,10 @@ void lightingInstant()
 		{
 			loadlvlpal(level);
 			
-			if(get_qr(qr_FADECS5) && !get_qr(qr_CSET5_LEVEL))
-				loadpalset(5,5);
-			if(get_qr(qr_FADECS1) && !get_qr(qr_CSET1_LEVEL))
-				loadpalset(1,1);
-			if(get_qr(qr_FADECS7) && !get_qr(qr_CSET7_LEVEL))
-				loadpalset(7,7);
-			if(get_qr(qr_FADECS8) && !get_qr(qr_CSET8_LEVEL))
-				loadpalset(8,8);
+			if(get_qr(qr_FADECS5) && !get_qr(qr_CSET5_LEVEL)) loadpalset(5,5);
+			if(get_qr(qr_FADECS1) && !get_qr(qr_CSET1_LEVEL)) loadpalset(1,1);
+			if(get_qr(qr_FADECS7) && !get_qr(qr_CSET7_LEVEL)) loadpalset(7,7);
+			if(get_qr(qr_FADECS8) && !get_qr(qr_CSET8_LEVEL)) loadpalset(8,8);
 	
 		}
 		else // Old room lit, new room dark
