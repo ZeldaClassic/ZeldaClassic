@@ -35,10 +35,9 @@ FunctionData::FunctionData(Program& program)
 		                       data.begin(), data.end());
 	}
 	
-	for (vector<Namespace*>::const_iterator it = program.namespaces.begin();
-		it != program.namespaces.end(); ++it)
+	for( Namespace* ns : program.namespaces)
 	{
-		NamespaceScope& scope = (*it)->getScope();
+		NamespaceScope& scope = ns->getScope();
 		vector<Datum*> data = scope.getLocalData();
 		globalVariables.insert(globalVariables.end(),
 		                       data.begin(), data.end());
