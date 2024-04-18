@@ -9207,26 +9207,29 @@ bool do_checkbox_tx(BITMAP *dest,int x,int y,int wid,int hei,int &value, int txt
 }
 
 //box_out stuff
-static int32_t box_x = 0;
-static int32_t box_y = 0;
-static bool box_active=false;
-static int32_t box_store_x = 0;
-static FONT *box_title_font=font;
-static FONT *box_message_font=font;
-static int32_t box_style=0;
-static int32_t box_titlebar_height=0;
-static int32_t box_message_height=0;
-static uint8_t box_text_scale=1;
-static int32_t box_w=304;
-static int32_t box_h=176;
-static int32_t box_l=8;
-static int32_t box_r=312;
-static int32_t box_t=32;
-static int32_t box_b=208;
-static bool box_log=true;
-static char box_log_msg[480];
-static int32_t box_msg_pos=0;
-static int32_t box_store_pos=0;
+namespace
+{
+	int32_t box_x = 0;
+	int32_t box_y = 0;
+	bool box_active = false;
+	int32_t box_store_x = 0;
+	FONT* box_title_font = font;
+	FONT* box_message_font = font;
+	int32_t box_style = 0;
+	int32_t box_titlebar_height = 0;
+	int32_t box_message_height = 0;
+	uint8_t box_text_scale = 1;
+	int32_t box_w = 304;
+	int32_t box_h = 176;
+	int32_t box_l = 8;
+	int32_t box_r = 312;
+	int32_t box_t = 32;
+	int32_t box_b = 208;
+	bool box_log = true;
+	char box_log_msg[480];
+	int32_t box_msg_pos = 0;
+	int32_t box_store_pos = 0;
+}
 
 int32_t onSnapshot2()
 {
