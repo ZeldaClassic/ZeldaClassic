@@ -148,7 +148,7 @@ dBushLeaves::dBushLeaves(zfix X,zfix Y,int32_t Id,int32_t Clk, int32_t wpnSpr) :
 
 bool dBushLeaves::animate(int32_t)
 {
-	return (clk++>=24);
+	return clk++ >= 24;
 }
 
 void dBushLeaves::draw(BITMAP *dest)
@@ -354,7 +354,7 @@ dFlowerClippings::dFlowerClippings(zfix X,zfix Y,int32_t Id,int32_t Clk, int32_t
 
 bool dFlowerClippings::animate(int32_t)
 {
-	return (clk++>=24);
+	return clk++ >= 24;
 }
 
 void dFlowerClippings::draw(BITMAP *dest)
@@ -740,9 +740,7 @@ void dDivineProtectionShield::realdraw(BITMAP *dest, int32_t draw_what)
 		tile=t;
 		
 		if(fr>0&&spd>0)
-		{
 			tile+=((clk/spd)%fr);
-		}
 		
 		decoration::draw(dest);
 		x+=16;
