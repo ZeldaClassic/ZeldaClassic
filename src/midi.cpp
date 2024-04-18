@@ -1,7 +1,6 @@
 #include <cstring>
 #include <stdio.h>
-
-
+ 
 #include "midi.h"
 #include "base/zsys.h"
 /* save_midi:
@@ -11,15 +10,13 @@
 
 int32_t save_midi(char *filename, MIDI *midi)
 {
-    int32_t c;
-    int32_t len;
-    PACKFILE *fp;
+    int32_t c, len;
     int32_t num_tracks = 0;
     
     if(!midi)
         return 1;
         
-    fp = pack_fopen_password(filename, F_WRITE,"");                       /* open the file */
+    PACKFILE *fp = pack_fopen_password(filename, F_WRITE,"");                       /* open the file */
     
     if(!fp)
         return 2;
@@ -101,8 +98,7 @@ err:
 
 dword getval(byte *buf,int32_t nbytes)
 {
-    dword value;
-    value=0;
+    dword value=0;
     
     for(int32_t i=0; i<nbytes; i++)
     {
