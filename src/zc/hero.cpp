@@ -4821,13 +4821,9 @@ void HeroClass::check_slash_block2(int32_t bx, int32_t by, weapon *w)
 				int32_t r=zc_oldrand()%100;
 				
 				if(r<15)
-				{
 					it=iHeart;                                // 15%
-				}
 				else if(r<35)
-				{
 					it=iRupy;                                 // 20%
-				}
 			}
             
             if(it!=-1 && itemsbuf[it].family != itype_misc) // Don't drop non-gameplay items
@@ -4843,17 +4839,14 @@ void HeroClass::check_slash_block2(int32_t bx, int32_t by, weapon *w)
 			if (!isBushType(type2) && !isFlowersType(type2) && !isGrassType(type2))
 			{
 				if (combobuf[cid].usrflags&cflag3)
-				{
 					sfx(combobuf[cid].attribytes[2],int32_t(bx));
-				}
 			}
 			else
 			{
 				if (combobuf[cid].usrflags&cflag3)
-				{
 					sfx(combobuf[cid].attribytes[2],int32_t(bx));
-				}
-				else sfx(QMisc.miscsfx[sfxBUSHGRASS],int32_t(bx));
+				else
+					sfx(QMisc.miscsfx[sfxBUSHGRASS],int32_t(bx));
 			}
 		}
 		
@@ -4892,9 +4885,6 @@ void HeroClass::check_wand_block2(int32_t bx, int32_t by, weapon *w)
 	
 	byte dontignore = 0;
 	byte dontignoreffc = 0;
-    
-	
-	
     
 
     //keep things inside the screen boundaries
@@ -4963,13 +4953,10 @@ void HeroClass::check_slash_block(weapon *w)
 	al_trace("check_slash_block(weapon *w): par_item is: %d\n", par_item);
 	int32_t usewpn = -1;
 	if ( par_item > -1 )
-	{
 		usewpn = itemsbuf[par_item].useweapon;
-	}
 	else if ( par_item == -1 && w->ScriptGenerated ) 
-	{
 		usewpn = w->useweapon;
-	}
+
 	al_trace("check_slash_block(weapon *w): usewpn is: %d\n", usewpn);
     if(usewpn != wSword) return;
 	
@@ -5010,9 +4997,7 @@ void HeroClass::check_slash_block(weapon *w)
     bool ignoreffc=false;
     
     if(get_bit(screengrid, i) != 0)
-    {
         ignorescreen = true;
-    }
     
     int32_t current_ffcombo = getFFCAt(fx,fy);
     
