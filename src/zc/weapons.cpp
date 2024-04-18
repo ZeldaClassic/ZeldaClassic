@@ -4062,9 +4062,7 @@ bool weapon::animate(int32_t index)
 				break;
 			default:
 				if(z <= 0 && fakez <= 0)
-				{
 					fallCombo = check_pits();
-				}
 		}
 	}
 	if(moveflags & FLAG_CAN_WATERDROWN)
@@ -4086,9 +4084,7 @@ bool weapon::animate(int32_t index)
 				break;
 			default:
 				if(z <= 0 && fakez <= 0)
-				{
 					drownCombo = check_water();
-				}
 		}
 	}
 	
@@ -6617,9 +6613,7 @@ bool weapon::animate(int32_t index)
 			}
 			
 			if(blocked())
-			{
 				dead=1;
-			}
 			
 			// Killed by script?
 			if(dead==0 && get_qr(qr_TEMPCANDLELIGHT) && flame_count()==1)
@@ -6638,13 +6632,9 @@ bool weapon::animate(int32_t index)
 				step=0;  //should already be 0, but still...
 				isLit=true;
 				if(get_qr(qr_TEMPCANDLELIGHT))
-				{
 					checkLightSources();
-				}
 				else
-				{
 					checkLightSources(true);
-				}
 			}
 			
 			if((get_qr(qr_OLD_FLAMETRAIL_DURATION) && clk==640) || (!get_qr(qr_OLD_FLAMETRAIL_DURATION) && clk == 180))
