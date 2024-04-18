@@ -366,9 +366,7 @@ void do_framer(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     
 	frame2x2(bmp, x + xoffset, y + yoffset, tile, cs, w, h, 0, overlay, trans);
 }
-
-
-
+ 
 void do_circler(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 {
     //sdci[1]=layer
@@ -383,9 +381,7 @@ void do_circler(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     //sdci[10]=fill
     //sdci[11]=opacity
     if(sdci[6]==0)  //scale
-    {
         return;
-    }
     
     int32_t x1=sdci[2]/10000;
     int32_t y1=sdci[3]/10000;
@@ -401,9 +397,7 @@ void do_circler(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     int32_t color=sdci[5]/10000;
     
     if(sdci[11]/10000<=127) //translucent
-    {
         drawing_mode(DRAW_MODE_TRANS, NULL, 0, 0);
-    }
     
     if(sdci[9]!=0&&(sdci[2]!=sdci[7]||sdci[3]!=sdci[8])) //rotation
     {
@@ -422,13 +416,9 @@ void do_circler(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     }
     
     if(sdci[10]) //filled
-    {
         circlefill(bmp, x1+xoffset, y1+yoffset, r, color);
-    }
     else //outline
-    {
         circle(bmp, x1+xoffset, y1+yoffset, r, color);
-    }
     
     drawing_mode(DRAW_MODE_SOLID, NULL, 0, 0);
 }
@@ -452,9 +442,7 @@ void do_arcr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     //sdci[14]=opacity
     
     if(sdci[8]==0)  //scale
-    {
         return;
-    }
     
     int32_t cx=sdci[2]/10000;
     int32_t cy=sdci[3]/10000;
@@ -514,13 +502,9 @@ void do_arcr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 			floodfill(prim_bmp, fillx, filly, color);
             
             if(sdci[14]/10000<=127) //translucent
-            {
                 draw_trans_sprite(bmp, prim_bmp, 0,0);
-            }
             else
-            {
                 draw_sprite(bmp, prim_bmp, 0,0);
-            }
         }
         else
         {
@@ -532,15 +516,12 @@ void do_arcr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     else
     {
         if(sdci[14]/10000<=127) //translucent
-        {
             drawing_mode(DRAW_MODE_TRANS, NULL, 0, 0);
-        }
         
         arc(bmp, cx+xoffset, cy+yoffset, sa, ea, int32_t(r), color);
         drawing_mode(DRAW_MODE_SOLID, NULL, 0, 0);
     }
-}
-
+} 
 
 void do_ellipser(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 {
@@ -558,9 +539,7 @@ void do_ellipser(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     //sdci[12]=opacity
     
     if(sdci[7]==0)  //scale
-    {
         return;
-    }
     
     int32_t x1=sdci[2]/10000;
     int32_t y1=sdci[3]/10000;
@@ -653,9 +632,7 @@ void do_liner(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     //sdci[10]=rotation angle
     //sdci[11]=opacity
     if(sdci[7]==0)  //scale
-    {
         return;
-    }
     
     int32_t x1=sdci[2]/10000;
     int32_t y1=sdci[3]/10000;
@@ -677,9 +654,7 @@ void do_liner(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     int32_t color=sdci[6]/10000;
     
     if(sdci[11]/10000<=127) //translucent
-    {
         drawing_mode(DRAW_MODE_TRANS, NULL, 0, 0);
-    }
     
     if(sdci[10]!=0) //rotation
     {
@@ -845,9 +820,8 @@ void do_polygonr(BITMAP *bmp, int32_t i, int32_t *sdci, int32_t xoffset, int32_t
     
     //Fix the draw Y offset. -Z 20th June, 2019
     for ( int32_t q = 1; q < sz; q+=2 )
-    {
 		pos[q] += yoffset;
-    }
+
 	if(op <= 127) //translucent
 	{
 		drawing_mode(DRAW_MODE_TRANS, NULL, 0, 0);
@@ -930,16 +904,13 @@ void do_spliner(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
                     };
                     
     if(sdci[11]/10000 < 128)   //translucent
-    {
         drawing_mode(DRAW_MODE_TRANS, NULL, 0, 0);
-    }
     
     spline(bmp, points, sdci[10]/10000);
     
     drawing_mode(DRAW_MODE_SOLID, NULL, 0, 0);
 }
-
-
+ 
 void do_putpixelr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 {
     //sdci[1]=layer
@@ -955,9 +926,7 @@ void do_putpixelr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     int32_t color=sdci[4]/10000;
     
     if(sdci[8]/10000<=127) //translucent
-    {
         drawing_mode(DRAW_MODE_TRANS, NULL, 0, 0);
-    }
     
     if(sdci[7]!=0) //rotation
     {
@@ -1070,9 +1039,7 @@ void do_drawtiler(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     int32_t h = sdci[6]/10000;
     
     if(w < 1 || h < 1 || h > 20 || w > 20)
-    {
         return;
-    }
     
     int32_t xscale=sdci[8]/10000;
     int32_t yscale=sdci[9]/10000;
@@ -1091,9 +1058,7 @@ void do_drawtiler(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     bool canscale = true;
     
     if(xscale==0||yscale==0)
-    {
         return;
-    }
     
     if(xscale<=0||yscale<=0)
         canscale = false; //default size
@@ -1103,13 +1068,9 @@ void do_drawtiler(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
         BITMAP* pbitty = script_drawing_commands.AquireSubBitmap(w*16, h*16);
         
         if(transparency) //transparency
-        {
             TileHelper::OverTile(pbitty, (sdci[4]/10000), 0, 0, w, h, color, flip);
-        }
         else //no transparency
-        {
             TileHelper::OldPutTile(pbitty, (sdci[4]/10000), 0, 0, w, h, color, flip);
-        }
         
         if(rotation != 0)
         {
@@ -1179,13 +1140,9 @@ void do_drawtiler(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
             else //error -do not scale
             {
                 if(opacity<128)
-                {
                     draw_trans_sprite(bmp, prim_bmp, x1+xoffset, y1+yoffset);
-                }
                 else
-                {
                     draw_sprite(bmp, pbitty, x1+xoffset, y1+yoffset);
-                }
             }
         }
         
@@ -1225,9 +1182,7 @@ void do_drawtilecloakedr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yo
 	int32_t h = sdci[6]/10000;
 	
 	if(w < 1 || h < 1 || h > 20 || w > 20)
-	{
 		return;
-	}
 	
 	int32_t flip=(sdci[7]/10000)&3;
 	
@@ -1380,13 +1335,9 @@ void do_drawcombor(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
             else //error -do not scale
             {
                 if(opacity<128)
-                {
                     draw_trans_sprite(bmp, prim_bmp, x1+xoffset, y1+yoffset);
-                }
                 else
-                {
                     draw_sprite(bmp, pbitty, x1+xoffset, y1+yoffset);
-                }
             }
         }
         
@@ -1484,8 +1435,7 @@ void do_fasttilesr(BITMAP *bmp, int32_t i, int32_t *sdci, int32_t xoffset, int32
     int32_t sz = v.size();
     
     for ( int32_t q = 0; q < sz; q+=5 )
-    {
-	    
+    { 
 	    if(v.at(q+4) < 128)
 		overtiletranslucent16(bmp, v.at(q+2), xoffset+(v.at(q)), yoffset+(v.at(q+1)), v.at(q+3), 0, v.at(q+4));
 	    else
@@ -1575,10 +1525,7 @@ void do_fastcombosr(BITMAP *bmp, int32_t i, int32_t *sdci, int32_t xoffset, int3
 		}
 	}
 }
-
-
-
-
+ 
 void do_drawcharr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 {
 	//broken 2.50.2 and earlier drawcharacter()
@@ -1665,8 +1612,7 @@ void do_drawcharr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 	}
 	
 	else //2.53.0 fixed version and later.
-	{
-	
+	{ 
 		//sdci[1]=layer
 		    //sdci[2]=x
 		    //sdci[3]=y
@@ -3778,9 +3724,7 @@ void do_drawquad3dr(BITMAP *bmp, int32_t i, int32_t *sdci, int32_t xoffset, int3
         destroy_bitmap(tex);
         
 }
-
-
-
+ 
 void do_drawtriangle3dr(BITMAP *bmp, int32_t i, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 {
     //sdci[1]=layer
@@ -5135,8 +5079,7 @@ void bmp_do_fastcombor(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoff
 	if(opacity < 128)
 	{
 		//void overcomboblocktranslucent(BITMAP *dest, int32_t x, int32_t y, int32_t cmbdat, int32_t cset, int32_t w, int32_t h, int32_t opacity)
-		overcomboblocktranslucent(refbmp, xoffset+x1, yoffset+y1, cmb, sdci[5]/10000, 1, 1, 128);
-
+		overcomboblocktranslucent(refbmp, xoffset+x1, yoffset+y1, cmb, sdci[5]/10000, 1, 1, 128); 
 	}
 	else
 	{
@@ -5144,8 +5087,6 @@ void bmp_do_fastcombor(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoff
 		overcomboblock(refbmp, xoffset+x1, yoffset+y1, cmb, sdci[5]/10000, 1, 1);
 	}
 }
-
-
 
 void bmp_do_drawcharr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 {
