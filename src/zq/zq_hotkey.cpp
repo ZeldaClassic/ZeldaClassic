@@ -212,7 +212,7 @@ char const* get_hotkey_name(uint hkey)
 		case ZQKEY_DEFAULT_PALETTES: return "Default Palettes";
 		case ZQKEY_MAZE_PATH: return "Maze Path";
 		case ZQKEY_PLAY_MUSIC: return "Play Music";
-		case ZQKEY_APPLY_TEMPLATE_ALL: return "Apply Template to All";
+		case ZQKEY_APPLY_TEMPLATE_ALL: return "Apply Template Mapwide";
 		case ZQKEY_REVERT: return "Revert";
 		case ZQKEY_PASTE_ROOMTYPE: return "Paste Room Type Data";
 		case ZQKEY_PASTE_SCREEN_DATA: return "Paste Screen Data";

@@ -1359,16 +1359,16 @@ static NewMenu fixtools_menu
 
 static NewMenu tool_menu
 {
-	{ "Combo &Flags",           onFlags, nullopt, MFL_EXIT_PRE_PROC },
-	{ "Fix &Tools ",            &fixtools_menu },
-	{ "&NES Dungeon Template",  onTemplate },
-	{ "&Apply Template to All", onReTemplate },
+	{ "Combo &Flags",            onFlags, nullopt, MFL_EXIT_PRE_PROC },
+	{ "Fix &Tools ",             &fixtools_menu },
+	{ "&NES Dungeon Template",   onTemplate },
+	{ "&Apply Template Mapwide", onReTemplate },
 	{},
-	{ "&Preview Mode",          onPreviewMode },
-	{ "Drawing &Mode ",         &drawing_mode_menu },
+	{ "&Preview Mode",           onPreviewMode },
+	{ "Drawing &Mode ",          &drawing_mode_menu },
 	{},
-	{ "&List Combos Used",      onUsedCombos },
-	{ "&Quest Reports ",        &quest_reports_menu },
+	{ "&List Combos Used",       onUsedCombos },
+	{ "&Quest Reports ",         &quest_reports_menu },
 };
 
 int32_t onLayer3BG()
