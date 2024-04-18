@@ -3991,181 +3991,41 @@ string OClearSpritesRegister::toString() const
     return "CLEARSPRITESR " + getArgument()->toString();
 }
 
-string ORectangleRegister::toString() const
-{
-    return "RECT";
-}
-
-string OFrameRegister::toString() const
-{
-    return "FRAMER";
-}
-
-string OCircleRegister::toString() const
-{
-    return "CIRCLE";
-}
-
-string OArcRegister::toString() const
-{
-    return "ARC";
-}
-
-string OEllipseRegister::toString() const
-{
-    return "ELLIPSE";
-}
-
-string OLineRegister::toString() const
-{
-    return "LINE";
-}
-
-string OSplineRegister::toString() const
-{
-    return "SPLINE";
-}
-
-string OPutPixelRegister::toString() const
-{
-    return "PUTPIXEL";
-}
-
-string OPutPixelArrayRegister::toString() const
-{
-    return "PIXELARRAYR";
-}
-
-string OPutTileArrayRegister::toString() const
-{
-    return "TILEARRAYR";
-}
-
-string OPutLinesArrayRegister::toString() const
-{
-    return "LINESARRAY";
-}
-
-string ODrawCharRegister::toString() const
-{
-    return "DRAWCHAR";
-}
-
-string ODrawIntRegister::toString() const
-{
-    return "DRAWINT";
-}
-
-string ODrawTileRegister::toString() const
-{
-    return "DRAWTILE";
-}
-
-string ODrawTileCloakedRegister::toString() const
-{
-    return "DRAWTILECLOAKEDR";
-}
-
-string ODrawComboRegister::toString() const
-{
-    return "DRAWCOMBO";
-}
-
-string ODrawComboCloakedRegister::toString() const
-{
-    return "DRAWCOMBOCLOAKEDR";
-}
-
-string OFastTileRegister::toString() const
-{
-    return "FASTTILE";
-}
-
-string OFastComboRegister::toString() const
-{
-    return "FASTCOMBO";
-}
-
-string OFastComboArrayRegister::toString() const
-{
-    return "COMBOARRAYR";
-}
-
-string ODrawStringRegister::toString() const
-{
-    return "DRAWSTRING";
-}
-
-string ODrawString2Register::toString() const
-{
-    return "DRAWSTRINGR2";
-}
-
-string ODrawBitmapRegister::toString() const
-{
-    return "DRAWBITMAP";
-}
-
-string ODrawBitmapExRegister::toString() const
-{
-    return "BITMAPEXR";
-}
-
-string OSetRenderTargetRegister::toString() const
-{
-    return "SETRENDERTARGET";
-}
-
-string OSetDepthBufferRegister::toString() const
-{
-    return "SETDEPTHB";
-}
-
-string OGetDepthBufferRegister::toString() const
-{
-    return "GETDEPTHB";
-}
-
-string OSetColorBufferRegister::toString() const
-{
-    return "SETCOLORB";
-}
-
-string OGetColorBufferRegister::toString() const
-{
-    return "GETCOLORB";
-}
-
-string OQuadRegister::toString() const
-{
-    return "QUAD";
-}
-
-string OTriangleRegister::toString() const
-{
-    return "TRIANGLE";
-}
-
-
-string OQuad3DRegister::toString() const
-{
-    return "QUAD3D";
-}
-
-string OTriangle3DRegister::toString() const
-{
-    return "TRIANGLE3D";
-}
-
-string ODrawLayerRegister::toString() const
-{
-    return "DRAWLAYER";
-}
-
-string ODrawScreenRegister::toString() const
-{
-    return "DRAWSCREEN";
-}
+string ORectangleRegister       ::toString() const { return "RECT"; } 
+string OFrameRegister           ::toString() const { return "FRAMER"; } 
+string OCircleRegister          ::toString() const { return "CIRCLE"; } 
+string OArcRegister             ::toString() const { return "ARC"; } 
+string OEllipseRegister         ::toString() const { return "ELLIPSE"; } 
+string OLineRegister            ::toString() const { return "LINE"; } 
+string OSplineRegister          ::toString() const { return "SPLINE"; } 
+string OPutPixelRegister        ::toString() const { return "PUTPIXEL"; } 
+string OPutPixelArrayRegister   ::toString() const { return "PIXELARRAYR"; } 
+string OPutTileArrayRegister    ::toString() const { return "TILEARRAYR"; } 
+string OPutLinesArrayRegister   ::toString() const { return "LINESARRAY"; } 
+string ODrawCharRegister        ::toString() const { return "DRAWCHAR"; } 
+string ODrawIntRegister         ::toString() const { return "DRAWINT"; } 
+string ODrawTileRegister        ::toString() const { return "DRAWTILE"; } 
+string ODrawTileCloakedRegister ::toString() const { return "DRAWTILECLOAKEDR"; } 
+string ODrawComboRegister       ::toString() const { return "DRAWCOMBO"; } 
+string ODrawComboCloakedRegister::toString() const { return "DRAWCOMBOCLOAKEDR"; } 
+string OFastTileRegister        ::toString() const { return "FASTTILE"; } 
+string OFastComboRegister       ::toString() const { return "FASTCOMBO"; } 
+string OFastComboArrayRegister  ::toString() const { return "COMBOARRAYR"; } 
+string ODrawStringRegister      ::toString() const { return "DRAWSTRING"; } 
+string ODrawString2Register     ::toString() const { return "DRAWSTRINGR2"; } 
+string ODrawBitmapRegister      ::toString() const { return "DRAWBITMAP"; } 
+string ODrawBitmapExRegister    ::toString() const { return "BITMAPEXR"; } 
+string OSetRenderTargetRegister ::toString() const { return "SETRENDERTARGET"; } 
+string OSetDepthBufferRegister  ::toString() const { return "SETDEPTHB"; } 
+string OGetDepthBufferRegister  ::toString() const { return "GETDEPTHB"; } 
+string OSetColorBufferRegister  ::toString() const { return "SETCOLORB"; } 
+string OGetColorBufferRegister  ::toString() const { return "GETCOLORB"; } 
+string OQuadRegister            ::toString() const { return "QUAD"; } 
+string OTriangleRegister        ::toString() const { return "TRIANGLE"; } 
+string OQuad3DRegister          ::toString() const { return "QUAD3D"; } 
+string OTriangle3DRegister      ::toString() const { return "TRIANGLE3D"; } 
+string ODrawLayerRegister       ::toString() const { return "DRAWLAYER"; } 
+string ODrawScreenRegister      ::toString() const { return "DRAWSCREEN"; } 
 
 string OMessageRegister::toString() const
 {
@@ -5989,27 +5849,12 @@ string OIsAllocatedBitmap::toString() const
 }
 
 
-string OBMPDrawScreenSolidRegister::toString() const
-{
-    return "BMPDRAWSCREENSOLIDR";
-}
+string OBMPDrawScreenSolidRegister ::toString() const { return "BMPDRAWSCREENSOLIDR"; } 
+string OBMPDrawScreenSolid2Register::toString() const { return "BMPDRAWSCREENSOLID2R"; }
+string OBMPDrawScreenComboFRegister::toString() const { return "BMPDRAWSCREENCOMBOFR"; }
+string OBMPDrawScreenComboIRegister::toString() const { return "BMPDRAWSCREENCOMBOIR"; }
+string OBMPDrawScreenComboTRegister::toString() const { return "BMPDRAWSCREENCOMBOTR"; }
 
-string OBMPDrawScreenSolid2Register::toString() const
-{
-    return "BMPDRAWSCREENSOLID2R";
-}
-string OBMPDrawScreenComboFRegister::toString() const
-{
-    return "BMPDRAWSCREENCOMBOFR";
-}
-string OBMPDrawScreenComboIRegister::toString() const
-{
-    return "BMPDRAWSCREENCOMBOIR";
-}
-string OBMPDrawScreenComboTRegister::toString() const
-{
-    return "BMPDRAWSCREENCOMBOTR";
-}
 string OGraphicsGetpixel::toString() const
 {
     return "GRAPHICSGETPIXEL " + getArgument()->toString();
@@ -6104,22 +5949,10 @@ string oARRAYCOPY::toString() const
 
 //1 inp, 1 ret, baseds on STRINGLENGTH / Ostrlen
 
-string Oxlen::toString() const
-{
-    return "XLEN " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
-}
-string Oxtoi::toString() const
-{
-    return "XTOI " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
-}
-string Oilen::toString() const
-{
-    return "ILEN " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
-}
-string Oatoi::toString() const
-{
-    return "ATOI " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
-}
+string Oxlen::toString() const { return "XLEN " + getFirstArgument()->toString() + "," + getSecondArgument()->toString(); }
+string Oxtoi::toString() const { return "XTOI " + getFirstArgument()->toString() + "," + getSecondArgument()->toString(); }
+string Oilen::toString() const { return "ILEN " + getFirstArgument()->toString() + "," + getSecondArgument()->toString(); }
+string Oatoi::toString() const { return "ATOI " + getFirstArgument()->toString() + "," + getSecondArgument()->toString(); }
 
 //2 inp, 1 ret, based on STRINGCOMPARE / OStrCmp
 
@@ -6214,103 +6047,32 @@ string Oremchr2::toString() const
     { "STRCSPN3",		       1,   0,   0,   0},
     
 */
-
-
-
-
-
-
-
-
-string Ouppertolower::toString() const
-{
-    return "UPPERTOLOWER " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
-}
-string Olowertoupper::toString() const
-{
-    return "LOWERTOUPPER " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
-}
-string Oconvertcase::toString() const
-{
-    return "CONVERTCASE " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
-}
+ 
+string Ouppertolower::toString() const { return "UPPERTOLOWER " + getFirstArgument()->toString() + "," + getSecondArgument()->toString(); }
+string Olowertoupper::toString() const { return "LOWERTOUPPER " + getFirstArgument()->toString() + "," + getSecondArgument()->toString(); }
+string Oconvertcase ::toString() const { return "CONVERTCASE " + getFirstArgument()->toString() + "," + getSecondArgument()->toString(); }
 
 //Game->GetByString functions
 //similar to Oconvertcase
 
-string OGETNPCSCRIPT::toString() const
-{
-    return "GETNPCSCRIPT " + getArgument()->toString();
-}
-string OGETLWEAPONSCRIPT::toString() const
-{
-    return "GETLWEAPONSCRIPT " + getArgument()->toString();
-}
-string OGETEWEAPONSCRIPT::toString() const
-{
-    return "GETEWEAPONSCRIPT " + getArgument()->toString();
-}
-string OGETGENERICSCRIPT::toString() const
-{
-    return "GETGENERICSCRIPT " + getArgument()->toString();
-}
-string OGETHEROSCRIPT::toString() const
-{
-    return "GETHEROSCRIPT " + getArgument()->toString();
-}
-string OGETGLOBALSCRIPT::toString() const
-{
-    return "GETGLOBALSCRIPT " + getArgument()->toString();
-}
-string OGETDMAPSCRIPT::toString() const
-{
-    return "GETDMAPSCRIPT " + getArgument()->toString();
-}
-string OGETSCREENSCRIPT::toString() const
-{
-    return "GETSCREENSCRIPT " + getArgument()->toString();
-}
-string OGETSPRITESCRIPT::toString() const
-{
-    return "GETSPRITESCRIPT " + getArgument()->toString();
-}
-string OGETUNTYPEDSCRIPT::toString() const
-{
-    return "GETUNTYPEDSCRIPT " + getArgument()->toString();
-}
-string OGETSUBSCREENSCRIPT::toString() const
-{
-    return "GETSUBSCREENSCRIPT " + getArgument()->toString();
-}
-string OGETNPCBYNAME::toString() const
-{
-    return "GETNPCBYNAME " + getArgument()->toString();
-}
-string OGETITEMBYNAME::toString() const
-{
-    return "GETITEMBYNAME " + getArgument()->toString();
-}
-string OGETCOMBOBYNAME::toString() const
-{
-    return "GETCOMBOBYNAME " + getArgument()->toString();
-}
-string OGETDMAPBYNAME::toString() const
-{
-    return "GETDMAPBYNAME " + getArgument()->toString();
-}
-
-string OLoadNPCBySUIDRegister::toString() const
-{
-    return "LOADNPCBYSUID " + getArgument()->toString();
-}
-string OLoadLWeaponBySUIDRegister::toString() const
-{
-    return "LOADLWEAPONBYSUID " + getArgument()->toString();
-}
-string OLoadEWeaponBySUIDRegister::toString() const
-{
-    return "LOADWEAPONCBYSUID " + getArgument()->toString();
-}
+string OGETNPCSCRIPT             ::toString() const { return "GETNPCSCRIPT " + getArgument()->toString(); }
+string OGETLWEAPONSCRIPT         ::toString() const { return "GETLWEAPONSCRIPT " + getArgument()->toString(); }
+string OGETEWEAPONSCRIPT         ::toString() const { return "GETEWEAPONSCRIPT " + getArgument()->toString(); }
+string OGETGENERICSCRIPT         ::toString() const { return "GETGENERICSCRIPT " + getArgument()->toString(); }
+string OGETHEROSCRIPT            ::toString() const { return "GETHEROSCRIPT " + getArgument()->toString(); }
+string OGETGLOBALSCRIPT          ::toString() const { return "GETGLOBALSCRIPT " + getArgument()->toString(); }
+string OGETDMAPSCRIPT            ::toString() const { return "GETDMAPSCRIPT " + getArgument()->toString(); }
+string OGETSCREENSCRIPT          ::toString() const { return "GETSCREENSCRIPT " + getArgument()->toString(); }
+string OGETSPRITESCRIPT          ::toString() const { return "GETSPRITESCRIPT " + getArgument()->toString(); }
+string OGETUNTYPEDSCRIPT         ::toString() const { return "GETUNTYPEDSCRIPT " + getArgument()->toString(); }
+string OGETSUBSCREENSCRIPT       ::toString() const { return "GETSUBSCREENSCRIPT " + getArgument()->toString(); }
+string OGETNPCBYNAME             ::toString() const { return "GETNPCBYNAME " + getArgument()->toString(); }
+string OGETITEMBYNAME            ::toString() const { return "GETITEMBYNAME " + getArgument()->toString(); }
+string OGETCOMBOBYNAME           ::toString() const { return "GETCOMBOBYNAME " + getArgument()->toString(); }
+string OGETDMAPBYNAME            ::toString() const { return "GETDMAPBYNAME " + getArgument()->toString(); } 
+string OLoadNPCBySUIDRegister    ::toString() const { return "LOADNPCBYSUID " + getArgument()->toString(); }
+string OLoadLWeaponBySUIDRegister::toString() const { return "LOADLWEAPONBYSUID " + getArgument()->toString(); }
+string OLoadEWeaponBySUIDRegister::toString() const { return "LOADWEAPONCBYSUID " + getArgument()->toString(); }
 
 string OByte::toString() const
 {
