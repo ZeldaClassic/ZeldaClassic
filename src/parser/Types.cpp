@@ -5,8 +5,7 @@
 #include "DataStructs.h"
 #include "Scope.h"
 #include "Types.h"
-#include "AST.h"
-
+#include "AST.h" 
 
 using namespace ZScript;
 using std::string;
@@ -383,8 +382,7 @@ bool ZScript::operator> (DataType const& lhs, DataType const& rhs) { return lhs.
 bool ZScript::operator>=(DataType const& lhs, DataType const& rhs) { return lhs.compare(rhs) >= 0; }
 
 DataType const& ZScript::getNaiveType(DataType const& type, Scope* scope)
-{
-
+{ 
 	DataType const* t = &type;
 	while (t->isArray()) //Avoid dynamic_cast<>
 	{
@@ -396,19 +394,13 @@ DataType const& ZScript::getNaiveType(DataType const& type, Scope* scope)
 	if(t->isConstant())
 	{
 		if(DataTypeSimpleConst const* ts = dynamic_cast<DataTypeSimpleConst const*>(t))
-		{
 			t = DataType::get(ts->getId());
-		}
 		
 		if(DataTypeClassConst const* tc = dynamic_cast<DataTypeClassConst const*>(t))
-		{
 			t = DataType::getClass(tc->getClassId());
-		}
 		
 		if(DataTypeCustomConst const* tcu = dynamic_cast<DataTypeCustomConst const*>(t))
-		{
 			t = DataType::getCustom(tcu->getCustomId());
-		}
 	}
 
 	return *t;
