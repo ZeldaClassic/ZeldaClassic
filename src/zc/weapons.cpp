@@ -7317,9 +7317,7 @@ offscreenCheck:
         if(clipped)
         {
             if(misc==999)                                       // in enemy wind
-            {
                 ewind_restart=true;
-            }
             
             dead=1;
         }
@@ -7527,9 +7525,7 @@ void weapon::draw(BITMAP *dest)
 					clk2 = 0;
 					
 					if(frames>1 && ++aframe >= frames)
-					{
 						aframe = 0;
-					}
 				}
 			}
 			else
@@ -7537,17 +7533,13 @@ void weapon::draw(BITMAP *dest)
 				if((clk2 % zc_max(1, o_speed))==0)
 				{
 					if(frames>1 && ++aframe >= frames)
-					{
 						aframe = 0;
-					}
 				}
 			}
 			
 			//tile = o_tile+aframe;
 			if ( do_animation ) 
-			{
 				update_weapon_frame(aframe,o_tile);
-			}
 		}
 	}
 	
@@ -7612,9 +7604,7 @@ void weapon::draw(BITMAP *dest)
 					id2=wBOOM;
 					
 					if(parentitem>-1)
-					{
 						id2=itemsbuf[parentitem].wpn2;
-					}
 					
 					break;
 				}
@@ -7624,9 +7614,7 @@ void weapon::draw(BITMAP *dest)
 					id2=wSBOOM;
 					
 					if(parentitem>-1)
-					{
 						id2=itemsbuf[parentitem].wpn2;
-					}
 					
 					break;
 				}
@@ -7751,9 +7739,7 @@ void weapon::draw(BITMAP *dest)
 						}
 						
 						if(parentitem>=0 && itemsbuf[parentitem].flags & ITEM_FLAG2)
-						{
-						update_weapon_frame((BSZ?1:4)*dir,tile);
-						}
+							update_weapon_frame((BSZ?1:4)*dir,tile);
 					}
 				}
 				else
@@ -7821,9 +7807,7 @@ void weapon::draw(BITMAP *dest)
 			case pDIVINEPROTECTIONROCKETTRAIL2:
 			case pDIVINEPROTECTIONROCKETTRAILRETURN2:
 				if(parentitem>=0 && (itemsbuf[parentitem].flags & ITEM_FLAG1 ? 1 : 0)&&!(frame&1))
-				{
 					return;
-				}
 				
 				break;
 			}
@@ -7890,9 +7874,7 @@ void weapon::draw(BITMAP *dest)
 			{
 				shd_aclk = 0;
 				if(++shd_aframe >= zc_max(spr.frames,1))
-				{
 					shd_aframe = 0;
-				}
 			}
 		}
 		shadowtile = spr.tile+shd_aframe;
