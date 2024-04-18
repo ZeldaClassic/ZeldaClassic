@@ -7060,29 +7060,21 @@ waves2:
 	break;
 	
 	case aFLIP:
-	{
 		flip = f2&1;
-	}
-	break;
+		break;
 	
 	case a2FRM:
-	{
 		tile += (1-f2);
-	}
-	break;
+		break;
 	
 	case a2FRMB:
-	{
 		tile+= 2*(1-f2);
 		ignore_extend = true;
-	}
-	break;
+		break;
 	
 	case a2FRM4DIR:
-	{
 		basetile = n_frame_n_dir(2, 4, f2&1);
-	}
-	break;
+		break;
 	
 	case a4FRM4DIRF:
 	{
@@ -7099,10 +7091,8 @@ waves2:
 	break;
 	
 	case a4FRM4DIR:
-	{
 		basetile = n_frame_n_dir(4,4,f4);
-	}
-	break;
+		break;
 	
 	case a4FRM8DIRF:
 	{
