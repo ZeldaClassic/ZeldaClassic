@@ -3439,12 +3439,16 @@ bool weapon::blocked(int32_t xOffset, int32_t yOffset)
 
 void collectitem_script(int32_t id);
 
-static const int bombxoff[] = {-16, -8, -8, 0,  8,  8, 16};
-static const int bombyoff[] = {  0,-16, 16, 0,-16, 16,  0};
-static const int sbombxoff[] = { -8,  8,-24, -8,  8, 24,-32,-16,  0, 16, 32,-24, -8,  8, 24, -8,  8};
-static const int sbombyoff[] = {-32,-32,-16,-16,-16,-16,  0,  0,  0,  0,  0, 16, 16, 16, 16, 32, 32};
-static const int bombcount = 7;
-static const int sbombcount = 17;
+namespace
+{
+	const int bombxoff[] = { -16, -8, -8, 0,  8,  8, 16 };
+	const int bombyoff[] = { 0,-16, 16, 0,-16, 16,  0 };
+	const int sbombxoff[] = { -8,  8,-24, -8,  8, 24,-32,-16,  0, 16, 32,-24, -8,  8, 24, -8,  8 };
+	const int sbombyoff[] = { -32,-32,-16,-16,-16,-16,  0,  0,  0,  0,  0, 16, 16, 16, 16, 32, 32 };
+	const int bombcount = 7;
+	const int sbombcount = 17;
+}
+
 void weapon::getBombPoses(std::set<int>& poses)
 {
 	poses.clear();
