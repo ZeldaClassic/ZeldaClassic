@@ -603,13 +603,9 @@ void dTallGrass::draw(BITMAP *dest)
 	
 //  if (BSZ)
 	if(zinit.heroAnimationStyle==las_bszelda)
-	{
 		tile=t+(anim_3_4(HeroLStep(),7)*2);
-	}
 	else
-	{
 		tile=t+((HeroLStep()>=6)?2:0);
-	}
 	
 	decoration::draw8(dest);
 	x+=8;
@@ -721,9 +717,7 @@ bool dDivineProtectionShield::animate(int32_t)
 void dDivineProtectionShield::realdraw(BITMAP *dest, int32_t draw_what)
 {
 	if(misc!=draw_what)
-	{
 		return;
-	}
 	
 	int32_t fb=(misc==0?
 	        (itemsbuf[current_item_id(itype_divineprotection)].wpn5 ?
