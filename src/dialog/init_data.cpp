@@ -1105,11 +1105,11 @@ bool InitGenscriptWizard::handleMessage(const GUI::DialogMessage<message>& msg)
 		case message::OK:
 		{
 			dest_zinit.gen_doscript.set(index, local_zinit.gen_doscript.get(index));
-			dest_zinit.gen_exitState[index] = local_zinit.gen_exitState[index];
+			dest_zinit.gen_exitState  [index] = local_zinit.gen_exitState[index];
 			dest_zinit.gen_reloadState[index] = local_zinit.gen_reloadState[index];
-			dest_zinit.gen_initd[index] = local_zinit.gen_initd[index];
-			dest_zinit.gen_data[index] = local_zinit.gen_data[index];
-			dest_zinit.gen_eventstate[index] = local_zinit.gen_eventstate[index];
+			dest_zinit.gen_initd      [index] = local_zinit.gen_initd[index];
+			dest_zinit.gen_data       [index] = local_zinit.gen_data[index];
+			dest_zinit.gen_eventstate [index] = local_zinit.gen_eventstate[index];
 		}
 		return true;
 
