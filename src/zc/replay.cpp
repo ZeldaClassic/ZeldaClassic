@@ -624,7 +624,7 @@ static void set_version()
 	version = std::stoi(version_str);
 }
 
-static void load_replay(std::filesystem::path path)
+static void load_replay(std::filesystem::path const& path)
 {
 #ifdef __EMSCRIPTEN__
     if (em_is_lazy_file(path))
