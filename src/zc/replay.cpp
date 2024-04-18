@@ -29,60 +29,63 @@ using namespace std::chrono_literals;
 
 struct ReplayStep;
 
-static const int ASSERT_SNAPSHOT_BUFFER = 10;
-static const int ASSERT_FAILED_EXIT_CODE = 120;
-static const int VERSION = 32;
+namespace
+{
+	const int ASSERT_SNAPSHOT_BUFFER = 10;
+	const int ASSERT_FAILED_EXIT_CODE = 120;
+	const int VERSION = 32;
 
-static const std::string ANNOTATION_MARKER = "«";
-static const char TypeMeta    = 'M';
-static const char TypeKeyDown = 'D';
-static const char TypeKeyUp   = 'U';
-static const char TypeComment = 'C';
-static const char TypeQuit    = 'Q';
-static const char TypeCheat   = 'X';
-static const char TypeRng     = 'R';
-static const char TypeKeyMap  = 'K';
-static const char TypeMouse   = 'V';
-static const char TypeState   = 'S';
+	const std::string ANNOTATION_MARKER = "«";
+	const char TypeMeta = 'M';
+	const char TypeKeyDown = 'D';
+	const char TypeKeyUp = 'U';
+	const char TypeComment = 'C';
+	const char TypeQuit = 'Q';
+	const char TypeCheat = 'X';
+	const char TypeRng = 'R';
+	const char TypeKeyMap = 'K';
+	const char TypeMouse = 'V';
+	const char TypeState = 'S';
 
-static ReplayMode mode = ReplayMode::Off;
-static int version, frame_arg;
-static bool version_use_latest, debug, snapshot_all_frames, exit_when_done, sync_rng;
-static std::filesystem::path replay_path, output_dir;
-static std::vector<std::shared_ptr<ReplayStep>> replay_log, record_log;
-static std::map<std::string, std::string> meta_map;
-static std::vector<int> snapshot_frames, expected_loadscr_frame_count;
-static int loadscr_count, failed_loadscr_count_frame;
+	ReplayMode mode = ReplayMode::Off;
+	int version, frame_arg;
+	bool version_use_latest, debug, snapshot_all_frames, exit_when_done, sync_rng;
+	std::filesystem::path replay_path, output_dir;
+	std::vector<std::shared_ptr<ReplayStep>> replay_log, record_log;
+	std::map<std::string, std::string> meta_map;
+	std::vector<int> snapshot_frames, expected_loadscr_frame_count;
+	int loadscr_count, failed_loadscr_count_frame;
 
-static size_t replay_log_current_index;
-static size_t replay_log_current_quit_index;
-static size_t replay_log_current_state_index;
-static size_t assert_current_index;
-static size_t manual_takeover_start_index;
+	size_t replay_log_current_index;
+	size_t replay_log_current_quit_index;
+	size_t replay_log_current_state_index;
+	size_t assert_current_index;
+	size_t manual_takeover_start_index;
 
-static bool has_assert_failed;
-static int failing_frame;
-static int last_failing_gfx_frame;
-static int current_failing_gfx_segment_start_frame;
+	bool has_assert_failed;
+	int failing_frame;
+	int last_failing_gfx_frame;
+	int current_failing_gfx_segment_start_frame;
 
-static std::vector<int> unexpected_gfx_frames;
-static std::vector<std::pair<int, int>> unexpected_gfx_segments, unexpected_gfx_segments_limited;
-static bool has_rng_desynced, did_attempt_input_during_replay;
-static int frame_count;
-static bool previous_control_state[ZC_CONTROL_STATES];
-static char previous_keys[KEY_MAX];
-static std::vector<zc_randgen *> rngs;
-static std::map<int, int> rng_seed_count_this_frame;
+	std::vector<int> unexpected_gfx_frames;
+	std::vector<std::pair<int, int>> unexpected_gfx_segments, unexpected_gfx_segments_limited;
+	bool has_rng_desynced, did_attempt_input_during_replay;
+	int frame_count;
+	bool previous_control_state[ZC_CONTROL_STATES];
+	char previous_keys[KEY_MAX];
+	std::vector<zc_randgen*> rngs;
+	std::map<int, int> rng_seed_count_this_frame;
 
-static uint32_t prev_gfx_hash;
-static bool prev_gfx_hash_was_same;
+	uint32_t prev_gfx_hash;
+	bool prev_gfx_hash_was_same;
 
-static int prev_debug_x;
-static int prev_debug_y;
-static bool gfx_got_mismatch;
-static std::array<int, 4> prev_mouse_state, current_mouse_state;
-static std::chrono::time_point<std::chrono::steady_clock> time_started, time_result_saved;
-static std::chrono::time_point<std::chrono::system_clock> time_started_system;
+	int prev_debug_x;
+	int prev_debug_y;
+	bool gfx_got_mismatch;
+	std::array<int, 4> prev_mouse_state, current_mouse_state;
+	std::chrono::time_point<std::chrono::steady_clock> time_started, time_result_saved;
+	std::chrono::time_point<std::chrono::system_clock> time_started_system;
+}
 
 struct FramebufHistoryEntry
 {
