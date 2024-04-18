@@ -110,8 +110,7 @@ user_file script_files[MAX_USER_FILES];
 user_dir script_dirs[MAX_USER_DIRS];
 user_object script_objects[MAX_USER_OBJECTS];
 user_stack script_stacks[MAX_USER_STACKS];
-user_rng nulrng;
-user_rng script_rngs[MAX_USER_RNGS];
+user_rng nulrng, script_rngs[MAX_USER_RNGS];
 zc_randgen script_rnggens[MAX_USER_RNGS];
 user_paldata script_paldatas[MAX_USER_PALDATAS];
 
