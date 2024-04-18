@@ -17539,7 +17539,6 @@ int32_t addchild(int32_t x,int32_t y,int32_t z,int32_t id,int32_t clk, int32_t p
 		{
 			e = new eTrigger((zfix)x,(zfix)y,id,clk);
 			break;
-			break;
 		}
 		[[fallthrough]];
 	default:
