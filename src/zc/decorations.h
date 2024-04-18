@@ -11,7 +11,7 @@ class decoration : public sprite
 public:
 	decoration(zfix X,zfix Y,int32_t Id,int32_t Clk, int32_t wpnSpr=0);
 	int32_t the_deco_sprite; 
-	virtual ~decoration();
+	virtual ~decoration() = default;
 };
 
 /*******************************/

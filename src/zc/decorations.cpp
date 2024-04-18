@@ -23,8 +23,6 @@ decoration::decoration(zfix X,zfix Y,int32_t Id,int32_t Clk, int32_t wpnSpr) : s
 	the_deco_sprite = vbound(wpnSpr,0,255);
 }
 
-decoration::~decoration() {}
-
 /*******************************/
 /*******   Decorations   *******/
 /*******************************/
