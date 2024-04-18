@@ -4772,17 +4772,14 @@ void HeroClass::check_slash_block2(int32_t bx, int32_t by, weapon *w)
 			if (!isBushType(type) && !isFlowersType(type) && !isGrassType(type))
 			{
 				if (combobuf[cid].usrflags&cflag3)
-				{
 					sfx(combobuf[cid].attribytes[2],int32_t(bx));
-				}
 			}
 			else
 			{
 				if (combobuf[cid].usrflags&cflag3)
-				{
 					sfx(combobuf[cid].attribytes[2],int32_t(bx));
-				}
-				else sfx(QMisc.miscsfx[sfxBUSHGRASS],int32_t(bx));
+				else
+					sfx(QMisc.miscsfx[sfxBUSHGRASS],int32_t(bx));
 			}
 		}
 		
