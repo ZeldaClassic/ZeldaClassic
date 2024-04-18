@@ -2527,45 +2527,14 @@ string VectorArgument::toString() const
 	return util::stringify_vector(value, true);
 }
 
-string OSetTrue::toString() const
-{
-    return "SETTRUE " + getArgument()->toString();
-}
-
-string OSetTrueI::toString() const
-{
-    return "SETTRUEI " + getArgument()->toString();
-}
-
-string OSetFalse::toString() const
-{
-    return "SETFALSE " + getArgument()->toString();
-}
-
-string OSetFalseI::toString() const
-{
-    return "SETFALSEI " + getArgument()->toString();
-}
-
-string OSetMore::toString() const
-{
-    return "SETMORE " + getArgument()->toString();
-}
-
-string OSetMoreI::toString() const
-{
-    return "SETMOREI " + getArgument()->toString();
-}
-
-string OSetLess::toString() const
-{
-    return "SETLESS " + getArgument()->toString();
-}
-
-string OSetLessI::toString() const
-{
-    return "SETLESSI " + getArgument()->toString();
-}
+string OSetTrue  ::toString() const { return "SETTRUE "   + getArgument()->toString(); } 
+string OSetTrueI ::toString() const { return "SETTRUEI "  + getArgument()->toString(); } 
+string OSetFalse ::toString() const { return "SETFALSE "  + getArgument()->toString(); } 
+string OSetFalseI::toString() const { return "SETFALSEI " + getArgument()->toString(); } 
+string OSetMore  ::toString() const { return "SETMORE "   + getArgument()->toString(); } 
+string OSetMoreI ::toString() const { return "SETMOREI "  + getArgument()->toString(); } 
+string OSetLess  ::toString() const { return "SETLESS "   + getArgument()->toString(); } 
+string OSetLessI ::toString() const { return "SETLESSI "  + getArgument()->toString(); } 
 
 string OSetImmediate::toString() const
 {
@@ -2860,7 +2829,6 @@ string OMultImmediate::toString() const
 {
     return "MULTV " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
 }
-
 
 string OMultRegister::toString() const
 {
