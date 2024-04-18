@@ -10677,196 +10677,132 @@ void do_primitives(BITMAP *targetBitmap, int32_t type, mapscr* theScreen, int32_
 		switch(sdci[0])
 		{
 			case RECTR:
-			{
 				do_rectr(bmp, sdci, xoffset, yoffset);
-			}
-			break;
+				break;
+
 			case FRAMER:
-			{
 				do_framer(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
-			
+				break;
+
 			case CIRCLER:
-			{
 				do_circler(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case ARCR:
-			{
 				do_arcr(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case ELLIPSER:
-			{
 				do_ellipser(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case LINER:
-			{
 				do_liner(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case SPLINER:
-			{
 				do_spliner(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case PUTPIXELR:
-			{
 				do_putpixelr(bmp, sdci, xoffset, yoffset);
-			}
-			break;
+				break;
+
 			case PIXELARRAYR:
-			{
 			 //Z_scripterrlog("Reached case PIXELARRAYR\n");
 				do_putpixelsr(bmp, i, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case TILEARRAYR:
-			{
 			 //Z_scripterrlog("Reached case PIXELARRAYR\n");
 				do_fasttilesr(bmp, i, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case LINESARRAY:
-			{
 			 //Z_scripterrlog("Reached case PIXELARRAYR\n");
 				do_linesr(bmp, i, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case COMBOARRAYR:
-			{
 			 //Z_scripterrlog("Reached case PIXELARRAYR\n");
 				do_fastcombosr(bmp, i, sdci, xoffset, yoffset);
-			}
-			break;
-			
-			
-			
+				break;
+
 			case DRAWTILER:
-			{
 				do_drawtiler(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case DRAWTILECLOAKEDR:
-			{
 				do_drawtilecloakedr(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case DRAWCOMBOR:
-			{
 				do_drawcombor(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case DRAWCOMBOCLOAKEDR:
-			{
 				do_drawcombocloakedr(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case FASTTILER:
-			{
 				do_fasttiler(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case FASTCOMBOR:
-			{
 				do_fastcombor(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case DRAWCHARR:
-			{
 				do_drawcharr(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case DRAWINTR:
-			{
 				do_drawintr(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case DRAWSTRINGR:
-			{
 				do_drawstringr(bmp, i, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case DRAWSTRINGR2:
-			{
 				do_drawstringr2(bmp, i, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case QUADR:
-			{
 				do_drawquadr(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case QUAD3DR:
-			{
 				do_drawquad3dr(bmp, i, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case TRIANGLER:
-			{
 				do_drawtriangler(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case TRIANGLE3DR:
-			{
 				do_drawtriangle3dr(bmp, i, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case POLYGONR:
-			{
 				do_polygonr(bmp, i, sdci, xoffset, yoffset);
-			}
-			break;
-			
-			
+				break;
+
 			case BITMAPR:
-			{
 				do_drawbitmapr(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case BITMAPEXR:
-			{
 				do_drawbitmapexr(bmp, sdci, xoffset, yoffset);
-			}
-			break;
-			
+				break;
+
 			case DRAWLAYERR:
-			{
 				do_drawlayerr(bmp, sdci, xoffset, yoffset, isTargetOffScreenBmp);
-			}
-			break;
+				break;
 			
 			case DRAWSCREENR:
-			{
 				do_drawscreenr(bmp, sdci, xoffset, yoffset, isTargetOffScreenBmp);
-			}
-			break;
+				break;
 			
 			case BMPRECTR: bmp_do_rectr(bmp, sdci, xoffset, yoffset); break;
 			case BMPFRAMER: bmp_do_framer(bmp, sdci, xoffset, yoffset); break;
