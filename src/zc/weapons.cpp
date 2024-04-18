@@ -38,114 +38,33 @@ static void weapon_triggersecret(int32_t pos, int32_t flag)
 	//Convert a flag type to a secret type. -Z
 	switch(flag)
 	{
-		case mfANYFIRE:
-			ft=sBCANDLE;
-			break;
-			
-		case mfSTRONGFIRE:
-			ft=sRCANDLE;
-			break;
-			
-		case mfMAGICFIRE:
-			ft=sWANDFIRE;
-			break;
-			
-		case mfDIVINEFIRE:
-			ft=sDIVINEFIRE;
-			break;
-			
-		case mfARROW:
-			ft=sARROW;
-			break;
-			
-		case mfSARROW:
-			ft=sSARROW;
-			break;
-			
-		case mfGARROW:
-			ft=sGARROW;
-			break;
-			
-		case mfSBOMB:
-			ft=sSBOMB;
-			break;
-			
-		case mfBOMB:
-			ft=sBOMB;
-			break;
-			
-		case mfBRANG:
-			ft=sBRANG;
-			break;
-			
-		case mfMBRANG:
-			ft=sMBRANG;
-			break;
-			
-		case mfFBRANG:
-			ft=sFBRANG;
-			break;
-			
-		case mfWANDMAGIC:
-			ft=sWANDMAGIC;
-			break;
-			
-		case mfREFMAGIC:
-			ft=sREFMAGIC;
-			break;
-			
-		case mfREFFIREBALL:
-			ft=sREFFIREBALL;
-			break;
-			
-		case mfSWORD:
-			ft=sSWORD;
-			break;
-			
-		case mfWSWORD:
-			ft=sWSWORD;
-			break;
-			
-		case mfMSWORD:
-			ft=sMSWORD;
-			break;
-			
-		case mfXSWORD:
-			ft=sXSWORD;
-			break;
-			
-		case mfSWORDBEAM:
-			ft=sSWORDBEAM;
-			break;
-			
-		case mfWSWORDBEAM:
-			ft=sWSWORDBEAM;
-			break;
-			
-		case mfMSWORDBEAM:
-			ft=sMSWORDBEAM;
-			break;
-			
-		case mfXSWORDBEAM:
-			ft=sXSWORDBEAM;
-			break;
-			
-		case mfHOOKSHOT:
-			ft=sHOOKSHOT;
-			break;
-			
-		case mfWAND:
-			ft=sWAND;
-			break;
-			
-		case mfHAMMER:
-			ft=sHAMMER;
-			break;
-			
-		case mfSTRIKE:
-			ft=sSTRIKE;
-			break;
-			
+		case mfANYFIRE:     ft=sBCANDLE;     break; 
+		case mfSTRONGFIRE:  ft=sRCANDLE;     break; 
+		case mfMAGICFIRE:   ft=sWANDFIRE;    break; 
+		case mfDIVINEFIRE:  ft=sDIVINEFIRE;  break; 
+		case mfARROW:       ft=sARROW;       break; 
+		case mfSARROW:      ft=sSARROW;      break; 
+		case mfGARROW:      ft=sGARROW;      break; 
+		case mfSBOMB:       ft=sSBOMB;       break; 
+		case mfBOMB:        ft=sBOMB;        break; 
+		case mfBRANG:       ft=sBRANG;       break; 
+		case mfMBRANG:      ft=sMBRANG;      break; 
+		case mfFBRANG:      ft=sFBRANG;      break; 
+		case mfWANDMAGIC:   ft=sWANDMAGIC;   break; 
+		case mfREFMAGIC:    ft=sREFMAGIC;    break; 
+		case mfREFFIREBALL: ft=sREFFIREBALL; break; 
+		case mfSWORD:       ft=sSWORD;       break; 
+		case mfWSWORD:      ft=sWSWORD;      break; 
+		case mfMSWORD:      ft=sMSWORD;      break; 
+		case mfXSWORD:      ft=sXSWORD;      break; 
+		case mfSWORDBEAM:   ft=sSWORDBEAM;   break; 
+		case mfWSWORDBEAM:  ft=sWSWORDBEAM;  break; 
+		case mfMSWORDBEAM:  ft=sMSWORDBEAM;  break; 
+		case mfXSWORDBEAM:  ft=sXSWORDBEAM;  break; 
+		case mfHOOKSHOT:    ft=sHOOKSHOT;    break; 
+		case mfWAND:        ft=sWAND;        break; 
+		case mfHAMMER:      ft=sHAMMER;      break; 
+		case mfSTRIKE:      ft=sSTRIKE;      break; 
 		default:
 			putit = false;
 			break;
@@ -188,12 +107,10 @@ static void weapon_triggersecret(int32_t pos, int32_t flag)
 						//s->sflag[pos] = s->secretflag[ft];
 						screen_combo_modify_postroutine(s,pos);
 					}
-					
 				}
 			//}
 		}
 	}
-	
 }
 
 static bool CanComboTrigger(weapon *w)
@@ -499,9 +416,8 @@ int32_t wid = (w->useweapon > 0) ? w->useweapon : w->id;
 void do_generic_combo_ffc(weapon *w, int32_t pos, int32_t cid, int32_t ft)
 {
 	if ( combobuf[cid].type < cTRIGGERGENERIC && !(combobuf[cid].usrflags&cflag9 )  )  //Script combos need an 'Engine' flag
-	{ 
 		return;
-	} 
+
 	ft = vbound(ft, minSECRET_TYPE, maxSECRET_TYPE); //sanity guard to legal secret types. 44 to 127 are unused
 	byte* grid = w->wscreengrid_ffc;
 	ffcdata& ffc = tmpscr->ffcs[pos];
