@@ -638,22 +638,14 @@ void unpack_tile(tiledata *buf, int32_t tile, int32_t flip, bool force)
                 
                 for(j=1; j>=0; --j)
                 {
-                    di-=16;
-                    *di = (*(--si));
-                    di-=16;
-                    *di = (*(--si));
-                    di-=16;
-                    *di = (*(--si));
-                    di-=16;
-                    *di = (*(--si));
-                    di-=16;
-                    *di = (*(--si));
-                    di-=16;
-                    *di = (*(--si));
-                    di-=16;
-                    *di = (*(--si));
-                    di-=16;
-                    *di = (*(--si));
+                    di-=16; *di = (*(--si));
+                    di-=16; *di = (*(--si));
+                    di-=16; *di = (*(--si));
+                    di-=16; *di = (*(--si));
+                    di-=16; *di = (*(--si));
+                    di-=16; *di = (*(--si));
+                    di-=16; *di = (*(--si));
+                    di-=16; *di = (*(--si));
                 }
                 
                 break;
