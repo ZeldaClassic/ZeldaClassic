@@ -3559,9 +3559,7 @@ void weapon::limited_animate()
 							findentrance(x+tx,y+ty+(isSideViewGravity()?2:-3),mfBOMB,true);
 							
 							if(id==wSBomb || id==wLitSBomb)
-							{
 								findentrance(x+tx,y+ty+(isSideViewGravity()?2:-3),mfSBOMB,true);
-							}
 							
 							findentrance(x+tx,y+ty+(isSideViewGravity()?2:-3),mfSTRIKE,true);
 						}
@@ -3607,9 +3605,7 @@ void weapon::limited_animate()
 							// this is awkward. NES Z1 converts colors based on the global
 							// NES palette. Something like RAMpal[i] = NESpal( reverse_NESpal(RAMpal[i]) & 0x30 );
 							for(int32_t i=CSET(0); i < CSET(15); i++)
-							{
 								RAMpal[i] = NESpal(reverse_NESpal(RAMpal[i]) & 0x30);
-							}
 						}
 						
 						refreshpal = true;
@@ -3626,16 +3622,12 @@ void weapon::limited_animate()
 			}
 			
 			if(clk==misc+30)
-			{
 				bombdoor(x,y);
-			}
 			
 			if(clk==misc+34)
 			{
 				if(canboom)
-				{
 					dead=1;
-				}
 			}
 			break;
 		}
@@ -3651,9 +3643,7 @@ bool weapon::animate(int32_t index)
 		{
 			//Run its script
 			if (runscript_do_earlyret(run_script(MODE_NORMAL)))
-			{
 				return 0; //Avoid NULLPO if this object deleted itself
-			}
 		}
 		solid_update(false);
 		return false;
@@ -3666,9 +3656,8 @@ bool weapon::animate(int32_t index)
 			if(!weapon_dying_frame && get_qr(qr_WEAPONS_EXTRA_FRAME))
 			{
 				if(id==wSword || id==wBrang)
-				{
 					return true;
-				}
+
 				dead = 0;
 				weapon_dying_frame = true;
 				++fallclk;
@@ -3704,9 +3693,8 @@ bool weapon::animate(int32_t index)
 			if(!weapon_dying_frame && get_qr(qr_WEAPONS_EXTRA_FRAME))
 			{
 				if(id==wSword || id==wBrang)
-				{
 					return true;
-				}
+
 				dead = 0;
 				weapon_dying_frame = true;
 				++drownclk;
@@ -4228,10 +4216,10 @@ bool weapon::animate(int32_t index)
 			z = HeroZ();
 			
 			if(parentitem>-1 && dead != 1) //Perhaps don't play the sound if the weapon is dead?
-			{
 				sfx(itemsbuf[parentitem].usesound,pan(int32_t(x)),true,false);
-			}
-			if(runscript_do_earlyret(run_script(MODE_NORMAL))) return false;
+
+			if(runscript_do_earlyret(run_script(MODE_NORMAL)))
+				return false;
 		}
 		
 		break;
@@ -4241,20 +4229,17 @@ bool weapon::animate(int32_t index)
 		{
 			for(int32_t i2=0; i2<=zc_min(type-1,3) && dead!=23; i2++)
 			{
-				if(findentrance(x,y,mfSWORDBEAM+i2,true)) dead=23;
+				if(findentrance(x,y,mfSWORDBEAM+i2,true))
+					dead=23;
 			}
 			
 			if(blocked())
-			{
 				dead=23;
-			}		 
 			
 		}
 		case ewSword:
 			if(blocked())
-			{
 				dead=0;
-			}
 			
 			if(id==ewSword && get_qr(qr_SWORDMIRROR) || id!=ewSword && (parentitem > -1 ? itemsbuf[parentitem].flags & ITEM_FLAG9 : get_qr(qr_SWORDMIRROR))) //TODO: First qr_SWORDMIRROR port to enemy weapon flag, second qr_SWORDMIRROR port to script default flag -V
 			{
@@ -4549,9 +4534,7 @@ bool weapon::animate(int32_t index)
 		case wWhistle:
 		{
 			if(clk)
-			{
 				dead=1;
-			}
 			
 			if(runscript_do_earlyret(run_script(MODE_NORMAL))) return false;
 			break;
@@ -4560,9 +4543,7 @@ bool weapon::animate(int32_t index)
 		case wWind:
 		{
 			if(blocked())
-			{
 				dead=1;
-			}
 			
 			int32_t wrx;
 			
@@ -4601,9 +4582,7 @@ bool weapon::animate(int32_t index)
 		case wRefFire2:
 		{
 			if(blocked())
-			{
 				dead=1;
-			}
 			
 			itemdata const& parent = itemsbuf[parentitem];
 			if(id != wFire)
@@ -4682,13 +4661,9 @@ bool weapon::animate(int32_t index)
 				{
 					isLit = true;
 					if(parent.flags & ITEM_FLAG5)
-					{
 						checkLightSources();
-					} 
 					else
-					{
 						checkLightSources(true);
-					}
 				}
 				
 				if(clk==80)
@@ -4733,9 +4708,7 @@ bool weapon::animate(int32_t index)
 		case ewSBomb:
 		{
 			if(!misc)
-			{
 				break;
-			}
 			
 			// Naaah.
 			/*if (blocked())
@@ -4776,9 +4749,7 @@ bool weapon::animate(int32_t index)
 			if(clk==misc+34)
 			{
 				if(step==0)
-				{
 					dead=1;
-				}
 			}
 			break;
 		}
@@ -4795,14 +4766,10 @@ bool weapon::animate(int32_t index)
 				else break;
 			}
 			if(dead>0 && !get_qr(qr_ARROWCLIP))
-			{
 				break;
-			}
 			
 			if(id == wArrow && misc>0 && clk > misc)
-			{
 				dead=4;
-			}
 			
 			if(findentrance(x,y,mfSTRIKE,true))
 			{
@@ -4844,14 +4811,10 @@ bool weapon::animate(int32_t index)
 		case wSSparkle:
 		{
 			if(blocked())  //no spakle area?
-			{
 				dead=1;
-			}
 			
 			if(clk>=frames*o_speed-1) //(((wpnsbuf[wSSPARKLE].frames) * (wpnsbuf[wSSPARKLE].speed))-1))
-			{
 				dead=1;
-			}
 		
 			if ( isLWeapon )
 			{
@@ -4864,14 +4827,10 @@ bool weapon::animate(int32_t index)
 		case wFSparkle:
 		{
 			if(blocked())  //no sparkle area?
-			{
 				dead=1;
-			}
 			
 			if(clk>=frames*o_speed-1) //(((wpnsbuf[wFSPARKLE].frames) * (wpnsbuf[wFSPARKLE].speed))-1))
-			{
 				dead=1;
-			}
 		
 			if ( isLWeapon )
 			{
@@ -4981,13 +4940,9 @@ bool weapon::animate(int32_t index)
 			if(range && clk2>=range)
 			{
 				if(deadval==1)
-				{
 					misc=1;
-				}
 				else
-				{
 					dead=deadval;
-				}
 			}
 			
 			if(range && clk2>range-18 && clk2<range+16)
@@ -5046,9 +5001,7 @@ bool weapon::animate(int32_t index)
 			}
 			
 			if(dead==-2)
-			{
 				misc=1;
-			}
 			
 			if(misc==1)                                           // returning
 			{
