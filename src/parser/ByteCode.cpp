@@ -6589,50 +6589,16 @@ string OFileSystemRemove::toString() const
 	return "FILESYSREMOVE " + getArgument()->toString();
 }
 
-string OFileClose::toString() const
-{
-	return "FILECLOSE";
-};
+string OFileClose      ::toString() const { return "FILECLOSE"; }; 
+string OFileFree       ::toString() const { return "FILEFREE"; }; 
+string OFileIsAllocated::toString() const { return "FILEISALLOCATED"; }; 
+string OFileIsValid    ::toString() const { return "FILEISVALID"; }; 
+string OAllocateFile   ::toString() const { return "FILEALLOCATE"; }; 
+string OFileFlush      ::toString() const { return "FILEFLUSH"; }; 
+string OFileGetChar    ::toString() const { return "FILEGETCHAR"; }; 
+string OFileRewind     ::toString() const { return "FILEREWIND"; }; 
+string OFileClearError ::toString() const { return "FILECLEARERR"; };
 
-string OFileFree::toString() const
-{
-	return "FILEFREE";
-};
-
-string OFileIsAllocated::toString() const
-{
-	return "FILEISALLOCATED";
-};
-
-string OFileIsValid::toString() const
-{
-	return "FILEISVALID";
-};
-
-string OAllocateFile::toString() const
-{
-	return "FILEALLOCATE";
-};
-
-string OFileFlush::toString() const
-{
-	return "FILEFLUSH";
-};
-
-string OFileGetChar::toString() const
-{
-	return "FILEGETCHAR";
-};
-
-string OFileRewind::toString() const
-{
-	return "FILEREWIND";
-};
-
-string OFileClearError::toString() const
-{
-	return "FILECLEARERR";
-};
 //
 string OFileOpen::toString() const
 {
@@ -6719,28 +6685,11 @@ string ODirectoryGet::toString() const
 	return "DIRECTORYGET " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
 }
 
-string ODirectoryReload::toString() const
-{
-	return "DIRECTORYRELOAD";
-}
-
-string ODirectoryFree::toString() const
-{
-	return "DIRECTORYFREE";
-}
-
-string OStackFree::toString() const
-{
-	return "STACKFREE";
-}
-string OStackOwn::toString() const
-{
-	return "STACKOWN";
-}
-string OStackClear::toString() const
-{
-	return "STACKCLEAR";
-}
+string ODirectoryReload::toString() const { return "DIRECTORYRELOAD"; } 
+string ODirectoryFree  ::toString() const { return "DIRECTORYFREE"; } 
+string OStackFree      ::toString() const { return "STACKFREE"; }
+string OStackOwn       ::toString() const { return "STACKOWN"; }
+string OStackClear     ::toString() const { return "STACKCLEAR"; }
 
 string OStackPopBack::toString() const
 {
@@ -6834,31 +6783,13 @@ string OReservedZ3_10::toString() const
 	return "RESRVD_OP_Z3_10 " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
 }
 
+string OSubscrSwapPages    ::toString() const { return "SUBDATA_SWAP_PAGES"; }
+string OSubscrPgFindWidget ::toString() const { return "SUBPAGE_FIND_WIDGET"; }
+string OSubscrPgMvCursor   ::toString() const { return "SUBPAGE_MOVE_SEL"; }
+string OSubscrPgSwapWidgets::toString() const { return "SUBPAGE_SWAP_WIDG"; }
+string OSubscrPgNewWidget  ::toString() const { return "SUBPAGE_NEW_WIDG"; }
+string OSubscrPgDelete     ::toString() const { return "SUBPAGE_DELETE"; }
 
-string OSubscrSwapPages::toString() const
-{
-	return "SUBDATA_SWAP_PAGES";
-}
-string OSubscrPgFindWidget::toString() const
-{
-	return "SUBPAGE_FIND_WIDGET";
-}
-string OSubscrPgMvCursor::toString() const
-{
-	return "SUBPAGE_MOVE_SEL";
-}
-string OSubscrPgSwapWidgets::toString() const
-{
-	return "SUBPAGE_SWAP_WIDG";
-}
-string OSubscrPgNewWidget::toString() const
-{
-	return "SUBPAGE_NEW_WIDG";
-}
-string OSubscrPgDelete::toString() const
-{
-	return "SUBPAGE_DELETE";
-}
 string OGetSubWidgSelTxtOverride::toString() const
 {
 	return "SUBWIDG_GET_SELTEXT_OVERRIDE " + getArgument()->toString();
@@ -6876,12 +6807,10 @@ string OSubWidgTy_SetText::toString() const
 	return "SUBWIDG_TY_SETTEXT " + getArgument()->toString();
 }
 
-
 string OSubscrPgFindWidgetLbl::toString() const
 {
 	return "SUBPAGE_FIND_WIDGET_BY_LABEL";
 }
-
 
 string OGetSubWidgLabel::toString() const
 {
