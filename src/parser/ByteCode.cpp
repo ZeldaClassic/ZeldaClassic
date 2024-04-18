@@ -5723,25 +5723,10 @@ string OSSetContinueString::toString() const
 
 //Visual effects with one bool arg.
 
-string OWavyR::toString() const
-{
-    return "FXWAVYR " + getArgument()->toString();
-}
-
-string OZapR::toString() const
-{
-    return "FXZAPR " + getArgument()->toString();
-}
-
-string OGreyscaleR::toString() const
-{
-    return "GREYSCALER " + getArgument()->toString();
-}
-
-string OMonochromeR::toString() const
-{
-    return "MONOCHROMER " + getArgument()->toString();
-}
+string OWavyR      ::toString() const { return "FXWAVYR " + getArgument()->toString(); } 
+string OZapR       ::toString() const { return "FXZAPR " + getArgument()->toString(); } 
+string OGreyscaleR ::toString() const { return "GREYSCALER " + getArgument()->toString(); } 
+string OMonochromeR::toString() const { return "MONOCHROMER " + getArgument()->toString(); } 
 
 string OClearTint::toString() const
 {
