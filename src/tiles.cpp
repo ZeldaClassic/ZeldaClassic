@@ -479,9 +479,7 @@ void overlay_tile(tiledata *buf,int32_t dest,int32_t src,int32_t cs,bool backwar
 bool copy_tile(tiledata *buf, int32_t src, int32_t dest, bool swap)
 {
     if(src==dest)
-    {
         return true;
-    }
     
     int32_t tempformat=buf[dest].format;
     byte *temptiledata=(byte *)malloc(tilesize(tempformat));
@@ -490,26 +488,20 @@ bool copy_tile(tiledata *buf, int32_t src, int32_t dest, bool swap)
     if(swap)
     {
         for(int32_t j=0; j<tsize; j++)
-        {
             temptiledata[j]=buf[dest].data[j];
-        }
     }
     
     reset_tile(buf, dest, buf[src].format);
     
     for(int32_t j=0; j<tilesize(buf[src].format); j++)
-    {
         buf[dest].data[j]=buf[src].data[j];
-    }
     
     if(swap)
     {
         reset_tile(buf, src, tempformat);
         
         for(int32_t j=0; j<tsize; j++)
-        {
             buf[src].data[j]=temptiledata[j];
-        }
     }
 	int32_t t = blank_tile_table[dest];
 	blank_tile_table[dest] = blank_tile_table[src];
@@ -609,14 +601,14 @@ void unpack_tile(tiledata *buf, int32_t tile, int32_t flip, bool force)
                 
                 for(j=1; j>=0; --j)
                 {
-                    (*(++di)) = (*(--si));
-                    (*(++di)) = (*(--si));
-                    (*(++di)) = (*(--si));
-                    (*(++di)) = (*(--si));
-                    (*(++di)) = (*(--si));
-                    (*(++di)) = (*(--si));
-                    (*(++di)) = (*(--si));
-                    (*(++di)) = (*(--si));
+                    *(++di) = *(--si);
+                    *(++di) = *(--si);
+                    *(++di) = *(--si);
+                    *(++di) = *(--si);
+                    *(++di) = *(--si);
+                    *(++di) = *(--si);
+                    *(++di) = *(--si);
+                    *(++di) = *(--si);
                 }
                 
                 break;
@@ -638,14 +630,14 @@ void unpack_tile(tiledata *buf, int32_t tile, int32_t flip, bool force)
                 
                 for(j=1; j>=0; --j)
                 {
-                    di-=16; *di = (*(--si));
-                    di-=16; *di = (*(--si));
-                    di-=16; *di = (*(--si));
-                    di-=16; *di = (*(--si));
-                    di-=16; *di = (*(--si));
-                    di-=16; *di = (*(--si));
-                    di-=16; *di = (*(--si));
-                    di-=16; *di = (*(--si));
+                    di-=16; *di = *(--si);
+                    di-=16; *di = *(--si);
+                    di-=16; *di = *(--si);
+                    di-=16; *di = *(--si);
+                    di-=16; *di = *(--si);
+                    di-=16; *di = *(--si);
+                    di-=16; *di = *(--si);
+                    di-=16; *di = *(--si);
                 }
                 
                 break;
