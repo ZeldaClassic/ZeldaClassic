@@ -196,10 +196,10 @@ Script::Script(Program& program)
 	: runFunc(NULL), program(program)
 {}
 
-Script::~Script()
+/*Script::~Script()
 {
 	//deleteElements(code);
-}
+}*/
 
 bool Script::isPrototypeRun() const
 {

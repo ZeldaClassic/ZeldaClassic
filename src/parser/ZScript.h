@@ -90,7 +90,7 @@ namespace ZScript
 	class Script
 	{
 	public:
-		virtual ~Script();
+		virtual ~Script() = default;
 
 		virtual ParserScriptType getType() const = 0;
 		virtual void setName(std::string const& newname) = 0;
