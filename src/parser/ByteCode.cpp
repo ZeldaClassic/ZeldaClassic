@@ -4027,75 +4027,25 @@ string OTriangle3DRegister      ::toString() const { return "TRIANGLE3D"; }
 string ODrawLayerRegister       ::toString() const { return "DRAWLAYER"; } 
 string ODrawScreenRegister      ::toString() const { return "DRAWSCREEN"; } 
 
-string OMessageRegister::toString() const
-{
-    return "MSGSTRR " + getArgument()->toString();
-}
-
-string OIsSolid::toString() const
-{
-    return "ISSOLID " + getArgument()->toString();
-}
-
-string OIsSolidMapdata::toString() const
-{
-    return "MAPDATAISSOLID " + getArgument()->toString();
-}
-
-string OIsSolidMapdataLayer::toString() const
-{
-    return "MAPDATAISSOLIDLYR " + getArgument()->toString();
-}
-
-string OIsSolidLayer::toString() const
-{
-    return "ISSOLIDLAYER " + getArgument()->toString();
-}
-
-string OLoadTmpScr::toString() const
-{
-    return "LOADTMPSCR " + getArgument()->toString();
-}
-
-string OLoadScrollScr::toString() const
-{
-    return "LOADSCROLLSCR " + getArgument()->toString();
-}
+string OMessageRegister    ::toString() const { return "MSGSTRR " + getArgument()->toString(); } 
+string OIsSolid            ::toString() const { return "ISSOLID " + getArgument()->toString(); } 
+string OIsSolidMapdata     ::toString() const { return "MAPDATAISSOLID " + getArgument()->toString(); } 
+string OIsSolidMapdataLayer::toString() const { return "MAPDATAISSOLIDLYR " + getArgument()->toString(); } 
+string OIsSolidLayer       ::toString() const { return "ISSOLIDLAYER " + getArgument()->toString(); } 
+string OLoadTmpScr         ::toString() const { return "LOADTMPSCR " + getArgument()->toString(); } 
+string OLoadScrollScr      ::toString() const { return "LOADSCROLLSCR " + getArgument()->toString(); } 
 
 string OSetSideWarpRegister::toString() const
 {
     return "SETSIDEWARP";
 }
 
-string OGetSideWarpDMap::toString() const
-{
-    return "GETSIDEWARPDMAP " + getArgument()->toString();
-}
-
-string OGetSideWarpScreen::toString() const
-{
-    return "GETSIDEWARPSCR " + getArgument()->toString();
-}
-
-string OGetSideWarpType::toString() const
-{
-    return "GETSIDEWARPTYPE " + getArgument()->toString();
-}
-
-string OGetTileWarpDMap::toString() const
-{
-    return "GETTILEWARPDMAP " + getArgument()->toString();
-}
-
-string OGetTileWarpScreen::toString() const
-{
-    return "GETTILEWARPSCR " + getArgument()->toString();
-}
-
-string OGetTileWarpType::toString() const
-{
-    return "GETTILEWARPTYPE " + getArgument()->toString();
-}
+string OGetSideWarpDMap  ::toString() const { return "GETSIDEWARPDMAP " + getArgument()->toString(); } 
+string OGetSideWarpScreen::toString() const { return "GETSIDEWARPSCR " + getArgument()->toString(); } 
+string OGetSideWarpType  ::toString() const { return "GETSIDEWARPTYPE " + getArgument()->toString(); } 
+string OGetTileWarpDMap  ::toString() const { return "GETTILEWARPDMAP " + getArgument()->toString(); } 
+string OGetTileWarpScreen::toString() const { return "GETTILEWARPSCR " + getArgument()->toString(); } 
+string OGetTileWarpType  ::toString() const { return "GETTILEWARPTYPE " + getArgument()->toString(); } 
 
 string OSetTileWarpRegister::toString() const
 {
@@ -4260,35 +4210,12 @@ string OGetScreenEFlags::toString() const
     return "GETSCREENEFLAGS " + getArgument()->toString();
 }
 
-string OEnd::toString() const
-{
-    return "GAMEEND";
-}
-
-string OGameReload::toString() const
-{
-    return "GAMERELOAD";
-}
-
-string OGameContinue::toString() const
-{
-    return "GAMECONTINUE";
-}
-
-string OGameSaveQuit::toString() const
-{
-    return "GAMESAVEQUIT";
-}
-
-string OGameSaveContinue::toString() const
-{
-    return "GAMESAVECONTINUE";
-}
-
-string OShowF6Screen::toString() const
-{
-    return "SHOWF6SCREEN";
-}
+string OEnd             ::toString() const { return "GAMEEND"; } 
+string OGameReload      ::toString() const { return "GAMERELOAD"; } 
+string OGameContinue    ::toString() const { return "GAMECONTINUE"; } 
+string OGameSaveQuit    ::toString() const { return "GAMESAVEQUIT"; } 
+string OGameSaveContinue::toString() const { return "GAMESAVECONTINUE"; } 
+string OShowF6Screen    ::toString() const { return "SHOWF6SCREEN"; }
 
 string OComboTile::toString() const
 {
@@ -4310,237 +4237,60 @@ string OShowSaveQuitScreen::toString() const
     return "SAVEQUITSCREEN";
 }
 
-string OSelectAWeaponRegister::toString() const
-{
-    return "SELECTAWPNR " + getArgument()->toString();
-}
-
-string OSelectBWeaponRegister::toString() const
-{
-    return "SELECTBWPNR " + getArgument()->toString();
-}
-
-string OSelectXWeaponRegister::toString() const
-{
-    return "SELECTXWPNR " + getArgument()->toString();
-}
-
-string OSelectYWeaponRegister::toString() const
-{
-    return "SELECTYWPNR " + getArgument()->toString();
-}
-
-string OGetFFCScript::toString() const
-{
-    return "GETFFCSCRIPT " + getArgument()->toString();
-}
-
-string OGetComboScript::toString() const
-{
-    return "GETCOMBOSCRIPT " + getArgument()->toString();
-}
+string OSelectAWeaponRegister::toString() const { return "SELECTAWPNR " + getArgument()->toString(); } 
+string OSelectBWeaponRegister::toString() const { return "SELECTBWPNR " + getArgument()->toString(); } 
+string OSelectXWeaponRegister::toString() const { return "SELECTXWPNR " + getArgument()->toString(); } 
+string OSelectYWeaponRegister::toString() const { return "SELECTYWPNR " + getArgument()->toString(); } 
+string OGetFFCScript         ::toString() const { return "GETFFCSCRIPT " + getArgument()->toString(); } 
+string OGetComboScript       ::toString() const { return "GETCOMBOSCRIPT " + getArgument()->toString(); }
 
 //2.54
 
-string OGreyscaleOn::toString() const
-{
-    return "GREYSCALEON";
-}
-
-string OGreyscaleOff::toString() const
-{
-    return "GREYSCALEOFF";
-}
-
-string OZapIn::toString() const
-{
-    return "ZAPIN";
-}
-
-string OZapOut::toString() const
-{
-    return "ZAPOUT";
-}
+string OGreyscaleOn ::toString() const { return "GREYSCALEON"; } 
+string OGreyscaleOff::toString() const { return "GREYSCALEOFF"; } 
+string OZapIn       ::toString() const { return "ZAPIN"; } 
+string OZapOut      ::toString() const { return "ZAPOUT"; }
 
 //These need to be unary opcodes that accept bool linkvisible. 
-string OWavyIn::toString() const
-{
-    return "WAVYIN";
-}
+string OWavyIn   ::toString() const { return "WAVYIN"; } 
+string OWavyOut  ::toString() const { return "WAVYOUT"; } 
+string OOpenWipe ::toString() const { return "OPENWIPE"; } 
+string OCloseWipe::toString() const { return "CLOSEWIPE"; }
 
-string OWavyOut::toString() const
-{
-    return "WAVYOUT";
-}
-
-string OOpenWipe::toString() const
-{
-    return "OPENWIPE";
-}
-
-string OCloseWipe::toString() const
-{
-    return "CLOSEWIPE";
-}
-
-string OOpenWipeShape::toString() const
-{
-    return "OPENWIPESHAPE " + getArgument()->toString();
-}
-
-string OCloseWipeShape::toString() const
-{
-    return "CLOSEWIPESHAPE " + getArgument()->toString();
-}
+string OOpenWipeShape ::toString() const { return "OPENWIPESHAPE " + getArgument()->toString(); } 
+string OCloseWipeShape::toString() const { return "CLOSEWIPESHAPE " + getArgument()->toString(); }
 
 //Game->GetItemScript(int32_t ptr[])
-string OGetItemScript::toString() const
-{
-    return "GETITEMSCRIPT " + getArgument()->toString();
-}
+string OGetItemScript        ::toString() const { return "GETITEMSCRIPT " + getArgument()->toString(); } 
+string OGetLWeaponPointer    ::toString() const { return "LWPNARRPTR " + getArgument()->toString(); } 
+string OSetLWeaponPointer    ::toString() const { return "LWPNARRPTR2 " + getArgument()->toString(); } 
+string OGetEWeaponPointer    ::toString() const { return "EWPNARRPTR " + getArgument()->toString(); } 
+string OSetEWeaponPointer    ::toString() const { return "EWPNARRPTR2 " + getArgument()->toString(); } 
+string OGetItemPointer       ::toString() const { return "ITEMARRPTR " + getArgument()->toString(); } 
+string OSetItemPointer       ::toString() const { return "ITEMARRPTR2 " + getArgument()->toString(); } 
+string OGetItemDataPointer   ::toString() const { return "IDATAARRPTR " + getArgument()->toString(); } 
+string OSetItemDataPointer   ::toString() const { return "IDATAARRPTR2 " + getArgument()->toString(); } 
+string OGetFFCPointer        ::toString() const { return "FFCARRPTR " + getArgument()->toString(); } 
+string OSetFFCPointer        ::toString() const { return "FFCARRPTR2 " + getArgument()->toString(); } 
+string OGetBoolPointer       ::toString() const { return "BOOLARRPTR " + getArgument()->toString(); } 
+string OSetBoolPointer       ::toString() const { return "BOOLARRPTR2 " + getArgument()->toString(); } 
+string OGetNPCPointer        ::toString() const { return "NPCARRPTR " + getArgument()->toString(); } 
+string OSetNPCPointer        ::toString() const { return "NPCARRPTR2 " + getArgument()->toString(); } 
+string OGetScreenDoor        ::toString() const { return "GETSCREENDOOR " + getArgument()->toString(); } 
+string OGetScreenEnemy       ::toString() const { return "GETSCREENENEMY " + getArgument()->toString(); } 
+string OGetScreenLayerOpacity::toString() const { return "GETSCREENLAYOP " + getArgument()->toString(); } 
+string OGetScreenSecretCombo ::toString() const { return "GETSCREENSECCMB " + getArgument()->toString(); } 
+string OGetScreenSecretCSet  ::toString() const { return "GETSCREENSECCST " + getArgument()->toString(); } 
+string OGetScreenSecretFlag  ::toString() const { return "GETSCREENSECFLG " + getArgument()->toString(); } 
+string OGetScreenLayerMap    ::toString() const { return "GETSCREENLAYMAP " + getArgument()->toString(); } 
+string OGetScreenLayerScreen ::toString() const { return "GETSCREENLAYSCR " + getArgument()->toString(); } 
+string OGetScreenPath        ::toString() const { return "GETSCREENPATH " + getArgument()->toString(); } 
+string OGetScreenWarpReturnX ::toString() const { return "GETSCREENWARPRX " + getArgument()->toString(); } 
+string OGetScreenWarpReturnY ::toString() const { return "GETSCREENWARPRY " + getArgument()->toString(); } 
+string OTriggerSecretRegister::toString() const { return "TRIGGERSECRETR " + getArgument()->toString(); }
 
-
-string OGetLWeaponPointer::toString() const
-{
-    return "LWPNARRPTR " + getArgument()->toString();
-}
-
-string OSetLWeaponPointer::toString() const
-{
-    return "LWPNARRPTR2 " + getArgument()->toString();
-}
-
-string OGetEWeaponPointer::toString() const
-{
-    return "EWPNARRPTR " + getArgument()->toString();
-}
-
-string OSetEWeaponPointer::toString() const
-{
-    return "EWPNARRPTR2 " + getArgument()->toString();
-}
-
-string OGetItemPointer::toString() const
-{
-    return "ITEMARRPTR " + getArgument()->toString();
-}
-
-string OSetItemPointer::toString() const
-{
-    return "ITEMARRPTR2 " + getArgument()->toString();
-}
-
-string OGetItemDataPointer::toString() const
-{
-    return "IDATAARRPTR " + getArgument()->toString();
-}
-
-string OSetItemDataPointer::toString() const
-{
-    return "IDATAARRPTR2 " + getArgument()->toString();
-}
-
-string OGetFFCPointer::toString() const
-{
-    return "FFCARRPTR " + getArgument()->toString();
-}
-
-string OSetFFCPointer::toString() const
-{
-    return "FFCARRPTR2 " + getArgument()->toString();
-}
-
-string OGetBoolPointer::toString() const
-{
-    return "BOOLARRPTR " + getArgument()->toString();
-}
-
-string OSetBoolPointer::toString() const
-{
-    return "BOOLARRPTR2 " + getArgument()->toString();
-}
-
-string OGetNPCPointer::toString() const
-{
-    return "NPCARRPTR " + getArgument()->toString();
-}
-
-string OSetNPCPointer::toString() const
-{
-    return "NPCARRPTR2 " + getArgument()->toString();
-}
-
-
-string OGetScreenDoor::toString() const
-{
-    return "GETSCREENDOOR " + getArgument()->toString();
-}
-
-string OGetScreenEnemy::toString() const
-{
-    return "GETSCREENENEMY " + getArgument()->toString();
-}
-
-
-string OGetScreenLayerOpacity::toString() const
-{
-    return "GETSCREENLAYOP " + getArgument()->toString();
-}
-
-string OGetScreenSecretCombo::toString() const
-{
-    return "GETSCREENSECCMB " + getArgument()->toString();
-}
-
-string OGetScreenSecretCSet::toString() const
-{
-    return "GETSCREENSECCST " + getArgument()->toString();
-}
-
-string OGetScreenSecretFlag::toString() const
-{
-    return "GETSCREENSECFLG " + getArgument()->toString();
-}
-
-string OGetScreenLayerMap::toString() const
-{
-    return "GETSCREENLAYMAP " + getArgument()->toString();
-}
-
-string OGetScreenLayerScreen::toString() const
-{
-    return "GETSCREENLAYSCR " + getArgument()->toString();
-}
-
-string OGetScreenPath::toString() const
-{
-    return "GETSCREENPATH " + getArgument()->toString();
-}
-
-string OGetScreenWarpReturnX::toString() const
-{
-    return "GETSCREENWARPRX " + getArgument()->toString();
-}
-
-string OGetScreenWarpReturnY::toString() const
-{
-    return "GETSCREENWARPRY " + getArgument()->toString();
-}
-
-string OTriggerSecretRegister::toString() const
-{
-    return "TRIGGERSECRETR " + getArgument()->toString();
-}
-
-string OBMPPolygonRegister::toString() const
-{
-    return "BMPPOLYGONR";
-}
-
-string OPolygonRegister::toString() const
-{
-    return "POLYGONR";
-}
+string OBMPPolygonRegister::toString() const { return "BMPPOLYGONR"; } 
+string OPolygonRegister   ::toString() const { return "POLYGONR"; }
 
 
 //NPCData
@@ -5805,48 +5555,29 @@ string OAllocateBitmap::toString() const
     return "ALLOCATEBITMAP " + getArgument()->toString();
 }
 
-string OClearBitmap::toString() const
-{
-    return "CLEARBITMAP";
-}
+string OClearBitmap       ::toString() const { return "CLEARBITMAP"; } 
+string OBitmapClearToColor::toString() const { return "BITMAPCLEARTOCOLOR"; } 
+string ORegenerateBitmap  ::toString() const { return "REGENERATEBITMAP"; } 
+string OReadBitmap        ::toString() const { return "READBITMAP"; }
+string OWriteBitmap       ::toString() const { return "WRITEBITMAP"; }
+string OBitmapFree        ::toString() const { return "BITMAPFREE"; }
+string OBitmapOwn         ::toString() const { return "BITMAPOWN"; }
+string OFileOwn           ::toString() const { return "FILEOWN"; }
+string ODirectoryOwn      ::toString() const { return "DIRECTORYOWN"; }
+string ORNGOwn            ::toString() const { return "RNGOWN"; }
+string OBitmapWriteTile   ::toString() const { return "BMPWRITETILE"; }
+string OBitmapDither      ::toString() const { return "BMPDITHER"; }
+string OBitmapReplColor   ::toString() const { return "BMPREPLCOLOR"; }
+string OBitmapShiftColor  ::toString() const { return "BMPSHIFTCOLOR"; }
+string OBitmapMaskDraw    ::toString() const { return "BMPMASKDRAW"; }
+string OBitmapMaskDraw2   ::toString() const { return "BMPMASKDRAW2"; }
+string OBitmapMaskDraw3   ::toString() const { return "BMPMASKDRAW3"; }
+string OBitmapMaskBlit    ::toString() const { return "BMPMASKBLIT"; }
+string OBitmapMaskBlit2   ::toString() const { return "BMPMASKBLIT2"; }
+string OBitmapMaskBlit3   ::toString() const { return "BMPMASKBLIT3"; }
 
-string OBitmapClearToColor::toString() const
-{
-    return "BITMAPCLEARTOCOLOR";
-}
-
-string ORegenerateBitmap::toString() const
-{
-    return "REGENERATEBITMAP";
-}
-
-string OReadBitmap      ::toString() const { return "READBITMAP"; }
-string OWriteBitmap     ::toString() const { return "WRITEBITMAP"; }
-string OBitmapFree      ::toString() const { return "BITMAPFREE"; }
-string OBitmapOwn       ::toString() const { return "BITMAPOWN"; }
-string OFileOwn         ::toString() const { return "FILEOWN"; }
-string ODirectoryOwn    ::toString() const { return "DIRECTORYOWN"; }
-string ORNGOwn          ::toString() const { return "RNGOWN"; }
-string OBitmapWriteTile ::toString() const { return "BMPWRITETILE"; }
-string OBitmapDither    ::toString() const { return "BMPDITHER"; }
-string OBitmapReplColor ::toString() const { return "BMPREPLCOLOR"; }
-string OBitmapShiftColor::toString() const { return "BMPSHIFTCOLOR"; }
-string OBitmapMaskDraw  ::toString() const { return "BMPMASKDRAW"; }
-string OBitmapMaskDraw2 ::toString() const { return "BMPMASKDRAW2"; }
-string OBitmapMaskDraw3 ::toString() const { return "BMPMASKDRAW3"; }
-string OBitmapMaskBlit  ::toString() const { return "BMPMASKBLIT"; }
-string OBitmapMaskBlit2 ::toString() const { return "BMPMASKBLIT2"; }
-string OBitmapMaskBlit3 ::toString() const { return "BMPMASKBLIT3"; }
-
-string OIsValidBitmap::toString() const
-{
-    return "ISVALIDBITMAP " + getArgument()->toString();
-}
-
-string OIsAllocatedBitmap::toString() const
-{
-    return "ISALLOCATEDBITMAP " + getArgument()->toString();
-}
+string OIsValidBitmap    ::toString() const { return "ISVALIDBITMAP " + getArgument()->toString(); } 
+string OIsAllocatedBitmap::toString() const { return "ISALLOCATEDBITMAP " + getArgument()->toString(); }
 
 
 string OBMPDrawScreenSolidRegister ::toString() const { return "BMPDRAWSCREENSOLIDR"; } 
@@ -5855,35 +5586,14 @@ string OBMPDrawScreenComboFRegister::toString() const { return "BMPDRAWSCREENCOM
 string OBMPDrawScreenComboIRegister::toString() const { return "BMPDRAWSCREENCOMBOIR"; }
 string OBMPDrawScreenComboTRegister::toString() const { return "BMPDRAWSCREENCOMBOTR"; }
 
-string OGraphicsGetpixel::toString() const
-{
-    return "GRAPHICSGETPIXEL " + getArgument()->toString();
-}
-string OGraphicsCountColor::toString() const
-{
-    return "GRAPHICSCOUNTCOLOR " + getArgument()->toString();
-}
+string OGraphicsGetpixel  ::toString() const { return "GRAPHICSGETPIXEL " + getArgument()->toString(); }
+string OGraphicsCountColor::toString() const { return "GRAPHICSCOUNTCOLOR " + getArgument()->toString(); }
 
-string OBMPDrawScreenSolidityRegister::toString() const
-{
-    return "BMPDRAWLAYERSOLIDITYR";
-}
-string OBMPDrawScreenSolidMaskRegister::toString() const
-{
-    return "BMPDRAWLAYERSOLIDR";
-}
-string OBMPDrawScreenCTypeRegister::toString() const
-{
-    return "BMPDRAWLAYERCTYPER";
-}
-string OBMPDrawScreenCFlagRegister::toString() const
-{
-    return "BMPDRAWLAYERCFLAGR";
-}
-string OBMPDrawScreenCIFlagRegister::toString() const
-{
-    return "BMPDRAWLAYERCIFLAGR";
-}
+string OBMPDrawScreenSolidityRegister ::toString() const { return "BMPDRAWLAYERSOLIDITYR"; }
+string OBMPDrawScreenSolidMaskRegister::toString() const { return "BMPDRAWLAYERSOLIDR"; }
+string OBMPDrawScreenCTypeRegister    ::toString() const { return "BMPDRAWLAYERCTYPER"; }
+string OBMPDrawScreenCFlagRegister    ::toString() const { return "BMPDRAWLAYERCFLAGR"; }
+string OBMPDrawScreenCIFlagRegister   ::toString() const { return "BMPDRAWLAYERCIFLAGR"; }
 
 //Text ptr opcodes
 string OFontHeight::toString() const
@@ -5913,25 +5623,10 @@ string OMessageHeight::toString() const
 
 //
 
-string OStrCmp::toString() const
-{
-    return "STRINGCOMPARE " + getArgument()->toString();
-}
-
-string OStrNCmp::toString() const
-{
-    return "STRINGNCOMPARE " + getArgument()->toString();
-}
-
-string OStrICmp::toString() const
-{
-    return "STRINGICOMPARE " + getArgument()->toString();
-}
-
-string OStrNICmp::toString() const
-{
-    return "STRINGNICOMPARE " + getArgument()->toString();
-}
+string OStrCmp  ::toString() const { return "STRINGCOMPARE " + getArgument()->toString(); } 
+string OStrNCmp ::toString() const { return "STRINGNCOMPARE " + getArgument()->toString(); } 
+string OStrICmp ::toString() const { return "STRINGICOMPARE " + getArgument()->toString(); } 
+string OStrNICmp::toString() const { return "STRINGNICOMPARE " + getArgument()->toString(); }
 
 //based on Ostrcpy
 string oARRAYCOPY::toString() const
