@@ -327,17 +327,17 @@ item::item(zfix X,zfix Y,zfix Z,int32_t i,int32_t p,int32_t c, bool isDummy) : s
 	if(id<0 || id>MAXITEMS) //>, not >= for dummy items such as the HC Piece display in the subscreen
 		return;
 		 
-	o_tile = itm.tile;
-	tile = itm.tile;
-	cs = itm.csets&15;
-	o_cset = itm.csets;
-	o_speed = itm.speed;
-	o_delay = itm.delay;
-	frames = itm.frames;
-	flip = itm.misc_flags>>2;
-	family = itm.family;
-	lvl = itm.fam_type;
-	pstring = itm.pstring;
+	o_tile              = itm.tile;
+	tile                = itm.tile;
+	cs                  = itm.csets&15;
+	o_cset              = itm.csets;
+	o_speed             = itm.speed;
+	o_delay             = itm.delay;
+	frames              = itm.frames;
+	flip                = itm.misc_flags>>2;
+	family              = itm.family;
+	lvl                 = itm.fam_type;
+	pstring             = itm.pstring;
 	pickup_string_flags = itm.pickup_string_flags;
 	linked_parent = family == itype_progressive_itm ? -1 : 0;
 	moveflags = FLAG_OBEYS_GRAV | FLAG_CAN_PITFALL;
