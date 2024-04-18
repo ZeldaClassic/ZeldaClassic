@@ -79,8 +79,6 @@ void register_blank_tile_quarters(int32_t tile)
     }
 }
 
-
-
 void register_blank_tiles()
 {
     //int32_t tiles_used=count_tiles(newtilebuf);
@@ -125,9 +123,7 @@ int32_t count_tiles(tiledata *buf)
           */
 	    //al_trace("count_tiles() is checking if tile %d is blank.\n", tiles_used-1);
         if(!isblanktile(buf, tiles_used-1))
-        {
             break;
-        }
     }
     
     return tiles_used;
@@ -141,9 +137,7 @@ word count_combos()
     for(combos_used=MAXCOMBOS; combos_used>0; --combos_used)
     {
         if(combobuf[combos_used-1].tile!=0)
-        {
             break;
-        }
     }
     
     return combos_used;
@@ -237,24 +231,24 @@ void reset_combo_animation2(int32_t c)
 
 void reset_combo_animations()
 {
-    for(word x=0; x<animated_combos; ++x)
-    {
+	for(word x=0; x<animated_combos; ++x)
+	{
 		int32_t y = animated_combo_table4[x][0];
 		combobuf[y].tile = combobuf[y].o_tile;
 		combobuf[y].aclk = 0;
 		combobuf[y].cur_frame = 0;
-    }
+	}
 }
 
 void reset_combo_animations2()
 {
-    for(word x=0; x<animated_combos; ++x)
-    {
+	for(word x=0; x<animated_combos; ++x)
+	{
 		int32_t y = animated_combo_table24[x][0];
 		combobuf[y].tile = combobuf[y].o_tile;
 		combobuf[y].aclk = 0;
 		combobuf[y].cur_frame = 0;
-    }
+	}
 }
 
 extern void update_combo_cycling();
@@ -1405,9 +1399,7 @@ void draw_cloaked_sprite(BITMAP* dest,BITMAP* src,int32_t x,int32_t y)
 			for(int32_t dx=(x<0 ? 0-x : 0); dx<w; ++dx)
 			{
 				if(src->line[sy][sx])
-				{
 					*di=dest->line[((y+dy)^1)][((x+dx)^1)];
-				}
 				
 				++di;
 				++sx;
@@ -1425,9 +1417,7 @@ void draw_cloaked_sprite(BITMAP* dest,BITMAP* src,int32_t x,int32_t y)
 				if(x+i<dest->w)
 				{
 					if(src->line[sy][sx])
-					{
 						*di=dest->line[((y+dy)^1)][(x^1)];
-					}
 					
 					++di;
 				}
@@ -1458,9 +1448,7 @@ void putblocktranslucent8(BITMAP *dest,int32_t tile,int32_t x,int32_t y,int32_t 
         
     case 3:
         if(flip&2)
-        {
             zc_swap(t[0],t[1]);
-        }
         
         puttiletranslucent8(dest,t[0],x,y,  csets[0],flip,opacity);
         puttiletranslucent8(dest,t[1],x,y+8,csets[1],flip,opacity);
@@ -1468,9 +1456,7 @@ void putblocktranslucent8(BITMAP *dest,int32_t tile,int32_t x,int32_t y,int32_t 
         
     case 5:
         if(flip&1)
-        {
             zc_swap(t[0],t[1]);
-        }
         
         puttiletranslucent8(dest,t[0],x,  y,csets[0],flip,opacity);
         puttiletranslucent8(dest,t[1],x+8,y,csets[1],flip,opacity);
@@ -1523,9 +1509,7 @@ void overblocktranslucent8(BITMAP *dest,int32_t tile,int32_t x,int32_t y,int32_t
         
     case 5:
         if(flip&1)
-        {
             zc_swap(t[0],t[1]);
-        }
         
         overtiletranslucent8(dest,t[0],x,  y,csets[0],flip,opacity);
         overtiletranslucent8(dest,t[1],x+8,y,csets[1],flip,opacity);
@@ -1684,8 +1668,8 @@ int32_t combo_tile(const newcombo &c, int32_t x, int32_t y)
 
 int32_t combo_tile(int32_t cmbdat, int32_t x, int32_t y)
 {
-    const newcombo & c = combobuf[cmbdat];
-    return combo_tile(c, x, y);
+	const newcombo & c = combobuf[cmbdat];
+	return combo_tile(c, x, y);
 }
 
 void putcombotranslucent(BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset,int32_t opacity)
@@ -1711,7 +1695,7 @@ void putcombotranslucent(BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t
 
 void overcombotranslucent(BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset,int32_t opacity)
 {
-    overcomboblocktranslucent(dest, x, y, cmbdat, cset, 1, 1, opacity);
+	overcomboblocktranslucent(dest, x, y, cmbdat, cset, 1, 1, opacity);
 }
 
 void overcomboblocktranslucent(BITMAP *dest, int32_t x, int32_t y, int32_t cmbdat, int32_t cset, int32_t w, int32_t h, int32_t opacity)
@@ -1762,7 +1746,8 @@ static void draw_tile8_unified(BITMAP* dest, int cl, int ct, int cr, int cb, con
             int desty = y + (flip&2 ? 7 - dy : dy);
             if (destx >= cl && desty >= ct && destx < cr && desty < cb)
             {
-                if (*si) dest->line[desty][destx] = *si + cset;
+                if (*si)
+                        dest->line[desty][destx] = *si + cset;
             }
             si++;
         }
@@ -1814,7 +1799,8 @@ static void draw_tile16_unified(BITMAP* dest, int cl, int ct, int cr, int cb, co
             int desty = y + (flip&2 ? 15 - dy : dy);
             if (destx >= cl && desty >= ct && destx < cr && desty < cb)
             {
-                if (!transparency || *si) dest->line[desty][destx] = *si + cset;
+                if (!transparency || *si)
+                        dest->line[desty][destx] = *si + cset;
             }
             si++;
         }
@@ -1833,9 +1819,7 @@ void puttile8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_t
         return;
         
     if(newtilebuf[tile>>2].format>tf4Bit)
-    {
         cset=0;
-    }
     
     cset &= 15;
     cset <<= CSET_SHFT;
@@ -1934,9 +1918,7 @@ void oldputtile8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int3
         return;
         
     if(newtilebuf[tile>>2].format>tf4Bit)
-    {
         cset=0;
-    }
     
     cset &= 15;
     cset <<= CSET_SHFT;
@@ -1944,16 +1926,12 @@ void oldputtile8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int3
     const byte *si = bytes + ((tile&2)<<6) + ((tile&1)<<3);
     
     if(flip&1)
-    {
         si+=7;
-    }
     
     if((flip&2)==0)                                           //not flipped vertically
     {
         if(y<0)
-        {
             si+=(0-y)<<4;
-        }
         
         for(int32_t dy=(y<0 ? 0-y : 0); (dy<8)&&(dy+y<dest->h); ++dy)
         {
@@ -1971,22 +1949,15 @@ void oldputtile8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int3
             }
             
             if(flip&1)
-            {
                 si+=24;
-            }
             else
-            {
-                si+=8;
-                
-            }
+                si+=8; 
         }
     }                                                         //flipped vertically
     else
     {
         if(y+7>=dest->h)
-        {
             si+=(8+y-dest->h)<<4;
-        }
         
         for(int32_t dy=(y+7>=dest->h ? dest->h-y-1 : 7); (dy>=0)&&(dy+y>=0); --dy)
         {
@@ -2004,13 +1975,9 @@ void oldputtile8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int3
             }
             
             if(flip&1)
-            {
                 si+=24;
-            }
             else
-            {
                 si+=8;
-            }
         }
     }
 }
@@ -2040,14 +2007,10 @@ void overtile8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_
 		return;
         
     if(blank_tile_quarters_table[tile])
-    {
         return;
-    }
     
     if(newtilebuf[tile>>2].format>tf4Bit)
-    {
         cset=0;
-    }
     
     cset &= 15;
     cset <<= CSET_SHFT;
@@ -2064,16 +2027,12 @@ void overtile8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_
     }
     
     if(flip&1)
-    {
         si+=7;
-    }
     
 	if((flip&2)==0)                                           //not flipped vertically
 	{
 		if(y<0)
-		{
 			si+=(0-y)<<4;
-		}
 		
 		for(int32_t dy=0; dy<8; ++dy)
 		{
@@ -2093,14 +2052,9 @@ void overtile8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_
 			}
 			
 			if(flip&1)
-			{
 				si+=24;
-			}
 			else
-			{
-				si+=8;
-				
-			}
+				si+=8; 
 		}
 	}                                                         //flipped vertically
 	else
@@ -2123,13 +2077,9 @@ void overtile8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_
 			}
 			
 			if(flip&1)
-			{
 				si+=24;
-			}
 			else
-			{
 				si+=8;
-			}
 		}
 	}
 }
@@ -2164,9 +2114,7 @@ void puttile16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32_
     }
     
     if(newtilebuf[tile].format>tf4Bit)
-    {
         cset=0;
-    }
     
     cset &= 15;
     cset <<= CSET_SHFT;
@@ -2285,9 +2233,7 @@ void oldputtile16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int
     }
     
     if(newtilebuf[tile].format>tf4Bit)
-    {
         cset=0;
-    }
     
     cset &= 15;
     cset <<= CSET_SHFT;
@@ -2443,9 +2389,7 @@ void overtile16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t cset,int32
 		return;
 	
 	if(newtilebuf[tile].format>tf4Bit)
-	{
 		cset=0;
-	}
 	
 	cset &= 15;
 	cset <<= CSET_SHFT;
@@ -2585,9 +2529,7 @@ void putcombo(BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset)
             cofs |= ~int32_t(0xF);
         
         for(int32_t i=0; i<4; ++i)
-        {
             csets[i] = c.csets&(16<<i) ? WRAP_CS2(cset, cofs) : cset;
-        }
         
         drawtile16_cs2(dest,drawtile,x,y,csets,c.flip,false);
     }
@@ -2595,7 +2537,7 @@ void putcombo(BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset)
 
 void overcombo(BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset)
 {
-    overcomboblock(dest, x, y, cmbdat, cset, 1, 1);
+	overcomboblock(dest, x, y, cmbdat, cset, 1, 1);
 }
 
 void overcomboblock(BITMAP *dest, int32_t x, int32_t y, int32_t cmbdat, int32_t cset, int32_t w, int32_t h)
@@ -2635,10 +2577,8 @@ void overcomboblock(BITMAP *dest, int32_t x, int32_t y, int32_t cmbdat, int32_t 
 
 void overcombo2(BITMAP* dest,int32_t x,int32_t y,int32_t cmbdat,int32_t cset)
 {
-    if(cmbdat!=0)
-    {
-        overcombo(dest,x,y,cmbdat,cset);
-    }
+	if(cmbdat!=0)
+		overcombo(dest,x,y,cmbdat,cset);
 }
 
 bool is_valid_format(byte format)
@@ -2681,4 +2621,3 @@ int32_t tilesize(byte format)
 	// sane amount right now should fix any crashes associated with this. -Gleeok
 	return 256;
 }
-
