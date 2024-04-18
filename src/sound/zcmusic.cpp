@@ -112,26 +112,26 @@ ZCMUSIC* zcmusic_load_for_quest(const char* filename, char* quest_path)
     return nullptr;
 }
 
-typedef struct DUHFILE : public ZCMUSIC
+struct DUHFILE : public ZCMUSIC
 {
     DUH *s;
     AL_DUH_PLAYER *p;
-} DUHFILE;
+};
 
 // used for allegro streamed music (ogg, mp3)
-typedef struct ALSTREAMFILE : public ZCMUSIC
+struct ALSTREAMFILE : public ZCMUSIC
 {
 	ALLEGRO_AUDIO_STREAM *s;
     char *fname;
     int32_t vol;
-} ALSTREAMFILE;
+};
 
-typedef struct GMEFILE : public ZCMUSIC
+struct GMEFILE : public ZCMUSIC
 {
     AUDIOSTREAM *stream;
     struct Music_Emu* emu;
     int32_t samples;
-} GMEFILE;
+};
 
 #include <vector>
 static std::vector<ZCMUSIC*> playlist;                      //yeah, I'm too lazy to do it myself

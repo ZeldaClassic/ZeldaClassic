@@ -1649,7 +1649,7 @@ int32_t onIntegrityCheckAll()
     return D_O_K;
 }
 
-typedef struct item_location_node
+struct item_location_node
 {
     int32_t map;
     int32_t screen;
@@ -1658,7 +1658,7 @@ typedef struct item_location_node
     int32_t enemy;
     int32_t pal;
     item_location_node* next;
-} item_location_node;
+};
 
 void itemLocationReport()
 {
@@ -1957,7 +1957,7 @@ int32_t onItemLocationReport()
     return D_O_K;
 }
 
-typedef struct enemy_location_node
+struct enemy_location_node
 {
     int32_t map;
     int32_t screen;
@@ -1968,7 +1968,7 @@ typedef struct enemy_location_node
     int32_t combotype;
     int32_t ganonscr;
     enemy_location_node* next;
-} enemy_location_node;
+};
 
 void enemyLocationReport()
 {
@@ -2129,14 +2129,14 @@ int32_t onEnemyLocationReport()
     return D_O_K;
 }
 
-typedef struct script_location_node
+struct script_location_node
 {
     int32_t map;
     int32_t screen;
     int32_t pal;
     int32_t d[8];
     script_location_node* next;
-} script_location_node;
+};
 
 void scriptLocationReport()
 {
@@ -2422,7 +2422,7 @@ int32_t onBuggedNextComboLocationReport()
     return D_O_K;
 }
 
-typedef struct combotype_location_node
+struct combotype_location_node
 {
     int32_t map;
     int32_t screen;
@@ -2432,7 +2432,7 @@ typedef struct combotype_location_node
     int32_t ffuses;
     bool undercombouses;
     combotype_location_node* next;
-} combotype_location_node;
+};
 
 void ComboTypeLocationReport()
 {

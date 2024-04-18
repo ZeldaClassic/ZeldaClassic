@@ -5954,13 +5954,13 @@ static DIALOG tile_move_list_dlg[] =
 };
 
 
-typedef struct move_tiles_item
+struct move_tiles_item
 {
 	const char *name;
 	int32_t tile;
 	int32_t width;
 	int32_t height;
-} move_tiles_item;
+};
 
 /*move_tiles_item subscreen_items[1]=
 {

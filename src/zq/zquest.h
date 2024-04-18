@@ -509,19 +509,19 @@ int32_t onExportZASM();
 int32_t onImportZASM();
 
 
-typedef struct item_struct
+struct item_struct
 {
     char *s;
     int32_t i;
-} item_struct;
+};
 
 extern item_struct bii[MAXITEMS+1];
 
-typedef struct weapon_struct
+struct weapon_struct
 {
     char *s;
     int32_t i;
-} weapon_struct;
+};
 
 extern weapon_struct biw[MAXWPNS];
 
@@ -794,11 +794,11 @@ int32_t onPattern();
 int32_t onEnemyFlags();
 const char *enemy_viewer(int32_t index, int32_t *list_size);
 
-typedef struct enemy_struct
+struct enemy_struct
 {
     char *s;
     int32_t i;
-} enemy_struct;
+};
 
 #define zqMAXGUYS    gDUMMY1
 

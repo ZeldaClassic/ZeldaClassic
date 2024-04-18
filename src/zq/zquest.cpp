@@ -531,12 +531,12 @@ int showHotkeys()
 }
 
 typedef int32_t (*intF)();
-typedef struct command_pair
+struct command_pair
 {
 	char name[80];
 	int32_t flags;
 	intF command;
-} command_pair;
+};
 
 extern map_and_screen map_page[MAX_MAPPAGE_BTNS];
 
