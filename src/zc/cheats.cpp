@@ -184,22 +184,16 @@ static void cheats_execute(Cheat cheat, int arg1, int arg2, std::string arg3)
     switch (cheat)
     {
     case Life:
-    {
-        game->set_life(arg1);
-    }
-    break;
+	game->set_life(arg1);
+	break;
 
     case Magic:
-    {
         game->set_magic(arg1);
-    }
-    break;
+	break;
 
     case Rupies:
-    {
-        game->set_drupy(arg1);
-    }
-    break;
+	game->set_drupy(arg1);
+	break;
 
     case Bombs:
     {
@@ -216,10 +210,8 @@ static void cheats_execute(Cheat cheat, int arg1, int arg2, std::string arg3)
     break;
 
     case Arrows:
-    {
-        game->set_arrows(arg1);
-    }
-    break;
+	game->set_arrows(arg1);
+	break;
 
     case Kill:
     {
@@ -232,79 +224,55 @@ static void cheats_execute(Cheat cheat, int arg1, int arg2, std::string arg3)
     break;
 
     case Fast:
-    {
         gofast = gofast ? false : true;
-    }
-    break;
+	break;
 
     case Clock:
-    {
         setClock(!getClock());
         cheat_superman = getClock();
-    }
-    break;
+	break;
 
     case Walls:
-    {
         toogam = !toogam;
         if (toogam)
         {
             cheat_superman = true;
             setClock(true);
         }
-    }
-    break;
+	break;
 
     case Freeze:
-    {
         if (Hero.getAction() == freeze)
-        {
             Hero.unfreeze();
-        }
         else
-        {
             Hero.Freeze();
-        }
-    }
-    break;
+	break;
 
     case Light:
-    {
         cheats_execute_light = true;
-    }
-    break;
+	break;
 
     case GoTo:
-    {
         cheats_execute_goto = true;
         cheat_goto_dmap = arg1;
         cheat_goto_screen = arg2;
-    }
-    break;
+	break;
 
     case IgnoreSideView:
-    {
         ignoreSideview = !ignoreSideview;
-    }
-    break;
+	break;
 
     case MaxLife:
-    {
         game->set_maxlife(arg1);
-    }
-    break;
+	break;
 
     case MaxMagic:
-    {
         game->set_maxmagic(arg1);
-    }
-    break;
+	break;
 
     case MaxBombs:
-    {
         game->set_maxbombs(arg1);
-    }
-    break;
+	break;
 
     case PlayerData:
     {
@@ -326,100 +294,81 @@ static void cheats_execute(Cheat cheat, int arg1, int arg2, std::string arg3)
     break;
 	
 	case TrigSecrets:
-	{
 		hidden_entrance(0, true, false, -9);
-	}
-	break;
+		break;
+
 	case TrigSecretsPerm:
-	{
 		hidden_entrance(0, true, false, -10);
 		setmapflag(mSECRET);
-	}
-	break;
-	case ShowL0:
-	{
-		onShowLayer0();
-	}
-	break;
-	case ShowL1:
-	{
-		onShowLayer1();
-	}
-	break;
-	case ShowL2:
-	{
-		onShowLayer2();
-	}
-	break;
-	case ShowL3:
-	{
-		onShowLayer3();
-	}
-	break;
-	case ShowL4:
-	{
-		onShowLayer4();
-	}
-	break;
-	case ShowL5:
-	{
-		onShowLayer5();
-	}
-	break;
-	case ShowL6:
-	{
-		onShowLayer6();
-	}
-	break;
-	case ShowFFC:
-	{
-		onShowLayerF();
-	}
-	break;
-	case ShowSprites:
-	{
-		onShowLayerS();
-	}
-	break;
-	case ShowWalkability:
-	{
-		onShowLayerW();
-	}
-	break;
-	case ShowEffects:
-	{
-		onShowLayerE();
-	}
-	break;
-	case ShowOverhead:
-	{
-		onShowLayerO();
-	}
-	break;
-	case ShowPushblock:
-	{
-		onShowLayerP();
-	}
-	break;
-	case ShowHitbox:
-	{
-		onShowHitboxes();
-	}
-	break;
-	case ShowFFCScripts:
-	{
-		onShowFFScripts();
-	}
-	break;
-	case ShowInfoOpacity:
-	{
-		onShowInfoOpacity();
-	}
-	break;
+		break;
 
-    case None:
-    case Last:
-        break;
+	case ShowL0:
+		onShowLayer0();
+		break;
+
+	case ShowL1:
+		onShowLayer1();
+		break;
+
+	case ShowL2:
+		onShowLayer2();
+		break;
+
+	case ShowL3:
+		onShowLayer3();
+		break;
+
+	case ShowL4:
+		onShowLayer4();
+		break;
+
+	case ShowL5:
+		onShowLayer5();
+		break;
+
+	case ShowL6:
+		onShowLayer6();
+		break;
+
+	case ShowFFC:
+		onShowLayerF();
+		break;
+
+	case ShowSprites:
+		onShowLayerS();
+		break;
+
+	case ShowWalkability:
+		onShowLayerW();
+		break;
+
+	case ShowEffects:
+		onShowLayerE();
+		break;
+
+	case ShowOverhead:
+		onShowLayerO();
+		break;
+
+	case ShowPushblock:
+		onShowLayerP();
+		break;
+
+	case ShowHitbox:
+		onShowHitboxes();
+		break;
+
+	case ShowFFCScripts:
+		onShowFFScripts();
+		break;
+
+	case ShowInfoOpacity:
+		onShowInfoOpacity();
+		break;
+
+	case None:
+	case Last:
+		break;
     }
 }
 
