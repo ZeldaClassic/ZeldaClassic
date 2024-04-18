@@ -183,14 +183,11 @@ void loadpalset(int32_t cset, int32_t dataset, bool update_tint)
 		if (!get_qr(qr_NOLEVEL3FIX) && DMaps[currdmap].color == 3) {
 			RAMpal[CSET(6) + 2] = NESpal(0x37);
 		}
+
 		if (dataset >= poSPRITE255 && dataset < poSPRITE255 + pdSPRITE) 
-		{
 			currspal6 = dataset - poSPRITE255;
-		}
 		else
-		{
 			currspal6 = -1;
-		}
 	}
 	if (cset == 14)
 	{
