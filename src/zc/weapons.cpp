@@ -706,9 +706,7 @@ int32_t weapon::seekEnemy2(int32_t j)
     }
     
     if(j==-1)
-    {
         return j;
-    }
     
     //al_trace("Guy: %d, gx: %f, gy: %f, x: %f, y: %f\n", j, float(GuyX(j)), float(GuyY(j)), float(dummy_fix[0]), float(dummy_fix[1]));
     double _MSVC2022_tmp1, _MSVC2022_tmp2;
@@ -733,9 +731,7 @@ void weapon::convertType(bool toLW)
 	//== here is unsafe!
 	weaponscript = 0;
 	for(int32_t q = 0; q < 8; ++q)
-	{
 		weap_initd[q] = 0;
-	}
 }
 
 weapon::weapon(weapon const & other):
@@ -907,17 +903,14 @@ weapon::weapon(weapon const & other):
 //	initiald[q] = other.initiald[q];		//int32_t	InitD[]
     //}
     for ( int32_t q = 0; q < FFSCRIPT_MISC; q++ ) 
-    {
 	ffmisc[q] = other.ffmisc[q];		//int32_t -The base wpn->Misc[32] set from the editor
-    }
+
     for ( int32_t q = 0; q < FFSCRIPT_MISC; q++ ) 
-    {
 	wpn_misc_d[q] = other.wpn_misc_d[q];		//int32_t -The base wpn->Misc[32] set from the editor
-    }
+
     for ( int32_t q = 0; q < 128; q++ ) 
-    {
 	weapname[q] = 0;		//int32_t -The base wpn->Misc[32] set from the editor
-    }
+
     script_wrote_otile = 0;
     
     //if ( parentitem > -1 )
@@ -944,14 +937,10 @@ weapon::weapon(weapon const & other):
 
 byte weapon::get_burnstate() const
 {
-	if(misc_wflags & WFLAG_BURN_DIVINEFIRE)
-		return WPNSPR_IGNITE_DIVINE;
-	if(misc_wflags & WFLAG_BURN_MAGICFIRE)
-		return WPNSPR_IGNITE_MAGIC;
-	if(misc_wflags & WFLAG_BURN_STRONGFIRE)
-		return WPNSPR_IGNITE_STRONG;
-	if(misc_wflags & WFLAG_BURN_ANYFIRE)
-		return WPNSPR_IGNITE_ANY;
+	if(misc_wflags & WFLAG_BURN_DIVINEFIRE) return WPNSPR_IGNITE_DIVINE;
+	if(misc_wflags & WFLAG_BURN_MAGICFIRE)  return WPNSPR_IGNITE_MAGIC;
+	if(misc_wflags & WFLAG_BURN_STRONGFIRE) return WPNSPR_IGNITE_STRONG;
+	if(misc_wflags & WFLAG_BURN_ANYFIRE)    return WPNSPR_IGNITE_ANY;
 	return WPNSPR_BASE;
 }
 
@@ -1012,9 +1001,7 @@ void weapon::cleanup_sfx()
             weapon *w = ((weapon *)Lwpns.spr(i));
             
             if(w->getUID() == getUID())  // Itself!
-            {
                 continue;
-            }
             
             int32_t wparent = w->parentitem;
             
@@ -1129,9 +1116,8 @@ weapon::weapon(zfix X,zfix Y,zfix Z,int32_t Id,int32_t Type,int32_t pow,int32_t 
 			//Sparkles shouldn't have these behaviors!
 			weaponscript = itemsbuf[Parentitem].weaponscript;
 			for ( int32_t q = 0; q < 8; q++ )
-			{
 				weap_initd[q] = itemsbuf[Parentitem].weap_initiald[q];
-			}
+
 			useweapon = itemsbuf[Parentitem].useweapon;
 			usedefence = itemsbuf[Parentitem].usedefence;
 		}
