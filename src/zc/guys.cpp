@@ -19679,9 +19679,7 @@ void putprices(bool sign)
 		step<<=1;
 		
 		if(prices[1]==0)
-		{
 			x=112;
-		}
 	}
 	
 	for(int32_t i=0; i<3; i++)

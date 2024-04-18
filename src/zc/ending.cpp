@@ -164,7 +164,6 @@ void endingpal()
 
 void ending()
 {
-	
 	/*
 	  *************************
 	  * WIN THE GAME SEQUENCE *
@@ -229,9 +228,7 @@ void ending()
 			for(int32_t i = guys.Count() - 1; i >= 0; i--)
 			{
 				if(guys.spr(i)->id > gDUMMY9)
-				{
 					guys.del(i);
-				}
 			}
 			
 			guys.draw(framebuf,true);
@@ -274,14 +271,10 @@ void ending()
 	char tmpmsg[6][25];
 	
 	for(int32_t x=0; x<3; x++)
-	{
 		sprintf(tmpmsg[x], "%.24s", MsgStrings[QMisc.endstring].s.c_str()+(24*x));
-	}
 	
 	for(int32_t x=0; x<3; x++)
-	{
 		sprintf(tmpmsg[x+3], "%.24s", MsgStrings[QMisc.endstring+1].s.c_str()+(24*x));
-	}
 	
 	if(QMisc.endstring==0)
 	{
@@ -315,9 +308,7 @@ void ending()
 		}
 		
 		if(f==860)
-		{
 			blit(tmp_bmp, framebuf, 0,0, 120,113, 32,32);
-		}
 		
 		if(f==669 || f==861)
 		{
@@ -334,9 +325,7 @@ void ending()
 				for(int32_t x=0; x<256; x++)
 				{
 					if(!(framebuf->line[y][x]&15))
-					{
 						framebuf->line[y][x]=16;
-					}
 				}
 			}
 		}
@@ -358,24 +347,18 @@ void ending()
 				for(int32_t x=0; x<256; x++)
 				{
 					if(framebuf->line[y][x]==16)
-					{
 						framebuf->line[y][x]=0;
-					}
 				}
 			}
 		}
 		
 		if(f>668 && f!=860)
-		{
 			put_triforce();
-		}
 		
 		advanceframe(true);
 		
 		if(Quit)
-		{
 			return;
-		}
 	}
 	
 	if(QMisc.endstring==0)
@@ -394,21 +377,15 @@ void ending()
 	for(int32_t f=1336; f<1492; f++)
 	{
 		if(f<1461)
-		{
 			put_triforce();
-		}
 		
 		if(f==1461)
-		{
 			blit(tmp_bmp,framebuf,0,0,120,113,32,32);
-		}
 		
 		advanceframe(true);
 		
 		if(Quit)
-		{
 			return;
-		}
 	}
 	
 	clear_bitmap(scrollbuf);
@@ -418,9 +395,7 @@ void ending()
 	puttile16(scrollbuf,3,256,0,csBOSS,0);
 	
 	if(game->get_quest()>1)
-	{
 		len=720*2;
-	}
 	
 	
 	switch(game->get_quest())
@@ -466,9 +441,7 @@ void ending()
 			if(y==240 || y==584)
 			{
 				for(int32_t x=24; x<=224; x+=8)
-				{
 					brick(x,224);
-				}
 			}
 			
 			if(creditsLine<numCreditsLines)
@@ -518,17 +491,13 @@ void ending()
 		}
 		
 		if(f&1)
-		{
 			blit(scrollbuf,scrollbuf,0,1,0,0,256,232);
-		}
 		
 		blit(scrollbuf,framebuf,0,0,0,0,256,224);
 		advanceframe(true);
 		
 		if(Quit)
-		{
 			return;
-		}
 		
 		load_control_state();
 		getInput(btnS, true, false, true);//rSbtn();
@@ -537,23 +506,17 @@ void ending()
 	do
 	{
 		if(frame&1)
-		{
 			overtile16(framebuf,176,120,129,9,0);
-		}
 		
 		overtile16(framebuf,175,120,129,((frame&8)>>3)+7,0);
 		
 		if(!(frame&1))
-		{
 			overtile16(framebuf,176,120,129,9,0);
-		}
 		
 		advanceframe(true);
 		
 		if(Quit)
-		{
 			return;
-		}
 		
 		load_control_state();
 	}
@@ -569,14 +532,10 @@ void ending()
 		int32_t maxring = getHighestLevelOfFamily(&zinit,itemsbuf,itype_ring);
 		
 		if(maxring != -1)
-		{
 			getitem(maxring,true);
-		}
 		
 		ringcolor(false);
 	}
-	
-	
 	
 	zc_stop_midi();
 	if (get_qr(qr_OLD_SCRIPT_VOLUME))
