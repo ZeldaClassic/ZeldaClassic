@@ -115,9 +115,7 @@ void CompileOption::initialize()
 
 		// Fill nameMap from entries table.
 		for (int32_t i = 0; i < ID_END; ++i)
-		{
 			nameMap[entries[i].name] = CompileOption(i);
-		}
 		
 		initialized = true;
 	}
