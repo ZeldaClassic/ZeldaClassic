@@ -55,14 +55,17 @@ enum class TaskState
 	Done,
 };
 
-static const int MAX_THREADS = 16;
-static std::array<ThreadInfo, MAX_THREADS> thread_infos;
-static std::map<script_id, TaskState> task_states;
-static std::vector<script_id> active_tasks;
-static std::vector<script_data*> pending_scripts;
-static ALLEGRO_MUTEX* tasks_mutex;
-static ALLEGRO_COND* tasks_cond;
-static ALLEGRO_COND* task_finish_cond;
+namespace
+{
+	const int MAX_THREADS = 16;
+	std::array<ThreadInfo, MAX_THREADS> thread_infos;
+	std::map<script_id, TaskState> task_states;
+	std::vector<script_id> active_tasks;
+	std::vector<script_data*> pending_scripts;
+	ALLEGRO_MUTEX* tasks_mutex;
+	ALLEGRO_COND* tasks_cond;
+	ALLEGRO_COND* task_finish_cond;
+}
 
 // Returns a JittedFunction. If already compiled, returns the cached reference.
 // If a thread is currently compiling this script, waits for that thread to finish.
@@ -88,9 +91,7 @@ static JittedFunction compile_if_needed(script_data *script)
 		// Wait for task to finish.
 		jit_printf("jit: [*] waiting for thread to compile script type: %s index: %d name: %s\n", ScriptTypeToString(script->id.type), script->id.index, script->meta.script_name.c_str());
 		while (!compiled_functions.contains(script->id))
-		{
 			al_wait_cond(task_finish_cond, tasks_mutex);
-		}
 
 		fn = compiled_functions[script->id];
 		al_unlock_mutex(tasks_mutex);
