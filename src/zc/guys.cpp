@@ -7997,8 +7997,7 @@ int32_t eScript::takehit(weapon *w, weapon* realweap)
 			o_tile=s_tile;
 	}
 	
-	int32_t ret = enemy::takehit(w,realweap);
-	return ret;
+	return enemy::takehit(w,realweap);
 }
 
 void eScript::break_shield()
@@ -8111,8 +8110,7 @@ int32_t eFriendly::takehit(weapon *w, weapon* realweap)
 			o_tile=s_tile;
 	}
 	
-	int32_t ret = enemy::takehit(w,realweap);
-	return ret;
+	return enemy::takehit(w,realweap);
 }
 
 void eFriendly::break_shield()
