@@ -1815,15 +1815,12 @@ void enemy::FireBreath(bool seekhero)
 	}
 	
 	for(int32_t j=Ewpns.Count()-1; j>0; j--)
-	{
 		Ewpns.swap(j,j-1);
-	}
 }
 
 void enemy::FireWeapon()
 {
-	/*
-	 * Type:
+	/* Type:
 	 * 0x01: Boss fireball
 	 * 0x02: Seeks Hero
 	 * 0x04: Fast projectile
@@ -2002,9 +1999,7 @@ void enemy::FireWeapon()
 			}
 			
 			if(summoned)
-			{
 				sfx(get_qr(qr_MORESOUNDS) ? WAV_ZN1SUMMON : WAV_FIRE,pan(int32_t(x)));
-			}
 		}
 		
 		break;
@@ -2131,13 +2126,9 @@ int32_t enemy::resolveEnemyDefence(weapon *w)
 	int32_t usedef = w->usedefence;
 	
 	if ( usedef > 0 && (wdeftype < 0 || wdeftype >= edefLAST255 || defense[wdeftype] == 0)) 
-	{
 		weapondef = usedef*-1;
-	}
 	else if(unsigned(wdeftype) < edefLAST255)
-	{
 		weapondef = wdeftype;
-	}
 	return weapondef;
 }
 
@@ -3600,9 +3591,7 @@ int32_t enemy::takehit(weapon *w, weapon* realweap)
 	int32_t parent_item = w->parentitem;
 	
 	if ( w->useweapon > 0 /*&& wpnId != wWhistle*/ )
-	{
 		wpnId = w->useweapon;
-	}
 	
 	// If it's a boomerang that just bounced, use the opposite direction;
 	// otherwise, it might bypass a shield. This probably won't handle
@@ -3895,9 +3884,7 @@ fsparkle:
 		if(def >= 0)
 			return def;
 		else if(def == -2)
-		{
 			ret = 0;
-		}
 	}
 	
 	if(!power)
@@ -3929,9 +3916,7 @@ hitclock:
 	}
 	
 	if(((wpnId==wBrang) || (get_qr(qr_NOFLASHDEATH))) && (hp<=0 && !immortal))
-	{
 		fading=fade_blue_poof;
-	}
 	
 	if ( FFCore.getQuestHeaderInfo(vZelda) > 0x250 || ( FFCore.getQuestHeaderInfo(vZelda) == 0x250 && FFCore.getQuestHeaderInfo(vBuild) > 31 )) //2.53 Gamma 2 and later
 	{
@@ -4064,13 +4049,10 @@ void enemy::draw(BITMAP *dest)
 	if(fallclk||drownclk)
 	{
 		if (canSee == DRAW_CLOAKED)
-		{
 			sprite::drawcloaked(dest);
-		}
 		else if (canSee == DRAW_NORMAL)
-		{
 			sprite::draw(dest);
-		}
+
 		return;
 	}
 	int32_t cshold=cs;
@@ -4083,13 +4065,10 @@ void enemy::draw(BITMAP *dest)
 			{
 				//if the enemy isn't totally invisible, or if it is, but Hero has the item needed to reveal it, draw it.
 				if (canSee == DRAW_CLOAKED)
-				{
 					sprite::drawcloaked(dest);
-				}
 				else if (canSee == DRAW_NORMAL)
-				{
 					sprite::draw(dest);
-				}
+
 			}	
 			return;
 		}
@@ -5014,14 +4993,9 @@ void enemy::newdir_8_old(int32_t newrate,int32_t newhoming,int32_t special,int32
 				if(abs(int32_t(y)-by)>14)
 				{
 					if(ndir>0)  // Already left or right
-					{
-						// Making the diagonal directions
-						ndir += (by<y) ? 2 : 4;
-					}
+						ndir += (by<y) ? 2 : 4; // Making the diagonal directions
 					else
-					{
 						ndir = (by<y) ? up : down;
-					}
 				}
 				
 				if(canmove(ndir,special,false))
