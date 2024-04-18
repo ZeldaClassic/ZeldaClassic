@@ -309,18 +309,18 @@ done:
 
 char *timestr(double sec)
 {
-    static char buf[16];
-    int32_t min = (int32_t)(sec/60);
-    sec -= min*60;
+	static char buf[16];
+	int32_t min = (int32_t)(sec/60);
+	sec -= min*60;
     
-    if(sec>=59.5)
-    {
-        min++;
-        sec=0;
-    }
+	if(sec>=59.5)
+	{
+		min++;
+		sec=0;
+	}
     
-    sprintf(buf,"%02d:%02.0f",min,sec);
-    return buf;
+	sprintf(buf,"%02d:%02.0f",min,sec);
+	return buf;
 }
 
 bool decode_text_event(char *s,int32_t length, byte type,byte *buf)
