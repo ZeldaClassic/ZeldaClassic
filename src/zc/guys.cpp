@@ -7772,8 +7772,7 @@ int32_t eFire::takehit(weapon *w, weapon* realweap)
 			o_tile=s_tile;
 	}
 	
-	int32_t ret = enemy::takehit(w,realweap);
-	return ret;
+	return enemy::takehit(w,realweap);
 }
 
 void eFire::break_shield()
