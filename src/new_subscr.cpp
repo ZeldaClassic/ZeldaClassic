@@ -656,49 +656,39 @@ int32_t SubscrColorInfo::get_cset() const
 }
 int32_t SubscrColorInfo::get_cset(byte type, int16_t color)
 {
-	int32_t ret=type;
-	
 	switch(type)
 	{
 		case ssctMISC:
 			switch(color)
 			{
 				case sscsTRIFORCECSET:
-					ret=QMisc.colors.triforce_cset;
-					break;
+					return QMisc.colors.triforce_cset;
 					
 				case sscsTRIFRAMECSET:
-					ret=QMisc.colors.triframe_cset;
-					break;
+					return QMisc.colors.triframe_cset;
 					
 				case sscsOVERWORLDMAPCSET:
-					ret=QMisc.colors.overworld_map_cset;
-					break;
+					return QMisc.colors.overworld_map_cset;
 					
 				case sscsDUNGEONMAPCSET:
-					ret=QMisc.colors.dungeon_map_cset;
-					break;
+					return QMisc.colors.dungeon_map_cset;
 					
 				case sscsBLUEFRAMECSET:
-					ret=QMisc.colors.blueframe_cset;
-					break;
+					return QMisc.colors.blueframe_cset;
 					
 				case sscsHCPIECESCSET:
-					ret=QMisc.colors.HCpieces_cset;
-					break;
+					return QMisc.colors.HCpieces_cset;
 					
 				case sscsSSVINECSET:
-					ret=wpnsbuf[iwSubscreenVine].csets&15;
-					break;
+					return wpnsbuf[iwSubscreenVine].csets&15;
 					
 				default:
-					ret=(zc_oldrand()*1000)%256;
-					break;
+					return (zc_oldrand()*1000)%256;
 			}
 			break;
 	}
 	
-	return ret;
+	return type;
 }
 int32_t SubscrColorInfo::get_int_cset() const
 {
