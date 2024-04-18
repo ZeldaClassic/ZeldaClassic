@@ -195,13 +195,9 @@ void loadpalset(int32_t cset, int32_t dataset, bool update_tint)
 	if (cset == 14)
 	{
 		if (dataset >= poSPRITE255 && dataset < poSPRITE255 + pdSPRITE)
-		{
 			currspal14 = dataset - poSPRITE255;
-		}
 		else
-		{
 			currspal14 = -1;
-		}
 	}
 	refreshpal=true;
 }
@@ -548,9 +544,7 @@ void dryuplake()
         if(tmpscr->flags & fWHISTLE)
         {
             if(hiddenstair(0,true))
-            {
                 sfx(tmpscr->secretsfx);
-            }
         }
     }
 }
