@@ -1502,6 +1502,7 @@ enum
 	MENUID_ETC_VIDMODE,
 	MENUID_ETC_FULLSCREEN,
 	MENUID_ETC_DEBUG_CONSOLE,
+	MENUID_ETC_CLEAR_QUESTPATH
 };
 static NewMenu etc_menu
 {
@@ -1517,7 +1518,7 @@ static NewMenu etc_menu
 	{ "Media",                 &media_menu },
 	{},
 	{ "&Debug Console",        toggleConsole, MENUID_ETC_DEBUG_CONSOLE },
-	{ "Clear Quest Filepath",  onClearQuestFilepath },
+	{ "Clear Quest Filepath",  onClearQuestFilepath, MENUID_ETC_CLEAR_QUESTPATH },
 	{ "&Take ZQ Snapshot",     onSnapshot },
 	{ "Take &Screen Snapshot", onMapscrSnapshot },
 };
