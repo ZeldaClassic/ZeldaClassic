@@ -164,10 +164,7 @@ static int32_t read_saves(ReadMode read_mode, PACKFILE* f, std::vector<save_t>& 
 		return 3;
 	
 	if(section_version < 11) //Sorry!
-	{
-		//Currently unsupported
-		return 1;
-	}
+		return 1; //Currently unsupported
 	
 	//section size
 	if(!p_igetl(&section_size,f))

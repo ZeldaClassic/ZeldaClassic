@@ -49,14 +49,8 @@ static int zc_gui_mouse_y()
 	return rti_game.rel_mouse().second;
 }
 
-int window_mouse_x()
-{
-	return rti_game.rel_mouse().first;
-}
-int window_mouse_y()
-{
-	return rti_game.rel_mouse().second;
-}
+int window_mouse_x() { return rti_game.rel_mouse().first; }
+int window_mouse_y() { return rti_game.rel_mouse().second; }
 
 static void init_render_tree()
 {
