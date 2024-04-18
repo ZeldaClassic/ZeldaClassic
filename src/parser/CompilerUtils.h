@@ -67,7 +67,7 @@ namespace ZScript
 class XTableHelper
 {
 	public:
-	std::string formatStr(std::string const* format, ...);
+	const char* formatStr(std::string const* format, ...);
 
 	private:
 };

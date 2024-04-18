@@ -4,7 +4,7 @@
 #include <cstdio>
 #include <string>
 
-std::string XTableHelper::formatStr(std::string const* format, ...)
+const char* XTableHelper::formatStr(std::string const* format, ...)
 {
 	static char buffer[formatBufferSize];
 	
@@ -13,5 +13,5 @@ std::string XTableHelper::formatStr(std::string const* format, ...)
 	vsprintf(buffer, format->c_str(), args);
 	va_end(args);
 
-	return std::string(buffer);
+	return buffer;
 }
