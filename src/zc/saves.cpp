@@ -35,11 +35,14 @@ namespace fs = std::filesystem;
 
 extern FFScript FFCore;
 
-static const char *SAVE_HEADER = "ZQuest Classic Save File";
-static const char *OLD_SAVE_HEADER = "Zelda Classic Save File";
-static int currgame = -1;
-static std::vector<save_t> saves;
-static bool save_current_replay_games;
+namespace
+{
+	const char* SAVE_HEADER = "ZQuest Classic Save File";
+	const char* OLD_SAVE_HEADER = "Zelda Classic Save File";
+	int currgame = -1;
+	std::vector<save_t> saves;
+	bool save_current_replay_games;
+}
 
 void save_t::unload()
 {
