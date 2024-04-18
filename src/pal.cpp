@@ -211,13 +211,9 @@ void ringcolor(bool forceDefault)
     int32_t itemid = current_item_id(itype_ring);
     
     if(!forceDefault && itemid>-1)
-    {
         loadpalset(6,itemsbuf[itemid].misc1 ? pSprite(zc_min((pdSPRITE-1),itemsbuf[itemid].misc1)):6);
-    }
     else
-    {
         loadpalset(6,6);
-    }
     
     refreshpal=true;
 }
