@@ -19729,9 +19729,7 @@ void setupscreen()
 		for(int32_t i=0; i<3; i++)
 		{
 			if(QMisc.info[tmpscr[t].catchall].str[i])
-			{
 				++count;
-			}
 			else
 				break;
 		}
@@ -19739,14 +19737,10 @@ void setupscreen()
 		if(count)
 		{
 			if(count==1)
-			{
 				base = 88+32;
-			}
 			
 			if(count==2)
-			{
 				step = 6;
-			}
 			
 			for(int32_t i=0; i < count; i++)
 			{
@@ -19835,24 +19829,16 @@ void setupscreen()
 		for(int32_t i=0; i<3; ++i)
 		{
 			if(QMisc.shop[tmpscr[t].catchall].hasitem[count] != 0)
-			{
 				++count;
-			}
 			else
-			{
 				break;
-			}
 		}
 		
 		if(count==1)
-		{
 			base = 88+32;
-		}
 		
 		if(count==2)
-		{
 			step = 6;
-		}
 		
 		for(int32_t i=0; i<count; i++)
 		{
@@ -19896,24 +19882,16 @@ void setupscreen()
 		for(int32_t i=0; i<3; ++i)
 		{
 			if(bst.fill[count] != 0)
-			{
 				++count;
-			}
 			else
-			{
 				break;
-			}
 		}
 		
 		if(count==1)
-		{
 			base = 88+32;
-		}
 		
 		if(count==2)
-		{
 			step = 6;
-		}
 		
 		for(int32_t i=0; i<count; i++)
 		{
@@ -20010,13 +19988,9 @@ void setupscreen()
 	putprices(false);
 	
 	if(str)
-	{
 		donewmsg(str);
-	}
 	else
-	{
 		Hero.unfreeze();
-	}
 }
 
 // Increments msgptr and returns the control code argument pointed at.
