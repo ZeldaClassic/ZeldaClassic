@@ -6846,25 +6846,10 @@ bool weapon::animate(int32_t index)
 	{
 		switch(dir)
 		{
-			case up:
-				x-=1;
-				y+=2;
-				break;
-				
-			case down:
-				x+=1;
-				y-=2;
-				break;
-				
-			case left:
-				x+=2;
-				y-=1;
-				break;
-				
-			case right:
-				x-=2;
-				y-=1;
-				break;
+			case up:    x-=1; y+=2; break; 
+			case down:  x+=1; y-=2; break; 
+			case left:  x+=2; y-=1; break; 
+			case right: x-=2; y-=1; break;
 		}
 	}
 	
