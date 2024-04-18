@@ -12467,10 +12467,10 @@ static DIALOG wlist_dlg[] =
 
 
 /*
-  typedef struct item_struct {
+  struct item_struct {
   char *s;
   int32_t i;
-  } item_struct;
+  };
   */
 item_struct bii[MAXITEMS+1];
 int32_t bii_cnt=-1;

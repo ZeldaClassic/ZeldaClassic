@@ -64,7 +64,7 @@ err:
 /*
   #define MAX_TEMPO_CHANGES 512
 
-  typedef struct midi_info
+  struct midi_info
   {
   // midi info
   int32_t format;
@@ -81,9 +81,9 @@ err:
   byte event,running_status,type,byte2;
   byte *buf;
 
-  } midi_info;
+  };
 
-  typedef struct mtrkevent
+  struct mtrkevent
   // sort of... it's actually not a true MTrk event because it can be a
   // combination of events, such as a "note on" event plus a "note off" event
   {
@@ -95,7 +95,7 @@ err:
   word nbytes;     // number of bytes in "buf" or note off velocity
   byte type;       // meta type, note number, etc.
   byte byte2;      // byte 2 or note on velocity
-  } mtrkevent;
+  };
 
   */
 

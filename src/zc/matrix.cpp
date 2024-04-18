@@ -13,17 +13,17 @@ FONT* get_zc_font(int index);
 #define MED_GREEN     245
 #define DARK_GREEN    244
 
-typedef struct zcMatrixTRACER
+struct zcMatrixTRACER
 {
     byte x, y;
     byte speed;
     byte cnt;
-} zcMatrixTRACER;
+};
 
-typedef struct zcMatrixCOLUMN
+struct zcMatrixCOLUMN
 {
     int16_t speed, cnt;
-} zcMatrixCOLUMN;
+};
 
 static LegacyBitmapRTI rti_matrix("matrix");
 static BITMAP *target_bitmap = NULL;
