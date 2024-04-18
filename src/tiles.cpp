@@ -41,9 +41,7 @@ bool isblanktile(tiledata *buf, int32_t i)
     for(int32_t j=0; j<parts; ++j, ++di)
     {
         if(*di!=0)
-        {
             return false;
-        }
     }
     
     return true;
@@ -422,9 +420,7 @@ void reset_tile(tiledata *buf, int32_t t, int32_t format=1)
 void clear_tiles(tiledata *buf)
 {
     for(int32_t i=0; i<NEWMAXTILES; ++i)
-    {
         reset_tile(buf,i,tf4Bit);
-    }
 }
 
 void overlay_tile(tiledata *buf,int32_t dest,int32_t src,int32_t cs,bool backwards)
@@ -443,9 +439,7 @@ void overlay_tile(tiledata *buf,int32_t dest,int32_t src,int32_t cs,bool backwar
     unpack_tile(buf, src, 0, false);
     
     if(buf[src].format>tf4Bit)
-    {
         cs=0;
-    }
     
     cs &= 15;
     cs <<= CSET_SHFT;
@@ -455,23 +449,17 @@ void overlay_tile(tiledata *buf,int32_t dest,int32_t src,int32_t cs,bool backwar
         if(backwards)
         {
             if(!upbuf[i])
-            {
                 upbuf[i] = unpackbuf[i]+cs;
-            }
         }
         else
         {
             if(unpackbuf[i])
-            {
                 upbuf[i] = unpackbuf[i]+cs;
-            }
         }
     }
     
     if(!blank_tile_table[src])
-    {
         blank_tile_table[dest]=false;
-    }
     
     pack_tile(buf, upbuf,dest);
 }
