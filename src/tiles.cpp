@@ -814,9 +814,7 @@ void puttiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t c
         return;
         
     if(newtilebuf[tile>>2].format>tf4Bit)
-    {
         cset=0;
-    }
     
     cset &= 15;
     cset <<= CSET_SHFT;
@@ -824,16 +822,12 @@ void puttiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t c
     const byte *si = bytes + ((tile&2)<<6) + ((tile&1)<<3);
     
     if(flip&1)  //horizontal
-    {
         si+=7;
-    }
     
     if((flip&2)==0)                                           //not flipped vertically
     {
         if(y<0)
-        {
             si+=(0-y)<<4;
-        }
         
         for(int32_t dy=(y<0 ? 0-y : 0); (dy<8)&&(dy+y<dest->h); ++dy)
         {
@@ -852,21 +846,15 @@ void puttiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t c
             }
             
             if(flip&1)
-            {
                 si+=24;
-            }
             else
-            {
                 si+=8;
-            }
         }
     }                                                         //flipped vertically
     else
     {
         if(y+7>=dest->h)
-        {
             si+=(8+y-dest->h)<<4;
-        }
         
         for(int32_t dy=(y+7>=dest->h ? dest->h-y-1 : 7); (dy>=0)&&(dy+y>=0); --dy)
         {
@@ -885,13 +873,9 @@ void puttiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t c
             }
             
             if(flip&1)
-            {
                 si+=24;
-            }
             else
-            {
                 si+=8;
-            }
         }
     }
 }
@@ -908,14 +892,10 @@ void overtiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t 
         return;
         
     if(blank_tile_quarters_table[tile])
-    {
         return;
-    }
     
     if(newtilebuf[tile>>2].format>tf4Bit)
-    {
         cset=0;
-    }
     
     cset &= 15;
     cset <<= CSET_SHFT;
@@ -924,16 +904,12 @@ void overtiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t 
     const byte *si = bytes + ((tile&2)<<6) + ((tile&1)<<3);
     
     if(flip&1)
-    {
         si+=7;
-    }
     
     if((flip&2)==0)                                           //not flipped vertically
     {
         if(y<0)
-        {
             si+=(0-y)<<4;
-        }
         
         for(int32_t dy=(y<0 ? 0-y : 0); (dy<8)&&(dy+y<dest->h); ++dy)
         {
@@ -956,21 +932,15 @@ void overtiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t 
             }
             
             if(flip&1)
-            {
                 si+=24;
-            }
             else
-            {
                 si+=8;
-            }
         }
     }                                                         //flipped vertically
     else
     {
         if(y+7>=dest->h)
-        {
             si+=(8+y-dest->h)<<4;
-        }
         
         for(int32_t dy=(y+7>=dest->h ? dest->h-y-1 : 7); (dy>=0)&&(dy+y>=0); --dy)
         {
@@ -993,13 +963,9 @@ void overtiletranslucent8(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t 
             }
             
             if(flip&1)
-            {
                 si+=24;
-            }
             else
-            {
                 si+=8;
-            }
         }
     }
 }
@@ -1022,9 +988,7 @@ void puttiletranslucent16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t 
     }
     
     if(newtilebuf[tile].format>tf4Bit)
-    {
         cset=0;
-    }
     
     cset &= 15;
     cset <<= CSET_SHFT;
@@ -1137,14 +1101,10 @@ void overtiletranslucent16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t
     }
     
     if(blank_tile_table[tile])
-    {
         return;
-    }
     
     if(newtilebuf[tile].format>tf4Bit)
-    {
         cset=0;
-    }
     
     cset &= 15;
     cset <<= CSET_SHFT;
@@ -1290,9 +1250,7 @@ void overtilecloaked16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t fli
                 for(int32_t dx=(x<0 ? 0-x : 0); dx<16; ++dx)
                 {
                     if(*si)
-                    {
                         *di=dest->line[((y+dy)^1)][((x+dx)^1)];
-                    }
                     
                     ++di;
                     flip&1 ? --si : ++si;
@@ -1305,9 +1263,7 @@ void overtilecloaked16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t fli
                     if(x+i<dest->w)
                     {
                         if(*si)
-                        {
                             *di=dest->line[((y+dy)^1)][(x^1)];
-                        }
                         
                         ++di;
                     }
@@ -1337,9 +1293,7 @@ void overtilecloaked16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t fli
                 for(int32_t dx=(x<0 ? 0-x : 0); dx<16; ++dx)
                 {
                     if(*si)
-                    {
                         *di=dest->line[((y+dy)^1)][((x+dx)^1)];
-                    }
                     
                     ++di;
                     flip&1 ? --si : ++si;
@@ -1352,9 +1306,7 @@ void overtilecloaked16(BITMAP* dest,int32_t tile,int32_t x,int32_t y,int32_t fli
                     if(x+i<dest->w)
                     {
                         if(*si)
-                        {
                             *di=dest->line[((y+dy)^1)][(x^1)];
-                        }
                         
                         ++di;
                     }
