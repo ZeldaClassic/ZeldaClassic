@@ -3417,21 +3417,10 @@ bool weapon::blocked(int32_t xOffset, int32_t yOffset)
     
     switch(dir)
     {
-    case up:
-        wy-=8;
-        break;
-        
-    case down:
-        wy+=8;
-        break;
-        
-    case left:
-        wx-=8;
-        break;
-        
-    case right:
-        wx+=8;
-        break;
+	    case up:    wy-=8; break; 
+	    case down:  wy+=8; break; 
+	    case left:  wx-=8; break; 
+	    case right: wx+=8; break;
     }
     
     if(get_bit(combo_class_buf[COMBOTYPE(wx,wy)].block_weapon,id)
