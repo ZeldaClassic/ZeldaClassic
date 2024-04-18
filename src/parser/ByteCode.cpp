@@ -5728,161 +5728,40 @@ string OZapR       ::toString() const { return "FXZAPR " + getArgument()->toStri
 string OGreyscaleR ::toString() const { return "GREYSCALER " + getArgument()->toString(); } 
 string OMonochromeR::toString() const { return "MONOCHROMER " + getArgument()->toString(); } 
 
-string OClearTint::toString() const
-{
-    return "CLEARTINT";
-}
-
-string OTintR::toString() const
-{
-    return "TINT";
-}
-
-string OMonoHueR::toString() const
-{
-    return "MONOHUE";
-}
+string OClearTint::toString() const { return "CLEARTINT"; } 
+string OTintR    ::toString() const { return "TINT"; } 
+string OMonoHueR ::toString() const { return "MONOHUE"; }
 
 //Bitmap commands
 
-string OBMPRectangleRegister::toString() const
-{
-    return "BMPRECTR";
-}
-
-string OBMPFrameRegister::toString() const
-{
-    return "BMPFRAMER";
-}
-
-string OBMPCircleRegister::toString() const
-{
-    return "BMPCIRCLER";
-}
-
-string OBMPArcRegister::toString() const
-{
-    return "BMPARCR";
-}
-
-string OBMPEllipseRegister::toString() const
-{
-    return "BMPELLIPSER";
-}
-
-string OBMPLineRegister::toString() const
-{
-    return "BMPLINER";
-}
-
-string OBMPSplineRegister::toString() const
-{
-    return "BMPBMPSPLINER";
-}
-
-string OBMPPutPixelRegister::toString() const
-{
-    return "BMPPUTPIXELR";
-}
-
-string OBMPDrawCharRegister::toString() const
-{
-    return "BMPDRAWCHARR";
-}
-
-string OBMPDrawIntRegister::toString() const
-{
-    return "BMPDRAWINTR";
-}
-
-string OBMPDrawTileRegister::toString() const
-{
-    return "BMPDRAWTILER";
-}
-
-string OBMPDrawTileCloakedRegister::toString() const
-{
-    return "BMPDRAWTILECLOAKEDR";
-}
-
-string OBMPDrawComboRegister::toString() const
-{
-    return "BMPDRAWCOMBOR";
-}
-
-string OBMPDrawComboCloakedRegister::toString() const
-{
-    return "BMPDRAWCOMBOCLOAKEDR";
-}
-
-string OBMPFastTileRegister::toString() const
-{
-    return "BMPFASTTILER";
-}
-
-string OBMPFastComboRegister::toString() const
-{
-    return "BMPFASTCOMBOR";
-}
-
-string OBMPDrawStringRegister::toString() const
-{
-    return "BMPDRAWSTRINGR";
-}
-
-string OBMPDrawString2Register::toString() const
-{
-    return "BMPDRAWSTRINGR2";
-}
-
-string OBMPDrawBitmapExRegister::toString() const
-{
-    return "BMPBLIT";
-}
-string OBMPBlitTO::toString() const
-{
-    return "BMPBLITTO";
-}
-
-string OBMPGetPixel::toString() const
-{
-    return "BITMAPGETPIXEL";
-}
-string OBMPMode7::toString() const
-{
-    return "BMPMODE7";
-}
-
-string OBMPQuadRegister::toString() const
-{
-    return "BMPQUADR";
-}
-
-string OBMPTriangleRegister::toString() const
-{
-    return "BMPTRIANGLER";
-}
-
-
-string OBMPQuad3DRegister::toString() const
-{
-    return "BMPQUAD3DR";
-}
-
-string OBMPTriangle3DRegister::toString() const
-{
-    return "BMPTRIANGLE3DR";
-}
-
-string OBMPDrawLayerRegister::toString() const
-{
-    return "BMPDRAWLAYERR";
-}
-
-string OBMPDrawScreenRegister::toString() const
-{
-    return "BMPDRAWSCREENR";
-}
+string OBMPRectangleRegister       ::toString() const { return "BMPRECTR"; } 
+string OBMPFrameRegister           ::toString() const { return "BMPFRAMER"; } 
+string OBMPCircleRegister          ::toString() const { return "BMPCIRCLER"; } 
+string OBMPArcRegister             ::toString() const { return "BMPARCR"; } 
+string OBMPEllipseRegister         ::toString() const { return "BMPELLIPSER"; } 
+string OBMPLineRegister            ::toString() const { return "BMPLINER"; } 
+string OBMPSplineRegister          ::toString() const { return "BMPBMPSPLINER"; } 
+string OBMPPutPixelRegister        ::toString() const { return "BMPPUTPIXELR"; } 
+string OBMPDrawCharRegister        ::toString() const { return "BMPDRAWCHARR"; } 
+string OBMPDrawIntRegister         ::toString() const { return "BMPDRAWINTR"; } 
+string OBMPDrawTileRegister        ::toString() const { return "BMPDRAWTILER"; } 
+string OBMPDrawTileCloakedRegister ::toString() const { return "BMPDRAWTILECLOAKEDR"; } 
+string OBMPDrawComboRegister       ::toString() const { return "BMPDRAWCOMBOR"; } 
+string OBMPDrawComboCloakedRegister::toString() const { return "BMPDRAWCOMBOCLOAKEDR"; } 
+string OBMPFastTileRegister        ::toString() const { return "BMPFASTTILER"; } 
+string OBMPFastComboRegister       ::toString() const { return "BMPFASTCOMBOR"; } 
+string OBMPDrawStringRegister      ::toString() const { return "BMPDRAWSTRINGR"; } 
+string OBMPDrawString2Register     ::toString() const { return "BMPDRAWSTRINGR2"; } 
+string OBMPDrawBitmapExRegister    ::toString() const { return "BMPBLIT"; }
+string OBMPBlitTO                  ::toString() const { return "BMPBLITTO"; } 
+string OBMPGetPixel                ::toString() const { return "BITMAPGETPIXEL"; }
+string OBMPMode7                   ::toString() const { return "BMPMODE7"; } 
+string OBMPQuadRegister            ::toString() const { return "BMPQUADR"; } 
+string OBMPTriangleRegister        ::toString() const { return "BMPTRIANGLER"; } 
+string OBMPQuad3DRegister          ::toString() const { return "BMPQUAD3DR"; } 
+string OBMPTriangle3DRegister      ::toString() const { return "BMPTRIANGLE3DR"; } 
+string OBMPDrawLayerRegister       ::toString() const { return "BMPDRAWLAYERR"; } 
+string OBMPDrawScreenRegister      ::toString() const { return "BMPDRAWSCREENR"; }
 
 string OHeroWarpExRegister::toString() const
 {
@@ -5929,49 +5808,20 @@ string OScreenTriggerCombo::toString() const
 	return "SCRTRIGGERCOMBO " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
 }
 
-string ONPCMovePaused::toString() const
-{
-	return "NPCMOVEPAUSED";
-}
-string ONPCMove::toString() const
-{
-	return "NPCMOVE";
-}
-string ONPCMoveAngle::toString() const
-{
-	return "NPCMOVEANGLE";
-}
-string ONPCMoveXY::toString() const
-{
-	return "NPCMOVEXY";
-}
-string ONPCCanMoveDir::toString() const
-{
-	return "NPCCANMOVEDIR";
-}
-string ONPCCanMoveAngle::toString() const
-{
-	return "NPCCANMOVEANGLE";
-}
-string ONPCCanMoveXY::toString() const
-{
-	return "NPCCANMOVEXY";
-}
-string ONPCCanPlace::toString() const
-{
-	return "NPCCANPLACE";
-}
-string ONPCIsFlickerFrame::toString() const
-{
-	return "NPCISFLICKERFRAME";
-}
-
+string ONPCMovePaused    ::toString() const { return "NPCMOVEPAUSED"; }
+string ONPCMove          ::toString() const { return "NPCMOVE"; }
+string ONPCMoveAngle     ::toString() const { return "NPCMOVEANGLE"; }
+string ONPCMoveXY        ::toString() const { return "NPCMOVEXY"; }
+string ONPCCanMoveDir    ::toString() const { return "NPCCANMOVEDIR"; }
+string ONPCCanMoveAngle  ::toString() const { return "NPCCANMOVEANGLE"; }
+string ONPCCanMoveXY     ::toString() const { return "NPCCANMOVEXY"; }
+string ONPCCanPlace      ::toString() const { return "NPCCANPLACE"; }
+string ONPCIsFlickerFrame::toString() const { return "NPCISFLICKERFRAME"; } 
 
 string OGetSystemRTCRegister::toString() const
 {
     return "GETRTCTIMER " + getArgument()->toString();
-}
-
+} 
 
 string ONPCExplodeRegister::toString() const
 {
@@ -6020,18 +5870,10 @@ string ONPCRemove::toString() const
 {
     return "NPCKICKBUCKET " + getArgument()->toString();
 }
-string OLWpnRemove::toString() const
-{
-    return "LWPNDEL";
-}
-string OEWpnRemove::toString() const
-{
-    return "EWPNDEL";
-}
-string OItemRemove::toString() const
-{
-    return "ITEMDEL";
-}
+string OLWpnRemove::toString() const { return "LWPNDEL"; }
+string OEWpnRemove::toString() const { return "EWPNDEL"; }
+string OItemRemove::toString() const { return "ITEMDEL"; }
+
 string ONPCStopSFX::toString() const
 {
     return "NPCSTOPBGSFX " + getArgument()->toString();
@@ -6118,74 +5960,23 @@ string ORegenerateBitmap::toString() const
     return "REGENERATEBITMAP";
 }
 
-string OReadBitmap::toString() const
-{
-    return "READBITMAP";
-}
-string OWriteBitmap::toString() const
-{
-    return "WRITEBITMAP";
-}
-string OBitmapFree::toString() const
-{
-    return "BITMAPFREE";
-}
-string OBitmapOwn::toString() const
-{
-    return "BITMAPOWN";
-}
-string OFileOwn::toString() const
-{
-    return "FILEOWN";
-}
-string ODirectoryOwn::toString() const
-{
-    return "DIRECTORYOWN";
-}
-string ORNGOwn::toString() const
-{
-    return "RNGOWN";
-}
-string OBitmapWriteTile::toString() const
-{
-    return "BMPWRITETILE";
-}
-string OBitmapDither::toString() const
-{
-    return "BMPDITHER";
-}
-string OBitmapReplColor::toString() const
-{
-    return "BMPREPLCOLOR";
-}
-string OBitmapShiftColor::toString() const
-{
-    return "BMPSHIFTCOLOR";
-}
-string OBitmapMaskDraw::toString() const
-{
-    return "BMPMASKDRAW";
-}
-string OBitmapMaskDraw2::toString() const
-{
-    return "BMPMASKDRAW2";
-}
-string OBitmapMaskDraw3::toString() const
-{
-    return "BMPMASKDRAW3";
-}
-string OBitmapMaskBlit::toString() const
-{
-    return "BMPMASKBLIT";
-}
-string OBitmapMaskBlit2::toString() const
-{
-    return "BMPMASKBLIT2";
-}
-string OBitmapMaskBlit3::toString() const
-{
-    return "BMPMASKBLIT3";
-}
+string OReadBitmap      ::toString() const { return "READBITMAP"; }
+string OWriteBitmap     ::toString() const { return "WRITEBITMAP"; }
+string OBitmapFree      ::toString() const { return "BITMAPFREE"; }
+string OBitmapOwn       ::toString() const { return "BITMAPOWN"; }
+string OFileOwn         ::toString() const { return "FILEOWN"; }
+string ODirectoryOwn    ::toString() const { return "DIRECTORYOWN"; }
+string ORNGOwn          ::toString() const { return "RNGOWN"; }
+string OBitmapWriteTile ::toString() const { return "BMPWRITETILE"; }
+string OBitmapDither    ::toString() const { return "BMPDITHER"; }
+string OBitmapReplColor ::toString() const { return "BMPREPLCOLOR"; }
+string OBitmapShiftColor::toString() const { return "BMPSHIFTCOLOR"; }
+string OBitmapMaskDraw  ::toString() const { return "BMPMASKDRAW"; }
+string OBitmapMaskDraw2 ::toString() const { return "BMPMASKDRAW2"; }
+string OBitmapMaskDraw3 ::toString() const { return "BMPMASKDRAW3"; }
+string OBitmapMaskBlit  ::toString() const { return "BMPMASKBLIT"; }
+string OBitmapMaskBlit2 ::toString() const { return "BMPMASKBLIT2"; }
+string OBitmapMaskBlit3 ::toString() const { return "BMPMASKBLIT3"; }
 
 string OIsValidBitmap::toString() const
 {
