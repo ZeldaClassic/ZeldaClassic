@@ -7886,8 +7886,7 @@ int32_t eOther::takehit(weapon *w, weapon* realweap)
 			o_tile=s_tile;
 	}
 	
-	int32_t ret = enemy::takehit(w,realweap);
-	return ret;
+	return enemy::takehit(w,realweap);
 }
 
 void eOther::break_shield()
