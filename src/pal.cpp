@@ -201,14 +201,15 @@ void loadpalset(int32_t cset, int32_t dataset, bool update_tint)
 
 void ringcolor(bool forceDefault)
 {
-    int32_t itemid = current_item_id(itype_ring);
+	int32_t itemid = current_item_id(itype_ring);
+	int32_t dataset = 6; // if forceDefault, dataset will stay 6
     
-    if (!forceDefault && itemid > -1)
-        loadpalset(6,itemsbuf[itemid].misc1 ? pSprite(zc_min((pdSPRITE-1),itemsbuf[itemid].misc1)):6);
-    else
-        loadpalset(6,6);
+	if (!forceDefault && itemid > -1 && itemsbuf[itemid].misc1)
+		dataset = pSprite(zc_min((pdSPRITE - 1), itemsbuf[itemid].misc1));
+
+	loadpalset(6, dataset);
     
-    refreshpal=true;
+	refreshpal=true;
 }
 
 void loadfadepal(int32_t dataset)
