@@ -126,14 +126,10 @@ static void * compile_script_proc(ALLEGRO_THREAD *thread, void *arg)
 	while (true)
 	{
 		while (!(al_get_thread_should_stop(thread) || pending_scripts.size()))
-		{
 			al_wait_cond(tasks_cond, tasks_mutex);
-		}
 
 		if (al_get_thread_should_stop(thread))
-		{
 			break;
-		}
 
 		int generation = thread_pool_generation_count;
 		auto script = pending_scripts.back();
@@ -172,9 +168,7 @@ static void create_compile_tasks(script_data *scripts[], size_t start, size_t ma
 	{
 		auto script = scripts[i];
 		if (script && script->valid() && !compiled_functions.contains({type, (int)i}))
-		{
 			pending_scripts.push_back(script);
-		}
 	}
 }
 
@@ -214,9 +208,8 @@ static bool set_compilation_thread_pool_size(int target_size)
 
 			ALLEGRO_THREAD *t = al_create_thread(compile_script_proc, &thread_info);
 			if (!t)
-			{
 				return false;
-			}
+
 			thread_info.thread = t;
 			thread_info.state = ThreadState::Starting;
 			al_start_thread(t);
@@ -276,9 +269,7 @@ static void create_compile_tasks()
 	if (jit_log_enabled)
 	{
 		for (auto a : pending_scripts) 
-		{
 			jit_printf("jit: %d: %d\n", a->id, (int)a->size);
-		}
 	}
 
 	al_broadcast_cond(tasks_cond);
@@ -361,9 +352,7 @@ void jit_startup()
 		num_threads = std::max(1, (int)processor_count / -num_threads);
 
 	for (int i = 0; i < thread_infos.size(); i++)
-	{
 		thread_infos[i].id = i;
-	}
 
 	if (!tasks_mutex)
 		tasks_mutex = al_create_mutex();
@@ -383,9 +372,8 @@ void jit_startup()
 		al_lock_mutex(tasks_mutex);
 		thread_pool_generation_count++;
 		for (auto &it : compiled_functions)
-		{
 			jit_release(it.second);
-		}
+
 		compiled_functions.clear();
 		al_unlock_mutex(tasks_mutex);
 	}
@@ -405,9 +393,8 @@ void jit_startup()
 	{
 		al_lock_mutex(tasks_mutex);
 		while (pending_scripts.size() || active_tasks.size())
-		{
 			al_wait_cond(task_finish_cond, tasks_mutex);
-		}
+
 		al_unlock_mutex(tasks_mutex);
 	}
 #endif
@@ -436,9 +423,7 @@ void jit_poll()
 		}
 
 		if (thread_info.state == ThreadState::Running || thread_info.state == ThreadState::Starting)
-		{
 			active_threads += 1;
-		}
 	}
 
 	int tasks_left = active_tasks.size() + pending_scripts.size();
