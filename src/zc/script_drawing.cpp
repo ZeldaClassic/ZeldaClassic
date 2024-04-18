@@ -244,9 +244,6 @@ public:
     }
 };
 
-
-
-
 void do_rectr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
 {
     //sdci[1]=layer
