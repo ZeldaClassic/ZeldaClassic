@@ -259,9 +259,7 @@ void do_rectr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     //sdci[11]=fill
     //sdci[12]=opacity
     if(sdci[7]==0)  //scale
-    {
         return;
-    }
     
     int32_t x1=sdci[2]/10000;
     int32_t y1=sdci[3]/10000;
@@ -269,14 +267,10 @@ void do_rectr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     int32_t y2=sdci[5]/10000;
     
     if(x1>x2)
-    {
         zc_swap(x1,x2);
-    }
     
     if(y1>y2)
-    {
         zc_swap(y1,y2);
-    }
     
     if(sdci[7] != 10000)
     {
@@ -293,20 +287,14 @@ void do_rectr(BITMAP *bmp, int32_t *sdci, int32_t xoffset, int32_t yoffset)
     int32_t color=sdci[6]/10000;
     
     if(sdci[12]/10000<=127) //translucent
-    {
         drawing_mode(DRAW_MODE_TRANS, NULL, 0, 0);
-    }
     
     if(sdci[10]==0) //no rotation
     {
         if(sdci[11]) //filled
-        {
             rectfill(bmp, x1+xoffset, y1+yoffset, x2+xoffset, y2+yoffset, color);
-        }
         else //outline
-        {
             rect(bmp, x1+xoffset, y1+yoffset, x2+xoffset, y2+yoffset, color);
-        }
     }
     else  //rotate
     {
