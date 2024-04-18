@@ -376,9 +376,7 @@ void fade(int32_t level,bool blackall,bool fromblack)
 		fromblack ? --cx : ++cx;
 		
 		if(get_qr(qr_FADE))
-		{
 			fromblack ? --cx : ++cx;
-		}
 	}
 	
 	// Make sure the palette is set exactly right before returning...
@@ -406,9 +404,8 @@ void lighting(bool existslight, bool setnaturaldark, int32_t specialstate)
 			return;
 	}
 	if(stayLit)
-	{
 		existslight=true;
-	}
+
     bool newstate = !existslight && (setnaturaldark ? ((TheMaps[currmap*MAPSCRS+currscr].flags&fDARK) != 0) : naturaldark);
     if(get_qr(qr_NEW_DARKROOM)) newstate = false;
     if(darkroom != newstate)
