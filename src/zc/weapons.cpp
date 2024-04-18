@@ -4091,37 +4091,14 @@ bool weapon::animate(int32_t index)
 	if(id>wEnemyWeapons && id!=ewBrang && id != ewFireball2 && id != ewBomb && id != ewSBomb)
 		switch(misc)
 		{
-			case up:
-				y-=.5;
-				break;
-				
-			case down:
-				y+=.5;
-				break;
-				
-			case left:
-				x-=.5;
-				break;
-				
-			case right:
-				x+=.5;
-				break;
-				
-			case 4:
-				y-=1;
-				break;
-				
-			case 5:
-				y+=1;
-				break;
-				
-			case 6:
-				x-=1;
-				break;
-				
-			case 7:
-				x+=1;
-				break;
+			case up:    y-=.5; break; 
+			case down:  y+=.5; break; 
+			case left:  x-=.5; break; 
+			case right: x+=.5; break; 
+			case 4:     y-=1;  break; 
+			case 5:     y+=1;  break; 
+			case 6:     x-=1;  break; 
+			case 7:     x+=1;  break;
 			//case l_up:  y-=.354; x-=.354; break;
 			//case r_up:  y-=.354; x+=.354; break;
 			//case l_down:y+=.354; x-=.354; break;
@@ -4167,18 +4144,14 @@ bool weapon::animate(int32_t index)
 		case wHammer:
 		case wBugNet:
 			if(HeroAction()!=attacking && HeroAction()!=sideswimattacking && HeroAction()!=ischarging && !HeroCharged())
-			{
 				dead=0;
-			}
 			
 			break;
 			
 		case wCByrna:
 		{
 			if(blocked())
-			{
 				dead=0;
-			}
 			
 			int32_t speed = parentitem>-1 ? zc_max(itemsbuf[parentitem].misc1,1) : 1;
 			int32_t radius = parentitem>-1 ? zc_max(itemsbuf[parentitem].misc2,8) : 8;
