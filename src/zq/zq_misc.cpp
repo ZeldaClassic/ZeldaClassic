@@ -824,9 +824,14 @@ int32_t onSpacebar()
 
 int32_t onClearQuestFilepath()
 {
+	std::string msg = "Clear the current default filepath?";
+
+	if (filepath && strlen(filepath) )
+		msg += "  Currently is " + string(filepath);
+
 	if(jwin_alert3(
 			"Clear Quest Path",
-			"Clear the current default filepath?",
+			msg.c_str(),
 			NULL,
 			NULL,
 		 "&Yes",
