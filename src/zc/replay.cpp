@@ -686,8 +686,7 @@ static void load_replay(std::filesystem::path path)
         {
             ASSERT(!done_with_meta);
 
-            std::string key;
-            std::string value;
+	    std::string key, value;
             iss >> key;
             iss.ignore(1);
             util::portable_get_line(iss, value);
@@ -712,9 +711,7 @@ static void load_replay(std::filesystem::path path)
         {
             Cheat cheat;
             int arg1 = -1, arg2 = -1;
-            std::string arg3;
-
-            std::string cheat_name;
+	    std::string arg3, cheat_name;
             iss >> cheat_name;
             cheat = cheat_from_string(cheat_name);
             ASSERT(cheat > Cheat::None && cheat < Cheat::Last);
