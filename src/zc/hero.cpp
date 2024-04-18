@@ -30792,17 +30792,14 @@ bool HeroClass::refill()
 }
 
 void HeroClass::getTriforce(int32_t id2)
-{
-		
+{ 
 	PALETTE flash_pal;
 	int32_t refill_frame = ( (itemsbuf[id2].misc5 > 0) ? itemsbuf[id2].misc5 : 88 );
 	
 	for(int32_t i=0; i<256; i++)
 	{
 		flash_pal[i] = get_qr(qr_FADE) ? _RGB(63,63,0) : _RGB(63,63,63); 
-	}
-
-
+	} 
 
 	//get rid off all sprites but Hero
 	guys.clear();
@@ -30857,9 +30854,7 @@ void HeroClass::getTriforce(int32_t id2)
 	int32_t c=0;
 
 	do
-	{
-		
-		
+	{ 
 		if ( (itemsbuf[id2].flags & ITEM_FLAG13) ) //Run action script on collection.
 		{
 			if ( itemsbuf[id2].script )
@@ -32454,19 +32449,13 @@ void HeroClass::execute(HeroClass::WalkflagInfo info)
     }
     
     if(flags & WalkflagInfo::SETDIR)
-    {
         dir = info.getDir();
-    }
     
     if(flags & WalkflagInfo::SETHOPCLK)
-    {
         hopclk = info.getHopClk();
-    }
     
     if(flags & WalkflagInfo::SETHOPDIR)
-    {
         hopdir = info.getHopDir();
-    }
     
 }
 
