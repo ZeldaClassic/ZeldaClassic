@@ -71,10 +71,9 @@ Scope* ZScript::lookupScope(Scope const& scope, string const& name, bool noUsing
 	if(!noUsing)//handle Using Namespaces
 	{
 		vector<NamespaceScope*> namespaces = lookupUsingNamespaces(*first);
-		for(vector<NamespaceScope*>::iterator it = namespaces.begin();
-			it != namespaces.end(); ++it)
+		for( NamespaceScope* nss : namespaces)
 		{
-			Scope* usingscope = *it;
+			Scope* usingscope = nss;
 			if (Scope* child = usingscope->getChild(name))
 			{
 				if(found && found != child)

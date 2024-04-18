@@ -26,10 +26,9 @@ FunctionData::FunctionData(Program& program)
 			globalVariables.push_back(datum);
 	}
 
-	for (vector<Script*>::const_iterator it = program.scripts.begin();
-	     it != program.scripts.end(); ++it)
+	for (Script* script : program.scripts)
 	{
-		ScriptScope& scope = (*it)->getScope();
+		ScriptScope& scope = script->getScope();
 		vector<Datum*> data = scope.getLocalData();
 		globalVariables.insert(globalVariables.end(),
 		                       data.begin(), data.end());
