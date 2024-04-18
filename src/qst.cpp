@@ -16354,9 +16354,10 @@ int32_t readmaps(PACKFILE *f, zquestheader *Header)
 	{
 		const int32_t _mapsSize = MAPSCRS*temp_map_count;
 		TheMaps.resize(_mapsSize);
+		box_out(".");
 		map_autolayers.clear();
 		map_autolayers.resize(temp_map_count*6);
-		for(int32_t i(0); i<_mapsSize; i++)
+		for (int32_t i(0); i < _mapsSize; i++)
 			TheMaps[i].zero_memory();
 	}
 	
@@ -16364,6 +16365,9 @@ int32_t readmaps(PACKFILE *f, zquestheader *Header)
 	
 	for(int32_t i=0; i<temp_map_count && i<MAXMAPS; i++)
 	{
+		if( i%4 == 0 )
+			box_out(".");
+
 		byte valid=1;
 		if(version > 22)
 		{

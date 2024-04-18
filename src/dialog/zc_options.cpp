@@ -7,7 +7,7 @@
 #include "alert.h"
 
 extern bool reload_fonts;
-void load_size_poses();
+//void load_size_poses();
 
 void call_zc_options_dlg()
 {
@@ -16,7 +16,7 @@ void call_zc_options_dlg()
 
 void ZCOptionsDialog::loadOptions()
 {
-	char const* _font_titles[CFONT_MAX] = {"dialog", "gui", "title", "favcmd", "textbox", "ttip", "info"};
+	//char const* _font_titles[CFONT_MAX] = {"dialog", "gui", "title", "favcmd", "textbox", "ttip", "info"};
 	for(int q = 0; q < CFONT_MAX; ++q)
 	{
 		opts[q+OPT_FIRSTFONT] = zc_get_config("ZQ_GUI",
@@ -417,4 +417,3 @@ bool ZCOptionsDialog::handleMessage(const GUI::DialogMessage<message>& msg)
 	}
 	return false;
 }
-

@@ -10,8 +10,7 @@
 
 namespace fs = std::filesystem;
 
-static std::map<std::string, std::string> base_config;
-static std::map<std::string, std::string> user_config;
+static std::map<std::string, std::string> base_config, user_config;
 void zconsole_db(const char *format,...);
 static inline string& trim(string& str)
 {
@@ -26,8 +25,7 @@ static bool load_config(std::map<std::string, std::string>& config, std::string 
 	if (!file.is_open())
 		return false;
 
-	std::string section;
-	std::string line;
+	std::string section, line;
 	while (util::portable_get_line(file, line))
 	{
 		if (line.empty())
@@ -52,15 +50,8 @@ static bool load_config(std::map<std::string, std::string>& config, std::string 
 	return true;
 }
 
-bool zscript_load_base_config(std::string path)
-{
-	return load_config(base_config, path);
-}
-
-bool zscript_load_user_config(std::string path)
-{
-	return load_config(user_config, path);
-}
+bool zscript_load_base_config(std::string path) { return load_config(base_config, path); } 
+bool zscript_load_user_config(std::string path) { return load_config(user_config, path); }
 
 std::string zscript_get_config_string(std::string key, std::string def_value)
 {
