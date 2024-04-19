@@ -53,16 +53,12 @@ AutoComboDialog::AutoComboDialog() :
 void AutoComboDialog::addCombos(int32_t count)
 {
 	for (int32_t q = 0; q < count; ++q)
-	{
 		temp_autocombo.addEntry(0, ACT_NORMAL, q, -1);
-	}
 }
 void AutoComboDialog::removeCombos(int32_t count)
 {
 	for (int32_t q = 0; q < count; ++q)
-	{
 		temp_autocombo.removeEntry();
-	}
 }
 
 int32_t AutoComboDialog::numCombosSet()
