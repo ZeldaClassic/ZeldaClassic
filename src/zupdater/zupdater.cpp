@@ -86,7 +86,7 @@ static int32_t used_switch(int32_t argc,char *argv[],const char *s)
 	if (headless)
 		printf("[fatal] %s\n", msg.c_str());
 	else
-		al_show_native_message_box(all_get_display(), "ZQuest Classic: I AM ERROR", "", msg.c_str(), NULL, ALLEGRO_MESSAGEBOX_ERROR);
+		al_show_native_message_box(all_get_display(), "Zelda Classic: I AM ERROR", "", msg.c_str(), NULL, ALLEGRO_MESSAGEBOX_ERROR);
 
 	out << "[fatal] " << msg.c_str() << '\n';
 	out.close();
@@ -98,7 +98,7 @@ static int32_t used_switch(int32_t argc,char *argv[],const char *s)
 	if (headless)
 		printf("[done] %s\n", msg.c_str());
 	else
-		al_show_native_message_box(all_get_display(), "ZQuest Classic Updater", "", msg.c_str(), NULL, ALLEGRO_MESSAGEBOX_OK_CANCEL);
+		al_show_native_message_box(all_get_display(), "Zelda Classic Updater", "", msg.c_str(), NULL, ALLEGRO_MESSAGEBOX_OK_CANCEL);
 
 	out << "[done] " << msg.c_str() << '\n';
 	out.close();
@@ -114,7 +114,7 @@ static bool prompt(std::string msg)
 		return true;
 	}
 
-	int ret = al_show_native_message_box(all_get_display(), "ZQuest Classic Updater", "", msg.c_str(), NULL, ALLEGRO_MESSAGEBOX_YES_NO);
+	int ret = al_show_native_message_box(all_get_display(), "Zelda Classic Updater", "", msg.c_str(), NULL, ALLEGRO_MESSAGEBOX_YES_NO);
 	return ret != 2;
 }
 
@@ -139,7 +139,7 @@ static std::pair<std::string, std::map<std::string, std::string>> get_output_map
 static bool is_in_osx_application_bundle()
 {
 #ifdef __APPLE__
-    return fs::current_path().string().find("/ZQuest Classic.app/") != std::string::npos;
+    return fs::current_path().string().find("/Zelda Classic.app/") != std::string::npos;
 #else
     return false;
 #endif

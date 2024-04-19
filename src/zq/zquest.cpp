@@ -497,7 +497,7 @@ void clearConsole()
 	zscript_coloured_console.cls(CConsoleLoggerEx::COLOR_BACKGROUND_BLACK);
 	zscript_coloured_console.gotoxy(0,0);
 	zscript_coloured_console.cprintf( CConsoleLoggerEx::COLOR_BLUE | CConsoleLoggerEx::COLOR_INTENSITY |
-		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"ZQuest Classic Logging Console\n");
+		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"Zelda Classic Logging Console\n");
 }
 
 void initConsole()
@@ -505,7 +505,7 @@ void initConsole()
 	if(console_is_open) return;
 	console_is_open = 1;
 	set_console_state();
-	zscript_coloured_console.Create("ZQuest Classic Logging Console", 600, 200);
+	zscript_coloured_console.Create("Zelda Classic Logging Console", 600, 200);
 	clearConsole();
 }
 
@@ -25701,7 +25701,7 @@ int32_t main(int32_t argc,char **argv)
 		FatalConsole("Failed to load fonts datafile '%s'!\n", moduledata.datafiles[fonts_dat]);
 	
 	if(strncmp((char*)fontsdata[0].dat,fontsdat_sig,24))
-		FatalConsole("ZQuest Classic I/O Error:\nIncompatible version of fonts.dat.\nZQuest Classic cannot run without this file,\nand is now exiting.\nPlease upgrade to %s Build %d",VerStr(FONTSDAT_VERSION), FONTSDAT_BUILD);
+		FatalConsole("Zelda Classic I/O Error:\nIncompatible version of fonts.dat.\nZelda Classic cannot run without this file,\nand is now exiting.\nPlease upgrade to %s Build %d",VerStr(FONTSDAT_VERSION), FONTSDAT_BUILD);
 	
 	if(fontsdat_cnt != FONTSDAT_CNT)
 		FatalConsole("Incompatible fonts.dat: Found size '%d', expecting size '%d'\n", fontsdat_cnt, FONTSDAT_CNT);
@@ -28390,11 +28390,11 @@ void FFScript::ZScriptConsole(bool open)
 	#ifdef _WIN32
 	if ( console_is_open )
 	{
-		zscript_coloured_console.Create("ZQuest Classic Logging Console", 600, 200);
+		zscript_coloured_console.Create("Zelda Classic Logging Console", 600, 200);
 		zscript_coloured_console.cls(CConsoleLoggerEx::COLOR_BACKGROUND_BLACK);
 		zscript_coloured_console.gotoxy(0,0);
 		zscript_coloured_console.cprintf( CConsoleLoggerEx::COLOR_BLUE | CConsoleLoggerEx::COLOR_INTENSITY |
-		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"ZQuest Classic Logging Console\n");
+		CConsoleLoggerEx::COLOR_BACKGROUND_BLACK,"Zelda Classic Logging Console\n");
 	}
 	else
 	{

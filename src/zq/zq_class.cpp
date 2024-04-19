@@ -68,7 +68,7 @@ using std::pair;
 #define COLOR_LADDER vc(6)
 //#define COLOR_EFFECT vc(10)
 
-//const char zqsheader[30]="ZQuest Classic String Table\n\x01";
+//const char zqsheader[30]="Zelda Classic String Table\n\x01";
 extern char msgbuf[MSG_NEW_SIZE*8];
 
 extern string zScript;
@@ -6782,7 +6782,7 @@ int32_t writeheader(PACKFILE *f, zquestheader *Header)
 		    new_return(36);
 		}
 		
-		if(!pfwrite("ZQuest Classic",1024,f))
+		if(!pfwrite("Zelda Classic",1024,f))
 		{
 		    new_return(37);
 		}

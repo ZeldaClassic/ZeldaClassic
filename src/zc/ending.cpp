@@ -99,7 +99,7 @@ namespace
 		/* time */
 		{ "You finished a",   72, 816, white },
 		{ "custom quest.",    76, 832, white },
-		{ "ZQUEST CLASSIC",   76, 880, white }
+		{ "ZELDA CLASSIC",    76, 880, white }
 	};
 }
 

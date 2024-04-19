@@ -2422,7 +2422,7 @@ int32_t readheader(PACKFILE *f, zquestheader *Header, byte printmetadata)
 			memset(tempheader.new_version_compilername, 0, 256);
 			memset(tempheader.new_version_compilerversion, 0, 256);
 			memset(tempheader.product_name, 0, 1024);
-			strcpy(tempheader.product_name, "ZQuest Classic");
+			strcpy(tempheader.product_name, "Zelda Classic");
 			
 			tempheader.compilerid = 0;
 			tempheader.compilerversionnumber_first = 0;

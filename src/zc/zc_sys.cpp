@@ -6096,7 +6096,7 @@ static NewMenu replay_menu
 static DIALOG credits_dlg[] =
 {
 	/* (dialog proc)     (x)   (y)   (w)   (h)       (fg)	 (bg)	 (key)	(flags)	(d1)	  (d2)	 (dp)	 (dp2) (dp3) */
-	{ jwin_win_proc,     40,   38,   241,  173,   vc(14),   vc(1),   0,	   D_EXIT,	0,		0, (void *) "ZQuest Classic Credits", NULL,  NULL },
+	{ jwin_win_proc,     40,   38,   241,  173,   vc(14),   vc(1),   0,	   D_EXIT,	0,		0, (void *) "Zelda Classic Credits", NULL,  NULL },
 	{ jwin_frame_proc,   47,   65,   227,  115,   vc(15),   vc(1),   0,	   0,		 FR_DEEP,  0,	   NULL, NULL,  NULL },
 	{ d_bitmap_proc,     49,   67,   222,  110,   vc(15),   vc(1),   0,	   0,		 0,		0,	   NULL, NULL,  NULL },
 	{ jwin_button_proc, 140,  184,    41,   21,   vc(14),   vc(1),   0,	   D_EXIT,	0,		0, (void *) "OK", NULL,  NULL },
@@ -6838,7 +6838,7 @@ int32_t onSound()
 
 int32_t queding(char const* s1, char const* s2, char const* s3)
 {
-	return jwin_alert("ZQuest Classic",s1,s2,s3,"&Yes","&No",'y','n',get_zc_font(font_lfont));
+	return jwin_alert("Zelda Classic",s1,s2,s3,"&Yes","&No",'y','n',get_zc_font(font_lfont));
 }
 
 int32_t onQuit()
@@ -6928,7 +6928,7 @@ int32_t onReset()
 
 int32_t onExit()
 {
-	if(queding(" Quit ZQuest Classic? ",NULL,NULL)==1)
+	if(queding(" Quit Zelda Classic? ",NULL,NULL)==1)
 	{
 		Quit=qEXIT;
 		return D_CLOSE;
