@@ -6146,9 +6146,7 @@ int32_t onGoTo()
 int32_t onGoToComplete()
 {
 	if(!Playing)
-	{
 		return D_O_K;
-	}
 	
 	enter_sys_pal();
 	music_pause();
