@@ -88,8 +88,6 @@ class HeroClass : public sprite
 			return newhopclk;
 		}
 	
-	
-	
 		int32_t getHopDir()
 		{
 			return newhopdir;

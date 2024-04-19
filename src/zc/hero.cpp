@@ -26594,21 +26594,10 @@ void HeroClass::stepforward(int32_t steps, bool adjust)
 				
 				switch(dir)
 				{
-				case up:
-					ty-=tstep;
-					break;
-					
-				case down:
-					ty+=tstep;
-					break;
-					
-				case left:
-					tx-=tstep;
-					break;
-					
-				case right:
-					tx+=tstep;
-					break;
+					case up:    ty-=tstep; break; 
+					case down:  ty+=tstep; break; 
+					case left:  tx-=tstep; break; 
+					case right: tx+=tstep; break;
 				}
 			}
 		}
@@ -26780,9 +26769,7 @@ void HeroClass::stepforward(int32_t steps, bool adjust)
 void HeroClass::walkdown(bool opening) //entering cave
 {
     if(opening)
-    {
         close_black_opening(x+8, y+8+playing_field_offset, false);
-    }
     
     hclk=0;
     stop_item_sfx(itype_brang);
@@ -26841,9 +26828,7 @@ void HeroClass::walkdown2(bool opening) //exiting cave 2
     z=fakez=fall=fakefall=0;
     
     if(opening)
-    {
         open_black_opening(x+8, y+8+playing_field_offset+16, false);
-    }
     
     hclk=0;
     stop_item_sfx(itype_brang);
@@ -26893,9 +26878,7 @@ void HeroClass::walkup(bool opening) //exiting cave
     z=fakez=fall=fakefall=0;
     
     if(opening)
-    {
         open_black_opening(x+8, y+8+playing_field_offset-16, false);
-    }
     
     hclk=0;
     stop_item_sfx(itype_brang);
