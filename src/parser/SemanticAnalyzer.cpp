@@ -28,11 +28,9 @@ SemanticAnalyzer::SemanticAnalyzer(Program& program)
 	for (Function* func : functions )
 		analyzeFunctionInternals(*func);
 	
-	for (vector<Script*>::iterator it = program.scripts.begin();
-		 it != program.scripts.end(); ++it)
+	for (Script* script : program.scripts)
 	{
-		Script& script = **it;
-		scope = &script.getScope();
+		scope = &script->getScope();
 		functions = scope->getLocalFunctions();
 		for (Function* f : functions)
 			analyzeFunctionInternals(*f);
