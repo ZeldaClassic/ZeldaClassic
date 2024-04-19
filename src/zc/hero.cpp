@@ -30763,9 +30763,7 @@ void HeroClass::getTriforce(int32_t id2)
 	int32_t refill_frame = ( (itemsbuf[id2].misc5 > 0) ? itemsbuf[id2].misc5 : 88 );
 	
 	for(int32_t i=0; i<256; i++)
-	{
 		flash_pal[i] = get_qr(qr_FADE) ? _RGB(63,63,0) : _RGB(63,63,63); 
-	} 
 
 	//get rid off all sprites but Hero
 	guys.clear();
@@ -31015,8 +31013,6 @@ void red_shift()
     refreshpal = true;
 }
 
-
-
 void setup_red_screen_old()
 {
     clear_bitmap(framebuf);
@@ -31044,24 +31040,16 @@ void setup_red_screen_old()
 	}
 	
     if(!(msg_bg_display_buf->clip))
-    {
-		blit_msgstr_bg(framebuf, 0, 0, 0, playing_field_offset, 256, 168);
-    }
+	blit_msgstr_bg(framebuf, 0, 0, 0, playing_field_offset, 256, 168);
     
     if(!(msg_portrait_display_buf->clip))
-    {
-		blit_msgstr_prt(framebuf, 0, 0, 0, playing_field_offset, 256, 168);
-    }
+	blit_msgstr_prt(framebuf, 0, 0, 0, playing_field_offset, 256, 168);
     
     if(!(msg_txt_display_buf->clip))
-    {
-		blit_msgstr_fg(framebuf, 0, 0, 0, playing_field_offset, 256, 168);
-    }
+	blit_msgstr_fg(framebuf, 0, 0, 0, playing_field_offset, 256, 168);
     
     if(!(pricesdisplaybuf->clip))
-    {
         masked_blit(pricesdisplaybuf, framebuf,0,0,0,playing_field_offset, 256,168);
-    }
     
     //red shift
     // color scale the game screen
@@ -31119,17 +31107,13 @@ void setup_red_screen_old()
                     int32_t c3 = pricesdisplaybuf->clip ? 0 : pricesdisplaybuf->line[y][x];
                     
                     if(c1 && c3)
-                    {
                         framebuf->line[y+playing_field_offset][x] = c3;
-                    }
                     else if(c1 && c2)
-                    {
                         framebuf->line[y+playing_field_offset][x] = c2;
-                    }
                 }
             }
 			destroy_bitmap(subbmp);
-		}
+	}
         
         //red shift
         // color scale the game screen
@@ -31157,9 +31141,7 @@ void setup_red_screen_old()
     
     refreshpal = true;
 }
-
-
-
+ 
 void slide_in_color(int32_t color)
 {
     for(int32_t i=1; i<16; i+=3)
@@ -31170,8 +31152,7 @@ void slide_in_color(int32_t color)
     }
     
     refreshpal=true;
-}
-
+} 
 
 void HeroClass::heroDeathAnimation()
 {
@@ -31183,9 +31164,7 @@ void HeroClass::heroDeathAnimation()
 	kill_sfx();  //call before the onDeath script.
 	
 	if(!debug_enabled)
-	{
 		Paused=false;
-	}
     
     /*
 	game->set_deaths(zc_min(game->get_deaths()+1,999));
@@ -31333,18 +31312,15 @@ void HeroClass::heroDeathAnimation()
 					}
 				}
 				else if(BSZ)
-				{
 					tile += (f-194)/3;
-				}
 				else if(f>=204)
-				{
 					++tile;
-				}
 			}
             
 			if(f==208)
 			{
-				if ( dontdraw < 2 ) { dontdraw = 1; }
+				if ( dontdraw < 2 )
+					dontdraw = 1;
 			}
 			if(get_qr(qr_FADE))
 			{
@@ -31445,9 +31421,7 @@ void HeroClass::heroDeathAnimation()
 				if(f==60)
 				{
 					for(int32_t i=0; i<176; i++)
-					{
 						tmpscr->cset[i] = 2;
-					}
                     
 					for(int32_t j=0; j<6; j++)
 						if(tmpscr->layermap[j]>0)
@@ -31559,9 +31533,9 @@ void HeroClass::heroDeathAnimation()
     
 	destroy_bitmap(subscrbmp);
 	action=none; FFCore.setHeroAction(none);
-	if ( dontdraw < 2 ) { dontdraw=0; }
+	if ( dontdraw < 2 )
+		dontdraw=0;
 }
-
 
 void HeroClass::ganon_intro()
 {
@@ -31585,9 +31559,7 @@ void HeroClass::ganon_intro()
     loaditem();
     
     if(game->lvlitems[dlevel]&liBOSS)
-    {
         return;
-    }
     
     dir=down;
     if ( !isSideViewHero() )
@@ -31622,13 +31594,9 @@ void HeroClass::ganon_intro()
             }
             
             if(current_item(itype_ring))
-            {
                 addenemy(160,96,Id,0);
-            }
             else
-            {
                 addenemy(80,32,Id,0);
-            }
         }
         
         if(f==48)
@@ -31641,14 +31609,10 @@ void HeroClass::ganon_intro()
         //while still showing Hero's two-handed overhead sprite.
 	//This should be a Quest Rule for NES Accuracy. -Z
         if(f==255 || f==270)
-        {
             holditem=-1;
-        }
         
         if(f==256)
-        {
             holditem=getItemID(itemsbuf,itype_triforcepiece,1);
-        }
         
         draw_screen(tmpscr);
         advanceframe(true);
@@ -31740,14 +31704,11 @@ void HeroClass::reset_hookshot()
 	hs_switcher = false;
 	
 	if(index>=0)
-	{
 		stop_sfx(itemsbuf[index].usesound);
-	}
 	
 	hs_xdist=0;
 	hs_ydist=0;
-}
-
+} 
 
 bool HeroClass::can_deploy_ladder()
 {
@@ -31885,19 +31846,13 @@ void HeroClass::check_conveyor()
 						hs_starty-=step.getInt();
 						
 						for(int32_t j=0; j<chainlinks.Count(); j++)
-						{
 							chainlinks.spr(j)->y-=step;
-						}
 						
 						if(Lwpns.idFirst(wHookshot)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHookshot))->y-=step;
-						}
 						
 						if(Lwpns.idFirst(wHSHandle)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHSHandle))->y-=step;
-						}
 					}
 				}
 				else if(deltay>0)
@@ -31930,19 +31885,13 @@ void HeroClass::check_conveyor()
 						hs_starty+=step.getInt();
 						
 						for(int32_t j=0; j<chainlinks.Count(); j++)
-						{
 							chainlinks.spr(j)->y+=step;
-						}
 						
 						if(Lwpns.idFirst(wHookshot)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHookshot))->y+=step;
-						}
 						
 						if(Lwpns.idFirst(wHSHandle)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHSHandle))->y+=step;
-						}
 					}
 				}
 				
@@ -31976,19 +31925,13 @@ void HeroClass::check_conveyor()
 						hs_startx-=step.getInt();
 						
 						for(int32_t j=0; j<chainlinks.Count(); j++)
-						{
 							chainlinks.spr(j)->x-=step;
-						}
 						
 						if(Lwpns.idFirst(wHookshot)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHookshot))->x-=step;
-						}
 						
 						if(Lwpns.idFirst(wHSHandle)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHSHandle))->x-=step;
-						}
 					}
 				}
 				else if(deltax>0)
@@ -32021,19 +31964,13 @@ void HeroClass::check_conveyor()
 						hs_startx+=step.getInt();
 						
 						for(int32_t j=0; j<chainlinks.Count(); j++)
-						{
 							chainlinks.spr(j)->x+=step;
-						}
 						
 						if(Lwpns.idFirst(wHookshot)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHookshot))->x+=step;
-						}
 						
 						if(Lwpns.idFirst(wHSHandle)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHSHandle))->x+=step;
-						}
 					}
 				}
 				if(deltax && !movedx && !deltay)
@@ -32050,17 +31987,11 @@ void HeroClass::check_conveyor()
 					if (validpush || ny != COMBOY(pos))
 					{
 						if (y <= ny-1)
-						{
 							setYfix(y+1);
-						}
 						else if (y >= ny+1)
-						{
 							setYfix(y-1);
-						}
 						else
-						{
 							setYfix(ny);
-						}
 					}
 				}
 				if(deltay && !movedy && !deltax)
@@ -32077,17 +32008,11 @@ void HeroClass::check_conveyor()
 					if (validpush || nx != COMBOX(pos))
 					{
 						if (x <= nx-1)
-						{
 							setXfix(x+1);
-						}
 						else if (x >= nx+1)
-						{
 							setXfix(x-1);
-						}
 						else
-						{
 							setXfix(nx);
-						}
 					}
 				}
 			}
@@ -32123,19 +32048,13 @@ void HeroClass::check_conveyor()
 						hs_starty-=step.getInt();
 						
 						for(int32_t j=0; j<chainlinks.Count(); j++)
-						{
 							chainlinks.spr(j)->y-=step;
-						}
 						
 						if(Lwpns.idFirst(wHookshot)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHookshot))->y-=step;
-						}
 						
 						if(Lwpns.idFirst(wHSHandle)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHSHandle))->y-=step;
-						}
 					}
 					else checkdamagecombos(x,y+8-(bigHitbox ? 8 : 0)-2);
 				}
@@ -32169,19 +32088,13 @@ void HeroClass::check_conveyor()
 						hs_starty+=step.getInt();
 						
 						for(int32_t j=0; j<chainlinks.Count(); j++)
-						{
 							chainlinks.spr(j)->y+=step;
-						}
 						
 						if(Lwpns.idFirst(wHookshot)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHookshot))->y+=step;
-						}
 						
 						if(Lwpns.idFirst(wHSHandle)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHSHandle))->y+=step;
-						}
 					}
 					else checkdamagecombos(x,y+15);
 				}
@@ -32218,19 +32131,13 @@ void HeroClass::check_conveyor()
 						hs_startx-=step.getInt();
 						
 						for(int32_t j=0; j<chainlinks.Count(); j++)
-						{
 							chainlinks.spr(j)->x-=step;
-						}
 						
 						if(Lwpns.idFirst(wHookshot)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHookshot))->x-=step;
-						}
 						
 						if(Lwpns.idFirst(wHSHandle)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHSHandle))->x-=step;
-						}
 					}
 					else checkdamagecombos(x-int32_t(lsteps[x.getInt()&7]),y+8-(bigHitbox ? 8 : 0));
 				}
@@ -32264,19 +32171,13 @@ void HeroClass::check_conveyor()
 						hs_startx+=step.getInt();
 						
 						for(int32_t j=0; j<chainlinks.Count(); j++)
-						{
 							chainlinks.spr(j)->x+=step;
-						}
 						
 						if(Lwpns.idFirst(wHookshot)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHookshot))->x+=step;
-						}
 						
 						if(Lwpns.idFirst(wHSHandle)>-1)
-						{
 							Lwpns.spr(Lwpns.idFirst(wHSHandle))->x+=step;
-						}
 					}
 					else checkdamagecombos(x+15+2,y+8-(bigHitbox ? 8 : 0));
 				}
@@ -32357,9 +32258,7 @@ bool HeroClass::canSideviewLadder(bool down)
 	if (down)
 	{
 		if (check_new_slope(x, y + 0.0001_zf, 16, 16, old_x, old_y, true))
-		{
 			return false;
-		}
 	}
 	if(down && get_qr(qr_DOWN_DOESNT_GRAB_LADDERS))
 	{
