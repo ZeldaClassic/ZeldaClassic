@@ -1950,10 +1950,9 @@ void SemanticAnalyzer::caseArrayLiteral(ASTArrayLiteral& host, void*)
 
 	// If initialized, check that each element can be cast to type.
 	// and, if part of a declaration, check for temp values
-	for (vector<ASTExpr*>::iterator it = host.elements.begin();
-		 it != host.elements.end(); ++it)
+	for( ASTExpr* expr : host.elements)
 	{
-		ASTExpr& element = **it;
+		ASTExpr& element = *expr;
 		if(host.declaration && element.isTempVal())
 		{
 			handleError(CompileError::BadTempVal(&element));

@@ -1657,7 +1657,6 @@ int32_t replacedcs()
     if(doorcombosetlist_dlg[5].d1==-1)
     {
         return D_O_K;
-        
     }
     
     DoorComboSets[doorcombosetlist_dlg[2].d1]=DoorComboSets[doorcombosetlist_dlg[5].d1];

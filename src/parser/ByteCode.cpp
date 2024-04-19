@@ -3321,8 +3321,7 @@ string OSPrintfVargs::toString() const
 string OBreakpoint::toString() const
 {
     return "BREAKPOINT " + getArgument()->toString();
-}
-
+} 
 
 string ORandRegister::toString() const
 {
