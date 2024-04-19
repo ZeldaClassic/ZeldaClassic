@@ -6,8 +6,7 @@
 #include "gui/jwin.h"
 #include "qst.h"
 #include "base/fonts.h"
-#include "base/packfile.h"
-
+#include "base/packfile.h" 
 
 std::string getComboTypeHelpText(int32_t id);
 std::string getMapFlagHelpText(int32_t id);

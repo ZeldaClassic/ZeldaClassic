@@ -4766,12 +4766,12 @@ int main(int argc, char **argv)
 	if (used_switch(argc, argv, "-replay-save-games") > 0)
 		saves_enable_save_current_replay();
 
-	int replay_arg = used_switch(argc, argv, "-replay");
+	int replay_arg   = used_switch(argc, argv, "-replay");
 	int snapshot_arg = used_switch(argc, argv, "-snapshot");
-	int record_arg = used_switch(argc, argv, "-record");
-	int assert_arg = used_switch(argc, argv, "-assert");
-	int update_arg = used_switch(argc, argv, "-update");
-	int frame_arg = used_switch(argc, argv, "-frame");
+	int record_arg   = used_switch(argc, argv, "-record");
+	int assert_arg   = used_switch(argc, argv, "-assert");
+	int update_arg   = used_switch(argc, argv, "-update");
+	int frame_arg    = used_switch(argc, argv, "-frame");
 
 	int frame = -1;
 	if (frame_arg > 0)
@@ -4857,9 +4857,7 @@ int main(int argc, char **argv)
 
 		int ret = saves_load();
 		if (ret)
-		{
 			Z_error_fatal("Failed to load saves. error: %d", ret);
-		}
 
 		int save_index = -1;
 		int savecnt = saves_count();
@@ -4881,13 +4879,10 @@ int main(int argc, char **argv)
 		}
 
 		if (save_index == -1)
-		{
 			load_qstpath = rel_qstpath;
-		}
 		else
-		{
 			load_save = save_index + 1;
-		}
+
 		fast_start = true;
 	}
 
@@ -4916,9 +4911,7 @@ int main(int argc, char **argv)
 		Z_message("Config file warning: \"zc_win_proc_fix\" enabled switch found. This can cause crashes on some computers.\n");
 
 		if(win32data.zcSetCustomCallbackProc(al_get_win_window_handle(all_get_display())) != 0)
-		{
 			use_win32_proc = FALSE;
-		}
 	}
 	
 #endif
@@ -4944,9 +4937,8 @@ reload_for_replay_file:
 		zprint2("Loading Saved Games\n");
 		int ret = saves_load();
 		if (ret)
-		{
 			Z_error_fatal("Failed to load saves. error: %d", ret);
-		}
+
 		zprint2("Finished Loading Saved Games\n");
 	}
 
@@ -5048,9 +5040,7 @@ reload_for_replay_file:
 #ifdef _WIN32
 			
 			if(use_win32_proc != FALSE)
-			{
 				win32data.Update(0);
-			}
 #endif
 			game_loop();
 			advanceframe(true);
@@ -5293,15 +5283,13 @@ reload_for_replay_file:
 }
 END_OF_MAIN()
 
-
 void remove_installed_timers()
 {
 	al_trace("Removing timers. \n");
 	remove_int(update_throttle_counter);
 	Z_remove_timers();
 }
-
-
+ 
 void delete_everything_else() //blarg.
 {
 	refresh_subscr_buttonitems();
@@ -5461,11 +5449,10 @@ bool isSideViewHero(int32_t t)
 {
 	return !ignoreSideview && isSideViewGravity(t);
 }
-
-
+ 
 int32_t d_timer_proc(int32_t, DIALOG *, int32_t)
 {
-    return D_O_K;
+	return D_O_K;
 }
 
 #ifdef __EMSCRIPTEN__
