@@ -1221,7 +1221,7 @@ static std::string arrow_infos[5] =
 		"\nIf shift held: Move by 1 grid step",
 	"Decrease/Increase selected object's width/height"
 		"\nIf shift held: Resize by 1 grid step",
-	"Move preview of item selector",
+	"Move preview of item selector reticule, which is animated using tiles starting at #20140",
 	"L/R: Change Page (-1/+1)"
 		"\n-/+: Delete/Add Page"
 		"\nLL/RR: Change Page (Home/End)"
