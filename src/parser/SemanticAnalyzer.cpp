@@ -34,9 +34,8 @@ SemanticAnalyzer::SemanticAnalyzer(Program& program)
 		Script& script = **it;
 		scope = &script.getScope();
 		functions = scope->getLocalFunctions();
-		for (vector<Function*>::iterator it = functions.begin();
-		     it != functions.end(); ++it)
-			analyzeFunctionInternals(**it);
+		for (Function* f : functions)
+			analyzeFunctionInternals(*f);
 		scope = scope->getParent();
 	}
 	
