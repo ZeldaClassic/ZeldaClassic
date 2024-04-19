@@ -103,9 +103,7 @@ bool pDivineEscapeDust::animate(int32_t)
 	step=os*(double)timer/(double)ot;
 	
 	if(timer>0)
-	{
 		--timer;
-	}
 	
 	move(step);
 	return (!timer);
@@ -120,13 +118,9 @@ pTwilight::pTwilight(zfix X,zfix Y,int32_t L,int32_t CS,int32_t C, int32_t T) : 
 bool pTwilight::animate(int32_t)
 {
 	if(delay>0)
-	{
 		delay--;
-	}
 	else
-	{
 		move(step);
-	}
 	
 	return (y<0)!=0;
 }
@@ -213,9 +207,7 @@ gotit:
 zfix particle_list::getX(int32_t j)
 {
 	if((j>=count)||(j<0))
-	{
 		return (zfix)1000000;
-	}
 	
 	return particles[j]->x;
 }
@@ -223,9 +215,7 @@ zfix particle_list::getX(int32_t j)
 zfix particle_list::getY(int32_t j)
 {
 	if((j>=count)||(j<0))
-	{
 		return (zfix)1000000;
-	}
 	
 	return particles[j]->y;
 }
