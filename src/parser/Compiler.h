@@ -168,22 +168,11 @@ namespace ZScript
 	class ScriptParser
 	{
 	public:
-		static int32_t getUniqueVarID()
-		{
-			return vid++;
-		}
-		static int32_t getUniqueFuncID()
-		{
-			return fid++;
-		}
-		static int32_t getUniqueLabelID()
-		{
-			return lid++;
-		}
-		static int32_t getUniqueGlobalID()
-		{
-			return gid++;
-		}
+		static int32_t getUniqueVarID   () { return vid++; }
+		static int32_t getUniqueFuncID  () { return fid++; }
+		static int32_t getUniqueLabelID () { return lid++; }
+		static int32_t getUniqueGlobalID() { return gid++; }
+
 		static bool preprocess_one(ASTImportDecl& decl, int32_t reclevel);
 		static bool preprocess(ASTFile* root, int32_t reclevel);
 		static unique_ptr<IntermediateData> generateOCode(FunctionData& fdata);
