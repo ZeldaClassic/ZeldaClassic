@@ -4432,18 +4432,12 @@ int main(int argc, char **argv)
 	Z_message("Fonts.Dat...");
 	
 	if((fontsdata=load_datafile_count("modules/classic/classic_fonts.dat", fontsdat_cnt))==NULL)
-	{
 		Z_error_fatal("failed to load fonts");
-	}
 	if(fontsdat_cnt != FONTSDAT_CNT)
-	{
 		Z_error_fatal("failed: count error (found %d != exp %d)\n", fontsdat_cnt, FONTSDAT_CNT);
-	}
 	
 	if(strncmp((char*)fontsdata[0].dat,fontsdat_sig,24))
-	{
 		Z_error_fatal("\nIncompatible version of fonts.dat.\nPlease upgrade to %s Build %d",VerStr(FONTSDAT_VERSION), FONTSDAT_BUILD);
-	}
 	
 	Z_message("OK\n");
 	
@@ -4453,14 +4447,10 @@ int main(int argc, char **argv)
 	Z_message("SFX.Dat...");
 	
 	if((sfxdata=load_datafile("sfx.dat"))==NULL)
-	{
 		Z_error_fatal("failed to load sfx_dat");
-	}
 	
 	if(strncmp((char*)sfxdata[0].dat,sfxdat_sig,22) || sfxdata[Z35].type != DAT_ID('S', 'A', 'M', 'P'))
-	{
 		Z_error_fatal("\nIncompatible version of sfx.dat.\nPlease upgrade to %s Build %d",VerStr(SFXDAT_VERSION), SFXDAT_BUILD);
-	}
 	
 	Z_message("OK\n");
 		
@@ -4485,9 +4475,7 @@ int main(int argc, char **argv)
 		}
 
 		if(!al_init_acodec_addon())
-		{
 			Z_error("Failed al_init_acodec_addon");
-		}
 
 		if(install_sound(DIGI_AUTODETECT,MIDI_AUTODETECT,NULL))
 		{
