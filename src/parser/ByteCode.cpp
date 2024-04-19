@@ -2722,34 +2722,14 @@ string OUseSpritePortal::toString() const
 {
 	return "PORTALUSESPRITE " + getArgument()->toString();
 }
-string OHeroMoveAtAngle::toString() const
-{
-	return "HEROMOVEATANGLE";
-}
-string OHeroCanMoveAtAngle::toString() const
-{
-	return "HEROCANMOVEATANGLE";
-}
-string OHeroMove::toString() const
-{
-	return "HEROMOVE";
-}
-string OHeroCanMove::toString() const
-{
-	return "HEROCANMOVE";
-}
-string ODrawLightCircle::toString() const
-{
-	return "DRAWLIGHT_CIRCLE";
-}
-string ODrawLightSquare::toString() const
-{
-	return "DRAWLIGHT_SQUARE";
-}
-string ODrawLightCone::toString() const
-{
-	return "DRAWLIGHT_CONE";
-}
+string OHeroMoveAtAngle   ::toString() const { return "HEROMOVEATANGLE"; }
+string OHeroCanMoveAtAngle::toString() const { return "HEROCANMOVEATANGLE"; }
+string OHeroMove          ::toString() const { return "HEROMOVE"; }
+string OHeroCanMove       ::toString() const { return "HEROCANMOVE"; }
+string ODrawLightCircle   ::toString() const { return "DRAWLIGHT_CIRCLE"; }
+string ODrawLightSquare   ::toString() const { return "DRAWLIGHT_SQUARE"; }
+string ODrawLightCone     ::toString() const { return "DRAWLIGHT_CONE"; }
+
 string OPeek::toString() const
 {
 	return "PEEK " + getArgument()->toString();
@@ -2758,30 +2738,14 @@ string OPeekAtImmediate::toString() const
 {
 	return "PEEKATV " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();;
 }
-string OMakeVargArray::toString() const
-{
-	return "MAKEVARGARRAY";
-}
-string OPrintfArr::toString() const
-{
-	return "PRINTFA";
-}
-string OSPrintfArr::toString() const
-{
-	return "SPRINTFA";
-}
-string OCurrentItemID::toString() const
-{
-	return "CURRENTITEMID";
-}
-string OArrayPush::toString() const
-{
-	return "ARRAYPUSH";
-}
-string OArrayPop::toString() const
-{
-	return "ARRAYPOP";
-}
+
+string OMakeVargArray::toString() const { return "MAKEVARGARRAY"; }
+string OPrintfArr    ::toString() const { return "PRINTFA"; }
+string OSPrintfArr   ::toString() const { return "SPRINTFA"; }
+string OCurrentItemID::toString() const { return "CURRENTITEMID"; }
+string OArrayPush    ::toString() const { return "ARRAYPUSH"; }
+string OArrayPop     ::toString() const { return "ARRAYPOP"; }
+
 string OLoadSubscreenDataRV::toString() const
 {
 	return "LOADSUBDATARV " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
@@ -2895,15 +2859,8 @@ string OWaitTo::toString() const
 	return "WAITTO " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
 }
 
-string OWaitEvent::toString() const
-{
-	return "WAITEVENT";
-}
-
-string ONoOp::toString() const
-{
-	return "NOP";
-}
+string OWaitEvent::toString() const { return "WAITEVENT"; } 
+string ONoOp     ::toString() const { return "NOP"; }
 
 string OCastBoolI::toString() const
 {
@@ -3122,18 +3079,10 @@ string OMaxRegister::toString() const
 {
     return "MAXR " + getFirstArgument()->toString() + "," + getSecondArgument()->toString();
 }
-string OMaxNew::toString() const
-{
-    return "MAXVARG";
-}
-string OMinNew::toString() const
-{
-    return "MINVARG";
-}
-string OChoose::toString() const
-{
-    return "CHOOSEVARG";
-}
+
+string OMaxNew::toString() const { return "MAXVARG"; }
+string OMinNew::toString() const { return "MINVARG"; }
+string OChoose::toString() const { return "CHOOSEVARG"; }
 
 string OPowRegister::toString() const
 {
@@ -3189,7 +3138,6 @@ string OArraySize::toString() const
 {
     return "ARRAYSIZE " + getArgument()->toString();
 }
-
 
 string OArraySizeF::toString() const
 {
