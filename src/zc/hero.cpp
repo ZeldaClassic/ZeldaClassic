@@ -25619,13 +25619,9 @@ bool HeroClass::dowarp(int32_t type, int32_t index, int32_t warpsfx)
 		if(((wrx>0||wry>0)||(get_qr(qr_WARPSIGNOREARRIVALPOINT)))&&(!(tmpscr->flags6&fNOCONTINUEHERE)))
 		{
 			if(dlevel)
-			{
 				lastentrance = currscr;
-			}
 			else
-			{
 				lastentrance = DMaps[currdmap].cont + DMaps[currdmap].xoff;
-			}
 			
 			lastentrance_dmap = wdmap;
 		}
@@ -25776,9 +25772,7 @@ bool HeroClass::dowarp(int32_t type, int32_t index, int32_t warpsfx)
 		
 		// fix the scrolling direction, if it was a tile or instant warp
 		if(type==0 || type>=3)
-		{
 			sdir = dir;
-		}
 
 		scrollscr(sdir, wscr+DMaps[wdmap].xoff, wdmap);
 		//dlevel = DMaps[wdmap].level; //Fix dlevel and draw the map (end hack). -Z
@@ -25793,10 +25787,10 @@ bool HeroClass::dowarp(int32_t type, int32_t index, int32_t warpsfx)
 				
 				if(swd->id == (attack==wSword ? wSword : wWand))
 				{
-				int32_t itype = (attack==wFire ? itype_candle : attack==wCByrna ? itype_cbyrna : attack==wWand ? itype_wand : attack==wHammer ? itype_hammer : itype_sword);
-				int32_t item_id = (directWpn>-1 && itemsbuf[directWpn].family==itype) ? directWpn : current_item_id(itype);
-				positionSword(swd,item_id);
-				break;
+					int32_t itype = (attack==wFire ? itype_candle : attack==wCByrna ? itype_cbyrna : attack==wWand ? itype_wand : attack==wHammer ? itype_hammer : itype_sword);
+					int32_t item_id = (directWpn>-1 && itemsbuf[directWpn].family==itype) ? directWpn : current_item_id(itype);
+					positionSword(swd,item_id);
+					break;
 				}
 			}
 		}
@@ -25821,21 +25815,15 @@ bool HeroClass::dowarp(int32_t type, int32_t index, int32_t warpsfx)
 			if(((wrx>0||wry>0)||(get_qr(qr_WARPSIGNOREARRIVALPOINT)))&&(!get_qr(qr_NOSCROLLCONTINUE))&&(!(tmpscr->flags6&fNOCONTINUEHERE)))
 			{
 				if(dlevel)
-				{
 					lastentrance = currscr;
-				}
 				else
-				{
 					lastentrance = DMaps[currdmap].cont + DMaps[currdmap].xoff;
-				}
 				
 				lastentrance_dmap = wdmap;
 			}
 		}
 		if(DMaps[currdmap].color != c)
-		{
 			lighting(false, true);
-		}
 		
 		if (updatemusic)
 		{
@@ -26446,9 +26434,7 @@ bool HeroClass::dowarp(int32_t type, int32_t index, int32_t warpsfx)
 	}
 	
 	if(tmpscr->flags4&fAUTOSAVE)
-	{
 		save_game(true,0);
-	}
 	
 	if(tmpscr->flags6&fCONTINUEHERE)
 	{
@@ -26569,7 +26555,6 @@ void HeroClass::exitcave()
 	map_bkgsfx(true);
 	loadside=dir^1;
 }
-
 
 void HeroClass::stepforward(int32_t steps, bool adjust)
 {
