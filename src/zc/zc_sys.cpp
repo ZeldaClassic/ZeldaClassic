@@ -7262,7 +7262,6 @@ static NewMenu name_entry_mode_menu
 
 static void set_controls_menu_active()
 {
-	
 }
 
 enum
@@ -7652,9 +7651,7 @@ void exit_sys_pal()
 void switch_out_callback()
 {
 	if (pause_in_background && !MenuOpen)
-	{
 		System();
-	}
 }
 
 void switch_in_callback()
@@ -8049,9 +8046,7 @@ void jukebox(int32_t index)
 	
 	// do nothing if it's already playing
 	if(index==currmidi && midi_pos>=0)
-	{
 		return;
-	}
 	
 	jukebox(index,tunes[index].loop);
 }
@@ -8122,13 +8117,9 @@ void play_DmapMusic()
 	else
 	{
 		if (DMaps[currdmap].midi == 0 && fadeoutframes > 0 && zcmusic != NULL && strcmp(zcmusic->filename, DMaps[currdmap].tmusic) != 0)
-		{
 			play_enh_music_crossfade(NULL, qstpath, DMaps[currdmap].tmusictrack, get_emusic_volume(), DMaps[currdmap].tmusic_xfade_in, fadeoutframes);
-		}
 		else
-		{
 			domidi = true;
-		}
 	}
 	
 	if(domidi)
@@ -8274,13 +8265,9 @@ SAMPLE* sfx_get_sample(int32_t index)
 	if (sfxdat)
 	{
 		if (index<Z35)
-		{
 			return (SAMPLE*)sfxdata[index].dat;
-		}
 		else
-		{
 			return (SAMPLE*)sfxdata[Z35].dat;
-		}
 	}
 	else
 	{
@@ -8315,13 +8302,9 @@ int32_t sfx_get_default_freq(int32_t index)
 	if (sfxdat)
 	{
 		if (index < Z35)
-		{
 			return ((SAMPLE*)sfxdata[index].dat)->freq;
-		}
 		else
-		{
 			return ((SAMPLE*)sfxdata[Z35].dat)->freq;
-		}
 	}
 	else
 	{
@@ -8334,13 +8317,9 @@ int32_t sfx_get_length(int32_t index)
 	if (sfxdat)
 	{
 		if (index < Z35)
-		{
 			return int32_t(((SAMPLE*)sfxdata[index].dat)->len);
-		}
 		else
-		{
 			return int32_t(((SAMPLE*)sfxdata[Z35].dat)->len);
-		}
 	}
 	else
 	{
@@ -8397,9 +8376,7 @@ void cont_sfx(int32_t index)
 		return;
 
 	if(!sfx_init(index))
-	{
 		return;
-	}
 	
 	if(voice_get_position(sfx_voice[index])<=0)
 	{
@@ -8660,13 +8637,9 @@ static bool rButton(bool &btn, bool &flag)
 static bool rButtonPeek(bool btn, bool flag)
 {
 	if(!btn)
-	{
 		return false;
-	}
 	else if(!flag)
-	{
 		return true;
-	}
 	
 	return false;
 }
