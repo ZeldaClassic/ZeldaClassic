@@ -30637,35 +30637,35 @@ void HeroClass::StartRefill(int32_t refillWhat)
 
 void HeroClass::Start250Refill(int32_t refillWhat)
 {
-	if(!refilling)
-	{
-		refillclk=21;
-		stop_sfx(QMisc.miscsfx[sfxLOWHEART]);
-		sfx(WAV_REFILL,128,true);
-		refilling=refillWhat;
-		
-		if(refill_why>=0) // Item index
-		{
-			if((itemsbuf[refill_why].family==itype_potion)&&(!get_qr(qr_NONBUBBLEMEDICINE)))
-			{
-				swordclk=0;
-				verifyAWpn();
-				if(get_qr(qr_ITEMBUBBLE)) itemclk=0;
-			}
+	if (refilling)
+		return;
 
-			if((itemsbuf[refill_why].family==itype_triforcepiece)&&(!get_qr(qr_NONBUBBLETRIFORCE)))
-			{
-				swordclk=0;
-				verifyAWpn();
-				if(get_qr(qr_ITEMBUBBLE)) itemclk=0;
-			}
-		}
-		else if((refill_why==REFILL_FAIRY)&&(!get_qr(qr_NONBUBBLEFAIRIES)))
+	refillclk=21;
+	stop_sfx(QMisc.miscsfx[sfxLOWHEART]);
+	sfx(WAV_REFILL,128,true);
+	refilling=refillWhat;
+	
+	if(refill_why>=0) // Item index
+	{
+		if((itemsbuf[refill_why].family==itype_potion)&&(!get_qr(qr_NONBUBBLEMEDICINE)))
 		{
 			swordclk=0;
 			verifyAWpn();
 			if(get_qr(qr_ITEMBUBBLE)) itemclk=0;
 		}
+
+		if((itemsbuf[refill_why].family==itype_triforcepiece)&&(!get_qr(qr_NONBUBBLETRIFORCE)))
+		{
+			swordclk=0;
+			verifyAWpn();
+			if(get_qr(qr_ITEMBUBBLE)) itemclk=0;
+		}
+	}
+	else if((refill_why==REFILL_FAIRY)&&(!get_qr(qr_NONBUBBLEFAIRIES)))
+	{
+		swordclk=0;
+		verifyAWpn();
+		if(get_qr(qr_ITEMBUBBLE)) itemclk=0;
 	}
 }
 
