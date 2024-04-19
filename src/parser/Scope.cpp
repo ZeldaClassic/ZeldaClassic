@@ -70,8 +70,7 @@ Scope* ZScript::lookupScope(Scope const& scope, string const& name, bool noUsing
 	}
 	if(!noUsing)//handle Using Namespaces
 	{
-		vector<NamespaceScope*> namespaces = lookupUsingNamespaces(*first);
-		for( NamespaceScope* nss : namespaces)
+		for( NamespaceScope* nss : lookupUsingNamespaces(*first))
 		{
 			Scope* usingscope = nss;
 			if (Scope* child = usingscope->getChild(name))
@@ -113,8 +112,7 @@ vector<Scope*> ZScript::lookupScopes(Scope const& scope, vector<string> const& n
 	}
 	if(!noUsing)
 	{
-		vector<NamespaceScope*> namespaces = lookupUsingNamespaces(scope);
-		for(NamespaceScope* nssp : namespaces)
+		for(NamespaceScope* nssp : lookupUsingNamespaces(scope))
 		{
 			if (Scope* descendant = getDescendant(*nssp, names, delimiters))
 				scopes.push_back(descendant);
@@ -126,8 +124,7 @@ vector<Scope*> ZScript::lookupScopes(Scope const& scope, vector<string> const& n
 vector<Scope*> ZScript::lookupUsingScopes(Scope const& scope, vector<string> const& names, vector<std::string> const& delimiters)
 {
 	vector<Scope*> scopes;
-	vector<NamespaceScope*> namespaces = lookupUsingNamespaces(scope);
-	for (NamespaceScope* nss : namespaces)
+	for (NamespaceScope* nss : lookupUsingNamespaces(scope))
 	{
 		if (Scope* descendant = getDescendant(*nss, names, delimiters))
 			scopes.push_back(descendant);
@@ -175,8 +172,7 @@ DataType const* ZScript::lookupDataType(
 		if(isTypedefCheck && !current->isFile()) return type; //Only check current scope, and root for file, for typedefs
 	}
 	if(host.noUsing || forceSkipUsing || isTypedefCheck) return type; //End early
-	vector<NamespaceScope*> namespaces = lookupUsingNamespaces(scope);
-	for(NamespaceScope* nssp : namespaces)
+	for(NamespaceScope* nssp : lookupUsingNamespaces(scope))
 	{
 		DataType const* temp = nssp->getLocalDataType(name);
 		if(!type)
@@ -251,8 +247,7 @@ Datum* ZScript::lookupDatum(Scope& scope, std::string const& name, ASTExprIdenti
 		}
 	}
 	if(host.noUsing || forceSkipUsing) return datum; //End early
-	vector<NamespaceScope*> namespaces = lookupUsingNamespaces(scope);
-	for(NamespaceScope* nsscope : namespaces)
+	for(NamespaceScope* nsscope : lookupUsingNamespaces(scope))
 	{
 		Datum* temp = nsscope->getLocalDatum(name);
 		if(!datum)
