@@ -111,8 +111,7 @@ void SemanticAnalyzer::analyzeFunctionInternals(Function& function)
 		script = &ss->script;
 
 	// Add the parameters to the scope.
-	vector<ASTDataDecl*>& parameters = functionDecl->parameters.data();
-	for( ASTDataDecl* parameter_p : parameters )
+	for( ASTDataDecl* parameter_p : functionDecl->parameters.data())
 	{
 		ASTDataDecl& parameter = *parameter_p;
 		string const& name = parameter.name;
