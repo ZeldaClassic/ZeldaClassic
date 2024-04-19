@@ -367,16 +367,16 @@ vector<Function*> ZScript::lookupFunctions(
 	vector<Scope*> usingScopes = lookupUsingScopes(scope, ancestry, delimiters); //get ONLY using scopes
 	//Check all non-using scopes for valid function matches
 	bool foundFile = false;
-	for (vector<Scope*>::const_iterator it = scopes.begin();
-	     it != scopes.end(); ++it)
+	//for (vector<Scope*>::const_iterator it = scopes.begin();
+	 //    it != scopes.end(); ++it)
+	for( Scope* current : scopes)
 	{
-		Scope& current = **it;
-		if(current.isFile() || (current.isRoot() && !foundFile))
+		if(current->isFile() || (current->isRoot() && !foundFile))
 		{
 			if(!functions.empty()) noUsing = true; //If there are local matches, don't check using
 		}
-		if(current.isFile()) foundFile = true;
-		vector<Function*> currentFunctions = current.getLocalFunctions(name);
+		if(current->isFile()) foundFile = true;
+		vector<Function*> currentFunctions = current->getLocalFunctions(name);
 		trimBadFunctions(currentFunctions, parameterTypes, !isClass);
 		functions.insert(functions.end(),
 		                 currentFunctions.begin(), currentFunctions.end());
