@@ -41,7 +41,7 @@ static void get_root_path(char* path, int32_t size)
 	int32_t drive = 0;
 #endif
 
-    _al_getdcwd(drive, path, size - ucwidth(OTHER_PATH_SEPARATOR));
+	_al_getdcwd(drive, path, size - ucwidth(OTHER_PATH_SEPARATOR));
 	fix_filename_case(path);
 	fix_filename_slashes(path);
 	put_backslash(path);
@@ -51,7 +51,7 @@ static std::filesystem::path relativize_path(std::string src_path)
 {
 	char rootpath[PATH_MAX] = {0};
 	get_root_path(rootpath, PATH_MAX);
-    return std::filesystem::relative(src_path, rootpath);
+	return std::filesystem::relative(src_path, rootpath);
 }
 
 static std::filesystem::path derelativize_path(std::string src_path)
@@ -287,9 +287,7 @@ bool ScriptParser::valid_include(ASTImportDecl& decl, string& ret_fname)
 				//Convert the include string to a proper import path
 				fname = checkIncludes(includePath, importname, ZQincludePaths);
 				if(!fname)
-				{
 					fname = checkIncludes(includePath, importname, includePaths);
-				}
 			}
 		}
 	}
@@ -437,9 +435,7 @@ unique_ptr<IntermediateData> ScriptParser::generateOCode(FunctionData& fdata)
 	
 	//Parse the indexes for class variables
 	for(UserClass* user_class : program.classes)
-	{
 		user_class->getScope().parse_ucv();
-	}
 	
 	//globals have been initialized, now we repeat for the functions
 	vector<Function*> funs = program.getUserFunctions();
