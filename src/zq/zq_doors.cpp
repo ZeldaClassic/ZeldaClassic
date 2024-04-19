@@ -24,9 +24,7 @@ extern int32_t jwin_pal[jcMAX];
 extern bool saved;
 
 word door_combo_set_count;
-
-
-
+ 
 const char *doors_string[9]= {"(None)","Wall","Open","Locked","Shutter","Bombable","Walk-through","1-Way Shutter","Boss"};
 
 const char *doorslist(int32_t index, int32_t *list_size)
