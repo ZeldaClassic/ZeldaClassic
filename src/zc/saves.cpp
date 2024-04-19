@@ -69,20 +69,9 @@ static fs::path get_save_folder_path()
 	return zc_get_config("zeldadx", "save_folder", "saves");
 }
 
-static fs::path get_save_order_path()
-{
-	return get_save_folder_path() / "order.txt";
-}
-
-static fs::path get_backup_folder_path()
-{
-	return get_save_folder_path() / "backup";
-}
-
-static fs::path get_deleted_folder_path()
-{
-	return get_save_folder_path() / "deleted";
-}
+static fs::path get_save_order_path    () { return get_save_folder_path() / "order.txt"; } 
+static fs::path get_backup_folder_path () { return get_save_folder_path() / "backup"; } 
+static fs::path get_deleted_folder_path() { return get_save_folder_path() / "deleted"; }
 
 static int move_to_folder(fs::path path, fs::path dir, std::string stem = "", bool force_suffix = false)
 {
