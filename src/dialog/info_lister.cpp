@@ -250,10 +250,10 @@ void ItemListerDialog::edit()
 void ItemListerDialog::rclick(int x, int y)
 {
 	NewMenu rcmenu {
-		{ "&Copy", [&](){copy(); update();} },
+		{ "&Copy",       [&](){copy();  update();} },
 		{ "Paste", "&v", [&](){paste(); update();}, 0, copied_item_id < 0 },
-		{ "&Save", [&](){save(); update();} },
-		{ "&Load", [&](){load(); update();} },
+		{ "&Save",       [&](){save();  update();} },
+		{ "&Load",       [&](){load();  update();} },
 	};
 	rcmenu.pop(x, y);
 }
