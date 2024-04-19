@@ -1790,9 +1790,7 @@ void close_black_opening(int32_t x, int32_t y, bool wait, int32_t shape)
 			advanceframe(true);
 			
 			if(Quit)
-			{
 				break;
-			}
 		}
 	}
 }
@@ -1832,9 +1830,7 @@ void open_black_opening(int32_t x, int32_t y, bool wait, int32_t shape)
 			advanceframe(true);
 			
 			if(Quit)
-			{
 				break;
-			}
 		}
 	}
 }

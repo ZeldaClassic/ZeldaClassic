@@ -121,13 +121,9 @@ void dosubscr()
 		// With COOLSCROLL on, the subscreen crawls down over the playing field.
 		// Otherwise the playing field scrolls down past the bottom of the screen.
 		if(COOLSCROLL)
-		{
 			blit(scrollbuf,framebuf,0,0,0,passive_subscreen_height,256,176);
-		}
 		else
-		{
 			blit(scrollbuf,framebuf,0,0,0,y+168+passive_subscreen_height,256,-y);
-		}
 		
 		draw_subscrs(framebuf,0,y,showtime,sspSCROLLING);
 		if(replay_version_check(19))
@@ -193,16 +189,12 @@ void dosubscr()
 				else if(rEx3btn() )
 				{
 					if ( use_a && get_qr(qr_USE_EX1_EX2_INVENTORYSWAP) )
-					{
 						selectNextAWpn(SEL_LEFT);
-					}
 				}
 				else if(rEx4btn() )
 				{
 					if ( use_a && get_qr(qr_USE_EX1_EX2_INVENTORYSWAP) )
-					{
 						selectNextAWpn(SEL_RIGHT);
-					}
 				}
 			}
 			
@@ -483,13 +475,9 @@ void dosubscr()
 		rectfill(framebuf, 0, 0, 255, 223, 0);
 		
 		if(COOLSCROLL)
-		{
 			blit(scrollbuf,framebuf,0,0,0,passive_subscreen_height,256,176);
-		}
 		else
-		{
 			blit(scrollbuf,framebuf,0,0,0,y+168+passive_subscreen_height,256,-y);
-		}
 		
 		draw_subscrs(framebuf,0,y,showtime,sspSCROLLING);
 		if(replay_version_check(19))
@@ -502,9 +490,7 @@ void dosubscr()
 	active_sub_yoff = -224;
 	subscreen_open = false;
 	if(usebombpal)
-	{
 		memcpy(RAMpal, temppal, PAL_SIZE*sizeof(RGB));
-	}
 	
 	resume_sfx(WAV_BRANG);
 }
