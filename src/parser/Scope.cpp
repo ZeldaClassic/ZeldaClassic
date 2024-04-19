@@ -787,11 +787,9 @@ int32_t BasicScope::useNamespace(vector<std::string> names, vector<std::string> 
 	//
 	if(namesp)
 	{
-		vector<NamespaceScope*> namespaces = lookupUsingNamespaces(*this);
-		for(vector<NamespaceScope*>::iterator it = namespaces.begin();
-			it != namespaces.end(); ++it)
+		for( NamespaceScope* nsscope : lookupUsingNamespaces(*this))
 		{
-			if(*it == namesp) return -1; //Already using this namespace! -V
+			if(nsscope == namesp) return -1; //Already using this namespace! -V
 		}
 	}
 	if(!namesp) return 0;
