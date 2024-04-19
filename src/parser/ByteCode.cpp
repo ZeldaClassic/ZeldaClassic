@@ -3431,20 +3431,9 @@ string ORNGSeed::toString() const
     return "RNGSEED " + getArgument()->toString();
 }
 
-string ORNGRSeed::toString() const
-{
-    return "RNGRSEED";
-}
-
-string ORNGFree::toString() const
-{
-    return "RNGFREE";
-}
-
-string OCheckTrig::toString() const
-{
-    return "CHECKTRIG";
-}
+string ORNGRSeed ::toString() const { return "RNGRSEED"; } 
+string ORNGFree  ::toString() const { return "RNGFREE"; } 
+string OCheckTrig::toString() const { return "CHECKTRIG"; }
 
 string OWarp::toString() const
 {
