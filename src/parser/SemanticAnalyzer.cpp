@@ -588,11 +588,8 @@ void SemanticAnalyzer::caseDataEnum(ASTDataEnum& host, void* param)
 
 	//Handle initializer assignment
 	int32_t ipart = -1, dpart = 0;
-	std::vector<ASTDataDecl*> decls = host.getDeclarations();
-	for(vector<ASTDataDecl*>::iterator it = decls.begin();
-		it != decls.end(); ++it)
+	for( ASTDataDecl* declaration : host.getDeclarations())
 	{
-		ASTDataDecl* declaration = *it;
 		ASTExpr* init = declaration->getInitializer();
 		if(!init) //auto-fill
 		{
