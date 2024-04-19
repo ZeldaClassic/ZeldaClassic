@@ -37,11 +37,9 @@ SemanticAnalyzer::SemanticAnalyzer(Program& program)
 		scope = scope->getParent();
 	}
 	
-	for (vector<Namespace*>::iterator it = program.namespaces.begin();
-		 it != program.namespaces.end(); ++it)
+	for( Namespace* namesp : program.namespaces)
 	{
-		Namespace& namesp = **it;
-		scope = &namesp.getScope();
+		scope = &namesp->getScope();
 		functions = scope->getLocalFunctions();
 		for (vector<Function*>::iterator it = functions.begin();
 		     it != functions.end(); ++it)
