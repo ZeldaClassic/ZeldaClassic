@@ -100,10 +100,7 @@ void init_ffpos()
 		ffprvy[q] = -10000000;
 	}
 }
-
-
-
-
+ 
 void Z_message_d(const char *format,...)
 {
 #ifdef _DEBUG
@@ -118,9 +115,7 @@ void Z_message_d(const char *format,...)
     format=format;
 #endif
 }
-
-
-
+ 
 bool checktrigger=false;
 
 void debugging_box(int32_t x1, int32_t y1, int32_t x2, int32_t y2)
@@ -155,10 +150,8 @@ void clear_dmap(word i)
 
 void clear_dmaps()
 {
-    for(int32_t i=0; i<MAXDMAPS; i++)
-    {
-        clear_dmap(i);
-    }
+	for(int32_t i=0; i<MAXDMAPS; i++)
+		clear_dmap(i);
 }
 
 int32_t isdungeon(int32_t dmap, int32_t scr) // The arg is only used by loadscr2 and loadscr
@@ -245,12 +238,10 @@ int32_t MAPFLAGL(int32_t layer,int32_t x,int32_t y)
 
 int32_t COMBOTYPEL(int32_t layer,int32_t x,int32_t y)
 {
-    if(!layer || tmpscr2[layer-1].valid==0)
-    {
-        return 0;
-    }
+	if(!layer || tmpscr2[layer-1].valid==0)
+		return 0;
     
-    return combobuf[MAPCOMBO2(layer-1,x,y)].type;
+	return combobuf[MAPCOMBO2(layer-1,x,y)].type;
 }
 
 int32_t MAPCOMBOFLAGL(int32_t layer,int32_t x,int32_t y)
@@ -498,29 +489,19 @@ static int32_t MAPCOMBO3_impl(int32_t map, int32_t screen, int32_t layer, int32_
 		}
 	}
 	if(flags&mLOCKBLOCK)              // if special stuff done before
-	{
 	    remove_screenstatecombos2(&scr, (mapscr*)NULL, cLOCKBLOCK, cLOCKBLOCK2);
-	}
 
 	if(flags&mBOSSLOCKBLOCK)          // if special stuff done before
-	{
 	    remove_screenstatecombos2(&scr, (mapscr*)NULL, cBOSSLOCKBLOCK, cBOSSLOCKBLOCK2);
-	}
 
 	if(flags&mCHEST)              // if special stuff done before
-	{
 	    remove_screenstatecombos2(&scr, (mapscr*)NULL, cCHEST, cCHEST2);
-	}
 
 	if(flags&mCHEST)              // if special stuff done before
-	{
 	    remove_screenstatecombos2(&scr, (mapscr*)NULL, cLOCKEDCHEST, cLOCKEDCHEST2);
-	}
 
 	if(flags&mBOSSCHEST)              // if special stuff done before
-	{
 	    remove_screenstatecombos2(&scr, (mapscr*)NULL, cBOSSCHEST, cBOSSCHEST2);
-	}
 	
 	clear_xdoors2(&scr, nullptr, mi);
 	clear_xstatecombos2(&scr, nullptr, mi);
@@ -645,7 +626,7 @@ bool HASFLAG_ANY(int32_t flag, int32_t pos)
 
 void setmapflag(int32_t flag)
 {
-    setmapflag((currmap*MAPSCRSNORMAL)+homescr,flag);
+	setmapflag((currmap*MAPSCRSNORMAL)+homescr,flag);
 }
 
 const char *screenstate_string[16] =
