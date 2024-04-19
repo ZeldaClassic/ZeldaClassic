@@ -177,9 +177,7 @@ GUI::ListData GUI::ZCListData::shadow_types()
 	std::vector<std::string> strings;
 
 	for(int q = 0; q < sstsMAX; ++q)
-	{
 		strings.push_back(shadowstyle_str[q]);
-	}
 
 	return GUI::ListData(strings);
 }
@@ -213,9 +211,8 @@ GUI::ListData GUI::ZCListData::enemies(bool numbered, bool defaultFilter)
 	GUI::ListData ls;
 	ls.add("(None)", 0);
 	for( auto const& name : names)
-	{
 		ls.add(name, ids[name]);
-	}
+
 	return ls;
 }
 
@@ -240,9 +237,8 @@ GUI::ListData GUI::ZCListData::items(bool numbered, bool none)
 	if(none)
 		ls.add("(None)", -1);
 	for(auto const& name : names)
-	{
 		ls.add(name, ids[name]);
-	}
+
 	return ls;
 }
 
@@ -267,9 +263,8 @@ GUI::ListData GUI::ZCListData::dropsets(bool numbered, bool none)
 	if(none)
 		ls.add("(None)", -1);
 	for(auto const& name : names)
-	{
 		ls.add(name, ids[name]);
-	}
+
 	return ls;
 }
 
@@ -309,9 +304,8 @@ GUI::ListData GUI::ZCListData::itemclass(bool numbered, bool zero_none)
 	if(zero_none)
 		ls.add("(None)", 0);
 	for( auto const& name : famnames )
-	{
 		ls.add(name, fams[name]);
-	}
+
 	return ls;
 }
 
@@ -350,9 +344,8 @@ GUI::ListData GUI::ZCListData::combotype(bool numbered, bool skipNone)
 	}
 
 	for(auto const& tn : typenames)
-	{
 		ls.add(tn, types[tn]);
-	}
+
 	return ls;
 }
 
@@ -384,9 +377,7 @@ GUI::ListData GUI::ZCListData::mapflag(int32_t numericalFlags, bool numbered, bo
 	if (!numericalFlags)
 	{
 		for( auto const& name : names)
-		{
 			ls.add(name, vals[name]);
-		}
 	}
 	
 	return ls;
@@ -472,9 +463,8 @@ GUI::ListData GUI::ZCListData::miscsprites(bool skipNone, bool inclNegSpecialVal
 	if(!skipNone)
 		ls.add("(None)", -1);
 	for( auto const& name : sprnames)
-	{
 		ls.add(name, ids[name]);
-	}
+
 	return ls;
 }
 
@@ -621,9 +611,8 @@ GUI::ListData GUI::ZCListData::disableditems(byte* disabledarray)
 		}
 	}
 	if (ls.size() == 0)
-	{
 		ls.add("", -1);
-	}
+
 	ls.alphabetize();
 	return ls;
 }

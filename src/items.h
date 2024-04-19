@@ -306,5 +306,5 @@ int32_t getCanonicalItemID(itemdata *items, int32_t family);
 int32_t getItemIDPower(itemdata *items, int32_t family, int32_t power);
 void addOldStyleFamily(zinitdata *dest, itemdata *items, int32_t family, char levels);
 
-std::string bottle_name(size_t type);
+const char* bottle_name(size_t type);
 std::string bottle_slot_name(size_t slot, std::string const& emptystr);

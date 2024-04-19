@@ -183,9 +183,9 @@ int32_t item::run_script(int32_t mode)
 }
 
 
-std::string bottle_name(size_t type)
+const char* bottle_name(size_t type)
 {
-	return std::string(QMisc.bottle_types[type-1].name);
+	return QMisc.bottle_types[type-1].name;
 }
 std::string bottle_slot_name(size_t slot, std::string const& emptystr)
 {
