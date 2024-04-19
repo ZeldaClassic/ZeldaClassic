@@ -3133,7 +3133,7 @@ void draw_lens_under(BITMAP *dest, bool layer)
 						
 					case mfMBRANG:
 						if(!hints)
-				{
+						{
 							if(!(itemsbuf[Hero.getLastLensID()].flags & ITEM_FLAG2))putcombo(dest,x,y,tmpscr->secretcombo[sMBRANG],tmpscr->secretcset[sMBRANG]);
 						}
 						else
@@ -3239,23 +3239,15 @@ void draw_lens_under(BITMAP *dest, bool layer)
 								tempweapony=y;
 								
 								if(lens_hint_weapon[ewMagic][2]==up)
-								{
 									--lens_hint_weapon[ewMagic][4];
-								}
 								else
-								{
 									++lens_hint_weapon[ewMagic][4];
-								}
 								
 								if(lens_hint_weapon[ewMagic][4]>8)
-								{
 									lens_hint_weapon[ewMagic][2]=up;
-								}
 								
 								if(lens_hint_weapon[ewMagic][4]<=0)
-								{
 									lens_hint_weapon[ewMagic][2]=down;
-								}
 							}
 							
 							putitem2(dest,tempitemx,tempitemy,tempitem, lens_hint_item[tempitem][0], lens_hint_item[tempitem][1], 0);
@@ -3293,13 +3285,9 @@ void draw_lens_under(BITMAP *dest, bool layer)
 								}
 								
 								if(lens_hint_weapon[ewFireball][3]>0)
-								{
 									++lens_hint_weapon[ewFireball][4];
-								}
 								else
-								{
 									--lens_hint_weapon[ewFireball][4];
-								}
 							}
 							
 							putitem2(dest,tempitemx,tempitemy,tempitem, lens_hint_item[tempitem][0], lens_hint_item[tempitem][1], 0);
@@ -3638,24 +3626,16 @@ void draw_lens_under(BITMAP *dest, bool layer)
 				rectfill(dest, 224, 80+playing_field_offset, 239, 95+playing_field_offset, WHITE);
 				
 			if(tmpscr->door[0]==dBOMB)
-			{
 				showbombeddoor(dest, 0);
-			}
 			
 			if(tmpscr->door[1]==dBOMB)
-			{
 				showbombeddoor(dest, 1);
-			}
 			
 			if(tmpscr->door[2]==dBOMB)
-			{
 				showbombeddoor(dest, 2);
-			}
 			
 			if(tmpscr->door[3]==dBOMB)
-			{
 				showbombeddoor(dest, 3);
-			}
 		}
 		
 		if(tmpscr->stairx + tmpscr->stairy)
@@ -3992,13 +3972,9 @@ int32_t onNonGUISnapshot()
 int32_t onSnapshot()
 {
 	if(zc_getkey(KEY_LSHIFT, true)||zc_getkey(KEY_RSHIFT, true))
-	{
 		onGUISnapshot();
-	}
 	else
-	{
 		onNonGUISnapshot();
-	}
 	
 	return D_O_K;
 }
@@ -4020,9 +3996,7 @@ int32_t onSaveMapPic()
 		tmpscr2[i].zero_memory();
 		
 		if(i>=2)
-		{
 			continue;
-		}
 		
 		tmpscr_b[i] = tmpscr[i];
 		tmpscr[i].zero_memory();
@@ -4117,9 +4091,7 @@ int32_t onSaveMapPic()
 		tmpscr2[i]=tmpscr_c[i];
 		
 		if(i>=2)
-		{
 			continue;
-		}
 		
 		tmpscr[i]=tmpscr_b[i];
 	}
@@ -4624,17 +4596,13 @@ void advanceframe(bool allowwavy, bool sfxcleanup, bool allowF6Script)
 #ifdef _WIN32
 		
 		if(use_dwm_flush)
-		{
 			do_DwmFlush();
-		}
 		
 #endif
 		
 		// to keep music playing
 		if(zcmusic!=NULL)
-		{
 			zcmusic_poll();
-		}
 
 		update_hw_screen();
 	}
@@ -4702,9 +4670,7 @@ void advanceframe(bool allowwavy, bool sfxcleanup, bool allowF6Script)
 #ifdef _WIN32
 	
 	if(use_dwm_flush)
-	{
 		do_DwmFlush();
-	}
 	
 #endif
 	
@@ -4764,9 +4730,7 @@ void zapout()
 		advanceframe(true);
 		
 		if(Quit)
-		{
 			break;
-		}
 	}
 }
 
@@ -4786,12 +4750,9 @@ void zapin()
 		advanceframe(true);
 		
 		if(Quit)
-		{
 			break;
-		}
 	}
-}
-
+} 
 
 void wavyout(bool showhero)
 {
@@ -4996,9 +4957,7 @@ void openscreen(int32_t shape)
 		advanceframe(true);
 		
 		if(Quit)
-		{
 			break;
-		}
 	}
 	
 	Hero.setDontDraw(false);
@@ -5046,9 +5005,7 @@ void closescreen(int32_t shape)
 		advanceframe(true);
 		
 		if(Quit)
-		{
 			break;
-		}
 	}
 	
 	Hero.setDontDraw(false);
@@ -5206,7 +5163,6 @@ int32_t onClrConsoleOnLoad()
 	zc_set_config("CONSOLE","clear_console_on_load",clearConsoleOnLoad?1:0);
 	return D_O_K;
 }
-
 
 int32_t onFrameSkip()
 {
@@ -5965,13 +5921,9 @@ bool zc_getname_nogo(const char *prompt,const char *ext,EXT_LIST *list,const cha
 	int32_t sel=0;
 	
 	if(list==NULL)
-	{
 		ret = jwin_file_select_ex(prompt,modulepath,ext,2048,-1,-1,get_zc_font(font_lfont));
-	}
 	else
-	{
 		ret = jwin_file_browse_ex(prompt, modulepath, list, &sel, 2048, -1, -1, get_zc_font(font_lfont));
-	}
 	
 	return ret!=0;
 }
