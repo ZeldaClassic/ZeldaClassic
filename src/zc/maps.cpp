@@ -3957,19 +3957,13 @@ void draw_msgstr(byte layer)
 	if(layer != msgstr_layer) return;
 
 	if(!(msg_bg_display_buf->clip))
-	{
 		blit_msgstr_bg(framebuf,0,0,0,playing_field_offset,256,168);
-	}
 	
 	if(!(msg_portrait_display_buf->clip))
-	{
 		blit_msgstr_prt(framebuf,0,0,0,playing_field_offset,256,168);
-	}
 	
 	if(!(msg_txt_display_buf->clip))
-	{
 		blit_msgstr_fg(framebuf,0,0,0,playing_field_offset,256,168);
-	}
 }
 
 void draw_screen(mapscr* this_screen, bool showhero, bool runGeneric)
@@ -4050,13 +4044,9 @@ void draw_screen(mapscr* this_screen, bool showhero, bool runGeneric)
 				((Hero.getAction()==climbcovertop)||(Hero.getAction()==climbcoverbottom)))
 		{
 			if(Hero.getAction()==climbcovertop)
-			{
 				cmby2=16;
-			}
 			else if(Hero.getAction()==climbcoverbottom)
-			{
 				cmby2=-16;
-			}
 			
 			decorations.draw2(scrollbuf,true);
 			Hero.draw(scrollbuf);
@@ -4097,13 +4087,9 @@ void draw_screen(mapscr* this_screen, bool showhero, bool runGeneric)
 				((Hero.getAction()==climbcovertop)||(Hero.getAction()==climbcoverbottom)))
 		{
 			if(Hero.getAction()==climbcovertop)
-			{
 				cmby2=16;
-			}
 			else if(Hero.getAction()==climbcoverbottom)
-			{
 				cmby2=-16;
-			}
 			
 			decorations.draw2(scrollbuf,true);
 			Hero.draw(scrollbuf);
@@ -4867,17 +4853,13 @@ void putdoor(BITMAP *dest,int32_t t,int32_t side,int32_t door,bool redraw,bool e
 void putcombo_not_zero(BITMAP *dest, int32_t x, int32_t y, int32_t combo, int32_t cset)
 {
 	if(combo!=0)
-	{
 		putcombo(dest,x, y, combo, cset);
-	}
 }
 
 void overcombo_not_zero(BITMAP *dest, int32_t x, int32_t y, int32_t combo, int32_t cset)
 {
-    if(combo!=0)
-    {
-        overcombo(dest,x, y, combo, cset);
-    }
+	if(combo!=0)
+		overcombo(dest,x, y, combo, cset);
 }
 
 void showbombeddoor(BITMAP *dest, int32_t side)
@@ -5262,29 +5244,19 @@ void loadscr(int32_t tmp,int32_t destdmap, int32_t scr,int32_t ldir,bool overlay
 	toggle_gswitches_load(tmpscr+tmp, tmpscr2);
 	
 	if(game->maps[(currmap*MAPSCRSNORMAL)+scr]&mLOCKBLOCK)			  // if special stuff done before
-	{
 		remove_lockblocks(tmp);
-	}
 	
 	if(game->maps[(currmap*MAPSCRSNORMAL)+scr]&mBOSSLOCKBLOCK)		  // if special stuff done before
-	{
 		remove_bosslockblocks(tmp);
-	}
 	
 	if(game->maps[(currmap*MAPSCRSNORMAL)+scr]&mCHEST)			  // if special stuff done before
-	{
 		remove_chests(tmp);
-	}
 	
 	if(game->maps[(currmap*MAPSCRSNORMAL)+scr]&mLOCKEDCHEST)			  // if special stuff done before
-	{
 		remove_lockedchests(tmp);
-	}
 	
 	if(game->maps[(currmap*MAPSCRSNORMAL)+scr]&mBOSSCHEST)			  // if special stuff done before
-	{
 		remove_bosschests(tmp);
-	}
 	
 	clear_xdoors(tmp, (currmap*MAPSCRSNORMAL)+scr);
 	clear_xstatecombos(tmp, (currmap*MAPSCRSNORMAL)+scr);
@@ -5343,14 +5315,10 @@ void loadscr(int32_t tmp,int32_t destdmap, int32_t scr,int32_t ldir,bool overlay
 			}
 			
 			if(putit)
-			{
 				putdoor(scrollbuf,tmp,i,tmpscr[tmp].door[i],false);
-			}
 			
 			if(door==dSHUTTER||door==d1WAYSHUTTER)
-			{
 				tmpscr[tmp].door[i]=door;
-			}
 		}
 	}
 	
@@ -5418,13 +5386,9 @@ void loadscr2(int32_t tmp,int32_t scr,int32_t)
 		for(int32_t i=0; i<6; i++)
 		{
 			if(tmpscr[tmp].layermap[i]>0)
-			{
 				tmpscr2[i]=TheMaps[(tmpscr[tmp].layermap[i]-1)*MAPSCRS+tmpscr[tmp].layerscreen[i]];
-			}
 			else
-			{
 				(tmpscr2+i)->zero_memory();
-			}
 		}
 	}
 	
@@ -5456,29 +5420,19 @@ void loadscr2(int32_t tmp,int32_t scr,int32_t)
 	}
 	
 	if(game->maps[(currmap*MAPSCRSNORMAL)+scr]&mLOCKBLOCK)			  // if special stuff done before
-	{
 		remove_lockblocks(tmp);
-	}
 	
 	if(game->maps[(currmap*MAPSCRSNORMAL)+scr]&mBOSSLOCKBLOCK)		  // if special stuff done before
-	{
 		remove_bosslockblocks(tmp);
-	}
 	
 	if(game->maps[(currmap*MAPSCRSNORMAL)+scr]&mCHEST)			  // if special stuff done before
-	{
 		remove_chests(tmp);
-	}
 	
 	if(game->maps[(currmap*MAPSCRSNORMAL)+scr]&mLOCKEDCHEST)			  // if special stuff done before
-	{
 		remove_lockedchests(tmp);
-	}
 	
 	if(game->maps[(currmap*MAPSCRSNORMAL)+scr]&mBOSSCHEST)			  // if special stuff done before
-	{
 		remove_bosschests(tmp);
-	}
 	
 	clear_xdoors(tmp, (currmap*MAPSCRSNORMAL)+scr);
 	clear_xstatecombos(tmp, (currmap*MAPSCRSNORMAL)+scr);
@@ -5595,29 +5549,19 @@ void putscr(BITMAP* dest,int32_t x,int32_t y, mapscr* scrn)
 void putscrdoors(BITMAP *dest,int32_t x,int32_t y, mapscr* scrn)
 {
 	if(scrn->valid==0||!show_layer_0)
-	{
 		return;
-	}
 	
 	if(scrn->door[0]==dBOMBED)
-	{
 		over_door(dest,0,39,up,x,y);
-	}
 	
 	if(scrn->door[1]==dBOMBED)
-	{
 		over_door(dest,0,135,down,x,y);
-	}
 	
 	if(scrn->door[2]==dBOMBED)
-	{
 		over_door(dest,0,66,left,x,y);
-	}
 	
 	if(scrn->door[3]==dBOMBED)
-	{
 		over_door(dest,0,77,right,x,y);
-	}
 }
 static inline bool onSwitch(newcombo const& cmb, zfix const& switchblockstate)
 {
