@@ -1699,25 +1699,10 @@ void SemanticAnalyzer::caseExprBitNot(ASTExprBitNot& host, void*)
 	analyzeUnaryExpr(host, DataType::FLOAT);
 }
 
-void SemanticAnalyzer::caseExprIncrement(ASTExprIncrement& host, void*)
-{
-	analyzeIncrement(host);
-}
-
-void SemanticAnalyzer::caseExprPreIncrement(ASTExprPreIncrement& host, void*)
-{
-	analyzeIncrement(host);
-}
-
-void SemanticAnalyzer::caseExprDecrement(ASTExprDecrement& host, void*)
-{
-	analyzeIncrement(host);
-}
-
-void SemanticAnalyzer::caseExprPreDecrement(ASTExprPreDecrement& host, void*)
-{
-	analyzeIncrement(host);
-}
+void SemanticAnalyzer::caseExprIncrement   (ASTExprIncrement&    host, void*) { analyzeIncrement(host); } 
+void SemanticAnalyzer::caseExprPreIncrement(ASTExprPreIncrement& host, void*) { analyzeIncrement(host); } 
+void SemanticAnalyzer::caseExprDecrement   (ASTExprDecrement&    host, void*) { analyzeIncrement(host); } 
+void SemanticAnalyzer::caseExprPreDecrement(ASTExprPreDecrement& host, void*) { analyzeIncrement(host); }
 
 void SemanticAnalyzer::caseExprCast(ASTExprCast& host, void* param)
 {
