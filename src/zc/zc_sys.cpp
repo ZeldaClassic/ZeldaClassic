@@ -2585,16 +2585,12 @@ void draw_lens_under(BITMAP *dest, bool layer)
 			
 			for(int32_t iter=0; iter<2; ++iter)
 			{
-				int32_t checkflag=0;
+				int32_t checkflag;
 				
 				if(iter==0)
-				{
 					checkflag=combobuf[tmpscr->data[i]].flag;
-				}
 				else
-				{
 					checkflag=tmpscr->sflag[i];
-				}
 				
 				if(checkflag==mfSTRIKE)
 				{
