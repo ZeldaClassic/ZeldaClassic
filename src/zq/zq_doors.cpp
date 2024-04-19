@@ -815,10 +815,10 @@ static int32_t door_east_list[] =
 static TABPANEL door_tabs[] =
 {
     // (text)
-    { (char *)"North",  D_SELECTED,  door_north_list,    0, NULL },
-    { (char *)"South",  0,           door_south_list, 0, NULL },
+    { (char *)"North",  D_SELECTED,  door_north_list,  0, NULL },
+    { (char *)"South",  0,           door_south_list,  0, NULL },
     { (char *)"West",   0,           door_west_list,   0, NULL },
-    { (char *)"East",   0,           door_east_list,  0, NULL },
+    { (char *)"East",   0,           door_east_list,   0, NULL },
     { NULL,             0,           NULL,             0, NULL }
 };
 
