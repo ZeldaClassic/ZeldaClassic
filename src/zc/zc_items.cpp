@@ -75,28 +75,20 @@ int32_t select_dropitem(int32_t item_set)
             int32_t current_item=item_drop_sets[item_set].item[k-1];
             
             if((!get_qr(qr_ENABLEMAGIC)||(game->get_maxmagic()<=0))&&(itemsbuf[current_item].family == itype_magic))
-            {
                 current_chance=0;
-            }
             
             if((!get_qr(qr_TRUEARROWS))&&(itemsbuf[current_item].family == itype_arrowammo))
-            {
                 current_chance=0;
-            }
 			
 		if(get_qr(qr_SMARTDROPS))
 		{
 			if(itemsbuf[current_item].amount > 0 && game->get_maxcounter(itemsbuf[current_item].count) == 0)
-			{
 				current_chance = 0;
-			}
 		}
 		if(get_qr(qr_SMARTER_DROPS))
 		{
 			if(itemsbuf[current_item].amount > 0 && game->get_counter(itemsbuf[current_item].count) >= game->get_maxcounter(itemsbuf[current_item].count))
-			{
 				current_chance = 0;
-			}
 		}
         }
         
@@ -116,29 +108,21 @@ int32_t select_dropitem(int32_t item_set)
         int32_t current_item=(k==0 ? -1 : item_drop_sets[item_set].item[k-1]);
         
         if((!get_qr(qr_ENABLEMAGIC)||(game->get_maxmagic()<=0))&&(current_item>=0&&itemsbuf[current_item].family == itype_magic))
-        {
             current_chance=0;
-        }
         
         if((!get_qr(qr_TRUEARROWS))&&(current_item>=0&&itemsbuf[current_item].family == itype_arrowammo))
-        {
             current_chance=0;
-        }
         
 		if(get_qr(qr_SMARTDROPS))
 		{
 			if(itemsbuf[current_item].amount > 0 && game->get_maxcounter(itemsbuf[current_item].count) == 0)
-			{
 				current_chance = 0;
-			}
 		}
 		
 		if(get_qr(qr_SMARTER_DROPS)) //OH SHIT EMILY
 		{											//DEEDEE 'BOUT TO DAB ON YOU
 			if(itemsbuf[current_item].amount > 0 && game->get_counter(itemsbuf[current_item].count) >= game->get_maxcounter(itemsbuf[current_item].count))
-			{
 				current_chance = 0;	//Item droprate being set to 0 faster than I can chug an entire coffee (read: fast)
-			}
 		}
 		
         if(current_chance>0&&item_chance<=current_chance)
