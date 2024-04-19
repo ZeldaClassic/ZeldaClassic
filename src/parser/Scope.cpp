@@ -340,11 +340,8 @@ vector<Function*> ZScript::lookupFunctions(Scope& scope, string const& name, vec
 	}
 	if(!noUsing)
 	{
-		vector<NamespaceScope*> namespaces = lookupUsingNamespaces(scope);
-		for(vector<NamespaceScope*>::iterator it = namespaces.begin();
-			it != namespaces.end(); ++it)
+		for( NamespaceScope* nsscope : lookupUsingNamespaces(scope))
 		{
-			NamespaceScope* nsscope = *it;
 			vector<Function*> currentFunctions = nsscope->getLocalFunctions(name);
 			trimBadFunctions(currentFunctions, parameterTypes, !isClass);
 			functions.insert(currentFunctions.begin(), currentFunctions.end());
