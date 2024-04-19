@@ -284,9 +284,7 @@ void RecursiveVisitor::caseStmtRepeat(ASTStmtRepeat& host, void* param)
 			if(rep>0)
 			{
 				for(int32_t q = 0; q < rep; ++q)
-				{
 					host.bodies.push_back((*host.body).clone());
-				}
 			}
 			else if(rep < 0)
 			{
@@ -688,11 +686,9 @@ void RecursiveVisitor::caseExprRShift(ASTExprRShift& host, void* param)
 
 void RecursiveVisitor::caseExprTernary(ASTTernaryExpr& host, void* param)
 {
-	visit(host.left.get(), param);
-	if (breakRecursion(host, param)) return;
-	visit(host.middle.get(), param);
-	if (breakRecursion(host, param)) return;
-	visit(host.right.get(), param);
+	visit(host.left  .get(), param); if (breakRecursion(host, param)) return;
+	visit(host.middle.get(), param); if (breakRecursion(host, param)) return;
+	visit(host.right .get(), param);
 }
 
 // Literals
@@ -709,9 +705,7 @@ void RecursiveVisitor::caseCharLiteral(ASTCharLiteral& host, void* param)
 
 void RecursiveVisitor::caseArrayLiteral(ASTArrayLiteral& host, void* param)
 {
-	visit(host.type.get(), param);
-	if (breakRecursion(host, param)) return;
-	visit(host.size.get(), param);
-	if (breakRecursion(host, param)) return;
+	visit(host.type.get(), param); if (breakRecursion(host, param)) return;
+	visit(host.size.get(), param); if (breakRecursion(host, param)) return;
 	visit(host, host.elements, param);
 }
