@@ -804,9 +804,9 @@ void unsetmapflag(int32_t mi2, int32_t flag, bool anyflag)
             nmap=TheMaps[((cmap-1)*MAPSCRS)+cscr].nextmap;
             nscr=TheMaps[((cmap-1)*MAPSCRS)+cscr].nextscr;
             
-            for(std::vector<int32_t>::iterator it = done.begin(); it != done.end(); it++)
+	    for(int32_t i : done)
             {
-                if(*it == ((nmap-1)<<7)+nscr)
+                if(i == ((nmap-1)<<7)+nscr)
                     looped = true;
             }
             
@@ -957,8 +957,7 @@ void update_combo_cycling()
     static int32_t newcset[176];
     static int32_t newdata2[176];
     static int32_t newcset2[176];
-    std::set<uint16_t> restartanim;
-    std::set<uint16_t> restartanim2;
+    std::set<uint16_t> restartanim, restartanim2;
     static bool initialized=false;
     
     // Just a simple bit of optimization
@@ -1435,7 +1434,7 @@ int get_icy(int x, int y, int type)
 bool isSVLadder(int32_t x, int32_t y)
 {
 	if(x<0 || x>255 || y<0 || y>175)
-        return false;
+		return false;
 	
 	mapscr *s1, *s2;
 	s1=(tmpscr2->valid)?tmpscr2:tmpscr;
@@ -1450,7 +1449,7 @@ bool isSVLadder(int32_t x, int32_t y)
 bool isSVPlatform(int32_t x, int32_t y)
 {
 	if(x<0 || x>255 || y<0 || y>175)
-        return false;
+		return false;
 	
 	mapscr *s1, *s2;
 	s1=(tmpscr2->valid)?tmpscr2:tmpscr;
