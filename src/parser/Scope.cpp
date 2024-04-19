@@ -413,11 +413,8 @@ UserClass* ZScript::lookupClass(Scope& scope, string const& name, bool noUsing)
 	}
 	if(!noUsing)
 	{
-		vector<NamespaceScope*> namespaces = lookupUsingNamespaces(scope);
-		for(vector<NamespaceScope*>::iterator it = namespaces.begin();
-			it != namespaces.end(); ++it)
+		for( NamespaceScope* nsscope : lookupUsingNamespaces(scope))
 		{
-			NamespaceScope* nsscope = *it;
 			tscope = nsscope->getChild(name);
 			if(tscope && tscope->isClass())
 			{
