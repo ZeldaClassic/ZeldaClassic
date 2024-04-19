@@ -30672,9 +30672,7 @@ void HeroClass::Start250Refill(int32_t refillWhat)
 bool HeroClass::refill()
 {
     if(refilling==REFILL_NONE || refilling==REFILL_FAIRYDONE)
-    {
         return false;
-    }
     
     ++refillclk;
     int32_t speed = get_qr(qr_FASTFILL) ? 6 : 22;
@@ -30780,9 +30778,7 @@ void HeroClass::getTriforce(int32_t id2)
 	
 	//decorations.clear();
 	if(!COOLSCROLL)
-	{
 		show_subscreen_items=false;
-	}
     
 	sfx(itemsbuf[id2].playsound);
 	if ( !(itemsbuf[id2].flags & ITEM_FLAG11) ) music_stop();
@@ -30914,9 +30910,7 @@ void HeroClass::getTriforce(int32_t id2)
 			if(f==(refill_frame+1))
 			{
 				if(refill())
-				{
 					--f;
-				}
 			}
 		}
 	
