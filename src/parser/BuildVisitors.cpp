@@ -3164,9 +3164,9 @@ void BuildOpcodes::arrayLiteralFree(
 	std::vector<int32_t> constelements;
 	bool constelem = false;
 	bool varelem = false;
-	for (auto it = host.elements.begin(); it != host.elements.end(); ++it)
+	for( auto const& elem : host.elements)
 	{
-		if (std::optional<int32_t> val = (*it)->getCompileTimeValue(this, scope))
+		if (std::optional<int32_t> val = elem->getCompileTimeValue(this, scope))
 		{
 			constelements.push_back(*val);
 			constelem = true;
