@@ -20,9 +20,8 @@ bool call_paledit_dlg(char* namebuf, byte* cdata, PALETTE *pal, int32_t offset, 
 	BITMAP* tmp = create_bitmap_ex(8,192_px,156_px);
 	clear_bitmap(tmp);
 	for(int pos = 0; pos < 208; ++pos)
-	{
 		rectfill(tmp, (pos%16)*12_px, (pos/16)*12_px, ((pos%16)*12_px)+12_px-1_px, ((pos/16)*12_px)+(12_px-1), pos);
-	}
+
 	DidCS9 = false;
 	PalEditDialog(tmp, cdata, pal, namebuf, offset, index).show();
 	destroy_bitmap(tmp);
@@ -33,9 +32,8 @@ PalEditDialog::PalEditDialog(BITMAP* bmp, byte* cdata, PALETTE* pal, char* nameb
 	coldata(cdata), palt(pal), namebuf(namebuf), offset(offset), index(index)
 {
 	for(int i = 0; i < pdLEVEL; ++i)
-	{
 		load_cset(undo,i,i+offset);
-	}
+
 	memcpy(undo1, undo, sizeof(undo));
 }
 
@@ -54,14 +52,13 @@ void PalEditDialog::loadPal()
 	static RGB* ptr = NULL;
 	ptr = &(undo1[(paltab ? 13 : 0) * 16]);
 	gUndoPal = &ptr;
+
 	for(int32_t i=0; i<cset_count; i++)
-	{
 		load_cset(*palt,i,i+cset_first);
-	}
+
 	for(int32_t i=240; i<256; i++)
-	{
 		(*palt)[i] = RAMpal[i];
-	}
+
 	zc_set_palette(*palt);
 	pendDraw();
 }

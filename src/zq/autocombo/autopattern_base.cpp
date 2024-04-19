@@ -31,28 +31,22 @@ namespace AutoPattern
 	void container::apply_changes()
 	{
 		for (auto c : combos)
-		{
 			if (c.second->changed)
-			{
 				c.second->write(layer, basescreen * 176 + basepos == c.first || c.second->force_cset);
-			}
-		}
 	}
 	
 	int32_t container::cid_to_slot(int32_t cid)
 	{
 		if (pattern_slots.count(cid))
-		{
 			return pattern_slots.at(cid) - 1;
-		}
+
 		return -1;
 	}
 	int32_t container::slot_to_cid(int32_t slot)
 	{
 		if (pattern_cids.count(slot))
-		{
 			return pattern_cids.at(slot);
-		}
+
 		return 0;
 	}
 	std::pair<int32_t, int32_t> container::slot_to_cid_pair(int32_t slot)

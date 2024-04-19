@@ -28,9 +28,7 @@ MiscSFXDialog::MiscSFXDialog(byte* vals, size_t vals_per_tab, std::function<void
 	sfx_list(GUI::ZCListData::sfxnames()), setVals(setVals), vals_per_tab(vals_per_tab)
 {
 	for(int q = 0; q < sfxMAX; ++q)
-	{
 		local_sfx[q] = vals[q];
-	}
 }
 
 std::shared_ptr<GUI::Widget> MiscSFXDialog::view()
