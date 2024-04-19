@@ -364,9 +364,7 @@ int32_t main(int32_t argc, char **argv)
 	int32_t syncthing = 0;
 	
 	if(linked)
-	{
 		cph->write(&syncthing, sizeof(int32_t));
-	}
 	
 	std::string runstr = zscript_get_config_string("run_string", "run");
 	strncpy(FFCore.scriptRunString, runstr.c_str(), sizeof(FFCore.scriptRunString));
@@ -400,9 +398,8 @@ int32_t main(int32_t argc, char **argv)
 	if(linked)
 	{
 		if(!res)
-		{
 			write_compile_data(result->scriptTypes, result->theScripts);
-		}
+
 		int32_t errorcode = ZC_CONSOLE_TERM_CODE;
 		cph->write(&errorcode, sizeof(int32_t));
 		cph->write(&res, sizeof(int32_t));
