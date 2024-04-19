@@ -62,9 +62,8 @@ LibrarySymbols* LibrarySymbols::getTypeInstance(DataTypeId typeId)
 void getConstant(int32_t refVar, Function* function, int32_t val)
 {
 	if(refVar != NUL)
-	{
 		throw compile_exception(fmt::format("Internal Constant {} has non-NUL refVar!", function->name));
-	}
+
 	function->setFlag(FUNCFLAG_INLINE);
 	function->internal_flags |= IFUNCFLAG_SKIPPOINTER;
 	int32_t label = function->getLabel();
@@ -308,5 +307,3 @@ Function* LibrarySymbols::getFunction(std::string const& name, byte tag) const
 	
 	return ret;
 }
-
-LibrarySymbols::~LibrarySymbols(){}

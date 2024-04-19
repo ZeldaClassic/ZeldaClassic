@@ -45,14 +45,14 @@ public:
 	static LibrarySymbols* getTypeInstance(DataTypeId typeId);
 
 	virtual void addSymbolsToScope(ZScript::Scope& scope);
-    virtual ~LibrarySymbols();
+        virtual ~LibrarySymbols() = default;
 
 protected:
 	LibrarySymbols() : table(nullptr), refVar(0),
 		hasPrefixType(true)
 	{}
-    AccessorTable *table;
-    int32_t refVar;
+	AccessorTable *table;
+	int32_t refVar;
 	bool hasPrefixType;
 
 	ZScript::Function* getFunction(string const& name, byte tag = 0) const;
