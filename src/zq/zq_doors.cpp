@@ -944,11 +944,11 @@ static DIALOG doorcomboset_dlg[] =
     
     { jwin_ctext_proc,      64,   136+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Open", NULL, NULL },
     { jwin_ctext_proc,      112,  136+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Unlocked", NULL, NULL },
-    { jwin_ctext_proc,      160,  136,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Open", NULL, NULL },
+    { jwin_ctext_proc,      160,  136,      0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Open", NULL, NULL },
     { jwin_ctext_proc,      160,  136+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Shuttered", NULL, NULL },
-    { jwin_ctext_proc,      208,  136,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Open", NULL, NULL },
+    { jwin_ctext_proc,      208,  136,      0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Open", NULL, NULL },
     { jwin_ctext_proc,      208,  136+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Boss", NULL, NULL },
-    { jwin_ctext_proc,      256,  136,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Walk-", NULL, NULL },
+    { jwin_ctext_proc,      256,  136,      0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Walk-", NULL, NULL },
     { jwin_ctext_proc,      256,  136+8,    0,   8,    vc(14),  vc(1),  0,       0,          0,             0, (void *) "Through", NULL, NULL },
     
     { jwin_frame_proc,   46,    152,      36,   36,   0,       0,      0,       0,          FR_DEEP,       0,       NULL, NULL, NULL },
