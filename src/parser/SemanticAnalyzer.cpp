@@ -300,9 +300,8 @@ void SemanticAnalyzer::caseStmtFor(ASTStmtFor& host, void*)
 {
 	//Use sub-scope
 	if(!host.getScope())
-	{
 		host.setScope(scope->makeChild());
-	}
+
 	scope = host.getScope();
 	RecursiveVisitor::caseStmtFor(host);
 	scope = scope->getParent();
@@ -1094,9 +1093,7 @@ void SemanticAnalyzer::caseImportDecl(ASTImportDecl& host, void*)
 {
 	//Check if the import is valid, or to be stopped by header guard. -V
 	if(getRoot(*scope)->checkImport(&host, *lookupOption(*scope, CompileOption::OPT_HEADER_GUARD) / 10000.0, this))
-	{
 		RecursiveVisitor::caseImportDecl(host);
-	}
 }
 void SemanticAnalyzer::caseIncludePath(ASTIncludePath& host, void*)
 {}
@@ -1499,8 +1496,7 @@ void SemanticAnalyzer::caseExprCall(ASTExprCall& host, void* param)
 	// We may have failed, though namespaces may resolve the issue. Check for namespace closeness.
 	if(bestFunctions.size() > 1)
 	{
-		std::map<Function*, Scope*> bestNSs;
-		std::map<Function*, Scope*> bestScripts;
+		std::map<Function*, Scope*> bestNSs, bestScripts;
 		for (vector<Function*>::const_iterator it = bestFunctions.begin();
 		     it != bestFunctions.end(); ++it)
 		{
@@ -1690,9 +1686,7 @@ void SemanticAnalyzer::caseExprDelete(ASTExprDelete& host, void*)
 	
 	DataType const* optype = host.operand->getReadType(scope, this);
 	if(!optype->isUsrClass())
-	{
 		handleError(CompileError::BadDelete(&host));
-	}
 }
 
 void SemanticAnalyzer::caseExprNot(ASTExprNot& host, void*)
