@@ -1591,8 +1591,6 @@ void init_dmap()
     // also update subscreens
     update_subscreens();
     verifyBothWeapons();
-    
-    return;
 }
 
 // Sets globals to their default values.
@@ -1874,13 +1872,9 @@ int32_t init_game()
 	{
 		//if ((DMaps[currdmap].type&dmfTYPE)==dmOVERW || QHeader.zelda_version <= 0x190)
 		if((DMaps[currdmap].type&dmfTYPE)==dmOVERW)
-		{
 			homescr = currscr = DMaps[currdmap].cont;
-		}
 		else
-		{
 			homescr = currscr = DMaps[currdmap].cont + DMaps[currdmap].xoff;
-		}
 	}
 	else
 	{
@@ -1894,9 +1888,7 @@ int32_t init_game()
 	dlevel = DMaps[currdmap].level;
 	
 	if(currscr < 0x80 && (DMaps[currdmap].flags&dmfVIEWMAP))
-	{
 		game->maps[(currmap*MAPSCRSNORMAL)+currscr] |= mVISITED;			  // mark as visited
-	}
 	
 	game->lvlitems[9] &= ~liBOSS;
 	
@@ -1961,9 +1953,7 @@ int32_t init_game()
 	{
 		int32_t itemid = current_item_id(itype_pearl);
 		if(itemid < 0)
-		{
 			Hero.setBunnyClock(-1);
-		}
 	}
 	
 	if(firstplay) //Move up here, so that arrays are initialised before we run Hero's Init script.
@@ -2183,24 +2173,19 @@ int32_t init_game()
 	openscreen();
 	dointro();
 	if(!(tmpscr->room==rGANON && !get_qr(qr_GANON_CANT_SPAWN_ON_CONTINUE)))
-	{
 		loadguys();
-	}
 
 	newscr_clk = frame;
 	
 	if(isdungeon() && currdmap>0) // currdmap>0 is weird, but at least one quest (Mario's Insane Rampage) depends on it
-	{
 		Hero.stepforward(get_qr(qr_LTTPWALK) ? 11: 12, false);
-	}
 	
 	if(!Quit)
 	{
 		if(tmpscr->room==rGANON && !get_qr(qr_GANON_CANT_SPAWN_ON_CONTINUE))
-		{
 			Hero.ganon_intro();
-		}
-		else playLevelMusic();
+		else
+			playLevelMusic();
 	}
 
 	 
@@ -2276,26 +2261,20 @@ int32_t cont_game()
 	dlevel = DMaps[lastentrance_dmap].level;
 	currdmap = lastentrance_dmap;
 	if(changeddmap)
-	{
 		throwGenScriptEvent(GENSCR_EVENT_CHANGE_DMAP);
-	}
+
 	if(changedlevel)
-	{
 		throwGenScriptEvent(GENSCR_EVENT_CHANGE_LEVEL);
-	}
+
 	homescr = currscr = lastentrance;
 	currmap = DMaps[currdmap].map;
 	init_dmap();
 	
 	for(int32_t i=0; i<6; i++)
-	{
 		visited[i]=-1;
-	}
 	
 	if(dlevel==0)
-	{
 		game->lvlitems[9]&=~liBOSS;
-	}
 	
 	ALLOFF();
 	whistleclk=-1;
@@ -2329,9 +2308,7 @@ int32_t cont_game()
 	{
 		int32_t itemid = current_item_id(itype_pearl);
 		if(itemid < 0)
-		{
 			Hero.setBunnyClock(-1);
-		}
 	}
 	
 	wavy=quakeclk=0;
@@ -2376,9 +2353,7 @@ int32_t cont_game()
 	show_subscreen_life=true;
 	dointro();
 	if(!(tmpscr->room==rGANON && !get_qr(qr_GANON_CANT_SPAWN_ON_CONTINUE)))
-	{
 		loadguys();
-	}
 
 	
 	if(!Quit)
@@ -2392,9 +2367,7 @@ int32_t cont_game()
 		newscr_clk=frame;
 		activated_timed_warp=false;
 		if(tmpscr->room==rGANON && !get_qr(qr_GANON_CANT_SPAWN_ON_CONTINUE))
-		{
 			Hero.ganon_intro();
-		}
 	}
 	return 0;
 }
@@ -2434,13 +2407,9 @@ void restart_level()
 	else
 	{
 		if((DMaps[currdmap].type&dmfTYPE)==dmOVERW)
-		{
 			homescr = currscr = DMaps[currdmap].cont;
-		}
 		else
-		{
 			homescr = currscr = DMaps[currdmap].cont + DMaps[currdmap].xoff;
-		}
 	}
 	
 	currmap = DMaps[currdmap].map;
@@ -2470,9 +2439,7 @@ void restart_level()
 	{
 		int32_t itemid = current_item_id(itype_pearl);
 		if(itemid < 0)
-		{
 			Hero.setBunnyClock(-1);
-		}
 	}
 	
 	currcset=DMaps[currdmap].color;
@@ -2483,9 +2450,7 @@ void restart_level()
 	show_subscreen_numbers=true;
 	show_subscreen_life=true;
 	if(!(tmpscr->room==rGANON && !get_qr(qr_GANON_CANT_SPAWN_ON_CONTINUE)))
-	{
 		loadguys();
-	}
 	
 	if(!Quit)
 	{
@@ -2498,12 +2463,9 @@ void restart_level()
 		newscr_clk=frame;
 		activated_timed_warp=false;
 		if(tmpscr->room==rGANON && !get_qr(qr_GANON_CANT_SPAWN_ON_CONTINUE))
-		{
 			Hero.ganon_intro();
-		}
 	}
-}
-
+} 
 
 void putintro()
 {
@@ -2586,9 +2548,7 @@ void do_magic_casting()
     bool shieldModify=true;
     
     if(magicitem==-1)
-    {
         return;
-    }
     
     switch(itemsbuf[magicitem].family)
     {
@@ -2621,9 +2581,7 @@ void do_magic_casting()
             herotile(&Hero.tile, &Hero.flip, &Hero.extend, Hero.IsSideSwim()?ls_sidewaterhold2:ls_landhold2, Hero.getDir(), zinit.heroAnimationStyle);
             
             if(get_qr(qr_EXPANDEDLTM))
-            {
                 Hero.tile+=Hero.getTileModifier();
-            }
             
             castnext=false;
         }
@@ -2674,9 +2632,7 @@ void do_magic_casting()
             herotile(&ltile, &lflip, Hero.IsSideSwim()?ls_sideswimstab:ls_stab, down, zinit.heroAnimationStyle);
             
             if(get_qr(qr_EXPANDEDLTM))
-            {
                 ltile+=Hero.getTileModifier();
-            }
             
             unpack_tile(newtilebuf, ltile, lflip, true);
             memcpy(herotilebuf, unpackbuf, 256);
@@ -2685,9 +2641,7 @@ void do_magic_casting()
             herotile(&Hero.tile, &Hero.flip, &Hero.extend, Hero.IsSideSwim()?ls_sideswimpound:ls_pound, down, zinit.heroAnimationStyle);
             
             if(get_qr(qr_EXPANDEDLTM))
-            {
                 Hero.tile+=Hero.getTileModifier();
-            }
         }
         
         if(magiccastclk>=0&&magiccastclk<64)
@@ -2703,9 +2657,7 @@ void do_magic_casting()
             herotile(&Hero.tile, &Hero.flip, &Hero.extend, Hero.IsSideSwim()?ls_sideswimstab:ls_stab, down, zinit.heroAnimationStyle);
             
             if(get_qr(qr_EXPANDEDLTM))
-            {
                 Hero.tile+=Hero.getTileModifier();
-            }
         }
         
         if(magiccastclk==96)
@@ -2774,7 +2726,8 @@ void do_magic_casting()
 			//action=none;
 			magicitem=-1;
 			magiccastclk=0;
-			if ( Hero.getDontDraw() < 2 ) { Hero.setDontDraw(0); }
+			if ( Hero.getDontDraw() < 2 )
+				Hero.setDontDraw(0);
 		}
         }
     }
@@ -2795,9 +2748,7 @@ void do_magic_casting()
             herotile(&Hero.tile, &Hero.flip, &Hero.extend, Hero.IsSideSwim()?ls_sideswimcast:ls_cast, Hero.getDir(), zinit.heroAnimationStyle);
             
             if(get_qr(qr_EXPANDEDLTM))
-            {
                 Hero.tile+=Hero.getTileModifier();
-            }
             
             castx=Hero.getX();
         }
@@ -2825,9 +2776,7 @@ void do_magic_casting()
             herotile(&Hero.tile, &Hero.flip, &Hero.extend, Hero.IsSideSwim()?ls_sideswimcast:ls_cast, Hero.getDir(), zinit.heroAnimationStyle);
             
             if(get_qr(qr_EXPANDEDLTM))
-            {
                 Hero.tile+=Hero.getTileModifier();
-            }
             
             castnext=false;
         }
@@ -2895,9 +2844,7 @@ void update_hookshot()
     //find out where the head is and make it
     //easy to reference
     if(Lwpns.idFirst(wHookshot)>-1)
-    {
         check_hs=true;
-    }
     
     if(check_hs)
     {
@@ -2948,13 +2895,9 @@ void update_hookshot()
                 for(int32_t counter=0; counter<chainlinks.Count(); counter++)
                 {
                     if(Hero.getDir()>down)                            //chain is moving horizontally
-                    {
                         chainlinks.spr(counter)->x=hs_startx+hs_w+dist_bx+(counter*(hs_w+dist_bx));
-                    }
                     else
-                    {
                         chainlinks.spr(counter)->y=hs_starty+hs_w+dist_by+(counter*(hs_w+dist_by));
-                    }
                 }
             }
         }                                                       //retracting
@@ -2993,13 +2936,9 @@ void update_hookshot()
                         hs_xdist=abs(hs_x-hs_startx);
                         
                         if(pull_hero==false)
-                        {
                             chainlinks.del(chainlinks.idLast(wHSChain));
-                        }
                         else
-                        {
                             chainlinks.del(chainlinks.idFirst(wHSChain));
-                        }
                     }
                 }
             }                                                     //chain is moving vertically
@@ -3019,13 +2958,9 @@ void update_hookshot()
                         hs_ydist=abs(hs_y-hs_starty);
                         
                         if(pull_hero==false)
-                        {
                             chainlinks.del(chainlinks.idLast(wHSChain));
-                        }
                         else
-                        {
                             chainlinks.del(chainlinks.idFirst(wHSChain));
-                        }
                     }
                 }
             }
@@ -3465,10 +3400,6 @@ void game_loop()
 		FFCore.runGenericPassiveEngine(SCR_TIMING_POST_LWPN_WAITDRAW);
 		if ( !FFCore.system_suspend[susptITEMSPRITESCRIPTS] ) FFCore.itemSpriteScriptEngineOnWaitdraw();
 		FFCore.runGenericPassiveEngine(SCR_TIMING_POST_ITEMSPRITE_WAITDRAW);
-		
-		
-		
-		
 		
 		#if LOGGAMELOOP > 0
 		al_trace("game_loop is calling: %s\n", "draw_screen()\n");
@@ -4265,9 +4196,7 @@ int main(int argc, char **argv)
 	Z_title("ZC Launched: %s, v.%s",ZC_PLAYER_NAME, getReleaseTag());
 	
 	if(!get_qst_buffers())
-	{
 		Z_error_fatal("Error");
-	}
 
 	three_finger_flag=false;
 
@@ -4296,13 +4225,9 @@ int main(int argc, char **argv)
 		// TODO make qstdir a fs::path and absoulute
 		standalone_quest = (fs::current_path() / fs::path(qstdir) / argv[standalone_arg + 1]).lexically_normal();
 		if (standalone_arg + 2 < argc && argv[standalone_arg + 2][0] != '-')
-		{
 			standalone_save_path = argv[standalone_arg + 2];
-		}
 		else
-		{
 			standalone_save_path = "standalone-" + standalone_quest.stem().string() + ".sav";
-		}
 	}
 
 	// Before anything else, let's register our custom trace handler:
@@ -4312,13 +4237,10 @@ int main(int argc, char **argv)
 	
 	Z_message("Initializing Allegro... ");
 	if(!al_init())
-	{
 		Z_error_fatal("Failed Init!");
-	}
+
 	if(allegro_init() != 0)
-	{
 		Z_error_fatal("Failed Init!");
-	}
 
 	// Merge old a4 config into a5 system config.
 	ALLEGRO_CONFIG *tempcfg = al_load_config_file(get_config_file_name());
@@ -4333,19 +4255,13 @@ int main(int argc, char **argv)
 #endif
 	
 	if(!al_init_image_addon())
-	{
 		Z_error_fatal("Failed al_init_image_addon");
-	}
 
 	if(!al_init_font_addon())
-	{
 		Z_error_fatal("Failed al_init_font_addon");
-	}
 
 	if(!al_init_primitives_addon())
-	{
 		Z_error_fatal("Failed al_init_primitives_addon");
-	}
 
 	al5img_init();
 	register_png_file_type();
@@ -4362,35 +4278,24 @@ int main(int argc, char **argv)
 	//strcpy(moduledata.module_name,zc_get_config("ZCMODULE","current_module", moduledata.module_name));
 	//al_trace("Before zcm.init, the current module is: %s\n", moduledata.module_name)
 	if ( !(zcm.init(true)) ) 
-	{
 		Z_error_fatal("ZC Player I/O Error: No module definitions found. Please check your settings in %s.cfg.\n", "zc");
-	}
 	
 	if ( zscript_debugger )
-	{
 		FFCore.ZScriptConsole(true);
-	}
 	
 	if(install_timer() < 0)
-	{
 		Z_error_fatal(allegro_error);
-	}
 	
 	if(install_keyboard() < 0)
-	{
 		Z_error_fatal(allegro_error);
-	}
+
 	poll_keyboard();
 	
 	if(install_mouse() < 0)
-	{
 		Z_error_fatal(allegro_error);
-	}
 	
 	if(install_joystick(JOY_TYPE_AUTODETECT) < 0)
-	{
 		Z_error_fatal(allegro_error);
-	}
 	
 	//set_keyboard_rate(1000,160);
 
@@ -4411,9 +4316,7 @@ int main(int argc, char **argv)
 		timerfail = true;
 	
 	if(timerfail)
-	{
 		Z_error_fatal("Couldn't Allocate Timers");
-	}
 	
 	Z_message("OK\n");
 	
@@ -4498,13 +4401,9 @@ int main(int argc, char **argv)
 	slot_arg = used_switch(argc,argv,"-slot");
 	
 	if(argc <= (slot_arg+1))
-	{
 		slot_arg = 0;
-	}
 	else
-	{
 		slot_arg2 = vbound(atoi(argv[slot_arg+1]), 1, 100000);
-	}
 	
 	if(standalone_mode)
 	{
