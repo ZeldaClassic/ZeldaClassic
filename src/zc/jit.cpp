@@ -16,8 +16,7 @@
 #include <filesystem>
 #include <thread>
 
-static bool is_enabled;
-static bool jit_log_enabled;
+static bool is_enabled, jit_log_enabled;
 static std::map<script_id, JittedFunction> compiled_functions;
 
 void jit_printf(const char *format, ...)
