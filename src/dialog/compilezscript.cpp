@@ -323,33 +323,23 @@ bool do_compile_and_slots(int assign_mode, bool delay)
 	
 	if(compile_cancel)
 		return false;
+
+	const vector<string> just_none = { "<none>" };
 	
-	asffcscripts.clear();
-	asffcscripts.push_back("<none>");
-	asglobalscripts.clear();
-	asglobalscripts.push_back("<none>");
-	asitemscripts.clear();
-	asitemscripts.push_back("<none>");
-	asnpcscripts.clear();
-	asnpcscripts.push_back("<none>");
-	aseweaponscripts.clear();
-	aseweaponscripts.push_back("<none>");
-	aslweaponscripts.clear();
-	aslweaponscripts.push_back("<none>");
-	asplayerscripts.clear();
-	asplayerscripts.push_back("<none>");
-	asdmapscripts.clear();
-	asdmapscripts.push_back("<none>");
-	asscreenscripts.clear();
-	asscreenscripts.push_back("<none>");
-	asitemspritescripts.clear();
-	asitemspritescripts.push_back("<none>");
-	ascomboscripts.clear();
-	ascomboscripts.push_back("<none>");
-	asgenericscripts.clear();
-	asgenericscripts.push_back("<none>");
-	assubscreenscripts.clear();
-	assubscreenscripts.push_back("<none>");
+	asffcscripts        = just_none;
+	asglobalscripts     = just_none;
+	asitemscripts       = just_none;
+	asnpcscripts        = just_none;
+	aseweaponscripts    = just_none;
+	aslweaponscripts    = just_none;
+	asplayerscripts     = just_none;
+	asdmapscripts       = just_none;
+	asscreenscripts     = just_none;
+	asitemspritescripts = just_none;
+	ascomboscripts      = just_none;
+	asgenericscripts    = just_none;
+	assubscreenscripts  = just_none;
+ 
 	clear_map_states();
 	globalmap[0].updateName("~Init"); //force name to ~Init
 	
