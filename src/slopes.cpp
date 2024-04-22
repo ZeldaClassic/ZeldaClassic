@@ -155,14 +155,12 @@ zfix check_slope(zfix tx, zfix ty, zfix tw, zfix th, bool fallthrough, bool plat
 			zfix cy = ty + th/2 - 1;
 			double lineangle = atan2(double(s.y2-s.y1),double(s.x2-s.x1));
 			double val = comparePointLine(cx, cy, s.x1, s.y1, s.x2, s.y2);
+
 			if (val < 0)
-			{
 				lineangle -= PI/2;
-			}
 			else
-			{
 				lineangle += PI/2;
-			}
+
 			zfix sinangle = zc::math::Sin(lineangle);
 			zfix cosangle = zc::math::Cos(lineangle);
 			if (s.x2 == s.x1) sinangle = 0;
@@ -188,14 +186,12 @@ zfix check_new_slope(zfix tx, zfix ty, zfix tw, zfix th, zfix otx, zfix oty, boo
 			zfix cy = ty + th/2 - 1;
 			double lineangle = atan2(double(s.y2-s.y1),double(s.x2-s.x1));
 			double val = comparePointLine(cx, cy, s.x1, s.y1, s.x2, s.y2);
+
 			if (val < 0)
-			{
 				lineangle -= PI/2;
-			}
 			else
-			{
 				lineangle += PI/2;
-			}
+
 			bool staircheck = false;
 			zfix sinangle = zc::math::Sin(lineangle);
 			zfix cosangle = zc::math::Cos(lineangle);
@@ -250,14 +246,12 @@ slope_object const& get_slope(zfix tx, zfix ty, zfix tw, zfix th)
 			zfix cy = ty + th/2 - 1;
 			double lineangle = atan2(double(s.y2-s.y1),double(s.x2-s.x1));
 			double val = comparePointLine(cx, cy, s.x1, s.y1, s.x2, s.y2);
+
 			if (val < 0)
-			{
 				lineangle -= PI/2;
-			}
 			else
-			{
 				lineangle += PI/2;
-			}
+
 			zfix sinangle = zc::math::Sin(lineangle);
 			zfix cosangle = zc::math::Cos(lineangle);
 			if (s.x2 == s.x1) sinangle = 0;
@@ -288,14 +282,12 @@ slope_object const& get_new_slope(zfix tx, zfix ty, zfix tw, zfix th, zfix otx, 
 			zfix cy = ty + th/2 - 1;
 			double lineangle = atan2(double(s.y2-s.y1),double(s.x2-s.x1));
 			double val = comparePointLine(cx, cy, s.x1, s.y1, s.x2, s.y2);
+
 			if (val < 0)
-			{
 				lineangle -= PI/2;
-			}
 			else
-			{
 				lineangle += PI/2;
-			}
+
 			zfix sinangle = zc::math::Sin(lineangle);
 			zfix cosangle = zc::math::Cos(lineangle);
 			if (s.x2 == s.x1) sinangle = 0;
@@ -406,14 +398,12 @@ void slope_push_int(slope_info const& s, solid_object* obj, zfix& dx, zfix& dy, 
 	zfix cy = ry + rh/2 - 1;
 	double lineangle = atan2(double(s.y2-s.y1),double(s.x2-s.x1));
 	double val = comparePointLine(cx, cy, s.x1, s.y1, s.x2, s.y2);
+
 	if (val < 0)
-	{
 		lineangle -= PI/2;
-	}
 	else
-	{
 		lineangle += PI/2;
-	}
+
 	zfix sinangle = zc::math::Sin(lineangle);
 	zfix cosangle = zc::math::Cos(lineangle);
 	if (s.x2 == s.x1) sinangle = 0; //Same as slide_slope; I don't trust double's ability to handle PI without getting it slightly wrong.
