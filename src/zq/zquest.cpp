@@ -25188,7 +25188,7 @@ bool can_use_item([[maybe_unused]] int32_t item_type, [[maybe_unused]] int32_t i
 	return true;
 }
 
-bool has_item(int32_t [[maybe_unused]] item_type, [[maybe_unused]] int32_t it)
+bool has_item([[maybe_unused]] int32_t tem_type, [[maybe_unused]] int32_t it)
 {
 	return true;
 }
@@ -26385,7 +26385,8 @@ int32_t main(int32_t argc,char **argv)
 	
 	if(ForceExit) //last resort fix to the allegro process hanging bug.
 		exit(0);
-	
+
+	allegro_exit();
 	return 0;
 // memset(qtpathtitle,0,10);//UNREACHABLE
 }
@@ -27796,7 +27797,7 @@ void check_autosave()
 }
 
 void flushItemCache(bool) {}
-void ringcolor(bool [[maybe_unused]] forceDefault)
+void ringcolor([[maybe_unused]] bool forceDefault)
 {
 }
 
