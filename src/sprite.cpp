@@ -2,6 +2,9 @@
 #include "base/zsys.h"
 #include "base/qrs.h"
 #include "sprite.h"
+
+#include <ranges>
+
 #include "tiles.h"
 #include "particles.h"
 #include "zc/maps.h"
@@ -322,12 +325,19 @@ sprite::sprite(zfix X,zfix Y,int32_t T,int32_t CS,int32_t F,int32_t Clk,int32_t 
 
 sprite::~sprite()
 {
-	#ifdef IS_PLAYER
+	// This done to prevent undefined behavior on delete due to have virtual function calls done
+	// work in destructors.
+	destroy_sprite();
+}
+
+void sprite::destroy_sprite() const
+{
+#ifdef IS_PLAYER
 	if(auto scrty = get_scrtype())
 	{
 		FFCore.clear_script_engine_data(*scrty, getUID());
 	}
-	#endif
+#endif
 }
 
 static int32_t nextid = 0;
@@ -335,7 +345,7 @@ int32_t sprite::getNextUID()
 {
 	return nextid++;
 }
-void sprite::unget_UID()
+void sprite::unget_UID() const
 {
 	if(uid == nextid-1)
 		--nextid;
@@ -2081,7 +2091,7 @@ sprite *sprite_list::spr(int32_t index)
 
 int32_t sprite_list::find(sprite *spr)
 {
-	for(int32_t ind = 0; ind < count; ++ind)
+	for(const int32_t ind: std::ranges::views::iota(0, count.load()))
 	{
 		if(spr == sprites[ind])
 			return ind;
@@ -2110,9 +2120,10 @@ bool sprite_list::add(sprite *s)
 		delete s;
 		return false;
 	}
-    
-	containedUIDs[s->getUID()] = count;
-	sprites[count++]=s;
+
+	const int32_t counter_snapshot = count++;
+	containedUIDs[s->getUID()] = counter_snapshot;
+	sprites[counter_snapshot] = s;
 	//checkConsistency();
 	return true;
 }
@@ -2126,10 +2137,8 @@ bool sprite_list::remove(sprite *s)
 		lastUIDRequested=0;
 		lastSpriteRequested=0;
 	}
-    
-	map<int32_t, int32_t>::iterator it = containedUIDs.find(s->getUID());
-    
-	if(it != containedUIDs.end())
+
+	if(const auto it = containedUIDs.find(s->getUID()); it != containedUIDs.end())
 		containedUIDs.erase(it);
         
 	int32_t j=0;
@@ -2154,7 +2163,7 @@ gotit:
 	return true;
 }
 
-zfix sprite_list::getX(int32_t j)
+zfix sprite_list::getX(int32_t j) const
 {
     if((j>=count)||(j<0))
     {
@@ -2164,7 +2173,7 @@ zfix sprite_list::getX(int32_t j)
     return sprites[j]->x;
 }
 
-zfix sprite_list::getY(int32_t j)
+zfix sprite_list::getY(int32_t j) const
 {
     if((j>=count)||(j<0))
     {
@@ -2212,21 +2221,19 @@ bool sprite_list::del(int32_t j, bool force, bool may_defer)
 		remove(sprites[j]);
 		return false;
 	}
-	
-	map<int32_t, int32_t>::iterator it = containedUIDs.find(sprites[j]->getUID());
-	
-	if(it != containedUIDs.end())
+
+	if(const auto it = containedUIDs.find(sprites[j]->getUID()); it != containedUIDs.end())
 		containedUIDs.erase(it);
 	
 	if(sprites[j]==lastSpriteRequested)
 	{
 		lastUIDRequested=0;
-		lastSpriteRequested=0;
+		lastSpriteRequested = nullptr;
 	}
 	
 	delete sprites[j];
 	
-	for(int32_t i=j; i<count-1; i++)
+	for(const int32_t i: std::ranges::views::iota(j, count - 1))
 	{
 		sprites[i]=sprites[i+1];
 		containedUIDs[sprites[i]->getUID()] = i;
@@ -2241,7 +2248,7 @@ bool sprite_list::del(int32_t j, bool force, bool may_defer)
 void sprite_list::draw(BITMAP* dest,bool lowfirst)
 {
 	if(lowfirst)
-		for(int32_t i=0; i<count; i++)
+		for(const int32_t i: std::ranges::views::iota(0, count.load()))
 		{
 			sprites[i]->draw(dest);
 		}
@@ -2255,7 +2262,7 @@ void sprite_list::draw(BITMAP* dest,bool lowfirst)
 void sprite_list::drawshadow(BITMAP* dest,bool translucent, bool lowfirst)
 {
 	if(lowfirst)
-		for(int32_t i=0; i<count; i++)
+		for(const int32_t i: std::ranges::views::iota(0, count.load()))
 		{
 			sprites[i]->drawshadow(dest,translucent);
 		}
@@ -2269,7 +2276,7 @@ void sprite_list::drawshadow(BITMAP* dest,bool translucent, bool lowfirst)
 void sprite_list::draw2(BITMAP* dest,bool lowfirst)
 {
 	if(lowfirst)
-		for(int32_t i=0; i<count; i++)
+		for(const int32_t i: std::ranges::views::iota(0, count.load()))
 		{
 			sprites[i]->draw2(dest);
 		}
@@ -2283,7 +2290,7 @@ void sprite_list::draw2(BITMAP* dest,bool lowfirst)
 void sprite_list::drawcloaked2(BITMAP* dest,bool lowfirst)
 {
 	if(lowfirst)
-		for(int32_t i=0; i<count; i++)
+		for(const int32_t i: std::ranges::views::iota(0, count.load()))
 		{
 			sprites[i]->drawcloaked2(dest);
 		}
@@ -2350,8 +2357,10 @@ void sprite_list::animate()
 
 void sprite_list::solid_push(solid_object* pusher)
 {
-    for(int32_t i=0; i<count; i++)
-        sprites[i]->solid_push(pusher);
+    for(const int32_t i: std::ranges::views::iota(0, count.load()))
+    {
+	    sprites[i]->solid_push(pusher);
+    }
 }
 
 void sprite_list::run_script(int32_t mode)
@@ -2378,7 +2387,7 @@ void sprite_list::run_script(int32_t mode)
 
 void sprite_list::check_conveyor()
 {
-	for (int32_t i=0; i<count; ++i)
+	for(const int32_t i: std::ranges::views::iota(0, count.load()))
 		sprites[i]->check_conveyor();
 }
 
@@ -2394,7 +2403,7 @@ bool sprite_list::has_space(int32_t space)
 
 int32_t sprite_list::hit(sprite *s)
 {
-    for(int32_t i=0; i<count; i++)
+	for(const int32_t i: std::ranges::views::iota(0, count.load()))
         if(sprites[i]->hit(s))
             return i;
             
@@ -2403,7 +2412,7 @@ int32_t sprite_list::hit(sprite *s)
 
 int32_t sprite_list::hit(int32_t x,int32_t y,int32_t z, int32_t xsize, int32_t ysize, int32_t zsize)
 {
-    for(int32_t i=0; i<count; i++)
+	for(const int32_t i: std::ranges::views::iota(0, count.load()))
         if(sprites[i]->hit(x,y,z,xsize,ysize,zsize))
             return i;
             
@@ -2411,7 +2420,7 @@ int32_t sprite_list::hit(int32_t x,int32_t y,int32_t z, int32_t xsize, int32_t y
 }
 int32_t sprite_list::hit(int32_t x,int32_t y,int32_t xsize, int32_t ysize)
 {
-    for(int32_t i=0; i<count; i++)
+	for(const int32_t i: std::ranges::views::iota(0, count.load()))
         if(sprites[i]->hit(x,y,xsize,ysize))
             return i;
             
@@ -2419,11 +2428,11 @@ int32_t sprite_list::hit(int32_t x,int32_t y,int32_t xsize, int32_t ysize)
 }
 
 // returns the number of sprites with matching id
-int32_t sprite_list::idCount(int32_t id, int32_t mask)
+int32_t sprite_list::idCount(int32_t id, int32_t mask) const
 {
     int32_t c=0;
     
-    for(int32_t i=0; i<count; i++)
+	for(const int32_t i: std::ranges::views::iota(0, count.load()))
     {
         if(((sprites[i]->id)&mask) == (id&mask))
         {
@@ -2434,11 +2443,11 @@ int32_t sprite_list::idCount(int32_t id, int32_t mask)
     return c;
 }
 
-int32_t sprite_list::idCount(std::set<int32_t> const& ids)
+int32_t sprite_list::idCount(std::set<int32_t> const& ids) const
 {
     int32_t c=0;
     
-    for(int32_t i=0; i<count; i++)
+	for(const int32_t i: std::ranges::views::iota(0, count.load()))
     {
         if(ids.contains(sprites[i]->id))
             ++c;
@@ -2448,9 +2457,9 @@ int32_t sprite_list::idCount(std::set<int32_t> const& ids)
 }
 
 // returns index of first sprite with matching id, -1 if none found
-int32_t sprite_list::idFirst(int32_t id, int32_t mask)
+int32_t sprite_list::idFirst(int32_t id, int32_t mask) const
 {
-    for(int32_t i=0; i<count; i++)
+	for(const int32_t i: std::ranges::views::iota(0, count.load()))
     {
         if(((sprites[i]->id)&mask) == (id&mask))
         {
@@ -2462,9 +2471,9 @@ int32_t sprite_list::idFirst(int32_t id, int32_t mask)
 }
 
 // returns index of nth sprite with matching id, -1 if none found
-int32_t sprite_list::idNth(int32_t id, int32_t n, int32_t mask)
+int32_t sprite_list::idNth(int32_t id, int32_t n, int32_t mask) const
 {
-    for(int32_t i=0; i<count; i++)
+	for(const int32_t i: std::ranges::views::iota(0, count.load()))
     {
         if(((sprites[i]->id)&mask) == (id&mask))
         {
@@ -2477,7 +2486,7 @@ int32_t sprite_list::idNth(int32_t id, int32_t n, int32_t mask)
 }
 
 // returns index of last sprite with matching id, -1 if none found
-int32_t sprite_list::idLast(int32_t id, int32_t mask)
+int32_t sprite_list::idLast(int32_t id, int32_t mask) const
 {
     for(int32_t i=count-1; i>=0; i--)
     {
@@ -2537,20 +2546,20 @@ void sprite_list::checkConsistency()
     assert((int32_t)containedUIDs.size() == count);
     assert(lastUIDRequested==0 || containedUIDs.find(lastUIDRequested)!=containedUIDs.end());
     
-    for(int32_t i=0; i<count; i++)
+	for(const int32_t i: std::ranges::views::iota(0, count.load()))
         assert(sprites[i] == getByUID(sprites[i]->getUID()));
 }
 
-void sprite_list::forEach(std::function<bool(sprite&)> proc)
+void sprite_list::forEach(const std::function<bool(sprite&)>& proc) const
 {
-	for(int q = 0; q < count; ++q)
+	for(const int32_t q: std::ranges::views::iota(0, count.load()))
 	{
 		if(proc(*sprites[q]))
 			return;
 	}
 }
 
-void sprite::explode(int32_t type)
+void sprite::explode(int32_t mode)
 {
 	al_trace("Trying to explode enemy tile: %d\n",tile);
 	
@@ -2581,7 +2590,7 @@ void sprite::explode(int32_t type)
                 {
                     if(spritetilebuf[i*16+j])
                     {
-                        if(type==0)  // Twilight
+                        if(mode==0)  // Twilight
                         {
                             particles.add(new pTwilight(x+j, y-z-fakez+i, 5, 0, 0, (zc_oldrand()%8)+i*4));
                             int32_t k=particles.Count()-1;
@@ -2591,7 +2600,7 @@ void sprite::explode(int32_t type)
 			    p->color= zc_oldrand()%4+1;
                         }
                         
-			else if(type ==1)  // Sands of Hours
+			else if(mode ==1)  // Sands of Hours
                         {
                             particles.add(new pTwilight(x+j, y-z-fakez+i, 5, 1, 2, (zc_oldrand()%16)+i*2));
                             int32_t k=particles.Count()-1;
@@ -2624,11 +2633,11 @@ void sprite::explode(int32_t type)
 	
 }
 
-bool sprite::getCanFlicker()
+bool sprite::getCanFlicker() const
 {
 	return can_flicker;
 }
-void sprite::setCanFlicker(bool v)
+void sprite::setCanFlicker(const bool v)
 {
 	can_flicker = v;
 }

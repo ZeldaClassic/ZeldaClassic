@@ -14,6 +14,7 @@ void setCurObject(solid_object* obj);
 class solid_object
 {
 public:
+	virtual ~solid_object() = default;
 	zfix x, y, vx, vy;
 	zfix old_x, old_y, old_x2, old_y2;
 	int32_t hit_width=16,hit_height=16,hxofs,hyofs;
@@ -22,28 +23,29 @@ public:
 	bool switch_hooked;
 	
 	virtual bool setSolid(bool set);
-	virtual bool getSolid() const;
+	[[nodiscard]] virtual bool getSolid() const;
 	virtual void updateSolid();
 	void setTempNonsolid(bool set);
-	bool getTempNonsolid() const;
+	[[nodiscard]] bool getTempNonsolid() const;
 	
 	virtual bool collide(solid_object const* other) const;
-	virtual bool collide(zfix tx, zfix ty, zfix tw, zfix th) const;
-	virtual bool collide_old(zfix tx, zfix ty, zfix tw, zfix th) const;
+	[[nodiscard]] virtual bool collide(zfix tx, zfix ty, zfix tw, zfix th) const;
+	[[nodiscard]] virtual bool collide_old(zfix tx, zfix ty, zfix tw, zfix th) const;
 	
 	void draw(BITMAP *dest, int32_t tx, int32_t ty, int32_t col);
 	void draw_a5(int32_t tx, int32_t ty, ALLEGRO_COLOR col);
-	virtual void solid_update(bool push = true);
+	virtual void solid_update(bool push);
+	void solid_update() { solid_update(true); };
 	virtual void solid_push(solid_object* pusher);
 	//Overload to do damage to Hero on pushing them
 	virtual void doContactDamage(int32_t hdir){}
 	//Overload to give 'riding sideview platform' behaviors
-	virtual bool sideview_mode() const {return false;}
+	[[nodiscard]] virtual bool sideview_mode() const {return false;}
 protected:
-	bool solid;
-	bool ignore_solid_temp;
+	bool solid = false;
+	bool ignore_solid_temp = false;
 	void solid_push_int(solid_object const* obj, zfix& dx, zfix& dy, int32_t& hdir, bool can_platform);
 	int32_t push_dir() const;
 	
-	virtual bool is_unpushable() const {return false;}
+	[[nodiscard]] virtual bool is_unpushable() const {return false;}
 };
