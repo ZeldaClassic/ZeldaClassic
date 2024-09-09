@@ -34,23 +34,34 @@ else()
 endif()
 
 if(WANT_GIT_HOOKS)
-	if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
+	set(GIT_DIR "${CMAKE_SOURCE_DIR}/.git")
+	if(NOT EXISTS "${GIT_DIR}/config")
+		set(GIT_DIR "${CMAKE_SOURCE_DIR}/../.git")
+		if(NOT EXISTS "${GIT_DIR}/config")
+			set(GIT_DIR "${CMAKE_SOURCE_DIR}/../../.git")
+			if(NOT EXISTS "${GIT_DIR}/config")
+				message(FATAL_ERROR "Not .git dir found")
+			endif()
+		endif()
+	endif()
+
+	if(EXISTS "${GIT_DIR}")
 		if(UNIX)
-			configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/commit-msg.in" "${CMAKE_SOURCE_DIR}/.git/commit-msg")
-			configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/prepare-commit-msg.in" "${CMAKE_SOURCE_DIR}/.git/prepare-commit-msg")
+			configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/commit-msg.in" "${GIT_DIR}/commit-msg")
+			configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/prepare-commit-msg.in" "${GIT_DIR}/prepare-commit-msg")
 			file(
-				COPY "${CMAKE_SOURCE_DIR}/.git/commit-msg"
-				DESTINATION "${CMAKE_SOURCE_DIR}/.git/hooks"
-				FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
+					COPY "${GIT_DIR}/commit-msg"
+					DESTINATION "${GIT_DIR}/hooks"
+					FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 			)
 			file(
-				COPY "${CMAKE_SOURCE_DIR}/.git/prepare-commit-msg"
-				DESTINATION "${CMAKE_SOURCE_DIR}/.git/hooks"
-				FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
+					COPY "${GIT_DIR}/prepare-commit-msg"
+					DESTINATION "${GIT_DIR}/hooks"
+					FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 			)
 		else()
-			configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/commit-msg.in" "${CMAKE_SOURCE_DIR}/.git/hooks/commit-msg")
-			configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/prepare-commit-msg.in" "${CMAKE_SOURCE_DIR}/.git/hooks/prepare-commit-msg")
+			configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/commit-msg.in" "${GIT_DIR}/hooks/commit-msg")
+			configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/prepare-commit-msg.in" "${GIT_DIR}/hooks/prepare-commit-msg")
 		endif()
 	endif()
 endif()
