@@ -20,28 +20,23 @@ FunctionData::FunctionData(Program& program)
 	: program(program),
 	  globalData(program.getScope().getLocalData())
 {
-	for (vector<Datum*>::const_iterator it = globalData.begin();
-	     it != globalData.end(); ++it)
+	for (const auto it : globalData)
 	{
-		Datum& datum = **it;
+		Datum& datum = *it;
 		if (!datum.getCompileTimeValue())
 			globalVariables.push_back(&datum);
 	}
 
-	for (vector<Script*>::const_iterator it = program.scripts.begin();
-	     it != program.scripts.end(); ++it)
+	for (const auto script : program.scripts)
 	{
-		ScriptScope& scope = (*it)->getScope();
-		vector<Datum*> data = scope.getLocalData();
+		const auto data = script->getScope().getLocalData();
 		globalVariables.insert(globalVariables.end(),
 		                       data.begin(), data.end());
 	}
 	
-	for (vector<Namespace*>::const_iterator it = program.namespaces.begin();
-		it != program.namespaces.end(); ++it)
+	for (const auto it : program.namespaces)
 	{
-		NamespaceScope& scope = (*it)->getScope();
-		vector<Datum*> data = scope.getLocalData();
+		const auto data = it->getScope().getLocalData();
 		globalVariables.insert(globalVariables.end(),
 		                       data.begin(), data.end());
 	}
