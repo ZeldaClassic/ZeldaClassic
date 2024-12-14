@@ -8,7 +8,7 @@ The homepage contains information about the latest release, links to the latest 
 
 This repository contains the Zelda Classic source code, for use by the Zelda Classic developers and advanced users wanting to port ZC to new platforms. You do not need to download or compile the source if you want to play Zelda Classic or make quests on Windows, OS X, or (Debian) Linux.
 
-# Note
+## Note
 
 This repository, dubbed 'Neo ZC' by some, was an experiment due to unforseen circumstances with some previous developers, and was more or less a testing grounds for the 2.55 branch. It is no longer active or maintained but is left up for the benefit of a few forks by community members. There will be a new repository for future versions forthcoming. 
 
