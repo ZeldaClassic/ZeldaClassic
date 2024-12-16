@@ -25188,7 +25188,7 @@ bool can_use_item([[maybe_unused]] int32_t item_type, [[maybe_unused]] int32_t i
 	return true;
 }
 
-bool has_item(int32_t [[maybe_unused]] item_type, [[maybe_unused]] int32_t it)
+bool has_item([[maybe_unused]] int32_t item_type, [[maybe_unused]] int32_t it)
 {
 	return true;
 }
@@ -27796,7 +27796,7 @@ void check_autosave()
 }
 
 void flushItemCache(bool) {}
-void ringcolor(bool [[maybe_unused]] forceDefault)
+void ringcolor([[maybe_unused]] bool forceDefault)
 {
 }
 
