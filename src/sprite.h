@@ -1,5 +1,7 @@
 #pragma once
 
+#include <atomic>
+
 #include "base/zc_alleg.h"
 #include "base/headers.h"
 #include "base/zdefs.h"
@@ -43,8 +45,8 @@ private:
 	int32_t uid;
     
 public:
-	void unget_UID();
-	int32_t getUID()
+	void unget_UID() const;
+	[[nodiscard]] int32_t getUID() const
 	{
 		return uid;
 	}
@@ -124,7 +126,10 @@ public:
 	sprite();
 	sprite(sprite const & other);
 	sprite(zfix X,zfix Y,int32_t T,int32_t CS,int32_t F,int32_t Clk,int32_t Yofs);
-	virtual ~sprite();
+	~sprite() override;
+private:
+	void destroy_sprite() const;
+public:
 	virtual void handle_sprlighting();
 	virtual void draw(BITMAP* dest);                        // main layer
 	virtual void drawzcboss(BITMAP* dest);                        // main layer
@@ -157,17 +162,18 @@ public:
 	virtual void move(zfix s);
 	virtual bool knockback(int32_t time, int32_t dir, int32_t speed);
 	virtual bool runKnockback();
-	void explode(int32_t mode);
-	bool getCanFlicker();
+	virtual void explode(int32_t mode);
+	[[nodiscard]] bool getCanFlicker() const;
 	void setCanFlicker(bool v);
 	
 	virtual int32_t run_script(int32_t mode);
 	
-	virtual ALLEGRO_COLOR hitboxColor(byte opacity = 255) const;
+	[[nodiscard]] virtual ALLEGRO_COLOR hitboxColor(byte opacity) const;
+	[[nodiscard]] ALLEGRO_COLOR hitboxColor() const { return hitboxColor(255); }
 	virtual void draw_hitbox();
 	
 	//Script helper funcs
-	virtual optional<ScriptType> get_scrtype() const {return nullopt;}
+	[[nodiscard]] constexpr virtual optional<ScriptType> get_scrtype() const {return nullopt;}
 };
 
 enum //run_script modes
@@ -182,12 +188,12 @@ enum //run_script modes
 /********** Sprite List ***********/
 /**********************************/
 
-#define SLMAX 255*(511*4)+1
+constexpr std::int32_t SLMAX = 255*(511*4)+1;
 
 class sprite_list
 {
 	sprite *sprites[SLMAX];
-	int32_t count;
+	std::atomic<int32_t> count;
 	int32_t active_iterator;
 	bool delete_active_iterator;
 	int32_t max_sprites;
@@ -198,6 +204,10 @@ class sprite_list
     
 public:
 	sprite_list();
+	sprite_list(const sprite_list & _) = delete;
+	sprite_list(sprite_list && _) = delete;
+	sprite_list & operator=(const sprite_list & _) = delete;
+	sprite_list & operator=(sprite_list && _) = delete;
     
 	sprite *getByUID(int32_t uid);
 	void clear(bool force = false);
@@ -207,12 +217,12 @@ public:
 	bool add(sprite *s);
 	// removes pointer from list but doesn't delete it
 	bool remove(sprite *s);
-	zfix getX(int32_t j);
-	zfix getY(int32_t j);
+	zfix getX(int32_t j) const;
+	zfix getY(int32_t j) const;
 	int32_t getID(int32_t j);
 	int32_t getMisc(int32_t j);
-	int32_t getMax() {return max_sprites;}
-	void setMax(int32_t max) {max_sprites = (max < SLMAX ? max : SLMAX);}
+	int32_t getMax() const {return max_sprites;}
+	void setMax(int32_t max) {max_sprites = std::clamp(max, 0,SLMAX);}
 	bool del(int32_t j, bool force = false, bool may_defer = true);
 	void draw(BITMAP* dest,bool lowfirst);
 	void drawshadow(BITMAP* dest,bool translucent, bool lowfirst);
@@ -228,17 +238,17 @@ public:
 	int32_t hit(int32_t x,int32_t y,int32_t z,int32_t xsize, int32_t ysize, int32_t zsize);
 	int32_t hit(int32_t x,int32_t y,int32_t xsize, int32_t ysize);
 	// returns the number of sprites with matching id
-	int32_t idCount(int32_t id, int32_t mask);
+	int32_t idCount(int32_t id, int32_t mask) const;
 	// returns index of first sprite with matching id, -1 if none found
-	int32_t idFirst(int32_t id, int32_t mask);
+	int32_t idFirst(int32_t id, int32_t mask) const;
 	// returns index of nth sprite with matching id, -1 if none found
-	int32_t idNth(int32_t id, int32_t n, int32_t mask);
+	int32_t idNth(int32_t id, int32_t n, int32_t mask) const;
 	// returns index of last sprite with matching id, -1 if none found
-	int32_t idLast(int32_t id, int32_t mask);
+	int32_t idLast(int32_t id, int32_t mask) const;
 	// returns the number of sprites with matching id
 	int32_t idCount(int32_t id);
 	// returns the number of sprites matching any id in the set
-	int32_t idCount(std::set<int32_t> const& ids);
+	int32_t idCount(std::set<int32_t> const& ids) const;
 	// returns index of first sprite with matching id, -1 if none found
 	int32_t idFirst(int32_t id);
 	// returns index of nth sprite with matching id, -1 if none found
@@ -246,7 +256,7 @@ public:
 	// returns index of last sprite with matching id, -1 if none found
 	int32_t idLast(int32_t id);
     
-	void forEach(std::function<bool(sprite&)> proc);
+	void forEach(const std::function<bool(sprite&)>& proc) const;
 	
 private:
 
@@ -260,17 +270,17 @@ private:
 class movingblock : public sprite
 {
 public:
-	int32_t bcombo;
-	int32_t oldflag;
-	int32_t oldcset;
-	int32_t endx, endy;
-	bool trigger, bhole;
-	byte undercset;
+	int32_t bcombo{};
+	int32_t oldflag{};
+	int32_t oldcset{};
+	int32_t endx{}, endy{};
+	bool trigger{}, bhole{};
+	byte undercset{};
 	byte blockLayer;
 	zfix step;
-	bool force_many;
-	bool no_icy;
-	bool new_block;
+	bool force_many{};
+	bool no_icy{};
+	bool new_block{};
     
 	cpos_info blockinfo;
 	
