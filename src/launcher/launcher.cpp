@@ -144,7 +144,7 @@ int32_t main(int32_t argc, char* argv[])
 	
 	LOCK_VARIABLE(framecnt);
 	LOCK_FUNCTION(fps_callback);
-	
+
 	if(install_int_ex(fps_callback,SECS_TO_TIMER(1)))
 	{
 		Z_error_fatal("couldn't allocate timer\n");
@@ -258,11 +258,11 @@ int32_t main(int32_t argc, char* argv[])
 	set_close_button_callback((void (*)()) hit_close_button);
 	//
 	Z_message("Launcher opened successfully.\n");
-	
+
 	#if QUICK_EXIT > 0
 	goto exit;
 	#endif
-	
+
 	LauncherDialog().show();
 
 	#if QUICK_EXIT > 0
@@ -272,6 +272,7 @@ int32_t main(int32_t argc, char* argv[])
 	//
 	
 	flush_config_file();
+	allegro_exit();
 	return 0;
 }
 END_OF_MAIN()
